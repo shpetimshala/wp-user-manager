@@ -148,6 +148,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 */
 		private function includes() {
 
+			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
+			
 		}
 
 		/**
@@ -158,7 +160,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 * @return void
 		 */
 		public function load_textdomain() {
-			
+
 		}
 
 	}
