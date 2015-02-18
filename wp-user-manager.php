@@ -148,10 +148,23 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 */
 		private function includes() {
 
+			global $wpum_options;
+
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
+			$wpum_options = wpum_get_settings();
+
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				// Load Welcome Page
 				require_once WPUM_PLUGIN_DIR . 'includes/admin/welcome.php';
+				// Load Settings Pages
+				require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-pages.php';
+				// Load Admin Notices
+				require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-notices.php';
+				// Load Admin Actions
+				require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-actions.php';
+				// Display Settings Page
+				require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			}
 
 			// Plugin's filters
