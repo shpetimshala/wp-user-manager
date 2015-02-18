@@ -110,10 +110,35 @@ function wpum_get_registered_settings() {
 		/** General Settings */
 		'general' => apply_filters( 'wpum_settings_general',
 			array(
-				'test_option' => array(
-					'id' => 'test_option',
-					'name' => __( 'Test Option', 'wpum' ),
-					'desc' => __( 'Test Description', 'wpum' ),
+				'registration_status' => array(
+					'id'   => 'registration_status',
+					'name' => __( 'Registrations Status:', 'wpum' ),
+					'type' => 'hook'
+				),
+				'login_method' => array(
+					'id'      => 'login_method',
+					'name'    => __( 'Allow users to login with:', 'wpum' ),
+					'desc'    => __('Select how users can login to your site.'),
+					'type'    => 'select',
+					'options' => wpum_get_login_methods()
+				),
+				'password_strenght' => array(
+					'id'      => 'password_strenght',
+					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
+					'desc'    => __('Select how strong the password needs to be before users can register.'),
+					'type'    => 'select',
+					'options' => wpum_get_psw_lenghts()
+				),
+				'display_password_meter_registration' => array(
+					'id'   => 'display_password_meter_registration',
+					'name' => __( 'Display password meter on registration page:', 'wpum' ),
+					'desc'    => __('Enable to display a password meter on registration page.'),
+					'type' => 'checkbox'
+				),
+				'display_password_meter_profile' => array(
+					'id'   => 'display_password_meter_profile',
+					'name' => __( 'Display password meter on profile page:', 'wpum' ),
+					'desc'    => __('Enable to display a password meter on profile page.'),
 					'type' => 'checkbox'
 				),
 			)

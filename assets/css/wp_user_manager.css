@@ -5,10 +5,8 @@
  * Copyright (c) 2015 Alessandro Tesoro
  * Licensed under the GPLv2+ license.
  */
-
 /* Admin settings page */
-.wpum-admin-message {
-	strong {
-		color: green;
-	}
-}
+.wpum-admin-message strong {
+  color: green; }
+
+/*# sourceMappingURL=wp_user_manager.css.map */

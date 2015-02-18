@@ -71,7 +71,9 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				self::$instance = new WP_User_Manager;
 				self::$instance->setup_constants();
 				self::$instance->includes();
-				self::$instance->load_textdomain();
+
+				// load framework assets css and scripts
+				add_action( 'admin_enqueue_scripts', array( self::$instance, 'assets' ) );
 			}
 			return self::$instance;
 
@@ -153,6 +155,11 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
 			$wpum_options = wpum_get_settings();
 
+			// Load General Functions
+			require_once WPUM_PLUGIN_DIR . 'includes/functions.php';
+			// Plugin's filters
+			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
+			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				// Load Welcome Page
@@ -166,9 +173,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				// Display Settings Page
 				require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			}
-
-			// Plugin's filters
-			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 			
 		}
 
@@ -179,7 +183,24 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 * @since 1.0.0
 		 * @return void
 		 */
-		public function load_textdomain() {
+		public function assets() {
+
+			$js_dir  = WPUM_PLUGIN_URL . 'assets/js/';
+			$css_dir = WPUM_PLUGIN_URL . 'assets/css/';
+
+			// Use minified libraries if SCRIPT_DEBUG is turned off
+			$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+			// Styles
+			wp_register_style( 'wpum-admin', $css_dir . 'wp_user_manager' . $suffix . '.css', WPUM_VERSION );
+
+			// Enqueue styles & scripts
+			$screen = get_current_screen();
+
+			if ( $screen->base !== 'users_page_wpum-settings' )
+				return;
+
+			wp_enqueue_style( 'wpum-admin' );
 
 		}
 
