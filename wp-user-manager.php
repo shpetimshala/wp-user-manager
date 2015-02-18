@@ -159,6 +159,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/functions.php';
 			// Plugin's filters
 			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
+			// Shortcodes
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
