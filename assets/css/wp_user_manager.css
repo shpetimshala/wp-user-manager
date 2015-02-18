@@ -9,4 +9,8 @@
 .wpum-admin-message strong {
   color: green; }
 
+.wpum-page-title {
+  background: url("../../images/title.png") no-repeat;
+  padding-left: 65px !important; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

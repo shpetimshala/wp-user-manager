@@ -2,4 +2,4 @@
  * http://wp-user-manager.com
  * Copyright (c) 2015; * Licensed GPLv2+ */
 
-.wpum-admin-message strong{color:green}
+.wpum-admin-message strong{color:green}.wpum-page-title{background:url(../../images/title.png) no-repeat;padding-left:65px!important}

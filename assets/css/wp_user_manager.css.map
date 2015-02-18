@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": ";;;;;;;;AAUC,0BAAO;EACN,KAAK,EAAE,KAAK",
+"mappings": ";;;;;;;;AAUC,0BAAO;EACN,KAAK,EAAE,KAAK;;AAId,gBAAiB;EAChB,UAAU,EAAE,uCAAuC;EACnD,YAAY,EAAE,eAAe",
 "sources": ["sass/wp_user_manager.scss"],
 "names": [],
 "file": "wp_user_manager.css"

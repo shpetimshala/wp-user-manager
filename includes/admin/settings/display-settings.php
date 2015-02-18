@@ -29,7 +29,7 @@ function wpum_options_page() {
 	?>
 	<div class="wrap">
 
-		<h2><?php printf( __( 'WP User Manager v%s Settings', 'wpum' ), WPUM_VERSION ); ?> <?php do_action('wpum_next_to_settings_title');?></h2>
+		<h2 class="wpum-page-title"><?php printf( __( 'WP User Manager v%s Settings', 'wpum' ), WPUM_VERSION ); ?> <?php do_action('wpum_next_to_settings_title');?></h2>
 
 		<h2 class="nav-tab-wrapper" style="margin-bottom:10px;">
 			<?php

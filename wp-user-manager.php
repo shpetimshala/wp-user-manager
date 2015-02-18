@@ -177,7 +177,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		}
 
 		/**
-		 * Loads the plugin language files
+		 * Loads the plugin assets files
 		 *
 		 * @access public
 		 * @since 1.0.0
@@ -193,8 +193,12 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			// Styles
 			wp_register_style( 'wpum-admin', $css_dir . 'wp_user_manager' . $suffix . '.css', WPUM_VERSION );
+			wp_register_style( 'wpum-shortcode-manager', WPUM_PLUGIN_URL . 'includes/admin/tinymce/css/wpum_shortcodes_tinymce_style.css', WPUM_VERSION );
 
-			// Enqueue styles & scripts
+			// Enquery styles and scripts anywhere needed
+			wp_enqueue_style( 'wpum-shortcode-manager' );
+
+			// Enqueue styles & scripts on admin page only
 			$screen = get_current_screen();
 
 			if ( $screen->base !== 'users_page_wpum-settings' )
