@@ -148,6 +148,13 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 */
 		private function includes() {
 
+			// Files loaded only on the admin side
+			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+				// Load Welcome Page
+				require_once WPUM_PLUGIN_DIR . 'includes/admin/welcome.php';
+			}
+
+			// Plugin's filters
 			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 			
 		}
