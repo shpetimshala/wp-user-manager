@@ -88,14 +88,14 @@ class WPUM_Getting_Started {
 		remove_submenu_page( 'index.php', 'wpum-credits' );
 
 		// Badge for welcome page
-		$badge_url = WPUM_PLUGIN_URL . 'assets/images/wpum-badge.png';
+		$badge_url = WPUM_PLUGIN_URL . 'images/badge.png';
 		?>
 		<style type="text/css" media="screen">
 		/*<![CDATA[*/
 		.wpum-badge {
-			background: url('<?php echo $badge_url; ?>') center 24px/85px 85px no-repeat #0074a2;
+			background: url('<?php echo $badge_url; ?>') center 24px/85px 85px no-repeat #404448;
 			-webkit-background-size: 85px 85px;
-			color: #78c8e6;
+			color: #7ec276;
 			font-size: 14px;
 			text-align: center;
 			font-weight: 600;
