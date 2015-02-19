@@ -123,7 +123,10 @@ class WPUM_Shortcodes {
 			'label'    => __('Logout')
 		), $atts ) );
 
-		$output = sprintf( __('<a href="%s">%s</a>'), wpum_logout_url($redirect), esc_attr($label) );
+		$output = null;
+
+		if(is_user_logged_in())
+			$output = sprintf( __('<a href="%s">%s</a>'), wpum_logout_url($redirect), esc_attr($label) );
 
 		return $output;
 
