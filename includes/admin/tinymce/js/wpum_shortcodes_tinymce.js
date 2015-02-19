@@ -82,6 +82,33 @@
 					}
 				}, // End Login Form
 
+				/* Logout Link */
+				{
+					text: 'Logout Link',
+					onclick: function() {
+						editor.windowManager.open( {
+							title: 'Logout Link',
+							body: [ 
+								{
+									type: 'textbox', 
+									name: 'redirect', 
+									label: 'Redirect after logout (optional)',
+									value: ''
+								},
+								{
+									type: 'textbox', 
+									name: 'label', 
+									label: 'Link Label',
+									value: 'Logout'
+								},
+							],
+							onsubmit: function( e ) {
+								editor.insertContent( '[wpum_logout redirect="' + e.data.redirect + '" label="' + e.data.label + '" ]');
+							}
+						});
+					}
+				}, // End Login Form
+
 			]
 		});
 	});

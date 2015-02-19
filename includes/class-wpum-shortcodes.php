@@ -29,6 +29,7 @@ class WPUM_Shortcodes {
 		
 		add_filter( 'widget_text', 'do_shortcode' );
 		add_shortcode( 'wpum_login_form', array( $this, 'wpum_login_form' ) );
+		add_shortcode( 'wpum_logout', array( $this, 'wpum_logout' ) );
 
 	}
 
@@ -108,6 +109,25 @@ class WPUM_Shortcodes {
 
 	}
 
+	/**
+	 * Login Form Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_logout( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'redirect' => '',
+			'label'    => __('Logout')
+		), $atts ) );
+
+		$output = sprintf( __('<a href="%s">%s</a>'), wpum_logout_url($redirect), esc_attr($label) );
+
+		return $output;
+
+	}
 }
 
 new WPUM_Shortcodes;

@@ -47,16 +47,24 @@ endif;
 if ( ! function_exists( 'wpum_logout_url' ) ) :
 /**
  * A simple wrapper function for the wp_logout_url function
+ * 
+ * The function checks whether a custom url has been passed,
+ * if not, looks for the settings panel option,
+ * defaults to wp_logout_url
+ * 
  *
  * @access public
  * @return string
  */
-function wpum_logout_url() {
+function wpum_logout_url( $custom_redirect = null ) {
 		
 	$redirect = null;
 
-	if( wpum_get_option('logout_redirect') )
+	if( !empty($custom_redirect) ) {
+		$redirect = esc_url($custom_redirect);
+	} else if( wpum_get_option('logout_redirect') ) {
 		$redirect = esc_url( wpum_get_option('logout_redirect') );
+	}
 
 	return wp_logout_url( $redirect );
 
