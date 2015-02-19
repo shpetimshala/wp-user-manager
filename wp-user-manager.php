@@ -243,6 +243,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Frontend jS Settings
 			wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
 				'ajax' => admin_url( 'admin-ajax.php' ),
+				'checking_credentials' => __('Checking credentials...'),
 			) );
 
 		}

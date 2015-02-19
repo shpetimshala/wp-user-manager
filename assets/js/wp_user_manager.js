@@ -41,7 +41,7 @@ jQuery(document).ready(function ($) {
 					},
 					beforeSend: function() {
 						$( wpum_form ).find('p.wpum-message').remove();
-						$(wpum_form).prepend('<p class="wpum-message notice">processing</p>');
+						$(wpum_form).prepend('<p class="wpum-message notice">' + wpum_frontend_js.checking_credentials + '</p>');
 					},
 					success: function(results) {
 

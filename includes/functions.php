@@ -22,7 +22,7 @@ function wpum_get_login_methods() {
 	return apply_filters( 'wpum_get_login_methods', array(
 		'username'       => __( 'Username only' ),
 		'email'          => __( 'Email only' ),
-		'username_email' => __( 'Username and Email' ),
+		'username_email' => __( 'Username or Email' ),
 	) );
 }
 endif;
@@ -49,7 +49,7 @@ if ( ! function_exists( 'wpum_logout_url' ) ) :
  * A simple wrapper function for the wp_logout_url function
  *
  * @access public
- * @return array
+ * @return string
  */
 function wpum_logout_url() {
 		
@@ -59,6 +59,29 @@ function wpum_logout_url() {
 		$redirect = esc_url( wpum_get_option('logout_redirect') );
 
 	return wp_logout_url( $redirect );
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_get_username_label' ) ) :
+/**
+ * Returns the correct username label on the login form
+ * based on the selected login method.
+ *
+ * @access public
+ * @return string
+ */
+function wpum_get_username_label() {
+		
+	$label = __('Username');
+
+	if( wpum_get_option('login_method') == 'email' ) {
+		$label = __('Email');
+	} else if( wpum_get_option('login_method') == 'username_email' ) {
+		$label = __('Username or email');
+	}
+
+	return $label;
 
 }
 endif;

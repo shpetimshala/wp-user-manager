@@ -56,7 +56,7 @@ class WPUM_Shortcodes {
 		if(empty($redirect))
 			$redirect = site_url( $_SERVER['REQUEST_URI'] );
 		if(empty($label_username))
-			$label_username = __('Username');
+			$label_username = wpum_get_username_label();
 		if(empty($label_password))
 			$label_password = __('Password');
 		if(empty($label_remember))
