@@ -27,8 +27,8 @@ class WPUM_Shortcodes {
 	 */
 	public function __construct() {
 		
-		add_filter('widget_text', 'do_shortcode');
-		add_shortcode( 'wpum_login_form', array($this, 'wpum_login_form'));
+		add_filter( 'widget_text', 'do_shortcode' );
+		add_shortcode( 'wpum_login_form', array( $this, 'wpum_login_form' ) );
 
 	}
 
@@ -42,10 +42,43 @@ class WPUM_Shortcodes {
 	public function wpum_login_form( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'id' => '',
+			'id'             => '',
+			'redirect'       => '',
+			'label_username' => '',
+			'label_password' => '',
+			'label_remember' => '',
+			'label_log_in'   => ''
 		), $atts ) );
 
-		$output = null;
+		// Set default values if options missing
+		if(empty($id))
+			$id = 'wpum_loginform';
+		if(empty($redirect))
+			$redirect = site_url( $_SERVER['REQUEST_URI'] );
+		if(empty($label_username))
+			$label_username = __('Username');
+		if(empty($label_password))
+			$label_password = __('Password');
+		if(empty($label_remember))
+			$label_remember = __('Remember Me');
+		if(empty($label_log_in))
+			$label_log_in = __('Login');
+
+		$args = array(
+			'echo'           => false,
+			'redirect'       => $redirect, 
+			'form_id'        => $id,
+			'label_username' => $label_username,
+			'label_password' => $label_password,
+			'label_remember' => $label_remember,
+			'label_log_in'   => $label_log_in,
+			'id_username'    => $id.'user_login',
+			'id_password'    => $id.'user_pass',
+			'id_remember'    => $id.'rememberme',
+			'id_submit'      => $id.'wp-submit',
+		);
+
+		$output = wp_login_form( apply_filters( 'wpum_login_shortcode_args', $args, $atts ) );
 
 		return $output;
 
