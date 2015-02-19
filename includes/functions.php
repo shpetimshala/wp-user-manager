@@ -43,3 +43,22 @@ function wpum_get_psw_lenghts() {
 	) );
 }
 endif;
+
+if ( ! function_exists( 'wpum_logout_url' ) ) :
+/**
+ * A simple wrapper function for the wp_logout_url function
+ *
+ * @access public
+ * @return array
+ */
+function wpum_logout_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('logout_redirect') )
+		$redirect = esc_url( wpum_get_option('logout_redirect') );
+
+	return wp_logout_url( $redirect );
+
+}
+endif;

@@ -141,6 +141,17 @@ function wpum_get_registered_settings() {
 					'desc'    => __('Enable to display a password meter on profile page.'),
 					'type' => 'checkbox'
 				),
+				'header1' => array(
+					'id'   => 'header1',
+					'name' => __( 'Redirects', 'wpum' ),
+					'type' => 'header'
+				),
+				'logout_redirect' => array(
+					'id'   => 'logout_redirect',
+					'name' => __( 'Logout Redirect', 'wpum' ),
+					'desc'    => __('Enter the url where you want to redirect users after they logout.'),
+					'type' => 'text'
+				),
 			)
 		),
 	);
