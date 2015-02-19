@@ -72,8 +72,10 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				self::$instance->setup_constants();
 				self::$instance->includes();
 
-				// load framework assets css and scripts
-				add_action( 'admin_enqueue_scripts', array( self::$instance, 'assets' ) );
+				// load admin assets css and scripts
+				add_action( 'admin_enqueue_scripts', array( self::$instance, 'admin_enqueue_scripts' ) );
+				// load frontend assets css and scripts
+				add_action( 'wp_enqueue_scripts', array( self::$instance, 'wp_enqueue_scripts' ) );
 			}
 			return self::$instance;
 
@@ -161,8 +163,12 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/templates.php';
 			// Plugin's filters
 			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
+			// Plugin's actions
+			require_once WPUM_PLUGIN_DIR . 'includes/actions.php';
 			// Shortcodes
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
+			// Ajax Handler
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -181,13 +187,13 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		}
 
 		/**
-		 * Loads the plugin assets files
+		 * Loads the plugin admin assets files
 		 *
 		 * @access public
 		 * @since 1.0.0
 		 * @return void
 		 */
-		public function assets() {
+		public function admin_enqueue_scripts() {
 
 			$js_dir  = WPUM_PLUGIN_URL . 'assets/js/';
 			$css_dir = WPUM_PLUGIN_URL . 'assets/css/';
@@ -209,6 +215,35 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				return;
 
 			wp_enqueue_style( 'wpum-admin' );
+
+		}
+
+		/**
+		 * Loads the plugin frontend assets files
+		 *
+		 * @access public
+		 * @since 1.0.0
+		 * @return void
+		 */
+		public function wp_enqueue_scripts() {
+
+			$js_dir  = WPUM_PLUGIN_URL . 'assets/js/';
+			$css_dir = WPUM_PLUGIN_URL . 'assets/css/';
+
+			// Use minified libraries if SCRIPT_DEBUG is turned off
+			$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+			// Styles & scripts registration
+			wp_register_script( 'wpum-frontend-js', $js_dir . 'wp_user_manager' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
+
+			// Enqueue everything
+			wp_enqueue_script( 'jQuery' );
+			wp_enqueue_script( 'wpum-frontend-js' );
+
+			// Frontend jS Settings
+			wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
+				'ajax' => admin_url( 'admin-ajax.php' ),
+			) );
 
 		}
 
