@@ -157,6 +157,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			// Load General Functions
 			require_once WPUM_PLUGIN_DIR . 'includes/functions.php';
+			// Templates
+			require_once WPUM_PLUGIN_DIR . 'includes/templates.php';
 			// Plugin's filters
 			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 			// Shortcodes

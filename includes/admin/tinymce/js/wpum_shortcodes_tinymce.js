@@ -5,9 +5,17 @@
 		{text: 'Yes', value: 'yes'},
 		{text: 'No', value: 'no'},
 	];
+	var no_yes = [
+		{text: 'No', value: 'no'},
+		{text: 'Yes', value: 'yes'},
+	];
 	var true_false = [
 		{text: 'Yes', value: 'true'},
 		{text: 'No', value: 'false'},
+	];
+	var false_true = [
+		{text: 'No', value: 'false'},
+		{text: 'Yes', value: 'true'},
 	];
 
 	tinymce.PluginManager.add( 'wpum_shortcodes_mce_button', function( editor, url ) {
@@ -62,19 +70,13 @@
 								},
 								{
 									type: 'listbox',
-									name: 'remember',
-									label: 'Show remember option',
-									'values': true_false
-								},
-								{
-									type: 'listbox',
-									name: 'set_remember',
-									label: 'Default remember option',
-									'values': true_false
-								},
+									name: 'profile',
+									label: 'Show Profile Info',
+									'values': no_yes
+								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_login_form id="' + e.data.id + '" redirect="' + e.data.redirect + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" remember="' + e.data.remember + '" set_remember="' + e.data.set_remember + '" ]');
+								editor.insertContent( '[wpum_login_form id="' + e.data.id + '" redirect="' + e.data.redirect + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" profile="' + e.data.profile + '" ]');
 							}
 						});
 					}

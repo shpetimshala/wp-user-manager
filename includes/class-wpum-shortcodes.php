@@ -65,20 +65,44 @@ class WPUM_Shortcodes {
 			$label_log_in = __('Login');
 
 		$args = array(
-			'echo'           => false,
-			'redirect'       => $redirect, 
-			'form_id'        => $id,
-			'label_username' => $label_username,
-			'label_password' => $label_password,
-			'label_remember' => $label_remember,
-			'label_log_in'   => $label_log_in,
-			'id_username'    => $id.'user_login',
-			'id_password'    => $id.'user_pass',
-			'id_remember'    => $id.'rememberme',
-			'id_submit'      => $id.'wp-submit',
+			'echo'           => true,
+			'redirect'       => esc_url($redirect),
+			'form_id'        => esc_attr($id),
+			'label_username' => esc_attr($label_username),
+			'label_password' => esc_attr($label_password),
+			'label_remember' => esc_attr($label_remember),
+			'label_log_in'   => esc_attr($label_log_in),
+			'id_username'    => esc_attr($id).'user_login',
+			'id_password'    => esc_attr($id).'user_pass',
+			'id_remember'    => esc_attr($id).'rememberme',
+			'id_submit'      => esc_attr($id).'wp-submit',
 		);
 
-		$output = wp_login_form( apply_filters( 'wpum_login_shortcode_args', $args, $atts ) );
+		ob_start();
+
+		// Show already logged in message
+		if( is_user_logged_in() ) :
+
+			get_wpum_template( 'already-logged-in.php', 
+				array(
+					'args' => $args,
+					'atts' => $atts,
+				)
+			);
+
+		// Show login form if not logged in
+		else :
+
+			get_wpum_template( 'login-form.php', 
+				array(
+					'args' => $args,
+					'atts' => $atts,
+				)
+			);
+
+		endif;
+
+		$output = ob_get_clean();
 
 		return $output;
 
