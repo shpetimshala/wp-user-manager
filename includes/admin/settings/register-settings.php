@@ -110,11 +110,7 @@ function wpum_get_registered_settings() {
 		/** General Settings */
 		'general' => apply_filters( 'wpum_settings_general',
 			array(
-				'registration_status' => array(
-					'id'   => 'registration_status',
-					'name' => __( 'Registrations Status:', 'wpum' ),
-					'type' => 'hook'
-				),
+				
 				'login_method' => array(
 					'id'      => 'login_method',
 					'name'    => __( 'Allow users to login with:', 'wpum' ),
@@ -122,19 +118,7 @@ function wpum_get_registered_settings() {
 					'type'    => 'select',
 					'options' => wpum_get_login_methods()
 				),
-				'password_strenght' => array(
-					'id'      => 'password_strenght',
-					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
-					'desc'    => __('Select how strong the password needs to be before users can register.'),
-					'type'    => 'select',
-					'options' => wpum_get_psw_lenghts()
-				),
-				'display_password_meter_registration' => array(
-					'id'   => 'display_password_meter_registration',
-					'name' => __( 'Display password meter on registration page:', 'wpum' ),
-					'desc'    => __('Enable to display a password meter on registration page.'),
-					'type' => 'checkbox'
-				),
+				
 				'display_password_meter_profile' => array(
 					'id'   => 'display_password_meter_profile',
 					'name' => __( 'Display password meter on profile page:', 'wpum' ),
@@ -161,9 +145,49 @@ function wpum_get_registered_settings() {
 				'logout_redirect' => array(
 					'id'   => 'logout_redirect',
 					'name' => __( 'Logout Redirect', 'wpum' ),
-					'desc'    => __('Enter the url where you want to redirect users after they logout. If empty will return to wp-login.php'),
+					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
 					'type' => 'select',
 					'options' => wpum_get_pages()
+				),
+				'wp_login_signup_redirect' => array(
+					'id'   => 'wp_login_signup_redirect',
+					'name' => __( 'Signup Redirect on wp-login.php', 'wpum' ),
+					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'header2' => array(
+					'id'   => 'header2',
+					'name' => __( 'Uninstall Data', 'wpum' ),
+					'type' => 'header'
+				),
+				'uninstall_on_delete' => array(
+					'id' => 'uninstall_on_delete',
+					'name' => __( 'Remove Data on Uninstall?', 'wprm' ),
+					'desc' => __( 'Check this box if you would like WPUM to completely remove all of its data when the plugin is deleted. <strong>No user will be deleted.</strong>', 'wprm' ),
+					'type' => 'checkbox'
+				)
+			)
+		),
+		'registration' => apply_filters( 'wpum_settings_registration',
+			array(
+				'registration_status' => array(
+					'id'   => 'registration_status',
+					'name' => __( 'Registrations Status:', 'wpum' ),
+					'type' => 'hook'
+				),
+				'password_strenght' => array(
+					'id'      => 'password_strenght',
+					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
+					'desc'    => __('Select how strong the password needs to be before users can register.'),
+					'type'    => 'select',
+					'options' => wpum_get_psw_lenghts()
+				),
+				'display_password_meter_registration' => array(
+					'id'   => 'display_password_meter_registration',
+					'name' => __( 'Display password meter on registration page:', 'wpum' ),
+					'desc'    => __('Enable to display a password meter on registration page.'),
+					'type' => 'checkbox'
 				),
 			)
 		),
@@ -261,6 +285,7 @@ function wpum_get_settings_tabs() {
 
 	$tabs             = array();
 	$tabs['general']  = __( 'General', 'wpum' );
+	$tabs['registration']  = __( 'Registration', 'wpum' );
 
 	return apply_filters( 'wpum_settings_tabs', $tabs );
 }

@@ -61,3 +61,19 @@ function wpum_add_pwd_link_to_loginform( $args ) {
 
 }
 add_action( 'wpum_after_inside_loginform_template', 'wpum_add_pwd_link_to_loginform' );
+
+/**
+ * Stops users from accessing wp-login.php?action=register
+ * 
+ * @since 1.0.0
+ */
+function wpum_restrict_wp_register() {
+
+	if(wpum_get_option('wp_login_signup_redirect')):
+		$permalink = wpum_get_option('wp_login_signup_redirect');
+		wp_redirect( get_permalink( $permalink ) );
+    	exit();
+    endif;
+
+}
+add_action( 'login_form_register', 'wpum_restrict_wp_register' );
