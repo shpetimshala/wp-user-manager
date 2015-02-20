@@ -141,6 +141,18 @@ function wpum_get_registered_settings() {
 					'desc'    => __('Enable to display a password meter on profile page.'),
 					'type' => 'checkbox'
 				),
+				'display_registration_link' => array(
+					'id'   => 'display_registration_link',
+					'name' => __( 'Display registration link:', 'wpum' ),
+					'desc'    => __('Enable to display a registration link into the login form.'),
+					'type' => 'checkbox'
+				),
+				'display_password_link' => array(
+					'id'   => 'display_password_link',
+					'name' => __( 'Display password recovery link:', 'wpum' ),
+					'desc'    => __('Enable to display a password recovery link into the login form.'),
+					'type' => 'checkbox'
+				),
 				'header1' => array(
 					'id'   => 'header1',
 					'name' => __( 'Redirects', 'wpum' ),
