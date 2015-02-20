@@ -107,6 +107,33 @@
 							}
 						});
 					}
+				}, // End Logout Link
+
+				/* Registration Page */
+				{
+					text: 'Registration Form',
+					onclick: function() {
+						editor.windowManager.open( {
+							title: 'Registration Form',
+							body: [ 
+								{
+									type: 'textbox', 
+									name: 'redirect', 
+									label: 'Redirect after registration (optional)',
+									value: ''
+								},
+								{
+									type: 'textbox', 
+									name: 'form_id', 
+									label: 'Form ID (optional)',
+									value: ''
+								},
+							],
+							onsubmit: function( e ) {
+								editor.insertContent( '[wpum_register redirect="' + e.data.redirect + '" form_id="' + e.data.form_id + '" ]');
+							}
+						});
+					}
 				}, // End Login Form
 
 			]

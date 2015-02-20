@@ -53,6 +53,14 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		private static $instance;
 
 		/**
+		 * Forms Object
+		 *
+		 * @var object
+		 * @since 1.5
+		 */
+		public $forms;
+
+		/**
 		 * Main WP_User_Manager Instance
 		 *
 		 * Insures that only one instance of WP_User_Manager exists in memory at any one
@@ -68,14 +76,17 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		public static function instance() {
 
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WP_User_Manager ) ) {
+				
 				self::$instance = new WP_User_Manager;
 				self::$instance->setup_constants();
 				self::$instance->includes();
+				self::$instance->forms = new WPUM_Forms();
 
 				// load admin assets css and scripts
 				add_action( 'admin_enqueue_scripts', array( self::$instance, 'admin_enqueue_scripts' ) );
 				// load frontend assets css and scripts
 				add_action( 'wp_enqueue_scripts', array( self::$instance, 'wp_enqueue_scripts' ) );
+
 			}
 			return self::$instance;
 
@@ -167,6 +178,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 			// Plugin's actions
 			require_once WPUM_PLUGIN_DIR . 'includes/actions.php';
+			// Forms
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-forms.php';
 			// Shortcodes
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
 			// Ajax Handler
