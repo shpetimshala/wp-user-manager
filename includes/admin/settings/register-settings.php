@@ -162,7 +162,8 @@ function wpum_get_registered_settings() {
 					'id'   => 'logout_redirect',
 					'name' => __( 'Logout Redirect', 'wpum' ),
 					'desc'    => __('Enter the url where you want to redirect users after they logout. If empty will return to wp-login.php'),
-					'type' => 'text'
+					'type' => 'select',
+					'options' => wpum_get_pages()
 				),
 			)
 		),

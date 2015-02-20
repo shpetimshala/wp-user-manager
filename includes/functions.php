@@ -63,7 +63,7 @@ function wpum_logout_url( $custom_redirect = null ) {
 	if( !empty($custom_redirect) ) {
 		$redirect = esc_url($custom_redirect);
 	} else if( wpum_get_option('logout_redirect') ) {
-		$redirect = esc_url( wpum_get_option('logout_redirect') );
+		$redirect = get_permalink( wpum_get_option('logout_redirect') );
 	}
 
 	return wp_logout_url( $redirect );
