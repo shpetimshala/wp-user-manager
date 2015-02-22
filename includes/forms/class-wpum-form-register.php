@@ -32,6 +32,12 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
+		// Check for password field
+		if(wpum_get_option('custom_passwords')) :
+			add_filter( 'wpum_default_registration_fields', array( __CLASS__, 'add_password_field' ) );
+			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+		endif;
+
 	}
 
 	/**
@@ -184,6 +190,94 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
+	 * Add password field if option is enabled.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_password_field( $fields ) {
+
+		$fields['register']['password'] = array(
+		    'label' => __( 'Password' ),
+		    'type' => 'password',
+		    'required' => true,
+		    'placeholder' => '',
+		    'priority' => 3
+		);
+		
+		return $fields;
+
+	}
+
+	/**
+	 * Validate the password field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_password_field( $passed, $fields, $values ) {
+
+		$pwd = $values['register']['password'];
+		$pwd_strenght = wpum_get_option('password_strength');
+
+		$containsLetter  = preg_match('/[A-Z]/', $pwd);
+		$containsDigit   = preg_match('/\d/', $pwd);
+		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);
+
+		if($pwd_strenght == 'weak') {
+			if(strlen($pwd) < 8)
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long' ) );
+		}
+		if($pwd_strenght == 'medium') {
+			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+		}
+		if($pwd_strenght == 'strong') {
+			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+		}
+
+		return $passed;
+
+	}
+
+	/**
+	 * Do registration.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 * @todo  use wp_create_user
+	 */
+	public static function do_registration( $username, $email, $values ) {
+
+
+		// Try registration
+		$do_user = register_new_user($username, $email);
+
+		// Check for errors
+		if ( is_wp_error( $do_user ) ) {
+			
+			foreach ($do_user->errors as $error) {
+				self::add_error( $error[0] );
+			}
+			return;
+
+		} else {
+
+			self::add_confirmation( __('Registration Complete') );
+
+			// Add ability to extend registration process.
+			$user_id = $do_user;
+			do_action('wpum_registration_is_complete', $user_id, $values );
+
+		}
+
+	}
+
+	/**
 	 * Output the form.
 	 *
 	 * @access public
@@ -209,38 +303,6 @@ class WPUM_Form_Register extends WPUM_Form {
 				'register_fields' => self::get_fields( 'register' ),
 			)
 		);
-
-	}
-
-	/**
-	 * Do registration.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function do_registration( $username, $email, $values ) {
-
-		// Try registration
-		$do_user = register_new_user($username, $email);
-
-		// Check for errors
-		if ( is_wp_error( $do_user ) ) {
-			
-			foreach ($do_user->errors as $error) {
-				self::add_error( $error[0] );
-			}
-			return;
-
-		} else {
-
-			self::add_confirmation( __('Registration Complete') );
-
-			// Add ability to extend registration process.
-			$user_id = $do_user;
-			do_action('wpum_registration_is_complete', $user_id );
-
-		}
 
 	}
 

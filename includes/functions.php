@@ -27,15 +27,15 @@ function wpum_get_login_methods() {
 }
 endif;
 
-if ( ! function_exists( 'wpum_get_psw_lenghts' ) ) :
+if ( ! function_exists( 'wpum_get_psw_lengths' ) ) :
 /**
  * Define login methods for options panel
  *
  * @access public
  * @return array
  */
-function wpum_get_psw_lenghts() {
-	return apply_filters( 'wpum_get_psw_lenghts', array(
+function wpum_get_psw_lengths() {
+	return apply_filters( 'wpum_get_psw_lengths', array(
 		''       => __( 'Disabled' ),
 		'weak'   => __( 'Weak' ),
 		'medium' => __( 'Medium' ),

@@ -176,12 +176,18 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Registrations Status:', 'wpum' ),
 					'type' => 'hook'
 				),
-				'password_strenght' => array(
-					'id'      => 'password_strenght',
+				'custom_passwords' => array(
+					'id'   => 'custom_passwords',
+					'name' => __( 'Users custom passwords:', 'wpum' ),
+					'desc'    => __('Enable to allow users to set custom passwords on the registration page.'),
+					'type' => 'checkbox'
+				),
+				'password_strength' => array(
+					'id'      => 'password_strength',
 					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
 					'desc'    => __('Select how strong the password needs to be before users can register.'),
 					'type'    => 'select',
-					'options' => wpum_get_psw_lenghts()
+					'options' => wpum_get_psw_lengths()
 				),
 				'display_password_meter_registration' => array(
 					'id'   => 'display_password_meter_registration',
