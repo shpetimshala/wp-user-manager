@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Form_Register extends WPUM_Form {
 
 	public static $form_name = 'register';
+	public static $random_password = true;
 
 	/**
 	 * Init the form.
@@ -34,6 +35,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		// Check for password field
 		if(wpum_get_option('custom_passwords')) :
+			self::$random_password = false;
 			add_filter( 'wpum_default_registration_fields', array( __CLASS__, 'add_password_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 		endif;
@@ -249,13 +251,16 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @access public
 	 * @since 1.0.0
 	 * @return void
-	 * @todo  use wp_create_user
 	 */
 	public static function do_registration( $username, $email, $values ) {
 
-
 		// Try registration
-		$do_user = register_new_user($username, $email);
+		if( self::$random_password ) {
+			$do_user = register_new_user($username, $email);
+		} else {
+			$pwd = $values['register']['password'];
+			$do_user = wp_create_user( $username, $pwd, $email );
+		}
 
 		// Check for errors
 		if ( is_wp_error( $do_user ) ) {
@@ -266,6 +271,11 @@ class WPUM_Form_Register extends WPUM_Form {
 			return;
 
 		} else {
+
+			// Send notification if password is manually added by the user.
+			if(!self::$random_password):
+				wp_new_user_notification( $do_user, $pwd );
+			endif;
 
 			self::add_confirmation( __('Registration Complete') );
 
