@@ -5,27 +5,59 @@
  *
  * @abstract
  * @author      Mike Jolley
+ * @author      Alesssandro Tesoro
  */
 abstract class WPUM_Form {
 
 	protected static $fields;
 	protected static $action;
 	protected static $errors = array();
+	protected static $confirmations = array();
 
 	/**
-	 * Add an error
-	 * @param string $error
+	 * Add an error.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return array of errors.
 	 */
 	public static function add_error( $error ) {
 		self::$errors[] = $error;
 	}
 
 	/**
-	 * Show errors
+	 * Show errors.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
 	 */
 	public static function show_errors() {
 		foreach ( self::$errors as $error )
 			echo '<div class="wpum-message error">' . $error . '</div>';
+	}
+
+	/**
+	 * Add a confirmation message.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $array of confirmation messages
+	 */
+	public static function add_confirmation( $confirmation ) {
+		self::$confirmations[] = $confirmation;
+	}
+
+	/**
+	 * Show confirmation messages.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $void
+	 */
+	public static function show_confirmations() {
+		foreach ( self::$confirmations as $confirmation )
+			echo '<div class="wpum-message success">' . $confirmation . '</div>';
 	}
 
 	/**
@@ -41,6 +73,7 @@ abstract class WPUM_Form {
 	 * get_fields function.
 	 *
 	 * @access public
+	 * @since 1.0.0
 	 * @param mixed $key
 	 * @return array
 	 */
@@ -59,6 +92,7 @@ abstract class WPUM_Form {
 	 * priority_cmp function.
 	 *
 	 * @access private
+	 * @since 1.0.0
 	 * @param mixed $a
 	 * @param mixed $b
 	 * @return void

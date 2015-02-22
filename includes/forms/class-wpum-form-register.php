@@ -178,7 +178,8 @@ class WPUM_Form_Register extends WPUM_Form {
 			return;
 		}
 
-		print_r($values);
+		// Let's do the registration
+		self::do_registration( $values['register']['username'], $values['register']['email'], $values );
 
 	}
 
@@ -197,6 +198,9 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Show errors from fields
 		self::show_errors();
 
+		// Show confirmation messages
+		self::show_confirmations();
+
 		// Display template
 		get_wpum_template( 'default-registration-form.php', 
 			array(
@@ -205,6 +209,38 @@ class WPUM_Form_Register extends WPUM_Form {
 				'register_fields' => self::get_fields( 'register' ),
 			)
 		);
+
+	}
+
+	/**
+	 * Do registration.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function do_registration( $username, $email, $values ) {
+
+		// Try registration
+		$do_user = register_new_user($username, $email);
+
+		// Check for errors
+		if ( is_wp_error( $do_user ) ) {
+			
+			foreach ($do_user->errors as $error) {
+				self::add_error( $error[0] );
+			}
+			return;
+
+		} else {
+
+			self::add_confirmation( __('Registration Complete') );
+
+			// Add ability to extend registration process.
+			$user_id = $do_user;
+			do_action('wpum_registration_is_complete', $user_id );
+
+		}
 
 	}
 
