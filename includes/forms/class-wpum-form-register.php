@@ -3,7 +3,8 @@
  * WP User Manager Forms
  *
  * @package     wp-user-manager
- * @copyright   Copyright (c) 2015, Alessandro Tesoro
+ * @author      Mike Jolley
+ * @author      Alessandro Tesoro
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
@@ -134,6 +135,25 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
+	 * Validate the posted fields
+	 *
+	 * @return bool on success, WP_ERROR on failure
+	 */
+	protected static function validate_fields( $values ) {
+
+		foreach ( self::$fields as $group_key => $group_fields ) {
+			foreach ( $group_fields as $key => $field ) {
+				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
+					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
+				}
+			}
+		}
+
+		return apply_filters( 'wpum_register_form_validate_fields', true, self::$fields, $values );
+
+	}
+
+	/**
 	 * Process the submission.
 	 *
 	 * @access public
@@ -152,6 +172,12 @@ class WPUM_Form_Register extends WPUM_Form {
 			return;
 		}
 
+		// Validate required
+		if ( is_wp_error( ( $return = self::validate_fields( $values ) ) ) ) {
+			self::add_error( $return->get_error_message() );
+			return;
+		}
+
 		print_r($values);
 
 	}
@@ -167,6 +193,9 @@ class WPUM_Form_Register extends WPUM_Form {
 		
 		// Get fields
 		self::get_registration_fields();
+
+		// Show errors from fields
+		self::show_errors();
 
 		// Display template
 		get_wpum_template( 'default-registration-form.php', 

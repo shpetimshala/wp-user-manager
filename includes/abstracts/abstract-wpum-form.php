@@ -4,6 +4,7 @@
  * Abstract WPUM_Form class.
  *
  * @abstract
+ * @author      Mike Jolley
  */
 abstract class WPUM_Form {
 
@@ -24,7 +25,7 @@ abstract class WPUM_Form {
 	 */
 	public static function show_errors() {
 		foreach ( self::$errors as $error )
-			echo '<div class="wpum-error">' . $error . '</div>';
+			echo '<div class="wpum-message error">' . $error . '</div>';
 	}
 
 	/**
