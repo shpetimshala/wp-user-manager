@@ -176,10 +176,15 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Registrations Status:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'header3' => array(
+					'id'   => 'header3',
+					'name' => __( 'Passwords Setup', 'wpum' ),
+					'type' => 'header'
+				),
 				'custom_passwords' => array(
 					'id'   => 'custom_passwords',
 					'name' => __( 'Users custom passwords:', 'wpum' ),
-					'desc'    => __('Enable to allow users to set custom passwords on the registration page.'),
+					'desc' => __('Enable to allow users to set custom passwords on the registration page.'),
 					'type' => 'checkbox'
 				),
 				'password_strength' => array(
@@ -192,19 +197,42 @@ function wpum_get_registered_settings() {
 				'display_password_meter_registration' => array(
 					'id'   => 'display_password_meter_registration',
 					'name' => __( 'Display password meter on registration page:', 'wpum' ),
-					'desc'    => __('Enable to display a password meter on registration page.'),
+					'desc' => __('Enable to display a password meter on registration page.'),
 					'type' => 'checkbox'
+				),
+				'header4' => array(
+					'id'   => 'header4',
+					'name' => __( 'Terms &amp; Conditions', 'wpum' ),
+					'type' => 'header'
+				),
+				'enable_terms' => array(
+					'id'   => 'enable_terms',
+					'name' => __( 'Enable terms &amp conditions:', 'wpum' ),
+					'desc' => __('Enable to force users to agree to your terms before registering an account.'),
+					'type' => 'checkbox'
+				),
+				'terms_page' => array(
+					'id'      => 'terms_page',
+					'name'    => __( 'Terms Page:', 'wpum' ),
+					'desc'    => __('Select the page that contains your terms.'),
+					'type'    => 'select',
+					'options' => wpum_get_pages()
+				),
+				'header5' => array(
+					'id'   => 'header5',
+					'name' => __( 'Extra', 'wpum' ),
+					'type' => 'header'
 				),
 				'enable_honeypot' => array(
 					'id'   => 'enable_honeypot',
 					'name' => __( 'Anti-spam Honeypot:', 'wpum' ),
-					'desc'    => __('Enables honeypot spam protection technique.'),
+					'desc' => __('Enables honeypot spam protection technique.'),
 					'type' => 'checkbox'
 				),
 				'login_after_registration' => array(
 					'id'   => 'login_after_registration',
 					'name' => __( 'Login after registration:', 'wpum' ),
-					'desc'    => __('Enable this options to allow automatic login of users after their registration.'),
+					'desc' => __('Enable this options to allow automatic login of users after their registration.'),
 					'type' => 'checkbox'
 				),
 			)

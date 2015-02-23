@@ -56,6 +56,11 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
+		// Add terms & conditions field
+		if( wpum_get_option('enable_terms') ) :
+			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_terms_field' ) );
+		endif;
+
 	}
 
 	/**
@@ -374,6 +379,27 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		wp_redirect( get_permalink() );
 		exit;
+
+	}
+
+	/**
+	 * Add Terms field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_terms_field( $fields ) {
+
+		$fields['register'][ 'terms' ] = array(
+		    'label' => __('Terms &amp; Conditions'),
+		    'type' => 'checkbox',
+		    'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.'), get_permalink( wpum_get_option('terms_page') ) ),
+		    'required' => true,
+		    'priority' => 9999,
+		);
+
+		return $fields;
 
 	}
 
