@@ -255,10 +255,24 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			wp_enqueue_script( 'jQuery' );
 			wp_enqueue_script( 'wpum-frontend-js' );
 
+			// Display password meter only if enabled
+			if( wpum_get_option('display_password_meter_registration') && wpum_get_option('custom_passwords') ) :
+				wp_enqueue_script( 'password-strength-meter' );
+				wp_localize_script( 'password-strength-meter', 'pwsL10n', array(
+				    'empty' => __( 'Strength indicator' ),
+				    'short' => __( 'Very weak' ),
+				    'bad' => __( 'Weak' ),
+				    'good' => _x( 'Medium', 'password strength' ),
+				    'strong' => __( 'Strong' ),
+				    'mismatch' => __( 'Mismatch' )
+				) );
+			endif;
+
 			// Frontend jS Settings
 			wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
 				'ajax' => admin_url( 'admin-ajax.php' ),
 				'checking_credentials' => __('Checking credentials...'),
+				'pwd_meter' => wpum_get_option('display_password_meter_registration')
 			) );
 
 		}

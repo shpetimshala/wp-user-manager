@@ -35,9 +35,15 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		// Check for password field
 		if(wpum_get_option('custom_passwords')) :
+			
 			self::$random_password = false;
 			add_filter( 'wpum_default_registration_fields', array( __CLASS__, 'add_password_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+
+			// Add password meter field
+			if( wpum_get_option('display_password_meter_registration') )
+				add_action( 'wpum_after_inside_register_form_template', array( __CLASS__, 'add_password_meter_field' ) );
+
 		endif;
 
 	}
@@ -314,6 +320,17 @@ class WPUM_Form_Register extends WPUM_Form {
 			)
 		);
 
+	}
+
+	/**
+	 * Add password meter field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_password_meter_field( $atts ) {
+		echo '<span id="password-strength"></span>';		
 	}
 
 }

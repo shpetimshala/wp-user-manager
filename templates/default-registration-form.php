@@ -12,11 +12,11 @@
 ?>
 <div id="wpum-form-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form-wrapper" data-redirect="<?php echo $atts['redirect'];?>">
 
-	<?php do_action( 'wpum_before_default_register_form_template', $atts ); ?>
+	<?php do_action( 'wpum_before_register_form_template', $atts ); ?>
 
 	<form action="" method="post" id="wpum-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form" name="wpum-register-<?php echo $atts['form_id'];?>">
 
-		<?php do_action( 'wpum_before_inside_default_register_form_template', $atts ); ?>
+		<?php do_action( 'wpum_before_inside_register_form_template', $atts ); ?>
 
 		<?php foreach ( $register_fields as $key => $field ) : ?>
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
@@ -27,17 +27,17 @@
 			</fieldset>
 		<?php endforeach; ?>
 
-		<?php do_action( 'wpum_after_inside_default_register_form_template', $atts ); ?>
+		<?php do_action( 'wpum_after_inside_register_form_template', $atts ); ?>
 
 		<?php wp_nonce_field( 'wpum-register-nonce', 'security' ); ?>
 
 		<p>
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="submit" name="submit_wpum_register" class="button" value="<?php _e('Register'); ?>" />
+			<input type="submit" id="submit_wpum_register" name="submit_wpum_register" class="button" value="<?php _e('Register'); ?>" />
 		</p>
 
 	</form>
 
-	<?php do_action( 'wpum_after_default_register_form_template', $atts ); ?>
+	<?php do_action( 'wpum_after_register_form_template', $atts ); ?>
 
 </div>

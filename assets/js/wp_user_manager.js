@@ -58,10 +58,66 @@ jQuery(document).ready(function ($) {
 
 			});
 
+		}, 
+
+		// Check password strenght function
+		checkPasswordStrength : function( $pass1, $strengthResult, $submitButton, blacklistArray ) {
+	       
+	        var pass1 = $pass1.val();
+	 
+	    	// Reset the form & meter
+	        $strengthResult.removeClass( 'short bad good strong' );
+	 
+		    // Extend our blacklist array with those from the inputs & site data
+		    blacklistArray = blacklistArray.concat( wp.passwordStrength.userInputBlacklist() )
+		 
+		    // Get the password strength
+		    var strength = wp.passwordStrength.meter( pass1, blacklistArray );
+		 
+		    // Add the strength meter results
+		    switch ( strength ) {
+		 
+		        case 2:
+		            $strengthResult.addClass( 'bad' ).html( pwsL10n.bad );
+		            break;
+		 
+		        case 3:
+		            $strengthResult.addClass( 'good' ).html( pwsL10n.good );
+		            break;
+		 
+		        case 4:
+		            $strengthResult.addClass( 'strong' ).html( pwsL10n.strong );
+		            break;
+		 
+		        case 5:
+		            $strengthResult.addClass( 'short' ).html( pwsL10n.mismatch );
+		            break;
+		 
+		        default:
+		            $strengthResult.addClass( 'short' ).html( pwsL10n.short );
+		 
+		    }
+		 
+		    return strength;
+
 		}
 
 	};
 
 	WPUM_Frontend.init();
+
+	// Run pwd meter if enabled
+	if( wpum_frontend_js.pwd_meter == 1 ) {
+		$( 'body' ).on( 'keyup', 'input[name=password]',
+	        function( event ) {
+	            WPUM_Frontend.checkPasswordStrength(
+	                $('.wpum-default-registration-form-wrapper input[name=password]'),         // First password field
+	                $('.wpum-default-registration-form-wrapper #password-strength'),           // Strength meter
+	                $('#submit_wpum_register'),           // Submit button
+	                ['admin', 'administrator', 'test', 'user', 'demo']        // Blacklisted words
+	            );
+	        }
+	    );
+	}
 
 });
