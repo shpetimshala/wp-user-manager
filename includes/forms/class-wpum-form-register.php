@@ -21,6 +21,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 	public static $form_name = 'register';
 	public static $random_password = true;
+	public static $honeypot_field;
 
 	/**
 	 * Init the form.
@@ -44,6 +45,12 @@ class WPUM_Form_Register extends WPUM_Form {
 			if( wpum_get_option('display_password_meter_registration') )
 				add_action( 'wpum_after_inside_register_form_template', array( __CLASS__, 'add_password_meter_field' ) );
 
+		endif;
+
+		// Add honeypot spam field
+		if( wpum_get_option('enable_honeypot') ) :
+			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
+			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
 	}
@@ -294,6 +301,57 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
+	 * Add password meter field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_password_meter_field( $atts ) {
+		echo '<span id="password-strength"></span>';		
+	}
+
+	/**
+	 * Add Honeypot field markup.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_honeypot_field( $fields ) {
+
+		$fields['register'][ 'comments' ] = array(
+		    'label' => 'Comments',
+		    'type' => 'textarea',
+		    'required' => false,
+		    'placeholder' => '',
+		    'priority' => 9999,
+		    'class' => 'wpum-honeypot-field'
+		);
+
+		return $fields;
+
+	}
+
+	/**
+	 * Validate the honeypot field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_honeypot_field( $passed, $fields, $values ) {
+
+		$fake_field = $values['register'][ 'comments' ];
+
+		if( $fake_field )
+			return new WP_Error( 'honeypot-validation-error', __( 'Failed Honeypot validation' ) );
+
+		return $passed;
+
+	}
+
+	/**
 	 * Output the form.
 	 *
 	 * @access public
@@ -320,17 +378,6 @@ class WPUM_Form_Register extends WPUM_Form {
 			)
 		);
 
-	}
-
-	/**
-	 * Add password meter field.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function add_password_meter_field( $atts ) {
-		echo '<span id="password-strength"></span>';		
 	}
 
 }

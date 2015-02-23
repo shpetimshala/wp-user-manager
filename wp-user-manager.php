@@ -250,10 +250,12 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			// Styles & scripts registration
 			wp_register_script( 'wpum-frontend-js', $js_dir . 'wp_user_manager' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
+			wp_register_style( 'wpum-frontend-css', $css_dir . 'wp_user_manager_frontend' . $suffix . '.css' , WPUM_VERSION );
 
 			// Enqueue everything
 			wp_enqueue_script( 'jQuery' );
 			wp_enqueue_script( 'wpum-frontend-js' );
+			wp_enqueue_style( 'wpum-frontend-css' );
 
 			// Display password meter only if enabled
 			if( wpum_get_option('display_password_meter_registration') && wpum_get_option('custom_passwords') ) :
@@ -263,8 +265,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				    'short' => __( 'Very weak' ),
 				    'bad' => __( 'Weak' ),
 				    'good' => _x( 'Medium', 'password strength' ),
-				    'strong' => __( 'Strong' ),
-				    'mismatch' => __( 'Mismatch' )
+				    'strong' => __( 'Strong' )
 				) );
 			endif;
 

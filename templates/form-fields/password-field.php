@@ -10,7 +10,7 @@
 ?>
 <input
 	type="password"
-	class="input-text"
+	class="input-text <?php echo ! empty( $field['class'] ) ? $field['class'] : ''; ?>"
 	name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?>"
 	id="<?php echo esc_attr( $key ); ?>"
 	placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>"

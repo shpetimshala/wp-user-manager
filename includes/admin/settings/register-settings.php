@@ -195,6 +195,12 @@ function wpum_get_registered_settings() {
 					'desc'    => __('Enable to display a password meter on registration page.'),
 					'type' => 'checkbox'
 				),
+				'enable_honeypot' => array(
+					'id'   => 'enable_honeypot',
+					'name' => __( 'Anti-spam Honeypot:', 'wpum' ),
+					'desc'    => __('Enables honeypot spam protection technique.'),
+					'type' => 'checkbox'
+				),
 			)
 		),
 	);

@@ -1,0 +1,14 @@
+/**
+ * WP User Manager
+ * http://wp-user-manager.com
+ *
+ * Copyright (c) 2015 Alessandro Tesoro
+ * Licensed under the GPLv2+ license.
+ */
+
+// Honeypot field
+.wpum-default-registration-form {
+	.fieldset-comments, .wpum-honeypot-field {
+		display: none !important;
+	}
+}

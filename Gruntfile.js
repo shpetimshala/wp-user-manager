@@ -66,7 +66,8 @@ module.exports = function( grunt ) {
 		sass:   {
 			all: {
 				files: {
-					'assets/css/wp_user_manager.css': 'assets/css/sass/wp_user_manager.scss'
+					'assets/css/wp_user_manager.css': 'assets/css/sass/wp_user_manager.scss',
+					'assets/css/wp_user_manager_frontend.css': 'assets/css/sass/wp_user_manager_frontend.scss'
 				}
 			}
 		},
@@ -83,7 +84,7 @@ module.exports = function( grunt ) {
 				expand: true,
 				
 				cwd: 'assets/css/',				
-				src: ['wp_user_manager.css'],
+				src: ['*.css', '!*.min.css'],
 				
 				dest: 'assets/css/',
 				ext: '.min.css'
