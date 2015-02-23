@@ -201,6 +201,12 @@ function wpum_get_registered_settings() {
 					'desc'    => __('Enables honeypot spam protection technique.'),
 					'type' => 'checkbox'
 				),
+				'login_after_registration' => array(
+					'id'   => 'login_after_registration',
+					'name' => __( 'Login after registration:', 'wpum' ),
+					'desc'    => __('Enable this options to allow automatic login of users after their registration.'),
+					'type' => 'checkbox'
+				),
 			)
 		),
 	);

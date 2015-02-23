@@ -21,7 +21,6 @@ class WPUM_Form_Register extends WPUM_Form {
 
 	public static $form_name = 'register';
 	public static $random_password = true;
-	public static $honeypot_field;
 
 	/**
 	 * Init the form.
@@ -44,6 +43,10 @@ class WPUM_Form_Register extends WPUM_Form {
 			// Add password meter field
 			if( wpum_get_option('display_password_meter_registration') )
 				add_action( 'wpum_after_inside_register_form_template', array( __CLASS__, 'add_password_meter_field' ) );
+
+			// Automatic login after registration
+			if( wpum_get_option('login_after_registration') )
+				add_action( 'wpum_registration_is_complete', array( __CLASS__, 'do_login' ), 10, 3 );
 
 		endif;
 
@@ -348,6 +351,29 @@ class WPUM_Form_Register extends WPUM_Form {
 			return new WP_Error( 'honeypot-validation-error', __( 'Failed Honeypot validation' ) );
 
 		return $passed;
+
+	}
+
+	/**
+	 * Autologin.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function do_login( $user_id, $values ) {
+
+		$userdata = get_userdata( $user_id );
+
+		$data = array();
+		$data['user_login']    = $userdata->user_login;
+		$data['user_password'] = $values['register']['password'];
+		$data['rememberme']    = true;
+
+		$user_login = wp_signon( $data, false );
+
+		wp_redirect( get_permalink() );
+		exit;
 
 	}
 
