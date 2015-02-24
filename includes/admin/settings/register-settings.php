@@ -258,6 +258,12 @@ function wpum_get_registered_settings() {
 					'desc' => __('Enable this options to allow automatic login of users after their registration.'),
 					'type' => 'checkbox'
 				),
+				'exclude_usernames' => array(
+					'id'   => 'exclude_usernames',
+					'name' => __( 'Excluded usernames:', 'wpum' ),
+					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. This will prevent users in using these usernames when they register to your site. Eg: type "admin", users will not be able to register using that username. <br/> Separate each username on a new line.'),
+					'type' => 'textarea'
+				),
 			)
 		),
 	);

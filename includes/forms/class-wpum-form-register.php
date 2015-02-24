@@ -68,6 +68,10 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
 
+		// Exclude usernames if enabled
+		if( !empty(wpum_get_option('exclude_usernames') ) )
+			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
+
 	}
 
 	/**
@@ -274,48 +278,6 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
-	 * Do registration.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function do_registration( $username, $email, $values ) {
-
-		// Try registration
-		if( self::$random_password ) {
-			$do_user = register_new_user($username, $email);
-		} else {
-			$pwd = $values['register']['password'];
-			$do_user = wp_create_user( $username, $pwd, $email );
-		}
-
-		// Check for errors
-		if ( is_wp_error( $do_user ) ) {
-			
-			foreach ($do_user->errors as $error) {
-				self::add_error( $error[0] );
-			}
-			return;
-
-		} else {
-
-			// Send notification if password is manually added by the user.
-			if(!self::$random_password):
-				wp_new_user_notification( $do_user, $pwd );
-			endif;
-
-			self::add_confirmation( __('Registration Complete') );
-
-			// Add ability to extend registration process.
-			$user_id = $do_user;
-			do_action('wpum_registration_is_complete', $user_id, $values );
-
-		}
-
-	}
-
-	/**
 	 * Add password meter field.
 	 *
 	 * @access public
@@ -462,6 +424,66 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$user = new WP_User( $user_id );
 		$user->set_role( $values['register'][ 'role' ] );
+
+	}
+
+	/**
+	 * Validate username field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_username_field( $passed, $fields, $values ) {
+
+		$username = $values['register'][ 'username' ];
+
+		if( array_key_exists( $username , wpum_get_disabled_usernames() ) )
+			return new WP_Error( 'username-validation-error', __( 'This username cannot be used' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Do registration.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function do_registration( $username, $email, $values ) {
+
+		// Try registration
+		if( self::$random_password ) {
+			$do_user = register_new_user($username, $email);
+		} else {
+			$pwd = $values['register']['password'];
+			$do_user = wp_create_user( $username, $pwd, $email );
+		}
+
+		// Check for errors
+		if ( is_wp_error( $do_user ) ) {
+			
+			foreach ($do_user->errors as $error) {
+				self::add_error( $error[0] );
+			}
+			return;
+
+		} else {
+
+			// Send notification if password is manually added by the user.
+			if(!self::$random_password):
+				wp_new_user_notification( $do_user, $pwd );
+			endif;
+
+			self::add_confirmation( __('Registration Complete') );
+
+			// Add ability to extend registration process.
+			$user_id = $do_user;
+			do_action('wpum_registration_is_complete', $user_id, $values );
+
+		}
 
 	}
 

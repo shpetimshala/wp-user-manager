@@ -89,3 +89,28 @@ function wpum_get_allowed_user_roles() {
 	return $user_roles;
 
 }
+
+/**
+ * Retrieve a list of disabled usernames
+ *
+ * @since 1.0.0
+ * @return array $usernames An array of the usernames
+ */
+function wpum_get_disabled_usernames() {
+
+	$usernames = array();
+
+	if( wpum_get_option('exclude_usernames') ) {
+
+		$list = trim(wpum_get_option('exclude_usernames'));
+		$list = explode("\n", str_replace("\r", "", $list));
+
+		foreach ($list as $username) {
+			$usernames[] = $username;
+		}
+
+	}
+
+	return array_flip($usernames);
+
+}
