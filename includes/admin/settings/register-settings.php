@@ -139,6 +139,15 @@ function wpum_get_registered_settings() {
 					'desc'    => __('Enable to display a password recovery link into the login form.'),
 					'type' => 'checkbox'
 				),
+				'adminbar_roles' => array(
+					'id'      => 'adminbar_roles',
+					'name'    => __( 'Admin Bar Settings:', 'wpum' ),
+					'desc'    => __('Choose which user roles will not view the admin bar in the front-end of the website.'),
+					'type'    => 'multiselect',
+					'placeholder' => __('Select the user roles from the list.'),
+					'class' => 'select2',
+					'options' => wpum_get_roles()
+				),
 				'header1' => array(
 					'id'   => 'header1',
 					'name' => __( 'Redirects', 'wpum' ),
@@ -266,6 +275,11 @@ function wpum_get_registered_settings() {
 				),
 			)
 		),
+		'emails' => apply_filters( 'wpum_settings_emails',
+			array(
+				
+			)
+		),
 	);
 
 	return apply_filters( 'wpum_registered_settings', $wpum_settings );
@@ -361,6 +375,7 @@ function wpum_get_settings_tabs() {
 	$tabs             = array();
 	$tabs['general']  = __( 'General', 'wpum' );
 	$tabs['registration']  = __( 'Registration', 'wpum' );
+	$tabs['emails']  = __( 'Emails Editor', 'wpum' );
 
 	return apply_filters( 'wpum_settings_tabs', $tabs );
 }

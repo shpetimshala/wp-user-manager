@@ -77,3 +77,22 @@ function wpum_restrict_wp_register() {
 
 }
 add_action( 'login_form_register', 'wpum_restrict_wp_register' );
+
+/**
+ * Stops users from seeing the admin bar on the frontend.
+ * 
+ * @since 1.0.0
+ */
+function wpum_remove_admin_bar() {
+
+	$excluded_roles = wpum_get_option('adminbar_roles');
+	$user = wp_get_current_user();
+
+	if( !empty($excluded_roles) && array_intersect($excluded_roles, $user->roles ) && !is_admin() ) {
+		if ( current_user_can( $user->roles[0] ) ) {
+		  show_admin_bar(false);
+		}
+	}
+
+}
+add_action('after_setup_theme', 'wpum_remove_admin_bar');
