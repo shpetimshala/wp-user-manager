@@ -72,16 +72,18 @@ function wpum_register_settings() {
 				'wpum_settings_' . $tab,
 				'wpum_settings_' . $tab,
 				array(
-					'section' => $tab,
-					'id'      => isset( $option['id'] )      ? $option['id']      : null,
-					'desc'    => ! empty( $option['desc'] )  ? $option['desc']    : '',
-					'name'    => isset( $option['name'] )    ? $option['name']    : null,
-					'size'    => isset( $option['size'] )    ? $option['size']    : null,
-					'options' => isset( $option['options'] ) ? $option['options'] : '',
-					'std'     => isset( $option['std'] )     ? $option['std']     : '',
-					'min'     => isset( $option['min'] )     ? $option['min']     : null,
-					'max'     => isset( $option['max'] )     ? $option['max']     : null,
-					'step'    => isset( $option['step'] )    ? $option['step']    : null
+					'section'     => $tab,
+					'id'          => isset( $option['id'] ) ? $option['id']      : null,
+					'desc'        => ! empty( $option['desc'] ) ? $option['desc']    : '',
+					'class'       => ! empty( $option['class'] ) ? $option['class']    : '',
+					'name'        => isset( $option['name'] ) ? $option['name']    : null,
+					'size'        => isset( $option['size'] ) ? $option['size']    : null,
+					'options'     => isset( $option['options'] ) ? $option['options'] : '',
+					'std'         => isset( $option['std'] ) ? $option['std']     : '',
+					'min'         => isset( $option['min'] ) ? $option['min']     : null,
+					'max'         => isset( $option['max'] ) ? $option['max']     : null,
+					'step'        => isset( $option['step'] ) ? $option['step']    : null,
+					'placeholder' => isset( $option['placeholder'] ) ? $option['placeholder']     : ''
 				)
 			);
 		}
@@ -176,6 +178,26 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Registrations Status:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'registration_role' => array(
+					'id'   => 'registration_role',
+					'name' => __( 'Default user registration role:', 'wpum' ),
+					'type' => 'hook'
+				),
+				'allow_role_select' => array(
+					'id'   => 'allow_role_select',
+					'name' => __( 'Allow role section:', 'wpum' ),
+					'desc' => __('Enable to allow users to select a user role on registration.'),
+					'type' => 'checkbox'
+				),
+				'register_roles' => array(
+					'id'      => 'register_roles',
+					'name'    => __( 'Allowed Roles:', 'wpum' ),
+					'desc'    => __('Select which roles can be selected upon registration.'),
+					'type'    => 'multiselect',
+					'placeholder' => __('Select the user roles from the list.'),
+					'class' => 'select2',
+					'options' => wpum_get_roles()
+				),
 				'header3' => array(
 					'id'   => 'header3',
 					'name' => __( 'Passwords Setup', 'wpum' ),
@@ -192,6 +214,7 @@ function wpum_get_registered_settings() {
 					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
 					'desc'    => __('Select how strong the password needs to be before users can register.'),
 					'type'    => 'select',
+					'class' => 'test',
 					'options' => wpum_get_psw_lengths()
 				),
 				'display_password_meter_registration' => array(
@@ -521,7 +544,9 @@ function wpum_select_callback($args) {
 	else
 		$value = isset( $args['std'] ) ? $args['std'] : '';
 
-	$html = '<select id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . ']"/>';
+	$class = isset( $args['class'] ) ? $args['class'] : '';
+
+	$html = '<select id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . ']" class="'.$class.'" />';
 
 	foreach ( $args['options'] as $option => $name ) :
 		$selected = selected( $option, $value, false );
@@ -532,6 +557,42 @@ function wpum_select_callback($args) {
 	$html .= '<label for="wpum_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
+}
+
+/**
+ * Multicheck Callback
+ * Renders multiple checkboxes.
+ *
+ * @since 1.0.0
+ * @param array $args Arguments passed by the setting
+ * @global $wpum_options Array of all the WPUM Options
+ * @return void
+ */
+function wpum_multiselect_callback( $args ) {
+	global $wpum_options;
+
+	if ( ! empty( $args['options'] ) ) {
+
+		$class = isset( $args['class'] ) ? $args['class'] : '';
+
+		$html =  '<select id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . '][]" class="'.$class.'" multiple="multiple" data-placeholder="'.$args['placeholder'].'"/>';
+
+		if ( isset( $wpum_options[ $args['id'] ] ) )
+			$value = $wpum_options[ $args['id'] ];
+		else
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+
+		foreach ( $args['options'] as $option => $name ) :
+			$selected = selected( in_array( $option, (array) $value ), true, false );
+			$html .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+		endforeach;
+
+		$html .= '</select>';
+		$html .= '<br/><br/><label for="wpum_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+
+		echo $html;
+
+	}
 }
 
 /**

@@ -61,6 +61,13 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_terms_field' ) );
 		endif;
 
+		// Add Role selection if enabled
+		if( wpum_get_option('allow_role_select') ) :
+			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_role_field' ) );
+			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_role_field' ), 10, 3 );
+			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
+		endif;
+
 	}
 
 	/**
@@ -329,12 +336,12 @@ class WPUM_Form_Register extends WPUM_Form {
 	public static function add_honeypot_field( $fields ) {
 
 		$fields['register'][ 'comments' ] = array(
-		    'label' => 'Comments',
-		    'type' => 'textarea',
-		    'required' => false,
-		    'placeholder' => '',
-		    'priority' => 9999,
-		    'class' => 'wpum-honeypot-field'
+			'label'       => 'Comments',
+			'type'        => 'textarea',
+			'required'    => false,
+			'placeholder' => '',
+			'priority'    => 9999,
+			'class'       => 'wpum-honeypot-field'
 		);
 
 		return $fields;
@@ -392,14 +399,69 @@ class WPUM_Form_Register extends WPUM_Form {
 	public static function add_terms_field( $fields ) {
 
 		$fields['register'][ 'terms' ] = array(
-		    'label' => __('Terms &amp; Conditions'),
-		    'type' => 'checkbox',
-		    'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.'), get_permalink( wpum_get_option('terms_page') ) ),
-		    'required' => true,
-		    'priority' => 9999,
+			'label'       => __('Terms &amp; Conditions'),
+			'type'        => 'checkbox',
+			'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.'), get_permalink( wpum_get_option('terms_page') ) ),
+			'required'    => true,
+			'priority'    => 9999,
 		);
 
 		return $fields;
+
+	}
+
+	/**
+	 * Add Role field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_role_field( $fields ) {
+		
+		$fields['register'][ 'role' ] = array(
+			'label'       => __('Select Role'),
+			'type'        => 'select',
+			'required'    => true,
+			'options'     => wpum_get_allowed_user_roles(),
+			'description' => __('Select your user role'),
+			'priority'    => 9999,
+		);
+
+		return $fields;
+
+	}
+
+	/**
+	 * Validate the role field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_role_field( $passed, $fields, $values ) {
+
+		$role_field = $values['register'][ 'role' ];
+		$selected_roles = array_flip(wpum_get_option('register_roles'));
+
+		if( !array_key_exists( $role_field , $selected_roles ) )
+			return new WP_Error( 'role-validation-error', __( 'Select a valid role from the list.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Save the role.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function save_role( $user_id, $values ) {
+
+		$user = new WP_User( $user_id );
+		$user->set_role( $values['register'][ 'role' ] );
 
 	}
 

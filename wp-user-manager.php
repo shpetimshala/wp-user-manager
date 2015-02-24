@@ -216,12 +216,16 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Use minified libraries if SCRIPT_DEBUG is turned off
 			$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-			// Styles
+			// Styles & scripts
 			wp_register_style( 'wpum-admin', $css_dir . 'wp_user_manager' . $suffix . '.css', WPUM_VERSION );
 			wp_register_style( 'wpum-shortcode-manager', WPUM_PLUGIN_URL . 'includes/admin/tinymce/css/wpum_shortcodes_tinymce_style.css', WPUM_VERSION );
+			wp_register_style( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/css/select2.css', WPUM_VERSION );
+			wp_register_script( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/js/select2.min.js', 'jQuery', WPUM_VERSION, true );
+			wp_register_script( 'wpum-admin-js', $js_dir . 'wp_user_manager_admin' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
 
 			// Enquery styles and scripts anywhere needed
 			wp_enqueue_style( 'wpum-shortcode-manager' );
+
 
 			// Enqueue styles & scripts on admin page only
 			$screen = get_current_screen();
@@ -229,7 +233,11 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			if ( $screen->base !== 'users_page_wpum-settings' )
 				return;
 
+			wp_enqueue_script( 'wpum-select2' );
+			wp_enqueue_script( 'wpum-admin-js' );
 			wp_enqueue_style( 'wpum-admin' );
+			wp_enqueue_style( 'wpum-select2' );
+
 
 		}
 

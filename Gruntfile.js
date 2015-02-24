@@ -17,6 +17,12 @@ module.exports = function( grunt ) {
 					'assets/js/src/wp_user_manager.js'
 				],
 				dest: 'assets/js/wp_user_manager.js'
+			},
+			wp_user_manager_admin: {
+				src: [
+					'assets/js/src/wp_user_manager_admin.js'
+				],
+				dest: 'assets/js/wp_user_manager_admin.js'
 			}
 		},
 		jshint: {
@@ -45,7 +51,8 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					'assets/js/wp_user_manager.min.js': ['assets/js/wp_user_manager.js']
+					'assets/js/wp_user_manager.min.js': ['assets/js/wp_user_manager.js'],
+					'assets/js/wp_user_manager_admin.min.js': ['assets/js/wp_user_manager_admin.js']
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +

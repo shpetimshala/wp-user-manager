@@ -87,3 +87,21 @@ function wpum_shortcodes_register_mce_button( $buttons ) {
 	array_push( $buttons, 'wpum_shortcodes_mce_button' );
 	return $buttons;
 }
+
+/**
+ * Function to display content of the "registration_role" option.
+ *
+ * @since 1.0.0
+ * @return array
+*/
+function wpum_option_registration_role() {
+
+	$role = get_option( 'default_role' );
+
+	$output = '<span class="wpum-role-option">'.$role.'.</span>';
+	$output .= '<br/><small>'.sprintf( __('The default user role for registrations can be changed in <a href="%s">Settings -> General</a>'), admin_url( 'options-general.php#default_role' ) ).'</small>';
+
+	echo $output;
+
+}
+add_action( 'wpum_registration_role', 'wpum_option_registration_role' );
