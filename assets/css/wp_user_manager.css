@@ -21,4 +21,9 @@
 .select2-container-multi {
   width: 350px; }
 
+.widefat.users_page_wpum-settings thead th {
+  padding: 10px; }
+.widefat.users_page_wpum-settings tfoot th {
+  padding: 10px; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

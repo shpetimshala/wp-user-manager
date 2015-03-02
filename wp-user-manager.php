@@ -208,6 +208,10 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-actions.php';
 				// Display Settings Page
 				require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
+				// Load Emails Editor
+				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-editor.php';
+				// Load Emails List Table
+				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-list.php';
 			}
 			
 		}
