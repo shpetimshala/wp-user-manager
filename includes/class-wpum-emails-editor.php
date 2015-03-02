@@ -74,7 +74,7 @@ class WPUM_Emails_Editor {
 		$emails_list[ 'password' ] = array(
             'id' => 'password',
             'title' => __('Password Recovery'),
-            'description' => __('This is the email that is sent to the user upon when recovering the password.'),
+            'description' => __('This is the email that is sent to the user when recovering the password.'),
         );
 
 		return apply_filters( 'wpum_emails_list', $emails_list );
