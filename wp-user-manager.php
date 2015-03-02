@@ -69,6 +69,14 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		public $emails;
 
 		/**
+		 * EDD Email Template Tags Object
+		 *
+		 * @var object
+		 * @since 1.0.0
+		 */
+		public $email_tags;
+
+		/**
 		 * Main WP_User_Manager Instance
 		 *
 		 * Insures that only one instance of WP_User_Manager exists in memory at any one
@@ -88,8 +96,9 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				self::$instance = new WP_User_Manager;
 				self::$instance->setup_constants();
 				self::$instance->includes();
-				self::$instance->emails = new WPUM_Emails();
-				self::$instance->forms = new WPUM_Forms();
+				self::$instance->emails     = new WPUM_Emails();
+				self::$instance->email_tags = new WPUM_Email_Template_Tags();
+				self::$instance->forms      = new WPUM_Forms();
 
 				// load admin assets css and scripts
 				add_action( 'admin_enqueue_scripts', array( self::$instance, 'admin_enqueue_scripts' ) );
@@ -195,6 +204,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
 			// Emails
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
+			// Emails Tags
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-tags.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
