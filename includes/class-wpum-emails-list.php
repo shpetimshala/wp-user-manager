@@ -84,13 +84,7 @@ class WPUM_Emails_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = array();
-
-        $data[] = array(
-            'id' => 1,
-            'title' => 'Testing',
-            'description' => 'Testing',
-        );
+        $data = WPUM_Emails_Editor::get_emails_list();
 
         return $data;
 
@@ -116,10 +110,40 @@ class WPUM_Emails_List extends WP_List_Table {
             case 'description':
                 return $item['description'];
             break;
+            case 'actions':
+                return $this->table_actions($item);
+            break;
 
             default:
                 return null;
         }
+
+    }
+
+    /**
+     * Generate the table navigation above or below the table
+     *
+     * Overwriting this method allows to correctly save the options page
+     * because this method adds new nonce fields too.
+     *
+     * @since 1.0.0
+     * @access protected
+     * @param string $which
+     */
+    protected function display_tablenav( $which ) {
+        return null;
+    }
+
+    /**
+     * Displays edit button for the email.
+     *
+     * @param   array $item - The email item being passed
+     * @return  Mixed
+     */
+    private function table_actions( $item ) {
+
+        $edit_url = add_query_arg( array('email-id' => $item['id'], 'email-title' => $item['title'], 'wpum_action' => 'edit'), admin_url( 'users.php?page=wpum-edit-email' ) );
+        echo '<a href="'.$edit_url.'" class="button">'.__('Edit Email').'</a> ';
 
     }
 

@@ -33,6 +33,10 @@ function wpum_admin_messages() {
 		add_settings_error( 'wpum-notices', 'custom-passwords-disabled', __( 'Error: the option "Login after registration" can only work when the option "Users custom passwords" is enabled too.', 'wpum' ), 'error' );
 	}
 
+	if (  isset( $_GET['emails-updated'] ) && $_GET['emails-updated'] == true ) {
+		add_settings_error( 'wpum-notices', 'emails-updated', __( 'Email successfully updated.', 'wpum' ), 'updated' );	
+	}
+
 	settings_errors( 'wpum-notices' );
 }
 add_action( 'admin_notices', 'wpum_admin_messages' );

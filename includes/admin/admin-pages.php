@@ -23,7 +23,18 @@ function wpum_add_options_link() {
 
 	global $wpum_settings_page;
 	
-	$wpum_settings_page = add_users_page( __('WP User Manager Settings'), __('WPUM Settings'), 'manage_options', 'wpum-settings', 'wpum_options_page');
+	$wpum_settings_page = add_users_page( __('WP User Manager Settings'), __('WPUM Settings'), 'manage_options', 'wpum-settings', 'wpum_options_page' );
+	$wpum_settings_page = add_users_page( __('WP User Manager Email Editor'), __('WPUM Email Editor'), 'manage_options', 'wpum-edit-email', 'WPUM_Emails_Editor::get_emails_editor_page' );
+
+	add_action( 'admin_head', 'wpum_hide_admin_pages' );
 
 }
 add_action( 'admin_menu', 'wpum_add_options_link', 10 );
+
+/**
+ * Removes admin menu links that are masked.
+ * @return      void
+ */
+function wpum_hide_admin_pages() {
+	remove_submenu_page( 'users.php', 'wpum-edit-email' );
+}

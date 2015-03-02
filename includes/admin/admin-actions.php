@@ -105,3 +105,21 @@ function wpum_option_registration_role() {
 
 }
 add_action( 'wpum_registration_role', 'wpum_option_registration_role' );
+
+/**
+ * Processes all WPUM actions sent via POST and GET by looking for the 'wpum-action'
+ * request and running do_action() to call the function
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_process_actions() {
+	if ( isset( $_POST['wpum-action'] ) ) {
+		do_action( 'wpum_' . $_POST['wpum-action'], $_POST );
+	}
+
+	if ( isset( $_GET['wpum-action'] ) ) {
+		do_action( 'wpum_' . $_GET['wpum-action'], $_GET );
+	}
+}
+add_action( 'admin_init', 'wpum_process_actions' );
