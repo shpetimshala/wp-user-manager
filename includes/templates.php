@@ -71,6 +71,11 @@ function locate_wpum_template( $template_name, $template_path = 'wpum', $default
  * @param string|bool $default_path (default: '') False to not load a default
  */
 function get_wpum_template_part( $slug, $name = '', $template_path = 'wpum', $default_path = '' ) {
+	if ( ! $template_path )
+		$template_path = 'wprm';
+	if ( ! $default_path )
+		$default_path = WPUM_PLUGIN_DIR . '/templates/';
+
 	$template = '';
 
 	if ( $name ) {

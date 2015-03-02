@@ -223,7 +223,6 @@ function wpum_get_registered_settings() {
 					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
 					'desc'    => __('Select how strong the password needs to be before users can register.'),
 					'type'    => 'select',
-					'class' => 'test',
 					'options' => wpum_get_psw_lengths()
 				),
 				'display_password_meter_registration' => array(
@@ -277,7 +276,32 @@ function wpum_get_registered_settings() {
 		),
 		'emails' => apply_filters( 'wpum_settings_emails',
 			array(
-				
+				'from_name' => array(
+					'id'   => 'from_name',
+					'name' => __( 'From Name:', 'wpum' ),
+					'desc' => __( 'The name emails are said to come from. This should probably be your site name.' ),
+					'type' => 'text',
+					'std' => get_option( 'blogname' )
+				),
+				'from_email' => array(
+					'id'   => 'from_email',
+					'name' => __( 'From Email:', 'wpum' ),
+					'desc' => __( 'This will act as the "from" and "reply-to" address.' ),
+					'type' => 'text',
+					'std' => get_option( 'admin_email' )
+				),
+				'email_template' => array(
+					'id' => 'email_template',
+					'name' => __( 'Email Template', 'wpum' ),
+					'desc' => __( 'Choose a template.', 'wpum' ),
+					'type' => 'select',
+					'options' => wpum_get_email_templates()
+				),
+				'emails_editor' => array(
+					'id'   => 'emails_editor',
+					'name' => __( 'Emails Editor:', 'wpum' ),
+					'type' => 'hook'
+				),
 			)
 		),
 	);

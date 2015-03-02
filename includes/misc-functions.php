@@ -114,3 +114,15 @@ function wpum_get_disabled_usernames() {
 	return array_flip($usernames);
 
 }
+
+/**
+ * Gets all the email templates that have been registerd. The list is extendable
+ * and more templates can be added.
+ *
+ * @since 1.0.0
+ * @return array $templates All the registered email templates
+ */
+function wpum_get_email_templates() {
+	$templates = new WPUM_Emails;
+	return $templates->get_templates();
+}

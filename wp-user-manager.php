@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 	/**
-	 * Main WP_Restaurant_Manager Class
+	 * Main WP_User_Manager Class
 	 *
 	 * @since 1.0.0
 	 */
@@ -56,9 +56,17 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 * Forms Object
 		 *
 		 * @var object
-		 * @since 1.5
+		 * @since 1.0.0
 		 */
 		public $forms;
+
+		/**
+		 * WPUM Emails Object
+		 *
+		 * @var object
+		 * @since 1.0.0
+		 */
+		public $emails;
 
 		/**
 		 * Main WP_User_Manager Instance
@@ -80,6 +88,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				self::$instance = new WP_User_Manager;
 				self::$instance->setup_constants();
 				self::$instance->includes();
+				self::$instance->emails = new WPUM_Emails();
 				self::$instance->forms = new WPUM_Forms();
 
 				// load admin assets css and scripts
@@ -184,6 +193,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
 			// Ajax Handler
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
+			// Emails
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -308,4 +319,3 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
-
