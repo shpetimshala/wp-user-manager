@@ -47,7 +47,6 @@ class WPUM_Emails_List extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'id' => __('ID'),
             'title' => __('Email Title'),
             'description' => __('Email Description'),
             'actions' => __('Actions'),
