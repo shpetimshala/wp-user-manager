@@ -26,4 +26,13 @@
 .widefat.users_page_wpum-settings tfoot th {
   padding: 10px; }
 
+.wpum-spinner {
+  display: inline-block;
+  float: none; }
+
+.wpum-ajax-done-message {
+  display: inline-block;
+  margin-left: 10px;
+  color: green; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

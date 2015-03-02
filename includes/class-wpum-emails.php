@@ -266,6 +266,7 @@ class WPUM_Emails {
 	 * Add filters / actions before the email is sent
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function send_before() {
 		add_filter( 'wp_mail_from', array( $this, 'get_from_address' ) );
@@ -277,6 +278,7 @@ class WPUM_Emails {
 	 * Remove filters / actions after the email is sent
 	 *
 	 * @since 1.0.0
+	 * @return  void
 	 */
 	public function send_after() {
 		remove_filter( 'wp_mail_from', array( $this, 'get_from_address' ) );
@@ -291,6 +293,7 @@ class WPUM_Emails {
 	 * Converts text to formatted HTML. This is primarily for turning line breaks into <p> and <br/> tags.
 	 *
 	 * @since 1.0.0
+	 * @return $message string - The message.
 	 */
 	public function text_to_html( $message ) {
 
@@ -299,6 +302,74 @@ class WPUM_Emails {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Gets the default registration mail subject.
+	 *
+	 * @since 1.0.0
+	 * @return string - The default mail subject.
+	 */
+	public static function default_register_mail_subject() {
+		
+		$subject = sprintf( __('Your %s Account'), get_option( 'blogname' ) );
+
+		return apply_filters( 'wpum_default_register_mail_subject', $subject );
+
+	}
+
+	/**
+	 * Gets the default registration mail message.
+	 *
+	 * @since 1.0.0
+	 * @return string - The default mail message.
+	 */
+	public static function default_register_mail_message() {
+		
+		$message = 'Hello {username},
+
+			Welcome to {sitename},
+
+			These are your account details
+
+			Username: {username},
+			Password: {password}';
+		
+		return apply_filters( 'wpum_default_register_mail_message', $message );
+
+	}
+
+	/**
+	 * Gets the default password recovery mail subject.
+	 *
+	 * @since 1.0.0
+	 * @return string - The default mail subject.
+	 */
+	public static function default_password_mail_subject() {
+		
+		$subject = sprintf( __('Reset Your %s Password'), get_option( 'blogname' ) );
+
+		return apply_filters( 'wpum_default_password_mail_subject', $subject );
+
+	}
+
+	/**
+	 * Gets the default password recovery mail message.
+	 *
+	 * @since 1.0.0
+	 * @return string - The default mail message.
+	 */
+	public static function default_password_mail_message() {
+		
+		$message = 'Hello {sitename} user,
+
+			You are receiving this message because you or somebody else has attempted to
+			reset your password on {sitename}.
+			
+			Customize your message here.';
+		
+		return apply_filters( 'wpum_default_password_mail_message', $message );
+
 	}
 
 }

@@ -38,8 +38,12 @@ class WPUM_Ajax_Handler {
 		// retrieve login method
 		$this->login_method = wpum_get_option('login_method');
 
+		// Login
 		add_action( 'wp_ajax_wpum_ajax_login', array( $this, 'do_ajax_login' ) );
 		add_action( 'wp_ajax_nopriv_wpum_ajax_login', array( $this, 'do_ajax_login' ) );
+
+		// Restore Email
+		add_action( 'wp_ajax_wpum_restore_emails', array( $this, 'restore_emails' ) );
 
 	}
 
@@ -108,6 +112,59 @@ class WPUM_Ajax_Handler {
 		}
 
 		die();
+	}
+
+	/**
+	 * Restore email into the backend.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function restore_emails() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'wpum_nonce_login_form', 'wpum_backend_security' );
+
+		// Abort if something isn't right.
+		if( !is_admin() || !current_user_can( 'manage_options' ) ) {
+			echo json_encode( array(
+				'message'  => __( 'Error.' ),
+			 ) );
+			return;
+		}
+
+		// Default emails array
+		$default_emails = array();
+
+		// Delete the option
+		delete_option('wpum_emails');
+
+		// Get all registered emails
+		$emails = WPUM_Emails_Editor::get_emails_list();	
+
+		// Cycle through the emails and build the list
+		foreach ($emails as $email) {
+
+			if ( method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_subject" ) && method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_message" ) ) {
+
+				$default_emails[ $email['id'] ] = array(
+		            'subject' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_subject" ),
+		            'message' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_message" ),
+		        );
+
+			}
+
+		}
+
+		update_option( 'wpum_emails', $default_emails );
+
+		echo json_encode( array(
+				'message'  => __( 'Emails successfully restored.' ),
+			 ) );
+
+		die();
+
 	}
 
 }

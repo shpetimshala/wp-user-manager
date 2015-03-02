@@ -304,6 +304,15 @@ function wpum_get_registered_settings() {
 				),
 			)
 		),
+		'tools' => apply_filters( 'wpum_settings_tools',
+			array(
+				'restore_emails' => array(
+					'id'   => 'restore_emails',
+					'name' => __( 'Restore Default Emails:', 'wpum' ),
+					'type' => 'hook'
+				),
+			)
+		),
 	);
 
 	return apply_filters( 'wpum_registered_settings', $wpum_settings );
@@ -400,6 +409,7 @@ function wpum_get_settings_tabs() {
 	$tabs['general']  = __( 'General', 'wpum' );
 	$tabs['registration']  = __( 'Registration', 'wpum' );
 	$tabs['emails']  = __( 'Emails Editor', 'wpum' );
+	$tabs['tools']  = __( 'Tools', 'wpum' );
 
 	return apply_filters( 'wpum_settings_tabs', $tabs );
 }

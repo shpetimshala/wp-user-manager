@@ -64,14 +64,14 @@ class WPUM_Emails_Editor {
 		$emails_list = array();
 
 		// Registration Email
-		$emails_list[] = array(
+		$emails_list[ 'register' ] = array(
             'id' => 'register',
             'title' => __('Registration Email'),
             'description' => __('This is the email that is sent to the user upon successful registration.'),
         );
 
         // Password Recovery Email
-		$emails_list[] = array(
+		$emails_list[ 'password' ] = array(
             'id' => 'password',
             'title' => __('Password Recovery'),
             'description' => __('This is the email that is sent to the user upon when recovering the password.'),

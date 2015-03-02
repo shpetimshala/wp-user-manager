@@ -123,3 +123,20 @@ function wpum_process_actions() {
 	}
 }
 add_action( 'admin_init', 'wpum_process_actions' );
+
+/**
+ * Function to display content of the "restore_emails" option.
+ *
+ * @since 1.0.0
+ * @return array
+*/
+function wpum_option_restore_emails() {
+
+	$output = '<a id="wpum-restore-emails" href="'.add_query_arg( array('tool' => 'restore-email') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ).'" class="button">'.__('Restore default emails').'</a>';
+	$output .= '<br/><p class="description">' . __('Click the button to restore the default emails content and subject.') . '</p>';
+	$output .= wp_nonce_field( "wpum_nonce_login_form", "wpum_backend_security" );
+
+	echo $output;
+
+}
+add_action( 'wpum_restore_emails', 'wpum_option_restore_emails' );
