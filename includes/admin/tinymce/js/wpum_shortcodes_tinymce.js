@@ -109,7 +109,7 @@
 					}
 				}, // End Logout Link
 
-				/* Registration Page */
+				/* Registration form */
 				{
 					text: 'Registration Form',
 					onclick: function() {
@@ -134,7 +134,28 @@
 							}
 						});
 					}
-				}, // End Login Form
+				}, // End Registration form
+
+				/* Password Recovery Form */
+				{
+					text: 'Password Recovery Form',
+					onclick: function() {
+						editor.windowManager.open( {
+							title: 'Password Recovery Form',
+							body: [ 
+								{
+									type: 'textbox', 
+									name: 'form_id', 
+									label: 'Form ID (optional)',
+									value: ''
+								},
+							],
+							onsubmit: function( e ) {
+								editor.insertContent( '[wpum_password_recovery form_id="' + e.data.form_id + '" ]');
+							}
+						});
+					}
+				}, // End Password Recovery Form
 
 			]
 		});

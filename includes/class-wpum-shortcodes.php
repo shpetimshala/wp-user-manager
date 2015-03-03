@@ -31,6 +31,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_login_form', array( $this, 'wpum_login_form' ) );
 		add_shortcode( 'wpum_logout', array( $this, 'wpum_logout' ) );
 		add_shortcode( 'wpum_register', array( $this, 'wpum_registration' ) );
+		add_shortcode( 'wpum_password_recovery', array( $this, 'wpum_password' ) );
 
 	}
 
@@ -154,6 +155,27 @@ class WPUM_Shortcodes {
 			$atts['redirect'] = get_permalink();
 
 		return WPUM()->forms->get_form( 'register', $atts );
+
+	}
+
+	/**
+	 * Password Recovery Form Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_password( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'form_id' => 'default_password_form'
+		), $atts ) );
+
+		// Set default values
+		if( !array_key_exists('form_id', $atts) || empty($atts['form_id']) )
+			$atts['form_id'] = 'default_password_form';
+
+		return WPUM()->forms->get_form( 'password', $atts );
 
 	}
 
