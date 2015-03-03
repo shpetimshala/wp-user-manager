@@ -9,6 +9,12 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
+// Define the form status
+$form_status = 'recover'; 
+if( isset($_GET['password-reset']) )
+	$form_status = 'reset';
+
 ?>
 <div id="wpum-form-password-<?php echo $atts['form_id'];?>" class="wpum-password-form-wrapper">
 
@@ -56,6 +62,7 @@
 
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
+			<input type="hidden" name="wpum_password_form_status" value="<?php echo $form_status; ?>" />
 			<input type="submit" id="submit_wpum_password" name="submit_wpum_password" class="button" value="<?php _e('Reset Password'); ?>" />
 		</p>
 

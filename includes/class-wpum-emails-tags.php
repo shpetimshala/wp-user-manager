@@ -42,12 +42,14 @@ class WPUM_Email_Template_Tags {
 	private $user_id;
 
 	/**
-	 * Plain text password as per 
-	 * wp_new_user_notification() function from WP Core.
+	 * Object that can contain a private value.
+	 *
+	 * Upon registration, this holds the $plaintext_pass (as per WP Core wp_new_user_notification() function)
+	 * Upon password recover, this holds the secret key as per retrieve_password() in core wp-login.php
 	 *
 	 * @since 1.0.0
 	 */
-	private $plaintext_pass;
+	private $private_key;
 
 	/**
 	 * Add an email tag
@@ -107,12 +109,12 @@ class WPUM_Email_Template_Tags {
 	 *
 	 * @param string $content Content to search for email tags
 	 * @param int $user_id The user id
-	 * @param string $plaintext_pass the password
+	 * @param string $private_key the password
 	 *
 	 * @since 1.0.0
 	 * @return string Content with email tags filtered out.
 	 */
-	public function do_tags( $content, $user_id, $plaintext_pass ) {
+	public function do_tags( $content, $user_id, $private_key ) {
 
 		// Check if there is atleast one tag added
 		if ( empty( $this->tags ) || ! is_array( $this->tags ) ) {
@@ -120,12 +122,12 @@ class WPUM_Email_Template_Tags {
 		}
 
 		$this->user_id = $user_id;
-		$this->plaintext_pass = $plaintext_pass;
+		$this->private_key = $private_key;
 
 		$new_content = preg_replace_callback( "/{([A-z0-9\-\_]+)}/s", array( $this, 'do_tag' ), $content );
 
 		$this->user_id = null;
-		$this->plaintext_pass = null;
+		$this->private_key = null;
 
 		return $new_content;
 	}
@@ -149,7 +151,7 @@ class WPUM_Email_Template_Tags {
 			return $m[0];
 		}
 
-		return call_user_func( $this->tags[$tag]['func'], $this->user_id, $this->plaintext_pass, $tag );
+		return call_user_func( $this->tags[$tag]['func'], $this->user_id, $this->private_key, $tag );
 	}
 
 }
@@ -237,16 +239,16 @@ function wpum_get_emails_tags_list() {
  *
  * @param string $content Content to search for email tags
  * @param int $user_id The user id
- * @param string $plaintext_pass the password
+ * @param string $private_key the password
  *
  * @since 1.0.0
  *
  * @return string Content with email tags filtered out.
  */
-function wpum_do_email_tags( $content, $user_id, $plaintext_pass ) {
+function wpum_do_email_tags( $content, $user_id, $private_key ) {
 
 	// Replace all tags
-	$content = WPUM()->email_tags->do_tags( $content, $user_id, $plaintext_pass );
+	$content = WPUM()->email_tags->do_tags( $content, $user_id, $private_key );
 
 	// Return content
 	return $content;
@@ -286,7 +288,11 @@ function wpum_setup_email_tags() {
 			'description' => __( 'Displays the user password. If the "custom passwords" option is enabled, the password will not be displayed into the email.' ),
 			'function'    => 'wpum_email_tag_password'
 		),
-
+		array(
+			'tag'         => 'recovery_url',
+			'description' => __( 'Displays the password recovery url needed for the user to reset his password.' ),
+			'function'    => 'wpum_email_tag_recovery_url'
+		),
 	);
 
 	// Apply wpum_email_tags filter
@@ -321,12 +327,12 @@ function wpum_email_tag_sitename( $user_id ) {
  * will be displayed into the email.
  *
  * @param int $user_id
- * @param int $plaintext_pass
+ * @param int $private_key
  * @return string sitename
  */
-function wpum_email_tag_password( $user_id, $plaintext_pass ) {
+function wpum_email_tag_password( $user_id, $private_key ) {
 	
-	$pwd = $plaintext_pass;
+	$pwd = $private_key;
 
 	if( wpum_get_option('custom_passwords') )
 		$pwd = __('the password you chose upon registration.');
@@ -338,7 +344,6 @@ function wpum_email_tag_password( $user_id, $plaintext_pass ) {
  * Email template tag: username
  *
  * @param int $user_id
- * @param int $plaintext_pass
  * @return string username
  */
 function wpum_email_tag_username( $user_id ) {
@@ -347,4 +352,21 @@ function wpum_email_tag_username( $user_id ) {
 	$username = $username->user_login;
 
 	return $username;
+}
+
+/**
+ * Email template tag: recovery_url
+ *
+ * @param int $user_id
+ * @param int $private_key
+ * @return string url
+ */
+function wpum_email_tag_recovery_url( $user_id, $private_key ) {
+	
+	$username = get_userdata( $user_id );
+	$username = $username->user_login;
+	
+	$url = network_site_url("wp-login.php?action=rp&key=$private_key&login=" . rawurlencode($username), 'login');
+
+	return $url;
 }
