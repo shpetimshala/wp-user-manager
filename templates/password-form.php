@@ -20,12 +20,15 @@ if( isset($_GET['password-reset']) )
 
 	<?php do_action( 'wpum_before_password_form_template', $atts ); ?>
 
+	<!-- Display only when psw reset -->
 	<?php if( isset($_GET['reset']) && $_GET['reset'] == true ) : ?>
 		<p class="wpum-message wpum-success wpum-lost-psw-message">
 			<?php echo apply_filters( 'wpum_reset_successful_password_message', __( 'Your password has been reset.' ) ); ?>
 		</p>
 	<?php endif; ?>
+	<!-- Display only when psw reset -->
 
+	<?php if( !isset($_GET['reset']) ) : ?>
 	<form action="#" method="post" id="wpum-password-<?php echo $atts['form_id'];?>" class="wpum-password-form" name="wpum-password-<?php echo $atts['form_id'];?>">
 
 		<?php do_action( 'wpum_before_inside_password_form_template', $atts ); ?>
@@ -77,6 +80,7 @@ if( isset($_GET['password-reset']) )
 		</p>
 
 	</form>
+	<?php endif; ?>
 
 	<?php do_action( 'wpum_after_password_form_template', $atts ); ?>
 
