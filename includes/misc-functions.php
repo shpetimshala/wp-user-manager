@@ -126,3 +126,20 @@ function wpum_get_email_templates() {
 	$templates = new WPUM_Emails;
 	return $templates->get_templates();
 }
+
+/**
+ * Checks whether a given email id exists into the database.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_email_exists( $email_id ) {
+
+	$exists = false;
+	$emails = get_option( 'wpum_emails' );
+
+	if( array_key_exists($email_id, $emails) ) 
+		$exists = true;
+
+	return $exists;
+}
