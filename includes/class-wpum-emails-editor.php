@@ -49,6 +49,8 @@ class WPUM_Emails_Editor {
 	    $wpum_emails_table->prepare_items();
 	    $wpum_emails_table->display();
 
+	    echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
+
 		echo ob_get_clean();
 
 	}
