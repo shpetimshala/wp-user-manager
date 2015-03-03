@@ -42,6 +42,14 @@ class WPUM_Email_Template_Tags {
 	private $user_id;
 
 	/**
+	 * Plain text password as per 
+	 * wp_new_user_notification() function from WP Core.
+	 *
+	 * @since 1.0.0
+	 */
+	private $plaintext_pass;
+
+	/**
 	 * Add an email tag
 	 *
 	 * @since 1.0.0
@@ -99,11 +107,12 @@ class WPUM_Email_Template_Tags {
 	 *
 	 * @param string $content Content to search for email tags
 	 * @param int $user_id The user id
+	 * @param string $plaintext_pass the password
 	 *
 	 * @since 1.0.0
 	 * @return string Content with email tags filtered out.
 	 */
-	public function do_tags( $content, $user_id ) {
+	public function do_tags( $content, $user_id, $plaintext_pass ) {
 
 		// Check if there is atleast one tag added
 		if ( empty( $this->tags ) || ! is_array( $this->tags ) ) {
@@ -111,10 +120,12 @@ class WPUM_Email_Template_Tags {
 		}
 
 		$this->user_id = $user_id;
+		$this->plaintext_pass = $plaintext_pass;
 
 		$new_content = preg_replace_callback( "/{([A-z0-9\-\_]+)}/s", array( $this, 'do_tag' ), $content );
 
 		$this->user_id = null;
+		$this->plaintext_pass = null;
 
 		return $new_content;
 	}
@@ -138,7 +149,7 @@ class WPUM_Email_Template_Tags {
 			return $m[0];
 		}
 
-		return call_user_func( $this->tags[$tag]['func'], $this->user_id, $tag );
+		return call_user_func( $this->tags[$tag]['func'], $this->user_id, $this->plaintext_pass, $tag );
 	}
 
 }
@@ -226,15 +237,16 @@ function wpum_get_emails_tags_list() {
  *
  * @param string $content Content to search for email tags
  * @param int $user_id The user id
+ * @param string $plaintext_pass the password
  *
  * @since 1.0.0
  *
  * @return string Content with email tags filtered out.
  */
-function wpum_do_email_tags( $content, $user_id ) {
+function wpum_do_email_tags( $content, $user_id, $plaintext_pass ) {
 
 	// Replace all tags
-	$content = WPUM()->email_tags->do_tags( $content, $user_id );
+	$content = WPUM()->email_tags->do_tags( $content, $user_id, $plaintext_pass );
 
 	// Return content
 	return $content;
@@ -264,6 +276,17 @@ function wpum_setup_email_tags() {
 			'description' => __( 'Your site name' ),
 			'function'    => 'wpum_email_tag_sitename'
 		),
+		array(
+			'tag'         => 'username',
+			'description' => __( 'Displays the username.' ),
+			'function'    => 'wpum_email_tag_username'
+		),
+		array(
+			'tag'         => 'password',
+			'description' => __( 'Displays the user password. If the "custom passwords" option is enabled, the password will not be displayed into the email.' ),
+			'function'    => 'wpum_email_tag_password'
+		),
+
 	);
 
 	// Apply wpum_email_tags filter
@@ -282,9 +305,46 @@ add_action( 'wpum_add_email_tags', 'wpum_setup_email_tags' );
  * Your site name
  *
  * @param int $user_id
- *
  * @return string sitename
  */
 function wpum_email_tag_sitename( $user_id ) {
 	return wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+}
+
+/**
+ * Email template tag: password
+ * 
+ * The function checks whether custom passwords are enabled.
+ * If enabled, the mail won't contain the password.
+ *
+ * Only automatically generated passwords (as per WP default)
+ * will be displayed into the email.
+ *
+ * @param int $user_id
+ * @param int $plaintext_pass
+ * @return string sitename
+ */
+function wpum_email_tag_password( $user_id, $plaintext_pass ) {
+	
+	$pwd = $plaintext_pass;
+
+	if( wpum_get_option('custom_passwords') )
+		$pwd = __('the password you chose upon registration.');
+
+	return $pwd;
+}
+
+/**
+ * Email template tag: username
+ *
+ * @param int $user_id
+ * @param int $plaintext_pass
+ * @return string username
+ */
+function wpum_email_tag_username( $user_id ) {
+	
+	$username = get_userdata( $user_id );
+	$username = $username->user_login;
+
+	return $username;
 }

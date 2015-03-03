@@ -136,10 +136,24 @@ function wpum_get_email_templates() {
 function wpum_email_exists( $email_id ) {
 
 	$exists = false;
-	$emails = get_option( 'wpum_emails' );
+	$emails = get_option( 'wpum_emails', array() );
 
 	if( array_key_exists($email_id, $emails) ) 
 		$exists = true;
 
 	return $exists;
+}
+
+/**
+ * Get an email from the database.
+ *
+ * @since 1.0.0
+ * @return array email details containing subject and message
+ */
+function wpum_get_email( $email_id ) {
+
+	$emails = get_option( 'wpum_emails', array() );
+
+	return $emails[ $email_id ];
+
 }
