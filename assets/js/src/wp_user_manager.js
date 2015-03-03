@@ -15,6 +15,7 @@ jQuery(document).ready(function ($) {
 
 		init : function() {
 			this.ajax_login();
+			this.ajax_psw_recovery();
 		},
 
 		// Handle Ajax Login
@@ -46,16 +47,16 @@ jQuery(document).ready(function ($) {
 					},
 					beforeSend: function() {
 						$( wpum_form ).find('p.wpum-message').remove();
-						$(wpum_form).prepend('<p class="wpum-message notice">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if(results.loggedin === true) {
-							$( wpum_form ).find('p.wpum-message').removeClass('notice').addClass('success').text(results.message);
+							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
 							window.location.href = wpum_redirect;
 						} else {
-							$( wpum_form ).find('p.wpum-message').removeClass('notice').addClass('error').text(results.message);
+							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
 						}
 
 					}
@@ -104,6 +105,48 @@ jQuery(document).ready(function ($) {
 		    }
 		 
 		    return strength;
+
+		},
+
+		// Process ajax psw recovery
+		ajax_psw_recovery : function() {
+
+			$('.wpum-password-form-wrapper-recover form').on('submit', function(e) {
+
+				// Stop the form from submitting so we can use ajax.
+				e.preventDefault();
+
+				var wpum_psw_recovery_form = this; // form element
+				var wpum_psw_username = $(this).find('#username_email').val();
+				var wpum_psw_nonce = $(this).find('#_wpnonce').val();
+
+				// Process psw recovery form through ajax
+				$.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: wpum_frontend_js.ajax,
+					data: {
+						'action'     : 'wpum_ajax_psw_recovery', // Calls the ajax action
+						'username' : wpum_psw_username,
+						'wpum_nonce_psw_security' : wpum_psw_nonce
+					},
+					beforeSend: function() {
+						$( wpum_psw_recovery_form ).find('p.wpum-message').remove();
+						$( wpum_psw_recovery_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
+					},
+					success: function(results) {
+
+						// Check the response
+						if(results.valid === true) {
+							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						} else {
+							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+						}
+
+					}
+				});
+
+			});
 
 		}
 

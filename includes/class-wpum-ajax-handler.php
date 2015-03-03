@@ -45,6 +45,10 @@ class WPUM_Ajax_Handler {
 		// Restore Email
 		add_action( 'wp_ajax_wpum_restore_emails', array( $this, 'restore_emails' ) );
 
+		// Password Recovery
+		add_action( 'wp_ajax_wpum_ajax_psw_recovery', array( $this, 'password_recovery' ) );
+		add_action( 'wp_ajax_nopriv_wpum_ajax_psw_recovery', array( $this, 'password_recovery' ) );
+
 	}
 
 	/**
@@ -160,6 +164,27 @@ class WPUM_Ajax_Handler {
 		update_option( 'wpum_emails', $default_emails );
 
 		echo json_encode( array(
+				'message'  => __( 'Emails successfully restored.' ),
+			 ) );
+
+		die();
+
+	}
+
+	/**
+	 * Execute ajax psw recovery process.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function password_recovery() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'password', 'wpum_nonce_psw_security' );
+
+		echo json_encode( array(
+				'valid' => true,
 				'message'  => __( 'Emails successfully restored.' ),
 			 ) );
 

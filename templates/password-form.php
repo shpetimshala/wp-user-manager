@@ -16,7 +16,7 @@ if( isset($_GET['password-reset']) )
 	$form_status = 'reset';
 
 ?>
-<div id="wpum-form-password-<?php echo $atts['form_id'];?>" class="wpum-password-form-wrapper">
+<div id="wpum-form-password-<?php echo $atts['form_id'];?>" class="wpum-password-form-wrapper-<?php echo $form_status; ?>">
 
 	<?php do_action( 'wpum_before_password_form_template', $atts ); ?>
 
