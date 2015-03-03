@@ -161,8 +161,14 @@ class WPUM_Emails_Editor {
 
 			$emails['register'] = array(
 				'email_id' => 'register',
-				'subject'  => __( 'Registration email' ),
-				'message'  => 'Test'
+				'subject'  => WPUM_Emails::default_register_mail_subject(),
+				'message'  => WPUM_Emails::default_register_mail_message()
+			);
+
+			$emails['password'] = array(
+				'email_id' => 'password',
+				'subject'  => WPUM_Emails::default_password_mail_subject(),
+				'message'  => WPUM_Emails::default_password_mail_message()
 			);
 
 		}
