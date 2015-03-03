@@ -32,7 +32,11 @@ class WPUM_Form_Password extends WPUM_Form {
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
 		// Validate username field
-		add_filter( 'wpum_password_form_validate_fields', array( __CLASS__, 'validate_username' ), 10, 3 );
+		if( !isset( $_GET['password-reset'] ) )
+			add_filter( 'wpum_password_form_validate_fields', array( __CLASS__, 'validate_username' ), 10, 3 );
+
+		if( isset( $_GET['password-reset'] ) )
+			add_filter( 'wpum_password_form_validate_fields', array( __CLASS__, 'validate_passwords' ), 10, 3 );
 
 	}
 
@@ -82,6 +86,12 @@ class WPUM_Form_Password extends WPUM_Form {
 			unset( self::$fields['password']['password_1'] );
 			unset( self::$fields['password']['password_2'] );
 		endif;
+
+		// Temporarily remove user fields if viewing the password reset form
+		if( isset( $_GET['password-reset'] ) ) :
+			unset( self::$fields['user']['username_email'] );
+		endif;
+
 
 	}
 
@@ -189,6 +199,30 @@ class WPUM_Form_Password extends WPUM_Form {
 	}
 
 	/**
+	 * Validate passwords field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_passwords( $passed, $fields, $values ) {
+
+		$password_1 = $values['password'][ 'password_1' ];
+		$password_2 = $values['password'][ 'password_2' ];
+
+		if ( empty( $password_1 ) || empty( $password_2 ) ) {
+			return new WP_Error( 'password-validation-error', __( 'Please enter your password.' ) );
+		}
+
+		if ( $password_1 !== $password_2 ) {
+			return new WP_Error( 'password-validation-error-2', __( 'Passwords do not match.' ) );
+		}
+
+		return $passed;
+
+	}
+
+	/**
 	 * Process the submission.
 	 *
 	 * @access public
@@ -217,7 +251,10 @@ class WPUM_Form_Password extends WPUM_Form {
 		if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'recover' ) {
 			
 			self::retrieve_password( $values['user'][ 'username_email' ] );
-			self::add_confirmation( __('Check your e-mail for the confirmation link.') );
+
+		} else if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'reset' ) {
+
+			self::reset_password( $values['password'][ 'password_1' ], $values['password'][ 'password_2' ] );
 
 		}
 
@@ -228,6 +265,7 @@ class WPUM_Form_Password extends WPUM_Form {
 	 * Based on retrieve_password() in core wp-login.php
 	 *
 	 * @access public
+	 * @param string $username contains the username of the user.
 	 * @uses $wpdb WordPress Database object
 	 * @return bool True: when finish. False: on error
 	 */
@@ -304,6 +342,8 @@ class WPUM_Form_Password extends WPUM_Form {
 
 			WPUM()->emails->send( $user_email, $password_email['subject'], $message );
 
+			self::add_confirmation( __('Check your e-mail for the confirmation link.') );
+
 		} else {
 
 			return;
@@ -312,6 +352,92 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		return true;
 
+	}
+
+	/**
+	 * Process the password reset form. 
+	 * This is the function that actually changes the password of the user.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @param string $password_1 contains 1st psw.
+	 * @param string $password_2 contains 2nd psw.
+	 * @return void
+	 */
+	public static function reset_password( $password_1, $password_2 ) {
+
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'password' ) ) {
+			return;
+		}
+
+		$user = self::check_password_reset_key( $_GET['key'], $_GET['login'] );
+
+		if ( $user instanceof WP_User ) {
+			self::change_password( $user, $password_1 );
+			do_action( 'wpum_user_reset_password', $user );
+			wp_redirect( add_query_arg( 'reset', 'true', remove_query_arg( array( 'key', 'login', 'password-reset' ) ) ) );
+			exit;
+		}
+
+	}
+
+	/**
+	 * Retrieves a user row based on password reset key and login
+	 *
+	 * @uses $wpdb WordPress Database object
+	 *
+	 * @param string $key Hash to validate sending user's password
+	 * @param string $login The user login
+	 * @return WP_USER|bool User's database row on success, false for invalid keys
+	 */
+	public static function check_password_reset_key( $key, $login ) {
+		global $wpdb, $wp_hasher;
+
+		$key = preg_replace( '/[^a-z0-9]/i', '', $key );
+
+		if ( empty( $key ) || ! is_string( $key ) ) {
+			self::add_error( __( 'Invalid key.' ) );
+			return false;
+		}
+
+		if ( empty( $login ) || ! is_string( $login ) ) {
+			self::add_error( __( 'Invalid key.' ) );
+			return false;
+		}
+
+		$user = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->users WHERE user_login = %s", $login ) );
+
+		if ( ! empty( $user ) ) {
+			if ( empty( $wp_hasher ) ) {
+				require_once ABSPATH . 'wp-includes/class-phpass.php';
+				$wp_hasher = new PasswordHash( 8, true );
+			}
+
+			$valid = $wp_hasher->CheckPassword( $key, $user->user_activation_key );
+		}
+
+		if ( empty( $user ) || empty( $valid ) ) {
+			self::add_error( __( 'Invalid key.' ) );
+			return false;
+		}
+
+		return get_userdata( $user->ID );
+	}
+
+	/**
+	 * Handles resetting the user's password.
+	 *
+	 * @access public
+	 * @param object $user The user
+	 * @param string $new_pass New password for the user in plaintext
+	 * @return void
+	 */
+	public static function change_password( $user, $new_pass ) {
+		do_action( 'password_reset', $user, $new_pass );
+
+		wp_set_password( $new_pass, $user->ID );
+
+		wp_password_change_notification( $user );
 	}
 
 	/**
