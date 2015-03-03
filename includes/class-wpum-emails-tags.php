@@ -349,7 +349,7 @@ function wpum_email_tag_password( $user_id, $private_key ) {
 function wpum_email_tag_username( $user_id ) {
 	
 	$username = get_userdata( $user_id );
-	$username = $username->user_login;
+	$username = esc_attr($username->user_login);
 
 	return $username;
 }
@@ -364,9 +364,9 @@ function wpum_email_tag_username( $user_id ) {
 function wpum_email_tag_recovery_url( $user_id, $private_key ) {
 	
 	$username = get_userdata( $user_id );
-	$username = $username->user_login;
-	
-	$url = network_site_url("wp-login.php?action=rp&key=$private_key&login=" . rawurlencode($username), 'login');
+	$username = esc_attr($username->user_login);
+
+	$url = add_query_arg( array( 'password-reset' => true, 'key' => $private_key, 'login' => $username ), get_permalink( wpum_get_option('password_recovery_page') ) );
 
 	return $url;
 }

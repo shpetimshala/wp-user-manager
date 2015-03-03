@@ -61,14 +61,14 @@ class WPUM_Form_Password extends WPUM_Form {
 			),
 			'password' => array(
 				'password_1' => array(
-					'label'       => __( 'Password' ),
+					'label'       => __( 'New password' ),
 					'type'        => 'password',
 					'required'    => true,
 					'placeholder' => '',
 					'priority'    => 1
 				),
 				'password_2' => array(
-					'label'       => __( 'Repeat Password' ),
+					'label'       => __( 'Re-enter new password' ),
 					'type'        => 'password',
 					'required'    => true,
 					'placeholder' => '',
@@ -248,12 +248,12 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		if ( ! $user_data ) {
 			self::add_error( __( 'Invalid username or e-mail.' ) );
-			return false;
+			return;
 		}
 
 		if ( is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
 			self::add_error( __( 'Invalid username or e-mail.' ) );
-			return false;
+			return;
 		}
 
 		// redefining user_login ensures we return the right case in the email
@@ -267,12 +267,12 @@ class WPUM_Form_Password extends WPUM_Form {
 		if ( ! $allow ) {
 
 			self::add_error( __( 'Password reset is not allowed for this user' ) );
-			return false;
+			return;
 
 		} elseif ( is_wp_error( $allow ) ) {
 
 			self::add_error( __( 'Password reset is not allowed for this user' ) );
-			return false;
+			return;
 		}
 
 		$key = wp_generate_password( 20, false );
@@ -306,7 +306,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		} else {
 
-			return false;
+			return;
 
 		}
 

@@ -150,20 +150,27 @@ function wpum_get_registered_settings() {
 				),
 				'header1' => array(
 					'id'   => 'header1',
-					'name' => __( 'Redirects', 'wpum' ),
+					'name' => __( 'Pages Setup', 'wpum' ),
 					'type' => 'header'
 				),
 				'logout_redirect' => array(
 					'id'   => 'logout_redirect',
-					'name' => __( 'Logout Redirect', 'wpum' ),
+					'name' => __( 'Logout Redirect:', 'wpum' ),
 					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
 				'wp_login_signup_redirect' => array(
 					'id'   => 'wp_login_signup_redirect',
-					'name' => __( 'Signup Redirect on wp-login.php', 'wpum' ),
+					'name' => __( 'Signup Redirect on wp-login.php:', 'wpum' ),
 					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'password_recovery_page' => array(
+					'id'   => 'password_recovery_page',
+					'name' => __( 'Password recovery page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_password_recovery] shortcode.'),
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),

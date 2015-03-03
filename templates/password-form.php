@@ -20,15 +20,15 @@ if( isset($_GET['password-reset']) )
 
 	<?php do_action( 'wpum_before_password_form_template', $atts ); ?>
 
-	<p class="wpum-message wpum-info wpum-lost-psw-message">
-		<?php echo apply_filters( 'wpum_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.' ) ); ?>
-	</p>
-
 	<form action="#" method="post" id="wpum-password-<?php echo $atts['form_id'];?>" class="wpum-password-form" name="wpum-password-<?php echo $atts['form_id'];?>">
 
 		<?php do_action( 'wpum_before_inside_password_form_template', $atts ); ?>
 
-		<?php if( isset($_GET['password-reset']) ) : ?>
+		<?php if( isset($_GET['password-reset']) && $_GET['password-reset'] == true ) : ?>
+
+			<p class="wpum-message wpum-info wpum-lost-psw-message">
+				<?php echo apply_filters( 'wpum_reset_password_message', __( 'Enter a new password below.' ) ); ?>
+			</p>
 
 			<!-- Start Password Replace Fields -->
 			<?php foreach ( $password_fields as $key => $field ) : ?>
@@ -42,6 +42,10 @@ if( isset($_GET['password-reset']) )
 			<!-- End Password Replace Fields -->
 
 		<?php else : ?>
+
+			<p class="wpum-message wpum-info wpum-lost-psw-message">
+				<?php echo apply_filters( 'wpum_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.' ) ); ?>
+			</p>
 
 			<!-- Start Password User Fields -->
 			<?php foreach ( $user_fields as $key => $field ) : ?>
