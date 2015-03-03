@@ -506,13 +506,26 @@ class WPUM_Form_Register extends WPUM_Form {
 		self::show_confirmations();
 
 		// Display template
-		get_wpum_template( 'default-registration-form.php', 
-			array(
-				'atts' => $atts,
-				'form' => self::$form_name,
-				'register_fields' => self::get_fields( 'register' ),
-			)
-		);
+		if( is_user_logged_in() ) :
+
+			get_wpum_template( 'already-logged-in.php', 
+				array(
+					'args' => $atts
+				)
+			);
+
+		// Show register form if not logged in
+		else :
+
+			get_wpum_template( 'default-registration-form.php', 
+				array(
+					'atts' => $atts,
+					'form' => self::$form_name,
+					'register_fields' => self::get_fields( 'register' ),
+				)
+			);
+
+		endif;
 
 	}
 

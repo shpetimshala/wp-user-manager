@@ -459,14 +459,25 @@ class WPUM_Form_Password extends WPUM_Form {
 		self::show_confirmations();
 
 		// Display template
-		get_wpum_template( 'password-form.php', 
-			array(
-				'atts'            => $atts,
-				'form'            => self::$form_name,
-				'user_fields'     => self::get_fields( 'user' ),
-				'password_fields' => self::get_fields( 'password' ),
-			)
-		);
+		if( is_user_logged_in() ) :
+
+			get_wpum_template( 'already-logged-in.php', 
+				array(
+					'args' => $atts
+				)
+			);
+
+		// Show psw form if not logged in
+		else :
+			get_wpum_template( 'password-form.php', 
+				array(
+					'atts'            => $atts,
+					'form'            => self::$form_name,
+					'user_fields'     => self::get_fields( 'user' ),
+					'password_fields' => self::get_fields( 'password' ),
+				)
+			);
+		endif;
 
 	}
 
