@@ -320,6 +320,12 @@ function wpum_get_registered_settings() {
 					'desc' => __( 'Enable this option to stop receiving notifications when a new user registers.' ),
 					'type' => 'checkbox'
 				),
+				'disable_admin_password_recovery_email' => array(
+					'id'   => 'disable_admin_password_recovery_email',
+					'name' => __( 'Disable admin password recovery email:', 'wpum' ),
+					'desc' => __( 'Enable this option to stop receiving notifications when a new user resets his password.' ),
+					'type' => 'checkbox'
+				),
 			)
 		),
 		'tools' => apply_filters( 'wpum_settings_tools',
