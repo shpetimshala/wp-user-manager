@@ -263,7 +263,7 @@ function wpum_get_registered_settings() {
 				'login_after_registration' => array(
 					'id'   => 'login_after_registration',
 					'name' => __( 'Login after registration:', 'wpum' ),
-					'desc' => __('Enable this options to allow automatic login of users after their registration.'),
+					'desc' => __('Enable this option to allow automatic login of users after their registration.'),
 					'type' => 'checkbox'
 				),
 				'exclude_usernames' => array(
@@ -301,6 +301,17 @@ function wpum_get_registered_settings() {
 					'id'   => 'emails_editor',
 					'name' => __( 'Emails Editor:', 'wpum' ),
 					'type' => 'hook'
+				),
+				'header6' => array(
+					'id'   => 'header6',
+					'name' => __( 'Notifications Settings', 'wpum' ),
+					'type' => 'header'
+				),
+				'disable_admin_register_email' => array(
+					'id'   => 'disable_admin_register_email',
+					'name' => __( 'Disable admin registration email:', 'wpum' ),
+					'desc' => __( 'Enable this option to stop receiving notifications when a new user registers.' ),
+					'type' => 'checkbox'
 				),
 			)
 		),
