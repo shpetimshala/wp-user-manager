@@ -183,10 +183,33 @@ class WPUM_Ajax_Handler {
 		// Check our nonce and make sure it's correct.
 		check_ajax_referer( 'password', 'wpum_nonce_psw_security' );
 
-		echo json_encode( array(
-				'valid' => true,
-				'message'  => __( 'Emails successfully restored.' ),
-			 ) );
+		$username = $_REQUEST['username'];
+
+		// Validate the username
+		if( is_email( $username ) && !email_exists( $username ) || !is_email( $username ) && !username_exists( $username ) ) {
+			echo json_encode( array(
+				'valid' => false,
+				'message'  => __( 'This user could not be found.' ),
+			) );
+			die();
+		}
+
+		// Load the form class and use it's method to retrieve the password recovery mail
+		$get_form = WPUM()->forms->load_form_class( 'password' );
+		$send = $get_form::retrieve_password( $username );
+
+		// Verify is recovery was successful
+		if ( $send ) :
+			echo json_encode( array(
+					'valid' => true,
+					'message'  => __( 'Check your e-mail for the confirmation link.' ),
+				 ) );
+		else :
+			echo json_encode( array(
+					'valid' => false,
+					'message'  => __( 'Something went wrong.' ),
+				 ) );
+		endif;
 
 		die();
 

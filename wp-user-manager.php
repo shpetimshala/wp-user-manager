@@ -200,8 +200,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-forms.php';
 			// Shortcodes
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
-			// Ajax Handler
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
 			// Emails
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
 			// Emails Tags
@@ -224,6 +222,10 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				// Load Emails List Table
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-list.php';
 			}
+
+
+			// Ajax Handler
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
 			
 		}
 

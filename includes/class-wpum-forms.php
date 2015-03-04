@@ -52,7 +52,7 @@ class WPUM_Forms {
 	 * @param  string $form_name
 	 * @return string class name on success, false on failure
 	 */
-	private function load_form_class( $form_name ) {
+	public function load_form_class( $form_name ) {
 		// Load the form abtract
 		if ( ! class_exists( 'WPUM_Form' ) )
 			include( 'abstracts/abstract-wpum-form.php' );
