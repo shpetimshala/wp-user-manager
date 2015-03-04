@@ -212,6 +212,10 @@ class WPUM_Form_Register extends WPUM_Form {
 			return;
 		}
 
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'register' ) ) {
+			return;
+		}
+
 		// Validate required
 		if ( is_wp_error( ( $return = self::validate_fields( $values ) ) ) ) {
 			self::add_error( $return->get_error_message() );

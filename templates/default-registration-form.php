@@ -29,7 +29,7 @@
 
 		<?php do_action( 'wpum_after_inside_register_form_template', $atts ); ?>
 
-		<?php wp_nonce_field( 'wpum-register-nonce', 'security' ); ?>
+		<?php wp_nonce_field( $form ); ?>
 
 		<p>
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
