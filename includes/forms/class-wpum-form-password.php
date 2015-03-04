@@ -432,11 +432,14 @@ class WPUM_Form_Password extends WPUM_Form {
 	 * @return void
 	 */
 	public static function change_password( $user, $new_pass ) {
+		
 		do_action( 'password_reset', $user, $new_pass );
 
 		wp_set_password( $new_pass, $user->ID );
 
-		wp_password_change_notification( $user );
+		if( !wpum_get_option('disable_admin_password_recovery_email') )
+			wp_password_change_notification( $user );
+
 	}
 
 	/**

@@ -144,16 +144,3 @@ function wp_new_user_notification( $user_id, $plaintext_pass ) {
 
 }
 endif;
-
-if ( !function_exists( 'wp_password_change_notification' ) && wpum_get_option('disable_admin_password_recovery_email') ) :
-/**
- * This function is empty, if enabled into the settings panel,
- * it will not send any email to the admin when users reset their password.
- *
- * @since 1.0.0
- * @access public
- * @return void
- */
-function wp_password_change_notification() {}
-
-endif;
