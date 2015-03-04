@@ -32,6 +32,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_logout', array( $this, 'wpum_logout' ) );
 		add_shortcode( 'wpum_register', array( $this, 'wpum_registration' ) );
 		add_shortcode( 'wpum_password_recovery', array( $this, 'wpum_password' ) );
+		add_shortcode( 'wpum_profile_edit', array( $this, 'wpum_profile_edit' ) );
 
 	}
 
@@ -176,6 +177,23 @@ class WPUM_Shortcodes {
 			$atts['form_id'] = 'default_password_form';
 
 		return WPUM()->forms->get_form( 'password', $atts );
+
+	}
+
+	/**
+	 * Profile Edit Form Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_profile_edit( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'' => ''
+		), $atts ) );
+
+		return WPUM()->forms->get_form( 'profile', $atts );
 
 	}
 

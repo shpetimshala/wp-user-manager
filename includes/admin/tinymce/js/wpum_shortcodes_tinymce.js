@@ -157,6 +157,14 @@
 					}
 				}, // End Password Recovery Form
 
+				/* Profile Edit */
+				{
+					text: 'Profile Edit Form',
+					onclick: function() {
+						editor.insertContent( '[wpum_profile_edit]');
+					}
+				}, // End Profile Edit
+
 			]
 		});
 	});
