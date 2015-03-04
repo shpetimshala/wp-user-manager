@@ -480,12 +480,4 @@ class WPUM_Form_Password extends WPUM_Form {
 
 	}
 
-	function test() {
-
-		$test = 'lol';
-
-		return $test;
-
-	}
-
 }

@@ -185,15 +185,15 @@ jQuery(document).ready(function ($) {
 					},
 					beforeSend: function() {
 						$( wpum_psw_reset_form ).find('p.wpum-message').remove();
-						$( wpum_psw_reset_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_psw_reset_form ).prepend('<p class="wpum-message wpum-notice wpum-lost-psw-message">' + wpum_frontend_js.checking_credentials + '</p>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if(results.completed === true) {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success wpum-lost-psw-message').text(results.message);
 						} else {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error wpum-lost-psw-message').text(results.message);
 						}
 
 					}
