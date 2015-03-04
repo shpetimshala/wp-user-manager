@@ -75,7 +75,7 @@ if( isset($_GET['password-reset']) )
 
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="hidden" name="wpum_password_form_status" value="<?php echo $form_status; ?>" />
+			<input type="hidden" name="wpum_password_form_status" id="wpum_password_form_status" value="<?php echo $form_status; ?>" />
 			<input type="submit" id="submit_wpum_password" name="submit_wpum_password" class="button" value="<?php _e('Reset Password'); ?>" />
 		</p>
 

@@ -183,6 +183,9 @@ class WPUM_Ajax_Handler {
 		// Check our nonce and make sure it's correct.
 		check_ajax_referer( 'password', 'wpum_nonce_psw_security' );
 
+		if( !isset( $_REQUEST['form_status'] ) || isset( $_REQUEST['form_status'] ) && $_REQUEST['form_status'] !== 'recover' )
+			die();
+
 		$username = $_REQUEST['username'];
 
 		// Validate the username

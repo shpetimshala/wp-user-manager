@@ -114,6 +114,7 @@ jQuery(document).ready(function ($) {
 				var wpum_psw_recovery_form = this; // form element
 				var wpum_psw_username = $(this).find('#username_email').val();
 				var wpum_psw_nonce = $(this).find('#_wpnonce').val();
+				var wpum_psw_status = $(this).find('#wpum_password_form_status').val();
 
 				// Process psw recovery form through ajax
 				$.ajax({
@@ -123,6 +124,7 @@ jQuery(document).ready(function ($) {
 					data: {
 						'action'     : 'wpum_ajax_psw_recovery', // Calls the ajax action
 						'username' : wpum_psw_username,
+						'form_status' : wpum_psw_status,
 						'wpum_nonce_psw_security' : wpum_psw_nonce
 					},
 					beforeSend: function() {
