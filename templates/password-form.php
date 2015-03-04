@@ -20,8 +20,8 @@ if( isset($_GET['password-reset']) )
 
 // Retrieve reset key and login
 if( isset($_GET['password-reset']) ) {
-	$reset_key = esc_attr($_GET['key']);
-	$login = esc_attr($_GET['login']);
+	$reset_key = $_GET['key'];
+	$login = $_GET['login'];
 }
 
 ?>
@@ -85,8 +85,8 @@ if( isset($_GET['password-reset']) ) {
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
 			<input type="hidden" name="wpum_password_form_status" id="wpum_password_form_status" value="<?php echo $form_status; ?>" />
-			<input type="hidden" name="wpum_psw_reset_key" value="<?php echo $reset_key; ?>" />
-			<input type="hidden" name="wpum_psw_reset_login" value="<?php echo $login; ?>" />
+			<input type="hidden" name="wpum_psw_reset_key" value="<?php echo esc_attr($reset_key); ?>" />
+			<input type="hidden" name="wpum_psw_reset_login" value="<?php echo esc_attr($login); ?>" />
 			<input type="submit" id="submit_wpum_password" name="submit_wpum_password" class="button" value="<?php _e('Reset Password'); ?>" />
 		</p>
 
