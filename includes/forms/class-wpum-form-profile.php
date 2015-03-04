@@ -47,8 +47,31 @@ class WPUM_Form_Profile extends WPUM_Form {
 		}
 
 		self::$fields = apply_filters( 'wpum_profile_fields', array(
-			'profile' => array(
-				
+			'name' => array(
+				'first_name' => array(
+					'label'       => __( 'First Name' ),
+					'type'        => 'text',
+					'required'    => false,
+					'placeholder' => '',
+					'value'       => null,
+					'priority'    => 1
+				),
+				'last_name' => array(
+					'label'       => __( 'Last Name' ),
+					'type'        => 'text',
+					'required'    => false,
+					'placeholder' => '',
+					'value'       => null,
+					'priority'    => 2
+				),
+				'nickname' => array(
+					'label'       => __( 'Nickname' ),
+					'type'        => 'text',
+					'required'    => true,
+					'placeholder' => '',
+					'value'       => null,
+					'priority'    => 3
+				),
 			),
 		) );
 
@@ -179,6 +202,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function output( $atts = array() ) {
 
+		// Get fields
+		self::get_profile_fields();
+
 		// Display template
 		if( is_user_logged_in() ) :
 
@@ -186,6 +212,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 				array(
 					'args' => $atts,
 					'form' => self::$form_name,
+					'name_fields' => self::get_fields( 'name' )
 				)
 			);
 
