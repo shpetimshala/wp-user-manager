@@ -49,6 +49,10 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_ajax_psw_recovery', array( $this, 'password_recovery' ) );
 		add_action( 'wp_ajax_nopriv_wpum_ajax_psw_recovery', array( $this, 'password_recovery' ) );
 
+		// Password Reset
+		add_action( 'wp_ajax_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
+		add_action( 'wp_ajax_nopriv_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
+
 	}
 
 	/**
@@ -213,6 +217,71 @@ class WPUM_Ajax_Handler {
 					'message'  => __( 'Something went wrong.' ),
 				 ) );
 		endif;
+
+		die();
+
+	}
+
+	/**
+	 * Execute ajax psw reset process.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function password_reset() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'password', 'wpum_nonce_psw_security' );
+
+		if( !isset( $_REQUEST['form_status'] ) || isset( $_REQUEST['form_status'] ) && $_REQUEST['form_status'] !== 'reset' )
+			die();
+
+		$password_1 = $_REQUEST['password_1'];
+		$password_2 = $_REQUEST['password_2'];
+		$key        = $_REQUEST['key'];
+		$login      = $_REQUEST['login'];
+ 
+		// Validate passwords
+		if ( empty( $password_1 ) || empty( $password_2 ) ) {
+			echo json_encode( array(
+					'completed' => false,
+					'message'  => __( 'Please enter your password.' ),
+				 ) );
+			die();
+		}
+
+		// Check if they match
+		if ( $password_1 !== $password_2 ) {
+			echo json_encode( array(
+					'completed' => false,
+					'message'  => __( 'Passwords do not match.' ),
+				 ) );
+			die();
+		}
+		
+		// Load the form class and use it's method to retrieve the password reset function
+		$get_form = WPUM()->forms->load_form_class( 'password' );
+		$user = $get_form::check_password_reset_key( $key, $login );
+
+		if ( $user instanceof WP_User ) {
+
+			$reset = $get_form::change_password( $user, $password_1 );
+			do_action( 'wpum_user_reset_password', $user );
+
+			echo json_encode( array(
+					'completed' => true,
+					'message'  => __( 'Your password has been reset.' ),
+				 ) );
+
+		} else {
+
+			echo json_encode( array(
+					'completed' => false,
+					'message'  => __( 'Something went wrong.' ),
+				 ) );
+			
+		}
 
 		die();
 

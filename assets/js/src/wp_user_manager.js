@@ -16,6 +16,7 @@ jQuery(document).ready(function ($) {
 		init : function() {
 			this.ajax_login();
 			this.ajax_psw_recovery();
+			this.ajax_psw_reset();
 		},
 
 		// Handle Ajax Login
@@ -117,9 +118,9 @@ jQuery(document).ready(function ($) {
 				e.preventDefault();
 
 				var wpum_psw_recovery_form = this; // form element
-				var wpum_psw_username = $(this).find('#username_email').val();
-				var wpum_psw_nonce = $(this).find('#_wpnonce').val();
-				var wpum_psw_status = $(this).find('#wpum_password_form_status').val();
+				var wpum_psw_username      = $(this).find('#username_email').val();
+				var wpum_psw_nonce         = $(this).find('#_wpnonce').val();
+				var wpum_psw_status        = $(this).find('#wpum_password_form_status').val();
 
 				// Process psw recovery form through ajax
 				$.ajax({
@@ -143,6 +144,56 @@ jQuery(document).ready(function ($) {
 							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
 						} else {
 							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+						}
+
+					}
+				});
+
+			});
+
+		},
+
+		// Process ajax psw reset
+		ajax_psw_reset : function() {
+
+			$('.wpum-password-form-wrapper-reset form').on('submit', function(e) {
+
+				// Stop the form from submitting so we can use ajax.
+				e.preventDefault();
+
+				var wpum_psw_reset_form   = this; // form element
+				var wpum_psw_password_1   = $(this).find('#password_1').val();
+				var wpum_psw_password_2   = $(this).find('#password_2').val();
+				var wpum_psw_reset_nonce  = $(this).find('#_wpnonce').val();
+				var wpum_psw_reset_status = $(this).find('#wpum_password_form_status').val();
+				var wpum_psw_reset_key    = $(this).find("input:hidden[name='wpum_psw_reset_key']").val();
+				var wpum_psw_reset_login  = $(this).find("input:hidden[name='wpum_psw_reset_login']").val();
+
+				// Process psw recovery form through ajax
+				$.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: wpum_frontend_js.ajax,
+					data: {
+						'action'     : 'wpum_ajax_psw_reset', // Calls the ajax action
+						'password_1' : wpum_psw_password_1,
+						'password_2' : wpum_psw_password_2,
+						'form_status' : wpum_psw_reset_status,
+						'key' : wpum_psw_reset_key,
+						'login' : wpum_psw_reset_login,
+						'wpum_nonce_psw_security' : wpum_psw_reset_nonce
+					},
+					beforeSend: function() {
+						$( wpum_psw_reset_form ).find('p.wpum-message').remove();
+						$( wpum_psw_reset_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
+					},
+					success: function(results) {
+
+						// Check the response
+						if(results.completed === true) {
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						} else {
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
 						}
 
 					}

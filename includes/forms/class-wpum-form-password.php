@@ -254,7 +254,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		} else if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'reset' ) {
 
-			self::reset_password( $values['password'][ 'password_1' ], $values['password'][ 'password_2' ] );
+			self::reset_password( $values['password'][ 'password_1' ], $values['password'][ 'password_2' ], $_POST['wpum_psw_reset_key'], $_POST['wpum_psw_reset_login'] );
 
 		}
 
@@ -328,9 +328,6 @@ class WPUM_Form_Password extends WPUM_Form {
 		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user_login ) );
 
 		/* == Send Email == */
-			
-		$site_url = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
-
 		// Check if email exists first
 		if( wpum_email_exists('password') ) {
 
@@ -362,15 +359,17 @@ class WPUM_Form_Password extends WPUM_Form {
 	 * @since 1.0.0
 	 * @param string $password_1 contains 1st psw.
 	 * @param string $password_2 contains 2nd psw.
+	 * @param string $key the reset key.
+	 * @param string $login the user login to reset.
 	 * @return void
 	 */
-	public static function reset_password( $password_1, $password_2 ) {
+	public static function reset_password( $password_1, $password_2, $key, $login ) {
 
 		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'password' ) ) {
 			return;
 		}
 
-		$user = self::check_password_reset_key( $_GET['key'], $_GET['login'] );
+		$user = self::check_password_reset_key( $key, $login );
 
 		if ( $user instanceof WP_User ) {
 			self::change_password( $user, $password_1 );
@@ -478,6 +477,14 @@ class WPUM_Form_Password extends WPUM_Form {
 				)
 			);
 		endif;
+
+	}
+
+	function test() {
+
+		$test = 'lol';
+
+		return $test;
 
 	}
 
