@@ -258,7 +258,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Enquery styles and scripts anywhere needed
 			wp_enqueue_style( 'wpum-shortcode-manager' );
 
-
 			// Enqueue styles & scripts on admin page only
 			$screen = get_current_screen();
 
@@ -270,13 +269,14 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			wp_enqueue_style( 'wpum-admin' );
 			wp_enqueue_style( 'wpum-select2' );
 
+			if( isset($_GET['tab']) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
+				wp_enqueue_script('jquery-ui-sortable');
+
 			// Backend JS Settings
-			
 			wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
 				'ajax' => admin_url( 'admin-ajax.php' ),
 				'confirm' => __('Are you sure you want to do this? This action cannot be reversed.'),
 			) );
-
 
 		}
 

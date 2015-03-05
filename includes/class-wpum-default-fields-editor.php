@@ -46,9 +46,14 @@ class WPUM_Default_Fields_Editor {
 		ob_start();
 
 		// Prepare the table for display
+		
+		echo '<div class="wpum-fields-editor-container">';
+
 		$wpum_emails_table = new WPUM_Default_Fields_List();
 	    $wpum_emails_table->prepare_items();
 	    $wpum_emails_table->display();
+
+	    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 
 	    //echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
 

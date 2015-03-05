@@ -16,6 +16,7 @@ jQuery(document).ready(function ($) {
 		init : function() {
 			this.general();
 			this.restore_emails();
+			this.order_default_fields();
 		},
 
 		// General Functions
@@ -59,6 +60,40 @@ jQuery(document).ready(function ($) {
 
 			});
 
+		},
+
+		// Re-order the fields into the admin panel
+		order_default_fields : function() {
+
+			var wpum_fields_table_h = $('.wpum_fields_table_list').height();
+			var wpum_fields_table_w = $('.wpum_fields_table_list').width();
+			
+			$('.wpum-table-loader').height( wpum_fields_table_h ).width( wpum_fields_table_w );
+
+			$(".wpum_fields_table_list tbody").sortable({
+				helper: this.sortable_table_fix,
+				axis: "y",
+				cursor: 'pointer',
+				opacity: 0.5,
+				placeholder: "row-dragging",
+				delay: 150,
+				handle: ".column-order",
+				update: function() {
+	                $('.wpum-table-loader').css('display','table');
+	            }
+			}).disableSelection();
+
+		},
+
+		// Adjust table width when dragging
+		sortable_table_fix : function( e, tr ) {
+			var $originals = tr.children();
+		    var $helper = tr.clone();
+		    $helper.children().each(function(index)
+		    {
+		      $(this).width($originals.eq(index).width())
+		    });
+		    return $helper;
 		}
 
 	};

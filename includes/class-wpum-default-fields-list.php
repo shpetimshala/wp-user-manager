@@ -47,7 +47,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'order'    => __('Order'),
+            'order'    => '<span class="dashicons dashicons-sort"></span>',
             'title'    => __('Field Title'),
             'type'     => __('Field Type'),
             'meta'     => __('Meta name'),
@@ -168,6 +168,16 @@ class WPUM_Default_Fields_List extends WP_List_Table {
 
         return null;
 
+    }
+
+    /**
+     * Get a list of CSS classes for the list table table tag.
+     *
+     * @access protected
+     * @return array List of CSS classes for the table tag.
+     */
+    protected function get_table_classes() {
+        return array( 'widefat', 'fixed', $this->_args['plural'], 'wpum_fields_table_list' );
     }
 
 }
