@@ -1,0 +1,60 @@
+<?php
+/**
+ * Default Fields Editor
+ *
+ * @package     wp-user-manager
+ * @copyright   Copyright (c) 2015, Alessandro Tesoro
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0.0
+ */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * WPUM_Emails_Editor Class
+ *
+ * @since 1.0.0
+ */
+class WPUM_Default_Fields_Editor {
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function __construct() {
+		
+		if( ! class_exists( 'WP_List_Table' ) ) {
+		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+		}
+		
+		// Display the table into the settings panel
+		add_action( 'wpum_default_fields_editor', array( $this, 'default_fields_editor' ) );
+
+	}
+
+	/**
+	 * Display Table with list of default fields.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	*/
+	public function default_fields_editor() {
+
+		ob_start();
+
+		// Prepare the table for display
+		$wpum_emails_table = new WPUM_Default_Fields_List();
+	    $wpum_emails_table->prepare_items();
+	    $wpum_emails_table->display();
+
+	    //echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
+
+		echo ob_get_clean();
+
+	}
+
+}
+new WPUM_Default_Fields_Editor;

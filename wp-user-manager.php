@@ -221,6 +221,10 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-editor.php';
 				// Load Emails List Table
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-list.php';
+				// Load Default Fields List
+				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-list.php';
+				// Load Default Fields Editor
+				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-editor.php';
 			}
 
 
