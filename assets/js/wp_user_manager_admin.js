@@ -60,23 +60,53 @@ jQuery(document).ready(function ($) {
 		// Re-order the fields into the admin panel
 		order_default_fields : function() {
 
-			var wpum_fields_table_h = $('.wpum_fields_table_list').height();
-			var wpum_fields_table_w = $('.wpum_fields_table_list').width();
-			
-			$('.wpum-table-loader').height( wpum_fields_table_h ).width( wpum_fields_table_w );
+			if ( $.isFunction($.fn.sortable) ) {
+			    // Get the table size
+				var wpum_fields_table_h = $('.wpum_fields_table_list').height();
+				var wpum_fields_table_w = $('.wpum_fields_table_list').width();
+				
+				// Set size to the loader div
+				$('.wpum-table-loader').height( wpum_fields_table_h ).width( wpum_fields_table_w );
 
-			$(".wpum_fields_table_list tbody").sortable({
-				helper: this.sortable_table_fix,
-				axis: "y",
-				cursor: 'pointer',
-				opacity: 0.5,
-				placeholder: "row-dragging",
-				delay: 150,
-				handle: ".column-order",
-				update: function() {
-	                $('.wpum-table-loader').css('display','table');
-	            }
-			}).disableSelection();
+				$(".wpum_fields_table_list tbody").sortable({
+					helper: this.sortable_table_fix,
+					axis: "y",
+					cursor: 'pointer',
+					opacity: 0.5,
+					placeholder: "row-dragging",
+					delay: 150,
+					handle: ".column-order",
+					update: function(event, ui) {
+		                
+		                // Update TR data
+						$(this).children('tr').each(function() {
+				            $(this).children('td:first-child').html($(this).index());
+				            $(this).data('priority',$(this).index());
+				        });
+
+		                dataArray = $.map($(this).children('tr'), function(el){
+					        return {'priority':$(el).data('priority'), 'field_id':$(el).data('field_id')}; 
+					    });
+
+		                $.ajax({
+							type: 'GET',
+							dataType: 'json',
+							url: wpum_admin_js.ajax,
+							data: {
+								'action' : 'wpum_store_default_fields_order', // Calls the ajax action
+								'items' : dataArray
+							},
+							beforeSend: function() {
+								$('.wpum-table-loader').css('display','table');
+							},
+							success: function(results) {
+								$('.wpum-table-loader').css('display','none');
+							}
+						});
+
+		            }
+				}).disableSelection();
+			}
 
 		},
 
@@ -84,8 +114,7 @@ jQuery(document).ready(function ($) {
 		sortable_table_fix : function( e, tr ) {
 			var $originals = tr.children();
 		    var $helper = tr.clone();
-		    $helper.children().each(function(index)
-		    {
+		    $helper.children().each(function(index){
 		      $(this).width($originals.eq(index).width())
 		    });
 		    return $helper;

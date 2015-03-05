@@ -53,6 +53,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
             'meta'     => __('Meta name'),
             'required' => __('Required'),
             'actions'  => __('Actions'),
+            'field_id'  => null,
         );
 
         return $columns;
@@ -65,7 +66,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      * @return Array
      */
     public function get_hidden_columns() {
-        return array();
+        return array(  );
     }
 
     /**
@@ -90,18 +91,20 @@ class WPUM_Default_Fields_List extends WP_List_Table {
 
         $data[] = array(
             'order'    => 1,
-            'title'    => 'Test 1',
+            'title'    => 'Username',
             'type'     => 'Text',
             'meta'     => 'test',
             'required' => 'yes',
+            'field_id' => 'username'
         );
 
         $data[] = array(
             'order'    => 2,
-            'title'    => 'Test 2',
+            'title'    => 'Password',
             'type'     => 'Text',
             'meta'     => 'test_2',
             'required' => 'no',
+            'field_id' => 'password'
         );
 
         return $data;
@@ -136,6 +139,9 @@ class WPUM_Default_Fields_List extends WP_List_Table {
             break;
             case 'actions':
                 return $this->table_actions($item);
+            break;
+            case 'field_id':
+                return $item['field_id'];
             break;
 
             default:
@@ -178,6 +184,24 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     protected function get_table_classes() {
         return array( 'widefat', 'fixed', $this->_args['plural'], 'wpum_fields_table_list' );
+    }
+
+    /**
+     * Generates content for a single row of the table
+     *
+     * @access public
+     * @param object $item The current item
+     */
+    public function single_row( $item ) {
+        static $row_class = '';
+        $row_class = ( $row_class == '' ? ' class="alternate"' : '' );
+
+        // Add id
+        $row_id = ' id="'.$item['field_id'].'"';
+ 
+        echo '<tr' . $row_class . $row_id . ' data-priority="'.$item['field_id'].'" data-field_id="'.$item['field_id'].'">';
+        $this->single_row_columns( $item );
+        echo '</tr>';
     }
 
 }

@@ -53,6 +53,10 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
 		add_action( 'wp_ajax_nopriv_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
 
+		// Store the default fields order
+		add_action( 'wp_ajax_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
+		add_action( 'wp_ajax_nopriv_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
+
 	}
 
 	/**
@@ -282,6 +286,21 @@ class WPUM_Ajax_Handler {
 				 ) );
 			
 		}
+
+		die();
+
+	}
+
+	/**
+	 * Store default fields order.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function store_default_fields_order() {
+
+		update_option( 'wpum_default_fields', $_REQUEST['items'] );
 
 		die();
 
