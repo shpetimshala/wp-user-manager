@@ -57,6 +57,8 @@ class WPUM_Default_Fields_Editor {
 
 	    //echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
 
+	    echo wp_nonce_field( "wpum_nonce_default_fields_table", "wpum_backend_fields_table" );
+
 		echo ob_get_clean();
 
 	}

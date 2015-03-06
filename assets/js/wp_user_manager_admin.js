@@ -89,13 +89,16 @@ jQuery(document).ready(function ($) {
 					        return {'order':$(el).data('order'), 'meta':$(el).data('meta'), 'required':$(el).data('required')}; 
 					    });
 
+					    var wpum_backend_fields_table = $('#wpum_backend_fields_table').val();
+
 		                $.ajax({
 							type: 'GET',
 							dataType: 'json',
 							url: wpum_admin_js.ajax,
 							data: {
 								'action' : 'wpum_store_default_fields_order', // Calls the ajax action
-								'items' : dataArray
+								'items' : dataArray,
+								'wpum_backend_fields_table': wpum_backend_fields_table
 							},
 							beforeSend: function() {
 								$('#setting-error-').remove();

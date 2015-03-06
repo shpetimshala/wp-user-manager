@@ -303,7 +303,21 @@ class WPUM_Ajax_Handler {
 	 */
 	public function store_default_fields_order() {
 
-		update_option( 'wpum_default_fields', $_REQUEST['items'] );
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'wpum_nonce_default_fields_table', 'wpum_backend_fields_table' );
+
+		// Abort if something isn't right.
+		if( !is_admin() || !current_user_can( 'manage_options' ) ) {
+			echo json_encode( array(
+				'message'  => __( 'Error.' ),
+			 ) );
+			return;
+			die();
+		}
+
+		$fields = isset( $_REQUEST['items'] ) ? (array) $_REQUEST['items'] : array();
+
+		update_option( 'wpum_default_fields', $fields );
 
 		echo json_encode( array(
 					'completed' => true,
@@ -332,6 +346,7 @@ class WPUM_Ajax_Handler {
 				'message'  => __( 'Error.' ),
 			 ) );
 			return;
+			die();
 		}
 
 		// Delete previously saved option
@@ -401,8 +416,3 @@ class WPUM_Ajax_Handler {
 }
 
 new WPUM_Ajax_Handler;
-
-/*
-$options = get_option( 'wpum_default_fields' );
-
-print_r($options);*/
