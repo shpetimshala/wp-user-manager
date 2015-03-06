@@ -227,6 +227,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
 
         $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
         echo '<a href="'.$edit_url.'" class="button">'.__('Edit Field').'</a> ';
+        echo '<a href="#" class="button move-field"><span class="dashicons dashicons-sort"></span></a>';
 
     }
 

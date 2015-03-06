@@ -76,7 +76,7 @@ jQuery(document).ready(function ($) {
 					opacity: 0.5,
 					placeholder: "row-dragging",
 					delay: 150,
-					handle: ".column-order",
+					handle: ".column-order, .move-field",
 					update: function(event, ui) {
 		                
 		                // Update TR data

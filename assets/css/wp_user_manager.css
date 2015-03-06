@@ -64,5 +64,7 @@ table.wpum_fields_table_list th.column-order, table.wpum_fields_table_list td.co
   text-align: center; }
 table.wpum_fields_table_list td.column-order {
   cursor: ns-resize; }
+table.wpum_fields_table_list .move-field {
+  padding-top: 3px; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

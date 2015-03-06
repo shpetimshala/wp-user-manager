@@ -55,7 +55,7 @@ class WPUM_Default_Fields_Editor {
 
 	    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 
-	    //echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
+	    echo '<p class="description">' . __('Click the "Edit Field" button to customize the field.') . '<br/>' . sprintf( __('Click and drag the %s button or the field order number to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>') . '</p>';
 
 	    echo wp_nonce_field( "wpum_nonce_default_fields_table", "wpum_backend_fields_table" );
 
