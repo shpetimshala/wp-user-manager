@@ -57,6 +57,9 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
 		add_action( 'wp_ajax_nopriv_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
 
+		// Restore Default Fields
+		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
+
 	}
 
 	/**
@@ -302,6 +305,95 @@ class WPUM_Ajax_Handler {
 
 		update_option( 'wpum_default_fields', $_REQUEST['items'] );
 
+		echo json_encode( array(
+					'completed' => true,
+					'message'  => __( 'Fields order successfully updated.' ),
+				 ) );
+
+		die();
+
+	}
+
+	/**
+	 * Restore email into the backend.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function restore_default_fields() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'wpum_nonce_default_fields_restore', 'wpum_backend_fields_restore' );
+
+		// Abort if something isn't right.
+		if( !is_admin() || !current_user_can( 'manage_options' ) ) {
+			echo json_encode( array(
+				'message'  => __( 'Error.' ),
+			 ) );
+			return;
+		}
+
+		// Delete previously saved option
+		delete_option( 'wpum_default_fields' );
+
+		// Declare fields
+		$fields = array();
+
+		$fields[] = array(
+            'order'    => 0,
+            'meta'     => 'first_name',
+            'required' => false,
+        );
+
+        $fields[] = array(
+            'order'    => 1,
+            'meta'     => 'last_name',
+            'required' => false,
+        );
+
+        $fields[] = array(
+            'order'    => 2,
+            'meta'     => 'nickname',
+            'required' => true,
+        );
+
+        $fields[] = array(
+            'order'    => 3,
+            'meta'     => 'display_name',
+            'required' => true,
+        );
+
+        $fields[] = array(
+            'order'    => 4,
+            'meta'     => 'user_email',
+            'required' => true,
+        );
+
+        $fields[] = array(
+            'order'    => 5,
+            'meta'     => 'user_url',
+            'required' => false,
+        );
+
+        $fields[] = array(
+            'order'    => 6,
+            'meta'     => 'description',
+            'required' => false,
+        );
+
+        $fields[] = array(
+            'order'    => 7,
+            'meta'     => 'password',
+            'required' => true,
+        );
+
+        update_option( 'wpum_default_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
+
+		echo json_encode( array(
+				'message'  => __( 'Default fields successfully restored.' ),
+			 ) );
+
 		die();
 
 	}
@@ -309,3 +401,8 @@ class WPUM_Ajax_Handler {
 }
 
 new WPUM_Ajax_Handler;
+
+/*
+$options = get_option( 'wpum_default_fields' );
+
+print_r($options);*/

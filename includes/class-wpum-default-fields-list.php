@@ -50,10 +50,8 @@ class WPUM_Default_Fields_List extends WP_List_Table {
             'order'    => '<span class="dashicons dashicons-sort"></span>',
             'title'    => __('Field Title'),
             'type'     => __('Field Type'),
-            'meta'     => __('Meta name'),
             'required' => __('Required'),
             'actions'  => __('Actions'),
-            'field_id'  => null,
         );
 
         return $columns;
@@ -66,7 +64,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      * @return Array
      */
     public function get_hidden_columns() {
-        return array(  );
+        return array( );
     }
 
     /**
@@ -89,23 +87,82 @@ class WPUM_Default_Fields_List extends WP_List_Table {
 
         $data = array();
 
-        $data[] = array(
-            'order'    => 1,
-            'title'    => 'Username',
-            'type'     => 'Text',
-            'meta'     => 'test',
-            'required' => 'yes',
-            'field_id' => 'username'
+        $data['first_name'] = array(
+            'order'    => 0,
+            'title'    => __('First Name'),
+            'type'     => 'text',
+            'meta'     => 'first_name',
+            'required' => false,
         );
 
-        $data[] = array(
-            'order'    => 2,
-            'title'    => 'Password',
-            'type'     => 'Text',
-            'meta'     => 'test_2',
-            'required' => 'no',
-            'field_id' => 'password'
+        $data['last_name'] = array(
+            'order'    => 1,
+            'title'    => __('Last Name'),
+            'type'     => 'text',
+            'meta'     => 'last_name',
+            'required' => false,
         );
+
+        $data['nickname'] = array(
+            'order'    => 2,
+            'title'    => __('Nickname'),
+            'type'     => 'text',
+            'meta'     => 'nickname',
+            'required' => true,
+        );
+
+        $data['display_name'] = array(
+            'order'    => 3,
+            'title'    => __('Display Name'),
+            'type'     => 'select',
+            'meta'     => 'display_name',
+            'required' => true,
+        );
+
+        $data['user_email'] = array(
+            'order'    => 4,
+            'title'    => __('Email'),
+            'type'     => 'email',
+            'meta'     => 'user_email',
+            'required' => true,
+        );
+
+        $data['user_url'] = array(
+            'order'    => 5,
+            'title'    => __('Website'),
+            'type'     => 'text',
+            'meta'     => 'user_url',
+            'required' => false,
+        );
+
+        $data['description'] = array(
+            'order'    => 6,
+            'title'    => __('Description'),
+            'type'     => 'textarea',
+            'meta'     => 'description',
+            'required' => false,
+        );
+
+        $data['password'] = array(
+            'order'    => 7,
+            'title'    => __('Password'),
+            'type'     => 'password',
+            'meta'     => 'password',
+            'required' => true,
+        );
+
+        /* Modify the order of the data based on what's already saved into the database */
+        $saved_order = get_option( 'wpum_default_fields' );
+        
+        if( $saved_order ) {
+            foreach ($saved_order as $field) {
+                $data[ $field['meta'] ]['order'] = $field['order'];
+                $data[ $field['meta'] ]['required'] = $field['required'];
+            }
+        }
+
+        // Sort all together
+        uasort( $data, 'wpum_sort_default_fields_table');
 
         return $data;
 
@@ -129,21 +186,17 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                 return $item['title'];
             break;
             case 'type':
-                return $item['type'];
+                return $this->parse_field_name( $item['type'] );
             break;
             case 'meta':
                 return $item['meta'];
             break;
             case 'required':
-                return $item['required'];
+                return $this->parse_field_required( $item['required'] );
             break;
             case 'actions':
                 return $this->table_actions($item);
             break;
-            case 'field_id':
-                return $item['field_id'];
-            break;
-
             default:
                 return null;
         }
@@ -172,7 +225,8 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     private function table_actions( $item ) {
 
-        return null;
+        $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
+        echo '<a href="'.$edit_url.'" class="button">'.__('Edit Field').'</a> ';
 
     }
 
@@ -187,6 +241,48 @@ class WPUM_Default_Fields_List extends WP_List_Table {
     }
 
     /**
+     * Displays a translatable string for the field type column.
+     *
+     * @access public
+     * @return string the field type name.
+     */
+    public function parse_field_name( $type ) {
+
+        $text = __('Text field');
+
+        if( $type == 'email' ) {
+            $text = __('Email field');
+        } elseif ( $type == 'select' ) {
+            $text = __('Select dropdown');
+        } elseif ( $type == 'textarea' ) {
+            $text = __('Textarea field');
+        } elseif ( $type == 'password' ) {
+            $text = __('Password field');
+        }
+
+        return apply_filters( 'wpum_default_fields_table_field_types', $text );
+
+    }
+
+    /**
+     * Displays an icon for the required column
+     *
+     * @access public
+     * @return string whether it's required or not.
+     */
+    public function parse_field_required( $is_required = false ) {
+
+        $show_icon = '';
+
+        if( $is_required == true ) {
+            $show_icon = '<span class="dashicons dashicons-yes"></span>';
+        }
+
+        return $show_icon;
+
+    }
+
+    /**
      * Generates content for a single row of the table
      *
      * @access public
@@ -197,9 +293,9 @@ class WPUM_Default_Fields_List extends WP_List_Table {
         $row_class = ( $row_class == '' ? ' class="alternate"' : '' );
 
         // Add id
-        $row_id = ' id="'.$item['field_id'].'"';
+        $row_id = ' id="'.$item['meta'].'"';
  
-        echo '<tr' . $row_class . $row_id . ' data-priority="'.$item['field_id'].'" data-field_id="'.$item['field_id'].'">';
+        echo '<tr' . $row_class . $row_id . ' data-order="'.$item['order'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'">';
         $this->single_row_columns( $item );
         echo '</tr>';
     }

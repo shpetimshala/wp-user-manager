@@ -157,3 +157,13 @@ function wpum_get_email( $email_id ) {
 	return $emails[ $email_id ];
 
 }
+
+/**
+ * Sort default fields table in the admin panel
+ *
+ * @since 1.0.0
+ * @return array of all the fields correctly ordered.
+ */
+function wpum_sort_default_fields_table($a, $b) {
+	return ($a['order'] < $b['order']) ? -1 : 1;
+}
