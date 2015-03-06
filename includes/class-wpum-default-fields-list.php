@@ -151,6 +151,8 @@ class WPUM_Default_Fields_List extends WP_List_Table {
             'required' => true,
         );
 
+        $data = apply_filters( 'wpum_default_fields_table_list', $data );
+
         /* Modify the order of the data based on what's already saved into the database */
         $saved_order = get_option( 'wpum_default_fields' );
         
@@ -226,8 +228,10 @@ class WPUM_Default_Fields_List extends WP_List_Table {
     private function table_actions( $item ) {
 
         $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
-        echo '<a href="'.$edit_url.'" class="button">'.__('Edit Field').'</a> ';
+        echo '<a href="'.$edit_url.'" class="button wpum-trigger-modal" data-field="'.$item['meta'].'">'.__('Edit Field').'</a> ';
         echo '<a href="#" class="button move-field"><span class="dashicons dashicons-sort"></span></a>';
+
+        echo $this->add_modal_window( $item );
 
     }
 
@@ -299,6 +303,85 @@ class WPUM_Default_Fields_List extends WP_List_Table {
         echo '<tr' . $row_class . $row_id . ' data-order="'.$item['order'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'">';
         $this->single_row_columns( $item );
         echo '</tr>';
+    }
+
+    /**
+     * Injects modal window into table for field modification.
+     *
+     * @access public
+     * @param object $item The current item
+     */
+    public function add_modal_window( $item ) {
+        ?>
+
+        <div class="wpum-window-hide wpum-fields-window-editor" id="window-<?php echo $item['meta']; ?>">
+            <form action="#" method="post" id="wpum-field-update-<?php echo $item['meta']; ?>" class="wpum-field-update" name="wpum-field-update">
+                <div class="media-modal wp-core-ui">
+
+                    <a class="media-modal-close" href="#" title="Close">
+                        <span class="media-modal-icon"></span>
+                    </a>
+
+                    <div class="media-modal-content">
+                        <div class="media-frame wp-core-ui">
+
+                            <div class="media-frame-title">
+                                <h1><?php printf( __('Edit "%s" field'), $item['title'] ); ?></h1>
+                            </div><!-- .media-frame-title (end) -->
+
+                            <div id="optionsframework" class="media-frame-content">
+                                <div class="attachments-browser">
+
+                                    <div class="section_clearfix section">
+                                        <div class="section-description">
+                                            <strong><?php _e('Set field as required');?></strong>
+                                            <span><?php _e('Enable this option to set this field as required.');?></span>
+                                        </div>
+                                        <div class="section-form-element ">
+                                            <select class="" id="field_required" name="field_required">
+                                                <option value="1" <?php selected( $item['required'], true ); ?>><?php _e('Yes');?></option>
+                                                <option value="" <?php selected( $item['required'], false ); ?>><?php _e('No');?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="section_clearfix section">
+                                        <div class="section-description">
+                                            <strong><?php _e('Show in registration form');?></strong>
+                                            <span><?php _e('Enable this option to display this field into the registration form.');?></span>
+                                        </div>
+                                        <div class="section-form-element ">
+                                        <select class="" id="field_display" name="field_display">
+                                                <option value="1"><?php _e('Yes');?></option>
+                                                <option value=""><?php _e('No');?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div><!-- .attachments-browser (end) -->
+                            </div><!-- .media-frame-content (end) -->
+
+                            <div class="media-frame-toolbar">
+                                <div class="media-toolbar">
+                                    <div class="media-toolbar-secondary">
+
+                                    </div>
+                                    <div class="media-toolbar-primary">
+                                        <input type="hidden" name="wpum_field_submit" value="<?php echo $item['meta']; ?>" />
+                                        <?php wp_nonce_field( $item['meta'] ); ?>
+                                        <button href="#" data-insert="button" class="button media-button button-primary button-large"><?php _e('Update field'); ?></button>
+                                    </div>
+                                </div><!-- .media-toolbar (end) -->
+                            </div><!-- .media-frame-toolbar (end) -->
+
+                        </div><!-- .media-frame (end) -->
+                    </div><!-- .media-modal-content (end) -->
+
+                </div><!-- .media-modal (end) -->
+            </form>
+            <div class="media-modal-backdrop"></div>
+        </div>
+
+        <?php
     }
 
 }

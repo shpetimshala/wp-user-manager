@@ -278,6 +278,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				'confirm' => __('Are you sure you want to do this? This action cannot be reversed.'),
 			) );
 
+			wp_enqueue_media();
+
 		}
 
 		/**

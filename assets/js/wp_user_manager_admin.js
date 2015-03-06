@@ -13,6 +13,7 @@ jQuery(document).ready(function ($) {
 			this.restore_emails();
 			this.order_default_fields();
 			this.restore_default_fields();
+			this.fields_window_manager();
 		},
 
 		// General Functions
@@ -164,8 +165,59 @@ jQuery(document).ready(function ($) {
 
 		},
 
+		// Handles the display of the modal window to edit the fields.
+		fields_window_manager : function() {
+
+			$('.wpum-trigger-modal').on('click', function(e) {
+
+				e.preventDefault();
+
+				// Grab the window id and display it
+				var field = $(this).data('field');
+				var modal_window = '#window-' + field;
+				$( modal_window ).show();
+
+				// Hide the modal window when closed
+				$('.media-modal-close').on( 'click', function(){
+					$( modal_window ).hide();
+					$('body').addClass('themeblvd-stop-scroll');
+					return false;
+				});
+
+				// Trigger field update
+				var update_button = $( modal_window ).find('.button-primary');
+				var update_nonce = $( modal_window ).find('#_wpnonce').val();
+
+				$( update_button ).on( 'click', function(){
+
+					$.ajax({
+						type: 'GET',
+						dataType: 'json',
+						url: wpum_admin_js.ajax,
+						data: {
+							'action' : 'wpum_update_single_default_field', // Calls the ajax action
+							'update_nonce' : update_nonce
+						},
+						beforeSend: function() {
+							//$( '#wpum-restore-default-fields' ).after('<span id="wpum-spinner" class="spinner wpum-spinner"></span>');
+						},
+						success: function(results) {
+							//$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
+							//$( '#wpum-spinner' ).hide();
+						}
+					});
+
+
+					$( modal_window ).hide();
+					return false;
+				});
+
+			});
+
+		}
+
 	};
 
 	WPUM_Admin.init();
-	
+
 });

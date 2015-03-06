@@ -66,5 +66,46 @@ table.wpum_fields_table_list td.column-order {
   cursor: ns-resize; }
 table.wpum_fields_table_list .move-field {
   padding-top: 3px; }
+table.wpum_fields_table_list .wpum-window-hide {
+  display: none; }
+table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-title, table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-content, table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-toolbar {
+  left: 0px; }
+table.wpum_fields_table_list .wpum-fields-window-editor .media-modal {
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%; }
+table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-content {
+  top: 50px; }
+table.wpum_fields_table_list .wpum-fields-window-editor .section {
+  padding: 18px 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dfdfdf;
+  position: relative;
+  clear: both; }
+table.wpum_fields_table_list .wpum-fields-window-editor .section-description {
+  width: 89%;
+  float: right;
+  font-size: 12px; }
+  table.wpum_fields_table_list .wpum-fields-window-editor .section-description strong {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block; }
+  table.wpum_fields_table_list .wpum-fields-window-editor .section-description span {
+    margin: 0 0 15px 0;
+    padding: 0; }
+table.wpum_fields_table_list .wpum-fields-window-editor .section-form-element {
+  width: 9%;
+  float: left; }
+table.wpum_fields_table_list .wpum-fields-window-editor .section_clearfix:after {
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  clear: both; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

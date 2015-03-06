@@ -98,4 +98,64 @@ table.wpum_fields_table_list {
 		padding-top: 3px;
 	}
 
+	.wpum-window-hide {
+		display: none;
+	}
+
+	.wpum-fields-window-editor {
+		.media-frame-title, .media-frame-content, .media-frame-toolbar {
+			left: 0px;
+		}
+		.media-modal {
+			  top: 25%;
+			  left: 25%;
+			  right: 25%;
+			  bottom: 25%;
+		}
+		.media-frame-content {
+			top: 50px;
+		}
+
+		.section {
+		  padding: 18px 20px;
+		  -webkit-box-sizing: border-box;
+		  -moz-box-sizing: border-box;
+		  box-sizing: border-box;
+		  border-bottom: 1px solid #dfdfdf;
+		  position: relative;
+		  clear: both;
+		}
+
+		.section-description {
+		  width: 89%;
+		  float: right;
+		  font-size: 12px;
+		  strong {
+		  	font-size: 14px;
+			margin-bottom: 5px;
+			display: block;
+		  }
+		  span {
+		  	margin: 0 0 15px 0;
+			padding: 0;
+		  }
+		}
+
+		.section-form-element {
+		  width: 9%;
+		  float: left;
+		}
+
+		.section_clearfix:after {
+		  content: '.';
+		  display: block;
+		  overflow: hidden;
+		  visibility: hidden;
+		  width: 0;
+		  height: 0;
+		  clear: both;
+		}
+
+	}
+
 }
