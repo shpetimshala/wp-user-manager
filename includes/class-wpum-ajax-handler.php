@@ -365,7 +365,7 @@ class WPUM_Ajax_Handler {
 		delete_option( 'wpum_default_fields' );
 
 		// Declare fields
-		$fields = WPUM_Default_Fields_Editor::default_user_fields_list();
+		$fields = wpum_default_user_fields_list();
 
         update_option( 'wpum_default_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
 
@@ -400,7 +400,7 @@ class WPUM_Ajax_Handler {
 		}
 
 		// Validate it exists
-		if( array_key_exists( $field , WPUM_Default_Fields_Editor::default_user_fields_list() ) ) {
+		if( array_key_exists( $field , wpum_default_user_fields_list() ) ) {
 			
 			$get_fields = get_option( 'wpum_default_fields' );
 			$get_fields[ $field ]['required'] = esc_attr( $_REQUEST['required'] );

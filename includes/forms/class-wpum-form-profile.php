@@ -34,6 +34,54 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 	/**
+	 * Builds a list of all the profile fields sorted
+	 * through the settings panel.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $fields_list array of all the fields.
+	 */
+	protected static function get_sorted_profile_fields() {
+
+		$fields_list = array();
+
+		// Grab default fields list
+		$default_fields = wpum_default_user_fields_list();
+		
+		// Get the sorted list from the settings panel
+		$saved_order = get_option( 'wpum_default_fields' );
+
+		// Merge them together
+		if( $saved_order ) {
+            foreach ($saved_order as $field) {
+                $default_fields[ $field['meta'] ]['order'] = $field['order'];
+                $default_fields[ $field['meta'] ]['required'] = $field['required'];
+                $default_fields[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
+            }
+        }
+
+		// Sort all together
+        uasort( $default_fields, 'wpum_sort_default_fields_table');
+
+        // Build new list
+        foreach ($default_fields as $new_field) {
+        	
+        	$fields_list[ $new_field['meta'] ] = array(
+				'label'       => $new_field['title'],
+				'type'        => $new_field['type'],
+				'required'    => $new_field['required'],
+				'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $new_field ),
+				'value'       => apply_filters( 'wpum_profile_field_value', null, $new_field ),
+				'options'     => apply_filters( 'wpum_profile_field_options', null, $new_field ),
+				'priority'    => $new_field['order']
+			);
+        }
+
+		return $fields_list;
+
+	}
+
+	/**
 	 * Define profile fields
 	 *
 	 * @access public
@@ -47,32 +95,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		}
 
 		self::$fields = apply_filters( 'wpum_profile_fields', array(
-			'name' => array(
-				'first_name' => array(
-					'label'       => __( 'First Name' ),
-					'type'        => 'text',
-					'required'    => false,
-					'placeholder' => '',
-					'value'       => null,
-					'priority'    => 1
-				),
-				'last_name' => array(
-					'label'       => __( 'Last Name' ),
-					'type'        => 'text',
-					'required'    => false,
-					'placeholder' => '',
-					'value'       => null,
-					'priority'    => 2
-				),
-				'nickname' => array(
-					'label'       => __( 'Nickname' ),
-					'type'        => 'text',
-					'required'    => true,
-					'placeholder' => '',
-					'value'       => null,
-					'priority'    => 3
-				),
-			),
+			'profile' => self::get_sorted_profile_fields()
 		) );
 
 	}
@@ -212,7 +235,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 				array(
 					'args' => $atts,
 					'form' => self::$form_name,
-					'name_fields' => self::get_fields( 'name' )
+					'fields' => self::get_fields( 'profile' )
 				)
 			);
 

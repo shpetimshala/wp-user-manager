@@ -16,7 +16,7 @@
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile">
 
 		<!-- Start Name Fields -->
-		<?php foreach ( $name_fields as $key => $field ) : ?>
+		<?php foreach ( $fields as $key => $field ) : ?>
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">

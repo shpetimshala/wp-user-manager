@@ -85,7 +85,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = WPUM_Default_Fields_Editor::default_user_fields_list();
+        $data = wpum_default_user_fields_list();
 
         /* Modify the order of the data based on what's already saved into the database */
         $saved_order = get_option( 'wpum_default_fields' );
@@ -162,7 +162,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     private function table_actions( $item ) {
 
-        if($item['meta'] !== 'nickname' && $item['meta'] !== 'password' && $item['meta'] !== 'user_email' ) {
+        if($item['meta'] !== 'nickname' && $item['meta'] !== 'password' && $item['meta'] !== 'user_email' && $item['meta'] !== 'username' ) {
             $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
             echo '<a href="'.$edit_url.'" class="button wpum-trigger-modal" data-field="'.$item['meta'].'">'.__('Edit Field').'</a> ';
         }
@@ -288,7 +288,6 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                                             <span><?php _e('Enable this option to display this field into the registration form.');?></span>
                                         </div>
                                         <div class="section-form-element ">
-                                        <?php echo $item['show_on_signup']; ?>
                                         <select class="" id="<?php echo $item['meta']; ?>_field_display" name="<?php echo $item['meta']; ?>_field_display">
                                                 <option value="1" <?php selected( $item['show_on_signup'], true ); ?>><?php _e('Yes');?></option>
                                                 <option value="" <?php selected( $item['show_on_signup'], false ); ?>><?php _e('No');?></option>
