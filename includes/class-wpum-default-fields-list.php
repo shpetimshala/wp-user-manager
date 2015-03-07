@@ -162,8 +162,11 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     private function table_actions( $item ) {
 
-        $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
-        echo '<a href="'.$edit_url.'" class="button wpum-trigger-modal" data-field="'.$item['meta'].'">'.__('Edit Field').'</a> ';
+        if($item['meta'] !== 'nickname' && $item['meta'] !== 'password' && $item['meta'] !== 'user_email' ) {
+            $edit_url = add_query_arg( array('field' => $item['meta'], 'required' => $item['required'], 'wpum_action' => 'edit_default_field'), admin_url( 'users.php?page=wpum-edit-default-field' ) );
+            echo '<a href="'.$edit_url.'" class="button wpum-trigger-modal" data-field="'.$item['meta'].'">'.__('Edit Field').'</a> ';
+        }
+        
         echo '<a href="#" class="button move-field"><span class="dashicons dashicons-sort"></span></a>';
 
         echo $this->add_modal_window( $item );
