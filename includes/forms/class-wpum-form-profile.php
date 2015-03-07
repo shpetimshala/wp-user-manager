@@ -31,6 +31,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
+		// Set values to the fields
+		if(!is_admin())
+			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
+
 	}
 
 	/**
@@ -65,8 +69,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 
         // Build new list
         foreach ($default_fields as $new_field) {
-        	
-        	$fields_list[ $new_field['meta'] ] = array(
+
+	        $fields_list[ $new_field['meta'] ] = array(
 				'label'       => $new_field['title'],
 				'type'        => $new_field['type'],
 				'required'    => $new_field['required'],
@@ -78,6 +82,28 @@ class WPUM_Form_Profile extends WPUM_Form {
         }
 
 		return $fields_list;
+
+	}
+
+	/**
+	 * Setup field values on the frontend based on the user
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $value value of the field.
+	 */
+	public static function set_fields_values( $default, $new_field ) {
+
+		$user = get_user_by( 'id', get_current_user_id() );
+
+		print_r($user);
+
+		$value = null;
+
+		if($new_field['meta'] == 'description')
+			$value = 'desc';
+
+		return $value;
 
 	}
 
