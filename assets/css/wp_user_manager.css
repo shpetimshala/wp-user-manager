@@ -107,5 +107,10 @@ table.wpum_fields_table_list .wpum-fields-window-editor .section_clearfix:after 
   width: 0;
   height: 0;
   clear: both; }
+table.wpum_fields_table_list .wpum-fields-window-editor .button-primary {
+  float: none; }
+table.wpum_fields_table_list .wpum-fields-window-editor .modal-spinner {
+  display: inline-block;
+  margin-top: 20px; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

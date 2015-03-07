@@ -85,73 +85,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = array();
-
-        $data['first_name'] = array(
-            'order'    => 0,
-            'title'    => __('First Name'),
-            'type'     => 'text',
-            'meta'     => 'first_name',
-            'required' => false,
-        );
-
-        $data['last_name'] = array(
-            'order'    => 1,
-            'title'    => __('Last Name'),
-            'type'     => 'text',
-            'meta'     => 'last_name',
-            'required' => false,
-        );
-
-        $data['nickname'] = array(
-            'order'    => 2,
-            'title'    => __('Nickname'),
-            'type'     => 'text',
-            'meta'     => 'nickname',
-            'required' => true,
-        );
-
-        $data['display_name'] = array(
-            'order'    => 3,
-            'title'    => __('Display Name'),
-            'type'     => 'select',
-            'meta'     => 'display_name',
-            'required' => true,
-        );
-
-        $data['user_email'] = array(
-            'order'    => 4,
-            'title'    => __('Email'),
-            'type'     => 'email',
-            'meta'     => 'user_email',
-            'required' => true,
-        );
-
-        $data['user_url'] = array(
-            'order'    => 5,
-            'title'    => __('Website'),
-            'type'     => 'text',
-            'meta'     => 'user_url',
-            'required' => false,
-        );
-
-        $data['description'] = array(
-            'order'    => 6,
-            'title'    => __('Description'),
-            'type'     => 'textarea',
-            'meta'     => 'description',
-            'required' => false,
-        );
-
-        $data['password'] = array(
-            'order'    => 7,
-            'title'    => __('Password'),
-            'type'     => 'password',
-            'meta'     => 'password',
-            'required' => true,
-        );
-
-        $data = apply_filters( 'wpum_default_fields_table_list', $data );
+        $data = WPUM_Default_Fields_Editor::default_user_fields_list();
 
         /* Modify the order of the data based on what's already saved into the database */
         $saved_order = get_option( 'wpum_default_fields' );
@@ -338,7 +272,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                                             <span><?php _e('Enable this option to set this field as required.');?></span>
                                         </div>
                                         <div class="section-form-element ">
-                                            <select class="" id="field_required" name="field_required">
+                                            <select class="" id="<?php echo $item['meta']; ?>_field_required" name="<?php echo $item['meta']; ?>_field_required">
                                                 <option value="1" <?php selected( $item['required'], true ); ?>><?php _e('Yes');?></option>
                                                 <option value="" <?php selected( $item['required'], false ); ?>><?php _e('No');?></option>
                                             </select>
@@ -350,7 +284,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                                             <span><?php _e('Enable this option to display this field into the registration form.');?></span>
                                         </div>
                                         <div class="section-form-element ">
-                                        <select class="" id="field_display" name="field_display">
+                                        <select class="" id="<?php echo $item['meta']; ?>_field_display" name="<?php echo $item['meta']; ?>_field_display">
                                                 <option value="1"><?php _e('Yes');?></option>
                                                 <option value=""><?php _e('No');?></option>
                                             </select>
@@ -367,7 +301,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                                     </div>
                                     <div class="media-toolbar-primary">
                                         <input type="hidden" name="wpum_field_submit" value="<?php echo $item['meta']; ?>" />
-                                        <?php wp_nonce_field( $item['meta'] ); ?>
+                                        <?php wp_nonce_field( $item['meta'], $item['meta'] ); ?>
                                         <button href="#" data-insert="button" class="button media-button button-primary button-large"><?php _e('Update field'); ?></button>
                                     </div>
                                 </div><!-- .media-toolbar (end) -->

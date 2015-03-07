@@ -36,6 +36,86 @@ class WPUM_Default_Fields_Editor {
 	}
 
 	/**
+	 * Defines the list of default fields
+	 *
+	 * @since 1.0.0
+	 * @return void
+	*/
+	public static function default_user_fields_list() {
+
+		$fields = array();
+
+        $fields['first_name'] = array(
+            'order'    => 0,
+            'title'    => __('First Name'),
+            'type'     => 'text',
+            'meta'     => 'first_name',
+            'required' => false,
+        );
+
+        $fields['last_name'] = array(
+            'order'    => 1,
+            'title'    => __('Last Name'),
+            'type'     => 'text',
+            'meta'     => 'last_name',
+            'required' => false,
+        );
+
+        $fields['nickname'] = array(
+            'order'    => 2,
+            'title'    => __('Nickname'),
+            'type'     => 'text',
+            'meta'     => 'nickname',
+            'required' => true,
+        );
+
+        $fields['display_name'] = array(
+            'order'    => 3,
+            'title'    => __('Display Name'),
+            'type'     => 'select',
+            'meta'     => 'display_name',
+            'required' => true,
+        );
+
+        $fields['user_email'] = array(
+            'order'    => 4,
+            'title'    => __('Email'),
+            'type'     => 'email',
+            'meta'     => 'user_email',
+            'required' => true,
+        );
+
+        $fields['user_url'] = array(
+            'order'    => 5,
+            'title'    => __('Website'),
+            'type'     => 'text',
+            'meta'     => 'user_url',
+            'required' => false,
+        );
+
+        $fields['description'] = array(
+            'order'    => 6,
+            'title'    => __('Description'),
+            'type'     => 'textarea',
+            'meta'     => 'description',
+            'required' => false,
+        );
+
+        $fields['password'] = array(
+            'order'    => 7,
+            'title'    => __('Password'),
+            'type'     => 'password',
+            'meta'     => 'password',
+            'required' => true,
+        );
+
+        $fields = apply_filters( 'wpum_default_fields_list', $fields );
+
+        return $fields;
+
+	}
+
+	/**
 	 * Display Table with list of default fields.
 	 *
 	 * @since 1.0.0
@@ -49,9 +129,9 @@ class WPUM_Default_Fields_Editor {
 		
 		echo '<div class="wpum-fields-editor-container">';
 
-		$wpum_emails_table = new WPUM_Default_Fields_List();
-	    $wpum_emails_table->prepare_items();
-	    $wpum_emails_table->display();
+		$wpum_fields_table = new WPUM_Default_Fields_List();
+	    $wpum_fields_table->prepare_items();
+	    $wpum_fields_table->display();
 
 	    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 

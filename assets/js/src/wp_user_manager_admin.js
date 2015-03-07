@@ -185,13 +185,23 @@ jQuery(document).ready(function ($) {
 				// Hide the modal window when closed
 				$('.media-modal-close').on( 'click', function(){
 					$( modal_window ).hide();
-					$('body').addClass('themeblvd-stop-scroll');
+					$( modal_window ).find('.wpum-spinner').remove();
 					return false;
 				});
 
 				// Trigger field update
 				var update_button = $( modal_window ).find('.button-primary');
-				var update_nonce = $( modal_window ).find('#_wpnonce').val();
+				var update_nonce = $( modal_window ).find( '#' + field ).val();
+				var field_required = $( modal_window ).find( '#' + field + '_field_required' ).val();
+				var show_on_signup = $( modal_window ).find( '#' + field + '_field_display' ).val();
+
+				$( '#' + field + '_field_required' ).on("change", function() {
+				    field_required = this.value;
+				});
+
+				$( '#' + field + '_field_display' ).on("change", function() {
+				    show_on_signup = this.value;
+				});
 
 				$( update_button ).on( 'click', function(){
 
@@ -201,19 +211,34 @@ jQuery(document).ready(function ($) {
 						url: wpum_admin_js.ajax,
 						data: {
 							'action' : 'wpum_update_single_default_field', // Calls the ajax action
-							'update_nonce' : update_nonce
+							'update_nonce' : update_nonce,
+							'field' : field,
+							'required' : field_required,
+							'show_on_signup': show_on_signup
 						},
 						beforeSend: function() {
-							//$( '#wpum-restore-default-fields' ).after('<span id="wpum-spinner" class="spinner wpum-spinner"></span>');
+							$( '.settings-error' ).remove();
+							$( modal_window ).find('.wpum-spinner').remove();
+							$( update_button ).before('<span id="wpum-spinner" class="spinner wpum-spinner modal-spinner"></span>');
+							$( this ).attr('disabled','disabled');
 						},
 						success: function(results) {
-							//$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
-							//$( '#wpum-spinner' ).hide();
+							
+							if( results.valid == true ) {
+
+								$( modal_window ).find('.wpum-spinner').remove();
+								$( modal_window ).hide();
+								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.message + '</strong></p></div>');
+
+							} else {
+
+								alert( results.message );
+
+							}
+
 						}
 					});
 
-
-					$( modal_window ).hide();
 					return false;
 				});
 

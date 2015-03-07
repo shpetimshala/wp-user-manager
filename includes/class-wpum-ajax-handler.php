@@ -60,6 +60,9 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
 
+		// Restore Default Fields
+		add_action( 'wp_ajax_wpum_update_single_default_field', array( $this, 'update_single_default_fields' ) );
+
 	}
 
 	/**
@@ -315,7 +318,15 @@ class WPUM_Ajax_Handler {
 			die();
 		}
 
-		$fields = isset( $_REQUEST['items'] ) ? (array) $_REQUEST['items'] : array();
+		$fields = array();
+
+		if( isset( $_REQUEST['items'] ) && is_array($_REQUEST['items']) ) {
+			foreach ($_REQUEST['items'] as $field) {
+				$fields[ $field['meta'] ]['order'] = $field['order'];
+				$fields[ $field['meta'] ]['required'] = $field['required'];
+				$fields[ $field['meta'] ]['meta'] = $field['meta'];
+			}
+		}
 
 		update_option( 'wpum_default_fields', $fields );
 
@@ -355,49 +366,49 @@ class WPUM_Ajax_Handler {
 		// Declare fields
 		$fields = array();
 
-		$fields[] = array(
+		$fields['first_name'] = array(
             'order'    => 0,
             'meta'     => 'first_name',
             'required' => false,
         );
 
-        $fields[] = array(
+        $fields['last_name'] = array(
             'order'    => 1,
             'meta'     => 'last_name',
             'required' => false,
         );
 
-        $fields[] = array(
+        $fields['nickname'] = array(
             'order'    => 2,
             'meta'     => 'nickname',
             'required' => true,
         );
 
-        $fields[] = array(
+        $fields['display_name'] = array(
             'order'    => 3,
             'meta'     => 'display_name',
             'required' => true,
         );
 
-        $fields[] = array(
+        $fields['user_email'] = array(
             'order'    => 4,
             'meta'     => 'user_email',
             'required' => true,
         );
 
-        $fields[] = array(
+        $fields['user_url'] = array(
             'order'    => 5,
             'meta'     => 'user_url',
             'required' => false,
         );
 
-        $fields[] = array(
+        $fields['description'] = array(
             'order'    => 6,
             'meta'     => 'description',
             'required' => false,
         );
 
-        $fields[] = array(
+        $fields['password'] = array(
             'order'    => 7,
             'meta'     => 'password',
             'required' => true,
@@ -408,6 +419,54 @@ class WPUM_Ajax_Handler {
 		echo json_encode( array(
 				'message'  => __( 'Default fields successfully restored.' ),
 			 ) );
+
+		die();
+
+	}
+
+	/**
+	 * Update single default field settings
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function update_single_default_fields() {
+
+		// Check our nonce and make sure it's correct.
+		$field = $_REQUEST['field'];
+		check_ajax_referer( esc_attr($_REQUEST['field']), 'update_nonce' );
+
+		// Abort if something isn't right.
+		if( !is_admin() || !current_user_can( 'manage_options' ) ) {
+			echo json_encode( array(
+				'message'  => __( 'Error.' ),
+			 ) );
+			return;
+			die();
+		}
+
+		// Validate it exists
+		if( array_key_exists( $field , WPUM_Default_Fields_Editor::default_user_fields_list() ) ) {
+			
+			echo json_encode( array(
+				'valid' => true,
+				'message'  => __( 'Field successfully updated.' ),
+			) );
+
+			$get_fields = get_option( 'wpum_default_fields' );
+			$get_fields[ $field ]['required'] = esc_attr( $_REQUEST['required'] );
+
+			update_option('wpum_default_fields', $get_fields );
+
+		} else {
+
+			echo json_encode( array(
+				'valid' => false,
+				'message'  => __( 'Something went wrong.' ),
+			) );
+
+		}
 
 		die();
 
