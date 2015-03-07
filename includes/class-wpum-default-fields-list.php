@@ -94,6 +94,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
             foreach ($saved_order as $field) {
                 $data[ $field['meta'] ]['order'] = $field['order'];
                 $data[ $field['meta'] ]['required'] = $field['required'];
+                $data[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
             }
         }
 
@@ -234,7 +235,7 @@ class WPUM_Default_Fields_List extends WP_List_Table {
         // Add id
         $row_id = ' id="'.$item['meta'].'"';
  
-        echo '<tr' . $row_class . $row_id . ' data-order="'.$item['order'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'">';
+        echo '<tr' . $row_class . $row_id . ' data-order="'.$item['order'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'" data-show_on_signup="'.$item['show_on_signup'].'">';
         $this->single_row_columns( $item );
         echo '</tr>';
     }
@@ -284,9 +285,10 @@ class WPUM_Default_Fields_List extends WP_List_Table {
                                             <span><?php _e('Enable this option to display this field into the registration form.');?></span>
                                         </div>
                                         <div class="section-form-element ">
+                                        <?php echo $item['show_on_signup']; ?>
                                         <select class="" id="<?php echo $item['meta']; ?>_field_display" name="<?php echo $item['meta']; ?>_field_display">
-                                                <option value="1"><?php _e('Yes');?></option>
-                                                <option value=""><?php _e('No');?></option>
+                                                <option value="1" <?php selected( $item['show_on_signup'], true ); ?>><?php _e('Yes');?></option>
+                                                <option value="" <?php selected( $item['show_on_signup'], false ); ?>><?php _e('No');?></option>
                                             </select>
                                         </div>
                                     </div>

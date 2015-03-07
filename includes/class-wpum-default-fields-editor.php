@@ -46,35 +46,39 @@ class WPUM_Default_Fields_Editor {
 		$fields = array();
 
         $fields['first_name'] = array(
-            'order'    => 0,
-            'title'    => __('First Name'),
-            'type'     => 'text',
-            'meta'     => 'first_name',
-            'required' => false,
+            'order'          => 0,
+            'title'          => __('First Name'),
+            'type'           => 'text',
+            'meta'           => 'first_name',
+            'required'       => false,
+            'show_on_signup' => false
         );
 
         $fields['last_name'] = array(
-            'order'    => 1,
-            'title'    => __('Last Name'),
-            'type'     => 'text',
-            'meta'     => 'last_name',
-            'required' => false,
+            'order'          => 1,
+            'title'          => __('Last Name'),
+            'type'           => 'text',
+            'meta'           => 'last_name',
+            'required'       => false,
+            'show_on_signup' => false
         );
 
         $fields['nickname'] = array(
-            'order'    => 2,
-            'title'    => __('Nickname'),
-            'type'     => 'text',
-            'meta'     => 'nickname',
-            'required' => true,
+            'order'          => 2,
+            'title'          => __('Nickname'),
+            'type'           => 'text',
+            'meta'           => 'nickname',
+            'required'       => true,
+            'show_on_signup' => true
         );
 
         $fields['display_name'] = array(
-            'order'    => 3,
-            'title'    => __('Display Name'),
-            'type'     => 'select',
-            'meta'     => 'display_name',
-            'required' => true,
+            'order'          => 3,
+            'title'          => __('Display Name'),
+            'type'           => 'select',
+            'meta'           => 'display_name',
+            'required'       => true,
+            'show_on_signup' => false
         );
 
         $fields['user_email'] = array(
@@ -83,22 +87,25 @@ class WPUM_Default_Fields_Editor {
             'type'     => 'email',
             'meta'     => 'user_email',
             'required' => true,
+            'show_on_signup' => true
         );
 
         $fields['user_url'] = array(
-            'order'    => 5,
-            'title'    => __('Website'),
-            'type'     => 'text',
-            'meta'     => 'user_url',
-            'required' => false,
+            'order'          => 5,
+            'title'          => __('Website'),
+            'type'           => 'text',
+            'meta'           => 'user_url',
+            'required'       => false,
+            'show_on_signup' => false
         );
 
         $fields['description'] = array(
-            'order'    => 6,
-            'title'    => __('Description'),
-            'type'     => 'textarea',
-            'meta'     => 'description',
-            'required' => false,
+            'order'          => 6,
+            'title'          => __('Description'),
+            'type'           => 'textarea',
+            'meta'           => 'description',
+            'required'       => false,
+            'show_on_signup' => false
         );
 
         $fields['password'] = array(
@@ -107,6 +114,7 @@ class WPUM_Default_Fields_Editor {
             'type'     => 'password',
             'meta'     => 'password',
             'required' => true,
+            'show_on_signup' => true
         );
 
         $fields = apply_filters( 'wpum_default_fields_list', $fields );

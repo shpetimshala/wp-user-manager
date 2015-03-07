@@ -324,6 +324,7 @@ class WPUM_Ajax_Handler {
 			foreach ($_REQUEST['items'] as $field) {
 				$fields[ $field['meta'] ]['order'] = $field['order'];
 				$fields[ $field['meta'] ]['required'] = $field['required'];
+				$fields[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
 				$fields[ $field['meta'] ]['meta'] = $field['meta'];
 			}
 		}
@@ -364,55 +365,7 @@ class WPUM_Ajax_Handler {
 		delete_option( 'wpum_default_fields' );
 
 		// Declare fields
-		$fields = array();
-
-		$fields['first_name'] = array(
-            'order'    => 0,
-            'meta'     => 'first_name',
-            'required' => false,
-        );
-
-        $fields['last_name'] = array(
-            'order'    => 1,
-            'meta'     => 'last_name',
-            'required' => false,
-        );
-
-        $fields['nickname'] = array(
-            'order'    => 2,
-            'meta'     => 'nickname',
-            'required' => true,
-        );
-
-        $fields['display_name'] = array(
-            'order'    => 3,
-            'meta'     => 'display_name',
-            'required' => true,
-        );
-
-        $fields['user_email'] = array(
-            'order'    => 4,
-            'meta'     => 'user_email',
-            'required' => true,
-        );
-
-        $fields['user_url'] = array(
-            'order'    => 5,
-            'meta'     => 'user_url',
-            'required' => false,
-        );
-
-        $fields['description'] = array(
-            'order'    => 6,
-            'meta'     => 'description',
-            'required' => false,
-        );
-
-        $fields['password'] = array(
-            'order'    => 7,
-            'meta'     => 'password',
-            'required' => true,
-        );
+		$fields = WPUM_Default_Fields_Editor::default_user_fields_list();
 
         update_option( 'wpum_default_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
 
@@ -449,15 +402,16 @@ class WPUM_Ajax_Handler {
 		// Validate it exists
 		if( array_key_exists( $field , WPUM_Default_Fields_Editor::default_user_fields_list() ) ) {
 			
+			$get_fields = get_option( 'wpum_default_fields' );
+			$get_fields[ $field ]['required'] = esc_attr( $_REQUEST['required'] );
+			$get_fields[ $field ]['show_on_signup'] = esc_attr( $_REQUEST['show_on_signup'] );
+
+			update_option('wpum_default_fields', $get_fields );
+
 			echo json_encode( array(
 				'valid' => true,
 				'message'  => __( 'Field successfully updated.' ),
 			) );
-
-			$get_fields = get_option( 'wpum_default_fields' );
-			$get_fields[ $field ]['required'] = esc_attr( $_REQUEST['required'] );
-
-			update_option('wpum_default_fields', $get_fields );
 
 		} else {
 

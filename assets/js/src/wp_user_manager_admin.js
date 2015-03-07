@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
 				        });
 
 		                dataArray = $.map($(this).children('tr'), function(el){
-					        return {'order':$(el).data('order'), 'meta':$(el).data('meta'), 'required':$(el).data('required')}; 
+					        return {'order':$(el).data('order'), 'meta':$(el).data('meta'), 'required':$(el).data('required'), 'show_on_signup':$(el).data('show_on_signup')}; 
 					    });
 
 					    var wpum_backend_fields_table = $('#wpum_backend_fields_table').val();
@@ -229,6 +229,7 @@ jQuery(document).ready(function ($) {
 								$( modal_window ).find('.wpum-spinner').remove();
 								$( modal_window ).hide();
 								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.message + '</strong></p></div>');
+								location.reload(true);
 
 							} else {
 
