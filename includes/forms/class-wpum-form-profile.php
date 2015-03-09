@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Form_Profile extends WPUM_Form {
 
 	public static $form_name = 'profile';
+	private static $user;
 
 	/**
 	 * Init the form.
@@ -29,11 +30,17 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function init() {
 
+		if(!is_admin()) :
+			self::$user = wp_get_current_user();
+		endif;
+
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
 		// Set values to the fields
-		if(!is_admin())
+		if(!is_admin()) :
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
+			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
+		endif;
 
 	}
 
@@ -94,16 +101,95 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function set_fields_values( $default, $new_field ) {
 
-		$user = get_user_by( 'id', get_current_user_id() );
-
-		print_r($user);
-
 		$value = null;
 
-		if($new_field['meta'] == 'description')
-			$value = 'desc';
+		switch ($new_field['meta']) {
+			case 'first_name':
+				$value = self::$user->user_firstname;
+				break;
+			case 'last_name':
+				$value = self::$user->user_lastname;
+				break;
+			case 'nickname':
+				$value = self::$user->user_nicename;
+				break;
+			case 'user_email':
+				$value = self::$user->user_email;
+				break;
+			case 'user_url':
+				$value = self::$user->user_url;
+				break;
+			case 'description':
+				$value = self::$user->description;
+				break;
+			default:
+				$value = null;
+				break;
+		}
 
 		return $value;
+
+	}
+
+	/**
+	 * Setup field options on the frontend based on the user
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $value value of the field.
+	 */
+	public static function set_fields_options( $default, $new_field ) {
+
+		$options = array();
+
+		switch ($new_field['meta']) {
+			case 'display_name':
+				$options = self::get_display_name_options( self::$user );
+				break;
+			default:
+				$options = array();
+				break;
+		}
+
+		return $options;
+
+	}
+
+	/**
+	 * Returns the options for the "display_name" field on the profile form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $options list of the available options
+	 */
+	public static function get_display_name_options( $user ) {
+
+		$options = array();
+
+		// Generate the options
+		$public_display = array();
+		$public_display['display_username']  = $user->user_login;
+		$public_display['display_nickname']  = $user->nickname;
+
+		if ( !empty($user->first_name) )
+			$public_display['display_firstname'] = $user->first_name;
+		if ( !empty($user->last_name) )
+			$public_display['display_lastname'] = $user->last_name;
+		if ( !empty($user->first_name) && !empty($user->last_name) ) {
+			$public_display['display_firstlast'] = $user->first_name . ' ' . $user->last_name;
+			$public_display['display_lastfirst'] = $user->last_name . ' ' . $user->first_name;
+		}
+		if ( !in_array( $user->display_name, $public_display ) ) // Only add this if it isn't duplicated elsewhere
+			$public_display = array( 'display_displayname' => $user->display_name ) + $public_display;
+		$public_display = array_map( 'trim', $public_display );
+		$public_display = array_unique( $public_display );
+
+		// Add options to original array
+		foreach ( $public_display as $id => $item ) {
+			$options += array($id => $item);
+		}
+
+		return $options;
 
 	}
 
