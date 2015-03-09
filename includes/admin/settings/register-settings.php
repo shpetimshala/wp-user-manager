@@ -120,13 +120,6 @@ function wpum_get_registered_settings() {
 					'type'    => 'select',
 					'options' => wpum_get_login_methods()
 				),
-				
-				'display_password_meter_profile' => array(
-					'id'   => 'display_password_meter_profile',
-					'name' => __( 'Display password meter on profile page:', 'wpum' ),
-					'desc'    => __('Enable to display a password meter on profile page.'),
-					'type' => 'checkbox'
-				),
 				'display_registration_link' => array(
 					'id'   => 'display_registration_link',
 					'name' => __( 'Display registration link:', 'wpum' ),
@@ -147,6 +140,25 @@ function wpum_get_registered_settings() {
 					'placeholder' => __('Select the user roles from the list.'),
 					'class' => 'select2',
 					'options' => wpum_get_roles()
+				),
+				'header3' => array(
+					'id'   => 'header3',
+					'name' => __( 'Passwords Setup', 'wpum' ),
+					'type' => 'header'
+				),
+				
+				'password_strength' => array(
+					'id'      => 'password_strength',
+					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
+					'desc'    => __('Select the required password strength. This will be forced on registration and profile update.'),
+					'type'    => 'select',
+					'options' => wpum_get_psw_lengths()
+				),
+				'display_password_meter_registration' => array(
+					'id'   => 'display_password_meter_registration',
+					'name' => __( 'Display password meter:', 'wpum' ),
+					'desc' => __('Enable to display a password meter on registration page and profile update page.'),
+					'type' => 'checkbox'
 				),
 				'header1' => array(
 					'id'   => 'header1',
@@ -199,6 +211,12 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Default user registration role:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'custom_passwords' => array(
+					'id'   => 'custom_passwords',
+					'name' => __( 'Users custom passwords:', 'wpum' ),
+					'desc' => __('Enable to allow users to set custom passwords on the registration page.'),
+					'type' => 'checkbox'
+				),
 				'allow_role_select' => array(
 					'id'   => 'allow_role_select',
 					'name' => __( 'Allow role section:', 'wpum' ),
@@ -213,30 +231,6 @@ function wpum_get_registered_settings() {
 					'placeholder' => __('Select the user roles from the list.'),
 					'class' => 'select2',
 					'options' => wpum_get_roles()
-				),
-				'header3' => array(
-					'id'   => 'header3',
-					'name' => __( 'Passwords Setup', 'wpum' ),
-					'type' => 'header'
-				),
-				'custom_passwords' => array(
-					'id'   => 'custom_passwords',
-					'name' => __( 'Users custom passwords:', 'wpum' ),
-					'desc' => __('Enable to allow users to set custom passwords on the registration page.'),
-					'type' => 'checkbox'
-				),
-				'password_strength' => array(
-					'id'      => 'password_strength',
-					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
-					'desc'    => __('Select how strong the password needs to be before users can register.'),
-					'type'    => 'select',
-					'options' => wpum_get_psw_lengths()
-				),
-				'display_password_meter_registration' => array(
-					'id'   => 'display_password_meter_registration',
-					'name' => __( 'Display password meter on registration page:', 'wpum' ),
-					'desc' => __('Enable to display a password meter on registration page.'),
-					'type' => 'checkbox'
 				),
 				'header4' => array(
 					'id'   => 'header4',
@@ -272,12 +266,6 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Login after registration:', 'wpum' ),
 					'desc' => __('Enable this option to allow automatic login of users after their registration.'),
 					'type' => 'checkbox'
-				),
-				'exclude_usernames' => array(
-					'id'   => 'exclude_usernames',
-					'name' => __( 'Excluded usernames:', 'wpum' ),
-					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. This will prevent users in using these usernames when they register to your site. Eg: type "admin", users will not be able to register using that username. <br/> Separate each username on a new line.'),
-					'type' => 'textarea'
 				),
 			)
 		),
@@ -353,6 +341,12 @@ function wpum_get_registered_settings() {
 					'id'   => 'restore_default_fields',
 					'name' => __( 'Restore Default Fields:', 'wpum' ),
 					'type' => 'hook'
+				),
+				'exclude_usernames' => array(
+					'id'   => 'exclude_usernames',
+					'name' => __( 'Excluded usernames:', 'wpum' ),
+					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. This will prevent users in using these usernames. Eg: type "admin", users will not be able to use username. <br/> Separate each username on a new line.'),
+					'type' => 'textarea'
 				),
 			)
 		),

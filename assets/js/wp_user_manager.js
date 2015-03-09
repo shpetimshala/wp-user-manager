@@ -209,7 +209,7 @@ jQuery(document).ready(function ($) {
 	            WPUM_Frontend.checkPasswordStrength(
 	                $('.wpum-default-registration-form-wrapper input[name=password], .wpum-profile-form-wrapper input[name=password]'),         // First password field
 	                $('.wpum-default-registration-form-wrapper #password-strength, .wpum-profile-form-wrapper #password-strength'),           // Strength meter
-	                $('#submit_wpum_register'),           // Submit button
+	                $('#submit_wpum_register, #submit_wpum_profile'),           // Submit button
 	                ['admin', 'administrator', 'test', 'user', 'demo']        // Blacklisted words
 	            );
 	        }
