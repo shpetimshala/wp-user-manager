@@ -456,9 +456,12 @@ class WPUM_Form_Profile extends WPUM_Form {
 			}
 		}
 
-		do_action()
+		do_action('wpum_before_update_user', $user_data, $values );
 
 		$user_id = wp_update_user( $user_data );
+
+		do_action('wpum_after_update_user', $values, self::$user->ID );
+
 		if ( is_wp_error( $user_id ) ) {
 
 			$this_page = add_query_arg( array('updated' => 'error'), get_permalink() );
