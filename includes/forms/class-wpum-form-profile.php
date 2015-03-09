@@ -32,8 +32,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
-
-
 		// Set values to the fields
 		if(!is_admin()) :
 			self::$user = wp_get_current_user();
@@ -42,6 +40,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 		endif;
+
+		// Add password meter field
+		if( wpum_get_option('display_password_meter_registration') )
+			add_action( 'wpum_after_inside_profile_form_template', array( __CLASS__, 'add_password_meter_field' ) );
 
 	}
 
@@ -594,6 +596,17 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 	/**
+	 * Add password meter field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_password_meter_field( $atts ) {
+		echo '<span id="password-strength"></span>';		
+	}
+
+	/**
 	 * Output the form.
 	 *
 	 * @access public
@@ -616,7 +629,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 			get_wpum_template( 'profile-form.php', 
 				array(
-					'args' => $atts,
+					'atts' => $atts,
 					'form' => self::$form_name,
 					'fields' => self::get_fields( 'profile' )
 				)
@@ -633,6 +646,3 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 }
-
-
-

@@ -25,7 +25,11 @@
 		</p>
 	<?php endif; ?>
 
+	<?php do_action( 'wpum_before_profile_form_template', $atts ); ?>
+
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile">
+
+		<?php do_action( 'wpum_before_inside_profile_form_template', $atts ); ?>
 
 		<!-- Start Name Fields -->
 		<?php foreach ( $fields as $key => $field ) : ?>
@@ -38,6 +42,8 @@
 		<?php endforeach; ?>
 		<!-- End Name Fields -->
 
+		<?php do_action( 'wpum_after_inside_profile_form_template', $atts ); ?>
+
 		<?php wp_nonce_field( $form ); ?>
 
 		<p class="wpum-submit">
@@ -46,5 +52,7 @@
 		</p>
 
 	</form>
+
+	<?php do_action( 'wpum_after_profile_form_template', $atts ); ?>
 
 </div>
