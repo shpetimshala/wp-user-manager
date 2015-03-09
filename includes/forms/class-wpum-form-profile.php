@@ -86,6 +86,19 @@ class WPUM_Form_Profile extends WPUM_Form {
 				'priority'    => $new_field['order']
 			);
 
+	        // The password field needs another one to check if match on submit
+			if( $new_field['meta'] == 'password' ) {
+
+				$fields_list[ 'password_repeat' ] = array(
+					'label'       => __('Repeat Password'),
+					'type'        => 'password',
+					'required'    => false,
+					'placeholder' => null,
+					'priority'    => $new_field['order'] + 0.1
+				);
+
+			}
+
         }
 
         // Set the password field as non required on profile page
@@ -432,7 +445,16 @@ class WPUM_Form_Profile extends WPUM_Form {
 		foreach ( $values['profile'] as $meta_key => $meta_value ) {
 			switch ( $meta_key ) {
 				case 'password':
-					// do nothing now
+					if( !empty( $meta_value ) && $meta_value !== $values['profile']['password_repeat'] ) :
+						self::add_error( __('Passwords do not match.') );
+						return;
+					endif;
+					if( !empty( $meta_value ) && $meta_value == $values['profile']['password_repeat'] ) :
+						$user_data += array( 'user_pass' => $meta_value );
+					endif;
+				break;
+				case 'password_repeat':
+					// do nothing
 				break;
 				case 'user_email':
 					if(is_email( $meta_value )) :
@@ -456,7 +478,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			}
 		}
 
-		do_action('wpum_before_update_user', $user_data, $values );
+		do_action('wpum_before_update_user', $user_data, $values, self::$user->ID );
 
 		$user_id = wp_update_user( $user_data );
 
