@@ -333,6 +333,36 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 	/**
+	 * Get the value of a posted multiselect field
+	 * @param  string $key
+	 * @param  array $field
+	 * @return array
+	 */
+	protected static function get_posted_multiselect_field( $key, $field ) {
+		return isset( $_POST[ $key ] ) ? array_map( 'sanitize_text_field', $_POST[ $key ] ) : array();
+	}
+
+	/**
+	 * Get the value of a posted textarea field
+	 * @param  string $key
+	 * @param  array $field
+	 * @return string
+	 */
+	protected static function get_posted_textarea_field( $key, $field ) {
+		return isset( $_POST[ $key ] ) ? wp_kses_post( trim( stripslashes( $_POST[ $key ] ) ) ) : '';
+	}
+
+	/**
+	 * Get the value of a posted textarea field
+	 * @param  string $key
+	 * @param  array $field
+	 * @return string
+	 */
+	protected static function get_posted_wp_editor_field( $key, $field ) {
+		return self::get_posted_textarea_field( $key, $field );
+	}
+
+	/**
 	 * Validate the posted fields
 	 *
 	 * @return bool on success, WP_ERROR on failure
@@ -408,7 +438,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 				)
 			);
 
-		// Show psw form if not logged in
+		// Show login form if not logged in
 		else :
 			
 			echo do_shortcode( '[wpum_login_form redirect="'.get_permalink().'"]' );
