@@ -434,6 +434,14 @@ class WPUM_Form_Profile extends WPUM_Form {
 				case 'password':
 					// do nothing now
 				break;
+				case 'user_email':
+					if(is_email( $meta_value )) :
+						$user_data += array( 'user_email' => $meta_value );
+					else :
+						self::add_error( __('Please enter a valid email address.') );
+						return;
+					endif;
+				break;
 				case 'display_name':
 					$user_data += array( 'display_name' => self::store_display_name( $values['profile'], $meta_value ) );
 				break;
@@ -448,9 +456,23 @@ class WPUM_Form_Profile extends WPUM_Form {
 			}
 		}
 
-		$user_id = wp_update_user( $user_data );
+		do_action()
 
-		self::add_confirmation( __('Profile successfully updated.') );
+		$user_id = wp_update_user( $user_data );
+		if ( is_wp_error( $user_id ) ) {
+
+			$this_page = add_query_arg( array('updated' => 'error'), get_permalink() );
+			wp_redirect( $this_page );
+			exit();
+
+		} else {
+
+			$this_page = add_query_arg( array('updated' => 'success'), get_permalink() );
+			wp_redirect( $this_page );
+			exit();
+
+		}
+		
 
 	}
 

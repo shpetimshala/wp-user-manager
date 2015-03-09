@@ -13,6 +13,18 @@
 
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
+	<?php if( isset($_GET['updated']) && $_GET['updated'] == 'success' ) : ?>
+		<p class="wpum-message wpum-success wpum-profile-updated-message">
+			<?php echo apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) ); ?>
+		</p>
+	<?php endif; ?>
+
+	<?php if( isset($_GET['updated']) && $_GET['updated'] == 'error' ) : ?>
+		<p class="wpum-message wpum-error wpum-profile-updated-message">
+			<?php echo apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong during the update.' ) ); ?>
+		</p>
+	<?php endif; ?>
+
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile">
 
 		<!-- Start Name Fields -->
