@@ -30,14 +30,13 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function init() {
 
-		if(!is_admin()) :
-			self::$user = wp_get_current_user();
-		endif;
-
 		add_action( 'wp', array( __CLASS__, 'process' ) );
+
+
 
 		// Set values to the fields
 		if(!is_admin()) :
+			self::$user = wp_get_current_user();
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
 		endif;
@@ -82,10 +81,11 @@ class WPUM_Form_Profile extends WPUM_Form {
 				'type'        => $new_field['type'],
 				'required'    => $new_field['required'],
 				'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $new_field ),
-				'value'       => apply_filters( 'wpum_profile_field_value', null, $new_field ),
 				'options'     => apply_filters( 'wpum_profile_field_options', null, $new_field ),
+				'value'       => apply_filters( 'wpum_profile_field_value', null, $new_field ),
 				'priority'    => $new_field['order']
 			);
+
         }
 
 		return $fields_list;
@@ -121,6 +121,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 				break;
 			case 'description':
 				$value = self::$user->description;
+				break;
+			case 'display_name':
+				$value = self::get_selected_name();
 				break;
 			default:
 				$value = null;
@@ -190,6 +193,51 @@ class WPUM_Form_Profile extends WPUM_Form {
 		}
 
 		return $options;
+
+	}
+
+	/**
+	 * Returns the correct default selected option based 
+	 * on what display_name the user has chosen.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $options list of the available options
+	 */
+	public static function get_selected_name() {
+
+		$selected_name = self::$user->display_name;
+		$user_login    = self::$user->user_login;
+		$nickname      = self::$user->nickname;
+		$first_name    = self::$user->first_name;
+		$last_name     = self::$user->last_name;
+		$firstlast     = self::$user->first_name . ' ' . self::$user->last_name;
+		$lastfirst     = self::$user->last_name . ' ' . self::$user->first_name;
+
+		$selected_value = $user_login;
+
+		switch ($selected_name) {
+			case $nickname:
+				$selected_value = 'display_nickname';
+				break;
+			case $first_name:
+				$selected_value = 'display_firstname';
+				break;
+			case $last_name:
+				$selected_value = 'display_lastname';
+				break;
+			case $firstlast:
+				$selected_value = 'display_firstlast';
+				break;
+			case $lastfirst:
+				$selected_value = 'display_lastfirst';
+				break;
+			default:
+				$selected_value = $user_login;
+				break;
+		}
+
+		return $selected_value;
 
 	}
 
@@ -362,3 +410,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 }
+
+
+
