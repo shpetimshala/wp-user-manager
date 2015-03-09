@@ -258,6 +258,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 			'profile' => self::get_sorted_profile_fields()
 		) );
 
+		// The username cannot be changed, let's remove that field since it's useless
+		unset(self::$fields['profile']['username']);
+
 	}
 
 	/**
