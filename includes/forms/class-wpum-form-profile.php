@@ -88,6 +88,12 @@ class WPUM_Form_Profile extends WPUM_Form {
 
         }
 
+        // Set the password field as non required on profile page
+        $fields_list[ 'password' ]['required'] = false;
+
+        // The username cannot be changed, let's remove that field since it's useless
+		unset($fields_list['username']);
+
 		return $fields_list;
 
 	}
@@ -258,9 +264,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 			'profile' => self::get_sorted_profile_fields()
 		) );
 
-		// The username cannot be changed, let's remove that field since it's useless
-		unset(self::$fields['profile']['username']);
-
 	}
 
 	/**
@@ -390,6 +393,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		// Get fields
 		self::get_profile_fields();
+
+		// Show errors from fields
+		self::show_errors();
 
 		// Display template
 		if( is_user_logged_in() ) :
