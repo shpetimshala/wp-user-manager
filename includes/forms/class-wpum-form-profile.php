@@ -410,6 +410,87 @@ class WPUM_Form_Profile extends WPUM_Form {
 			return;
 		}
 
+		// Update the profile
+		self::update_profile( $values );
+
+	}
+
+	/**
+	 * Trigger update process.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function update_profile( $values ) {
+
+		if( empty($values) || !is_array($values) )
+			return;
+
+		$user_data = array( 'ID' => self::$user->ID );
+
+		foreach ( $values['profile'] as $meta_key => $meta_value ) {
+			switch ( $meta_key ) {
+				case 'password':
+					// do nothing now
+				break;
+				case 'display_name':
+					$user_data += array( 'display_name' => self::store_display_name( $values['profile'], $meta_value ) );
+				break;
+				case 'nickname':
+					$user_data += array( 'user_nicename' => $meta_value );
+					$user_data += array( 'nickname' => $meta_value );
+				break;
+				
+				default:
+					$user_data += array( $meta_key => $meta_value );
+					break;
+			}
+		}
+
+		$user_id = wp_update_user( $user_data );
+
+		self::add_confirmation( __('Profile successfully updated.') );
+
+	}
+
+	/**
+	 * Decides which option should be stored into the database.
+	 * This avoids the "display_name" option into the profile form to
+	 * save the select field option value into the database.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function store_display_name( $values, $meta_value ) {
+
+		$name = self::$user->user_login;
+
+		switch ($meta_value) {
+			case 'display_nickname':
+				$name = $values['nickname'];
+				break;
+			case 'display_firstname':
+				$name = $values['first_name'];
+				break;
+			case 'display_lastname':
+				$name = $values['last_name'];
+				break;
+			case 'display_firstlast':
+				$name = $values['first_name'] . ' ' . $values['last_name'];
+				break;
+			case 'display_lastfirst':
+				$name = $values['last_name'] . ' ' . $values['first_name'];
+				break;
+			
+			default:
+				$name = self::$user->user_login;
+				break;
+		}
+
+		return $name;
+
 	}
 
 	/**
@@ -426,6 +507,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		// Show errors from fields
 		self::show_errors();
+
+		// Show confirmation messages
+		self::show_confirmations();
 
 		// Display template
 		if( is_user_logged_in() ) :
