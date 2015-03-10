@@ -417,7 +417,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if($pwd_strenght == 'weak') {
 			if(strlen($pwd) < 8)
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
 		}
 		if($pwd_strenght == 'medium') {
 			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )

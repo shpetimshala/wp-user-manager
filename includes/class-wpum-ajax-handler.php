@@ -68,7 +68,7 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_nopriv_wpum_update_profile', array( $this, 'update_profile' ) );
 
 		// Validate Password Field on profile form
-		//add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
+		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
 
 	}
 
@@ -460,7 +460,6 @@ class WPUM_Ajax_Handler {
 		// Sanitize the submitted values
 		$fields = WPUM_Utils::sanitize_submitted_fields( $fields );
 
-		/*
 		// Validate Fields
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
 			echo json_encode( array(
@@ -468,7 +467,7 @@ class WPUM_Ajax_Handler {
 				'message'  => $return->get_error_message(),
 			) );
 			die();
-		}*/
+		}
 
 		echo json_encode( array(
 				'valid' => false,
@@ -476,6 +475,48 @@ class WPUM_Ajax_Handler {
 		) );
 
 		die();
+
+	}
+
+	/**
+	 * Validate the password field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_password_field( $passed, $fields ) {
+
+		$pwd = $fields['password']['value'];
+		$pwd_2 = $fields['password_repeat']['value'];
+		$pwd_strenght = wpum_get_option('password_strength');
+
+		// Do only when the password field is not empty
+		if( !empty($pwd) ) {
+
+			if( $pwd !== $pwd_2 )
+				return new WP_Error( 'password-validation-error', __( 'Passwords do not match.' ) );
+
+			$containsLetter  = preg_match('/[A-Z]/', $pwd);
+			$containsDigit   = preg_match('/\d/', $pwd);
+			$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);
+
+			if($pwd_strenght == 'weak') {
+				if(strlen($pwd) < 8)
+					return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
+			}
+			if($pwd_strenght == 'medium') {
+				if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
+					return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+			}
+			if($pwd_strenght == 'strong') {
+				if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
+					return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+			}
+
+		}
+
+		return $passed;
 
 	}
 
