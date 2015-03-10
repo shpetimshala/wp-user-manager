@@ -69,6 +69,8 @@ class WPUM_Ajax_Handler {
 
 		// Validate Password Field on profile form
 		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
+		if(wpum_get_option('exclude_usernames'))
+			add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 
 	}
 
@@ -515,6 +517,24 @@ class WPUM_Ajax_Handler {
 			}
 
 		}
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate nickname field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_nickname_field( $passed, $fields ) {
+
+		$username = $fields['nickname'][ 'value' ];
+
+		if( array_key_exists( $username , wpum_get_disabled_usernames() ) )
+			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
 
 		return $passed;
 
