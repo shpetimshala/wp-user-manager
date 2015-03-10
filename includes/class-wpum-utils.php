@@ -34,7 +34,7 @@ class WPUM_Utils {
 		foreach ($fields as $field) {
 
 			if ( method_exists( __CLASS__, "get_posted_{$field['type']}_field" ) ) {
-				$values[ $group_key ][ $key ] = call_user_func( __CLASS__ . "::get_posted_{{$field['type']}_field", $key, $field );
+				$values[ $field['id'] ] = call_user_func( __CLASS__ . "::get_posted_{$field['type']}_field", $field['value'] );
 			} else {
 				$values[ $field['id'] ] = self::sanitize_posted_field( $field['value'] );
 			}
@@ -63,6 +63,33 @@ class WPUM_Utils {
 		$value = is_array( $value ) ? array_map( array( __CLASS__, 'sanitize_posted_field' ), $value ) : sanitize_text_field( stripslashes( trim( $value ) ) );
 
 		return $value;
+	}
+
+	/**
+	 * Get the value of a posted multiselect field
+	 * @param array|string $value The array or string to be sanitized.
+	 * @return array
+	 */
+	protected static function get_posted_multiselect_field( $value ) {
+		return !empty( $value ) ? array_map( 'sanitize_text_field', $value ) : array();
+	}
+
+	/**
+	 * Get the value of a posted textarea field
+	 * @param array|string $value The array or string to be sanitized.
+	 * @return string
+	 */
+	protected static function get_posted_textarea_field( $value ) {
+		return !empty( $value ) ? wp_kses_post( trim( stripslashes( $value ) ) ) : '';
+	}
+
+	/**
+	 * Get the value of a posted textarea field
+	 * @param array|string $value The array or string to be sanitized.
+	 * @return string
+	 */
+	protected static function get_posted_wp_editor_field( $value ) {
+		return self::get_posted_textarea_field( $value );
 	}
 
 }
