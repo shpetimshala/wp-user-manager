@@ -112,7 +112,55 @@ function wpum_get_registered_settings() {
 		/** General Settings */
 		'general' => apply_filters( 'wpum_settings_general',
 			array(
-				
+				'header1' => array(
+					'id'   => 'header1',
+					'name' => __( 'Pages Setup', 'wpum' ),
+					'type' => 'header'
+				),
+				'logout_redirect' => array(
+					'id'   => 'logout_redirect',
+					'name' => __( 'Logout Redirect:', 'wpum' ),
+					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'wp_login_signup_redirect' => array(
+					'id'   => 'wp_login_signup_redirect',
+					'name' => __( 'Signup Redirect on wp-login.php:', 'wpum' ),
+					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'password_recovery_page' => array(
+					'id'   => 'password_recovery_page',
+					'name' => __( 'Password recovery page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_password_recovery] shortcode.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'header3' => array(
+					'id'   => 'header3',
+					'name' => __( 'Passwords Setup', 'wpum' ),
+					'type' => 'header'
+				),
+				'password_strength' => array(
+					'id'      => 'password_strength',
+					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
+					'desc'    => __('Select the required password strength. This will be forced on registration and profile update.'),
+					'type'    => 'select',
+					'options' => wpum_get_psw_lengths()
+				),
+				'display_password_meter_registration' => array(
+					'id'   => 'display_password_meter_registration',
+					'name' => __( 'Display password meter:', 'wpum' ),
+					'desc' => __('Enable to display a password meter on registration page and profile update page.'),
+					'type' => 'checkbox'
+				),
+				'header_n' => array(
+					'id'   => 'header_n',
+					'name' => __( 'Extra', 'wpum' ),
+					'type' => 'header'
+				),
 				'login_method' => array(
 					'id'      => 'login_method',
 					'name'    => __( 'Allow users to login with:', 'wpum' ),
@@ -140,51 +188,6 @@ function wpum_get_registered_settings() {
 					'placeholder' => __('Select the user roles from the list.'),
 					'class' => 'select2',
 					'options' => wpum_get_roles()
-				),
-				'header3' => array(
-					'id'   => 'header3',
-					'name' => __( 'Passwords Setup', 'wpum' ),
-					'type' => 'header'
-				),
-				
-				'password_strength' => array(
-					'id'      => 'password_strength',
-					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
-					'desc'    => __('Select the required password strength. This will be forced on registration and profile update.'),
-					'type'    => 'select',
-					'options' => wpum_get_psw_lengths()
-				),
-				'display_password_meter_registration' => array(
-					'id'   => 'display_password_meter_registration',
-					'name' => __( 'Display password meter:', 'wpum' ),
-					'desc' => __('Enable to display a password meter on registration page and profile update page.'),
-					'type' => 'checkbox'
-				),
-				'header1' => array(
-					'id'   => 'header1',
-					'name' => __( 'Pages Setup', 'wpum' ),
-					'type' => 'header'
-				),
-				'logout_redirect' => array(
-					'id'   => 'logout_redirect',
-					'name' => __( 'Logout Redirect:', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
-					'type' => 'select',
-					'options' => wpum_get_pages()
-				),
-				'wp_login_signup_redirect' => array(
-					'id'   => 'wp_login_signup_redirect',
-					'name' => __( 'Signup Redirect on wp-login.php:', 'wpum' ),
-					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
-					'type' => 'select',
-					'options' => wpum_get_pages()
-				),
-				'password_recovery_page' => array(
-					'id'   => 'password_recovery_page',
-					'name' => __( 'Password recovery page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_password_recovery] shortcode.'),
-					'type' => 'select',
-					'options' => wpum_get_pages()
 				),
 				'header2' => array(
 					'id'   => 'header2',
