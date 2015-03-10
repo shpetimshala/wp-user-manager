@@ -189,17 +189,6 @@ function wpum_get_registered_settings() {
 					'class' => 'select2',
 					'options' => wpum_get_roles()
 				),
-				'header2' => array(
-					'id'   => 'header2',
-					'name' => __( 'Uninstall Data', 'wpum' ),
-					'type' => 'header'
-				),
-				'uninstall_on_delete' => array(
-					'id' => 'uninstall_on_delete',
-					'name' => __( 'Remove Data on Uninstall?', 'wprm' ),
-					'desc' => __( 'Check this box if you would like WPUM to completely remove all of its data when the plugin is deleted. <strong>No user will be deleted.</strong>', 'wprm' ),
-					'type' => 'checkbox'
-				)
 			)
 		),
 		'registration' => apply_filters( 'wpum_settings_registration',
