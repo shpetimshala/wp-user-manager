@@ -208,6 +208,7 @@ jQuery(document).ready(function ($) {
 				e.preventDefault();
 				var wpum_profile_form = this; // form element
 				var wpum_profile_nonce  = $(this).find('#_wpnonce').val();
+				var wpum_user_id  = $(this).find('#wpum_user_id').val();
 
 				dataArray = $.map($(this).children('fieldset'), function(el){
 					return {
@@ -227,13 +228,20 @@ jQuery(document).ready(function ($) {
 						'action'     : 'wpum_update_profile', // Calls the ajax action
 						'wpum_profile_nonce' : wpum_profile_nonce,
 						'fields' : dataArray,
+						'user_id': wpum_user_id
 					},
 					beforeSend: function() {
+						$( wpum_profile_form ).find('p.wpum-message').remove();
+						$( wpum_profile_form ).prepend('<p class="wpum-message wpum-notice wpum-profile-updated-message">' + wpum_frontend_js.checking_credentials + '</p>');
 					},
 					success: function(results) {
 
 						// Check the response
-						console.log(results.message);
+						if(results.valid === true) {
+							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						} else {
+							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+						}
 
 					}
 				});

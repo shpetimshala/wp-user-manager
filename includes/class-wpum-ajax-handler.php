@@ -70,7 +70,7 @@ class WPUM_Ajax_Handler {
 		// Validate Password Field on profile form
 		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
 		if(wpum_get_option('exclude_usernames'))
-			add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
+			add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
 
 	}
 
@@ -454,7 +454,7 @@ class WPUM_Ajax_Handler {
 		if( !is_array($fields) || empty($fields) ) {
 			echo json_encode( array(
 				'valid'   => false,
-				'message' => __( 'Something went wrong.' ),
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
 			) );
 			die();
 		}
@@ -471,9 +471,10 @@ class WPUM_Ajax_Handler {
 			die();
 		}
 
+		// Now we can update the profile
 		echo json_encode( array(
-				'valid' => false,
-				'message'  => __( 'asdasd' ),
+			'valid'   => true,
+			'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
 		) );
 
 		die();

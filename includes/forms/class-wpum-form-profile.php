@@ -630,9 +630,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 			get_wpum_template( 'profile-form.php', 
 				array(
-					'atts' => $atts,
-					'form' => self::$form_name,
-					'fields' => self::get_fields( 'profile' )
+					'atts'    => $atts,
+					'form'    => self::$form_name,
+					'fields'  => self::get_fields( 'profile' ),
+					'user_id' => self::$user->ID
 				)
 			);
 
