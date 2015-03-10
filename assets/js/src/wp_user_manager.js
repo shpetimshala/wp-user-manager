@@ -17,6 +17,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_login();
 			this.ajax_psw_recovery();
 			this.ajax_psw_reset();
+			this.ajax_profile_update();
 		},
 
 		// Handle Ajax Login
@@ -201,7 +202,50 @@ jQuery(document).ready(function ($) {
 
 			});
 
-		}
+		},
+
+		// Process ajax profile update
+		ajax_profile_update : function() {
+
+			$('#wpum-form-profile form').on('submit', function(e) {
+
+				// Stop the form from submitting so we can use ajax.
+				e.preventDefault();
+				var wpum_profile_form = this; // form element
+				var wpum_profile_nonce  = $(this).find('#_wpnonce').val();
+
+				dataArray = $.map($(this).children('fieldset'), function(el){
+					return {
+						'id':$(el).data('name'), 
+						'type':$(el).data('type'), 
+						'label':$(el).data('label'),
+						'required':$(el).data('required'),
+						'value': $(el).find( '[name=' + $(el).data('name') + ']' ).val() 
+					}; 
+				});
+
+				$.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: wpum_frontend_js.ajax,
+					data: {
+						'action'     : 'wpum_update_profile', // Calls the ajax action
+						'wpum_profile_nonce' : wpum_profile_nonce,
+						'fields' : dataArray,
+					},
+					beforeSend: function() {
+					},
+					success: function(results) {
+
+						// Check the response
+						console.log(results.message);
+
+					}
+				});
+
+			});	
+
+		},
 
 	};
 

@@ -204,6 +204,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
 			// Emails Tags
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-tags.php';
+			// Utilities library
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-utils.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -226,7 +228,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				// Load Default Fields Editor
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-editor.php';
 			}
-
 
 			// Ajax Handler
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';

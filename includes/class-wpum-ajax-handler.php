@@ -63,6 +63,10 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_update_single_default_field', array( $this, 'update_single_default_fields' ) );
 
+		// Profile Update Method
+		add_action( 'wp_ajax_wpum_update_profile', array( $this, 'update_profile' ) );
+		add_action( 'wp_ajax_nopriv_wpum_update_profile', array( $this, 'update_profile' ) );
+
 	}
 
 	/**
@@ -409,18 +413,56 @@ class WPUM_Ajax_Handler {
 			update_option('wpum_default_fields', $get_fields );
 
 			echo json_encode( array(
-				'valid' => true,
-				'message'  => __( 'Field successfully updated.' ),
+				'valid'   => true,
+				'message' => __( 'Field successfully updated.' ),
 			) );
 
 		} else {
 
 			echo json_encode( array(
-				'valid' => false,
-				'message'  => __( 'Something went wrong.' ),
+				'valid'   => false,
+				'message' => __( 'Something went wrong.' ),
 			) );
 
 		}
+
+		die();
+
+	}
+
+	/**
+	 * Update profile on the frontend.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function update_profile() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'profile', 'wpum_profile_nonce' );
+
+		// Get the serialized string and covert it to array
+		$fields = $_REQUEST['fields'];
+		
+		// Abort if empty
+		if( !is_array($fields) || empty($fields) ) {
+			echo json_encode( array(
+				'valid'   => false,
+				'message' => __( 'Something went wrong.' ),
+			) );
+			die();
+		}
+		
+		// Sanitize the submitted values
+		$values = WPUM_Utils::sanitize_submitted_fields( $fields );
+		
+		print_r($values);
+
+		echo json_encode( array(
+				'valid' => false,
+				'message'  => __( 'asdasd' ),
+		) );
 
 		die();
 
