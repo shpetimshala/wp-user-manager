@@ -29,19 +29,17 @@ class WPUM_Utils {
 	 */
 	public static function sanitize_submitted_fields( $fields ) {
 
-		$values = array();
-
-		foreach ($fields as $field) {
+		foreach ($fields as $key => $field) {
 
 			if ( method_exists( __CLASS__, "get_posted_{$field['type']}_field" ) ) {
-				$values[ $field['id'] ] = call_user_func( __CLASS__ . "::get_posted_{$field['type']}_field", $field['value'] );
+				$fields[ $key ]['value'] = call_user_func( __CLASS__ . "::get_posted_{$field['type']}_field", $field['value'] );
 			} else {
-				$values[ $field['id'] ] = self::sanitize_posted_field( $field['value'] );
+				$fields[ $key ]['value'] = self::sanitize_posted_field( $field['value'] );
 			}
 
 		}
 
-		return $values;
+		return $fields;
 
 	}
 
@@ -90,6 +88,22 @@ class WPUM_Utils {
 	 */
 	protected static function get_posted_wp_editor_field( $value ) {
 		return self::get_posted_textarea_field( $value );
+	}
+
+	/**
+	 * Validate the posted fields
+	 * @return bool on success, WP_ERROR on failure
+	 */
+	public static function validate_fields( $fields ) {
+
+		foreach ( $fields as $key => $field ) {
+			if ( $field['required'] && empty( $field['value'] ) ) {
+				return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
+			}
+		}
+
+		return apply_filters( 'wpum_profile_form_validate_ajax_fields', true, $fields );
+
 	}
 
 }

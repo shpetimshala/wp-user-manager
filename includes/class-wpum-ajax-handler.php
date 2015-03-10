@@ -455,9 +455,16 @@ class WPUM_Ajax_Handler {
 		}
 		
 		// Sanitize the submitted values
-		$values = WPUM_Utils::sanitize_submitted_fields( $fields );
-		
-		print_r($values);
+		$fields = WPUM_Utils::sanitize_submitted_fields( $fields );
+
+		// Validate Fields
+		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
+			echo json_encode( array(
+				'valid' => false,
+				'message'  => __( 'Something went wrong again' ),
+			) );
+			die();
+		}
 
 		echo json_encode( array(
 				'valid' => false,
