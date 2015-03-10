@@ -38,7 +38,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
-			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
+			if(wpum_get_option('exclude_usernames'))
+				add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 		endif;
 
 		// Add password meter field

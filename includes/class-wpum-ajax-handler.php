@@ -442,7 +442,7 @@ class WPUM_Ajax_Handler {
 		// Check our nonce and make sure it's correct.
 		check_ajax_referer( 'profile', 'wpum_profile_nonce' );
 
-		// Get the serialized string and covert it to array
+		// Get the fields
 		$fields = $_REQUEST['fields'];
 		
 		// Abort if empty
@@ -461,7 +461,7 @@ class WPUM_Ajax_Handler {
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
 			echo json_encode( array(
 				'valid' => false,
-				'message'  => __( 'Something went wrong again' ),
+				'message'  => $return->get_error_message(),
 			) );
 			die();
 		}
