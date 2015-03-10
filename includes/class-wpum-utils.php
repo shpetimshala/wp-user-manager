@@ -29,17 +29,24 @@ class WPUM_Utils {
 	 */
 	public static function sanitize_submitted_fields( $fields ) {
 
+		$new_fields = array();
+
 		foreach ($fields as $key => $field) {
 
+			$new_fields[ $field['id'] ]['id'] = $field['id'];
+			$new_fields[ $field['id'] ]['type'] = $field['type'];
+			$new_fields[ $field['id'] ]['label'] = $field['label'];
+			$new_fields[ $field['id'] ]['required'] = $field['required'];
+
 			if ( method_exists( __CLASS__, "get_posted_{$field['type']}_field" ) ) {
-				$fields[ $key ]['value'] = call_user_func( __CLASS__ . "::get_posted_{$field['type']}_field", $field['value'] );
+				$new_fields[ $field['id'] ]['value'] = call_user_func( __CLASS__ . "::get_posted_{$field['type']}_field", $field['value'] );
 			} else {
-				$fields[ $key ]['value'] = self::sanitize_posted_field( $field['value'] );
+				$new_fields[ $field['id'] ]['value'] = self::sanitize_posted_field( $field['value'] );
 			}
 
 		}
 
-		return $fields;
+		return $new_fields;
 
 	}
 
@@ -102,7 +109,7 @@ class WPUM_Utils {
 			}
 		}
 
-		return apply_filters( 'wpum_profile_form_validate_ajax_fields', true, $fields );
+		return apply_filters( 'wpum_form_validate_ajax_fields', true, $fields );
 
 	}
 

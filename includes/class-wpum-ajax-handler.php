@@ -67,6 +67,9 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_update_profile', array( $this, 'update_profile' ) );
 		add_action( 'wp_ajax_nopriv_wpum_update_profile', array( $this, 'update_profile' ) );
 
+		// Validate Password Field on profile form
+		//add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
+
 	}
 
 	/**
@@ -457,6 +460,7 @@ class WPUM_Ajax_Handler {
 		// Sanitize the submitted values
 		$fields = WPUM_Utils::sanitize_submitted_fields( $fields );
 
+		/*
 		// Validate Fields
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
 			echo json_encode( array(
@@ -464,7 +468,7 @@ class WPUM_Ajax_Handler {
 				'message'  => $return->get_error_message(),
 			) );
 			die();
-		}
+		}*/
 
 		echo json_encode( array(
 				'valid' => false,
