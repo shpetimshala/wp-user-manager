@@ -411,6 +411,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 		$pwd = $values['profile']['password'];
 		$pwd_strenght = wpum_get_option('password_strength');
 
+		if( empty($pwd) )
+			return;
+
 		$containsLetter  = preg_match('/[A-Z]/', $pwd);
 		$containsDigit   = preg_match('/\d/', $pwd);
 		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);

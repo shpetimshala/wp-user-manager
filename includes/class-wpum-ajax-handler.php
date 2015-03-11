@@ -472,6 +472,9 @@ class WPUM_Ajax_Handler {
 		}
 
 		// Now we can update the profile
+		
+
+		// Show notification message
 		echo json_encode( array(
 			'valid'   => true,
 			'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
