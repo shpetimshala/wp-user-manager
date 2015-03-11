@@ -69,6 +69,7 @@ class WPUM_Ajax_Handler {
 
 		// Validate Password Field on profile form
 		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
+		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_email_field' ), 10, 2 );
 		if(wpum_get_option('exclude_usernames'))
 			add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
 
@@ -465,22 +466,68 @@ class WPUM_Ajax_Handler {
 		// Validate Fields
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
 			echo json_encode( array(
-				'valid' => false,
-				'message'  => $return->get_error_message(),
+				'valid'   => false,
+				'message' => $return->get_error_message(),
 			) );
 			die();
 		}
 
 		// Now we can update the profile
-		
+		$user_id = intval($_REQUEST['user_id']);
+		$user_data = array( 'ID' => $user_id );
 
-		// Show notification message
-		echo json_encode( array(
-			'valid'   => true,
-			'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
-		) );
+		foreach ( $fields as $field_key => $field ) {
+			
+			switch ($field_key) {
+				case 'password':
+					if ( !empty( $field['value'] ) ) {
+						$user_data += array( 'user_pass' => $field['value'] );
+					}
+					break;
+				case 'password_repeat':
+					// do nothing
+				break;
+				case 'display_name':
+					$user_data += array( 'display_name' => self::get_display_name( $fields, $field['value'], $user_id ) );
+				break;
+				case 'nickname':
+					$user_data += array( 'user_nicename' => $field['value'] );
+					$user_data += array( 'nickname' => $field['value'] );
+				break;
+				default:
+					$user_data += array( $field_key => $field['value'] );
+					break;
+			}
 
-		die();
+		}
+
+		do_action('wpum_before_ajax_update_user', $user_data, $fields, $user_id );
+
+		$user_id = wp_update_user( $user_data );
+
+		do_action('wpum_after_ajax_update_user', $user_data, $fields, $user_id );
+
+		if ( is_wp_error( $user_id ) ) {
+
+			// Show notification message
+			echo json_encode( array(
+				'valid'   => false,
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
+			) );
+
+			die();
+
+		} else {
+
+			// Show notification message
+			echo json_encode( array(
+				'valid'   => true,
+				'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
+			) );
+
+			die();
+
+		}
 
 	}
 
@@ -541,6 +588,65 @@ class WPUM_Ajax_Handler {
 			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
 
 		return $passed;
+
+	}
+
+	/**
+	 * Validate email field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_email_field( $passed, $fields ) {
+
+		$email = $fields['user_email'][ 'value' ];
+
+		if( !is_email( $email ) )
+			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Decides which option should be stored into the database.
+	 * This avoids the "display_name" option into the profile form to
+	 * save the select field option value into the database.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function get_display_name( $fields, $field_value, $user_id ) {
+
+		$user = get_userdata( $user_id );
+
+		$name = $user->user_login;
+
+		switch ($field_value) {
+			case 'display_nickname':
+				$name = $fields['nickname']['value'];
+				break;
+			case 'display_firstname':
+				$name = $fields['first_name']['value'];
+				break;
+			case 'display_lastname':
+				$name = $fields['last_name']['value'];
+				break;
+			case 'display_firstlast':
+				$name = $fields['first_name']['value'] . ' ' . $fields['last_name']['value'];
+				break;
+			case 'display_lastfirst':
+				$name = $fields['last_name']['value'] . ' ' . $fields['first_name']['value'];
+				break;
+			
+			default:
+				$name = $user->user_login;
+				break;
+		}
+
+		return $name;
 
 	}
 

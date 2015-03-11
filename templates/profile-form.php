@@ -48,7 +48,7 @@
 
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="hidden" name="wpum_user_id" value="<?php echo $user_id; ?>" />
+			<input type="hidden" name="wpum_user_id" id="wpum_user_id" value="<?php echo $user_id; ?>" />
 			<input type="submit" id="submit_wpum_profile" name="submit_wpum_profile" class="button" value="<?php _e('Update Profile'); ?>" />
 		</p>
 

@@ -17,7 +17,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_login();
 			this.ajax_psw_recovery();
 			this.ajax_psw_reset();
-			//this.ajax_profile_update();
+			this.ajax_profile_update();
 		},
 
 		// Handle Ajax Login
@@ -244,6 +244,7 @@ jQuery(document).ready(function ($) {
 						// Check the response
 						if(results.valid === true) {
 							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+							location.reload(true);
 						} else {
 							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
 						}

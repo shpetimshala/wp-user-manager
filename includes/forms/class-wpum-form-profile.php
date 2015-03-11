@@ -541,7 +541,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		$user_id = wp_update_user( $user_data );
 
-		do_action('wpum_after_update_user', $values, self::$user->ID );
+		do_action('wpum_after_update_user', $user_data, $values, self::$user->ID );
 
 		if ( is_wp_error( $user_id ) ) {
 
