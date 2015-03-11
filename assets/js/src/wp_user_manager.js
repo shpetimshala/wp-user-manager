@@ -18,6 +18,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_psw_recovery();
 			this.ajax_psw_reset();
 			this.ajax_profile_update();
+			this.ajax_registration();
 		},
 
 		// Handle Ajax Login
@@ -254,6 +255,11 @@ jQuery(document).ready(function ($) {
 
 			});	
 
+		},
+
+		// Process ajax registration
+		ajax_registration : function() {
+			
 		},
 
 	};

@@ -33,6 +33,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
+		/*
 		// Check for password field
 		if(wpum_get_option('custom_passwords')) :
 			
@@ -72,6 +73,65 @@ class WPUM_Form_Register extends WPUM_Form {
 		if( !empty(wpum_get_option('exclude_usernames') ) )
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
 
+		*/
+
+	}
+
+	/**
+	 * Builds a list of all the registration fields sorted
+	 * through the settings panel.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return $fields_list array of all the fields.
+	 */
+	protected static function get_sorted_registration_fields() {
+
+		$fields_list = array();
+
+		// Grab default fields list
+		$default_fields = wpum_default_user_fields_list();
+		
+		// Get the sorted list from the settings panel
+		$saved_order = get_option( 'wpum_default_fields' );
+
+		// Merge them together
+		if( $saved_order ) {
+            foreach ($saved_order as $field) {
+                $default_fields[ $field['meta'] ]['order'] = $field['order'];
+                $default_fields[ $field['meta'] ]['required'] = $field['required'];
+                $default_fields[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
+            }
+        }
+
+		// Sort all together
+        uasort( $default_fields, 'wpum_sort_default_fields_table');
+
+        // Build new list
+        foreach ($default_fields as $new_field) {
+
+        	// Check only for allowed fields
+        	switch ($new_field['show_on_signup']) {
+        		case true:
+        			$fields_list[ $new_field['meta'] ] = array(
+						'label'       => $new_field['title'],
+						'type'        => $new_field['type'],
+						'required'    => $new_field['required'],
+						'placeholder' => apply_filters( 'wpum_registration_field_placeholder', null, $new_field ),
+						'options'     => apply_filters( 'wpum_registration_field_options', null, $new_field ),
+						'priority'    => $new_field['order']
+					);
+        			break;
+        		
+        		default:
+        			// do nothing
+        			break;
+        	}
+
+        }
+
+		return apply_filters( 'wpum_default_registration_fields', $fields_list );
+
 	}
 
 	/**
@@ -87,25 +147,13 @@ class WPUM_Form_Register extends WPUM_Form {
 			return;
 		}
 
-		self::$fields = apply_filters( 'wpum_default_registration_fields', array(
-			'register' => array(
-				'username' => array(
-					'label'       => __( 'Username' ),
-					'type'        => 'text',
-					'required'    => true,
-					'placeholder' => '',
-					'priority'    => 1
-				),
-				'email' => array(
-					'label'       => __( 'Email' ),
-					'type'        => 'email',
-					'required'    => true,
-					'placeholder' => '',
-					'priority'    => 2
-				),
-			),
-		) );
+		self::$fields = array(
+			'register' => array()
+		);
 
+		echo "<pre>";
+		print_r(self::get_sorted_registration_fields());
+		echo "</pre>";
 	}
 
 	/**

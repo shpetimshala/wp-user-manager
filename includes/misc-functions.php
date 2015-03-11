@@ -207,7 +207,7 @@ function wpum_default_user_fields_list() {
 	    'type'           => 'text',
 	    'meta'           => 'nickname',
 	    'required'       => true,
-	    'show_on_signup' => true
+	    'show_on_signup' => false
 	);
 	$fields['display_name'] = array(
 	    'order'          => 4,
