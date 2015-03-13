@@ -49,13 +49,15 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		endif;
 
+		// Validate Email Field
+		add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
+
 		// Add honeypot spam field
 		if( wpum_get_option('enable_honeypot') ) :
 			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
-		
 		// Add terms & conditions field
 		if( wpum_get_option('enable_terms') ) :
 			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_terms_field' ) );
@@ -300,7 +302,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		}
 
 		// Let's do the registration
-		self::do_registration( $values['register']['username'], $values['register']['email'], $values );
+		self::do_registration( $values['register']['username'], $values['register']['user_email'], $values );
 
 	}
 
@@ -332,6 +334,27 @@ class WPUM_Form_Register extends WPUM_Form {
 			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
 				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
 		}
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate email field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_email_field( $passed, $fields, $values ) {
+
+		$mail = $values['register'][ 'user_email' ];
+
+		if( !is_email( $mail ) )
+			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.' ) );
+
+		if( email_exists( $mail ) )
+			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
 
 		return $passed;
 

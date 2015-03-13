@@ -9,7 +9,7 @@
  */
 ?>
 <input
-	type="text"
+	type="email"
 	class="input-email <?php echo ! empty( $field['class'] ) ? $field['class'] : ''; ?>"
 	name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?>"
 	id="<?php echo esc_attr( $key ); ?>"
