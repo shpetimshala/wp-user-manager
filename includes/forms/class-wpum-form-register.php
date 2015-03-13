@@ -41,7 +41,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Add password meter field
 			if( wpum_get_option('display_password_meter_registration') )
-				add_action( 'wpum_after_inside_register_form_template', array( __CLASS__, 'add_password_meter_field' ) );
+				add_action( 'wpum_after_single_password_field', array( __CLASS__, 'add_password_meter_field' ), 10, 2 );
 
 			// Automatic login after registration
 			if( wpum_get_option('login_after_registration') )
@@ -367,7 +367,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function add_password_meter_field( $atts ) {
+	public static function add_password_meter_field( $form, $field ) {
 		echo '<span id="password-strength"></span>';		
 	}
 

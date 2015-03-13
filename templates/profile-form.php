@@ -36,7 +36,9 @@
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo $field['type'];?>" data-label="<?php echo $field['label'];?>" data-required="<?php echo $field['required'];?>" data-name="<?php esc_attr_e( $key ); ?>">
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
+					<?php do_action( "wpum_before_single_{$field['type']}_field", $form, $field ); ?>
 					<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
+					<?php do_action( "wpum_after_single_{$field['type']}_field", $form, $field ); ?>
 				</div>
 			</fieldset>
 		<?php endforeach; ?>
