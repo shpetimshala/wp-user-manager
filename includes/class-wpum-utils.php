@@ -99,9 +99,12 @@ class WPUM_Utils {
 
 	/**
 	 * Validate the posted fields
+	 *
+	 * @param string $form name of the form.
+	 * @param array $fields holds all the fields.
 	 * @return bool on success, WP_ERROR on failure
 	 */
-	public static function validate_fields( $fields ) {
+	public static function validate_fields( $fields, $form ) {
 
 		foreach ( $fields as $key => $field ) {
 			if ( $field['required'] && empty( $field['value'] ) ) {
@@ -109,7 +112,7 @@ class WPUM_Utils {
 			}
 		}
 
-		return apply_filters( 'wpum_form_validate_ajax_fields', true, $fields );
+		return apply_filters( "wpum_form_validate_ajax_{$form}_fields", true, $fields );
 
 	}
 

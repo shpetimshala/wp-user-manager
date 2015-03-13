@@ -68,10 +68,14 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_nopriv_wpum_update_profile', array( $this, 'update_profile' ) );
 
 		// Validate Password Field on profile form
-		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
-		add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_email_field' ), 10, 2 );
+		add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
+		add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_email_field' ), 10, 2 );
 		if(wpum_get_option('exclude_usernames'))
-			add_filter( 'wpum_form_validate_ajax_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
+			add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
+
+		// Registration method
+		add_action( 'wp_ajax_wpum_register', array( $this, 'registration_form' ) );
+		add_action( 'wp_ajax_nopriv_wpum_register', array( $this, 'registration_form' ) );
 
 	}
 
@@ -464,7 +468,7 @@ class WPUM_Ajax_Handler {
 		$fields = WPUM_Utils::sanitize_submitted_fields( $fields );
 
 		// Validate Fields
-		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields ) ) ) ) {
+		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields, 'profile' ) ) ) ) {
 			echo json_encode( array(
 				'valid'   => false,
 				'message' => $return->get_error_message(),
@@ -647,6 +651,52 @@ class WPUM_Ajax_Handler {
 		}
 
 		return $name;
+
+	}
+
+	/**
+	 * Triggers ajax registration.
+	 * 
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function registration_form() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'register', 'wpum_register_nonce' );
+
+		// Get the fields
+		$fields = $_REQUEST['fields'];
+		
+		// Abort if empty
+		if( !is_array($fields) || empty($fields) ) {
+			echo json_encode( array(
+				'valid'   => false,
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
+			) );
+			die();
+		}
+
+		// Sanitize the submitted values
+		$fields = WPUM_Utils::sanitize_submitted_fields( $fields );
+
+		// Validate Fields
+		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields, 'register' ) ) ) ) {
+			echo json_encode( array(
+				'valid'   => false,
+				'message' => $return->get_error_message(),
+			) );
+			die();
+		}
+
+		// Show notification message
+		echo json_encode( array(
+			'valid'   => true,
+			'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
+		) );
+
+		die();
 
 	}
 

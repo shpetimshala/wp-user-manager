@@ -19,7 +19,7 @@
 		<?php do_action( 'wpum_before_inside_register_form_template', $atts ); ?>
 
 		<?php foreach ( $register_fields as $key => $field ) : ?>
-			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
+			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo $field['type'];?>" data-label="<?php echo $field['label'];?>" data-required="<?php echo $field['required'];?>" data-name="<?php esc_attr_e( $key ); ?>">
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum_before_single_{$field['type']}_field", $form, $field ); ?>
