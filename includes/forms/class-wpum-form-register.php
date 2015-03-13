@@ -33,12 +33,10 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
-		/*
 		// Check for password field
 		if(wpum_get_option('custom_passwords')) :
 			
 			self::$random_password = false;
-			add_filter( 'wpum_default_registration_fields', array( __CLASS__, 'add_password_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 
 			// Add password meter field
@@ -57,23 +55,22 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
+		
 		// Add terms & conditions field
 		if( wpum_get_option('enable_terms') ) :
 			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_terms_field' ) );
 		endif;
-
+		
 		// Add Role selection if enabled
 		if( wpum_get_option('allow_role_select') ) :
 			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_role_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_role_field' ), 10, 3 );
 			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
-
+		
 		// Exclude usernames if enabled
 		if( !empty(wpum_get_option('exclude_usernames') ) )
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
-
-		*/
 
 	}
 
@@ -130,6 +127,11 @@ class WPUM_Form_Register extends WPUM_Form {
 
         }
 
+        // Remove password field if not enabled
+        if( !wpum_get_option('custom_passwords') ) {
+        	unset( $fields_list['password'] );
+        }
+
 		return apply_filters( 'wpum_default_registration_fields', $fields_list );
 
 	}
@@ -148,12 +150,9 @@ class WPUM_Form_Register extends WPUM_Form {
 		}
 
 		self::$fields = array(
-			'register' => array()
+			'register' => self::get_sorted_registration_fields()
 		);
 
-		echo "<pre>";
-		print_r(self::get_sorted_registration_fields());
-		echo "</pre>";
 	}
 
 	/**
@@ -306,27 +305,6 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
-	 * Add password field if option is enabled.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function add_password_field( $fields ) {
-
-		$fields['register']['password'] = array(
-		    'label' => __( 'Password' ),
-		    'type' => 'password',
-		    'required' => true,
-		    'placeholder' => '',
-		    'priority' => 3
-		);
-		
-		return $fields;
-
-	}
-
-	/**
 	 * Validate the password field.
 	 *
 	 * @access public
@@ -379,7 +357,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function add_honeypot_field( $fields ) {
 
-		$fields['register'][ 'comments' ] = array(
+		$fields[ 'comments' ] = array(
 			'label'       => 'Comments',
 			'type'        => 'textarea',
 			'required'    => false,
@@ -442,7 +420,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function add_terms_field( $fields ) {
 
-		$fields['register'][ 'terms' ] = array(
+		$fields[ 'terms' ] = array(
 			'label'       => __('Terms &amp; Conditions'),
 			'type'        => 'checkbox',
 			'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.'), get_permalink( wpum_get_option('terms_page') ) ),
@@ -463,7 +441,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function add_role_field( $fields ) {
 		
-		$fields['register'][ 'role' ] = array(
+		$fields[ 'role' ] = array(
 			'label'       => __('Select Role'),
 			'type'        => 'select',
 			'required'    => true,
