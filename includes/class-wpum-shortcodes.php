@@ -145,15 +145,12 @@ class WPUM_Shortcodes {
 	public function wpum_registration( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'redirect' => '',
 			'form_id' => 'default_registration_form'
 		), $atts ) );
 
 		// Set default values
 		if( !array_key_exists('form_id', $atts) || empty($atts['form_id']) )
 			$atts['form_id'] = 'default_registration_form';
-		if( !array_key_exists('redirect', $atts) || empty($atts['redirect']) )
-			$atts['redirect'] = get_permalink();
 
 		return WPUM()->forms->get_form( 'register', $atts );
 

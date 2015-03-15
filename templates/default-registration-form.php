@@ -10,7 +10,7 @@
  * @since       1.0.0
  */
 ?>
-<div id="wpum-form-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form-wrapper" data-redirect="<?php echo $atts['redirect'];?>">
+<div id="wpum-form-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form-wrapper">
 
 	<?php do_action( 'wpum_before_register_form_template', $atts ); ?>
 
