@@ -94,6 +94,8 @@ class WPUM_Ajax_Handler {
 		if(wpum_get_option('custom_passwords')) :
 			self::$random_password = false;
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_password_field' ), 10, 2 );
+			if( wpum_get_option('login_after_registration') )
+				add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'do_login' ), 10, 3 );
 		endif;
 		if( wpum_get_option('enable_honeypot') )
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_honeypot_register_field' ), 10, 3 );
@@ -820,6 +822,26 @@ class WPUM_Ajax_Handler {
 	}
 
 	/**
+	 * Autologin.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function do_login( $user_id, $fields ) {
+
+		$userdata = get_userdata( $user_id );
+
+		$data = array();
+		$data['user_login']    = $userdata->user_login;
+		$data['user_password'] = $fields['password']['value'];
+		$data['rememberme']    = true;
+
+		$user_login = wp_signon( $data, false );
+
+	}
+
+	/**
 	 * Triggers ajax registration.
 	 * 
 	 * @access public
@@ -881,10 +903,16 @@ class WPUM_Ajax_Handler {
 			// Add ability to extend registration process.
 			$user_id = $do_user;
 			do_action('wpum_ajax_registration_is_complete', $user_id, $fields );
-			
+				
+			// Check for automatic login
+			$do_redirect = false;
+			if( wpum_get_option('login_after_registration') )
+				$do_redirect = true;
+
 			// Show notification message
 			echo json_encode( array(
 				'valid'   => true,
+				'redirect' => $do_redirect,
 				'message' => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
 			) );
 

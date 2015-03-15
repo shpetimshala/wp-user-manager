@@ -248,7 +248,7 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if(results.valid === true) {
+						if( results.valid === true ) {
 							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
 							location.reload(true);
 						} else {
@@ -304,8 +304,15 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if(results.valid === true) {
+						if( results.valid === true ) {
+							
 							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+
+							// Check for redirect
+							if( results.redirect === true ) {
+								location.reload(true);
+							}
+
 						} else {
 							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
 						}
