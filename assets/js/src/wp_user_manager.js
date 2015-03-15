@@ -334,7 +334,10 @@ jQuery(document).ready(function ($) {
 
 	};
 
-	WPUM_Frontend.init();
+	// Check if ajax is available
+	if( wpum_frontend_js.disable_ajax !== "1" ) {
+		WPUM_Frontend.init();
+	}
 
 	// Run pwd meter if enabled
 	if( wpum_frontend_js.pwd_meter == 1 ) {

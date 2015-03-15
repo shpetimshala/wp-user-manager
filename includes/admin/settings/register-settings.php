@@ -326,13 +326,19 @@ function wpum_get_registered_settings() {
 			array(
 				'restore_emails' => array(
 					'id'   => 'restore_emails',
-					'name' => __( 'Restore Default Emails:', 'wpum' ),
+					'name' => __( 'Restore default emails:', 'wpum' ),
 					'type' => 'hook'
 				),
 				'restore_default_fields' => array(
 					'id'   => 'restore_default_fields',
-					'name' => __( 'Restore Default Fields:', 'wpum' ),
+					'name' => __( 'Restore default fields:', 'wpum' ),
 					'type' => 'hook'
+				),
+				'disable_ajax' => array(
+					'id'   => 'disable_ajax',
+					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
+					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.' ),
+					'type' => 'checkbox'
 				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',

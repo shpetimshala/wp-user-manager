@@ -275,7 +275,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			// Backend JS Settings
 			wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
-				'ajax' => admin_url( 'admin-ajax.php' ),
+				'ajax'    => admin_url( 'admin-ajax.php' ),
 				'confirm' => __('Are you sure you want to do this? This action cannot be reversed.'),
 			) );
 
@@ -311,19 +311,20 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			if( wpum_get_option('display_password_meter_registration') && wpum_get_option('custom_passwords') ) :
 				wp_enqueue_script( 'password-strength-meter' );
 				wp_localize_script( 'password-strength-meter', 'pwsL10n', array(
-				    'empty' => __( 'Strength indicator' ),
-				    'short' => __( 'Very weak' ),
-				    'bad' => __( 'Weak' ),
-				    'good' => _x( 'Medium', 'password strength' ),
-				    'strong' => __( 'Strong' )
+					'empty'  => __( 'Strength indicator' ),
+					'short'  => __( 'Very weak' ),
+					'bad'    => __( 'Weak' ),
+					'good'   => _x( 'Medium', 'password strength' ),
+					'strong' => __( 'Strong' )
 				) );
 			endif;
 
 			// Frontend jS Settings
 			wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
-				'ajax' => admin_url( 'admin-ajax.php' ),
+				'ajax'                 => admin_url( 'admin-ajax.php' ),
 				'checking_credentials' => __('Checking credentials...'),
-				'pwd_meter' => wpum_get_option('display_password_meter_registration')
+				'pwd_meter'            => wpum_get_option('display_password_meter_registration'),
+				'disable_ajax'         => wpum_get_option('disable_ajax')
 			) );
 
 		}
