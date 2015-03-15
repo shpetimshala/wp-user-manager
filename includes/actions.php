@@ -95,3 +95,18 @@ function wpum_remove_admin_bar() {
 
 }
 add_action('after_setup_theme', 'wpum_remove_admin_bar');
+
+/**
+ * Stops users from seeing the profile.php page in wp-admin.
+ * 
+ * @since 1.0.0
+ */
+function wpum_remove_profile_wp_admin() {
+
+	if( !current_user_can('administrator') && IS_PROFILE_PAGE && wpum_get_option('backend_profile_redirect') ){
+		wp_redirect( get_permalink( wpum_get_option('backend_profile_redirect' ) ) );
+        exit;
+	}
+
+}
+add_action( 'load-profile.php', 'wpum_remove_profile_wp_admin' );
