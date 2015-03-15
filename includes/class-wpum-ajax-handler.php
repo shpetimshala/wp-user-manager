@@ -28,6 +28,14 @@ class WPUM_Ajax_Handler {
 	var $login_method;
 
 	/**
+	 * Store password method
+	 * 
+	 * @var random_password.
+	 * @since 1.0.0
+	 */
+	public static $random_password = true;
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
@@ -77,6 +85,22 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_register', array( $this, 'registration_form' ) );
 		add_action( 'wp_ajax_nopriv_wpum_register', array( $this, 'registration_form' ) );
 
+		// Registration Forms validation methods
+		add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_email_field' ), 10, 2 );
+		if( !empty(wpum_get_option('exclude_usernames') ) )
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_username_field' ), 10, 2 );
+		if( wpum_get_option('enable_terms') ) 
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_terms_field' ), 10, 2 );
+		if(wpum_get_option('custom_passwords')) :
+			self::$random_password = false;
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_password_field' ), 10, 2 );
+		endif;
+		if( wpum_get_option('enable_honeypot') )
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_honeypot_register_field' ), 10, 3 );
+		if( wpum_get_option('allow_role_select') ) :
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_role_register_field' ), 10, 3 );
+			add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
+		endif;
 	}
 
 	/**
@@ -655,6 +679,147 @@ class WPUM_Ajax_Handler {
 	}
 
 	/**
+	 * Validate email field registration form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_register_email_field( $passed, $fields ) {
+
+		$email = $fields['user_email'][ 'value' ];
+
+		if( !is_email( $email ) )
+			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.' ) );
+
+		if( email_exists( $email ) )
+			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate nickname field registrations form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_register_username_field( $passed, $fields ) {
+
+		$username = $fields['username'][ 'value' ];
+
+		if( array_key_exists( $username , wpum_get_disabled_usernames() ) )
+			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate TOS field registration form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_register_terms_field( $passed, $fields ) {
+
+		$terms = $fields['terms'][ 'value' ];
+
+		if( $terms !== "1" )
+			return new WP_Error( 'terms-validation-error', __( 'You must agree to the terms & conditions before registering.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate Password Registration form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_register_password_field( $passed, $fields ) {
+		
+		$pwd = $fields['password']['value'];
+		$pwd_strenght = wpum_get_option('password_strength');
+
+		$containsLetter  = preg_match('/[A-Z]/', $pwd);
+		$containsDigit   = preg_match('/\d/', $pwd);
+		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);
+
+		if($pwd_strenght == 'weak') {
+			if(strlen($pwd) < 8)
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
+		}
+		if($pwd_strenght == 'medium') {
+			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+		}
+		if($pwd_strenght == 'strong') {
+			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+		}
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate honeypot field registration form.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_honeypot_register_field( $passed, $fields ) {
+
+		$fake_field = $fields['comments'][ 'value' ];
+
+		if( $fake_field )
+			return new WP_Error( 'honeypot-validation-error', __( 'Failed Honeypot validation' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate the role field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_role_register_field( $passed, $fields ) {
+
+		$role_field = $fields['role'][ 'value' ];
+		$selected_roles = array_flip(wpum_get_option('register_roles'));
+
+		if( !array_key_exists( $role_field , $selected_roles ) )
+			return new WP_Error( 'role-validation-error', __( 'Select a valid role from the list.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Save the role.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function save_role( $user_id, $fields ) {
+
+		$user = new WP_User( $user_id );
+		$user->set_role( $fields['role'][ 'value' ] );
+
+	}
+
+	/**
 	 * Triggers ajax registration.
 	 * 
 	 * @access public
@@ -690,13 +855,42 @@ class WPUM_Ajax_Handler {
 			die();
 		}
 
-		// Show notification message
-		echo json_encode( array(
-			'valid'   => true,
-			'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
-		) );
+		// Do Registration
+		if( self::$random_password ) {
+			$do_user = register_new_user( $fields['username']['value'], $fields['user_email']['value'] );
+		} else {
+			$do_user = wp_create_user( $fields['username']['value'], $fields['password']['value'], $fields['user_email']['value'] );
+		}
 
-		die();
+		// Check for errors
+		if ( is_wp_error( $do_user ) ) {
+			
+			echo json_encode( array(
+				'valid'   => false,
+				'message' => $do_user->get_error_message(),
+			) );
+			die();
+
+		} else {
+
+			// Send notification if password is manually added by the user.
+			if(!self::$random_password):
+				wp_new_user_notification( $do_user, $fields['password']['value'] );
+			endif;
+			
+			// Add ability to extend registration process.
+			$user_id = $do_user;
+			do_action('wpum_ajax_registration_is_complete', $user_id, $fields );
+			
+			// Show notification message
+			echo json_encode( array(
+				'valid'   => true,
+				'message' => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
+			) );
+
+			die();
+
+		}
 
 	}
 

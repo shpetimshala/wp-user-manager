@@ -291,6 +291,8 @@ jQuery(document).ready(function ($) {
 					}; 
 				});
 
+				console.log(dataArray);
+
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
