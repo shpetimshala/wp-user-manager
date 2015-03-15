@@ -309,29 +309,8 @@ function wpum_get_registered_settings() {
 				
 			)
 		),
-		'tools' => apply_filters( 'wpum_settings_tools',
+		'redirects' => apply_filters( 'wpum_settings_redirects',
 			array(
-				'restore_emails' => array(
-					'id'   => 'restore_emails',
-					'name' => __( 'Restore default emails:', 'wpum' ),
-					'type' => 'hook'
-				),
-				'restore_default_fields' => array(
-					'id'   => 'restore_default_fields',
-					'name' => __( 'Restore default fields:', 'wpum' ),
-					'type' => 'hook'
-				),
-				'disable_ajax' => array(
-					'id'   => 'disable_ajax',
-					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
-					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.' ),
-					'type' => 'checkbox'
-				),
-				'header_r' => array(
-					'id'   => 'header_r',
-					'name' => __( 'Redirects', 'wpum' ),
-					'type' => 'header'
-				),
 				'logout_redirect' => array(
 					'id'   => 'logout_redirect',
 					'name' => __( 'Logout redirect:', 'wpum' ),
@@ -353,10 +332,25 @@ function wpum_get_registered_settings() {
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
-				'header_n' => array(
-					'id'   => 'header_n',
-					'name' => __( 'Extra', 'wpum' ),
-					'type' => 'header'
+			)
+		),
+		'tools' => apply_filters( 'wpum_settings_tools',
+			array(
+				'restore_emails' => array(
+					'id'   => 'restore_emails',
+					'name' => __( 'Restore default emails:', 'wpum' ),
+					'type' => 'hook'
+				),
+				'restore_default_fields' => array(
+					'id'   => 'restore_default_fields',
+					'name' => __( 'Restore default fields:', 'wpum' ),
+					'type' => 'hook'
+				),
+				'disable_ajax' => array(
+					'id'   => 'disable_ajax',
+					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
+					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.' ),
+					'type' => 'checkbox'
 				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',
@@ -461,9 +455,10 @@ function wpum_get_settings_tabs() {
 	$tabs                   = array();
 	$tabs['general']        = __( 'General', 'wpum' );
 	$tabs['registration']   = __( 'Registration', 'wpum' );
-	$tabs['emails']         = __( 'Emails Editor', 'wpum' );
-	$tabs['default_fields'] = __( 'Default Fields', 'wpum' );
+	$tabs['emails']         = __( 'Emails', 'wpum' );
+	$tabs['default_fields'] = __( 'Default fields', 'wpum' );
 	$tabs['profile']        = __( 'Profiles', 'wpum' );
+	$tabs['redirects']      = __( 'Redirects', 'wpum' );
 	$tabs['tools']          = __( 'Tools', 'wpum' );
 
 	return apply_filters( 'wpum_settings_tabs', $tabs );
