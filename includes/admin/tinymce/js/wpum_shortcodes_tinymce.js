@@ -118,19 +118,13 @@
 							body: [ 
 								{
 									type: 'textbox', 
-									name: 'redirect', 
-									label: 'Redirect after registration (optional)',
-									value: ''
-								},
-								{
-									type: 'textbox', 
 									name: 'form_id', 
 									label: 'Form ID (optional)',
 									value: ''
 								},
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_register redirect="' + e.data.redirect + '" form_id="' + e.data.form_id + '" ]');
+								editor.insertContent( '[wpum_register form_id="' + e.data.form_id + '" ]');
 							}
 						});
 					}
