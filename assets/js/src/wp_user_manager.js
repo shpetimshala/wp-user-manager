@@ -315,7 +315,7 @@ jQuery(document).ready(function ($) {
 
 							// Check for redirect
 							if( results.redirect === true ) {
-								location.reload(true);
+								window.location.replace( results.redirect_url );
 							}
 
 						} else {

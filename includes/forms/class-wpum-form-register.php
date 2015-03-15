@@ -429,7 +429,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$user_login = wp_signon( $data, false );
 
-		wp_redirect( get_permalink() );
+		wp_redirect( apply_filters( 'wpum_redirect_after_automatic_login', get_permalink(), $user_id ) );
 		exit;
 
 	}

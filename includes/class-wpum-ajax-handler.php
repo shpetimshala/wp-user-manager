@@ -911,9 +911,10 @@ class WPUM_Ajax_Handler {
 
 			// Show notification message
 			echo json_encode( array(
-				'valid'   => true,
-				'redirect' => $do_redirect,
-				'message' => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
+				'valid'        => true,
+				'redirect'     => $do_redirect,
+				'redirect_url' => apply_filters( 'wpum_redirect_after_automatic_login', home_url(), $user_id ),
+				'message'      => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
 			) );
 
 			die();
