@@ -51,11 +51,10 @@ add_action( 'wpum_after_inside_loginform_template', 'wpum_add_pwd_link_to_loginf
 function wpum_add_reg_link_to_loginform( $args ) {
 
 	$output = null;
-	$label = apply_filters( 'wpum_registration_link_label', __('Signup Now &raquo;') );
 	$url = '';
 
 	if(wpum_get_option('display_registration_link'))
-		$output = '<p class="wpum-registration-link">'. sprintf( __('Don\'t have an account? <a href="%s">Signup Now &raquo;</a>'), $url ) .'</p>';
+		$output = '<p class="wpum-registration-link">'. apply_filters( 'wpum_registration_link_label', sprintf( __('Don\'t have an account? <a href="%s">Signup Now &raquo;</a>'), $url ) ) .'</p>';
 
 	echo $output;
 
