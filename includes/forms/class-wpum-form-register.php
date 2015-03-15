@@ -589,7 +589,15 @@ class WPUM_Form_Register extends WPUM_Form {
 		self::show_confirmations();
 
 		// Display template
-		if( is_user_logged_in() ) :
+		if( !get_option( 'users_can_register' ) ) :
+
+			get_wpum_template( 'registrations-disabled.php', 
+				array(
+					'args' => $atts
+				)
+			);
+
+		elseif( is_user_logged_in() ) :
 
 			get_wpum_template( 'already-logged-in.php', 
 				array(
