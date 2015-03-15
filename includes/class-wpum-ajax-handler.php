@@ -700,7 +700,7 @@ class WPUM_Ajax_Handler {
 	}
 
 	/**
-	 * Validate nickname field registrations form.
+	 * Validate username field registrations form.
 	 *
 	 * @access public
 	 * @since 1.0.0
@@ -711,7 +711,7 @@ class WPUM_Ajax_Handler {
 		$username = $fields['username'][ 'value' ];
 
 		if( array_key_exists( $username , wpum_get_disabled_usernames() ) )
-			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+			return new WP_Error( 'username-validation-error', __( 'This username cannot be used.' ) );
 
 		return $passed;
 
