@@ -117,20 +117,7 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Pages Setup', 'wpum' ),
 					'type' => 'header'
 				),
-				'logout_redirect' => array(
-					'id'   => 'logout_redirect',
-					'name' => __( 'Logout Redirect:', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
-					'type' => 'select',
-					'options' => wpum_get_pages()
-				),
-				'wp_login_signup_redirect' => array(
-					'id'   => 'wp_login_signup_redirect',
-					'name' => __( 'Signup Redirect on wp-login.php:', 'wpum' ),
-					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
-					'type' => 'select',
-					'options' => wpum_get_pages()
-				),
+				
 				'password_recovery_page' => array(
 					'id'   => 'password_recovery_page',
 					'name' => __( 'Password recovery page:', 'wpum' ),
@@ -339,6 +326,37 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
 					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.' ),
 					'type' => 'checkbox'
+				),
+				'header_r' => array(
+					'id'   => 'header_r',
+					'name' => __( 'Redirects', 'wpum' ),
+					'type' => 'header'
+				),
+				'logout_redirect' => array(
+					'id'   => 'logout_redirect',
+					'name' => __( 'Logout redirect:', 'wpum' ),
+					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'wp_login_signup_redirect' => array(
+					'id'   => 'wp_login_signup_redirect',
+					'name' => __( 'Backend register redirect:', 'wpum' ),
+					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'backend_profile_redirect' => array(
+					'id'   => 'backend_profile_redirect',
+					'name' => __( 'Backend profile redirect:', 'wpum' ),
+					'desc'    => __('Select the page where you want to redirect users who try to access their profile on the backend.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'header_n' => array(
+					'id'   => 'header_n',
+					'name' => __( 'Extra', 'wpum' ),
+					'type' => 'header'
 				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',

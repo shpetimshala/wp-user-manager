@@ -93,7 +93,7 @@ class WPUM_Ajax_Handler {
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_terms_field' ), 10, 2 );
 		if ( wpum_get_option( 'custom_passwords' ) ) :
 			self::$random_password = false;
-		add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_password_field' ), 10, 2 );
+			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_register_password_field' ), 10, 2 );
 		if ( wpum_get_option( 'login_after_registration' ) )
 			add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'do_login' ), 10, 3 );
 		endif;
@@ -101,7 +101,7 @@ class WPUM_Ajax_Handler {
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_honeypot_register_field' ), 10, 3 );
 		if ( wpum_get_option( 'allow_role_select' ) ) :
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_role_register_field' ), 10, 3 );
-		add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
+			add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
 	}
 
