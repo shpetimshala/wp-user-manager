@@ -33,6 +33,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_register', array( $this, 'wpum_registration' ) );
 		add_shortcode( 'wpum_password_recovery', array( $this, 'wpum_password' ) );
 		add_shortcode( 'wpum_profile_edit', array( $this, 'wpum_profile_edit' ) );
+		add_shortcode( 'wpum_profile', array( $this, 'wpum_profile' ) );
 
 	}
 
@@ -206,6 +207,32 @@ class WPUM_Shortcodes {
 		), $atts ) );
 
 		return WPUM()->forms->get_form( 'profile', $atts );
+
+	}
+
+	/**
+	 * Profile Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_profile( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'' => ''
+		), $atts ) );
+
+		ob_start();
+			
+		get_wpum_template( 'mini-profile.php', array( 
+				'user_data' => get_user_by( 'id', get_current_user_id() )
+			) 
+		);
+
+		$output = ob_get_clean();
+
+		return $output;
 
 	}
 

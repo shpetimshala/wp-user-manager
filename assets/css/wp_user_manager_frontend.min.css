@@ -2,4 +2,4 @@
  * http://wp-user-manager.com
  * Copyright (c) 2015; * Licensed GPLv2+ */
 
-.wpum-default-registration-form .fieldset-comments,.wpum-default-registration-form .wpum-honeypot-field{display:none!important}
+.wpum-default-registration-form .fieldset-comments,.wpum-default-registration-form .wpum-honeypot-field{display:none!important}.wpum-single-profile{border:1px solid #e5e5e5;padding:15px;border-radius:3px}.wpum-left{float:left;padding:0;margin:0}.wpum-right{float:right;padding:0;margin:0}.wpum-clearfix{zoom:1}.wpum-clearfix:after,.wpum-clearfix:before{content:"\0020";display:block;height:0;visibility:hidden}.wpum-clearfix:after{clear:both}.wpum-user-avatar img{padding:5px;border-radius:999px!important;border:1px solid #e5e5e5;background:#fff;box-shadow:none!important}.wpum-avatar-img{float:left;margin:0 10px 0 0}.wpum-user-display-name{float:left;margin:0;padding:0}

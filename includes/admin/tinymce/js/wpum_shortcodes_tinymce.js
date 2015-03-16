@@ -213,6 +213,14 @@
 					}
 				}, // End Profile Edit
 
+				/* Profile */
+				{
+					text: 'Profiles Page',
+					onclick: function() {
+						editor.insertContent( '[wpum_profile]');
+					}
+				}, // End Profile
+
 			]
 		});
 	});
