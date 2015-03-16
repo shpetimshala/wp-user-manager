@@ -65,7 +65,7 @@ function wpum_logout_url( $custom_redirect = null ) {
 	if( !empty($custom_redirect) ) {
 		$redirect = esc_url($custom_redirect);
 	} else if( wpum_get_option('logout_redirect') ) {
-		$redirect = get_permalink( wpum_get_option('logout_redirect') );
+		$redirect = esc_url( get_permalink( wpum_get_option('logout_redirect') ) );
 	}
 
 	return wp_logout_url( apply_filters( 'wpum_logout_url', $redirect, $custom_redirect ) );
@@ -160,7 +160,7 @@ function wpum_get_login_page_url() {
 	$redirect = null;
 
 	if( wpum_get_option('login_page') )
-		$redirect = get_permalink( wpum_get_option('login_page') );
+		$redirect = esc_url( get_permalink( wpum_get_option('login_page') ) );
 
 	return $redirect;
 
@@ -182,7 +182,7 @@ function wpum_get_password_recovery_page_url() {
 	$redirect = null;
 
 	if( wpum_get_option('password_recovery_page') )
-		$redirect = get_permalink( wpum_get_option('password_recovery_page') );
+		$redirect = esc_url( get_permalink( wpum_get_option('password_recovery_page') ) );
 
 	return $redirect;
 
@@ -204,7 +204,7 @@ function wpum_get_registration_page_url() {
 	$redirect = null;
 
 	if( wpum_get_option('registration_page') )
-		$redirect = get_permalink( wpum_get_option('registration_page') );
+		$redirect = esc_url( get_permalink( wpum_get_option('registration_page') ) );
 
 	return $redirect;
 
@@ -226,7 +226,7 @@ function wpum_get_profile_edit_page_url() {
 	$redirect = null;
 
 	if( wpum_get_option('profile_edit_page') )
-		$redirect = get_permalink( wpum_get_option('profile_edit_page') );
+		$redirect = esc_url( get_permalink( wpum_get_option('profile_edit_page') ) );
 
 	return $redirect;
 

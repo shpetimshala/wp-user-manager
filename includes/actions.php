@@ -34,7 +34,7 @@ function wpum_restrict_wp_register() {
 
 	if(wpum_get_option('wp_login_signup_redirect')):
 		$permalink = wpum_get_option('wp_login_signup_redirect');
-		wp_redirect( get_permalink( $permalink ) );
+		wp_redirect( esc_url( get_permalink( $permalink ) ) );
     	exit();
     endif;
 
@@ -72,7 +72,7 @@ add_action('after_setup_theme', 'wpum_remove_admin_bar');
 function wpum_remove_profile_wp_admin() {
 
 	if( !current_user_can('administrator') && IS_PROFILE_PAGE && wpum_get_option('backend_profile_redirect') ){
-		wp_redirect( get_permalink( wpum_get_option('backend_profile_redirect' ) ) );
+		wp_redirect( esc_url( get_permalink( wpum_get_option('backend_profile_redirect' ) ) ) );
         exit;
 	}
 
@@ -93,9 +93,9 @@ function wpum_add_links_to_forms( $login, $register, $password ) {
 
 	get_wpum_template( 'helper-links.php', 
 		array(
-			'login'    => $login,
-			'register' => $register,
-			'password' => $password
+			'login'    => esc_attr( $login ),
+			'register' => esc_attr( $register ),
+			'password' => esc_attr( $password )
 		)
 	);
 
@@ -107,8 +107,8 @@ add_action( 'wpum_do_helper_links', 'wpum_add_links_to_forms', 10, 3 );
  * 
  * @since 1.0.0
  * @access public
- * @return mixed
  * @param array $atts Settings of the shortcode.
+ * @return mixed
  */
 function wpum_add_helper_links( $atts ) {
 
