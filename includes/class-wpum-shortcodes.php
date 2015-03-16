@@ -111,7 +111,7 @@ class WPUM_Shortcodes {
 			);
 
 			// Display helper links
-			do_action( 'wpum_do_helper_links', $login_link, $psw_link, $register_link );
+			do_action( 'wpum_do_helper_links', $login_link, $register_link, $psw_link );
 
 		endif;
 
