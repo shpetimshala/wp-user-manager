@@ -73,10 +73,28 @@
 									name: 'profile',
 									label: 'Show Profile Info',
 									'values': no_yes
+								},
+								{
+									type: 'listbox',
+									name: 'login_link',
+									label: 'Show login link',
+									'values': no_yes
+								},
+								{
+									type: 'listbox',
+									name: 'psw_link',
+									label: 'Show password link',
+									'values': yes_no
+								},
+								{
+									type: 'listbox',
+									name: 'register_link',
+									label: 'Show registration link',
+									'values': yes_no
 								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_login_form id="' + e.data.id + '" redirect="' + e.data.redirect + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" profile="' + e.data.profile + '" ]');
+								editor.insertContent( '[wpum_login_form id="' + e.data.id + '" redirect="' + e.data.redirect + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" profile="' + e.data.profile + '" login_link="' + e.data.login_link + '" psw_link="' + e.data.psw_link + '" register_link="' + e.data.register_link + '" ]');
 							}
 						});
 					}

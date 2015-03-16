@@ -13,7 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Add nonce field to login form needed for ajax validation
- * @since    1.0.0
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string nonce field
  */
 function wpum_add_nonce_to_login_form() {
 	return wp_nonce_field( "wpum_nonce_login_form", "wpum_nonce_login_security" );
@@ -21,50 +24,11 @@ function wpum_add_nonce_to_login_form() {
 add_action( 'login_form_bottom', 'wpum_add_nonce_to_login_form' );
 
 /**
- * Adds a password recovery link to the login from
- * 
- * @since 1.0.0
- * @uses  wpum_pwd_link_label filter for label.
- * @uses  wpum_get_pwd_page() function for retrieving the password recovery page url.
- */
-function wpum_add_pwd_link_to_loginform( $args ) {
-
-	$output = null;
-	$label = apply_filters( 'wpum_pwd_link_label', __('Lost your password?') );
-	$url = '';
-
-	if(wpum_get_option('display_password_link'))
-		$output = '<p class="wpum-pwd-link"><a href="'.$url.'">'. $label .'</a></p>';
-
-	echo $output;
-
-}
-add_action( 'wpum_after_inside_loginform_template', 'wpum_add_pwd_link_to_loginform' );
-
-/**
- * Adds a registration link to the login from
- * 
- * @since 1.0.0
- * @uses  wpum_registration_link_label filter for label.
- * @uses  wpum_get_registration_page() function for retrieving the registration page url.
- */
-function wpum_add_reg_link_to_loginform( $args ) {
-
-	$output = null;
-	$url = '';
-
-	if(wpum_get_option('display_registration_link'))
-		$output = '<p class="wpum-registration-link">'. apply_filters( 'wpum_registration_link_label', sprintf( __('Don\'t have an account? <a href="%s">Signup Now &raquo;</a>'), $url ) ) .'</p>';
-
-	echo $output;
-
-}
-add_action( 'wpum_after_inside_loginform_template', 'wpum_add_reg_link_to_loginform' );
-
-/**
  * Stops users from accessing wp-login.php?action=register
  * 
  * @since 1.0.0
+ * @access public
+ * @return void
  */
 function wpum_restrict_wp_register() {
 
@@ -81,6 +45,8 @@ add_action( 'login_form_register', 'wpum_restrict_wp_register' );
  * Stops users from seeing the admin bar on the frontend.
  * 
  * @since 1.0.0
+ * @access public
+ * @return void
  */
 function wpum_remove_admin_bar() {
 
@@ -100,6 +66,8 @@ add_action('after_setup_theme', 'wpum_remove_admin_bar');
  * Stops users from seeing the profile.php page in wp-admin.
  * 
  * @since 1.0.0
+ * @access public
+ * @return void
  */
 function wpum_remove_profile_wp_admin() {
 
@@ -110,3 +78,24 @@ function wpum_remove_profile_wp_admin() {
 
 }
 add_action( 'load-profile.php', 'wpum_remove_profile_wp_admin' );
+
+/**
+ * Add links to the forms.
+ * This action is loaded through each shortcode parameter.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_add_links_to_forms( $login, $register, $password ) {
+
+	get_wpum_template( 'helper-links.php', 
+		array(
+			'login'    => $login,
+			'register' => $register,
+			'password' => $password
+		)
+	);
+
+}
+add_action( 'wpum_do_helper_links', 'wpum_add_links_to_forms', 10, 3 );

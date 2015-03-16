@@ -51,7 +51,10 @@ class WPUM_Shortcodes {
 			'label_username' => '',
 			'label_password' => '',
 			'label_remember' => '',
-			'label_log_in'   => ''
+			'label_log_in'   => '',
+			'login_link'     => '',
+			'psw_link'       => '',
+			'register_link'  => ''
 		), $atts ) );
 
 		// Set default values if options missing
@@ -80,6 +83,9 @@ class WPUM_Shortcodes {
 			'id_password'    => esc_attr($id).'user_pass',
 			'id_remember'    => esc_attr($id).'rememberme',
 			'id_submit'      => esc_attr($id).'wp-submit',
+			'login_link'     => esc_attr($login_link),
+			'psw_link'       => esc_attr($psw_link),
+			'register_link'  => esc_attr($register_link)
 		);
 
 		ob_start();
@@ -103,6 +109,9 @@ class WPUM_Shortcodes {
 					'atts' => $atts,
 				)
 			);
+
+			// Display helper links
+			do_action( 'wpum_do_helper_links', $login_link, $psw_link, $register_link );
 
 		endif;
 
