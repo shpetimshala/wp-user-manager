@@ -19,13 +19,13 @@
 	
 	<?php if( $register == 'yes' ) : ?>
 	<p class="wpum-register-url">
-		<?php echo apply_filters( 'wpum_registration_link_label', sprintf( __('Don\'t have an account? <a href="%s">Signup Now &raquo;</a>'), esc_url( get_permalink( wpum_get_option('password_recovery_page') ) ) ) ); ?>
+		<?php echo apply_filters( 'wpum_registration_link_label', sprintf( __('Don\'t have an account? <a href="%s">Signup Now &raquo;</a>'), esc_url( get_permalink( wpum_get_option('registration_page') ) ) ) ); ?>
 	</p>
 	<?php endif; ?>
 	
 	<?php if( $password == 'yes' ) : ?>
 	<p class="wpum-password-recovery-url">
-		<a href="<?php echo esc_url( get_permalink( wpum_get_option('registration_page') ) );?>">
+		<a href="<?php echo esc_url( get_permalink( wpum_get_option('password_recovery_page') ) );?>">
 			<?php echo apply_filters( 'wpum_password_link_label', __('Lost your password?') ); ?>
 		</a>
 	</p>

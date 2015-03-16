@@ -212,7 +212,3 @@ class WPUM_Shortcodes {
 }
 
 new WPUM_Shortcodes;
-
-
-
-
