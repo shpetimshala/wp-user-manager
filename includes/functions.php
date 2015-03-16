@@ -144,3 +144,91 @@ function wp_new_user_notification( $user_id, $plaintext_pass ) {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_get_login_page_url' ) ) :
+/**
+ * Returns the URL of the login page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ * @uses wpum_get_option() To retrieve the selected page ID
+ * @uses get_permalink To retrieve permalink given an ID.
+ */
+function wpum_get_login_page_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('login_page') )
+		$redirect = get_permalink( wpum_get_option('login_page') );
+
+	return $redirect;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_get_password_recovery_page_url' ) ) :
+/**
+ * Returns the URL of the password recovery page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ * @uses wpum_get_option() To retrieve the selected page ID
+ * @uses get_permalink To retrieve permalink given an ID.
+ */
+function wpum_get_password_recovery_page_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('password_recovery_page') )
+		$redirect = get_permalink( wpum_get_option('password_recovery_page') );
+
+	return $redirect;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_get_registration_page_url' ) ) :
+/**
+ * Returns the URL of the registration page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ * @uses wpum_get_option() To retrieve the selected page ID
+ * @uses get_permalink To retrieve permalink given an ID.
+ */
+function wpum_get_registration_page_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('registration_page') )
+		$redirect = get_permalink( wpum_get_option('registration_page') );
+
+	return $redirect;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_get_profile_edit_page_url' ) ) :
+/**
+ * Returns the URL of the profile edit page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ * @uses wpum_get_option() To retrieve the selected page ID
+ * @uses get_permalink To retrieve permalink given an ID.
+ */
+function wpum_get_profile_edit_page_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('profile_edit_page') )
+		$redirect = get_permalink( wpum_get_option('profile_edit_page') );
+
+	return $redirect;
+
+}
+endif;
