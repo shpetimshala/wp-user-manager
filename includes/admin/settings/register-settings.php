@@ -117,11 +117,31 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Pages Setup', 'wpum' ),
 					'type' => 'header'
 				),
-				
+				'login_page' => array(
+					'id'   => 'login_page',
+					'name' => __( 'Login page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_login_form] shortcode.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
 				'password_recovery_page' => array(
 					'id'   => 'password_recovery_page',
 					'name' => __( 'Password recovery page:', 'wpum' ),
 					'desc'    => __('Select the page where you have added the [wpum_password_recovery] shortcode.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'registration_page' => array(
+					'id'   => 'registration_page',
+					'name' => __( 'Registration page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_register] shortcode.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
+				'profile_edit_page' => array(
+					'id'   => 'profile_edit_page',
+					'name' => __( 'Profile Edit page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_profile_edit] shortcode.'),
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
