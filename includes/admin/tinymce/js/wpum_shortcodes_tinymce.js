@@ -140,9 +140,27 @@
 									label: 'Form ID (optional)',
 									value: ''
 								},
+								{
+									type: 'listbox',
+									name: 'login_link',
+									label: 'Show login link',
+									'values': yes_no
+								},
+								{
+									type: 'listbox',
+									name: 'psw_link',
+									label: 'Show password link',
+									'values': yes_no
+								},
+								{
+									type: 'listbox',
+									name: 'register_link',
+									label: 'Show registration link',
+									'values': no_yes
+								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_register form_id="' + e.data.form_id + '" ]');
+								editor.insertContent( '[wpum_register form_id="' + e.data.form_id + '" login_link="' + e.data.login_link + '" psw_link="' + e.data.psw_link + '" register_link="' + e.data.register_link + '" ]');
 							}
 						});
 					}
@@ -161,9 +179,27 @@
 									label: 'Form ID (optional)',
 									value: ''
 								},
+								{
+									type: 'listbox',
+									name: 'login_link',
+									label: 'Show login link',
+									'values': yes_no
+								},
+								{
+									type: 'listbox',
+									name: 'psw_link',
+									label: 'Show password link',
+									'values': no_yes
+								},
+								{
+									type: 'listbox',
+									name: 'register_link',
+									label: 'Show registration link',
+									'values': yes_no
+								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_password_recovery form_id="' + e.data.form_id + '" ]');
+								editor.insertContent( '[wpum_password_recovery form_id="' + e.data.form_id + '" login_link="' + e.data.login_link + '" psw_link="' + e.data.psw_link + '" register_link="' + e.data.register_link + '" ]');
 							}
 						});
 					}

@@ -154,7 +154,10 @@ class WPUM_Shortcodes {
 	public function wpum_registration( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'form_id' => 'default_registration_form'
+			'form_id'       => 'default_registration_form',
+			'login_link'    => '',
+			'psw_link'      => '',
+			'register_link' => ''
 		), $atts ) );
 
 		// Set default values
@@ -175,7 +178,10 @@ class WPUM_Shortcodes {
 	public function wpum_password( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'form_id' => 'default_password_form'
+			'form_id'       => 'default_password_form',
+			'login_link'    => '',
+			'psw_link'      => '',
+			'register_link' => ''
 		), $atts ) );
 
 		// Set default values

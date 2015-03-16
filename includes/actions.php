@@ -80,12 +80,14 @@ function wpum_remove_profile_wp_admin() {
 add_action( 'load-profile.php', 'wpum_remove_profile_wp_admin' );
 
 /**
- * Add links to the forms.
- * This action is loaded through each shortcode parameter.
+ * Action to display helper links.
  * 
  * @since 1.0.0
  * @access public
- * @return void
+ * @param string $login yes/no
+ * @param string $register yes/no
+ * @param string $password yes/no
+ * @return mixed
  */
 function wpum_add_links_to_forms( $login, $register, $password ) {
 
@@ -99,3 +101,23 @@ function wpum_add_links_to_forms( $login, $register, $password ) {
 
 }
 add_action( 'wpum_do_helper_links', 'wpum_add_links_to_forms', 10, 3 );
+
+/**
+ * Add helper links to the password form.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return mixed
+ * @param array $atts Settings of the shortcode.
+ */
+function wpum_add_helper_links( $atts ) {
+
+	$login_link    = $atts['login_link'];
+	$psw_link      = $atts['psw_link'];
+	$register_link = $atts['register_link'];
+
+	// Display helper links
+	do_action( 'wpum_do_helper_links', $login_link, $register_link, $psw_link );
+
+}
+add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 );
