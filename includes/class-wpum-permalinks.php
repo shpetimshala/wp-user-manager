@@ -97,7 +97,7 @@ class WPUM_Permalinks {
 						</th>
 						<td>
 							<code>
-								<?php echo esc_url( get_permalink( wpum_get_option('profile_page') ) ); ?>
+								<?php echo wpum_get_core_page_url( 'profile' ); ?>
 							</code>
 						</td>
 					</tr>

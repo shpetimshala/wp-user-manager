@@ -313,3 +313,38 @@ function wpum_get_core_page_id( $page ) {
 
 	return $id;
 }
+
+/**
+ * Get URL of a core page.
+ *
+ * @since 1.0.0
+ * @param string $name the name of the page. Supports: login, register, password, profile_edit, profile.
+ * @return string $url of the core page.
+ */
+function wpum_get_core_page_url( $page ) {
+
+	$url = 0;
+
+	switch ( $page ) {
+		case 'login':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('login') ) );
+			break;
+		case 'register':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('register') ) );
+			break;
+		case 'password':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('password') ) );
+			break;
+		case 'profile_edit':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('profile_edit') ) );
+			break;
+		case 'profile':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('profile') ) );
+			break;
+		default:
+			// nothing
+			break;
+	}
+
+	return $url;
+}
