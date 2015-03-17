@@ -231,6 +231,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			// Ajax Handler
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
+			// Permalinks for WPUM
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-permalinks.php';
 			
 		}
 
