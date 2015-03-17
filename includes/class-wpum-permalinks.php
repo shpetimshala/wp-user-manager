@@ -97,11 +97,10 @@ class WPUM_Permalinks {
 						</th>
 						<td>
 							<code>
-								<?php echo wpum_get_core_page_url( 'profile' ); ?>
+								<?php echo wpum_get_core_page_url( 'profile' ); ?><?php echo $settings['sample']; ?>
 							</code>
 						</td>
 					</tr>
-
 				<?php endforeach; ?>
 			</tbody>
 		</table>

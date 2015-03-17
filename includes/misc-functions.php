@@ -263,16 +263,18 @@ function wpum_default_user_fields_list() {
  */
 function wpum_get_permalink_structures() {
 
+	$current_user = wp_get_current_user();
+
 	$structures = array(
 		'user_id' => array(
 			'name' => 'user_id',
 			'label' => __('Display user ID'),
-			'description' => 'Description goes here'
+			'sample' => $current_user->ID
 		),
 		'username' => array(
 			'name' => 'username',
 			'label' => __('Display username'),
-			'description' => 'Description goes here'
+			'sample' => $current_user->user_login
 		),
 	);
 
@@ -288,7 +290,7 @@ function wpum_get_permalink_structures() {
  */
 function wpum_get_core_page_id( $page ) {
 
-	$id = 0;
+	$id = null;
 
 	switch ( $page ) {
 		case 'login':
@@ -323,7 +325,7 @@ function wpum_get_core_page_id( $page ) {
  */
 function wpum_get_core_page_url( $page ) {
 
-	$url = 0;
+	$url = null;
 
 	switch ( $page ) {
 		case 'login':
