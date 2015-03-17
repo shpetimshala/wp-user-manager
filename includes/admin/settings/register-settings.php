@@ -145,6 +145,13 @@ function wpum_get_registered_settings() {
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
+				'profile_page' => array(
+					'id'   => 'profile_edit_page',
+					'name' => __( 'Profile page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_profile] shortcode.'),
+					'type' => 'select',
+					'options' => wpum_get_pages()
+				),
 				'header3' => array(
 					'id'   => 'header3',
 					'name' => __( 'Passwords Setup', 'wpum' ),

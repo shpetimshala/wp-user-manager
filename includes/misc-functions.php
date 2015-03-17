@@ -254,3 +254,62 @@ function wpum_default_user_fields_list() {
 	return $fields;
 
 }
+
+/**
+ * Get a list of available permalink structures.
+ *
+ * @since 1.0.0
+ * @return array of all the structures.
+ */
+function wpum_get_permalink_structures() {
+
+	$structures = array(
+		'user_id' => array(
+			'name' => 'user_id',
+			'label' => __('Display user ID'),
+			'description' => 'Description goes here'
+		),
+		'username' => array(
+			'name' => 'username',
+			'label' => __('Display username'),
+			'description' => 'Description goes here'
+		),
+	);
+
+	return apply_filters( 'wpum_get_permalink_structures', $structures);
+}
+
+/**
+ * Get ID of a core page.
+ *
+ * @since 1.0.0
+ * @param string $name the name of the page. Supports: login, register, password, profile_edit, profile.
+ * @return int $id of the core page.
+ */
+function wpum_get_core_page_id( $page ) {
+
+	$id = 0;
+
+	switch ( $page ) {
+		case 'login':
+			$id = wpum_get_option('login_page');
+			break;
+		case 'register':
+			$id = wpum_get_option('registration_page');
+			break;
+		case 'password':
+			$id = wpum_get_option('password_recovery_page');
+			break;
+		case 'profile_edit':
+			$id = wpum_get_option('profile_edit_page');
+			break;
+		case 'profile':
+			$id = wpum_get_option('profile_page');
+			break;
+		default:
+			// nothing
+			break;
+	}
+
+	return $id;
+}
