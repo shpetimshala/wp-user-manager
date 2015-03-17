@@ -263,18 +263,16 @@ function wpum_default_user_fields_list() {
  */
 function wpum_get_permalink_structures() {
 
-	$current_user = wp_get_current_user();
-
 	$structures = array(
 		'user_id' => array(
-			'name' => 'user_id',
-			'label' => __('Display user ID'),
-			'sample' => $current_user->ID
+			'name'   => 'user_id',
+			'label'  => _x( 'Display user ID', 'Permalink structure' ),
+			'sample' => '123'
 		),
 		'username' => array(
-			'name' => 'username',
-			'label' => __('Display username'),
-			'sample' => $current_user->user_login
+			'name'   => 'username',
+			'label'  => _x( 'Display username', 'Permalink structure' ),
+			'sample' => _x( 'username', 'Example of permalink setting' )
 		),
 	);
 
