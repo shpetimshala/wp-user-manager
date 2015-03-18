@@ -333,7 +333,11 @@ function wpum_get_registered_settings() {
 		),
 		'profile' => apply_filters( 'wpum_settings_profile',
 			array(
-				
+				'profile_permalinks' => array(
+					'id'   => 'profile_permalinks',
+					'name' => __( 'Profile permalink:', 'wpum' ),
+					'type' => 'hook'
+				),
 			)
 		),
 		'redirects' => apply_filters( 'wpum_settings_redirects',

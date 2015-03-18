@@ -157,3 +157,20 @@ function wpum_option_restore_default_fields() {
 
 }
 add_action( 'wpum_restore_default_fields', 'wpum_option_restore_default_fields' );
+
+
+/**
+ * Function to display content of the "wpum_profile_permalink" option.
+ *
+ * @since 1.0.0
+ * @return array
+*/
+function wpum_profile_permalink() {
+
+	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s'), wpum_get_profile_page_url(), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
+	$output .= '<p class="description">' . sprintf( __('You can change the profiles permalink structure into your <a href="%s">permalink settings page</a>.'), admin_url( 'options-permalink.php' ) ) . '</p>';
+
+	echo $output;
+
+}
+add_action( 'wpum_profile_permalinks', 'wpum_profile_permalink' );
