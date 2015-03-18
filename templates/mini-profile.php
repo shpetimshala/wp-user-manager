@@ -17,19 +17,31 @@ if( !is_object( $user_data ) ) {
 
 ?>
 
-<div class="wpum-single-profile">
+<div class="wpum-single-profile" id="wpum-profile-<?php echo $user_data->ID;?>">
 
-	<div class="wpum-user-avatar wpum-left">
-		<div class="wpum-avatar-img">
-			<?php echo get_avatar( $user_data->ID , 64 ); ?>
+	<div class="wpum-user-details wpum_one_half">
+		<div class="wpum-avatar-img wpum_one_fifth">
+			<a href=""><?php echo get_avatar( $user_data->ID , 64 ); ?></a>
 		</div>
-		<div class="wpum-user-display-name">
-			<?php echo $user_data->display_name; ?> 
+		<div class="wpum-inner-details wpum_four_fith last">
+			<div class="wpum-user-display-name">
+				<a href=""><?php echo esc_attr( $user_data->display_name ); ?></a>
+			</div>
+			<div class="wpum-user-description">
+				<?php echo wpautop( esc_attr( get_user_meta( $user_data->ID, 'description', true) ), true ); ?>
+			</div>
 		</div>
 	</div>
 
-	<div class="wpum-user-details wpum-right">
-		<?php echo $user_data->user_nicename; ?>
+	<div class="wpum-user-details wpum-align-right wpum_one_half last">
+			
+		<ul class="wpum-user-links">
+			<li><a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e('Send Email');?></a></li>
+			<?php if( !empty( $user_data->user_url ) ) : ?>
+			<li><a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e('Visit website');?></a></li>
+			<?php endif; ?>
+		</ul>
+
 	</div>
 
 	<div class="wpum-clearfix"></div>
