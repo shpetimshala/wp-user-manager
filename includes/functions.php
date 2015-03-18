@@ -255,3 +255,52 @@ function wpum_get_profile_page_url() {
 }
 endif;
 
+if ( ! function_exists( 'wpum_get_user_by_data' ) ) :
+/**
+ * Returns a wp user object containg user's data.
+ * The user is retrieved based on the current permalink structure.
+ * This function is currently used only through the wpum_profile shortcode.
+ * If no data is set, returns currently logged in user data.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return object
+ */
+function wpum_get_user_by_data() {
+	
+	$user_data = null;
+	$permalink_structure = get_option( 'wpum_permalink', 'user_id' );
+	$who = (get_query_var('user')) ? get_query_var('user') : null;
+
+	// Checks we are on the profile page
+	if( is_page( wpum_get_core_page_id('profile') ) ) {
+
+		// Verify the user isset
+		if( $who ) {
+
+			switch ( $permalink_structure ) {
+				case 'user_id':
+					$user_data = get_user_by( 'id', intval( get_query_var('user') ) );
+					break;
+				case 'username':
+					$user_data = get_user_by( 'login', esc_attr( get_query_var('user') ) );
+					break;
+				default:
+					$user_data = get_user_by( 'id', intval( get_query_var('user') ) );
+					break;
+			}
+
+		} else {
+
+			$user_data = get_user_by( 'id', get_current_user_id() );
+
+		}
+
+	}
+
+	return $user_data;
+
+}
+endif;
+
+

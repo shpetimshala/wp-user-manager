@@ -226,7 +226,7 @@ class WPUM_Shortcodes {
 		ob_start();
 			
 		get_wpum_template( 'mini-profile.php', array( 
-				'user_data' => get_user_by( 'id', get_current_user_id() )
+				'user_data' => wpum_get_user_by_data()
 			) 
 		);
 

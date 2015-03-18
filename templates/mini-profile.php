@@ -8,9 +8,6 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
-
-$who = (get_query_var('user')) ? get_query_var('user') : 0;
-
 ?>
 
 <div class="wpum-single-profile">
@@ -25,7 +22,7 @@ $who = (get_query_var('user')) ? get_query_var('user') : 0;
 	</div>
 
 	<div class="wpum-user-details wpum-right">
-	Test <?php echo $who; echo $user_data->user_nicename; ?>
+		<?php echo $user_data->user_nicename; ?>
 	</div>
 
 	<div class="wpum-clearfix"></div>
