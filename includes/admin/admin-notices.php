@@ -44,13 +44,13 @@ function wpum_admin_messages() {
 	if ( $screen->base == 'users_page_wpum-settings' ) {
 
 		// Display error if no core page is setup
-		if ( !wpum_get_option('login_page') || !wpum_get_option('password_recovery_page' || !wpum_get_option('registration_page') || !wpum_get_option('profile_edit_page') || !wpum_get_option('profile_page') ) ) {
+		if ( !wpum_get_option('login_page') || !wpum_get_option('password_recovery_page') || !wpum_get_option('registration_page') || !wpum_get_option('profile_edit_page') || !wpum_get_option('profile_page') ) {
 			add_settings_error( 'wpum-notices', 'page-missing', __('One or more WPUM pages are not configured.') . ' ' . sprintf( __('<a href="%s">Setup your pages here.</a>'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ), 'error' );	
 		}
 
 		// Display error if wrong permalinks
 		if( get_option('permalink_structure' ) == '' ) {
-			add_settings_error( 'wpum-notices', 'permalink-wrong', __( 'You must change your permalinks to anything else other than "default" for profiles to work.', 'wpum' ), 'error' );	
+			add_settings_error( 'wpum-notices', 'permalink-wrong', sprintf(__( 'You must <a href="%s">change your permalinks</a> to anything else other than "default" for profiles to work.', 'wpum' ), admin_url( 'options-permalink.php' ) ), 'error' );	
 		}
 
 	}

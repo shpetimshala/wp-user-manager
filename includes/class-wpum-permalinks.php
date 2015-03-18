@@ -86,28 +86,36 @@ class WPUM_Permalinks {
 		ob_start();
 		?>
 
-		<p><?php _e('These settings control the permalinks used for users profiles. These settings only apply when <strong>not using "default" permalinks above</strong>.'); ?></p>
+		<?php if( get_option('permalink_structure' ) == '' ) { ?>
 
-		<table class="form-table">
-			<tbody>
-				<?php foreach ($structures as $key => $settings) : ?>
-					<tr>
-						<th>
-							<label>
-								<input name="user_permalink" type="radio" value="<?php echo $settings['name']; ?>" <?php checked( $settings['name'], $saved_structure ); ?> />
-								<?php echo $settings['label']; ?>
-							</label>
-						</th>
-						<td>
-							<code>
-								<?php echo wpum_get_profile_page_url(); ?><?php echo $settings['sample']; ?>
-							</code>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				<input type="hidden" name="wpum-action" value="save_permalink_structure"/>
-			</tbody>
-		</table>
+		<p><?php printf(__( 'You must <a href="%s">change your permalinks</a> to anything else other than "default" for profiles to work.', 'wpum' ), admin_url( 'options-permalink.php' ) ) ?></p>
+
+		<?php } else { ?>
+
+			<p><?php _e('These settings control the permalinks used for users profiles. These settings only apply when <strong>not using "default" permalinks above</strong>.'); ?></p>
+
+			<table class="form-table">
+				<tbody>
+					<?php foreach ($structures as $key => $settings) : ?>
+						<tr>
+							<th>
+								<label>
+									<input name="user_permalink" type="radio" value="<?php echo $settings['name']; ?>" <?php checked( $settings['name'], $saved_structure ); ?> />
+									<?php echo $settings['label']; ?>
+								</label>
+							</th>
+							<td>
+								<code>
+									<?php echo wpum_get_profile_page_url(); ?><?php echo $settings['sample']; ?>
+								</code>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					<input type="hidden" name="wpum-action" value="save_permalink_structure"/>
+				</tbody>
+			</table>
+
+		<?php } ?>
 
 		<?php
 		echo ob_get_clean();

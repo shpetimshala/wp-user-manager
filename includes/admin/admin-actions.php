@@ -174,6 +174,9 @@ function wpum_profile_permalink() {
 	if( !wpum_get_core_page_id( 'profile' ) )
 		$output = '<p style="color:red;"><strong>'. __('Your users profile page is not configured.') .'</strong>'. ' ' . sprintf( __('<a href="%s">Setup your profile page here.</a>'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ) .'</p>';
 
+	if( get_option('permalink_structure' ) == '' )
+		$output = '<p style="color:red;"><strong>' . sprintf(__( 'You must <a href="%s">change your permalinks</a> to anything else other than "default" for profiles to work.', 'wpum' ), admin_url( 'options-permalink.php' ) ) .'</strong></p>' ;	
+
 	echo $output;
 
 }
