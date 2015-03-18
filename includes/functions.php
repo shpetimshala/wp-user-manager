@@ -232,3 +232,26 @@ function wpum_get_profile_edit_page_url() {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_get_profile_page_url' ) ) :
+/**
+ * Returns the URL of the user's profile page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ * @uses wpum_get_option() To retrieve the selected page ID
+ * @uses get_permalink To retrieve permalink given an ID.
+ */
+function wpum_get_profile_page_url() {
+		
+	$redirect = null;
+
+	if( wpum_get_option('profile_page') )
+		$redirect = esc_url( get_permalink( wpum_get_option('profile_page') ) );
+
+	return $redirect;
+
+}
+endif;
+

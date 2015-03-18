@@ -25,7 +25,7 @@ $who = (get_query_var('user')) ? get_query_var('user') : 0;
 	</div>
 
 	<div class="wpum-user-details wpum-right">
-	Test <?php echo $who; ?>
+	Test <?php echo $who; echo $user_data->user_nicename; ?>
 	</div>
 
 	<div class="wpum-clearfix"></div>
