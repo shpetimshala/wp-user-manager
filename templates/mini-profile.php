@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-$who = (get_query_var('args')) ? get_query_var('args') : 0;
+$who = (get_query_var('user')) ? get_query_var('user') : 0;
 
 ?>
 

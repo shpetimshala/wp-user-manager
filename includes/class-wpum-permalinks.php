@@ -49,12 +49,13 @@ class WPUM_Permalinks {
 		global $wp; 
 	    
 	    // Define args
-	    $wp->add_query_var('args');   
-	    $wp->add_query_var('arg_username');
+		$wp->add_query_var('user');
+		$page_id   = wpum_get_core_page_id( 'profile' );
+		$page_slug = esc_attr( get_post_field( 'post_name', intval( $page_id ) ) );
 	    
 	    // Add rewrite rule
-	    add_rewrite_rule('profile/([0-9]+)/([^/]*)/page/([0-9]+)','index.php?pagename=profile&args=$matches[1]&arg_username=$matches[2]&paged=$matches[3]','top');
-	    add_rewrite_rule('profile/([0-9]+)/([^/]*)','index.php?pagename=profile&args=$matches[1]&arg_username=$matches[2]','top');
+	    add_rewrite_rule( $page_slug . '/([^/]*)/page/([0-9]+)','index.php?page_id='. $page_id .'&user=$matches[1]&paged=$matches[2]','top');
+	    add_rewrite_rule( $page_slug . '/([^/]*)','index.php?page_id='. $page_id .'&user=$matches[1]','top');
 
 	}
 
