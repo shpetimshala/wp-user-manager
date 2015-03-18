@@ -67,16 +67,16 @@ class WPUM_Emails_Editor {
 
 		// Registration Email
 		$emails_list[ 'register' ] = array(
-            'id' => 'register',
-            'title' => __('Registration Email'),
-            'description' => __('This is the email that is sent to the user upon successful registration.'),
+			'id'          => 'register',
+			'title'       => __('Registration Email'),
+			'description' => __('This is the email that is sent to the user upon successful registration.'),
         );
 
         // Password Recovery Email
 		$emails_list[ 'password' ] = array(
-            'id' => 'password',
-            'title' => __('Password Recovery'),
-            'description' => __('This is the email that is sent to the user when recovering the password.'),
+			'id'          => 'password',
+			'title'       => __('Password Recovery'),
+			'description' => __('This is the email that is sent to the user when recovering the password.'),
         );
 
 		return apply_filters( 'wpum_emails_list', $emails_list );
@@ -93,7 +93,7 @@ class WPUM_Emails_Editor {
 
 		// Abort if not correctly loaded
 		if ( !isset( $_GET['wpum_action'] ) || isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] !== 'edit' || !current_user_can( 'manage_options' ) || !isset( $_GET['email-id'] ) || !isset( $_GET['email-title'] ) ) {
-			_doing_it_wrong( __FUNCTION__ , 'You have no rights to access this page', '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
 			return;
 		}
 
@@ -116,17 +116,17 @@ class WPUM_Emails_Editor {
 		}
 
 		if( ! current_user_can( 'manage_options' ) ) {
-			_doing_it_wrong( __FUNCTION__ , 'You have no rights to access this page', '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
 			return;
 		}
 
 		if( ! wp_verify_nonce( $data['wpum-email-nonce'], 'wpum_email_nonce' ) ) {
-			_doing_it_wrong( __FUNCTION__ , 'Nonce verification failed', '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'Nonce verification failed', '_doing_it_wrong error message' ), '1.0.0' );
 			return;
 		}
 
 		if( ! isset( $data['email_id'] ) ) {
-			_doing_it_wrong( __FUNCTION__ , 'No email ID was provided', '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'No email ID was provided', '_doing_it_wrong error message' ), '1.0.0' );
 			return;
 		}
 

@@ -31,6 +31,7 @@ class WPUM_Permalinks {
 		// Execute only on admin panel.
 		if( is_admin() ) {
 			add_action( 'admin_init', array( $this, 'add_new_permalink_settings' ) );
+			add_action( 'wpum_save_permalink_structure', array( $this, 'save_structure' ) );
 		}
 		
 	}
@@ -79,6 +80,7 @@ class WPUM_Permalinks {
 	public function display_settings() {
 
 		$structures = wpum_get_permalink_structures();
+		$saved_structure = get_option( 'wpum_permalink', 'user_id' );
 
 		ob_start();
 		?>
@@ -91,7 +93,7 @@ class WPUM_Permalinks {
 					<tr>
 						<th>
 							<label>
-								<input name="user_permalink" type="radio" value="<?php echo $settings['name']; ?>" <?php checked( $settings['name'], null ); ?> />
+								<input name="user_permalink" type="radio" value="<?php echo $settings['name']; ?>" <?php checked( $settings['name'], $saved_structure ); ?> />
 								<?php echo $settings['label']; ?>
 							</label>
 						</th>
@@ -102,12 +104,43 @@ class WPUM_Permalinks {
 						</td>
 					</tr>
 				<?php endforeach; ?>
+				<input type="hidden" name="wpum-action" value="save_permalink_structure"/>
 			</tbody>
 		</table>
 
 		<?php
 		echo ob_get_clean();
-	} 
+	}
+
+	/**
+	 * Saves the permalink structure.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function save_structure() {
+
+		// Check everything is correct.
+		if( ! is_admin() ) {
+			return;
+		}
+
+		// Bail if no cap
+		if( ! current_user_can( 'manage_options' ) ) {
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
+			return;
+		}
+
+		// Check that the saved permalink method is one of the registered structures.
+		if( isset( $_POST['user_permalink'] ) && array_key_exists( $_POST['user_permalink'] , wpum_get_permalink_structures() ) ) {
+		
+			$user_permalink = sanitize_text_field( $_POST['user_permalink'] );
+			update_option( 'wpum_permalink', $user_permalink );
+
+		}
+
+	}
 
 }
 

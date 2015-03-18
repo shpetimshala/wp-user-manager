@@ -276,7 +276,7 @@ function wpum_get_permalink_structures() {
 		),
 	);
 
-	return apply_filters( 'wpum_get_permalink_structures', $structures);
+	return apply_filters( 'wpum_get_permalink_structures', $structures );
 }
 
 /**
