@@ -286,7 +286,7 @@ function wpum_get_user_by_data() {
 					$user_data = get_user_by( 'login', esc_attr( get_query_var('user') ) );
 					break;
 				default:
-					$user_data = get_user_by( 'id', intval( get_query_var('user') ) );
+					$user_data = apply_filters( "wpum_get_user_by_data_{$permalink_structure}", $permalink_structure, $who );
 					break;
 			}
 
