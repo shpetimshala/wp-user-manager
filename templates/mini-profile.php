@@ -8,6 +8,13 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
+// Display error message if no user has been found.
+if( !is_object( $user_data ) ) {
+	get_wpum_template( 'profile-not-found.php' );
+	return;
+}
+
 ?>
 
 <div class="wpum-single-profile">
