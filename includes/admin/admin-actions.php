@@ -170,6 +170,10 @@ function wpum_profile_permalink() {
 	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s'), wpum_get_profile_page_url(), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
 	$output .= '<p class="description">' . sprintf( __('You can change the profiles permalink structure into your <a href="%s">permalink settings page</a>.'), admin_url( 'options-permalink.php' ) ) . '</p>';
 
+	// Display error if something is wrong
+	if( !wpum_get_core_page_id( 'profile' ) )
+		$output = '<p style="color:red;"><strong>'. __('Your users profile page is not configured.') .'</strong>'. ' ' . sprintf( __('<a href="%s">Setup your profile page here.</a>'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ) .'</p>';
+
 	echo $output;
 
 }

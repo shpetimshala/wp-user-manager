@@ -19,7 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
  */
 function wpum_admin_messages() {
+	
 	global $wpum_options;
+	$screen = get_current_screen();
 
 	/*
 	if (  isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true && !wpum_get_option('custom_passwords') && wpum_get_option('password_strength') ) {
@@ -38,6 +40,11 @@ function wpum_admin_messages() {
 		add_settings_error( 'wpum-notices', 'emails-updated', __( 'Email successfully updated.', 'wpum' ), 'updated' );	
 	}
 
+	if ( !wpum_get_option('login_page') || !wpum_get_option('password_recovery_page' || !wpum_get_option('registration_page') || !wpum_get_option('profile_edit_page') || !wpum_get_option('profile_page') ) && $screen->base == 'users_page_wpum-settings' ) {
+		add_settings_error( 'wpum-notices', 'page-missing', __('One or more WPUM pages are not configured.') . ' ' . sprintf( __('<a href="%s">Setup your pages here.</a>'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ), 'error' );	
+	}
+
 	settings_errors( 'wpum-notices' );
+
 }
 add_action( 'admin_notices', 'wpum_admin_messages' );
