@@ -357,10 +357,10 @@ function wpum_get_core_page_url( $page ) {
  */
 function wpum_guests_can_view_profiles() {
 
-	$check = false;
+	$check = true;
 
-	if( wpum_get_option('guests_can_view_profiles') )
-		$check = true;
+	if( !wpum_get_option('guests_can_view_profiles') && !is_user_logged_in() )
+		$check = false;
 
 	return $check;
 
