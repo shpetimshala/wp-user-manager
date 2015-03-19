@@ -130,6 +130,8 @@
   font-size: 1.1rem;
   text-transform: capitalize;
   font-weight: bold; }
+.wpum-single-profile .wpum-user-description p:last-child {
+  margin-bottom: 0px; }
 
 .wpum-align-right {
   text-align: right; }

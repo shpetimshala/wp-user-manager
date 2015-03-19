@@ -224,9 +224,12 @@ class WPUM_Shortcodes {
 		), $atts ) );
 
 		ob_start();
-			
-		get_wpum_template( 'mini-profile.php', array( 
-				'user_data' => wpum_get_user_by_data()
+		
+		echo "do setting to show content when not logged in";
+
+		get_wpum_template( 'profile-card.php', array( 
+				'user_data' => wpum_get_user_by_data(),
+				'card_template' => 'default'
 			) 
 		);
 

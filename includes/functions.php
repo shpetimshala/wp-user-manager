@@ -302,5 +302,3 @@ function wpum_get_user_by_data() {
 
 }
 endif;
-
-
