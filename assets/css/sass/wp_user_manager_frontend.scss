@@ -40,14 +40,18 @@
 	border: 1px solid #e5e5e5;
 	background: #fff;
 	box-shadow: none !important;
+	max-width: 100%;
+	height: auto;
 }
 
 .wpum-single-profile {
 	.wpum-user-links {
+		margin: 15px 0px 10px 0px !important;
+		padding: 0px !important;
 		li {
 			list-style: none;
 			display: inline-block;
-			margin-left: 10px;
+			margin: 0px 10px 0px 0px;
 			a {
 				text-decoration: none;
 				background-color: #efefef;
@@ -55,14 +59,12 @@
 				-moz-border-radius: 3px;
 				border-radius: 3px;
 				padding: 5px 10px 5px;
-				font-size: 12px;
 			}
 		}
 	}
 	.wpum-user-display-name {
 		a {
 			text-decoration: none;
-			font-size: 1.1rem;
 			text-transform: capitalize;
 			font-weight: bold;
 		}
