@@ -227,7 +227,6 @@ class WPUM_Shortcodes {
 		
 		get_wpum_template( 'profile-card.php', array( 
 				'user_data' => wpum_get_user_by_data(),
-				'card_template' => 'default'
 			) 
 		);
 
