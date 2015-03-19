@@ -348,3 +348,20 @@ function wpum_get_core_page_url( $page ) {
 
 	return $url;
 }
+
+/**
+ * Checks if guests can view users profiles.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_guests_can_view_profiles() {
+
+	$check = false;
+
+	if( wpum_get_option('guests_can_view_profiles') )
+		$check = true;
+
+	return $check;
+
+}

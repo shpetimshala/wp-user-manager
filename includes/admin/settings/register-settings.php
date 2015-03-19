@@ -329,6 +329,12 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Default Fields Editor:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'guests_can_view_profiles' => array(
+					'id' => 'guests_can_view_profiles',
+					'name' => __( 'Allow guests to view profiles', 'wpum' ),
+					'desc' => __( 'Enable this option to allow guests to view users profiles.', 'wpum' ),
+					'type' => 'checkbox'
+				),
 			)
 		),
 		'profile' => apply_filters( 'wpum_settings_profile',

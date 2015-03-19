@@ -286,7 +286,7 @@ function wpum_get_user_by_data() {
 					$user_data = get_user_by( 'login', esc_attr( get_query_var('user') ) );
 					break;
 				default:
-					$user_data = apply_filters( "wpum_get_user_by_data_{$permalink_structure}", $permalink_structure, $who );
+					$user_data = apply_filters( "wpum_get_user_by_data", $permalink_structure, $who );
 					break;
 			}
 
@@ -320,7 +320,7 @@ function wpum_get_user_profile_url( $user_data ) {
 	$permalink_structure = get_option( 'wpum_permalink', 'user_id' );
 	$base_url = wpum_get_core_page_url( 'profile' );
 
-	if( empty( $base_url ) )
+	if( empty( $base_url ) || !is_object( $user_data ) )
 		return;
 
 	// Define the method needed to grab the user url.
