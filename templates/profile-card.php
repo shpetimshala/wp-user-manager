@@ -26,14 +26,14 @@ do_action( "wpum_before_profile", $user_data );
 	<div class="wpum-user-details">
 		
 		<div class="wpum-avatar-img wpum_one_sixth">
-			<a href=""><?php echo get_avatar( $user_data->ID , 128 ); ?></a>
+			<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>"><?php echo get_avatar( $user_data->ID , 128 ); ?></a>
 			<?php do_action( "wpum_profile_after_avatar", $user_data ); ?>
 		</div>
 		
 		<div class="wpum-inner-details wpum_five_sixth last">
 			
 			<div class="wpum-user-display-name">
-				<a href=""><?php echo esc_attr( $user_data->display_name ); ?></a>
+				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>"><?php echo esc_attr( $user_data->display_name ); ?></a>
 				<?php do_action( "wpum_profile_after_name", $user_data ); ?>
 			</div>
 			
@@ -45,10 +45,10 @@ do_action( "wpum_before_profile", $user_data );
 			<?php do_action( "wpum_profile_before_links", $user_data ); ?>
 
 			<ul class="wpum-user-links">
-				<li><a href="#"><?php _e('View Profile'); ?></a></li>
-				<li><a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e('Send Email');?></a></li>
+				<li class="wpum-profile-link view-profile"><a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>"><?php _e('View Profile'); ?></a></li>
+				<li class="wpum-profile-link send-email"><a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e('Send Email');?></a></li>
 				<?php if( !empty( $user_data->user_url ) ) : ?>
-				<li><a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e('Visit website');?></a></li>
+				<li class="wpum-profile-link view-website"><a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e('Visit website');?></a></li>
 				<?php endif; ?>
 			</ul>
 

@@ -235,7 +235,7 @@ endif;
 
 if ( ! function_exists( 'wpum_get_profile_page_url' ) ) :
 /**
- * Returns the URL of the user's profile page.
+ * Returns the URL of the users profile page.
  * 
  * @since 1.0.0
  * @access public
@@ -299,6 +299,44 @@ function wpum_get_user_by_data() {
 	}
 
 	return $user_data;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_get_user_profile_url' ) ) :
+/**
+ * Returns the URL of the single user profile page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param object $user_data WP_User Object.
+ * @see https://codex.wordpress.org/Function_Reference/get_user_by
+ * @return string
+ */
+function wpum_get_user_profile_url( $user_data ) {
+		
+	$url = null;
+	
+	$permalink_structure = get_option( 'wpum_permalink', 'user_id' );
+	$base_url = wpum_get_core_page_url( 'profile' );
+
+	if( empty( $base_url ) )
+		return;
+
+	// Define the method needed to grab the user url.
+	switch ( $permalink_structure ) {
+		case 'user_id':
+			$url = $base_url . $user_data->ID;
+			break;
+		case 'username':
+			$url = $base_url . $user_data->user_login;
+			break;
+		default:
+			$url = apply_filters( 'wpum_get_user_profile_url', $user_data, $permalink_structure );
+			break;
+	}
+
+	return esc_url( $url );
 
 }
 endif;
