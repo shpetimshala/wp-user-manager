@@ -225,8 +225,6 @@ class WPUM_Shortcodes {
 
 		ob_start();
 		
-		echo "do setting to show content when not logged in";
-
 		get_wpum_template( 'profile-card.php', array( 
 				'user_data' => wpum_get_user_by_data(),
 				'card_template' => 'default'

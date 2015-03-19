@@ -42,16 +42,12 @@
 	box-shadow: none !important;
 }
 
-.wpum-avatar-img {
-	margin: 0 15px 0 0;
-}
-
 .wpum-single-profile {
 	.wpum-user-links {
 		li {
 			list-style: none;
 			display: inline-block;
-			margin-left: 0.9rem;
+			margin-left: 10px;
 			a {
 				text-decoration: none;
 				background-color: #efefef;
@@ -59,6 +55,7 @@
 				-moz-border-radius: 3px;
 				border-radius: 3px;
 				padding: 5px 10px 5px;
+				font-size: 12px;
 			}
 		}
 	}
@@ -80,5 +77,3 @@
 .wpum-align-right {
 	text-align: right
 }
-
-

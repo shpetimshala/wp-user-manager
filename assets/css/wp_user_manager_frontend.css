@@ -111,20 +111,18 @@
   background: #fff;
   box-shadow: none !important; }
 
-.wpum-avatar-img {
-  margin: 0 15px 0 0; }
-
 .wpum-single-profile .wpum-user-links li {
   list-style: none;
   display: inline-block;
-  margin-left: 0.9rem; }
+  margin-left: 10px; }
   .wpum-single-profile .wpum-user-links li a {
     text-decoration: none;
     background-color: #efefef;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    padding: 5px 10px 5px; }
+    padding: 5px 10px 5px;
+    font-size: 12px; }
 .wpum-single-profile .wpum-user-display-name a {
   text-decoration: none;
   font-size: 1.1rem;
