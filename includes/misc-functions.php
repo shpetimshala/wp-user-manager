@@ -365,3 +365,20 @@ function wpum_guests_can_view_profiles() {
 	return $check;
 
 }
+
+/**
+ * Checks if members can view users profiles.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_members_can_view_profiles() {
+
+	$check = true;
+
+	if( !wpum_get_option('members_can_view_profiles') && is_user_logged_in() )
+		$check = false;
+
+	return $check;
+
+}

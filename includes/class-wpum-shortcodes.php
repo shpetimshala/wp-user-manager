@@ -224,12 +224,6 @@ class WPUM_Shortcodes {
 		), $atts ) );
 
 		ob_start();
-		
-		// Check if profiles can be seen by guests
-		if( !wpum_guests_can_view_profiles() ) {
-			get_wpum_template( 'guests-warning.php' );
-			return;
-		}
 
 		get_wpum_template( 'profile-card.php', array( 
 				'user_data' => wpum_get_user_by_data(),
