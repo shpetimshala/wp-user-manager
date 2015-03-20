@@ -344,6 +344,12 @@ function wpum_get_registered_settings() {
 					'desc' => __( 'Enable this option to allow guests to view users profiles.', 'wpum' ),
 					'type' => 'checkbox'
 				),
+				'members_can_view_profiles' => array(
+					'id' => 'members_can_view_profiles',
+					'name' => __( 'Allow members to view profiles', 'wpum' ),
+					'desc' => __( 'Enable this option to allow members to view users profiles. If disabled, users can only see their own profile.', 'wpum' ),
+					'type' => 'checkbox'
+				),
 			)
 		),
 		'redirects' => apply_filters( 'wpum_settings_redirects',
