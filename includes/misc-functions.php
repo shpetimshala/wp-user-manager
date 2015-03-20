@@ -350,54 +350,49 @@ function wpum_get_core_page_url( $page ) {
 }
 
 /**
- * Checks if guests can view users profiles.
+ * Checks if guests can view profiles.
  *
  * @since 1.0.0
  * @return bool
  */
 function wpum_guests_can_view_profiles() {
 
-	$check = true;
+	$pass = false;
 
-	if( !wpum_get_option('guests_can_view_profiles') && !is_user_logged_in() )
-		$check = false;
+	if( wpum_get_option('guests_can_view_profiles') )
+		$pass = true;
 
-	return $check;
-
+	return $pass;
 }
 
 /**
- * Checks if members can view users profiles.
+ * Checks if members can view profiles.
  *
  * @since 1.0.0
  * @return bool
  */
 function wpum_members_can_view_profiles() {
 
-	$check = true;
+	$pass = false;
 
-	if( !wpum_get_option('members_can_view_profiles') && is_user_logged_in() )
-		$check = false;
+	if( wpum_get_option('members_can_view_profiles') )
+		$pass = true;
 
-	return $check;
+	return $pass;
 
 }
 
 /**
- * Checks if viewing user profile.
+ * Checks if viewing single profile page.
  *
  * @since 1.0.0
  * @return bool
  */
-function wpum_is_viewing_user_profile() {
+function wpum_is_single_profile() {
 
-	$pass = false;
-	$viewing_user = (get_query_var('user')) ? get_query_var('user') : null;
+	$who = (get_query_var('user')) ? get_query_var('user') : false;
 
-	if( $viewing_user )
-		$pass = true;
-
-	return $pass;
+	return $who;
 
 }
 
@@ -411,17 +406,23 @@ function wpum_can_access_profile() {
 
 	$pass = true;
 
-	// Checks if guests can view users profiles.
-	if( !wpum_guests_can_view_profiles() || !wpum_is_viewing_user_profile() ) :
+	// Check if not logged in and on profile page - no given user
+	if( !is_user_logged_in() && !wpum_is_single_profile() ) {
 		get_wpum_template( 'guests-warning.php' );
 		$pass = false;
-	endif;
+	}
 
-	// Checks if members can view users profiles.
-	if( !wpum_members_can_view_profiles() ) :
+	// Block guests on single profile page if option disabled
+	if( !is_user_logged_in() && wpum_is_single_profile() && !wpum_guests_can_view_profiles() ) {
 		get_wpum_template( 'guests-warning.php' );
 		$pass = false;
-	endif;
+	}
+
+	// Block members on single profile page if option disabled
+	if( is_user_logged_in() && wpum_is_single_profile() && !wpum_members_can_view_profiles() ) {
+		get_wpum_template( 'guests-warning.php' );
+		$pass = false;
+	}
 
 	return apply_filters( 'wpum_can_access_profile', $pass );
 
