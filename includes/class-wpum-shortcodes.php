@@ -211,7 +211,9 @@ class WPUM_Shortcodes {
 	}
 
 	/**
-	 * Profile Shortcode
+	 * Profile Shortcode.
+	 * Display currently logged in user profile
+	 * or selected if profile if given by URL.
 	 *
 	 * @access public
 	 * @since  1.0.0
@@ -225,10 +227,11 @@ class WPUM_Shortcodes {
 
 		ob_start();
 
-		get_wpum_template( 'profile-card.php', array( 
-				'user_data' => wpum_get_user_by_data(),
-			) 
-		);
+		if( wpum_can_access_profile() )
+			get_wpum_template( 'profile-card.php', array( 
+					'user_data' => wpum_get_user_by_data(),
+				) 
+			);
 
 		$output = ob_get_clean();
 

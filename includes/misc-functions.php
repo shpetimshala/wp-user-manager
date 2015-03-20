@@ -382,3 +382,47 @@ function wpum_members_can_view_profiles() {
 	return $check;
 
 }
+
+/**
+ * Checks if viewing user profile.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_is_viewing_user_profile() {
+
+	$pass = false;
+	$viewing_user = (get_query_var('user')) ? get_query_var('user') : null;
+
+	if( $viewing_user )
+		$pass = true;
+
+	return $pass;
+
+}
+
+/**
+ * Checks if profiles are available.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_can_access_profile() {
+
+	$pass = true;
+
+	// Checks if guests can view users profiles.
+	if( !wpum_guests_can_view_profiles() || !wpum_is_viewing_user_profile() ) :
+		get_wpum_template( 'guests-warning.php' );
+		$pass = false;
+	endif;
+
+	// Checks if members can view users profiles.
+	if( !wpum_members_can_view_profiles() ) :
+		get_wpum_template( 'guests-warning.php' );
+		$pass = false;
+	endif;
+
+	return apply_filters( 'wpum_can_access_profile', $pass );
+
+}
