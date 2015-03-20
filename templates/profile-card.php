@@ -50,6 +50,10 @@ do_action( "wpum_before_profile", $user_data );
 				<?php if( !empty( $user_data->user_url ) ) : ?>
 				<li class="wpum-profile-link view-website"><a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e('Visit website');?></a></li>
 				<?php endif; ?>
+				<?php if( $user_data->ID == get_current_user_id() ) : ?>
+				<li><a href="<?php echo wpum_get_core_page_url('profile_edit'); ?>"><?php _e('Edit Account');?></a></li>
+				<li><a href="<?php echo wpum_logout_url(); ?>"><?php _e('Logout');?></a></li>
+				<?php endif; ?>
 			</ul>
 
 			<?php do_action( "wpum_profile_after_links", $user_data ); ?>
