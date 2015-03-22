@@ -228,7 +228,7 @@ class WPUM_Shortcodes {
 		ob_start();
 
 		if( wpum_can_access_profile() )
-			get_wpum_template( 'profile-card.php', array( 
+			get_wpum_template( 'profile.php', array( 
 					'user_data' => wpum_get_user_by_data(),
 				) 
 			);
