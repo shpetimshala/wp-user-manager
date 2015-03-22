@@ -235,6 +235,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-permalinks.php';
 			// Template actions
 			require_once WPUM_PLUGIN_DIR . 'includes/template-actions.php';
+			// Load Profiles template system
+			require_once WPUM_PLUGIN_DIR . 'includes/profiles/profile-actions.php';
 			
 		}
 

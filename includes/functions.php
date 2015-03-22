@@ -340,3 +340,38 @@ function wpum_get_user_profile_url( $user_data ) {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_get_user_profile_tabs' ) ) :
+/**
+ * Returns registered tabs for the user profile page.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ */
+function wpum_get_user_profile_tabs() {
+
+	$tabs = array();
+
+	$tabs['profile_details'] = array( 
+		'id'       => 'profile_details',
+		'title'    => __( 'About' ),
+		'callback' => 'something_here'
+	);
+
+	$tabs['profile_posts'] = array( 
+		'id'       => 'profile_posts',
+		'title'    => __( 'Submitted Posts' ),
+		'callback' => 'something_here'
+	);
+
+	$tabs['profile_comments'] = array( 
+		'id'       => 'profile_comments',
+		'title'    => __( 'Submitted Comments' ),
+		'callback' => 'something_here'
+	);
+
+	return apply_filters( 'wpum_get_user_profile_tabs', $tabs );
+
+}
+endif;
