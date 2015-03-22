@@ -24,4 +24,4 @@ function wpum_load_profile_tabs( $user_data ) {
 	echo $output;
 
 }
-add_action( 'wpum_after_profile_details', 'wpum_load_profile_tabs' );
+add_action( 'wpum_after_profile_details', 'wpum_load_profile_tabs', 10 );

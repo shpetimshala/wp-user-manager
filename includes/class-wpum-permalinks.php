@@ -49,13 +49,15 @@ class WPUM_Permalinks {
 		global $wp; 
 	    
 	    // Define args
-		$wp->add_query_var('user');
-		$page_id   = wpum_get_core_page_id( 'profile' );
-		$page_slug = esc_attr( get_post_field( 'post_name', intval( $page_id ) ) );
+	    $wp->add_query_var('user');   
+	    $wp->add_query_var('tab');
 	    
-	    // Add rewrite rule
-	    add_rewrite_rule( $page_slug . '/([^/]*)/page/([0-9]+)','index.php?page_id='. $page_id .'&user=$matches[1]&paged=$matches[2]','top');
-	    add_rewrite_rule( $page_slug . '/([^/]*)','index.php?page_id='. $page_id .'&user=$matches[1]','top');
+	    $page_id   = wpum_get_core_page_id( 'profile' );
+		$page_slug = esc_attr( get_post_field( 'post_name', intval( $page_id ) ) );
+
+	    add_rewrite_rule($page_slug . '/([^/]*)/([^/]*)/page/([0-9]+)','index.php?page_id='. $page_id .'&user=$matches[1]&tab=$matches[2]&paged=$matches[3]','top');
+	    add_rewrite_rule($page_slug . '/([^/]*)/([^/]*)','index.php?page_id='. $page_id .'&user=$matches[1]&tab=$matches[2]','top');
+	    add_rewrite_rule($page_slug . '/([^/]*)','index.php?page_id='. $page_id .'&user=$matches[1]','top');
 
 	}
 
@@ -146,6 +148,8 @@ class WPUM_Permalinks {
 		
 			$user_permalink = sanitize_text_field( $_POST['user_permalink'] );
 			update_option( 'wpum_permalink', $user_permalink );
+
+			flush_rewrite_rules( true );
 
 		}
 
