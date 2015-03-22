@@ -139,4 +139,28 @@
 .wpum-align-right {
   text-align: right; }
 
+/* Profile Tabs */
+.wpum-profile-tabs-holder {
+  background: #f7f7f7;
+  margin: 15px -15px; }
+  .wpum-profile-tabs-holder ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: center; }
+    .wpum-profile-tabs-holder ul li {
+      display: inline-block;
+      margin: 15px 0px 0px; }
+      .wpum-profile-tabs-holder ul li a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        background: #e5e5e5;
+        -webkit-border-top-left-radius: 3px;
+        -webkit-border-top-right-radius: 3px;
+        -moz-border-radius-topleft: 3px;
+        -moz-border-radius-topright: 3px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

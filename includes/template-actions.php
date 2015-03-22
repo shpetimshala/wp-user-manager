@@ -56,4 +56,3 @@ function wpum_add_helper_links( $atts ) {
 }
 add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 );
 add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 );
-

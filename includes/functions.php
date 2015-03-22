@@ -355,19 +355,19 @@ function wpum_get_user_profile_tabs() {
 
 	$tabs['profile_details'] = array( 
 		'id'       => 'profile_details',
-		'title'    => __( 'About' ),
+		'title'    => __( 'Overview' ),
 		'callback' => 'something_here'
 	);
 
 	$tabs['profile_posts'] = array( 
 		'id'       => 'profile_posts',
-		'title'    => __( 'Submitted Posts' ),
+		'title'    => __( 'Posts' ),
 		'callback' => 'something_here'
 	);
 
 	$tabs['profile_comments'] = array( 
 		'id'       => 'profile_comments',
-		'title'    => __( 'Submitted Comments' ),
+		'title'    => __( 'Comments' ),
 		'callback' => 'something_here'
 	);
 
