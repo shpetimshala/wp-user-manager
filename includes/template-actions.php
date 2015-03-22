@@ -57,49 +57,6 @@ function wpum_add_helper_links( $atts ) {
 add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 );
 add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 );
 
-if ( ! function_exists( 'wpum_profile_show_avatar' ) ) :
-/**
- * Display user avatar in profile.php template.
- * 
- * @since 1.0.0
- * @param object $user_data holds WP_User object
- * @access public
- * @return void
- */
-function wpum_profile_show_avatar( $user_data ) {
-
-	$output = '<div class="wpum-avatar-img wpum_one_sixth">';
-		$output .= '<a href="' . wpum_get_user_profile_url( $user_data ) . '">' . get_avatar( $user_data->ID , 128 ) . '</a>';
-	$output .= '</div>';
-
-	echo $output;
-
-}
-add_action( 'wpum_main_profile_details', 'wpum_profile_show_avatar', 10 );
-endif;
-
-if ( ! function_exists( 'wpum_profile_show_user_details' ) ) :
-/**
- * Adds a column - used to wrap other elements inside it.
- * Used in profile.php template.
- * 
- * @since 1.0.0
- * @param object $user_data holds WP_User object
- * @access public
- * @return void
- */
-function wpum_profile_show_user_details( $user_data ) {
-
-	$output = '<div class="wpum-inner-details wpum_five_sixth last">';
-		$output .= do_action( 'wpum_profile_show_user_details', $user_data );
-	$output .= '</div>';
-
-	echo $output;
-
-}
-add_action( 'wpum_main_profile_details', 'wpum_profile_show_user_details', 10 );
-endif;
-
 if ( ! function_exists( 'wpum_profile_show_user_name' ) ) :
 /**
  * Display user name in profile.php template.
@@ -118,12 +75,12 @@ function wpum_profile_show_user_name( $user_data ) {
 	echo $output;
 
 }
-add_action( 'wpum_profile_show_user_details', 'wpum_profile_show_user_name', 10 );
+add_action( 'wpum_main_profile_details', 'wpum_profile_show_user_name', 10 );
 endif;
 
 if ( ! function_exists( 'wpum_profile_show_user_description' ) ) :
 /**
- * Display user name in profile.php template.
+ * Display user description in profile.php template.
  * 
  * @since 1.0.0
  * @param object $user_data holds WP_User object
@@ -139,5 +96,24 @@ function wpum_profile_show_user_description( $user_data ) {
 	echo $output;
 
 }
-add_action( 'wpum_profile_show_user_details', 'wpum_profile_show_user_description', 10 );
+add_action( 'wpum_main_profile_details', 'wpum_profile_show_user_description', 10 );
+endif;
+
+if ( ! function_exists( 'wpum_profile_show_user_links' ) ) :
+/**
+ * Display user name in profile.php template.
+ * 
+ * @since 1.0.0
+ * @param object $user_data holds WP_User object
+ * @access public
+ * @return void
+ */
+function wpum_profile_show_user_links( $user_data ) {
+
+	$output = get_wpum_template( 'profile-links.php', array( 'user_data' => $user_data ) );
+
+	echo $output;
+
+}
+add_action( 'wpum_secondary_profile_details', 'wpum_profile_show_user_links', 10 );
 endif;

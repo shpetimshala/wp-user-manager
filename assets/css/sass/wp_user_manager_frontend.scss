@@ -50,15 +50,17 @@
 		padding: 0px !important;
 		li {
 			list-style: none;
-			display: inline-block;
-			margin: 0px 10px 0px 0px;
+			margin: 0px 10px 10px 0px;
 			a {
+				display: block;
+				text-align: center;
 				text-decoration: none;
 				background-color: #efefef;
 				-webkit-border-radius: 3px;
 				-moz-border-radius: 3px;
 				border-radius: 3px;
 				padding: 5px 10px 5px;
+				font-size: 12px;
 			}
 		}
 	}

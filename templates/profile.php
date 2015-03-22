@@ -29,7 +29,16 @@ do_action( "wpum_before_profile", $user_data );
 
 		<!-- First column -->
 		<div class="wpum_three_fourth wpum-main-profile-details">
-			<?php do_action( 'wpum_main_profile_details', $user_data ); ?>
+
+			<div class="wpum-avatar-img wpum_one_sixth">
+				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>"><?php echo get_avatar( $user_data->ID , 128 ); ?></a>
+				<?php do_action( "wpum_profile_after_avatar", $user_data ); ?>
+			</div>
+
+			<div class="wpum-inner-details wpum_five_sixth last">
+				<?php do_action( 'wpum_main_profile_details', $user_data ); ?>
+			</div>
+
 		</div>
 		<!-- end first column -->
 
