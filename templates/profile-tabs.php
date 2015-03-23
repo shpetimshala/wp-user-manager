@@ -29,6 +29,8 @@ $all_tabs = array_keys( $tabs );
 
 </div>
 
+<div class="wpum-clearfix"></div>
+
 <div class="wpum-profile-tabs-content">
 
 	<?php 
@@ -39,10 +41,10 @@ $all_tabs = array_keys( $tabs );
 
 		switch ( $current_tab_slug ) {
 			case null: // Return first tab if null - meaning we're on /profile/ page
-				do_action( "wpum_profile_tab_content_{$all_tabs[0]}" );
+				do_action( "wpum_profile_tab_content_{$all_tabs[0]}", $user_data, $tabs, $current_tab_slug );
 				break;
 			case $current_tab_slug:
-				do_action( "wpum_profile_tab_content_{$current_tab_slug}" );
+				do_action( "wpum_profile_tab_content_{$current_tab_slug}", $user_data, $tabs, $current_tab_slug );
 				break;
 			default:
 				# nothing here...

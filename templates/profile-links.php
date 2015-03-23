@@ -13,9 +13,6 @@
 	
 	<?php do_action( 'wpum_top_user_profile_links',  $user_data ); ?>
 
-	<li class="wpum-profile-link view-profile">
-		<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>"><?php _e('View Profile'); ?></a>
-	</li>
 	<li class="wpum-profile-link send-email">
 		<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e('Send Email');?></a>
 	</li>
