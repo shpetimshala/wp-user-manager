@@ -25,3 +25,25 @@ function wpum_load_profile_tabs( $user_data ) {
 
 }
 add_action( 'wpum_after_profile_details', 'wpum_load_profile_tabs', 10 );
+
+
+function wpum_profile_tab_content_about() {
+
+	echo "string";
+
+}
+add_action( 'wpum_profile_tab_content_about', 'wpum_profile_tab_content_about' );
+
+function wpum_profile_tab_content_posts() {
+
+	echo "string 2";
+
+}
+add_action( 'wpum_profile_tab_content_posts', 'wpum_profile_tab_content_posts' );
+
+function wpum_profile_tab_content_comments() {
+
+	echo "string 3";
+
+}
+add_action( 'wpum_profile_tab_content_comments', 'wpum_profile_tab_content_comments' );

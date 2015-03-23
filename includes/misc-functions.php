@@ -427,3 +427,33 @@ function wpum_can_access_profile() {
 	return apply_filters( 'wpum_can_access_profile', $pass );
 
 }
+
+/**
+ * Checks the current active tab (if any).
+ *
+ * @since 1.0.0
+ * @return bool|string
+ */
+function wpum_get_current_profile_tab() {
+
+	$tab = ( get_query_var('tab') ) ? get_query_var('tab') : null;
+	return $tab;
+
+}
+
+/**
+ * Returns the permalink of a profile tab.
+ *
+ * @since 1.0.0
+ * @return bool|string
+ */
+function wpum_get_profile_tab_permalink( $user_data, $tab ) {
+
+	$tab_slug = $tab['slug'];
+	$base_link = wpum_get_user_profile_url( $user_data );
+
+	$tab_permalink = $base_link . '/' . $tab_slug;
+
+	return $tab_permalink;
+}
+

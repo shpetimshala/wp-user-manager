@@ -356,19 +356,19 @@ function wpum_get_user_profile_tabs() {
 	$tabs['profile_details'] = array( 
 		'id'       => 'profile_details',
 		'title'    => __( 'Overview' ),
-		'callback' => 'something_here'
+		'slug'     => 'about',
 	);
 
 	$tabs['profile_posts'] = array( 
 		'id'       => 'profile_posts',
 		'title'    => __( 'Posts' ),
-		'callback' => 'something_here'
+		'slug'     => 'posts',
 	);
 
 	$tabs['profile_comments'] = array( 
 		'id'       => 'profile_comments',
 		'title'    => __( 'Comments' ),
-		'callback' => 'something_here'
+		'slug'     => 'comments',
 	);
 
 	return apply_filters( 'wpum_get_user_profile_tabs', $tabs );
