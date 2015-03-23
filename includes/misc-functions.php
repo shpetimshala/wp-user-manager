@@ -442,6 +442,24 @@ function wpum_get_current_profile_tab() {
 }
 
 /**
+ * Checks the given profile tab is registered.
+ *
+ * @since 1.0.0
+ * @param string $tab the key value of the array in wpum_get_user_profile_tabs() must match slug
+ * @return bool
+ */
+function wpum_profile_tab_exists( $tab ) {
+
+	$exists = false;
+
+	if( array_key_exists( $tab, wpum_get_user_profile_tabs() ) )
+		$exists = true;
+
+	return $exists;
+
+}
+
+/**
  * Returns the permalink of a profile tab.
  *
  * @since 1.0.0
