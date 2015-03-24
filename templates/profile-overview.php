@@ -10,7 +10,10 @@
 ?>
 
 <div class="wpum-user-details-list">
-	<dl class="">          
+	
+	<?php do_action( 'wpum_before_user_details_list', $user_data, $tabs, $slug ); ?>
+
+	<dl>          
 	    <dt><?php _e('Name');?>:</dt>
 	    <dd><?php echo $user_data->first_name; ?> <?php echo $user_data->last_name; ?></dd>
 	             
@@ -23,4 +26,7 @@
 	    <dt><?php _e('Website');?>:</dt>
 	    <dd><a href="<?php echo esc_url( $user_data->user_url ); ?>" rel="nofollow" target="_blank"><?php echo esc_url( $user_data->user_url ); ?></a></dd>
 	</dl>
+
+	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
+
 </div>
