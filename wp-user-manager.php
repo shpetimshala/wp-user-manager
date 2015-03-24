@@ -313,7 +313,10 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Enqueue everything
 			wp_enqueue_script( 'jQuery' );
 			wp_enqueue_script( 'wpum-frontend-js' );
-			wp_enqueue_style( 'wpum-frontend-css' );
+			
+			// Allows developers to disable the frontend css in case own file is needed.
+			if( !defined( 'WPUM_DISABLE_CSS' ) )
+				wp_enqueue_style( 'wpum-frontend-css' );
 
 			// Display password meter only if enabled
 			if( wpum_get_option('display_password_meter_registration') && wpum_get_option('custom_passwords') ) :
