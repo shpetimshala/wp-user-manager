@@ -43,12 +43,22 @@ function wpum_profile_tab_content_about( $user_data, $tabs, $current_tab_slug ) 
 }
 add_action( 'wpum_profile_tab_content_about', 'wpum_profile_tab_content_about', 10, 3 );
 
-function wpum_profile_tab_content_posts() {
+/**
+ * Load content for the "posts" tab.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param object $user_data holds WP_User object
+ * @param array $tabs holds all the registered tabs
+ * @param string $current_tab_slug the slug of the current tab
+ * @return void
+ */
+function wpum_profile_tab_content_posts( $user_data, $tabs, $current_tab_slug ) {
 
-	echo "string 2";
+	echo get_wpum_template( 'profile-posts.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
 
 }
-add_action( 'wpum_profile_tab_content_posts', 'wpum_profile_tab_content_posts' );
+add_action( 'wpum_profile_tab_content_posts', 'wpum_profile_tab_content_posts', 11, 3 );
 
 function wpum_profile_tab_content_comments() {
 
