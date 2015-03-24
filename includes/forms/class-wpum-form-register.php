@@ -591,11 +591,13 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Display template
 		if( !get_option( 'users_can_register' ) ) :
 
-			get_wpum_template( 'registrations-disabled.php', 
-				array(
-					'args' => $atts
-				)
-			);
+			// Display error message
+			$message = array( 
+						'id'   => 'wpum-registrations-disabled', 
+						'type' => 'notice', 
+						'text' => __( 'Registrations are currently disabled.' )
+					);
+			wpum_message( $message );
 
 		elseif( is_user_logged_in() ) :
 

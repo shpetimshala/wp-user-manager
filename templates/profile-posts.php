@@ -34,7 +34,7 @@ $posts_query = new WP_Query( $args );
 			$args = array( 
 						'id'   => 'wpum-posts-not-found', 
 						'type' => 'notice', 
-						'text' => printf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
+						'text' => sprintf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
 					);
 			wpum_message( $args );
 

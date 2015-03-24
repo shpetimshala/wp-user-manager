@@ -56,7 +56,13 @@ $all_tabs = array_keys( $tabs );
 	// Display not found error if tab doesn't exist
 	} else {
 
-		get_wpum_template( 'content-not-found.php' );
+		// Display error message
+		$args = array( 
+					'id'   => 'wpum-not-found', 
+					'type' => 'notice', 
+					'text' => __( 'Content not found.' )
+				);
+		wpum_message( $args );
 
 	}
 

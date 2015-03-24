@@ -9,8 +9,13 @@
  * @since       1.0.0
  */
 ?>
+
+<?php do_action( "wpum_before_message_{$id}", $id, $type, $text ); ?>
+
 <div id="<?php echo esc_attr( $id ); ?>" class="wpum-message <?php echo esc_attr( $type ); ?>">
 
-	<p><?php esc_html( $text ); ?></p>
+	<p><?php echo $text ?></p>
 
 </div>
+
+<?php do_action( "wpum_after_message_{$id}", $id, $type, $text ); ?>

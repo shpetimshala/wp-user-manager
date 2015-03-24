@@ -408,19 +408,37 @@ function wpum_can_access_profile() {
 
 	// Check if not logged in and on profile page - no given user
 	if( !is_user_logged_in() && !wpum_is_single_profile() ) {
-		get_wpum_template( 'guests-warning.php' );
+		// Display error message
+		$args = array( 
+					'id'   => 'wpum-guests-disabled', 
+					'type' => 'notice', 
+					'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				);
+		wpum_message( $args );
 		$pass = false;
 	}
 
 	// Block guests on single profile page if option disabled
 	if( !is_user_logged_in() && wpum_is_single_profile() && !wpum_guests_can_view_profiles() ) {
-		get_wpum_template( 'guests-warning.php' );
+		// Display error message
+		$args = array( 
+					'id'   => 'wpum-guests-disabled', 
+					'type' => 'notice', 
+					'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				);
+		wpum_message( $args );
 		$pass = false;
 	}
 
 	// Block members on single profile page if option disabled
 	if( is_user_logged_in() && wpum_is_single_profile() && !wpum_members_can_view_profiles() ) {
-		get_wpum_template( 'area-warning.php' );
+		// Display error message
+		$args = array( 
+					'id'   => 'wpum-no-access', 
+					'type' => 'notice', 
+					'text' => __( 'You are not authorized to access this area.' )
+				);
+		wpum_message( $args );
 		$pass = false;
 	}
 
