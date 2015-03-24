@@ -12,7 +12,7 @@
 $args = array( 'author' => $user_data->ID );
 
 // The Query
-$posts_query = new WP_Query( $args );
+$posts_query = new WP_Query( apply_filters( 'wpum_profile_posts_query_args', $args ) );
 ?>
 
 <div class="wpum-user-posts-list">
@@ -22,11 +22,26 @@ $posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) :
 
-			while ( $posts_query->have_posts() ) : $posts_query->the_post();
+			while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
 
-				echo the_title();
+				<div class="wpum-post" id="wpum-post-<?php echo the_id();?>">
+				
+					<a href="<?php the_permalink();?>" class="wpum-post-title"><?php the_title();?></a>
+						
+					<ul class="wpum-post-meta">
+						<li>
+							<strong><?php _e( 'Posted on:' ); ?></strong>
+							<?php echo get_the_date(); ?> -
+						</li>
+						<li>
+							<strong><?php _e( 'Comments:' ); ?></strong>
+							<?php comments_popup_link( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?>
+						</li>
+					</ul>
 
-			endwhile;
+				</div>
+
+			<?php endwhile;
 
 		else :
 

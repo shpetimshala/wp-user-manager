@@ -145,33 +145,6 @@
   text-align: right; }
 
 /* Profile Tabs */
-/*
-.wpum-profile-tabs-holder {
-	background: lighten( $main_color, 3 );
-	margin: 15px -15px;
-	ul {
-		list-style: none;
-		margin:0px;
-		padding: 0px;
-		text-align: center;
-		li {
-			display: inline-block;
-			margin:15px 0px 0px;
-			a {
-				display: block;
-				padding: 10px 15px;
-				text-decoration: none;
-				background: $secondary_color;
-				-webkit-border-top-left-radius: 3px;
-				-webkit-border-top-right-radius: 3px;
-				-moz-border-radius-topleft: 3px;
-				-moz-border-radius-topright: 3px;
-				border-top-left-radius: 3px;
-				border-top-right-radius: 3px;
-			}
-		}
-	}
-}*/
 .wpum-profile-tabs-holder ul {
   border-bottom: 1px solid #cecccc;
   color: #414b52;
@@ -205,6 +178,7 @@
       .wpum-profile-tabs-holder ul li a:hover {
         background: #f3f3f3; }
 
+/* Profile details */
 .wpum-user-details-list dl {
   margin-left: 0px !important;
   -webkit-border-radius: 4px;
@@ -219,5 +193,20 @@
 .wpum-user-details-list dl dd {
   margin: 2px 0;
   padding: 5px 0; }
+
+/* profile posts */
+.wpum-single-profile .wpum-post-meta {
+  margin: 0px;
+  padding: 0px; }
+  .wpum-single-profile .wpum-post-meta li {
+    list-style: none;
+    margin: 0px;
+    display: inline-block; }
+
+.wpum-single-profile .wpum-post {
+  border-bottom: 2px solid #f6f6f6;
+  padding: 15px 0px; }
+  .wpum-single-profile .wpum-post:first-child {
+    padding-top: 0px; }
 
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */
