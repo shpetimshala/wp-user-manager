@@ -202,10 +202,6 @@ class WPUM_Shortcodes {
 	 */
 	public function wpum_profile_edit( $atts, $content=null ) {
 
-		extract( shortcode_atts( array(
-			'' => ''
-		), $atts ) );
-
 		return WPUM()->forms->get_form( 'profile', $atts );
 
 	}
@@ -220,10 +216,6 @@ class WPUM_Shortcodes {
 	 * @return $output shortcode output
 	 */
 	public function wpum_profile( $atts, $content=null ) {
-
-		extract( shortcode_atts( array(
-			'' => ''
-		), $atts ) );
 
 		ob_start();
 
