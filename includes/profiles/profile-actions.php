@@ -22,6 +22,11 @@ function wpum_profile_show_user_name( $user_data ) {
 
 	$output = '<div class="wpum-user-display-name">';
 		$output .= '<a href="'. wpum_get_user_profile_url( $user_data ) .'">'. esc_attr( $user_data->display_name ) .'</a>';
+
+		// Show edit account only when viewing own profile
+		if( $user_data->ID == get_current_user_id() )
+			$output .= '<small><a href="'. wpum_get_core_page_url('profile_edit') .'" class="wpum-profile-account-edit">'. __(' (Edit Account)') .'</a></small>';
+		
 	$output .= '</div>';
 
 	echo $output;

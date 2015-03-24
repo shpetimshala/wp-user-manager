@@ -22,7 +22,9 @@ $all_tabs = array_keys( $tabs );
 	<!-- Loop through each available tab -->
 	<ul class="wpum-profile-tabs">
 		<?php foreach ($tabs as $tab) : ?>
-			<li class="wpum-tab-<?php echo $tab['id'];?> <?php echo ($current_tab_slug == $tab['slug'] ? 'active' : '') ?>"><a href="<?php echo wpum_get_profile_tab_permalink( $user_data, $tab );?>"><?php echo $tab['title'];?></a></li>
+			<li class="wpum-tab-<?php echo $tab['id'];?> <?php echo ($current_tab_slug == $tab['slug'] || $current_tab_slug == null && $all_tabs[0] == $tab['slug'] ? 'active' : '') ?>">
+				<a href="<?php echo wpum_get_profile_tab_permalink( $user_data, $tab );?>"><?php echo $tab['title'];?></a>
+			</li>
 		<?php endforeach; ?>
 	</ul>
 	<!-- end tabs -->
