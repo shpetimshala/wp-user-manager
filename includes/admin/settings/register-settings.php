@@ -350,6 +350,18 @@ function wpum_get_registered_settings() {
 					'desc' => __( 'Enable this option to allow members to view users profiles. If disabled, users can only see their own profile.', 'wpum' ),
 					'type' => 'checkbox'
 				),
+				'profile_posts' => array(
+					'id' => 'profile_posts',
+					'name' => __( 'Display posts', 'wpum' ),
+					'desc' => __( 'Enable this option to display users submitted post on their profile page.', 'wpum' ),
+					'type' => 'checkbox'
+				),
+				'profile_comments' => array(
+					'id' => 'profile_comments',
+					'name' => __( 'Display comments', 'wpum' ),
+					'desc' => __( 'Enable this option to display users submitted comments on their profile page.', 'wpum' ),
+					'type' => 'checkbox'
+				),
 			)
 		),
 		'redirects' => apply_filters( 'wpum_settings_redirects',

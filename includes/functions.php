@@ -371,6 +371,13 @@ function wpum_get_user_profile_tabs() {
 		'slug'     => 'comments',
 	);
 
+	// Remove tabs if they're not active
+	if( !wpum_get_option('profile_posts') ) // remove posts tab
+		unset($tabs['posts']);
+
+	if( !wpum_get_option('profile_comments') ) // Remove comments tab
+		unset($tabs['comments']);
+
 	return apply_filters( 'wpum_get_user_profile_tabs', $tabs );
 
 }
