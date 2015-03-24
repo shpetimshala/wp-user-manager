@@ -31,12 +31,12 @@ $posts_query = new WP_Query( $args );
 		else :
 
 			// Display error message
-			echo get_wpum_template( 'message.php', array( 
+			$args = array( 
 						'id'   => 'wpum-posts-not-found', 
 						'type' => 'notice', 
 						'text' => printf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
-					)
-				);
+					);
+			wpum_message( $args );
 
 		endif;
 

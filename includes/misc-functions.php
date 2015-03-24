@@ -475,3 +475,32 @@ function wpum_get_profile_tab_permalink( $user_data, $tab ) {
 	return $tab_permalink;
 }
 
+/**
+ * Display a message loading the message.php template file.
+ *
+ * @since 1.0.0
+ * @param string $id html ID attribute.
+ * @param string $type message type: success/notice/error.
+ * @param string $text the text of the message.
+ * @return void
+ */
+function wpum_message( $args ) {
+
+	$defaults = array(
+		'id'   => 'wpum-notice', // html ID attribute
+		'type' => 'success', // message type: success/notice/error.
+		'text' => '' // the text of the message.
+	);
+
+	// Parse incoming $args into an array and merge it with $defaults
+	$args = wp_parse_args( $args, $defaults );
+
+	echo get_wpum_template( 'message.php', array( 
+				'id'   => $args['id'], 
+				'type' => $args['type'], 
+				'text' => $args['text']
+			)
+		);
+
+}
+
