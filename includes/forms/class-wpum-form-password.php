@@ -172,6 +172,16 @@ class WPUM_Form_Password extends WPUM_Form {
 	}
 
 	/**
+	 * Get the value of a posted number field
+	 * @param  string $key
+	 * @param  array $field
+	 * @return string
+	 */
+	protected static function get_posted_number_field( $key, $field ) {
+		return isset( $_POST[ $key ] ) ? intval( $_POST[ $key ] ) : '';
+	}
+
+	/**
 	 * Get the value of a posted textarea field
 	 * @param  string $key
 	 * @param  array $field
