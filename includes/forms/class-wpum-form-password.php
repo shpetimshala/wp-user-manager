@@ -62,6 +62,14 @@ class WPUM_Form_Password extends WPUM_Form {
 					'placeholder' => '',
 					'priority'    => 1
 				),
+				'test' => array(
+					'label'    => __( 'test' ),
+					'type'     => 'radio',
+					'name'     => 'test',
+					'priority' => 1,
+					'required' => true,
+					'options'  => array( 'test_opt' => 'label', 'test2' => 'label 2' )
+				),
 			),
 			'password' => array(
 				'password_1' => array(

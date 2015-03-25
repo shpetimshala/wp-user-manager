@@ -9,12 +9,16 @@
  */
 ?>
 <?php foreach ( $field['options'] as $key => $value ) : ?>
-<input
+
+<label><input
 	type="radio"
 	class="input-radio"
-	name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?>"
+	name="<?php echo esc_attr( $field['name'] ); ?>"
 	<?php checked( ! empty( $field['value'] ), true ); ?>
 	value="<?php echo esc_attr( $key ); ?>"
-	/>
+/>
+<?php echo esc_html( $value ); ?></label><br/>
+
 <?php endforeach; ?>
+
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
