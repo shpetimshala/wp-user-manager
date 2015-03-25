@@ -17,7 +17,7 @@
 
 	<?php do_action( 'wpum_before_inside_loginform_template', $args ); ?>
 
-	<?php wp_login_form( apply_filters( 'wpum_login_shortcode_args', $args, $atts ) ); ?>
+	<?php wp_login_form( apply_filters( 'wpum_login_shortcode_args', $args ) ); ?>
 
 	<?php do_action( 'wpum_after_inside_loginform_template', $args ); ?>
 

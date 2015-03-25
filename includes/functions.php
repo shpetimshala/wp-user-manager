@@ -382,3 +382,51 @@ function wpum_get_user_profile_tabs() {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_login_form' ) ) :
+/**
+ * Display login form.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return string
+ */
+function wpum_login_form( $args = array() ) {
+
+	$defaults = array(
+		'echo'           => true,
+		'redirect'       => esc_url( get_permalink() ),
+		'form_id'        => null,
+		'label_username' => wpum_get_username_label(),
+		'label_password' => __('Password'),
+		'label_remember' => __('Remember Me'),
+		'label_log_in'   => __('Login'),
+		'id_username'    => 'user_login',
+		'id_password'    => 'user_pass',
+		'id_remember'    => 'rememberme',
+		'id_submit'      => 'wp-submit',
+		'login_link'     => 'yes',
+		'psw_link'       => 'yes',
+		'register_link'  => 'yes'
+	);
+
+	// Parse incoming $args into an array and merge it with $defaults
+	$args = wp_parse_args( $args, $defaults );
+
+	// Show already logged in message
+	if( is_user_logged_in() ) :
+
+		get_wpum_template( 'already-logged-in.php', array( 'args' => $args ) );
+
+	// Show login form if not logged in
+	else :
+
+		get_wpum_template( 'login-form.php', array(	'args' => $args ) );
+
+		// Display helper links
+		do_action( 'wpum_do_helper_links', $args['login_link'], $args['register_link'], $args['psw_link'] );
+
+	endif;
+
+}
+endif;
