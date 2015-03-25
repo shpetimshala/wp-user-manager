@@ -25,6 +25,9 @@
 
 	    <dt><?php _e('Website');?>:</dt>
 	    <dd><a href="<?php echo esc_url( $user_data->user_url ); ?>" rel="nofollow" target="_blank"><?php echo esc_url( $user_data->user_url ); ?></a></dd>
+
+	    <dt><?php _e('Registered');?>:</dt>
+	    <dd><?php echo date( get_option('date_format'), strtotime( $user_data->user_registered ) ); ?></dd>
 	</dl>
 
 	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
