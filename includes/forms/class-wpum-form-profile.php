@@ -643,7 +643,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		// Show login form if not logged in
 		else :
 				
-			echo do_shortcode( '[wpum_login_form redirect="'.get_permalink().'"]' );
+			echo wpum_login_form();
 
 		endif;
 

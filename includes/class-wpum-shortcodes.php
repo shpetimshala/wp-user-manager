@@ -94,7 +94,7 @@ class WPUM_Shortcodes {
 		// Show already logged in message
 		if( is_user_logged_in() ) :
 
-			get_wpum_template( 'already-logged-in.php', 
+			get_wpum_template( 'already-logged-in.php',
 				array(
 					'args' => $args,
 					'atts' => $atts,
@@ -104,7 +104,7 @@ class WPUM_Shortcodes {
 		// Show login form if not logged in
 		else :
 
-			get_wpum_template( 'login-form.php', 
+			get_wpum_template( 'login-form.php',
 				array(
 					'args' => $args,
 					'atts' => $atts,
