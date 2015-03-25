@@ -51,6 +51,9 @@ jQuery(document).ready(function ($) {
 						success: function(results) {
 							$( '#wpum-restore-emails' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
 							$( '#wpum-spinner' ).hide();
+						},
+						error: function(xhr, status, error) {
+						    alert(xhr.responseText);
 						}
 					});
 
@@ -113,6 +116,9 @@ jQuery(document).ready(function ($) {
 							success: function(results) {
 								$('.wpum-table-loader').css('display','none');
 								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.message + '</strong></p></div>');
+							},
+							error: function(xhr, status, error) {
+							    alert(xhr.responseText);
 							}
 						});
 
@@ -157,6 +163,9 @@ jQuery(document).ready(function ($) {
 						success: function(results) {
 							$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
 							$( '#wpum-spinner' ).hide();
+						},
+						error: function(xhr, status, error) {
+						    alert(xhr.responseText);
 						}
 					});
 
@@ -237,6 +246,9 @@ jQuery(document).ready(function ($) {
 
 							}
 
+						},
+						error: function(xhr, status, error) {
+						    alert(xhr.responseText);
 						}
 					});
 
