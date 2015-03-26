@@ -9,16 +9,8 @@
  * @since       1.0.0
  */
 
-$args = array(
-	'number'  => $amount,
-	'orderby' => 'registered'
-);
-
-// The Query
-$user_query = new WP_User_Query( $args );
-
-// Get the results
-$users = $user_query->get_results();
+// Get the query
+$users = wpum_get_recent_users( $amount );
 
 ?>
 
