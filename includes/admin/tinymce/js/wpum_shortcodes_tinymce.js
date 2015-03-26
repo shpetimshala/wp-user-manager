@@ -207,9 +207,9 @@
 
 				/* Profile Edit */
 				{
-					text: 'Profile Edit Form',
+					text: 'Account Page',
 					onclick: function() {
-						editor.insertContent( '[wpum_profile_edit]');
+						editor.insertContent( '[wpum_account]');
 					}
 				}, // End Profile Edit
 
