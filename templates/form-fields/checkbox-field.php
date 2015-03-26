@@ -16,4 +16,4 @@
 	<?php checked( ! empty( $field['value'] ), true ); ?>
 	value="1"
 	/>
-<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
+<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo esc_html( $field['description'] ); ?></small><?php endif; ?>

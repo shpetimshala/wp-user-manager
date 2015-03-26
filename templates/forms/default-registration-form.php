@@ -10,16 +10,16 @@
  * @since       1.0.0
  */
 ?>
-<div id="wpum-form-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form-wrapper">
+<div id="wpum-form-register-<?php echo esc_attr( $atts['form_id'] );?>" class="wpum-default-registration-form-wrapper">
 
 	<?php do_action( 'wpum_before_register_form_template', $atts ); ?>
 
-	<form action="#" method="post" id="wpum-register-<?php echo $atts['form_id'];?>" class="wpum-default-registration-form" name="wpum-register-<?php echo $atts['form_id'];?>">
+	<form action="#" method="post" id="wpum-register-<?php echo esc_attr( $atts['form_id'] );?>" class="wpum-default-registration-form" name="wpum-register-<?php echo esc_attr( $atts['form_id'] );?>">
 
 		<?php do_action( 'wpum_before_inside_register_form_template', $atts ); ?>
 
 		<?php foreach ( $register_fields as $key => $field ) : ?>
-			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo $field['type'];?>" data-label="<?php echo $field['label'];?>" data-required="<?php echo $field['required'];?>" data-name="<?php esc_attr_e( $key ); ?>">
+			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key ); ?>">
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum_before_single_{$field['type']}_field", $form, $field ); ?>

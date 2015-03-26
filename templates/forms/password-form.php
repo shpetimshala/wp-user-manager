@@ -38,7 +38,7 @@ if( isset($_GET['password-reset']) ) {
 	<!-- Display only when psw reset -->
 
 	<?php if( !isset($_GET['reset']) ) : ?>
-	<form action="#" method="post" id="wpum-password-<?php echo $atts['form_id'];?>" class="wpum-password-form" name="wpum-password-<?php echo $atts['form_id'];?>">
+	<form action="#" method="post" id="wpum-password-<?php echo esc_attr( $atts['form_id'] );?>" class="wpum-password-form" name="wpum-password-<?php echo esc_attr( $atts['form_id'] );?>">
 
 		<?php do_action( 'wpum_before_inside_password_form_template', $atts ); ?>
 
@@ -51,7 +51,7 @@ if( isset($_GET['password-reset']) ) {
 			<!-- Start Password Replace Fields -->
 			<?php foreach ( $password_fields as $key => $field ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
-					<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
+					<label for="<?php esc_attr_e( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 						<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
 					</div>
@@ -68,7 +68,7 @@ if( isset($_GET['password-reset']) ) {
 			<!-- Start Password User Fields -->
 			<?php foreach ( $user_fields as $key => $field ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
-					<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
+					<label for="<?php esc_attr_e( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 						<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
 					</div>

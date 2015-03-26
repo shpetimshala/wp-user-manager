@@ -18,4 +18,4 @@
 	maxlength="<?php echo ! empty( $field['maxlength'] ) ? $field['maxlength'] : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
 	/>
-<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
+<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo esc_html( $field['description'] ); ?></small><?php endif; ?>

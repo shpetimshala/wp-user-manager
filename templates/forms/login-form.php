@@ -13,7 +13,7 @@
 
 <?php do_action( 'wpum_before_loginform_template', $args ); ?>
 
-<div id="wpum-form-<?php echo $args['form_id'];?>" class="wpum-login-form" data-redirect="<?php echo $args['redirect'];?>">
+<div id="wpum-form-<?php echo esc_attr( $args['form_id'] );?>" class="wpum-login-form" data-redirect="<?php echo esc_attr( $args['redirect'] );?>">
 
 	<?php do_action( 'wpum_before_inside_loginform_template', $args ); ?>
 
