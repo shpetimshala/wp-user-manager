@@ -577,7 +577,7 @@ function wpum_get_settings_tabs() {
 	$tabs['general']        = __( 'General', 'wpum' );
 	$tabs['registration']   = __( 'Registration', 'wpum' );
 	$tabs['emails']         = __( 'Emails', 'wpum' );
-	$tabs['default_fields'] = __( 'Default fields', 'wpum' );
+	$tabs['default_fields'] = __( 'Fields', 'wpum' );
 	$tabs['profile']        = __( 'Profiles', 'wpum' );
 	$tabs['redirects']      = __( 'Redirects', 'wpum' );
 	$tabs['tools']          = __( 'Tools', 'wpum' );
