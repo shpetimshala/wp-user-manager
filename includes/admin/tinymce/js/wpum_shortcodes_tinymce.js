@@ -220,6 +220,26 @@
 						editor.insertContent( '[wpum_profile]');
 					}
 				}, // End Profile
+				/* Latest Registered Users */
+				{
+					text: 'Recently Registered Users',
+					onclick: function() {
+						editor.windowManager.open( {
+							title: 'Recently Registered Users',
+							body: [ 
+								{
+									type: 'textbox', 
+									name: 'amount', 
+									label: 'Users amount:',
+									value: ''
+								},
+							],
+							onsubmit: function( e ) {
+								editor.insertContent( '[wpum_recently_registered amount="' + e.data.amount + '" ]');
+							}
+						});
+					}
+				}, // End Latest Registered Users
 
 			]
 		});

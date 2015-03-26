@@ -34,6 +34,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_password_recovery', array( $this, 'wpum_password' ) );
 		add_shortcode( 'wpum_account', array( $this, 'wpum_account' ) );
 		add_shortcode( 'wpum_profile', array( $this, 'wpum_profile' ) );
+		add_shortcode( 'wpum_recently_registered', array( $this, 'wpum_recently_registered' ) );
 
 	}
 
@@ -224,6 +225,29 @@ class WPUM_Shortcodes {
 					'user_data' => wpum_get_user_by_data(),
 				) 
 			);
+
+		$output = ob_get_clean();
+
+		return $output;
+
+	}
+
+	/**
+	 * Recently Registered Users Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_recently_registered( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'amount' => '1',
+		), $atts ) );
+
+		ob_start();
+
+		get_wpum_template( 'recently-registered.php', array( 'amount' => $amount ) );
 
 		$output = ob_get_clean();
 
