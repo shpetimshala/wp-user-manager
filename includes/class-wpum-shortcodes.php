@@ -104,7 +104,7 @@ class WPUM_Shortcodes {
 		// Show login form if not logged in
 		else :
 
-			get_wpum_template( 'login-form.php',
+			get_wpum_template( 'forms/login-form.php',
 				array(
 					'args' => $args,
 					'atts' => $atts,

@@ -519,7 +519,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		// Show psw form if not logged in
 		else :
-			get_wpum_template( 'password-form.php', 
+			get_wpum_template( 'forms/password-form.php', 
 				array(
 					'atts'            => $atts,
 					'form'            => self::$form_name,

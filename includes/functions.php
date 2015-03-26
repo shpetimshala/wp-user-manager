@@ -421,7 +421,7 @@ function wpum_login_form( $args = array() ) {
 	// Show login form if not logged in
 	else :
 
-		get_wpum_template( 'login-form.php', array(	'args' => $args ) );
+		get_wpum_template( 'forms/login-form.php', array( 'args' => $args ) );
 
 		// Display helper links
 		do_action( 'wpum_do_helper_links', $args['login_link'], $args['register_link'], $args['psw_link'] );

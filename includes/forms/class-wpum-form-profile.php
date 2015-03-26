@@ -631,7 +631,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		// Display template
 		if( is_user_logged_in() ) :
 
-			get_wpum_template( 'profile-form.php', 
+			get_wpum_template( 'forms/profile-form.php', 
 				array(
 					'atts'    => $atts,
 					'form'    => self::$form_name,
