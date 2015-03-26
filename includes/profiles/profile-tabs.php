@@ -19,7 +19,7 @@
  */
 function wpum_load_profile_tabs( $user_data ) {
 
-	$output = get_wpum_template( 'profile-tabs.php', array( 'user_data' => $user_data, 'tabs' => wpum_get_user_profile_tabs() ) );
+	$output = get_wpum_template( 'profile/profile-tabs.php', array( 'user_data' => $user_data, 'tabs' => wpum_get_user_profile_tabs() ) );
 
 	echo $output;
 
@@ -38,7 +38,7 @@ add_action( 'wpum_after_profile_details', 'wpum_load_profile_tabs', 10 );
  */
 function wpum_profile_tab_content_about( $user_data, $tabs, $current_tab_slug ) {
 
-	echo get_wpum_template( 'profile-overview.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
+	echo get_wpum_template( 'profile/profile-overview.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
 
 }
 add_action( 'wpum_profile_tab_content_about', 'wpum_profile_tab_content_about', 10, 3 );
@@ -55,7 +55,7 @@ add_action( 'wpum_profile_tab_content_about', 'wpum_profile_tab_content_about', 
  */
 function wpum_profile_tab_content_posts( $user_data, $tabs, $current_tab_slug ) {
 
-	echo get_wpum_template( 'profile-posts.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
+	echo get_wpum_template( 'profile/profile-posts.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
 
 }
 add_action( 'wpum_profile_tab_content_posts', 'wpum_profile_tab_content_posts', 11, 3 );
@@ -72,7 +72,7 @@ add_action( 'wpum_profile_tab_content_posts', 'wpum_profile_tab_content_posts', 
  */
 function wpum_profile_tab_content_comments( $user_data, $tabs, $current_tab_slug ) {
 
-	echo get_wpum_template( 'profile-comments.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
+	echo get_wpum_template( 'profile/profile-comments.php', array( 'user_data' => $user_data, 'tabs' => $tabs, 'slug' => $current_tab_slug ) );
 
 }
 add_action( 'wpum_profile_tab_content_comments', 'wpum_profile_tab_content_comments', 12, 3 );

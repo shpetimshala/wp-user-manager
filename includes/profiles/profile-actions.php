@@ -67,7 +67,7 @@ if ( ! function_exists( 'wpum_profile_show_user_links' ) ) :
  */
 function wpum_profile_show_user_links( $user_data ) {
 
-	$output = get_wpum_template( 'profile-links.php', array( 'user_data' => $user_data ) );
+	$output = get_wpum_template( 'profile/profile-links.php', array( 'user_data' => $user_data ) );
 
 	echo $output;
 
