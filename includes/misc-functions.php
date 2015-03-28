@@ -533,6 +533,7 @@ function wpum_get_recent_users( $amount ) {
 
 	$args = array(
 		'number'  => $amount,
+		'order'   => 'DESC',
 		'orderby' => 'registered'
 	);
 

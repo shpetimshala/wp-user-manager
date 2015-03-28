@@ -233,9 +233,15 @@
 									label: 'Users amount:',
 									value: ''
 								},
+								{
+									type: 'listbox',
+									name: 'link_to_profile',
+									label: 'Link to profile?',
+									'values': yes_no
+								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_recently_registered amount="' + e.data.amount + '" ]');
+								editor.insertContent( '[wpum_recently_registered amount="' + e.data.amount + '" link_to_profile ="' + e.data.link_to_profile + '" ]');
 							}
 						});
 					}

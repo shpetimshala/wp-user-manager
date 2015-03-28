@@ -185,3 +185,13 @@
 	}
 
 }
+
+.wpum-recent-users {
+	ul.wpum-users-list {
+		list-style: none;
+		li {
+			margin: 0px;
+			padding: 0px;
+		}
+	}
+}

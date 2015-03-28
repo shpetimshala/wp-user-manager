@@ -217,4 +217,10 @@
   .wpum-single-profile .wpum-single-comment:first-child p {
     padding-top: 0px; }
 
+.wpum-recent-users ul.wpum-users-list {
+  list-style: none; }
+  .wpum-recent-users ul.wpum-users-list li {
+    margin: 0px;
+    padding: 0px; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

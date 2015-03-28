@@ -242,12 +242,13 @@ class WPUM_Shortcodes {
 	public function wpum_recently_registered( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'amount' => '1',
+			'amount'          => '1',
+			'link_to_profile' => 'yes'
 		), $atts ) );
 
 		ob_start();
 
-		get_wpum_template( 'recently-registered.php', array( 'amount' => $amount ) );
+		get_wpum_template( 'recently-registered.php', array( 'amount' => intval($amount), 'link_to_profile' => $link_to_profile ) );
 
 		$output = ob_get_clean();
 
