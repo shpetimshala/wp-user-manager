@@ -13,19 +13,27 @@
 	
 	<?php do_action( 'wpum_before_user_details_list', $user_data, $tabs, $slug ); ?>
 
-	<dl>          
+	<dl>
+		<?php if( $user_data->first_name || $user_data->last_name ) : ?>
 	    <dt><?php _e('Name');?>:</dt>
 	    <dd><?php echo $user_data->first_name; ?> <?php echo $user_data->last_name; ?></dd>
-	             
+		<?php endif; ?>
+	    
+	    <?php if( $user_data->user_nicename ) : ?>
 	    <dt><?php _e('Nickname');?>:</dt>
 	    <dd><?php echo $user_data->user_nicename; ?></dd>
+		<?php endif; ?>
 
+		<?php if( $user_data->user_email ) : ?>
 	    <dt><?php _e('Email');?>:</dt>
 	    <dd><a href="mailto:<?php echo antispambot( $user_data->user_email );?>"><?php echo antispambot( $user_data->user_email ); ?></a></dd>
+		<?php endif; ?>
 
+		<?php if( $user_data->user_url ) : ?>
 	    <dt><?php _e('Website');?>:</dt>
 	    <dd><a href="<?php echo esc_url( $user_data->user_url ); ?>" rel="nofollow" target="_blank"><?php echo esc_url( $user_data->user_url ); ?></a></dd>
-
+		<?php endif; ?>
+		
 	    <dt><?php _e('Registered');?>:</dt>
 	    <dd><?php echo date( get_option('date_format'), strtotime( $user_data->user_registered ) ); ?></dd>
 	</dl>
