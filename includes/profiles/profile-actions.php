@@ -103,5 +103,5 @@ function wpum_profile_nickname_error_message() {
 	echo wpum_message( $args );
 
 }
-add_action( 'wpum_before_profile_details', 'wpum_profile_nickname_error_message', 10 );
+//add_action( 'wpum_before_profile_details', 'wpum_profile_nickname_error_message', 10 );
 endif;

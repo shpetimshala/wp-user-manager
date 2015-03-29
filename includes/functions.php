@@ -285,6 +285,20 @@ function wpum_get_user_by_data() {
 				case 'username':
 					$user_data = get_user_by( 'login', esc_attr( get_query_var('user') ) );
 					break;
+				case 'nickname':
+
+					// WP_User_Query arguments
+					$args = array (
+						'search'         => esc_attr( get_query_var('user') ),
+						'search_columns' => array( 'user_nicename' ),
+					);
+
+					// The User Query
+					$user_query = new WP_User_Query( $args );
+					$user_query = $user_query->get_results();
+
+					$user_data = $user_query[0];
+					break;
 				default:
 					$user_data = apply_filters( "wpum_get_user_by_data", $permalink_structure, $who );
 					break;
