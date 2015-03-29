@@ -610,7 +610,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Show register form if not logged in
 		else :
 
-			get_wpum_template( 'form/default-registration-form.php', 
+			get_wpum_template( 'forms/default-registration-form.php', 
 				array(
 					'atts' => $atts,
 					'form' => self::$form_name,
