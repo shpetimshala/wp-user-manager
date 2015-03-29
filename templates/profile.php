@@ -9,6 +9,8 @@
  * @since       1.0.0
  */
 
+print_r($user_data);
+
 // Display error message if no user has been found.
 if( !is_object( $user_data ) ) {
 	$args = array( 

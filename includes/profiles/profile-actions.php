@@ -74,3 +74,34 @@ function wpum_profile_show_user_links( $user_data ) {
 }
 add_action( 'wpum_secondary_profile_details', 'wpum_profile_show_user_links', 10 );
 endif;
+
+if ( ! function_exists( 'wpum_profile_nickname_error_message' ) ) :
+/**
+ * Display error message if no nickname has been added,
+ * and the permalink structure has been set to "nickname".
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_profile_nickname_error_message() {
+
+	$structure = get_option( 'wpum_permalink' );
+
+	if( $structure !== 'nickname' )
+		return;
+
+	if( !wpum_is_single_profile() )
+		return;
+
+	// Display error message
+	$args = array( 
+				'id'   => 'wpum-nickname-not-found', 
+				'type' => 'error', 
+				'text' => __( 'A nickname is required for your profile to be visible.' )
+			);
+	echo wpum_message( $args );
+
+}
+add_action( 'wpum_before_profile_details', 'wpum_profile_nickname_error_message', 10 );
+endif;
