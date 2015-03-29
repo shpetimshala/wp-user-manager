@@ -288,7 +288,7 @@ function wpum_get_permalink_structures() {
  * Get ID of a core page.
  *
  * @since 1.0.0
- * @param string $name the name of the page. Supports: login, register, password, profile_edit, profile.
+ * @param string $name the name of the page. Supports: login, register, password, account, profile.
  * @return int $id of the core page.
  */
 function wpum_get_core_page_id( $page ) {
@@ -305,8 +305,8 @@ function wpum_get_core_page_id( $page ) {
 		case 'password':
 			$id = wpum_get_option('password_recovery_page');
 			break;
-		case 'profile_edit':
-			$id = wpum_get_option('profile_edit_page');
+		case 'account':
+			$id = wpum_get_option('account_page');
 			break;
 		case 'profile':
 			$id = wpum_get_option('profile_page');
@@ -323,7 +323,7 @@ function wpum_get_core_page_id( $page ) {
  * Get URL of a core page.
  *
  * @since 1.0.0
- * @param string $name the name of the page. Supports: login, register, password, profile_edit, profile.
+ * @param string $name the name of the page. Supports: login, register, password, account, profile.
  * @return string $url of the core page.
  */
 function wpum_get_core_page_url( $page ) {
@@ -340,8 +340,8 @@ function wpum_get_core_page_url( $page ) {
 		case 'password':
 			$url = esc_url( get_permalink( wpum_get_core_page_id('password') ) );
 			break;
-		case 'profile_edit':
-			$url = esc_url( get_permalink( wpum_get_core_page_id('profile_edit') ) );
+		case 'account':
+			$url = esc_url( get_permalink( wpum_get_core_page_id('account') ) );
 			break;
 		case 'profile':
 			$url = esc_url( get_permalink( wpum_get_core_page_id('profile') ) );

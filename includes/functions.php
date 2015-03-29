@@ -211,7 +211,7 @@ function wpum_get_registration_page_url() {
 }
 endif;
 
-if ( ! function_exists( 'wpum_get_profile_edit_page_url' ) ) :
+if ( ! function_exists( 'wpum_get_account_page_url' ) ) :
 /**
  * Returns the URL of the profile edit page.
  * 
@@ -221,12 +221,12 @@ if ( ! function_exists( 'wpum_get_profile_edit_page_url' ) ) :
  * @uses wpum_get_option() To retrieve the selected page ID
  * @uses get_permalink To retrieve permalink given an ID.
  */
-function wpum_get_profile_edit_page_url() {
+function wpum_get_account_page_url() {
 		
 	$redirect = null;
 
-	if( wpum_get_option('profile_edit_page') )
-		$redirect = esc_url( get_permalink( wpum_get_option('profile_edit_page') ) );
+	if( wpum_get_option('account_page') )
+		$redirect = esc_url( get_permalink( wpum_get_option('account_page') ) );
 
 	return $redirect;
 

@@ -204,10 +204,10 @@ function wpum_get_registered_settings() {
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
-				'profile_edit_page' => array(
-					'id'   => 'profile_edit_page',
-					'name' => __( 'Profile Edit page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_profile_edit] shortcode.'),
+				'account_page' => array(
+					'id'   => 'account_page',
+					'name' => __( 'Account page:', 'wpum' ),
+					'desc'    => __('Select the page where you have added the [wpum_account] shortcode.'),
 					'type' => 'select',
 					'options' => wpum_get_pages()
 				),
