@@ -9,6 +9,24 @@
  * @since       1.0.0
  */
 
+/**
+ * Force 404 error if user or tabs do not exist.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_profile_force_404_error() {
+	
+	global $wp_query;
+
+	$wp_query->set_404();
+    status_header( 404 );
+    nocache_headers();
+
+}
+//add_action( 'wp', 'wpum_profile_force_404_error' );
+
 if ( ! function_exists( 'wpum_profile_show_user_name' ) ) :
 /**
  * Display user name in profile.php template.
