@@ -270,7 +270,7 @@ function wpum_get_user_by_data() {
 	
 	$user_data = null;
 	$permalink_structure = get_option( 'wpum_permalink', 'user_id' );
-	$who = (get_query_var('user')) ? get_query_var('user') : null;
+	$who = ( get_query_var('user') ) ? get_query_var('user') : null;
 
 	// Checks we are on the profile page
 	if( is_page( wpum_get_core_page_id('profile') ) ) {
@@ -330,6 +330,9 @@ function wpum_get_user_profile_url( $user_data ) {
 			break;
 		case 'username':
 			$url = $base_url . $user_data->user_login;
+			break;
+		case 'nickname':
+			$url = $base_url . $user_data->user_nicename;
 			break;
 		default:
 			$url = apply_filters( 'wpum_get_user_profile_url', $user_data, $permalink_structure );
