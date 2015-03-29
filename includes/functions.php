@@ -188,6 +188,7 @@ function wpum_get_user_by_data() {
 					$user_query = $user_query->get_results();
 
 					$user_data = $user_query[0];
+					
 					break;
 				default:
 					$user_data = apply_filters( "wpum_get_user_by_data", $permalink_structure, $who );

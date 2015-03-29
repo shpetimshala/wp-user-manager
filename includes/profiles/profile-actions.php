@@ -17,7 +17,7 @@
  * @return void
  */
 function wpum_profile_force_404_error() {
-	
+
 	// Bail if not on the profile page
 	if( !is_page( wpum_get_core_page_id('profile') ) )
 		return;
@@ -26,16 +26,13 @@ function wpum_profile_force_404_error() {
 	if( !wpum_is_single_profile() )
 		return;
 
-	// Bail if no tab is set
-	if( wpum_get_current_profile_tab() === null )
-		return;
-
 	// Trigger if tab is set and does not exist
 	if( wpum_get_current_profile_tab() !== null && !wpum_profile_tab_exists( wpum_get_current_profile_tab() ) )
 		wpum_trigger_404();
 
 	// Trigger if profile is set and does not exist
-	//if( wpum_is_single_profile() &&  )
+	if( wpum_is_single_profile() && !wpum_user_exists( wpum_is_single_profile(), get_option( 'wpum_permalink' ) ) )
+		wpum_trigger_404();
 
 }
 add_action( 'template_redirect', 'wpum_profile_force_404_error' );

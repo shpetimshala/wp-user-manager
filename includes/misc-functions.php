@@ -596,3 +596,35 @@ function wpum_trigger_404() {
     nocache_headers();
 
 }
+
+/**
+ * Given $user_data checks against $method_type if the user exists.
+ *
+ * @since 1.0.0
+ * @param string $user_data Either ID/Username/Nickname
+ * @param string $method_type Either user_id/username/nickname - usually retrieve thorugh get_option('wpum_permalink')
+ * @return bool
+ */
+function wpum_user_exists( $user_data, $method_type ) {
+
+	$exists = false;
+
+	// Check if user exists by ID
+	if( !empty( $user_data ) && $method_type == 'user_id' && get_user_by( 'id', intval( $user_data ) ) ) {
+		$exists = true;
+	}
+
+	// Check if user exists by username
+	if( !empty( $user_data ) && $method_type == 'username' && get_user_by( 'login', esc_attr( $user_data ) ) ) {
+		$exists = true;
+	}
+
+	// Check if user exists by nickname
+	if( !empty( $user_data ) && $method_type == 'nickname' && wpum_nickname_exists( $user_data ) ) {
+		$exists = true;
+	}
+
+	return $exists;
+
+}
+
