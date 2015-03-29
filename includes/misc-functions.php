@@ -551,3 +551,32 @@ function wpum_get_recent_users( $amount ) {
 	return $users;
 }
 
+/**
+ * Check if a given nickname already exists.
+ *
+ * @since 1.0.0
+ * @param string $nickname
+ * @return bool
+ */
+function wpum_nickname_exists( $nickname ) {
+
+	$exists = false;
+
+	$args = array(
+		'fields'         => 'user_nicename',
+		'search'         => $nickname,
+		'search_columns' => array( 'user_nicename' )
+	);
+
+	// The Query
+	$user_query = new WP_User_Query( $args );
+
+	// Get the results
+	$users = $user_query->get_results();
+
+	if( !empty( $users ) )
+		$exists = true;
+
+	return $exists;
+
+}
