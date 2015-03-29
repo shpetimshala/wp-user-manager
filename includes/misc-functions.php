@@ -395,7 +395,7 @@ function wpum_members_can_view_profiles() {
  */
 function wpum_is_single_profile() {
 
-	$who = (get_query_var('user')) ? get_query_var('user') : false;
+	$who = ( get_query_var('user') ) ? get_query_var('user') : false;
 
 	return $who;
 
@@ -578,5 +578,21 @@ function wpum_nickname_exists( $nickname ) {
 		$exists = true;
 
 	return $exists;
+
+}
+
+/**
+ * Force 404 error headers.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_trigger_404() {
+
+	global $wp_query;
+
+	$wp_query->set_404();
+    status_header( 404 );
+    nocache_headers();
 
 }

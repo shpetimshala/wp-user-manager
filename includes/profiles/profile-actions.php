@@ -18,14 +18,27 @@
  */
 function wpum_profile_force_404_error() {
 	
-	global $wp_query;
+	// Bail if not on the profile page
+	if( !is_page( wpum_get_core_page_id('profile') ) )
+		return;
 
-	$wp_query->set_404();
-    status_header( 404 );
-    nocache_headers();
+	// Bail if viewing single profile only and not another user profile
+	if( !wpum_is_single_profile() )
+		return;
+
+	// Bail if no tab is set
+	if( wpum_get_current_profile_tab() === null )
+		return;
+
+	// Trigger if tab is set and does not exist
+	if( wpum_get_current_profile_tab() !== null && !wpum_profile_tab_exists( wpum_get_current_profile_tab() ) )
+		wpum_trigger_404();
+
+	// Trigger if profile is set and does not exist
+	//if( wpum_is_single_profile() &&  )
 
 }
-//add_action( 'wp', 'wpum_profile_force_404_error' );
+add_action( 'template_redirect', 'wpum_profile_force_404_error' );
 
 if ( ! function_exists( 'wpum_profile_show_user_name' ) ) :
 /**
