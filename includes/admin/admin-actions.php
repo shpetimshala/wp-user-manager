@@ -167,7 +167,7 @@ add_action( 'wpum_restore_default_fields', 'wpum_option_restore_default_fields' 
 */
 function wpum_profile_permalink() {
 
-	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s'), wpum_get_profile_page_url(), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
+	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s'), wpum_get_core_page_url('profile'), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
 	$output .= '<p class="description">' . sprintf( __('You can change the profiles permalink structure into your <a href="%s">permalink settings page</a>.'), admin_url( 'options-permalink.php' ) ) . '</p>';
 
 	// Display error if something is wrong
