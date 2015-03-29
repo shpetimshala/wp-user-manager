@@ -69,7 +69,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		public $emails;
 
 		/**
-		 * EDD Email Template Tags Object
+		 * WPUM Email Template Tags Object
 		 *
 		 * @var object
 		 * @since 1.0.0

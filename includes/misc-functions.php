@@ -274,6 +274,11 @@ function wpum_get_permalink_structures() {
 			'label'  => _x( 'Display username', 'Permalink structure' ),
 			'sample' => _x( 'username', 'Example of permalink setting' )
 		),
+		'nickname' => array(
+			'name'   => 'nickname',
+			'label'  => _x( 'Display nickname', 'Permalink structure' ),
+			'sample' => _x( 'nickname', 'Example of permalink setting' )
+		),
 	);
 
 	return apply_filters( 'wpum_get_permalink_structures', $structures );
