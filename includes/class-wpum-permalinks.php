@@ -149,8 +149,6 @@ class WPUM_Permalinks {
 			$user_permalink = sanitize_text_field( $_POST['user_permalink'] );
 			update_option( 'wpum_permalink', $user_permalink );
 
-			flush_rewrite_rules( true );
-
 		}
 
 	}
