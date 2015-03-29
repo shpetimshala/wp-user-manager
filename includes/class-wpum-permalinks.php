@@ -137,6 +137,10 @@ class WPUM_Permalinks {
 			return;
 		}
 
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-permalink' ) ) {
+  			return;
+  		}
+
 		// Bail if no cap
 		if( ! current_user_can( 'manage_options' ) ) {
 			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
