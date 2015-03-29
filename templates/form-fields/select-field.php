@@ -13,4 +13,4 @@
 		<option value="<?php echo esc_attr( $key ); ?>" <?php if ( isset( $field['value'] ) || isset( $field['default'] ) ) selected( isset( $field['value'] ) ? $field['value'] : $field['default'], $key ); ?>><?php echo esc_html( $value ); ?></option>
 	<?php endforeach; ?>
 </select>
-<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo esc_html( $field['description'] ); ?></small><?php endif; ?>
+<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
