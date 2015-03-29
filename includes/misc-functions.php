@@ -574,6 +574,12 @@ function wpum_nickname_exists( $nickname ) {
 	// Get the results
 	$users = $user_query->get_results();
 
+	/*
+	// Get current user
+	$current_user = wp_get_current_user();
+
+	if( $users[0] == $current_user )*/
+
 	if( !empty( $users ) )
 		$exists = true;
 

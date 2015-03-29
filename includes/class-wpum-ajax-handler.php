@@ -78,8 +78,7 @@ class WPUM_Ajax_Handler {
 		// Validate Password Field on profile form
 		add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_password_field' ), 10, 2 );
 		add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_email_field' ), 10, 2 );
-		if ( wpum_get_option( 'exclude_usernames' ) )
-			add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
+		add_filter( 'wpum_form_validate_ajax_profile_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 2 );
 
 		// Registration method
 		add_action( 'wp_ajax_wpum_register', array( $this, 'registration_form' ) );
@@ -614,8 +613,18 @@ class WPUM_Ajax_Handler {
 
 		$username = $fields['nickname'][ 'value' ];
 
-		if ( array_key_exists( $username , wpum_get_disabled_usernames() ) )
+		if ( wpum_get_option('exclude_usernames') && array_key_exists( $username , wpum_get_disabled_usernames() ) )
 			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		// Check for nicknames if permalink structure requires unique nicknames.
+		if( get_option('wpum_permalink') == 'nickname'  ) :
+
+			$current_user = wp_get_current_user();
+
+			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		endif;
 
 		return $passed;
 

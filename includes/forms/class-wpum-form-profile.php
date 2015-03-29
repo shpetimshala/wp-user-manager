@@ -448,7 +448,15 @@ class WPUM_Form_Profile extends WPUM_Form {
 		if( wpum_get_option('exclude_usernames') && array_key_exists( $username , wpum_get_disabled_usernames() ) )
 			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
 
-		//if( get_option('wpum_permalink') == 'nickname' &&  ) 
+		// Check for nicknames if permalink structure requires unique nicknames.
+		if( get_option('wpum_permalink') == 'nickname'  ) :
+
+			$current_user = wp_get_current_user();
+
+			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		endif;
 
 		return $passed;
 
