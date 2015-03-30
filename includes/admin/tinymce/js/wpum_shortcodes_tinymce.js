@@ -246,6 +246,26 @@
 						});
 					}
 				}, // End Latest Registered Users
+				/* Profile Card */
+				{
+					text: 'Profile Card',
+					onclick: function() {
+						editor.windowManager.open( {
+							title: 'Profile Card',
+							body: [ 
+								{
+									type: 'textbox', 
+									name: 'user_id', 
+									label: 'User ID',
+									value: ''
+								}
+							],
+							onsubmit: function( e ) {
+								editor.insertContent( '[wpum_profile_card user_id="' + e.data.user_id + '"]');
+							}
+						});
+					}
+				}, // End Profile Card
 
 			]
 		});

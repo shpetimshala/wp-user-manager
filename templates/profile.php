@@ -1,7 +1,7 @@
 <?php
 /**
- * WPUM Template: Mini Profile.
- * Displays a preview of the user profile.
+ * WPUM Template: Profile.
+ * Displays the user profile.
  *
  * @package     wp-user-manager
  * @copyright   Copyright (c) 2015, Alessandro Tesoro

@@ -35,6 +35,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_account', array( $this, 'wpum_account' ) );
 		add_shortcode( 'wpum_profile', array( $this, 'wpum_profile' ) );
 		add_shortcode( 'wpum_recently_registered', array( $this, 'wpum_recently_registered' ) );
+		add_shortcode( 'wpum_profile_card', array( $this, 'wpum_profile_card' ) );
 
 	}
 
@@ -249,6 +250,41 @@ class WPUM_Shortcodes {
 		ob_start();
 
 		get_wpum_template( 'recently-registered.php', array( 'amount' => intval($amount), 'link_to_profile' => $link_to_profile ) );
+
+		$output = ob_get_clean();
+
+		return $output;
+
+	}
+
+	/**
+	 * Profile Card Shortcode.
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_profile_card( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'user_id'    => null,
+			'template'   => null,
+			'wrapper_id' => null
+		), $atts ) );
+
+		ob_start();
+
+		// Prepare attributes for the profile card
+		if( $wrapper_id ) {
+			$wrapper_id = '-'.$wrapper_id;
+		}
+
+		get_wpum_template( 'profile-card.php', array( 
+				'user_id'    => $user_id,
+				'template'   => $template,
+				'wrapper_id' => $wrapper_id
+			) 
+		);
 
 		$output = ob_get_clean();
 

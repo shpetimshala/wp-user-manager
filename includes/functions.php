@@ -338,3 +338,30 @@ function wpum_login_form( $args = array() ) {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_profile_avatar' ) ) :
+/**
+ * Display user avatar.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param int $user_id The id of the user
+ * @param bool $hyperlink whether to link the image to the profile's page.
+ * @param int $size the size of the avatar
+ * @return void
+ */
+function wpum_profile_avatar( $user_id, $hyperlink = true, $size = 128 ) {
+
+	$output = '';
+	$avatar = get_avatar( $user_id , $size );
+
+	if( $hyperlink ) {
+		$output .= '<a href="#">' . $avatar . '</a>';
+	} else {
+		$output = $avatar;
+	}
+
+	return $output;
+
+}
+endif;
