@@ -247,12 +247,7 @@
       border-bottom-right-radius: 0px; }
   .wpum-profile-card .wpum-card-details {
     		/*
-    		.wpum-profile-link {
-    			display: inline-block;
-    			margin-top: 10px;
-    			text-decoration: none;
-    		}
-    
+    		
     		p {
     			margin-bottom: 5px;
     		}
@@ -277,5 +272,9 @@
     			}
     		}
     		*/ }
+    .wpum-profile-card .wpum-card-details .wpum-profile-link {
+      display: block;
+      margin-top: 10px;
+      text-decoration: none; }
 
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

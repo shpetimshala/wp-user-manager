@@ -18,7 +18,10 @@
 
 	<div class="wpum-card-details wpum_five_sixth last">
 		
-		<p><?php echo wpum_profile_display_name( $user_data ); ?></p>
+		<?php echo wpum_profile_display_name( $user_data ); ?>
+		<a href=""><?php _e('View Profile');?></a>
+		<a href=""><?php _e('Send Email');?></a>
+
 		<?php do_action( 'wpum_profile_card_details', $user_data ); ?>
 
 	</div>
