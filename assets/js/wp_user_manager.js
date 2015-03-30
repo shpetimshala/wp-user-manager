@@ -50,11 +50,11 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if(results.loggedin === true) {
-							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						if(results.data.loggedin === true) {
+							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
 							window.location.href = wpum_redirect;
 						} else {
-							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
 						}
 
 					},
@@ -140,10 +140,10 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if(results.valid === true) {
-							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						if(results.data.valid === true) {
+							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
 						} else {
-							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
 						}
 
 					},
@@ -193,10 +193,10 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if(results.completed === true) {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success wpum-lost-psw-message').text(results.message);
+						if(results.data.completed === true) {
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success wpum-lost-psw-message').text(results.data.message);
 						} else {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error wpum-lost-psw-message').text(results.message);
+							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error wpum-lost-psw-message').text(results.data.message);
 						}
 
 					},
@@ -248,11 +248,11 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if( results.valid === true ) {
-							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+						if( results.data.valid === true ) {
+							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
 							location.reload(true);
 						} else {
-							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+							$( wpum_profile_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
 						}
 
 					},
@@ -286,8 +286,6 @@ jQuery(document).ready(function ($) {
 					}; 
 				});
 
-				console.log(dataArray);
-
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -304,17 +302,17 @@ jQuery(document).ready(function ($) {
 					success: function(results) {
 
 						// Check the response
-						if( results.valid === true ) {
+						if( results.data.valid === true ) {
 							
-							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.message);
+							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
 
 							// Check for redirect
-							if( results.redirect === true ) {
-								window.location.replace( results.redirect_url );
+							if( results.data.redirect === true ) {
+								window.location.replace( results.data.redirect_url );
 							}
 
 						} else {
-							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.message);
+							$( wpum_register_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
 						}
 
 					},

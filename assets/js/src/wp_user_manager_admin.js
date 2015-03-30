@@ -49,7 +49,7 @@ jQuery(document).ready(function ($) {
 							$( '#wpum-restore-emails' ).after('<span id="wpum-spinner" class="spinner wpum-spinner"></span>');
 						},
 						success: function(results) {
-							$( '#wpum-restore-emails' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
+							$( '#wpum-restore-emails' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.data.message + '</p>' );
 							$( '#wpum-spinner' ).hide();
 						},
 						error: function(xhr, status, error) {
@@ -115,7 +115,7 @@ jQuery(document).ready(function ($) {
 							},
 							success: function(results) {
 								$('.wpum-table-loader').css('display','none');
-								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.message + '</strong></p></div>');
+								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
 							},
 							error: function(xhr, status, error) {
 							    alert(xhr.responseText);
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
 							$( '#wpum-restore-default-fields' ).after('<span id="wpum-spinner" class="spinner wpum-spinner"></span>');
 						},
 						success: function(results) {
-							$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.message + '</p>' );
+							$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.data.message + '</p>' );
 							$( '#wpum-spinner' ).hide();
 						},
 						error: function(xhr, status, error) {
@@ -233,16 +233,16 @@ jQuery(document).ready(function ($) {
 						},
 						success: function(results) {
 							
-							if( results.valid == true ) {
+							if( results.data.valid == true ) {
 
 								$( modal_window ).find('.wpum-spinner').remove();
 								$( modal_window ).hide();
-								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.message + '</strong></p></div>');
+								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
 								location.reload(true);
 
 							} else {
 
-								alert( results.message );
+								alert( results.data.message );
 
 							}
 
