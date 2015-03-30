@@ -345,20 +345,43 @@ if ( ! function_exists( 'wpum_profile_avatar' ) ) :
  * 
  * @since 1.0.0
  * @access public
- * @param int $user_id The id of the user
+ * @param int $user_data WP_User Object
  * @param bool $hyperlink whether to link the image to the profile's page.
- * @param int $size the size of the avatar
+ * @param int $size the size of the avatar.
  * @return void
  */
-function wpum_profile_avatar( $user_id, $hyperlink = true, $size = 128 ) {
+function wpum_profile_avatar( $user_data, $hyperlink = true, $size = 128 ) {
 
 	$output = '';
-	$avatar = get_avatar( $user_id , $size );
+	$avatar = get_avatar( $user_data->ID , $size );
 
 	if( $hyperlink ) {
-		$output .= '<a href="#">' . $avatar . '</a>';
+		$output .= '<a href="'. wpum_get_user_profile_url( $user_data ) .'" class="wpum-profile-link">' . $avatar . '</a>';
 	} else {
 		$output = $avatar;
+	}
+
+	return $output;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_profile_display_name' ) ) :
+/**
+ * Display user avatar.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param int $user_data WP_User Object
+ * @param bool $hyperlink whether to link the image to the profile's page.
+ * @return void
+ */
+function wpum_profile_display_name( $user_data, $hyperlink = true ) {
+
+	$output = $user_data->display_name;
+
+	if( $hyperlink ) {
+		$output = '<a href="'. wpum_get_user_profile_url( $user_data ) .'" class="wpum-profile-link">' . $user_data->display_name . '</a>';
 	}
 
 	return $output;

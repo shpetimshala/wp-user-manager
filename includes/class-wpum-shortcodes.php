@@ -280,7 +280,7 @@ class WPUM_Shortcodes {
 		}
 
 		get_wpum_template( 'profile-card.php', array( 
-				'user_id'    => $user_id,
+				'user_data'  => get_user_by( 'id', intval( $user_id ) ),
 				'template'   => $template,
 				'wrapper_id' => $wrapper_id
 			) 
