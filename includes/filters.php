@@ -13,18 +13,24 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Add Settings Link To WP-Plugin Page
- * @since    1.0.0
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return array
  */
 function wpum_add_settings_link( $links ) {
-	$settings_link = '<a href="'.admin_url( '#' ).'">'.__('Settings','wpum').'</a>';
+	$settings_link = '<a href="'.admin_url( 'users.php?page=wpum-settings' ).'">'.__('Settings','wpum').'</a>';
 	array_push( $links, $settings_link );
 	return $links;
 }
 add_filter( "plugin_action_links_".WPUM_SLUG , 'wpum_add_settings_link');
 
 /**
- * Plugin row meta links
+ * Add links to plugin row
+ * 
  * @since 1.0.0
+ * @access public
+ * @return array
  */
 function wpum_plugin_row_meta( $input, $file ) {
 	
