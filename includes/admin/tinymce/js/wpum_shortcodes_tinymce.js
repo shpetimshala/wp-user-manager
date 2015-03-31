@@ -312,6 +312,27 @@
 							}
 						}, // End User ID Restriction
 
+						/* User role Restriction */
+						{
+							text: 'Restrict to specific user roles only',
+							onclick: function() {
+								editor.windowManager.open( {
+									title: 'Restrict to specific user roles only',
+									body: [ 
+										{
+											type: 'textbox', 
+											name: 'roles', 
+											label: 'Comma separated user role(s)',
+											value: 'subscriber, administrator'
+										}
+									],
+									onsubmit: function( e ) {
+										editor.insertContent( '[wpum_restrict_to_user_roles roles="' + e.data.roles + '"] content here [/wpum_restrict_to_user_roles]');
+									}
+								});
+							}
+						}, // End User role Restriction
+
 					]
 				},
 

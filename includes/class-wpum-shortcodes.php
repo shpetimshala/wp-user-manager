@@ -38,6 +38,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_profile_card', array( $this, 'wpum_profile_card' ) );
 		add_shortcode( 'wpum_restrict_logged_in', array( $this, 'wpum_restrict_logged_in' ) );
 		add_shortcode( 'wpum_restrict_to_users', array( $this, 'wpum_restrict_to_users' ) );
+		add_shortcode( 'wpum_restrict_to_user_roles', array( $this, 'wpum_restrict_to_user_roles' ) );
 
 	}
 
@@ -373,6 +374,50 @@ class WPUM_Shortcodes {
 				'id'   => 'wpum-guests-disabled', 
 				'type' => 'notice', 
 				'text' => sprintf( apply_filters( 'wpum_restricted_users_only_message', $message ), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+			);
+			$warning = wpum_message( $args, true );
+
+		}
+
+		$output = ob_get_clean();
+
+		return $output;
+
+	}
+
+	/**
+	 * Restrict content to logged in users only and by user roles.
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_restrict_to_user_roles( $atts, $content = null ) {
+
+		extract( shortcode_atts( array(
+			'roles' => null,
+		), $atts ) );
+
+		ob_start();
+
+		$allowed_roles = explode( ',', $roles );
+		$allowed_roles = array_map('trim', $allowed_roles );
+
+		$current_user = wp_get_current_user();
+		$current_user_role = $current_user->roles;
+
+		if( is_user_logged_in() && !is_null( $content ) && !is_feed() && array_intersect( $current_user->roles, $allowed_roles ) ) {
+
+			echo do_shortcode( $content );
+
+		} else {
+
+			$message = __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.');
+
+			$args = array( 
+				'id'   => 'wpum-guests-disabled', 
+				'type' => 'notice', 
+				'text' => sprintf( apply_filters( 'wpum_restricted_users_role_only_message', $message ), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( $args, true );
 
