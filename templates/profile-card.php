@@ -16,7 +16,8 @@ if( $template ) {
 			'template'        => $template,
 			'wrapper_id'      => $wrapper_id,
 			'link_to_profile' => $link_to_profile,
-			'display_buttons' => $display_buttons
+			'display_buttons' => $display_buttons,
+			'atts'            => $atts
 		) 
 	);
 	return;
@@ -45,7 +46,7 @@ if( $template ) {
 
 		<?php endif; ?>
 
-		<?php do_action( 'wpum_profile_card_details', $user_data ); ?>
+		<?php do_action( 'wpum_profile_card_details', $user_data, $atts ); ?>
 
 	</div>
 

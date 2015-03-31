@@ -296,7 +296,8 @@ class WPUM_Shortcodes {
 				'template'        => $template,
 				'wrapper_id'      => $wrapper_id,
 				'link_to_profile' => $link_to_profile,
-				'display_buttons' => $display_buttons
+				'display_buttons' => $display_buttons,
+				'atts'            => $atts
 			) 
 		);
 
