@@ -225,6 +225,13 @@
 
 /* Profile Card */
 .wpum-profile-card {
+  text-align: center;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 70px 15px 30px 15px;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -233,48 +240,38 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1); }
   .wpum-profile-card .wpum-profile-img {
-    padding: 0px;
-    line-height: 0; }
+    position: absolute;
+    left: 50%;
+    border-radius: 999px;
+    margin-left: -48px;
+    top: -48px; }
     .wpum-profile-card .wpum-profile-img img {
+      border-radius: 999px;
       box-shadow: none;
-      margin: 0px;
-      line-height: initial;
-      -webkit-border-top-right-radius: 0px;
-      -webkit-border-bottom-right-radius: 0px;
-      -moz-border-radius-topright: 0px;
-      -moz-border-radius-bottomright: 0px;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px; }
-  .wpum-profile-card .wpum-card-details {
-    		/*
-    		
-    		p {
-    			margin-bottom: 5px;
-    		}
-    
-    		.wpum-card-button {
-    			display: inline-block;
-    			border: solid 1px #cecccc;
-    			-webkit-border-radius: 3px;
-    			-moz-border-radius: 3px;
-    			border-radius: 3px;
-    			padding: 5px 10px 5px;
-    			background: lighten( $secondary_color , 5 );
-    			text-align: center;
-    			text-decoration: none;
-    			-webkit-box-shadow: 0 0 1px rgba(0,0,0,.17);
-    			-moz-box-shadow: 0 0 1px rgba(0,0,0,.17);
-    			box-shadow: 0 0 1px rgba(0,0,0,.17);
-    			margin-right: 10px;
-    			margin-top: 5px; 
-    			&:hover {
-    				background: lighten( $secondary_color , 7 );
-    			}
-    		}
-    		*/ }
-    .wpum-profile-card .wpum-card-details .wpum-profile-link {
-      display: block;
-      margin-top: 10px;
-      text-decoration: none; }
+      padding: 5px;
+      background-color: #fff;
+      border: 1px solid #e7e6e6; }
+  .wpum-profile-card a.wpum-card-button {
+    border: 1px solid #cecccc;
+    background: #e7e6e6;
+    padding: 3px 12px 2px;
+    margin-bottom: -1px;
+    line-height: 32px;
+    height: 32px;
+    text-decoration: none;
+    outline: none;
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.17);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.17); }
+    .wpum-profile-card a.wpum-card-button:hover {
+      background: #f3f3f3; }
+  .wpum-profile-card h4.wpum-card-name {
+    margin-top: 0px; }
+
+.wpum-profile-card ~ .wpum-profile-card {
+  margin-top: 70px; }
 
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */
