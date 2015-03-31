@@ -291,6 +291,27 @@
 							}
 						}, // End Logout Link
 
+						/* User ID Restriction */
+						{
+							text: 'Restrict to specific users only',
+							onclick: function() {
+								editor.windowManager.open( {
+									title: 'Restrict to specific users only',
+									body: [ 
+										{
+											type: 'textbox', 
+											name: 'ids', 
+											label: 'Comma separated user id(s)',
+											value: '1, 55, 80'
+										}
+									],
+									onsubmit: function( e ) {
+										editor.insertContent( '[wpum_restrict_to_users ids="' + e.data.ids + '"] content here [/wpum_restrict_to_users]');
+									}
+								});
+							}
+						}, // End User ID Restriction
+
 					]
 				},
 
