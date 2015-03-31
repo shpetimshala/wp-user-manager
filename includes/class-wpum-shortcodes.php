@@ -267,9 +267,11 @@ class WPUM_Shortcodes {
 	public function wpum_profile_card( $atts, $content=null ) {
 
 		extract( shortcode_atts( array(
-			'user_id'    => null,
-			'template'   => null,
-			'wrapper_id' => null
+			'user_id'         => null,
+			'template'        => null,
+			'wrapper_id'      => null,
+			'link_to_profile' => 'yes',
+			'display_buttons' => 'yes',
 		), $atts ) );
 
 		ob_start();
@@ -278,11 +280,23 @@ class WPUM_Shortcodes {
 		if( $wrapper_id ) {
 			$wrapper_id = '-'.$wrapper_id;
 		}
+		if( $link_to_profile == 'yes' ) {
+			$link_to_profile = true;
+		} else {
+			$link_to_profile = false;
+		}
+		if( $display_buttons == 'yes' ) {
+			$display_buttons = true;
+		} else {
+			$display_buttons = false;
+		}
 
 		get_wpum_template( 'profile-card.php', array( 
-				'user_data'  => get_user_by( 'id', intval( $user_id ) ),
-				'template'   => $template,
-				'wrapper_id' => $wrapper_id
+				'user_data'       => get_user_by( 'id', intval( $user_id ) ),
+				'template'        => $template,
+				'wrapper_id'      => $wrapper_id,
+				'link_to_profile' => $link_to_profile,
+				'display_buttons' => $display_buttons
 			) 
 		);
 

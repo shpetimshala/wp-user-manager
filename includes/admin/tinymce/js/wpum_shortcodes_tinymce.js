@@ -258,10 +258,22 @@
 									name: 'user_id', 
 									label: 'User ID',
 									value: ''
+								},
+								{
+									type: 'listbox',
+									name: 'link_to_profile',
+									label: 'Link to profile?',
+									'values': yes_no
+								},
+								{
+									type: 'listbox',
+									name: 'display_buttons',
+									label: 'Display buttons?',
+									'values': yes_no
 								}
 							],
 							onsubmit: function( e ) {
-								editor.insertContent( '[wpum_profile_card user_id="' + e.data.user_id + '"]');
+								editor.insertContent( '[wpum_profile_card user_id="' + e.data.user_id + '" link_to_profile ="' + e.data.link_to_profile + '" display_buttons ="' + e.data.display_buttons + '" ]');
 							}
 						});
 					}
