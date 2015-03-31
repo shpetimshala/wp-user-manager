@@ -78,3 +78,17 @@ function wpum_remove_profile_wp_admin() {
 
 }
 add_action( 'load-profile.php', 'wpum_remove_profile_wp_admin' );
+
+/**
+ * Show content of the User ID column in user list page
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return array
+ */
+function wpum_show_user_id_column_content( $value, $column_name, $user_id ) {
+	if ( 'user_id' == $column_name )
+		return $user_id;
+    return $value;
+}
+add_action( 'manage_users_custom_column',  'wpum_show_user_id_column_content', 10, 3 );

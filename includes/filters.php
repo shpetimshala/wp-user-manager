@@ -47,3 +47,16 @@ function wpum_plugin_row_meta( $input, $file ) {
 	return $input;
 }
 add_filter( 'plugin_row_meta', 'wpum_plugin_row_meta', 10, 2 );
+
+/**
+ * Add User ID Column to users list
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return array
+ */
+function wpum_add_user_id_column( $columns ) {
+    $columns['user_id'] = __( 'User ID' );
+    return $columns;
+}
+add_filter( 'manage_users_columns', 'wpum_add_user_id_column' );
