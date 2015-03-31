@@ -160,7 +160,7 @@ class WPUM_Ajax_Handler {
 			
 			$return = array(
 				'loggedin' => false,
-				'message'	=> __( 'Wrong username or password.' ),
+				'message'  => __( 'Wrong username or password.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -169,7 +169,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'loggedin' => true,
-				'message'	=> __( 'Login successful.' ),
+				'message'  => __( 'Login successful.' ),
 			);
 
 			wp_send_json_success( $return );
@@ -193,7 +193,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message'	=> __( 'Error.' ),
+				'message' => __( 'Error.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -225,7 +225,7 @@ class WPUM_Ajax_Handler {
 		update_option( 'wpum_emails', $default_emails );
 
 		$return = array(
-			'message'	=> __( 'Emails successfully restored.' ),
+			'message' => __( 'Emails successfully restored.' ),
 		);
 
 		wp_send_json_success( $return );
@@ -253,8 +253,8 @@ class WPUM_Ajax_Handler {
 		if ( is_email( $username ) && !email_exists( $username ) || !is_email( $username ) && !username_exists( $username ) ) {
 			
 			$return = array(
-				'valid' => false,
-				'message'	=> __( 'This user could not be found.' ),
+				'valid'   => false,
+				'message' => __( 'This user could not be found.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -269,8 +269,8 @@ class WPUM_Ajax_Handler {
 		if ( $send ) :
 
 			$return = array(
-				'valid' => true,
-				'message'	=> __( 'Check your e-mail for the confirmation link.' ),
+				'valid'   => true,
+				'message' => __( 'Check your e-mail for the confirmation link.' ),
 			);
 
 			wp_send_json_success( $return );
@@ -278,8 +278,8 @@ class WPUM_Ajax_Handler {
 		else :
 
 			$return = array(
-				'valid' => false,
-				'message'	=> __( 'Something went wrong.' ),
+				'valid'   => false,
+				'message' => __( 'Something went wrong.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -313,7 +313,7 @@ class WPUM_Ajax_Handler {
 			
 			$return = array(
 				'completed' => false,
-				'message'	=> __( 'Please enter your password.' ),
+				'message'   => __( 'Please enter your password.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -325,7 +325,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'completed' => false,
-				'message'	=> __( 'Passwords do not match.' ),
+				'message'   => __( 'Passwords do not match.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -378,7 +378,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message'	=> __( 'Error.' ),
+				'message' => __( 'Error.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -399,7 +399,7 @@ class WPUM_Ajax_Handler {
 
 		$return = array(
 			'completed' => true,
-			'message'	=> __( 'Fields order successfully updated.' ),
+			'message'   => __( 'Fields order successfully updated.' ),
 		);
 
 		wp_send_json_success( $return );
@@ -421,7 +421,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message'	=> __( 'Error.' ),
+				'message' => __( 'Error.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -436,7 +436,7 @@ class WPUM_Ajax_Handler {
 		update_option( 'wpum_default_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
 
 		$return = array(
-			'message'	=> __( 'Default fields successfully restored.' ),
+			'message' => __( 'Default fields successfully restored.' ),
 		);
 
 		wp_send_json_success( $return );
@@ -459,7 +459,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message'	=> __( 'Error.' ),
+				'message' => __( 'Error.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -476,7 +476,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => true,
-				'message'	=> __( 'Field successfully updated.' ),
+				'message' => __( 'Field successfully updated.' ),
 			);
 
 			wp_send_json_success( $return );
@@ -485,7 +485,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => false,
-				'message'	=> __( 'Something went wrong.' ),
+				'message' => __( 'Something went wrong.' ),
 			);
 
 			wp_send_json_error( $return );
@@ -513,7 +513,7 @@ class WPUM_Ajax_Handler {
 		if ( !is_array( $fields ) || empty( $fields ) ) {
 			$return = array(
 				'valid'   => false,
-				'message'	=> apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
 			);
 
 			wp_send_json_error( $return );
@@ -526,7 +526,7 @@ class WPUM_Ajax_Handler {
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields, 'profile' ) ) ) ) {
 			$return = array(
 				'valid'   => false,
-				'message'	=> $return->get_error_message()
+				'message' => $return->get_error_message()
 			);
 
 			wp_send_json_error( $return );
@@ -572,7 +572,7 @@ class WPUM_Ajax_Handler {
 			// Show notification message
 			$return = array(
 				'valid'   => false,
-				'message'	=> apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
 			);
 
 			wp_send_json_error( $return );
@@ -582,7 +582,7 @@ class WPUM_Ajax_Handler {
 			// Show notification message
 			$return = array(
 				'valid'   => true,
-				'message'	=> apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
+				'message' => apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) )
 			);
 
 			wp_send_json_error( $return );
@@ -901,7 +901,7 @@ class WPUM_Ajax_Handler {
 			// Show notification message
 			$return = array(
 				'valid'   => false,
-				'message'	=> apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
+				'message' => apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) )
 			);
 
 			wp_send_json_error( $return );
@@ -914,7 +914,7 @@ class WPUM_Ajax_Handler {
 		if ( is_wp_error( ( $return = WPUM_Utils::validate_fields( $fields, 'register' ) ) ) ) {
 			$return = array(
 				'valid'   => false,
-				'message'	=> $return->get_error_message()
+				'message' => $return->get_error_message()
 			);
 
 			wp_send_json_error( $return );
@@ -932,7 +932,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => false,
-				'message'	=> $do_user->get_error_message()
+				'message' => $do_user->get_error_message()
 			);
 
 			wp_send_json_error( $return );
@@ -956,9 +956,9 @@ class WPUM_Ajax_Handler {
 			// Show notification message
 			$return = array(
 				'valid'        => true,
-					'redirect'     => $do_redirect,
-					'redirect_url' => apply_filters( 'wpum_redirect_after_automatic_login', home_url(), $user_id ),
-					'message'      => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
+				'redirect'     => $do_redirect,
+				'redirect_url' => apply_filters( 'wpum_redirect_after_automatic_login', home_url(), $user_id ),
+				'message'      => apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) )
 			);
 
 			wp_send_json_success( $return );
