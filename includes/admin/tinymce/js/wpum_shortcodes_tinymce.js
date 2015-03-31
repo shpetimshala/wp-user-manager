@@ -278,6 +278,22 @@
 					]
 				},
 				
+				/** Restrictions **/
+				{
+					text: 'Restrictions',
+					menu: [
+
+						/* Logged In Content */
+						{
+							text: 'Restrict to logged in users only',
+							onclick: function() {
+								editor.insertContent( '[wpum_restrict_logged_in] content here [/wpum_restrict_logged_in]');
+							}
+						}, // End Logout Link
+
+					]
+				},
+
 				/* Logout Link */
 				{
 					text: 'Logout Link',

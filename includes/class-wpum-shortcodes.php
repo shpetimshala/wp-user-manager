@@ -36,6 +36,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_profile', array( $this, 'wpum_profile' ) );
 		add_shortcode( 'wpum_recently_registered', array( $this, 'wpum_recently_registered' ) );
 		add_shortcode( 'wpum_profile_card', array( $this, 'wpum_profile_card' ) );
+		add_shortcode( 'wpum_restrict_logged_in', array( $this, 'wpum_restrict_logged_in' ) );
 
 	}
 
@@ -300,6 +301,40 @@ class WPUM_Shortcodes {
 				'atts'            => $atts
 			) 
 		);
+
+		$output = ob_get_clean();
+
+		return $output;
+
+	}
+
+	/**
+	 * Restrict content to logged in users only.
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_restrict_logged_in( $atts, $content = null ) {
+
+		ob_start();
+
+		if ( is_user_logged_in() && !is_null( $content ) && !is_feed() ) {
+
+			echo do_shortcode( $content );
+
+		} else {
+
+			$message = __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.');
+
+			$args = array( 
+				'id'   => 'wpum-guests-disabled', 
+				'type' => 'notice', 
+				'text' => sprintf( apply_filters( 'wpum_restricted_logged_in_message', $message ), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+			);
+			$warning = wpum_message( $args, true );
+
+		}
 
 		$output = ob_get_clean();
 
