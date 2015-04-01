@@ -45,6 +45,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 		if( wpum_get_option('display_password_meter_registration') )
 			add_action( 'wpum_after_inside_profile_form_template', array( __CLASS__, 'add_password_meter_field' ) );
 
+		// Store uploaded avatar
+		add_action( 'wpum_after_update_user', array( __CLASS__, 'add_avatar' ), 10, 3 );
+
 	}
 
 	/**
@@ -682,6 +685,22 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function add_password_meter_field( $atts ) {
 		echo '<span id="password-strength"></span>';		
+	}
+
+	/**
+	 * Add avatar to user custom field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_avatar( $user_data, $values, $user_id ) {
+
+		$avatar_field = $values['profile'][ 'user_avatar' ];
+
+		if( !empty( $avatar_field ) )
+			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field ) );
+
 	}
 
 	/**
