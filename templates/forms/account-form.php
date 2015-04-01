@@ -27,7 +27,7 @@
 
 	<?php do_action( 'wpum_before_profile_form_template', $atts ); ?>
 
-	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile">
+	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile" enctype="multipart/form-data">
 
 		<?php do_action( 'wpum_before_inside_profile_form_template', $atts ); ?>
 

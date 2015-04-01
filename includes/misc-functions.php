@@ -628,3 +628,124 @@ function wpum_user_exists( $user_data, $method_type ) {
 
 }
 
+/**
+ * Triggers the mechanism to upload files.
+ *
+ * @copyright mikejolley
+ * @since 1.0.0
+ * @param  array $file_data Array of $_FILE data to upload.
+ * @return array|WP_Error Array of objects containing either file information or an error
+ */
+function wpum_trigger_upload_file( $field_key, $field ) {
+		
+	if ( isset( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ]['name'] ) ) {
+		
+		if ( ! empty( $field['allowed_mime_types'] ) ) {
+			$allowed_mime_types = $field['allowed_mime_types'];
+		} else {
+			$allowed_mime_types = get_allowed_mime_types();
+		}
+
+		$file_urls       = array();
+		$files_to_upload = wpum_prepare_uploaded_files( $_FILES[ $field_key ] );
+
+		foreach ( $files_to_upload as $file_key => $file_to_upload ) {
+			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
+
+			if ( is_wp_error( $uploaded_file ) ) {
+				throw new Exception( $uploaded_file->get_error_message() );
+			} else {
+				$file_urls[] = $uploaded_file->url;
+			}
+		}
+
+		if ( ! empty( $field['multiple'] ) ) {
+			return $file_urls;
+		} else {
+			return current( $file_urls );
+		}
+
+		return $files_to_upload;
+	}
+		
+}
+
+/**
+ * Prepare the files to upload.
+ *
+ * @copyright mikejolley
+ * @since 1.0.0
+ * @param  array $file_data Array of $_FILE data to upload.
+ * @return array|WP_Error Array of objects containing either file information or an error
+ */
+function wpum_prepare_uploaded_files( $file_data ) {
+	$files_to_upload = array();
+
+	if ( is_array( $file_data['name'] ) ) {
+		foreach( $file_data['name'] as $file_data_key => $file_data_value ) {
+			if ( $file_data['name'][ $file_data_key ] ) {
+				$files_to_upload[] = array(
+					'name'     => $file_data['name'][ $file_data_key ],
+					'type'     => $file_data['type'][ $file_data_key ],
+					'tmp_name' => $file_data['tmp_name'][ $file_data_key ],
+					'error'    => $file_data['error'][ $file_data_key ],
+					'size'     => $file_data['size'][ $file_data_key ]
+				);
+			}
+		}
+	} else {
+		$files_to_upload[] = $file_data;
+	}
+
+	return $files_to_upload;
+}
+
+/**
+ * Upload a file using WordPress file API.
+ *
+ * @since 1.0.0
+ * @copyright mikejolley
+ * @param  array $file_data Array of $_FILE data to upload.
+ * @param  array $args Optional arguments
+ * @return array|WP_Error Array of objects containing either file information or an error
+ */
+function wpum_upload_file( $file, $args = array() ) {
+	global $wpum_upload, $wpum_uploading_file;
+
+	include_once( ABSPATH . 'wp-admin/includes/file.php' );
+	include_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+	$args = wp_parse_args( $args, array(
+		'file_key'           => '',
+		'file_label'         => '',
+		'allowed_mime_types' => get_allowed_mime_types()
+	) );
+
+	$wpum_upload         = true;
+	$wpum_uploading_file = $args['file_key'];
+	$uploaded_file              = new stdClass();
+
+	if ( ! in_array( $file['type'], $args['allowed_mime_types'] ) ) {
+		if ( $args['file_label'] ) {
+			return new WP_Error( 'upload', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $args['file_label'], $file['type'], implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
+		} else {
+			return new WP_Error( 'upload', sprintf( __( 'Uploaded files need to be one of the following file types: %s' ), implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
+		}
+	} else {
+		$upload = wp_handle_upload( $file, apply_filters( 'submit_wpum_handle_upload_overrides', array( 'test_form' => false ) ) );
+		if ( ! empty( $upload['error'] ) ) {
+			return new WP_Error( 'upload', $upload['error'] );
+		} else {
+			$uploaded_file->url       = $upload['url'];
+			$uploaded_file->name      = basename( $upload['file'] );
+			$uploaded_file->type      = $upload['type'];
+			$uploaded_file->size      = $file['size'];
+			$uploaded_file->extension = substr( strrchr( $uploaded_file->name, '.' ), 1 );
+		}
+	}
+
+	$wpum_upload         = false;
+	$wpum_uploading_file = '';
+
+	return $uploaded_file;
+}

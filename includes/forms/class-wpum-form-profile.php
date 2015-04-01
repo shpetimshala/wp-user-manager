@@ -111,6 +111,30 @@ class WPUM_Form_Profile extends WPUM_Form {
         // The username cannot be changed, let's remove that field since it's useless
 		unset($fields_list['username']);
 
+		/* TESTING UPLOAD FIELD */
+
+		$avatar_field = array( 'user_avatar' => array(
+				'label'       => __( 'Avatar' ),
+				'type'        => 'file',
+				'required'    => false,
+				'placeholder' => '',
+				'priority'    => 999,
+				'ajax'        => false,
+				'multiple'    => false,
+				'allowed_mime_types' => array(
+					'jpg'  => 'image/jpeg',
+					'jpeg' => 'image/jpeg',
+					'gif'  => 'image/gif',
+					'png'  => 'image/png'
+				)
+			)
+		);
+
+		/*
+		array_push( $fields_list, $avatar_field );*/
+
+		$fields_list += $avatar_field;
+
 		return $fields_list;
 
 	}
@@ -351,6 +375,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 	/**
 	 * Get the value of a posted multiselect field
+	 *
+	 * @since 1.0.0
 	 * @param  string $key
 	 * @param  array $field
 	 * @return array
@@ -361,6 +387,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 	/**
 	 * Get the value of a posted textarea field
+	 *
+	 * @since 1.0.0
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
@@ -371,6 +399,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 	/**
 	 * Get the value of a posted textarea field
+	 *
+	 * @since 1.0.0
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
@@ -380,8 +410,29 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 	/**
-	 * Validate the posted fields
+	 * Get the value of a posted file field
 	 *
+	 * @since 1.0.0
+	 * @param  string $key
+	 * @param  array $field
+	 * @return string|array
+	 */
+	protected static function get_posted_file_field( $key, $field ) {
+		$file = wpum_trigger_upload_file( $key, $field );
+
+		if ( ! $file ) {
+			$file = self::get_posted_field( 'current_' . $key, $field );
+		} elseif ( is_array( $file ) ) {
+			$file = array_filter( array_merge( $file, (array) self::get_posted_field( 'current_' . $key, $field ) ) );
+		}
+
+		return $file;
+	}
+
+	/**
+	 * Validate the posted fields
+	 * 
+	 * @since 1.0.0
 	 * @return bool on success, WP_ERROR on failure
 	 */
 	protected static function validate_fields( $values ) {
@@ -390,6 +441,20 @@ class WPUM_Form_Profile extends WPUM_Form {
 			foreach ( $group_fields as $key => $field ) {
 				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
 					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
+				}
+				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
+					if ( is_array( $values[ $group_key ][ $key ] ) ) {
+						$check_value = array_filter( $values[ $group_key ][ $key ] );
+					} else {
+						$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
+					}
+					if ( ! empty( $check_value ) ) {
+						foreach ( $check_value as $file_url ) {
+							if ( ( $info = wp_check_filetype( $file_url ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
+								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
+							}
+						}
+					}
 				}
 			}
 		}

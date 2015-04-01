@@ -362,13 +362,3 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
-
-
-function test() {
-
-	if( wpum_is_single_profile() ) {
-		echo "string";
-	}
-
-}
-//add_action( 'wp_head', 'test', 999 );
