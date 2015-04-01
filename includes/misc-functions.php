@@ -627,3 +627,4 @@ function wpum_user_exists( $user_data, $method_type ) {
 	return $exists;
 
 }
+
