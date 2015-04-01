@@ -655,7 +655,7 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			if ( is_wp_error( $uploaded_file ) ) {
 				return new WP_Error( 'validation-error', $uploaded_file->get_error_message() );
 			} else {
-				$file_urls[] = $uploaded_file->url;
+				$file_urls[] = array( 'url' => $uploaded_file->url, 'path' => $uploaded_file->path );
 			}
 		}
 

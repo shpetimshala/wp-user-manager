@@ -698,8 +698,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		$avatar_field = $values['profile'][ 'user_avatar' ];
 
-		if( !empty( $avatar_field ) )
-			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field ) );
+		if( !empty( $avatar_field ) && is_array( $avatar_field ) ) {
+			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field['url'] ) );
+			update_user_meta( $user_id, '_wpum_custom_avatar_path', esc_url( $avatar_field['path'] ) );
+		}
 
 	}
 
