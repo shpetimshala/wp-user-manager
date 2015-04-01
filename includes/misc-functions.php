@@ -653,7 +653,7 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
 			if ( is_wp_error( $uploaded_file ) ) {
-				throw new Exception( $uploaded_file->get_error_message() );
+				return new WP_Error( 'validation-error', $uploaded_file->get_error_message() );
 			} else {
 				$file_urls[] = $uploaded_file->url;
 			}
@@ -738,6 +738,7 @@ function wpum_upload_file( $file, $args = array() ) {
 		} else {
 			$uploaded_file->url       = $upload['url'];
 			$uploaded_file->name      = basename( $upload['file'] );
+			$uploaded_file->path      = $upload['file'];
 			$uploaded_file->type      = $upload['type'];
 			$uploaded_file->size      = $file['size'];
 			$uploaded_file->extension = substr( strrchr( $uploaded_file->name, '.' ), 1 );
