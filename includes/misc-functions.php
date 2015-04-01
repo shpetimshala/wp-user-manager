@@ -655,7 +655,12 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			if ( is_wp_error( $uploaded_file ) ) {
 				return new WP_Error( 'validation-error', $uploaded_file->get_error_message() );
 			} else {
-				$file_urls[] = array( 'url' => $uploaded_file->url, 'path' => $uploaded_file->path );
+
+				$file_urls[] = array(
+					'url' => $uploaded_file->url,
+					'path' => $uploaded_file->path,
+					'size' => $uploaded_file->size
+				);
 			}
 		}
 
@@ -902,3 +907,25 @@ function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 	 */
 	return apply_filters( 'get_avatar', $avatar, $id_or_email, $size, $default, $alt );
 }
+
+/**
+ * Wrapper function for size_format - checks the max size of the avatar field.
+ *
+ * @since 1.0.0
+ * @param array $field
+ * @param string $size in bytes
+ * @return string
+ */
+function wpum_max_upload_size( $field_name ) {
+
+	// Default max upload size
+	$output = size_format( wp_max_upload_size() );
+
+	// Check if the field is the avatar upload field and max size is defined
+	if( $field_name == 'user_avatar' && defined( 'WPUM_MAX_AVATAR_SIZE' ) )
+		$output = size_format( WPUM_MAX_AVATAR_SIZE );
+
+	return $output;
+}
+
+

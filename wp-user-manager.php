@@ -166,6 +166,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				define( 'WPUM_PLUGIN_FILE', __FILE__ );
 			}
 
+			// Plugin Slug
 			if ( ! defined( 'WPUM_SLUG' ) ) {
 				define( 'WPUM_SLUG', plugin_basename(__FILE__));
 			}

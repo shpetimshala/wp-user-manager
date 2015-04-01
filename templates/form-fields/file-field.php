@@ -21,6 +21,6 @@ $field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
 	<?php if ( ! empty( $field['description'] ) ) : ?>
 		<?php echo $field['description']; ?>
 	<?php else : ?>
-		<?php printf( __( 'Maximum file size: %s.' ), size_format( wp_max_upload_size() ) ); ?>
+		<?php printf( __( 'Maximum file size: %s.' ), wpum_max_upload_size( $field_name ) ); ?>
 	<?php endif; ?>
 </small>

@@ -39,6 +39,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
+			if( defined( 'WPUM_MAX_AVATAR_SIZE' ) )
+				add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_avatar_size' ), 10, 3 );
 		endif;
 
 		// Add password meter field
@@ -446,18 +448,17 @@ class WPUM_Form_Profile extends WPUM_Form {
 					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
 				}
 				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
-					if ( is_array( $values[ $group_key ][ $key ] ) ) {
-						$check_value = array_filter( $values[ $group_key ][ $key ] );
-					} else {
-						$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
-					}
+					
+					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
+
 					if ( ! empty( $check_value ) ) {
 						foreach ( $check_value as $file_url ) {
-							if ( ( $info = wp_check_filetype( $file_url ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
+							if ( ( $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
 								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
 							}
 						}
 					}
+
 				}
 			}
 		}
@@ -525,6 +526,24 @@ class WPUM_Form_Profile extends WPUM_Form {
 				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
 
 		endif;
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate avatar size.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_avatar_size( $passed, $fields, $values ) {
+
+		$avatar = $values['profile'][ 'user_avatar' ];
+
+		if( $avatar['size'] > WPUM_MAX_AVATAR_SIZE )
+			return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.' ) );
 
 		return $passed;
 
