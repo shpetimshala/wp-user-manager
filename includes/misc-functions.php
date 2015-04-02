@@ -787,7 +787,7 @@ function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 	// if so - stop everything else and load custom avatar only.
 	if( is_numeric( $id_or_email ) ) {
 
-		$custom_avatar = get_user_meta( $id_or_email, 'wpum_custom_avatar_url', true );
+		$custom_avatar = get_user_meta( $id_or_email, 'current_user_avatar', true );
 
 		if( !empty( $custom_avatar ) ) {
 			$out = "<img alt='{$safe_alt}' src='{$custom_avatar}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
@@ -802,7 +802,7 @@ function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 		$user_object_id = $id_or_email->user_id;
 		
 		if ( $user_object_id > 0 ) {
-			$custom_avatar = get_user_meta( $user_object_id, 'wpum_custom_avatar_url', true );
+			$custom_avatar = get_user_meta( $user_object_id, 'current_user_avatar', true );
 			if( !empty( $custom_avatar ) ) {
 				$out = "<img alt='{$safe_alt}' src='{$custom_avatar}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
 				return $out;

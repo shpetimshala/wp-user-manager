@@ -177,6 +177,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 			case 'display_name':
 				$value = self::get_selected_name();
 				break;
+			case 'user_avatar':
+				$value = get_user_meta( self::$user->ID, 'current_user_avatar', true );
+				break;
 			default:
 				$value = null;
 				break;
@@ -725,7 +728,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			if( $previous_avatar )
 				unlink( $previous_avatar );
 
-			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field['url'] ) );
+			update_user_meta( $user_id, "current_user_avatar", esc_url( $avatar_field['url'] ) );
 			update_user_meta( $user_id, '_wpum_custom_avatar_path', $avatar_field['path'] );
 		}
 
