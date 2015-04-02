@@ -23,6 +23,12 @@ module.exports = function( grunt ) {
 					'assets/js/src/wp_user_manager_admin.js'
 				],
 				dest: 'assets/js/wp_user_manager_admin.js'
+			},
+			frontend_uploader: {
+				src: [
+					'assets/js/src/file_uploader.js'
+				],
+				dest: 'assets/js/file_uploader.js'
 			}
 		},
 		jshint: {
@@ -52,7 +58,8 @@ module.exports = function( grunt ) {
 			all: {
 				files: {
 					'assets/js/wp_user_manager.min.js': ['assets/js/wp_user_manager.js'],
-					'assets/js/wp_user_manager_admin.min.js': ['assets/js/wp_user_manager_admin.js']
+					'assets/js/wp_user_manager_admin.min.js': ['assets/js/wp_user_manager_admin.js'],
+					'assets/js/file_uploader.min.js': ['assets/js/file_uploader.js']
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +

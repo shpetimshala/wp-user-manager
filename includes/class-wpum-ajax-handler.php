@@ -1024,6 +1024,7 @@ class WPUM_Ajax_Handler {
 	 * Execture the upload of a file
 	 *
 	 * @access public
+	 * @copyright mikejolley
 	 * @since 1.0.0
 	 * @return void
 	 */

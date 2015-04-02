@@ -12,6 +12,11 @@ $classes            = array( 'input-upload' );
 $allowed_mime_types = array_keys( ! empty( $field['allowed_mime_types'] ) ? $field['allowed_mime_types'] : get_allowed_mime_types() );
 $field_name         = isset( $field['name'] ) ? $field['name'] : $key;
 $field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
+
+if ( ! wpum_get_option('disable_ajax') ) {
+	wp_enqueue_script( 'wpum-frontend-uploader' );
+	$classes[] = 'wpum-file-upload';
+}
 ?>
 
 <div class="wpum-uploaded-files">
