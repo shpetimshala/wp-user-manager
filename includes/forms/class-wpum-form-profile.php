@@ -726,7 +726,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 				unlink( $previous_avatar );
 
 			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field['url'] ) );
-			update_user_meta( $user_id, '_wpum_custom_avatar_path', esc_url( $avatar_field['path'] ) );
+			update_user_meta( $user_id, '_wpum_custom_avatar_path', $avatar_field['path'] );
 		}
 
 	}
