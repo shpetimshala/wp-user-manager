@@ -708,6 +708,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 	/**
 	 * Add avatar to user custom field.
+	 * Also deletes previously selected avatar.
 	 *
 	 * @access public
 	 * @since 1.0.0
@@ -718,6 +719,12 @@ class WPUM_Form_Profile extends WPUM_Form {
 		$avatar_field = $values['profile'][ 'user_avatar' ];
 
 		if( !empty( $avatar_field ) && is_array( $avatar_field ) ) {
+
+			// Deletes previously selected avatar.
+			$previous_avatar = get_user_meta( $user_id, '_wpum_custom_avatar_path', true );
+			if( $previous_avatar )
+				unlink( $previous_avatar );
+
 			update_user_meta( $user_id, 'wpum_custom_avatar_url', esc_url( $avatar_field['url'] ) );
 			update_user_meta( $user_id, '_wpum_custom_avatar_path', esc_url( $avatar_field['path'] ) );
 		}
