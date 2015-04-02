@@ -986,7 +986,7 @@ class WPUM_Ajax_Handler {
 
 		$field_id = $_REQUEST['field_id'];
 		$user_id = get_current_user_id();
-
+		
 		if( $field_id ) {
 
 			delete_user_meta( $user_id, "current_{$field_id}" );
