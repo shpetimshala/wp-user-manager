@@ -106,6 +106,8 @@ class WPUM_Ajax_Handler {
 		// Avatar removal method
 		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
+		add_action( 'wp_ajax_nopriv_wpum_upload_file', array( $this, 'upload_file' ) );
+		add_action( 'wp_ajax_wpum_upload_file', array( $this, 'upload_file' ) );
 
 	}
 
@@ -986,8 +988,8 @@ class WPUM_Ajax_Handler {
 
 		$field_id = $_REQUEST['field_id'];
 		$user_id = get_current_user_id();
-		
-		if( $field_id ) {
+
+		if( $field_id && is_user_logged_in() ) {
 
 			delete_user_meta( $user_id, "current_{$field_id}" );
 
@@ -1016,6 +1018,35 @@ class WPUM_Ajax_Handler {
 
 		}
 
+	}
+
+	/**
+	 * Execture the upload of a file
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function upload_file() {
+		
+		$data = array( 'files' => array() );
+
+		if ( ! empty( $_FILES ) ) {
+			foreach ( $_FILES as $file_key => $file ) {
+				$files_to_upload = wpum_prepare_uploaded_files( $file );
+				foreach ( $files_to_upload as $file_to_upload ) {
+					$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
+
+					if ( is_wp_error( $uploaded_file ) ) {
+						$data['files'][] = array( 'error' => $uploaded_file->get_error_message() );
+					} else {
+						$data['files'][] = $uploaded_file;
+					}
+				}
+			}
+		}
+
+		wp_send_json( $data );
 	}
 
 }

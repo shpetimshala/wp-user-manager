@@ -359,10 +359,10 @@ jQuery(document).ready(function ($) {
 						// Check the response
 						if( results.data.valid === true ) {
 							$( wpum_removal_button ).prev('p').prev().remove();
-							$( wpum_removal_button ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
+							$( '#wpum-form-profile' ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
 							location.reload(true);
 						} else {
-							$( wpum_removal_button ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
+							$( '#wpum-form-profile' ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
 						}
 
 					},
