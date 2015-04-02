@@ -106,6 +106,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 					'priority'    => $new_field['order'] + 0.1
 				);
 
+			// The avatar field needs specific settings
 			} else if( $new_field['meta'] == 'user_avatar' ) {
 
 				$fields_list[ 'user_avatar' ] = array(
@@ -135,6 +136,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 
         // The username cannot be changed, let's remove that field since it's useless
 		unset($fields_list['username']);
+
+		// Remove the user avatar field if not enabled
+		if( !wpum_get_option('custom_avatars') )
+			unset($fields_list['user_avatar']);
 
 		return $fields_list;
 

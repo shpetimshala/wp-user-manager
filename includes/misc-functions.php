@@ -257,7 +257,7 @@ function wpum_default_user_fields_list() {
 	    'required'       => false,
 	    'show_on_signup' => false
 	);
-	
+
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
 	return $fields;
 

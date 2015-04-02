@@ -416,6 +416,12 @@ function wpum_get_registered_settings() {
 					'desc' => __( 'Enable this option to allow members to view users profiles. If disabled, users can only see their own profile.', 'wpum' ),
 					'type' => 'checkbox'
 				),
+				'custom_avatars' => array(
+					'id' => 'custom_avatars',
+					'name' => __( 'Custom Avatars', 'wpum' ),
+					'desc' => __( 'Enable this option to allow users to upload custom avatars for their profiles.', 'wpum' ),
+					'type' => 'checkbox'
+				),
 				'profile_posts' => array(
 					'id' => 'profile_posts',
 					'name' => __( 'Display posts', 'wpum' ),
