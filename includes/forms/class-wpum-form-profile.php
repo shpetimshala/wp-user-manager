@@ -106,6 +106,26 @@ class WPUM_Form_Profile extends WPUM_Form {
 					'priority'    => $new_field['order'] + 0.1
 				);
 
+			} else if( $new_field['meta'] == 'user_avatar' ) {
+
+				$fields_list[ 'user_avatar' ] = array(
+					'label'       => $new_field['title'],
+					'type'        => 'file',
+					'required'    => $new_field['required'],
+					'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $new_field ),
+					'options'     => apply_filters( 'wpum_profile_field_options', null, $new_field ),
+					'value'       => apply_filters( 'wpum_profile_field_value', null, $new_field ),
+					'priority'    => $new_field['order'],
+					'ajax'        => false,
+					'multiple'    => false,
+					'allowed_mime_types' => array(
+						'jpg'  => 'image/jpeg',
+						'jpeg' => 'image/jpeg',
+						'gif'  => 'image/gif',
+						'png'  => 'image/png'
+					)
+				);
+
 			}
 
         }
@@ -115,30 +135,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 
         // The username cannot be changed, let's remove that field since it's useless
 		unset($fields_list['username']);
-
-		/* TESTING UPLOAD FIELD */
-
-		$avatar_field = array( 'user_avatar' => array(
-				'label'       => __( 'Avatar' ),
-				'type'        => 'file',
-				'required'    => false,
-				'placeholder' => '',
-				'priority'    => 999,
-				'ajax'        => false,
-				'multiple'    => false,
-				'allowed_mime_types' => array(
-					'jpg'  => 'image/jpeg',
-					'jpeg' => 'image/jpeg',
-					'gif'  => 'image/gif',
-					'png'  => 'image/png'
-				)
-			)
-		);
-
-		/*
-		array_push( $fields_list, $avatar_field );*/
-
-		$fields_list += $avatar_field;
 
 		return $fields_list;
 

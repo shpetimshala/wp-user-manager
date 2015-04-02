@@ -249,6 +249,14 @@ function wpum_default_user_fields_list() {
 	    'required'       => true,
 	    'show_on_signup' => true
 	);
+	$fields['user_avatar'] = array(
+	    'order'          => 9,
+	    'title'          => __('Profile Picture'),
+	    'type'           => 'file',
+	    'meta'           => 'user_avatar',
+	    'required'       => false,
+	    'show_on_signup' => false
+	);
 	
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
 	return $fields;
