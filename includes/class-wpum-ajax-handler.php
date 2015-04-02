@@ -102,6 +102,11 @@ class WPUM_Ajax_Handler {
 			add_filter( 'wpum_form_validate_ajax_register_fields', array( __CLASS__, 'validate_role_register_field' ), 10, 3 );
 			add_action( 'wpum_ajax_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
+
+		// Avatar removal method
+		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
+		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
+
 	}
 
 	/**
@@ -962,6 +967,52 @@ class WPUM_Ajax_Handler {
 			);
 
 			wp_send_json_success( $return );
+
+		}
+
+	}
+
+	/**
+	 * Remove the avatar of a user.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function remove_user_avatar() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'profile', 'wpum_removal_nonce' );
+
+		$field_id = $_REQUEST['field_id'];
+		$user_id = get_current_user_id();
+
+		if( $field_id ) {
+
+			delete_user_meta( $user_id, "current_{$field_id}" );
+
+			// Deletes previously selected avatar.
+			$previous_avatar = get_user_meta( $user_id, "_current_{$field_id}_path", true );
+			if( $previous_avatar )
+				unlink( $previous_avatar );
+
+			delete_user_meta( $user_id, "_current_{$field_id}_path" );
+
+			$return = array(
+				'valid'   => true,
+				'message' => apply_filters( 'wpum_avatar_deleted_success_message', __( 'Your profile picture has been deleted.' ) )
+			);
+
+			wp_send_json_success( $return );
+
+		} else {
+
+			$return = array(
+				'valid'   => false,
+				'message' => __( 'Something went wrong.' )
+			);
+
+			wp_send_json_error( $return );
 
 		}
 

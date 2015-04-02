@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_psw_reset();
 			this.ajax_profile_update();
 			this.ajax_registration();
+			this.ajax_remove_avatar();
 		},
 
 		// Handle Ajax Login
@@ -324,6 +325,50 @@ jQuery(document).ready(function ($) {
 			});
 
 		},
+
+		// Process removal of the user avatar
+		ajax_remove_avatar : function() {
+
+			$('a.wpum-remove-uploaded-file').on('click', function(e) {
+
+				e.preventDefault();
+				var wpum_removal_button = this; // form element
+				var wpum_removal_nonce  = $( '#wpum-form-profile' ).find('#_wpnonce').val();
+				var wpum_field_id = $( wpum_removal_button ).data("remove");
+
+				$.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: wpum_frontend_js.ajax,
+					data: {
+						'action' : 'wpum_remove_avatar', // Calls the ajax action
+						'wpum_removal_nonce' : wpum_removal_nonce,
+						'field_id' : wpum_field_id,
+					},
+					beforeSend: function() {
+						$( wpum_removal_button ).find('p.wpum-message').remove();
+						$( wpum_removal_button ).before('<p class="wpum-message wpum-notice wpum-avatar-message">' + wpum_frontend_js.checking_credentials + '</p>');
+					},
+					success: function(results) {
+
+						// Check the response
+						if( results.data.valid === true ) {
+							$( wpum_removal_button ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
+							location.reload(true);
+						} else {
+							$( wpum_removal_button ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
+						}
+
+					},
+					error: function(xhr, status, error) {
+					    alert(xhr.responseText);
+					}
+				});
+
+
+			});
+
+		}
 
 	};
 

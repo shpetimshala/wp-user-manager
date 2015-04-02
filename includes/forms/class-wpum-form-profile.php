@@ -725,12 +725,12 @@ class WPUM_Form_Profile extends WPUM_Form {
 		if( !empty( $avatar_field ) && is_array( $avatar_field ) ) {
 
 			// Deletes previously selected avatar.
-			$previous_avatar = get_user_meta( $user_id, '_wpum_custom_avatar_path', true );
+			$previous_avatar = get_user_meta( $user_id, '_current_user_avatar_path', true );
 			if( $previous_avatar )
 				unlink( $previous_avatar );
 
 			update_user_meta( $user_id, "current_user_avatar", esc_url( $avatar_field['url'] ) );
-			update_user_meta( $user_id, '_wpum_custom_avatar_path', $avatar_field['path'] );
+			update_user_meta( $user_id, '_current_user_avatar_path', $avatar_field['path'] );
 		}
 
 	}
