@@ -39,6 +39,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
+			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
 			if( defined( 'WPUM_MAX_AVATAR_SIZE' ) )
 				add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_avatar_size' ), 10, 3 );
 		endif;
@@ -530,6 +531,28 @@ class WPUM_Form_Profile extends WPUM_Form {
 				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
 
 		endif;
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate email field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_email_field( $passed, $fields, $values ) {
+
+		$email = $values['profile'][ 'user_email' ];
+
+		// If current email hasn't changed - abort.
+		if( $email == self::$user->user_email )
+			return;
+
+		if( email_exists( $email ) && $email !== self::$user->user_email )
+			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
 
 		return $passed;
 
