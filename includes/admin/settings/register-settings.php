@@ -419,7 +419,7 @@ function wpum_get_registered_settings() {
 				'custom_avatars' => array(
 					'id' => 'custom_avatars',
 					'name' => __( 'Custom Avatars', 'wpum' ),
-					'desc' => __( 'Enable this option to allow users to upload custom avatars for their profiles.', 'wpum' ),
+					'desc' => __( 'Enable this option to allow users to upload custom avatars for their profiles.', 'wpum' ) . wpum_check_permissions_button(),
 					'type' => 'checkbox'
 				),
 				'profile_posts' => array(

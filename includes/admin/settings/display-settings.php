@@ -38,6 +38,7 @@ function wpum_options_page() {
 				$tab_url = add_query_arg( array(
 					'settings-updated' => false,
 					'emails-updated' => false,
+					'wpum_action' => false,
 					'tab' => $tab_id
 				) );
 

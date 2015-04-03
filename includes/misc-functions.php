@@ -936,4 +936,19 @@ function wpum_max_upload_size( $field_name ) {
 	return $output;
 }
 
+/**
+ * Displays a button to check uploads folder permissions.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_check_permissions_button() {
+
+	$output = '<br/><br/>';
+	$output .= '<a class="button" href="'.admin_url( 'users.php?page=wpum-settings&tab=profile&wpum_action=check_folder_permission' ).'">'.__('Verify upload permissions').'</a>';
+	$output .= '<p class="description">'.__('Press the button above if avatar uploads does not work.').'</p>';
+
+	return $output;
+
+}
 
