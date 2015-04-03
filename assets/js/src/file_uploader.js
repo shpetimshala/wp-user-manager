@@ -76,6 +76,7 @@ jQuery(function($) {
 					} else {
 						$uploaded_files.html( html );
 					}
+					$( $form ).find('.wpum-remove-uploaded-file').remove();
 				}
 			});
 
