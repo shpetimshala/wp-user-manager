@@ -301,8 +301,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		 */
 		public function wp_enqueue_scripts() {
 
-			$js_dir            = WPUM_PLUGIN_URL . 'assets/js/';
-			$css_dir           = WPUM_PLUGIN_URL . 'assets/css/';
+			$js_dir  = WPUM_PLUGIN_URL . 'assets/js/';
+			$css_dir = WPUM_PLUGIN_URL . 'assets/css/';
 
 			// Use minified libraries if SCRIPT_DEBUG is turned off
 			$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';

@@ -17,8 +17,8 @@ jQuery(document).ready(function ($) {
 			this.ajax_login();
 			this.ajax_psw_recovery();
 			this.ajax_psw_reset();
-			this.ajax_profile_update();
-			this.ajax_registration();
+			//this.ajax_profile_update();
+			//this.ajax_registration();
 			this.ajax_remove_avatar();
 		},
 
