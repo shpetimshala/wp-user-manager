@@ -329,11 +329,11 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 				// Store templates in js
 				ob_start();
-				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'jpg' ) );
+				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'jpg', 'field_name' => '' ) );
 				$js_field_html_img = ob_get_clean();
 
 				ob_start();
-				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'zip' ) );
+				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'zip', 'field_name' => '' ) );
 				$js_field_html = ob_get_clean();
 			endif;
 			
