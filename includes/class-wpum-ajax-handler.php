@@ -1020,36 +1020,6 @@ class WPUM_Ajax_Handler {
 
 	}
 
-	/**
-	 * Execture the upload of a file
-	 *
-	 * @access public
-	 * @copyright mikejolley
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function upload_file() {
-		
-		$data = array( 'files' => array() );
-
-		if ( ! empty( $_FILES ) ) {
-			foreach ( $_FILES as $file_key => $file ) {
-				$files_to_upload = wpum_prepare_uploaded_files( $file );
-				foreach ( $files_to_upload as $file_to_upload ) {
-					$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
-
-					if ( is_wp_error( $uploaded_file ) ) {
-						$data['files'][] = array( 'error' => $uploaded_file->get_error_message() );
-					} else {
-						$data['files'][] = $uploaded_file;
-					}
-				}
-			}
-		}
-
-		wp_send_json( $data );
-	}
-
 }
 
 new WPUM_Ajax_Handler;

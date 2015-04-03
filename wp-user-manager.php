@@ -303,39 +303,17 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 
 			$js_dir            = WPUM_PLUGIN_URL . 'assets/js/';
 			$css_dir           = WPUM_PLUGIN_URL . 'assets/css/';
-			$ajax_disabled     = wpum_get_option('disable_ajax');
-			$js_field_html_img = null;
-			$js_field_html     = null;
 
 			// Use minified libraries if SCRIPT_DEBUG is turned off
 			$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 			// Styles & scripts registration
 			wp_register_script( 'wpum-frontend-js', $js_dir . 'wp_user_manager' . $suffix . '.js', array( 'jquery' ), WPUM_VERSION, true );
-			wp_register_script( 'wpum-frontend-iframetransport', $js_dir . 'vendor/jquery.iframe-transport.js', array( 'jquery' ), WPUM_VERSION, true );
-			wp_register_script( 'wpum-frontend-fileupload', $js_dir . 'vendor/jquery.fileupload.js', array( 'jquery', 'wpum-frontend-iframetransport', 'jquery-ui-widget' ), WPUM_VERSION, true );
-			wp_register_script( 'wpum-frontend-uploader', $js_dir . 'file_uploader' . $suffix . '.js', array( 'jquery', 'wpum-frontend-fileupload' ), WPUM_VERSION, true );
-
 			wp_register_style( 'wpum-frontend-css', $css_dir . 'wp_user_manager_frontend' . $suffix . '.css' , WPUM_VERSION );
 
 			// Enqueue everything
 			wp_enqueue_script( 'jQuery' );
 			wp_enqueue_script( 'wpum-frontend-js' );
-
-			// Enqueue upload scripts on profile page only
-			if( is_page( wpum_get_core_page_id('account') ) && !$ajax_disabled ) :
-				wp_enqueue_script( 'wpum-frontend-iframetransport' );
-				wp_enqueue_script( 'wpum-frontend-fileupload' );
-
-				// Store templates in js
-				ob_start();
-				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'jpg', 'field_name' => '' ) );
-				$js_field_html_img = ob_get_clean();
-
-				ob_start();
-				get_wpum_template( 'form-fields/uploaded-file-html.php', array( 'name' => '', 'value' => '', 'extension' => 'zip', 'field_name' => '' ) );
-				$js_field_html = ob_get_clean();
-			endif;
 			
 			// Allows developers to disable the frontend css in case own file is needed.
 			if( !defined( 'WPUM_DISABLE_CSS' ) )
@@ -357,9 +335,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
 				'ajax'                   => admin_url( 'admin-ajax.php' ),
 				'checking_credentials'   => __('Checking credentials...'),
-				'i18n_invalid_file_type' => __('Invalid file type. Accepted types:'),
-				'js_field_html_img'      => esc_js( str_replace( "\n", "", $js_field_html_img ) ),
-				'js_field_html'          => esc_js( str_replace( "\n", "", $js_field_html ) ),
 				'pwd_meter'              => wpum_get_option('display_password_meter_registration'),
 				'disable_ajax'           => wpum_get_option('disable_ajax')
 			) );
