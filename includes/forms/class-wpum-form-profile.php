@@ -40,8 +40,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
-			//if( defined( 'WPUM_MAX_AVATAR_SIZE' ) && wpum_get_option('custom_avatars') )
-				//add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_avatar_size' ), 10, 3 );
 		endif;
 
 		// Add password meter field
@@ -556,24 +554,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if( email_exists( $email ) && $email !== self::$user->user_email )
 			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
-
-		return $passed;
-
-	}
-
-	/**
-	 * Validate avatar size.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function validate_avatar_size( $passed, $fields, $values ) {
-
-		$avatar = $values['profile'][ 'user_avatar' ];
-
-		if( $avatar['size'] > WPUM_MAX_AVATAR_SIZE )
-			return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.' ) );
 
 		return $passed;
 

@@ -645,7 +645,7 @@ function wpum_user_exists( $user_data, $method_type ) {
  * @return array|WP_Error Array of objects containing either file information or an error
  */
 function wpum_trigger_upload_file( $field_key, $field ) {
-		
+	
 	if ( isset( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ]['name'] ) ) {
 		
 		if ( ! empty( $field['allowed_mime_types'] ) ) {
@@ -661,6 +661,9 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 			if( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
 				return new WP_Error( 'validation-error', sprintf( __('Allowed files types are: %s'), implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
+
+			if( defined( 'WPUM_MAX_AVATAR_SIZE' ) && $field_key == 'user_avatar' && $file_to_upload['size'] > WPUM_MAX_AVATAR_SIZE )
+				return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.' ) );
 
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
