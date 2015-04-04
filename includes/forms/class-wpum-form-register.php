@@ -74,6 +74,10 @@ class WPUM_Form_Register extends WPUM_Form {
 		if( !empty(wpum_get_option('exclude_usernames') ) )
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
 
+		// Store uploaded avatar
+		if( wpum_get_option('custom_avatars') )
+			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'add_avatar' ), 10, 3 );
+
 	}
 
 	/**
@@ -120,6 +124,26 @@ class WPUM_Form_Register extends WPUM_Form {
 						'options'     => apply_filters( 'wpum_registration_field_options', null, $new_field ),
 						'priority'    => $new_field['order']
 					);
+
+        			if( $new_field['meta'] == 'user_avatar' ) {
+        				$fields_list[ 'user_avatar' ] = array(
+							'label'       => $new_field['title'],
+							'type'        => 'file',
+							'required'    => $new_field['required'],
+							'placeholder' => apply_filters( 'wpum_registration_field_placeholder', null, $new_field ),
+							'value'       => '',
+							'priority'    => $new_field['order'],
+							'ajax'        => false,
+							'multiple'    => false,
+							'allowed_mime_types' => array(
+								'jpg'  => 'image/jpeg',
+								'jpeg' => 'image/jpeg',
+								'gif'  => 'image/gif',
+								'png'  => 'image/png'
+							)
+						);
+        			}
+
         			break;
         		
         		default:
@@ -158,8 +182,6 @@ class WPUM_Form_Register extends WPUM_Form {
 		self::$fields = array(
 			'register' => self::get_sorted_registration_fields()
 		);
-
-		print_r( self::$fields );
 
 	}
 
@@ -271,9 +293,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		$file = wpum_trigger_upload_file( $key, $field );
 
 		if ( ! $file ) {
-			$file = self::get_posted_field( 'current_' . $key, $field );
-		} elseif ( is_array( $file ) ) {
-			$file = array_filter( array_merge( $file, (array) self::get_posted_field( 'current_' . $key, $field ) ) );
+			$file = '';
 		}
 
 		return $file;
@@ -293,6 +313,9 @@ class WPUM_Form_Register extends WPUM_Form {
 				}
 				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
 					
+					if( is_wp_error( $values[ $group_key ][ $key ] ) )
+						return new WP_Error( 'validation-error', $values[ $group_key ][ $key ]->get_error_message() );
+
 					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
 
 					if ( ! empty( $check_value ) ) {
@@ -564,6 +587,26 @@ class WPUM_Form_Register extends WPUM_Form {
 			return new WP_Error( 'username-validation-error', __( 'This username cannot be used' ) );
 
 		return $passed;
+
+	}
+
+	/**
+	 * Add avatar to user custom field.
+	 * Also deletes previously selected avatar.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_avatar( $user_id, $values ) {
+
+		$avatar_field = $values['register'][ 'user_avatar' ];
+
+		if( !empty( $avatar_field ) && is_array( $avatar_field ) ) {
+
+			update_user_meta( $user_id, "current_user_avatar", esc_url( $avatar_field['url'] ) );
+			update_user_meta( $user_id, '_current_user_avatar_path', $avatar_field['path'] );
+		}
 
 	}
 
