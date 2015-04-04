@@ -658,6 +658,10 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 		$files_to_upload = wpum_prepare_uploaded_files( $_FILES[ $field_key ] );
 
 		foreach ( $files_to_upload as $file_key => $file_to_upload ) {
+
+			if( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
+				return new WP_Error( 'validation-error', sprintf( __('Allowed files types are: %s'), implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
+
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
 			if ( is_wp_error( $uploaded_file ) ) {
@@ -670,6 +674,7 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 					'size' => $uploaded_file->size
 				);
 			}
+
 		}
 
 		if ( ! empty( $field['multiple'] ) ) {
@@ -696,6 +701,7 @@ function wpum_prepare_uploaded_files( $file_data ) {
 
 	if ( is_array( $file_data['name'] ) ) {
 		foreach( $file_data['name'] as $file_data_key => $file_data_value ) {
+
 			if ( $file_data['name'][ $file_data_key ] ) {
 				$files_to_upload[] = array(
 					'name'     => $file_data['name'][ $file_data_key ],

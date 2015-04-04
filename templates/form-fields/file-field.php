@@ -15,7 +15,7 @@ $field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
 ?>
 
 <div class="wpum-uploaded-files">
-	<?php if ( ! empty( $field['value'] ) ) : ?>
+	<?php if ( ! empty( $field['value'] ) && !is_wp_error( $field['value'] ) ) : ?>
 		<?php if ( is_array( $field['value'] ) ) : ?>
 			<?php foreach ( $field['value'] as $value ) : ?>
 				<?php get_wpum_template( 'form-fields/uploaded-file-html.php', 

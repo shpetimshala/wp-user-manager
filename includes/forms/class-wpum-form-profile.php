@@ -40,8 +40,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
-			if( defined( 'WPUM_MAX_AVATAR_SIZE' ) )
-				add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_avatar_size' ), 10, 3 );
+			//if( defined( 'WPUM_MAX_AVATAR_SIZE' ) && wpum_get_option('custom_avatars') )
+				//add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_avatar_size' ), 10, 3 );
 		endif;
 
 		// Add password meter field
@@ -49,7 +49,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 			add_action( 'wpum_after_inside_profile_form_template', array( __CLASS__, 'add_password_meter_field' ) );
 
 		// Store uploaded avatar
-		add_action( 'wpum_after_update_user', array( __CLASS__, 'add_avatar' ), 10, 3 );
+		if( wpum_get_option('custom_avatars') )
+			add_action( 'wpum_after_update_user', array( __CLASS__, 'add_avatar' ), 10, 3 );
 
 	}
 
@@ -115,7 +116,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 					'type'        => 'file',
 					'required'    => $new_field['required'],
 					'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $new_field ),
-					'options'     => apply_filters( 'wpum_profile_field_options', null, $new_field ),
 					'value'       => apply_filters( 'wpum_profile_field_value', null, $new_field ),
 					'priority'    => $new_field['order'],
 					'ajax'        => false,
@@ -454,6 +454,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 				}
 				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
 					
+					if( is_wp_error( $values[ $group_key ][ $key ] ) )
+						return new WP_Error( 'validation-error', $values[ $group_key ][ $key ]->get_error_message() );
+
 					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
 
 					if ( ! empty( $check_value ) ) {

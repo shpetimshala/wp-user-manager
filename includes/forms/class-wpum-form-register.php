@@ -134,6 +134,10 @@ class WPUM_Form_Register extends WPUM_Form {
         	unset( $fields_list['password'] );
         }
 
+        // Remove the user avatar field if not enabled
+		if( !wpum_get_option('custom_avatars') )
+			unset($fields_list['user_avatar']);
+
 		return apply_filters( 'wpum_default_registration_fields', $fields_list );
 
 	}
@@ -154,6 +158,8 @@ class WPUM_Form_Register extends WPUM_Form {
 		self::$fields = array(
 			'register' => self::get_sorted_registration_fields()
 		);
+
+		print_r( self::$fields );
 
 	}
 
@@ -254,6 +260,26 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
+	 * Get the value of a posted file field
+	 *
+	 * @since 1.0.0
+	 * @param  string $key
+	 * @param  array $field
+	 * @return string|array
+	 */
+	protected static function get_posted_file_field( $key, $field ) {
+		$file = wpum_trigger_upload_file( $key, $field );
+
+		if ( ! $file ) {
+			$file = self::get_posted_field( 'current_' . $key, $field );
+		} elseif ( is_array( $file ) ) {
+			$file = array_filter( array_merge( $file, (array) self::get_posted_field( 'current_' . $key, $field ) ) );
+		}
+
+		return $file;
+	}
+
+	/**
 	 * Validate the posted fields
 	 *
 	 * @return bool on success, WP_ERROR on failure
@@ -264,6 +290,19 @@ class WPUM_Form_Register extends WPUM_Form {
 			foreach ( $group_fields as $key => $field ) {
 				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
 					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
+				}
+				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
+					
+					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
+
+					if ( ! empty( $check_value ) ) {
+						foreach ( $check_value as $file_url ) {
+							if ( ( $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
+								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
+							}
+						}
+					}
+
 				}
 			}
 		}
