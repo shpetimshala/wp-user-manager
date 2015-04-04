@@ -13,7 +13,7 @@ $allowed_mime_types = array_keys( ! empty( $field['allowed_mime_types'] ) ? $fie
 $field_name         = isset( $field['name'] ) ? $field['name'] : $key;
 $field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
 ?>
-
+<?php if( !is_page( wpum_get_core_page_id('register') ) ) : ?>
 <div class="wpum-uploaded-files">
 	<?php if ( ! empty( $field['value'] ) && !is_wp_error( $field['value'] ) ) : ?>
 		<?php if ( is_array( $field['value'] ) ) : ?>
@@ -43,6 +43,7 @@ $field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
 		<?php endif; ?>
 	<?php endif; ?>
 </div>
+<?php endif; ?>
 
 <input type="file" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-file_types="<?php echo esc_attr( implode( '|', $allowed_mime_types ) ); ?>" <?php if ( ! empty( $field['multiple'] ) ) echo 'multiple'; ?> name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?><?php if ( ! empty( $field['multiple'] ) ) echo '[]'; ?>" id="<?php echo esc_attr( $key ); ?>" placeholder="<?php echo empty( $field['placeholder'] ) ? '' : esc_attr( $field['placeholder'] ); ?>" />
 <small class="description">
