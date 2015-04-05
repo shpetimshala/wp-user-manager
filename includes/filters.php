@@ -90,3 +90,28 @@ function wpum_upload_dir( $pathdata ) {
 	return $pathdata;
 }
 add_filter( 'upload_dir', 'wpum_upload_dir' );
+
+/**
+ * Add rating links to the admin panel
+ *
+ * @since	    1.0.0
+ * @global		string $typenow
+ * @param       string $footer_text The existing footer text
+ * @return      string
+ */
+function wprm_admin_rate_us( $footer_text ) {
+	
+	$screen = get_current_screen();
+
+	if ( $screen->base !== 'users_page_wpum-settings' )
+		return;
+
+	$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">WP User Manager</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'wprm' ),
+		'https://wpusermanager.com',
+		'http://wordpress.org/support/view/plugin-reviews/wp-user-manager?filter=5#postform'
+	);
+
+	return str_replace( '</span>', '', $footer_text ) . ' | ' . $rate_text . ' <span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span></span>';
+	
+}
+add_filter( 'admin_footer_text', 'wprm_admin_rate_us' );

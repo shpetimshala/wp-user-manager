@@ -113,4 +113,10 @@ table.wpum_fields_table_list .wpum-fields-window-editor .modal-spinner {
   display: inline-block;
   margin-top: 20px; }
 
+.footer-star {
+  font-size: 14px;
+  margin-top: 3px;
+  height: auto;
+  width: auto; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */
