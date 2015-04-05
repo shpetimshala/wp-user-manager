@@ -115,3 +115,39 @@ function wprm_admin_rate_us( $footer_text ) {
 	
 }
 add_filter( 'admin_footer_text', 'wprm_admin_rate_us' );
+
+/**
+ * Add custom classes to body tag
+ * 
+ * @since	    1.0.0
+ * @param       array $classes
+ * @return      array
+ */
+function wpum_body_classes($classes) {
+
+	if( is_page( wpum_get_core_page_id('login') ) ) {
+		// add class if we're on a login page
+		$classes[] = 'wpum-login-page';
+	} else if( is_page( wpum_get_core_page_id('register') ) ) {
+		// add class if we're on a register page
+		$classes[] = 'wpum-register-page';
+	} else if( is_page( wpum_get_core_page_id('account') ) ) {
+		// add class if we're on a account page
+		$classes[] = 'wpum-account-page';
+	} else if( is_page( wpum_get_core_page_id('profile') ) ) {
+		
+		// add class if we're on a profile page
+		$classes[] = 'wpum-profile-page';
+
+		// add user to body class if set
+		if( wpum_is_single_profile() )
+			$classes[] = 'wpum-user-' . wpum_is_single_profile();
+
+	} else if( is_page( wpum_get_core_page_id('password') ) ) {
+		// add class if we're on a password page
+		$classes[] = 'wpum-password-page';
+	}
+		
+	return $classes;
+}
+add_filter( 'body_class', 'wpum_body_classes' );
