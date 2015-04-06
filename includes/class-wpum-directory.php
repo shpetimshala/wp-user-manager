@@ -35,7 +35,7 @@ class WPUM_Directory {
 	public function __construct() {
 		
 		add_action( 'init', array( $this, 'directory_post_type' ) );
-  		$this->directory_options =  new Pretty_Metabox( $this->meta_options() );
+  		$this->directory_options = new Pretty_Metabox( $this->meta_options() );
 
 	}
 
@@ -99,15 +99,16 @@ class WPUM_Directory {
 
 		$config = array(
 			'id'    => 'wpum_directory_options',
-			'title' => 'Demo Fields',
+			'title' => __( 'General Settings' ),
 			'pages' => array( 'wpum_directory' ),
 			'fields' => array(
 				array(
-					'id'   => 'text',
-					'name' => __( 'Text Field' ),
-					'sub' => __( 'Description goes here' ),
-					'desc' => __( 'Field Description goes here' ),
-					'type' => 'text'
+					'id'   => 'directory_roles',
+					'name' => __( 'User Roles' ),
+					'sub' => __( 'Leave blank to display all user roles.' ),
+					'desc' => __( 'Select the user roles you wish to display into this directory.' ),
+					'type' => 'multiselect',
+					'options' => wpum_get_roles( true )
 				),
 			),
 		);

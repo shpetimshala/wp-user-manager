@@ -205,8 +205,6 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
 			// Emails Tags
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-tags.php';
-			// Directory for WPUM
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-directory.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -229,9 +227,12 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				// Load Default Fields Editor
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-editor.php';
 				// Custom Fields Framework
-				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
+				if( ! class_exists( 'Pretty_Metabox' ) )
+					require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
 			}
 
+			// Directory for WPUM
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-directory.php';
 			// Ajax Handler
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
 			// Permalinks for WPUM
@@ -273,24 +274,26 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Enqueue styles & scripts on admin page only
 			$screen = get_current_screen();
 
-			if ( $screen->base !== 'users_page_wpum-settings' )
-				return;
+			// Load styles only on required pages.
+			if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' ):
 
-			wp_enqueue_script( 'wpum-select2' );
-			wp_enqueue_script( 'wpum-admin-js' );
-			wp_enqueue_style( 'wpum-admin' );
-			wp_enqueue_style( 'wpum-select2' );
+				wp_enqueue_script( 'wpum-select2' );
+				wp_enqueue_script( 'wpum-admin-js' );
+				wp_enqueue_style( 'wpum-admin' );
+				wp_enqueue_style( 'wpum-select2' );
 
-			if( isset($_GET['tab']) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
-				wp_enqueue_script('jquery-ui-sortable');
+				if( isset($_GET['tab']) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
+					wp_enqueue_script('jquery-ui-sortable');
 
-			// Backend JS Settings
-			wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
-				'ajax'    => admin_url( 'admin-ajax.php' ),
-				'confirm' => __('Are you sure you want to do this? This action cannot be reversed.'),
-			) );
+				// Backend JS Settings
+				wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
+					'ajax'    => admin_url( 'admin-ajax.php' ),
+					'confirm' => __('Are you sure you want to do this? This action cannot be reversed.'),
+				) );
 
-			wp_enqueue_media();
+				wp_enqueue_media();
+
+			endif;
 
 		}
 
