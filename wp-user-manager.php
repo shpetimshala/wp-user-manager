@@ -228,6 +228,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-list.php';
 				// Load Default Fields Editor
 				require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-editor.php';
+				// Custom Fields Framework
+				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
 			}
 
 			// Ajax Handler

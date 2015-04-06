@@ -48,7 +48,7 @@ class WPUM_Directory {
 			'parent_item_colon'   => __( 'Directory', 'wpum' ),
 			'all_items'           => __( 'User Directories', 'wpum' ),
 			'add_new_item'        => __( 'Add New Directory', 'wpum' ),
-			'add_new'             => __( 'Add New', 'wpum' ),
+			'add_new'             => __( 'Add New Directory', 'wpum' ),
 			'new_item'            => __( 'New Directory', 'wpum' ),
 			'edit_item'           => __( 'Edit Directory', 'wpum' ),
 			'update_item'         => __( 'Update Directory', 'wpum' ),
