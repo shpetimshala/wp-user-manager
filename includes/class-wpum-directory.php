@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Directory {
 
 	/**
+	 * WPUM Directory Meta Options
+	 *
+	 * @var object
+	 * @since 1.0.0
+	 */
+	public $directory_options;
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
@@ -27,6 +35,7 @@ class WPUM_Directory {
 	public function __construct() {
 		
 		add_action( 'init', array( $this, 'directory_post_type' ) );
+  		$this->directory_options =  new Pretty_Metabox( $this->meta_options() );
 
 	}
 
@@ -38,7 +47,7 @@ class WPUM_Directory {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	function directory_post_type() {
+	public function directory_post_type() {
 
 		$labels = array(
 			'name'                => _x( 'User Directories', 'Post Type General Name', 'wpum' ),
@@ -75,6 +84,35 @@ class WPUM_Directory {
 		);
 		
 		register_post_type( 'wpum_directory', apply_filters( 'wpum_directory_post_type_args', $args ) );
+
+	}
+
+	/**
+	 * Adds the directory post type.
+	 * This handles the creation of user directories.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function meta_options() {
+
+		$config = array(
+			'id'    => 'wpum_directory_options',
+			'title' => 'Demo Fields',
+			'pages' => array( 'wpum_directory' ),
+			'fields' => array(
+				array(
+					'id'   => 'text',
+					'name' => __( 'Text Field' ),
+					'sub' => __( 'Description goes here' ),
+					'desc' => __( 'Field Description goes here' ),
+					'type' => 'text'
+				),
+			),
+		);
+
+		return apply_filters( 'wpum_directory_meta_options', $config );
 
 	}
 
