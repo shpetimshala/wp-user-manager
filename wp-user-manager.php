@@ -205,6 +205,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
 			// Emails Tags
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-tags.php';
+			// Directory for WPUM
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-directory.php';
 			
 			// Files loaded only on the admin side
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
