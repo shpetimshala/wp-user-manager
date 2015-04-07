@@ -275,6 +275,27 @@
 							}
 						}, // End Profile Card
 
+						/* Directory */
+						{
+							text: 'User Directory',
+							onclick: function() {
+								editor.windowManager.open( {
+									title: 'User Directory',
+									body: [ 
+										{
+											type: 'textbox', 
+											name: 'id', 
+											label: 'Directory ID',
+											value: ''
+										}
+									],
+									onsubmit: function( e ) {
+										editor.insertContent( '[wpum_user_directory id="' + e.data.id + '"]');
+									}
+								});
+							}
+						}, // End Directory
+
 					]
 				},
 				
