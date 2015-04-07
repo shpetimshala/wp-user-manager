@@ -161,6 +161,7 @@ class WPUM_Directory {
 		$columns["roles"]             = __( 'User Roles' );
 		$columns["search_form"]       = __( 'Display search form' );
 		$columns["profiles_per_page"] = __( 'Profiles per page' );
+		$columns["shortcode"]         = __( 'Shortcode' );
 
 		return $columns;
 	}
@@ -194,6 +195,9 @@ class WPUM_Directory {
 				break;
 			case 'profiles_per_page':
 				echo get_post_meta( $post->ID, 'profiles_per_page', true );
+				break;
+			case 'shortcode':
+				echo '[wpum_user_directory id="'.$post->ID.'"]';
 				break;
 		}
 
