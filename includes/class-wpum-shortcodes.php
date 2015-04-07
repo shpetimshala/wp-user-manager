@@ -39,6 +39,7 @@ class WPUM_Shortcodes {
 		add_shortcode( 'wpum_restrict_logged_in', array( $this, 'wpum_restrict_logged_in' ) );
 		add_shortcode( 'wpum_restrict_to_users', array( $this, 'wpum_restrict_to_users' ) );
 		add_shortcode( 'wpum_restrict_to_user_roles', array( $this, 'wpum_restrict_to_user_roles' ) );
+		add_shortcode( 'wpum_user_directory', array( $this, 'wpum_user_directory' ) );
 
 	}
 
@@ -415,6 +416,51 @@ class WPUM_Shortcodes {
 			$warning = wpum_message( apply_filters( 'wpum_restrict_to_user_roles_args', $args ), true );
 
 		}
+
+		$output = ob_get_clean();
+
+		return $output;
+
+	}
+
+	/**
+	 * User directory shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_user_directory( $atts, $content = null ) {
+
+		extract( shortcode_atts( array(
+			'id' => null,
+		), $atts ) );
+
+		ob_start();
+
+		// Display error if no ID is set.
+		if( !$id ) :
+			$args = array( 
+				'id'   => 'wpum-no-user-directory-id', 
+				'type' => 'error', 
+				'text' => __( 'You must set an ID for this directory.' )
+			);
+			$warning = wpum_message( $args, true );
+			return;
+		endif;
+
+		// Make the query
+		$args = array(
+			'number' => 2
+		);
+		$user_query = new WP_User_Query( $args );
+
+		// Load the template
+		get_wpum_template( 'user-directory.php', array( 
+				'user_data' => $user_query->get_results(),
+				'users_found' => $user_query->get_total()
+			) 
+		);
 
 		$output = ob_get_clean();
 
