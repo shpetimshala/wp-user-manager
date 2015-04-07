@@ -41,6 +41,7 @@ class WPUM_Directory {
   		if( is_admin() ) {
   			add_filter( 'manage_edit-wpum_directory_columns', array( $this, 'post_type_columns' ) );
   			add_action( 'manage_wpum_directory_posts_custom_column', array( $this, 'post_type_columns_content' ), 2 );
+  			add_filter( 'post_row_actions', array( $this, 'remove_action_rows'), 10, 2 );
   		}
 
 	}
@@ -195,6 +196,23 @@ class WPUM_Directory {
 				echo get_post_meta( $post->ID, 'profiles_per_page', true );
 				break;
 		}
+
+	}
+
+	/**
+	 * Modifies the action links into the post type page.
+	 *
+	 * @access public
+	 * @return $actions array contains all action links.
+	 */
+	public function remove_action_rows( $actions, $post ) {
+		
+		if ( $post->post_type == 'wpum_directory' ) {
+			unset($actions['inline hide-if-no-js']);
+			unset($actions['view']);
+		}
+
+		return $actions;
 
 	}
 
