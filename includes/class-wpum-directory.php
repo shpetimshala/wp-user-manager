@@ -103,12 +103,33 @@ class WPUM_Directory {
 			'pages' => array( 'wpum_directory' ),
 			'fields' => array(
 				array(
-					'id'   => 'directory_roles',
-					'name' => __( 'User Roles' ),
-					'sub' => __( 'Leave blank to display all user roles.' ),
-					'desc' => __( 'Select the user roles you wish to display into this directory.' ),
-					'type' => 'multiselect',
+					'id'      => 'directory_roles',
+					'name'    => __( 'User Roles' ),
+					'sub'     => __( 'Leave blank to display all user roles.' ),
+					'desc'    => __( 'Select the user roles you wish to display into this directory.' ),
+					'type'    => 'multiselect',
 					'options' => wpum_get_roles( true )
+				),
+				array(
+					'id'   => 'display_search_form',
+					'name' => __( 'Display search form' ),
+					'desc' => __( 'Enable this option to display the user search form' ),
+					'type' => 'checkbox',
+					'std'  => 1
+				),
+				array(
+					'id'   => 'profiles_per_page',
+					'name' => __( 'Profiles per page' ),
+					'sub'  => __( 'Select how many profiles you wish to display per page.' ),
+					'type' => 'number',
+					'std'  => 10
+				),
+				array(
+					'id'      => 'directory_template',
+					'name'    => __( 'Directory Template' ),
+					'desc'    => __( 'Select a template from the list.' ),
+					'type'    => 'select',
+					'options' => wpum_get_directory_templates()
 				),
 			),
 		);

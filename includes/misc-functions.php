@@ -961,3 +961,20 @@ function wpum_check_permissions_button() {
 
 }
 
+/**
+ * Available templates for user directories.
+ * Developers can use the filter wpum_get_directory_templates
+ * to customize add and remove templates.
+ *
+ * @since 1.0.0
+ * @return array $templates list of the templates - the key is the file name without extension.
+ */
+function wpum_get_directory_templates() {
+
+	// Default template has empty key.
+	$templates = array( '' => __('Default template') );
+
+	return $templates;
+
+}
+

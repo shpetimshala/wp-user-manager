@@ -17,7 +17,7 @@ if ( ! class_exists( 'WPPF_Checkbox_Field' ) ) {
 		 */
 		static function html( $meta, $field ) {
 
-			$output = '<label><input type="checkbox" class="wppf-checkbox" name="'.$field['id'].'" id="'.$field['id'].'" value="1" '.checked( ! empty( $meta ), 1, false ).'>'.$field['checkbox_title'].'</label><br/><br/>';
+			$output = '<label><input type="checkbox" class="wppf-checkbox" name="'.$field['id'].'" id="'.$field['id'].'" value="1" '.checked( ! empty( $meta ), 1, false ).'>'.$field['checkbox_title'].'</label>';
 
 			return $output;
 
