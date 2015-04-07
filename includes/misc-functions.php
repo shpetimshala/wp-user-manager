@@ -974,7 +974,7 @@ function wpum_get_directory_templates() {
 	// Default template has empty key.
 	$templates = array( '' => __('Default template') );
 
-	return $templates;
+	return apply_filters( 'wpum_get_directory_templates', $templates );
 
 }
 
