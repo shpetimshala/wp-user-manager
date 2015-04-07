@@ -35,7 +35,7 @@ class WPUM_Directory {
 	public function __construct() {
 		
 		add_action( 'init', array( $this, 'directory_post_type' ) );
-  		$this->directory_options = new Pretty_Metabox( $this->meta_options() );
+  		add_action( 'admin_init', array( $this, 'meta_options' ) );
 
 	}
 
@@ -113,7 +113,7 @@ class WPUM_Directory {
 			),
 		);
 
-		return apply_filters( 'wpum_directory_meta_options', $config );
+		$this->directory_options = new Pretty_Metabox( apply_filters( 'wpum_directory_meta_options', $config ) );
 
 	}
 
