@@ -119,4 +119,9 @@ table.wpum_fields_table_list .wpum-fields-window-editor .modal-spinner {
   height: auto;
   width: auto; }
 
+/* Hide slug */
+body.post-type-wpum_directory #edit-slug-box,
+body.post-type-wpum_directory #preview-action {
+  display: none; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

@@ -37,6 +37,12 @@ class WPUM_Directory {
 		add_action( 'init', array( $this, 'directory_post_type' ) );
   		add_action( 'admin_init', array( $this, 'meta_options' ) );
 
+  		// Only in admin panel
+  		if( is_admin() ) {
+  			add_filter( 'manage_edit-wpum_directory_columns', array( $this, 'post_type_columns' ) );
+  			add_action( 'manage_wpum_directory_posts_custom_column', array( $this, 'post_type_columns_content' ), 2 );
+  		}
+
 	}
 
 	/**
@@ -135,6 +141,60 @@ class WPUM_Directory {
 		);
 
 		$this->directory_options = new Pretty_Metabox( apply_filters( 'wpum_directory_meta_options', $config ) );
+
+	}
+
+	/**
+	 * Modifies the list of columns available into the directory post type.
+	 *
+	 * @access public
+	 * @param mixed $columns
+	 * @return array $columns
+	 */
+	public function post_type_columns( $columns ) {
+		if ( ! is_array( $columns ) )
+			$columns = array();
+
+		unset( $columns['date'], $columns['author'] );
+
+		$columns["roles"]             = __( 'User Roles' );
+		$columns["search_form"]       = __( 'Display search form' );
+		$columns["profiles_per_page"] = __( 'Profiles per page' );
+
+		return $columns;
+	}
+
+	/**
+	 * Adds the content to the custom columns for the directory post type
+	 *
+	 * @access public
+	 * @param mixed $column
+	 * @return void
+	 */
+	public function post_type_columns_content( $columns ) {
+
+		global $post;
+
+		switch ( $columns ) {
+			case 'roles':
+				$roles = get_post_meta( $post->ID, 'directory_roles', true );	
+				if( $roles ) {
+					echo implode( ', ', $roles );
+				} else {
+					echo __( 'All' );
+				}
+				break;
+			case 'search_form':
+				if( get_post_meta( $post->ID, 'display_search_form', true ) ) {
+					echo '<span class="dashicons dashicons-yes"></span>';
+				} else {
+					echo '<span class="dashicons dashicons-no"></span>';
+				}
+				break;
+			case 'profiles_per_page':
+				echo get_post_meta( $post->ID, 'profiles_per_page', true );
+				break;
+		}
 
 	}
 

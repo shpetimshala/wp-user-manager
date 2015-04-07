@@ -175,3 +175,12 @@ table.wpum_fields_table_list {
 	height: auto;
 	width: auto;
 }
+
+/* Hide slug */
+
+body.post-type-wpum_directory {
+	#edit-slug-box,
+	#preview-action {
+		display: none;
+	}
+}
