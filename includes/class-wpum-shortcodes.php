@@ -438,12 +438,18 @@ class WPUM_Shortcodes {
 
 		ob_start();
 
-		// Display error if no ID is set.
-		if( !$id ) :
+		$directory_id = intval( $id );
+
+		// Check if directory exists
+		$check_directory_args = array( 'post_type' => 'wpum_directory', 'p' => $directory_id, 'fields' => 'ids' );
+		$check_directory = new WP_Query( $check_directory_args );
+
+		// Display error if something is wrong.
+		if( !$id || !$check_directory->have_posts() ) :
 			$args = array( 
 				'id'   => 'wpum-no-user-directory-id', 
 				'type' => 'error', 
-				'text' => __( 'You must set an ID for this directory.' )
+				'text' => __( 'Something went wrong, you have not set a directory ID or the directory is not published.' )
 			);
 			$warning = wpum_message( $args, true );
 			return;
@@ -451,14 +457,18 @@ class WPUM_Shortcodes {
 
 		// Make the query
 		$args = array(
-			'number' => 2
+			'number' => 2,
+			'fields' => wpum_get_user_query_fields()
 		);
-		$user_query = new WP_User_Query( $args );
+		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query_{$directory_id}", $args ) );
 
 		// Load the template
 		get_wpum_template( 'user-directory.php', array( 
-				'user_data' => $user_query->get_results(),
-				'users_found' => $user_query->get_total()
+				'user_data'    => $user_query->get_results(),
+				'users_found'  => $user_query->get_total(),
+				'directory_id' => $directory_id,
+				'search_form'  => wpum_directory_has_search_form( $directory_id ),
+				'template'     => wpum_directory_has_custom_template( $directory_id )
 			) 
 		);
 

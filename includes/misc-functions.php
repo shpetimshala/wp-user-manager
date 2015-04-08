@@ -978,3 +978,54 @@ function wpum_get_directory_templates() {
 
 }
 
+/**
+ * List of fields to retrieve during the WP_User_Query for user directories.
+ * Limiting the query to certain fields, speeds it up.
+ *
+ * @since 1.0.0
+ * @see https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
+ * @return array $fields - https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
+ */
+function wpum_get_user_query_fields() {
+
+	$fields = array( 'ID', 'display_name', 'user_login', 'user_nicename', 'user_email', 'user_url', 'user_registered' );
+
+	return apply_filters( 'wpum_get_user_query_fields', $fields );
+
+}
+
+/**
+ * Checks whether a directory has a search form.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return bool
+ */
+function wpum_directory_has_search_form( $directory_id = 0 ) {
+
+	if( get_post_meta( $directory_id, 'display_search_form', true ) )
+		return true;
+
+	return false;
+
+}
+
+/**
+ * Checks whether a directory has a custom template.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return bool|string Boolean if no custom template is assigned.
+ *                     Returns template name including extension if has custom template.
+ */
+function wpum_directory_has_custom_template( $directory_id = 0 ) {
+
+	$custom_template = get_post_meta( $directory_id, 'directory_template', true );
+
+	if( !empty( $custom_template ) )
+		return $custom_template;
+
+	return false;
+}
+
+

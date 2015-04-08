@@ -8,9 +8,13 @@
  * @since       1.0.0
  */
 
-
-
+print_r( $user_data );
 ?>
-<pre>
-<?php print_r( $user_data ); ?>
-</pre>
+
+<!-- start directory -->
+<div id="wpum-user-directory-<?php echo $directory_id; ?>" class="wpum-user-directory directory-<?php echo $directory_id; ?>">
+
+
+
+</div>
+<!-- end directory -->
