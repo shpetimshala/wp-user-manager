@@ -1028,4 +1028,21 @@ function wpum_directory_has_custom_template( $directory_id = 0 ) {
 	return false;
 }
 
+/**
+ * Grabs the amount of users to display into the directory.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return 
+ */
+function wpum_directory_profiles_per_page( $directory_id = 0 ) {
+
+	$amount = get_post_meta( $directory_id, 'profiles_per_page', true );
+
+	if( empty( $amount ) )
+		return 10;
+
+	return $amount;
+
+}
 
