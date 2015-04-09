@@ -1033,7 +1033,7 @@ function wpum_directory_has_custom_template( $directory_id = 0 ) {
  * 
  * @since 1.0.0
  * @param int $directory_id the ID of a directory custom post type, post.
- * @return 
+ * @return string amount of users to display.
  */
 function wpum_directory_profiles_per_page( $directory_id = 0 ) {
 
@@ -1043,6 +1043,24 @@ function wpum_directory_profiles_per_page( $directory_id = 0 ) {
 		return 10;
 
 	return $amount;
+
+}
+
+/**
+ * Grabs user roles for the directory if any.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return array|bool list of roles or false if no roles is set.
+ */
+function wpum_directory_get_roles( $directory_id = 0 ) {
+
+	$roles = get_post_meta( $directory_id, 'directory_roles', true );
+
+	if( empty( $roles ) || !is_array( $roles ) )
+		return false;
+
+	return $roles;
 
 }
 

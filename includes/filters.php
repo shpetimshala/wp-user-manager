@@ -151,3 +151,39 @@ function wpum_body_classes($classes) {
 	return $classes;
 }
 add_filter( 'body_class', 'wpum_body_classes' );
+
+/**
+ * Modify the WP_User_Query on the directory page.
+ * Check whether the directory should be displaying
+ * specific user roles only.
+ * 
+ * @since 1.0.0
+ * @param array $args WP_User_Query args.
+ * @param string $directory_id id number of the directory.
+ * @return array
+ */
+function wpum_directory_pre_set_roles( $args, $directory_id ) {
+
+	// Get roles
+	$roles = wpum_directory_get_roles( $directory_id );
+
+	// Execute only if there are roles.
+	if( $roles ) {
+
+		global $wpdb;
+		$blog_id = get_current_blog_id();
+
+		$meta_query = array(
+		    'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
+		    'value' => '"(' . implode( '|', array_map( 'preg_quote', $roles ) ) . ')"',
+		    'compare' => 'REGEXP'
+		);
+
+		$args['meta_query'] = array( $meta_query );
+
+	}
+
+	return $args;
+
+}
+add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_roles', 10, 2 );
