@@ -14,6 +14,8 @@
 
 	<!-- Start Users list -->
 	<?php if ( ! empty( $user_data ) ) {
+
+		do_action( 'wpum_before_user_directory', $directory_id );
 		
 		echo '<ul class="wpum-user-listings">';
 
@@ -25,6 +27,8 @@
 		}
 
 		echo "</ul>";
+
+		do_action( 'wpum_after_user_directory', $directory_id );
 
 	} else {
 	
