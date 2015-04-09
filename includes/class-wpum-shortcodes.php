@@ -459,7 +459,7 @@ class WPUM_Shortcodes {
 			'number' => wpum_directory_profiles_per_page( $directory_id ),
 			'fields' => wpum_get_user_query_fields()
 		);
-		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query_{$directory_id}", $args ) );
+		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Load the template
 		get_wpum_template( 'user-directory.php', array( 
