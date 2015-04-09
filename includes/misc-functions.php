@@ -1016,7 +1016,7 @@ function wpum_directory_has_search_form( $directory_id = 0 ) {
  * @since 1.0.0
  * @param int $directory_id the ID of a directory custom post type, post.
  * @return bool|string Boolean if no custom template is assigned.
- *                     Returns template name including extension if has custom template.
+ *                     Returns template name excluding extension if has custom template.
  */
 function wpum_directory_has_custom_template( $directory_id = 0 ) {
 

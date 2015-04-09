@@ -7,6 +7,20 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
+// Return different template if set.
+if( $template ) {
+	get_wpum_template( "user-directory-{$template}.php", array( 
+			'user_data'    => $user_data,
+			'users_found'  => $users_found,
+			'directory_id' => $directory_id,
+			'search_form'  => $search_form,
+			'template'     => $template
+		) 
+	);
+	return;
+}
+
 ?>
 
 <!-- start directory -->
