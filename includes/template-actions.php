@@ -105,8 +105,8 @@ function wpum_user_directory_pagination( $directory_id, $users_found, $total_use
 				'format' => '?paged=%#%',
 				'current' => $paged,
 				'total' => $total_pages,
-				'prev_text' => 'Previous',
-				'next_text' => 'Next'
+				'prev_text' => __('Previous page'),
+				'next_text' => __('Next page')
 			) 
 		);
 
