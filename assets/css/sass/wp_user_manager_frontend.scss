@@ -338,10 +338,14 @@ ul.wpum-user-listings {
 }
 
 /* Found users */
-
 .wpum-users-found {
 	padding: .5em 1em;
-	font-size: .83em;
 	background: #f9f9f9;
 	border-top: 1px solid #e5e5e5;
+}
+
+.wpum-directory-pagination {
+	padding: .5em 1em;
+	background: #f9f9f9;
+	border-bottom: 1px solid #e5e5e5;
 }

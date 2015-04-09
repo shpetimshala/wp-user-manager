@@ -100,15 +100,19 @@ add_action( 'wpum_before_user_directory', 'wpum_display_total_users_found', 10, 
  */
 function wpum_user_directory_pagination( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
 
+	echo '<div class="wpum-directory-pagination">';
+
 	echo paginate_links( array(
-				'base' => get_pagenum_link(1) . '%_%',
-				'format' => '?paged=%#%',
-				'current' => $paged,
-				'total' => $total_pages,
+				'base'      => get_pagenum_link(1) . '%_%',
+				'format'    => '?paged=%#%',
+				'current'   => $paged,  
+				'total'     => $total_pages,
 				'prev_text' => __('Previous page'),
 				'next_text' => __('Next page')
 			) 
 		);
+
+	echo '</div>';
 
 }
 add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination', 10, 8 );

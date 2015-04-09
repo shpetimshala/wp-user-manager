@@ -454,10 +454,14 @@ class WPUM_Shortcodes {
 			return;
 		endif;
 
-		// Check for pagination
+		// Prepare Pagination
+		$number = wpum_directory_profiles_per_page( $directory_id ) ;
 		$paged  = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-		$number = wpum_directory_profiles_per_page( $directory_id );
-		$offset = ( $paged - 1 ) * $number;
+		if( $paged == 1 ) {
+      		$offset = 0;  
+    	} else {
+			$offset = ( $paged -1 ) * $number;
+    	}
 
 		// Make the query
 		$args = array(
@@ -467,9 +471,9 @@ class WPUM_Shortcodes {
 		);
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
-		// Prepare pagination
-		$total_users = count( $user_query->get_total() );
-		$total_pages = ceil( $total_users / $number ) + 1;
+		// Build Pagination Count
+		$total_users  = $user_query->total_users;
+		$total_pages = ceil( $total_users / $number );
 
 		// Load the template
 		get_wpum_template( 'user-directory.php', array( 
