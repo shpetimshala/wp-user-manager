@@ -21,8 +21,6 @@ if( $template ) {
 	return;
 }
 
-echo $users_found;
-
 ?>
 
 <!-- start directory -->

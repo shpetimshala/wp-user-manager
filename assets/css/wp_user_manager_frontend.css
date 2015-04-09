@@ -346,4 +346,11 @@ ul.wpum-user-listings {
         display: block;
         margin: 0; }
 
+/* Found users */
+.wpum-users-found {
+  padding: .5em 1em;
+  font-size: .83em;
+  background: #f9f9f9;
+  border-top: 1px solid #e5e5e5; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

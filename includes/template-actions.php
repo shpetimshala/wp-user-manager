@@ -56,3 +56,27 @@ function wpum_add_helper_links( $atts ) {
 }
 add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 );
 add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 );
+
+/**
+ * Add helper links to the password form.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param int $directory_id directory id number
+ * @param string $users_found amount of users found
+ * @param bool $search_form whether the search form is enabled
+ * @param bool|string $template name if selected - false if default.
+ * @param array $user_data contains found users.
+ * @return void
+ */
+function wpum_display_total_users_found( $directory_id, $users_found, $search_form, $template, $user_data ) {
+
+	echo '<div class="wpum-users-found">';
+
+		echo '<span>'.sprintf( __('Found %s users.'), $users_found ).'</span>';
+
+	echo '</div>';
+
+}
+add_action( 'wpum_before_user_directory', 'wpum_display_total_users_found', 10, 5 );
+
