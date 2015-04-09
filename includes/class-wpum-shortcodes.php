@@ -441,11 +441,10 @@ class WPUM_Shortcodes {
 		$directory_id = intval( $id );
 
 		// Check if directory exists
-		$check_directory_args = array( 'post_type' => 'wpum_directory', 'p' => $directory_id, 'fields' => 'ids' );
-		$check_directory = new WP_Query( $check_directory_args );
+		$check_directory = get_post_status( $directory_id );
 
 		// Display error if something is wrong.
-		if( !$id || !$check_directory->have_posts() ) :
+		if( !$id || $check_directory !== 'publish' ) :
 			$args = array( 
 				'id'   => 'wpum-no-user-directory-id', 
 				'type' => 'error', 
