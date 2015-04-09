@@ -21,6 +21,8 @@ if( $template ) {
 	return;
 }
 
+echo $users_found;
+
 ?>
 
 <!-- start directory -->
@@ -29,8 +31,8 @@ if( $template ) {
 	<!-- Start Users list -->
 	<?php if ( ! empty( $user_data ) ) {
 
-		do_action( 'wpum_before_user_directory', $directory_id );
-		
+		do_action( 'wpum_before_user_directory', $directory_id, $users_found, $search_form, $template, $user_data );
+
 		echo '<ul class="wpum-user-listings">';
 
 		foreach ( $user_data as $user ) {
@@ -42,7 +44,7 @@ if( $template ) {
 
 		echo "</ul>";
 
-		do_action( 'wpum_after_user_directory', $directory_id );
+		do_action( 'wpum_after_user_directory', $directory_id, $users_found, $search_form, $template, $user_data );
 
 	} else {
 	
