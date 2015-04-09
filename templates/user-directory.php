@@ -14,6 +14,8 @@
 
 	<!-- Start Users list -->
 	<?php if ( ! empty( $user_data ) ) {
+		
+		echo '<ul class="wpum-user-listings">';
 
 		foreach ( $user_data as $user ) {
 
@@ -21,6 +23,8 @@
 			get_wpum_template( "single-user.php", array( 'user' => $user ) );
 
 		}
+
+		echo "</ul>";
 
 	} else {
 	
