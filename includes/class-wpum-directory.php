@@ -125,6 +125,13 @@ class WPUM_Directory {
 					'std'  => 1
 				),
 				array(
+					'id'   => 'excluded_ids',
+					'name' => __( 'Exclude users' ),
+					'sub'  => __( 'Comma separated list of users id you wish to exclude.' ),
+					'desc' => sprintf( __(' For example use %s to exclude users with those id(s).'), '<code>1, 6, 89</code>' ),
+					'type' => 'text',
+				),
+				array(
 					'id'   => 'profiles_per_page',
 					'name' => __( 'Profiles per page' ),
 					'sub'  => __( 'Select how many profiles you wish to display per page.' ),
