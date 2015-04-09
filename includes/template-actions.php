@@ -58,18 +58,21 @@ add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 
 add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 );
 
 /**
- * Add helper links to the password form.
+ * Adds total number of users found on top of the directory.
  * 
  * @since 1.0.0
  * @access public
- * @param int $directory_id directory id number
- * @param string $users_found amount of users found
- * @param bool $search_form whether the search form is enabled
+ * @param int $directory_id directory id number.
+ * @param string $users_found amount of users found.
+ * @param string $total_users amount of users for pagination.
+ * @param string $total_pages amount of pages for pagination.
+ * @param bool $page whether its paged or not.
+ * @param bool $search_form whether the search form is enabled.
  * @param bool|string $template name if selected - false if default.
  * @param array $user_data contains found users.
  * @return void
  */
-function wpum_display_total_users_found( $directory_id, $users_found, $search_form, $template, $user_data ) {
+function wpum_display_total_users_found( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
 
 	echo '<div class="wpum-users-found">';
 
@@ -78,5 +81,34 @@ function wpum_display_total_users_found( $directory_id, $users_found, $search_fo
 	echo '</div>';
 
 }
-add_action( 'wpum_before_user_directory', 'wpum_display_total_users_found', 10, 5 );
+add_action( 'wpum_before_user_directory', 'wpum_display_total_users_found', 10, 8 );
 
+/**
+ * Adds pagination at the bottom of the user directory.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param int $directory_id directory id number.
+ * @param string $users_found amount of users found.
+ * @param string $total_users amount of users for pagination.
+ * @param string $total_pages amount of pages for pagination.
+ * @param bool $page whether its paged or not.
+ * @param bool $search_form whether the search form is enabled.
+ * @param bool|string $template name if selected - false if default.
+ * @param array $user_data contains found users.
+ * @return void
+ */
+function wpum_user_directory_pagination( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
+
+	echo paginate_links( array(
+				'base' => get_pagenum_link(1) . '%_%',
+				'format' => '?paged=%#%',
+				'current' => $paged,
+				'total' => $total_pages,
+				'prev_text' => 'Previous',
+				'next_text' => 'Next'
+			) 
+		);
+
+}
+add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination', 10, 8 );

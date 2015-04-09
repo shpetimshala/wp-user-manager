@@ -13,8 +13,11 @@ if( $template ) {
 	get_wpum_template( "user-directory-{$template}.php", array( 
 			'user_data'    => $user_data,
 			'users_found'  => $users_found,
+			'total_users'  => $total_users,
+			'total_pages'  => $total_pages,
 			'directory_id' => $directory_id,
-			'search_form'  => $search_form,
+			'paged'        => $paged,
+			'search_form'  => $search_for,
 			'template'     => $template
 		) 
 	);
@@ -29,7 +32,7 @@ if( $template ) {
 	<!-- Start Users list -->
 	<?php if ( ! empty( $user_data ) ) {
 
-		do_action( 'wpum_before_user_directory', $directory_id, $users_found, $search_form, $template, $user_data );
+		do_action( 'wpum_before_user_directory', $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data );
 
 		echo '<ul class="wpum-user-listings">';
 
@@ -42,7 +45,7 @@ if( $template ) {
 
 		echo "</ul>";
 
-		do_action( 'wpum_after_user_directory', $directory_id, $users_found, $search_form, $template, $user_data );
+		do_action( 'wpum_after_user_directory', $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data );
 
 	} else {
 	
