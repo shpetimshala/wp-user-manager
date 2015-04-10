@@ -388,3 +388,24 @@ function wpum_profile_display_name( $user_data, $hyperlink = true ) {
 
 }
 endif;
+
+if ( ! function_exists( 'wpum_directory_sort_dropdown' ) ) :
+/**
+ * Builds the option for the frontend dropdown users sorter.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_directory_sort_dropdown( $user_data, $hyperlink = true ) {
+
+	$output = $user_data->display_name;
+
+	if( $hyperlink ) {
+		$output = '<a href="'. wpum_get_user_profile_url( $user_data ) .'" class="wpum-profile-link">' . $user_data->display_name . '</a>';
+	}
+
+	return $output;
+
+}
+endif;

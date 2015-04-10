@@ -1089,7 +1089,6 @@ function wpum_directory_get_excluded_users( $directory_id = 0 ) {
 
 }
 
-
 /**
  * Produces the list of sorting methods.
  * Developers can use the filter wpum_get_directory_sorting_methods

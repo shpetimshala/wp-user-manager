@@ -337,11 +337,14 @@ ul.wpum-user-listings {
 	}
 }
 
-/* Found users */
-.wpum-users-found {
+/* Directory Elements */
+.wpum-directory-top-bar {
 	padding: .5em 1em;
 	background: #f9f9f9;
 	border-top: 1px solid #e5e5e5;
+	div p {
+		margin:0px;
+	}
 }
 
 .wpum-directory-pagination {

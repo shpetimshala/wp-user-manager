@@ -72,16 +72,16 @@ add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 
  * @param array $user_data contains found users.
  * @return void
  */
-function wpum_display_total_users_found( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
+function wpum_directory_topbar( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
 
-	echo '<div class="wpum-users-found">';
-
-		echo '<span>'.sprintf( __('Found %s users.'), $users_found ).'</span>';
-
-	echo '</div>';
+	get_wpum_template( "directory/top-bar.php", array( 
+		'users_found'  => $users_found,
+		'search_form'  => $search_form,
+		'directory_id' => $directory_id
+	) );
 
 }
-add_action( 'wpum_before_user_directory', 'wpum_display_total_users_found', 10, 8 );
+add_action( 'wpum_before_user_directory', 'wpum_directory_topbar', 10, 8 );
 
 /**
  * Adds pagination at the bottom of the user directory.
