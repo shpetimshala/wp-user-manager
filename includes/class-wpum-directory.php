@@ -42,6 +42,7 @@ class WPUM_Directory {
   			add_filter( 'manage_edit-wpum_directory_columns', array( $this, 'post_type_columns' ) );
   			add_action( 'manage_wpum_directory_posts_custom_column', array( $this, 'post_type_columns_content' ), 2 );
   			add_filter( 'post_row_actions', array( $this, 'remove_action_rows'), 10, 2 );
+  			add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
   		}
 
 	}
@@ -225,6 +226,33 @@ class WPUM_Directory {
 
 		return $actions;
 
+	}
+
+	/**
+	 * Modifies the post update messages for this post type.
+	 *
+	 * @access public
+	 * @param mixed $messages
+	 * @return void
+	 */
+	function post_updated_messages( $messages ) {
+		
+		global $post, $post_ID;
+
+		$messages['wpum_directory'] = array(
+			0  => '', // Unused. Messages start at index 1.
+			1  => __( 'Directory updated.' ),
+			2  => __( 'Custom field updated.' ),
+			3  => __( 'Custom field deleted.'),
+			4  => __( 'Directory updated.' ),
+			/* translators: %s: date and time of the revision */
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Directory restored to revision from %s' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => sprintf( __( 'Directory created. Use the following shortcode to display this directory %s' ), '<code>[wpum_user_directory id="'.$post_ID.'"]</code>' ),
+			7  => __( 'Directory saved.' ),
+			8  => __( 'Directory submitted.' ),
+		);
+
+		return $messages;
 	}
 
 }
