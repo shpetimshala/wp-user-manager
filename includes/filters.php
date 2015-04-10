@@ -187,3 +187,25 @@ function wpum_directory_pre_set_roles( $args, $directory_id ) {
 
 }
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_roles', 10, 2 );
+
+/**
+ * Modify the WP_User_Query on the directory page.
+ * Check whether the directory should be excluding
+ * specific users by id.
+ * 
+ * @since 1.0.0
+ * @param array $args WP_User_Query args.
+ * @param string $directory_id id number of the directory.
+ * @return array
+ */
+function wpum_directory_pre_set_exclude_users( $args, $directory_id ) {
+
+	$users = wpum_directory_get_excluded_users( $directory_id );
+
+	if( is_array( $users ) )
+		$args['exclude'] = $users;
+
+	return $args;
+
+}
+add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_exclude_users', 11, 2 );

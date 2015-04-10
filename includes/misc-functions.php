@@ -1064,3 +1064,28 @@ function wpum_directory_get_roles( $directory_id = 0 ) {
 
 }
 
+/**
+ * Grabs excluded users for the directory if any.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return array|bool list of excluded users ids or false if no ids are set.
+ */
+function wpum_directory_get_excluded_users( $directory_id = 0 ) {
+
+	$users = get_post_meta( $directory_id, 'excluded_ids', true );
+
+	// Process string to array
+	if( $users ) {
+
+		$list = explode( ',', $users );
+		$users = $list;
+
+	} else {
+		$users = false;
+	}
+
+	return $users;
+
+}
+
