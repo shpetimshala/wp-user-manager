@@ -130,7 +130,7 @@ class WPUM_Directory {
 					'id'   => 'excluded_ids',
 					'name' => __( 'Exclude users' ),
 					'sub'  => __( 'Comma separated list of users id you wish to exclude.' ),
-					'desc' => sprintf( __(' For example use %s to exclude users with those id(s).'), '<code>1, 6, 89</code>' ),
+					'desc' => sprintf( __(' Example: type %s to exclude users with those id(s).'), '<code>1, 6, 89</code>' ),
 					'type' => 'text',
 				),
 				array(
