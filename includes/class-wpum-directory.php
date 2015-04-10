@@ -43,6 +43,7 @@ class WPUM_Directory {
   			add_action( 'manage_wpum_directory_posts_custom_column', array( $this, 'post_type_columns_content' ), 2 );
   			add_filter( 'post_row_actions', array( $this, 'remove_action_rows'), 10, 2 );
   			add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
+  			add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_post_updated_messages' ) );
   		}
 
 	}
@@ -253,6 +254,35 @@ class WPUM_Directory {
 		);
 
 		return $messages;
+	}
+
+	/**
+	 * Modifies the text of the trash function.
+	 *
+	 * @access public
+	 * @param mixed $bulk_messages
+	 * @return array $bulk_messages
+	 */
+	public function bulk_post_updated_messages( $bulk_messages ) {
+		global $post, $post_ID;
+
+		$bulk_counts = array(
+			'updated'   => isset( $_REQUEST['updated'] )   ? absint( $_REQUEST['updated'] )   : 0,
+			'locked'    => isset( $_REQUEST['locked'] )    ? absint( $_REQUEST['locked'] )    : 0,
+			'deleted'   => isset( $_REQUEST['deleted'] )   ? absint( $_REQUEST['deleted'] )   : 0,
+			'trashed'   => isset( $_REQUEST['trashed'] )   ? absint( $_REQUEST['trashed'] )   : 0,
+			'untrashed' => isset( $_REQUEST['untrashed'] ) ? absint( $_REQUEST['untrashed'] ) : 0,
+		);
+
+		$bulk_messages['wpum_directory'] = array(
+			'updated'   => _n( '%s directory updated.', '%s directory updated.', $bulk_counts['updated'], 'wprm' ),
+			'locked'    => _n( '%s directory not updated, somebody is editing it.', '%s directories not updated, somebody is editing them.', $bulk_counts['locked'], 'wprm' ),
+			'deleted'   => _n( '%s directory permanently deleted.', '%s directories permanently deleted.', $bulk_counts['deleted'], 'wprm' ),
+			'trashed'   => _n( '%s directory has been deleted.', '%s directories have been deleted.', $bulk_counts['trashed'], 'wprm' ),
+			'untrashed' => _n( '%s directory restored from the Trash.', '%s directories restored from the Trash.', $bulk_counts['untrashed'], 'wprm' ),
+		);
+
+		return $bulk_messages;
 	}
 
 }
