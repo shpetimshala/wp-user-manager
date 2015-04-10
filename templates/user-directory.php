@@ -39,7 +39,7 @@ if( $template ) {
 		foreach ( $user_data as $user ) {
 
 			// Load single-user.php template to display each user individually
-			get_wpum_template( "single-user.php", array( 'user' => $user ) );
+			get_wpum_template( "directory/single-user.php", array( 'user' => $user ) );
 
 		}
 

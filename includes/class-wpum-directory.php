@@ -170,7 +170,7 @@ class WPUM_Directory {
 				array(
 					'id'   => 'display_sorter',
 					'name' => __( 'Display sorter' ),
-					'desc' => __( 'Enable this option to display the user sorter field.' ),
+					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the sorting options.' ),
 					'type' => 'checkbox',
 					'std'  => 0
 				),
@@ -180,6 +180,7 @@ class WPUM_Directory {
 					'sub'     => __( 'Select the sorting method for the directory' ),
 					'desc'    => __('If the sorter field is visible, this will be used as default option.'),
 					'type'    => 'select',
+					'std'     => 'newest',
 					'options' => wpum_get_directory_sorting_methods()
 				),
 			),
