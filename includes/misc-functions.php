@@ -1089,3 +1089,29 @@ function wpum_directory_get_excluded_users( $directory_id = 0 ) {
 
 }
 
+
+/**
+ * Produces the list of sorting methods.
+ * Developers can use the filter wpum_get_directory_sorting_methods
+ * to add new methods.
+ * 
+ * @since 1.0.0
+ * @return array list sorting methods.
+ */
+function wpum_get_directory_sorting_methods() {
+
+	// Let's add the default sorting methods
+	// @see https://codex.wordpress.org/Class_Reference/WP_User_Query#Order_.26_Orderby_Parameters
+	$methods = array(
+		'id'            => __('Order by user id'),
+		'display_name'  => __('Order by user display name'),
+		'user_login'    => __('Order by user login'),
+		'user_nicename' => __('Order by user nicename'),
+		'newest'        => __('Newest users first'),
+		'oldest'        => __('Oldest users first')
+	);
+
+	return apply_filters( 'wpum_get_directory_sorting_methods', $methods );	
+
+}
+

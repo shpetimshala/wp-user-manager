@@ -19,12 +19,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Directory {
 
 	/**
-	 * WPUM Directory Meta Options
+	 * WPUM Directory General Options
 	 *
 	 * @var object
 	 * @since 1.0.0
 	 */
-	public $directory_options;
+	public $directory_general_options;
+
+	/**
+	 * WPUM Directory Sorting Options
+	 *
+	 * @var object
+	 * @since 1.0.0
+	 */
+	public $directory_sorting_options;
 
 	/**
 	 * __construct function.
@@ -106,10 +114,10 @@ class WPUM_Directory {
 	 */
 	public function meta_options() {
 
-		$config = array(
-			'id'    => 'wpum_directory_options',
-			'title' => __( 'General Settings' ),
-			'pages' => array( 'wpum_directory' ),
+		$general_options = array(
+			'id'     => 'wpum_directory_general_options',
+			'title'  => __( 'General Settings' ),
+			'pages'  => array( 'wpum_directory' ),
 			'fields' => array(
 				array(
 					'id'      => 'directory_roles',
@@ -149,8 +157,36 @@ class WPUM_Directory {
 				),
 			),
 		);
+		
+		// Create the new metabox
+		$this->directory_general_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $general_options ) );
 
-		$this->directory_options = new Pretty_Metabox( apply_filters( 'wpum_directory_meta_options', $config ) );
+		// Build the sorting metabox options
+		$sorting_options = array(
+			'id'     => 'wpum_directory_sorting_options',
+			'title'  => __( 'Users sorting' ),
+			'pages'  => array( 'wpum_directory' ),
+			'fields' => array(
+				array(
+					'id'   => 'display_sorter',
+					'name' => __( 'Display sorter' ),
+					'desc' => __( 'Enable this option to display the user sorter field.' ),
+					'type' => 'checkbox',
+					'std'  => 0
+				),
+				array(
+					'id'      => 'default_sorting_method',
+					'name'    => __( 'Sorting method' ),
+					'sub'     => __( 'Select the sorting method for the directory' ),
+					'desc'    => __('If the sorter field is visible, this will be used as default option.'),
+					'type'    => 'select',
+					'options' => wpum_get_directory_sorting_methods()
+				),
+			),
+		);
+
+		// Create the new metabox
+		$this->directory_sorting_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $sorting_options ) );
 
 	}
 

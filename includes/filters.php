@@ -209,3 +209,44 @@ function wpum_directory_pre_set_exclude_users( $args, $directory_id ) {
 
 }
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_exclude_users', 11, 2 );
+
+/**
+ * Modify the WP_User_Query on the directory page.
+ * Specify a custom sorting order.
+ * 
+ * @since 1.0.0
+ * @param array $args WP_User_Query args.
+ * @param string $directory_id id number of the directory.
+ * @return array
+ */
+function wpum_directory_pre_set_order( $args, $directory_id ) {
+
+	// Get selected sorting method
+	$sorting_method = get_post_meta( $directory_id, 'default_sorting_method', true );
+
+	switch ( $sorting_method ) {
+		case 'id':
+			$args['orderby'] = 'ID';
+			break;
+		case 'user_login':
+			$args['orderby'] = 'user_login';
+			break;
+		case 'display_name':
+			$args['orderby'] = 'display_name';
+			break;
+		case 'user_nicename':
+			$args['orderby'] = 'user_nicename';
+			break;
+		case 'newest':
+			$args['orderby'] = 'registered';
+			$args['order'] = 'DESC';
+			break;
+		case 'oldest':
+			$args['orderby'] = 'registered';
+			break;
+	}
+
+	return $args;
+
+}
+add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_order', 12, 2 );
