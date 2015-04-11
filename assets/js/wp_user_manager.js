@@ -13,6 +13,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_psw_recovery();
 			this.ajax_psw_reset();
 			this.ajax_remove_avatar();
+			this.directory_sort();
 		},
 
 		// Handle Ajax Login
@@ -250,6 +251,15 @@ jQuery(document).ready(function ($) {
 
 
 			});
+
+		},
+
+		// User directory sort function
+		directory_sort : function() {
+
+			jQuery("#wpum-dropdown").change(function () {
+		        location.href = jQuery(this).val();
+		    });
 
 		}
 

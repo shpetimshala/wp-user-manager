@@ -439,10 +439,12 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 
 	foreach ($sorting_methods as $value => $label ) {
 
-		if( $args['selected'] == $value ) {
-			$output .= "\t<option value='" . esc_attr( $value ) . "' selected='selected' >$label</option>\n";
+		$method_url = add_query_arg( array( 'sort' => $value ) ,get_permalink() );
+
+		if( $args['selected'] == $value || ( isset( $_GET['sort'] ) && $_GET['sort'] == $value ) ) {
+			$output .= "\t<option value='" . esc_url( $method_url ) . "' selected='selected' >$label</option>\n";
 		} else {
-			$output .= "\t<option value='" . esc_attr( $value ) . "'>$label</option>\n";
+			$output .= "\t<option value='" . esc_url( $method_url ) . "'>$label</option>\n";
 		}
 		
 	}
