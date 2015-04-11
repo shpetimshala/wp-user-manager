@@ -257,7 +257,7 @@ jQuery(document).ready(function ($) {
 		// User directory sort function
 		directory_sort : function() {
 
-			jQuery("#wpum-dropdown").change(function () {
+			jQuery("#wpum-dropdown, #wpum-amount-dropdown").change(function () {
 		        location.href = jQuery(this).val();
 		    });
 

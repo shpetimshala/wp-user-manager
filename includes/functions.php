@@ -396,7 +396,7 @@ if ( ! function_exists( 'wpum_directory_sort_dropdown' ) ) :
  * @since 1.0.0
  * @access public
  * @param string|array $args Optional. Override default arguments.
- * @return string HTML content only if 'echo' argument is 0.
+ * @return string HTML.
  */
 function wpum_directory_sort_dropdown( $args = '' ) {
 
@@ -440,13 +440,54 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 
 	foreach ($sorting_methods as $value => $label ) {
 
-		$method_url = add_query_arg( array( 'sort' => $value ) ,get_permalink() );
+		$method_url = add_query_arg( array( 'sort' => $value ), get_permalink() );
 
 		if( $selected == $value ) {
 			$output .= "\t<option value='" . esc_url( $method_url ) . "' selected='selected' >$label</option>\n";
 		} else {
 			$output .= "\t<option value='" . esc_url( $method_url ) . "'>$label</option>\n";
 		}
+		
+	}
+
+	$output .= "</select>\n";
+
+	return $output;
+
+}
+endif;
+
+if ( ! function_exists( 'wpum_directory_results_amount_dropdown' ) ) :
+/**
+ * Display or retrieve the HTML dropdown list of results amount options.
+ * 
+ * @since 1.0.0
+ * @access public
+ * @param string|array $args Optional. Override default arguments.
+ * @return string HTML content.
+ */
+function wpum_directory_results_amount_dropdown( $args = '' ) {
+
+	$defaults = array(
+		'exclude'  => '',
+		'class' => 'wpum-results-dropdown-sort',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	// Get css class
+	$class = $args['class'];
+
+	// Get options
+	$results_options = wpum_get_directory_amount_options();
+
+	$output = "<select name='wpum-amount-dropdown' id='wpum-amount-dropdown' class='$class'>\n";
+
+	foreach ($results_options as $value => $label ) {
+
+		$result_url = add_query_arg( array( 'amount' => $value ), get_permalink() );
+
+		$output .= "\t<option value='" . esc_url( $result_url ) . "'>$label</option>\n";
 		
 	}
 

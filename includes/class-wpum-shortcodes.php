@@ -455,7 +455,7 @@ class WPUM_Shortcodes {
 		endif;
 
 		// Prepare Pagination
-		$number = wpum_directory_profiles_per_page( $directory_id ) ;
+		$number = wpum_directory_profiles_per_page( $directory_id );
 		$paged  = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		if( $paged == 1 ) {
       		$offset = 0;  

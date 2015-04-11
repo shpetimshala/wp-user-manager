@@ -24,7 +24,7 @@ class WPUM_Directory {
 	 * @var object
 	 * @since 1.0.0
 	 */
-	public $directory_general_options;
+	public $general_options;
 
 	/**
 	 * WPUM Directory Sorting Options
@@ -32,7 +32,7 @@ class WPUM_Directory {
 	 * @var object
 	 * @since 1.0.0
 	 */
-	public $directory_sorting_options;
+	public $sorting_options;
 
 	/**
 	 * __construct function.
@@ -159,7 +159,7 @@ class WPUM_Directory {
 		);
 		
 		// Create the new metabox
-		$this->directory_general_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $general_options ) );
+		$this->general_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $general_options ) );
 
 		// Build the sorting metabox options
 		$sorting_options = array(
@@ -172,7 +172,14 @@ class WPUM_Directory {
 					'name' => __( 'Display sorter' ),
 					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the sorting options.' ),
 					'type' => 'checkbox',
-					'std'  => 0
+					'std'  => 1
+				),
+				array(
+					'id'   => 'display_amount',
+					'name' => __( 'Display amount filter' ),
+					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the results amount filter.' ),
+					'type' => 'checkbox',
+					'std'  => 1
 				),
 				array(
 					'id'      => 'default_sorting_method',
@@ -187,7 +194,7 @@ class WPUM_Directory {
 		);
 
 		// Create the new metabox
-		$this->directory_sorting_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $sorting_options ) );
+		$this->sorting_options = new Pretty_Metabox( apply_filters( 'wpum_directory_general_options', $sorting_options ) );
 
 	}
 

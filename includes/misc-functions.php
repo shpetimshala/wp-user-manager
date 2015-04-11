@@ -1127,3 +1127,56 @@ function wpum_get_directory_sorting_methods() {
 
 }
 
+/**
+ * Produces the list of results per page options.
+ * Developers can use the filter wpum_get_directory_amount_options
+ * to add new options.
+ * 
+ * @since 1.0.0
+ * @return array list amount options.
+ */
+function wpum_get_directory_amount_options() {
+
+	// Let's add the default results options
+	$amounts = array(
+		''   => '',
+		'10' => '10',
+		'15' => '15',
+		'20' => '20',
+	);
+
+	return apply_filters( 'wpum_get_directory_amount_options', $amounts );	
+
+}
+
+/**
+ * Checks whether a directory has the sorting form enabled.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return bool
+ */
+function wpum_directory_display_sorter( $directory_id = 0 ) {
+
+	if( get_post_meta( $directory_id, 'display_sorter', true ) )
+		return true;
+
+	return false;
+
+}
+
+/**
+ * Checks whether a directory has the amount results form enabled.
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return bool
+ */
+function wpum_directory_display_amount_sorter( $directory_id = 0 ) {
+
+	if( get_post_meta( $directory_id, 'display_amount', true ) )
+		return true;
+
+	return false;
+
+}
