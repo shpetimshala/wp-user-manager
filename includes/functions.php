@@ -414,6 +414,27 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 	// Get options
 	$sorting_methods = wpum_get_directory_sorting_methods();
 
+	// Exclude methods if any
+	if( !empty( $args['exclude'] ) ) {
+
+		// Check if it's only one value that we need to exclude
+		if( is_string( $args['exclude'] ) ) :
+			
+			unset( $sorting_methods[ $args['exclude'] ] );
+		
+		// Check if there's more than one value to exclude
+		elseif ( is_array( $args['exclude'] ) ) :
+		
+			foreach ( $args['exclude'] as $method_to_exclude ) {
+				unset( $sorting_methods[ $method_to_exclude ] );
+			}
+		
+		endif;
+
+	}
+
+	$sorting_methods = apply_filters( 'wpum_sort_dropdown_methods', $sorting_methods, $args );
+
 	$output = "<select name='wpum-dropdown' id='wpum-dropdown' class='$class'>\n";
 
 	foreach ($sorting_methods as $value => $label ) {
