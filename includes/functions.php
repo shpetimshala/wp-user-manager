@@ -480,6 +480,7 @@ function wpum_directory_results_amount_dropdown( $args = '' ) {
 
 	// Get options
 	$results_options = wpum_get_directory_amount_options();
+	$selected = isset( $_GET['amount'] ) ? $selected = $_GET['amount'] : false;
 
 	$output = "<select name='wpum-amount-dropdown' id='wpum-amount-dropdown' class='$class'>\n";
 
@@ -487,8 +488,11 @@ function wpum_directory_results_amount_dropdown( $args = '' ) {
 
 		$result_url = add_query_arg( array( 'amount' => $value ), get_permalink() );
 
-		$output .= "\t<option value='" . esc_url( $result_url ) . "'>$label</option>\n";
-		
+		if( $selected == $value ){
+			$output .= "\t<option value='" . esc_url( $result_url ) . "' selected='selected' >$label</option>\n";
+		} else {
+			$output .= "\t<option value='" . esc_url( $result_url ) . "'>$label</option>\n";
+		}
 	}
 
 	$output .= "</select>\n";
