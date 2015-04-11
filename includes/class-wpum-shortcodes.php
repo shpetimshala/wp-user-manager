@@ -475,18 +475,20 @@ class WPUM_Shortcodes {
 		$total_users  = $user_query->total_users;
 		$total_pages = ceil( $total_users / $number );
 
-		// Load the template
-		get_wpum_template( 'user-directory.php', array( 
-				'user_data'    => $user_query->get_results(),
-				'users_found'  => $user_query->get_total(),
-				'total_users'  => $total_users,
-				'total_pages'  => $total_pages,
-				'directory_id' => $directory_id,
-				'paged'        => $paged,
-				'search_form'  => wpum_directory_has_search_form( $directory_id ),
-				'template'     => wpum_directory_has_custom_template( $directory_id )
-			) 
+		// Merge directory details in array
+		$directory_args = array(
+			'user_data'    => $user_query->get_results(),
+			'users_found'  => $user_query->get_total(),
+			'total_users'  => $total_users,
+			'total_pages'  => $total_pages,
+			'directory_id' => $directory_id,
+			'paged'        => $paged,
+			'search_form'  => wpum_directory_has_search_form( $directory_id ),
+			'template'     => wpum_directory_has_custom_template( $directory_id )
 		);
+
+		// Load the template
+		get_wpum_template( 'user-directory.php', array( 'directory_args' => $directory_args ) );
 
 		$output = ob_get_clean();
 

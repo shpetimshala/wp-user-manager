@@ -62,51 +62,39 @@ add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 
  * 
  * @since 1.0.0
  * @access public
- * @param int $directory_id directory id number.
- * @param string $users_found amount of users found.
- * @param string $total_users amount of users for pagination.
- * @param string $total_pages amount of pages for pagination.
- * @param bool $page whether its paged or not.
- * @param bool $search_form whether the search form is enabled.
- * @param bool|string $template name if selected - false if default.
- * @param array $user_data contains found users.
+ * @param array $directory_args directory arguments.
+ * @see
  * @return void
  */
-function wpum_directory_topbar( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
+function wpum_directory_topbar( $directory_args ) {
 
 	get_wpum_template( "directory/top-bar.php", array( 
-		'users_found'  => $users_found,
-		'search_form'  => $search_form,
-		'directory_id' => $directory_id
+		'users_found'  => $directory_args['users_found'],
+		'search_form'  => $directory_args['search_form'],
+		'directory_id' => $directory_args['directory_id']
 	) );
 
 }
-add_action( 'wpum_before_user_directory', 'wpum_directory_topbar', 10, 8 );
+add_action( 'wpum_before_user_directory', 'wpum_directory_topbar' );
 
 /**
  * Adds pagination at the bottom of the user directory.
  * 
  * @since 1.0.0
  * @access public
- * @param int $directory_id directory id number.
- * @param string $users_found amount of users found.
- * @param string $total_users amount of users for pagination.
- * @param string $total_pages amount of pages for pagination.
- * @param bool $page whether its paged or not.
- * @param bool $search_form whether the search form is enabled.
- * @param bool|string $template name if selected - false if default.
- * @param array $user_data contains found users.
+ * @param array $directory_args directory arguments.
+ * @see
  * @return void
  */
-function wpum_user_directory_pagination( $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data ) {
+function wpum_user_directory_pagination( $directory_args ) {
 
 	echo '<div class="wpum-directory-pagination">';
 
 	echo paginate_links( array(
 				'base'      => get_pagenum_link(1) . '%_%',
 				'format'    => '?paged=%#%',
-				'current'   => $paged,  
-				'total'     => $total_pages,
+				'current'   => $directory_args['paged'],  
+				'total'     => $directory_args['total_pages'],
 				'prev_text' => __('Previous page'),
 				'next_text' => __('Next page')
 			) 
@@ -115,4 +103,4 @@ function wpum_user_directory_pagination( $directory_id, $users_found, $total_use
 	echo '</div>';
 
 }
-add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination', 10, 8 );
+add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination' );

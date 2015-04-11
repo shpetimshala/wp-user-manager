@@ -9,16 +9,9 @@
  */
 
 // Return different template if set.
-if( $template ) {
-	get_wpum_template( "user-directory-{$template}.php", array( 
-			'user_data'    => $user_data,
-			'users_found'  => $users_found,
-			'total_users'  => $total_users,
-			'total_pages'  => $total_pages,
-			'directory_id' => $directory_id,
-			'paged'        => $paged,
-			'search_form'  => $search_for,
-			'template'     => $template
+if( $directory_args['template'] ) {
+	get_wpum_template( "user-directory-{$directory_args['template']}.php", array( 
+			'directory_args' => $directory_args
 		) 
 	);
 	return;
@@ -27,16 +20,16 @@ if( $template ) {
 ?>
 
 <!-- start directory -->
-<div id="wpum-user-directory-<?php echo $directory_id; ?>" class="wpum-user-directory directory-<?php echo $directory_id; ?>">
+<div id="wpum-user-directory-<?php echo $directory_args['directory_id']; ?>" class="wpum-user-directory directory-<?php echo $directory_args['directory_id']; ?>">
 
 	<!-- Start Users list -->
-	<?php if ( ! empty( $user_data ) ) {
+	<?php if ( ! empty( $directory_args['user_data'] ) ) {
 
-		do_action( 'wpum_before_user_directory', $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data );
+		do_action( 'wpum_before_user_directory', $directory_args );
 
 		echo '<ul class="wpum-user-listings">';
 
-		foreach ( $user_data as $user ) {
+		foreach ( $directory_args['user_data'] as $user ) {
 
 			// Load single-user.php template to display each user individually
 			get_wpum_template( "directory/single-user.php", array( 'user' => $user ) );
@@ -45,7 +38,7 @@ if( $template ) {
 
 		echo "</ul>";
 
-		do_action( 'wpum_after_user_directory', $directory_id, $users_found, $total_users, $total_pages, $paged, $search_form, $template, $user_data );
+		do_action( 'wpum_after_user_directory', $directory_args );
 
 	} else {
 	
