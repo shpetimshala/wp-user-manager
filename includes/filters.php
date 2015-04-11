@@ -224,6 +224,10 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 	// Get selected sorting method
 	$sorting_method = get_post_meta( $directory_id, 'default_sorting_method', true );
 
+	// Check whether a sorting method is set from frontend
+	if( isset( $_GET['sort'] ) && array_key_exists( $_GET['sort'] , wpum_get_directory_sorting_methods() ) )
+		$sorting_method = $_GET['sort'];
+
 	switch ( $sorting_method ) {
 		case 'user_nicename':
 			$args['orderby'] = 'user_nicename';
@@ -239,6 +243,7 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 			$args['meta_key'] = 'first_name';
 			$args['orderby'] = 'meta_value';
 			$args['order'] = 'ASC';
+			break;
 		case 'last_name':
 			$args['meta_key'] = 'last_name';
 			$args['orderby'] = 'meta_value';
