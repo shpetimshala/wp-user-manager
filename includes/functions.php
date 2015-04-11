@@ -434,6 +434,7 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 	}
 
 	$sorting_methods = apply_filters( 'wpum_sort_dropdown_methods', $sorting_methods, $args );
+	$selected = isset( $_GET['sort'] ) ? $selected = $_GET['sort'] : $selected = $args['selected'];
 
 	$output = "<select name='wpum-dropdown' id='wpum-dropdown' class='$class'>\n";
 
@@ -441,7 +442,7 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 
 		$method_url = add_query_arg( array( 'sort' => $value ) ,get_permalink() );
 
-		if( $args['selected'] == $value || ( isset( $_GET['sort'] ) && $_GET['sort'] == $value ) ) {
+		if( $selected == $value ) {
 			$output .= "\t<option value='" . esc_url( $method_url ) . "' selected='selected' >$label</option>\n";
 		} else {
 			$output .= "\t<option value='" . esc_url( $method_url ) . "'>$label</option>\n";
