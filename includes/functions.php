@@ -416,10 +416,14 @@ function wpum_directory_sort_dropdown( $args = '' ) {
 
 	$output = "<select name='wpum-dropdown' id='wpum-dropdown' class='$class'>\n";
 
-	$selected = '';
-
 	foreach ($sorting_methods as $value => $label ) {
-		$output .= "\t<option value='" . esc_attr( $value ) . "'$selected>$label</option>\n";
+
+		if( $args['selected'] == $value ) {
+			$output .= "\t<option value='" . esc_attr( $value ) . "' selected='selected' >$label</option>\n";
+		} else {
+			$output .= "\t<option value='" . esc_attr( $value ) . "'>$label</option>\n";
+		}
+		
 	}
 
 	$output .= "</select>\n";

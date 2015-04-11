@@ -1090,6 +1090,21 @@ function wpum_directory_get_excluded_users( $directory_id = 0 ) {
 }
 
 /**
+ * Grabs the currently selected sorting method for the directory
+ * 
+ * @since 1.0.0
+ * @param int $directory_id the ID of a directory custom post type, post.
+ * @return string|bool sorting method or false if no ids are set.
+ */
+function wpum_directory_get_sorting_method( $directory_id = 0 ) {
+
+	$method = get_post_meta( $directory_id, 'default_sorting_method', true );
+
+	return $method;
+
+}
+
+/**
  * Produces the list of sorting methods.
  * Developers can use the filter wpum_get_directory_sorting_methods
  * to add new methods.
@@ -1100,14 +1115,12 @@ function wpum_directory_get_excluded_users( $directory_id = 0 ) {
 function wpum_get_directory_sorting_methods() {
 
 	// Let's add the default sorting methods
-	// @see https://codex.wordpress.org/Class_Reference/WP_User_Query#Order_.26_Orderby_Parameters
 	$methods = array(
-		'id'            => __('Order by user id'),
-		'display_name'  => __('Order by user display name'),
-		'user_login'    => __('Order by user login'),
-		'user_nicename' => __('Order by user nicename'),
+		'user_nicename' => __('By nickname'),
 		'newest'        => __('Newest users first'),
-		'oldest'        => __('Oldest users first')
+		'oldest'        => __('Oldest users first'),
+		'name'          => __('First name'),
+		'last_name'     => __('Last Name')
 	);
 
 	return apply_filters( 'wpum_get_directory_sorting_methods', $methods );	

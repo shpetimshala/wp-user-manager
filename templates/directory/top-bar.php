@@ -8,6 +8,9 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
+$default_sorting = wpum_directory_get_sorting_method( $directory_id );
+
 ?>
 
 <div class="wpum-directory-top-bar">
@@ -20,7 +23,7 @@
 
 	<div class="wpum_one_third">
 
-		<p><?php _e( 'Sort by:' ); ?><?php echo wpum_directory_sort_dropdown(); ?></p>
+		<p><?php _e( 'Sort by:' ); ?> <?php echo wpum_directory_sort_dropdown( "selected=$default_sorting" ); ?></p>
 
 	</div>
 

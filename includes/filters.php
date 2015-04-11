@@ -225,15 +225,6 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 	$sorting_method = get_post_meta( $directory_id, 'default_sorting_method', true );
 
 	switch ( $sorting_method ) {
-		case 'id':
-			$args['orderby'] = 'ID';
-			break;
-		case 'user_login':
-			$args['orderby'] = 'user_login';
-			break;
-		case 'display_name':
-			$args['orderby'] = 'display_name';
-			break;
 		case 'user_nicename':
 			$args['orderby'] = 'user_nicename';
 			break;
@@ -243,6 +234,15 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 			break;
 		case 'oldest':
 			$args['orderby'] = 'registered';
+			break;
+		case 'name':
+			$args['meta_key'] = 'first_name';
+			$args['orderby'] = 'meta_value';
+			$args['order'] = 'ASC';
+		case 'last_name':
+			$args['meta_key'] = 'last_name';
+			$args['orderby'] = 'meta_value';
+			$args['order'] = 'ASC';
 			break;
 	}
 
