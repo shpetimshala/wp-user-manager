@@ -20,7 +20,7 @@
 
 	<div class="wpum_one_third">
 
-		<p><?php _e( 'Sort by:' ); ?></p>
+		<p><?php _e( 'Sort by:' ); ?><?php echo wpum_directory_sort_dropdown(); ?></p>
 
 	</div>
 

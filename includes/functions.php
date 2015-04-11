@@ -391,19 +391,38 @@ endif;
 
 if ( ! function_exists( 'wpum_directory_sort_dropdown' ) ) :
 /**
- * Builds the option for the frontend dropdown users sorter.
+ * Display or retrieve the HTML dropdown list of sorting options.
  * 
  * @since 1.0.0
  * @access public
- * @return void
+ * @param string|array $args Optional. Override default arguments.
+ * @return string HTML content only if 'echo' argument is 0.
  */
-function wpum_directory_sort_dropdown( $user_data, $hyperlink = true ) {
+function wpum_directory_sort_dropdown( $args = '' ) {
 
-	$output = $user_data->display_name;
+	$defaults = array(
+		'exclude'  => '',
+		'selected' => '',
+		'class' => 'wpum-dropdown-sort',
+	);
 
-	if( $hyperlink ) {
-		$output = '<a href="'. wpum_get_user_profile_url( $user_data ) .'" class="wpum-profile-link">' . $user_data->display_name . '</a>';
+	$args = wp_parse_args( $args, $defaults );
+
+	// Get css class
+	$class = $args['class'];
+
+	// Get options
+	$sorting_methods = wpum_get_directory_sorting_methods();
+
+	$output = "<select name='wpum-dropdown' id='wpum-dropdown' class='$class'>\n";
+
+	$selected = '';
+
+	foreach ($sorting_methods as $value => $label ) {
+		$output .= "\t<option value='" . esc_attr( $value ) . "'$selected>$label</option>\n";
 	}
+
+	$output .= "</select>\n";
 
 	return $output;
 
