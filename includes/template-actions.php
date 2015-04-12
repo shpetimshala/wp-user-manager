@@ -92,7 +92,7 @@ function wpum_user_directory_pagination( $directory_args ) {
 
 	echo paginate_links( array(
 				'base'      => get_pagenum_link(1) . '%_%',
-				'format'    => isset( $_GET['sort'] ) ? '&paged=%#%' : '?paged=%#%',
+				'format'    => isset( $_GET['sort'] ) || isset( $_GET['amount'] ) ? '&paged=%#%' : '?paged=%#%',
 				'current'   => $directory_args['paged'],  
 				'total'     => $directory_args['total_pages'],
 				'prev_text' => __('Previous page'),

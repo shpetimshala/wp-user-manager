@@ -480,7 +480,7 @@ function wpum_directory_results_amount_dropdown( $args = '' ) {
 
 	// Get options
 	$results_options = wpum_get_directory_amount_options();
-	$selected = isset( $_GET['amount'] ) ? $selected = $_GET['amount'] : false;
+	$selected = isset( $_GET['amount'] ) ? $_GET['amount'] : false;
 
 	$output = "<select name='wpum-amount-dropdown' id='wpum-amount-dropdown' class='$class'>\n";
 
