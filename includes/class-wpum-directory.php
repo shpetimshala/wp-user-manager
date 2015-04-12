@@ -127,13 +127,14 @@ class WPUM_Directory {
 					'type'    => 'multiselect',
 					'options' => wpum_get_roles( true )
 				),
+				/* Search form feature under construction.
 				array(
 					'id'   => 'display_search_form',
 					'name' => __( 'Display search form' ),
 					'desc' => __( 'Enable this option to display the user search form' ),
 					'type' => 'checkbox',
 					'std'  => 1
-				),
+				),*/
 				array(
 					'id'   => 'excluded_ids',
 					'name' => __( 'Exclude users' ),
