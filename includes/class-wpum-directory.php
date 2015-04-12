@@ -213,7 +213,7 @@ class WPUM_Directory {
 		unset( $columns['date'], $columns['author'] );
 
 		$columns["roles"]             = __( 'User Roles' );
-		$columns["search_form"]       = __( 'Display search form' );
+		//$columns["search_form"]       = __( 'Display search form' ); Under construction
 		$columns["profiles_per_page"] = __( 'Profiles per page' );
 		$columns["shortcode"]         = __( 'Shortcode' );
 
