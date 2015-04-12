@@ -23,7 +23,6 @@ function wpum_admin_messages() {
 	global $wpum_options;
 	$screen = get_current_screen();
 
-	/*
 	if (  isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true && !wpum_get_option('custom_passwords') && wpum_get_option('password_strength') ) {
 		add_settings_error( 'wpum-notices', 'custom-passwords-disabled', __( 'You have enabled the "Minimum Password Strength" option, the "Users custom passwords" is currently disabled and must be enabled for custom passwords to work.', 'wpum' ), 'error' );
 	}
@@ -34,7 +33,7 @@ function wpum_admin_messages() {
 
 	if (  isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true && !wpum_get_option('custom_passwords') && wpum_get_option('login_after_registration') ) {
 		add_settings_error( 'wpum-notices', 'custom-passwords-disabled', __( 'Error: the option "Login after registration" can only work when the option "Users custom passwords" is enabled too.', 'wpum' ), 'error' );
-	}*/
+	}
 
 	if (  isset( $_GET['emails-updated'] ) && $_GET['emails-updated'] == true ) {
 		add_settings_error( 'wpum-notices', 'emails-updated', __( 'Email successfully updated.', 'wpum' ), 'updated' );	
