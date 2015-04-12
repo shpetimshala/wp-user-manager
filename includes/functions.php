@@ -137,7 +137,8 @@ function wp_new_user_notification( $user_id, $plaintext_pass ) {
 
 		$message = wpautop( $register_email['message'] );
 		$message = wpum_do_email_tags( $message, $user_id, $plaintext_pass );
-
+		
+		WPUM()->emails->__set( 'heading', __( 'Your account', 'wpum' ) );
 		WPUM()->emails->send( $user->user_email, $register_email['subject'], $message );
 
 	}

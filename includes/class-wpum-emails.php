@@ -156,6 +156,7 @@ class WPUM_Emails {
 	 */
 	public function get_templates() {
 		$templates = array(
+			'default' => __( 'Default template', 'wpum' ),
 			'none'    => __( 'No template, plain text only', 'wpum' )
 		);
 

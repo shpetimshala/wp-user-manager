@@ -377,6 +377,7 @@ class WPUM_Form_Password extends WPUM_Form {
 			$message = wpautop( $password_email['message'] );
 			$message = wpum_do_email_tags( $message, $user_data->ID, $key );
 
+			WPUM()->emails->__set( 'heading', __( 'Password Recovery', 'wpum' ) );
 			WPUM()->emails->send( $user_email, $password_email['subject'], $message );
 
 			self::add_confirmation( __('Check your e-mail for the confirmation link.') );
