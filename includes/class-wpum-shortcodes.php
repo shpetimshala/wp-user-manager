@@ -472,6 +472,11 @@ class WPUM_Shortcodes {
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Build Pagination Count
+		// Modify $number var if a custom amount is set from the frontend
+		// This updates the pagination too.
+		if( isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) )
+			$number = $_GET['amount'];
+
 		$total_users  = $user_query->total_users;
 		$total_pages = ceil( $total_users / $number );
 
