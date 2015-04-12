@@ -14,17 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Get and include template files.
  *
- * @param mixed $template_name
- * @param array $args (default: array())
- * @param string $template_path (default: '')
- * @param string $default_path (default: '')
+ * @param mixed   $template_name
+ * @param array   $args          (default: array())
+ * @param string  $template_path (default: '')
+ * @param string  $default_path  (default: '')
  * @return void
  */
 function get_wpum_template( $template_name, $args = array(), $template_path = 'wpum', $default_path = '' ) {
 	if ( $args && is_array( $args ) ) {
 		extract( $args );
 	}
-	include( locate_wpum_template( $template_name, $template_path, $default_path ) );
+	include locate_wpum_template( $template_name, $template_path, $default_path );
 }
 
 /**
@@ -32,13 +32,13 @@ function get_wpum_template( $template_name, $args = array(), $template_path = 'w
  *
  * This is the load order:
  *
- *		yourtheme		/	$template_path	/	$template_name
- *		yourtheme		/	$template_name
- *		$default_path	/	$template_name
+ *  yourtheme  / $template_path / $template_name
+ *  yourtheme  / $template_name
+ *  $default_path / $template_name
  *
- * @param string $template_name
- * @param string $template_path (default: 'wpum')
- * @param string|bool $default_path (default: '') False to not load a default
+ * @param string  $template_name
+ * @param string  $template_path (default: 'wpum')
+ * @param string|bool $default_path  (default: '') False to not load a default
  * @return string
  */
 function locate_wpum_template( $template_name, $template_path = 'wpum', $default_path = '' ) {
@@ -65,10 +65,10 @@ function locate_wpum_template( $template_name, $template_path = 'wpum', $default
 /**
  * Get template part (for templates in loops).
  *
- * @param string $slug
- * @param string $name (default: '')
- * @param string $template_path (default: 'wpum')
- * @param string|bool $default_path (default: '') False to not load a default
+ * @param string  $slug
+ * @param string  $name          (default: '')
+ * @param string  $template_path (default: 'wpum')
+ * @param string|bool $default_path  (default: '') False to not load a default
  */
 function get_wpum_template_part( $slug, $name = '', $template_path = 'wpum', $default_path = '' ) {
 	if ( ! $template_path )

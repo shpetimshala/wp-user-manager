@@ -10,12 +10,12 @@
  */
 
 // Display error message if no user has been found.
-if( !is_object( $user_data ) ) {
-	$args = array( 
-				'id'   => 'wpum-profile-not-found', 
-				'type' => 'error', 
-				'text' => __( 'User not found.' )
-			);
+if ( !is_object( $user_data ) ) {
+	$args = array(
+		'id'   => 'wpum-profile-not-found',
+		'type' => 'error',
+		'text' => __( 'User not found.' )
+	);
 	wpum_message( $args );
 	return;
 }

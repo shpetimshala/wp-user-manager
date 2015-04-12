@@ -16,13 +16,13 @@ $users = wpum_get_recent_users( $amount );
 
 <div class="wpum-recent-users">
 
-<?php if( $users ) : ?>
+<?php if ( $users ) : ?>
 
 	<ul class="wpum-users-list">
 		<?php foreach ( $users as $user ) : ?>
-			
+
 			<li>
-			<?php if( $link_to_profile == 'yes' ) : ?>
+			<?php if ( $link_to_profile == 'yes' ) : ?>
 				<a href="<?php echo wpum_get_user_profile_url( $user ); ?>"><?php echo $user->display_name; ?></a>
 			<?php else : ?>
 				<?php echo $user->display_name; ?>
@@ -33,16 +33,16 @@ $users = wpum_get_recent_users( $amount );
 		<?php endforeach; ?>
 	</ul>
 
-<?php else : 
+<?php else :
 
-	$args = array( 
-				'id'   => 'wpum-users-not-found', 
-				'type' => 'error', 
-				'text' => __( 'No user has been found.' )
-			);
+	$args = array(
+		'id'   => 'wpum-users-not-found',
+		'type' => 'error',
+		'text' => __( 'No user has been found.' )
+	);
 	wpum_message( $args );
 
-	endif; 
+endif;
 
 ?>
 

@@ -10,15 +10,15 @@
  */
 
 // Return different template if set.
-if( $template ) {
-	get_wpum_template( "profile-card-{$template}.php", array( 
+if ( $template ) {
+	get_wpum_template( "profile-card-{$template}.php", array(
 			'user_data'       => $user_data,
 			'template'        => $template,
 			'wrapper_id'      => $wrapper_id,
 			'link_to_profile' => $link_to_profile,
 			'display_buttons' => $display_buttons,
 			'atts'            => $atts
-		) 
+		)
 	);
 	return;
 }
@@ -31,18 +31,18 @@ if( $template ) {
 	</div>
 
 	<div class="wpum-card-details">
-		
+
 		<h4 class="wpum-card-name"><?php echo wpum_profile_display_name( $user_data, $link_to_profile ); ?></h4>
 
 		<?php echo wpautop( $user_data->user_description ); ?>
 
-		<?php if( $display_buttons ) : ?>
+		<?php if ( $display_buttons ) : ?>
 
-			<?php if( $link_to_profile ) : ?>
-				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>" class="wpum-card-button"><?php _e('View Profile');?></a>
+			<?php if ( $link_to_profile ) : ?>
+				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>" class="wpum-card-button"><?php _e( 'View Profile' );?></a>
 			<?php endif; ?>
 
-			<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-card-button"><?php _e('Send Email');?></a>
+			<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-card-button"><?php _e( 'Send Email' );?></a>
 
 		<?php endif; ?>
 

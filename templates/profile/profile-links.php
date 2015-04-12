@@ -10,18 +10,18 @@
  */
 ?>
 <ul class="wpum-user-links">
-	
+
 	<?php do_action( 'wpum_top_user_profile_links',  $user_data ); ?>
 
 	<li class="wpum-profile-link send-email">
-		<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e('Send Email');?></a>
+		<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e( 'Send Email' );?></a>
 	</li>
-	<?php if( !empty( $user_data->user_url ) ) : ?>
+	<?php if ( !empty( $user_data->user_url ) ) : ?>
 	<li class="wpum-profile-link view-website">
-		<a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e('Visit website');?></a>
+		<a href="<?php echo esc_url( $user_data->user_url );?>" class="wpum-button" rel="nofollow" target="_blank"><?php _e( 'Visit website' );?></a>
 	</li>
 	<?php endif; ?>
 
 	<?php do_action( 'wpum_bottom_user_profile_links',  $user_data ); ?>
-	
+
 </ul>

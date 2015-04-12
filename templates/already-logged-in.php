@@ -21,7 +21,7 @@ get_currentuserinfo();
 
 	<?php do_action( 'wpum_before_inside_already_loggedin_template', $current_user, $args ); ?>
 
-	<p><?php printf( __('Your are currently logged in as %s. <a href="%s">Logout &raquo;</a>'), $current_user->display_name, wpum_logout_url() );?></p>
+	<p><?php printf( __( 'Your are currently logged in as %s. <a href="%s">Logout &raquo;</a>' ), $current_user->display_name, wpum_logout_url() );?></p>
 
 	<?php do_action( 'wpum_after_inside_already_loggedin_template', $current_user, $args ); ?>
 

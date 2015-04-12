@@ -35,7 +35,7 @@
 
 		<p>
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="submit" id="submit_wpum_register" name="submit_wpum_register" class="button" value="<?php _e('Register'); ?>" />
+			<input type="submit" id="submit_wpum_register" name="submit_wpum_register" class="button" value="<?php _e( 'Register' ); ?>" />
 		</p>
 
 	</form>

@@ -13,13 +13,13 @@
 
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
-	<?php if( isset($_GET['updated']) && $_GET['updated'] == 'success' ) : ?>
+	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) : ?>
 		<p class="wpum-message wpum-success wpum-profile-updated-message">
 			<?php echo apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) ); ?>
 		</p>
 	<?php endif; ?>
 
-	<?php if( isset($_GET['updated']) && $_GET['updated'] == 'error' ) : ?>
+	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) : ?>
 		<p class="wpum-message wpum-error wpum-profile-updated-message">
 			<?php echo apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) ); ?>
 		</p>
@@ -51,7 +51,7 @@
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
 			<input type="hidden" name="wpum_user_id" id="wpum_user_id" value="<?php echo $user_id; ?>" />
-			<input type="submit" id="submit_wpum_profile" name="submit_wpum_profile" class="button" value="<?php _e('Update Profile'); ?>" />
+			<input type="submit" id="submit_wpum_profile" name="submit_wpum_profile" class="button" value="<?php _e( 'Update Profile' ); ?>" />
 		</p>
 
 	</form>

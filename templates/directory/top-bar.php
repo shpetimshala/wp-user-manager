@@ -14,7 +14,7 @@ $default_sorting = wpum_directory_get_sorting_method( $directory_id );
 ?>
 
 <div class="wpum-directory-top-bar">
-	
+
 	<div class="wpum_one_third">
 
 		<?php echo sprintf( __( 'Found %s users.' ), $users_found ) ?>
@@ -23,14 +23,14 @@ $default_sorting = wpum_directory_get_sorting_method( $directory_id );
 
 	<div class="wpum_one_third wpum-align-center">
 
-		<?php if( wpum_directory_display_sorter( $directory_id ) ) : ?>
+		<?php if ( wpum_directory_display_sorter( $directory_id ) ) : ?>
 		<p><?php _e( 'Sort by:' ); ?> <?php echo wpum_directory_sort_dropdown( "selected=$default_sorting" ); ?></p>
 		<?php endif; ?>
 
 	</div>
 
 	<div class="wpum_one_third last wpum-align-right">
-		<?php if( wpum_directory_display_amount_sorter( $directory_id ) ) : ?>
+		<?php if ( wpum_directory_display_amount_sorter( $directory_id ) ) : ?>
 		<p><?php _e( 'Results per page:' ); ?> <?php echo wpum_directory_results_amount_dropdown(); ?></p>
 		<?php endif; ?>
 	</div>
