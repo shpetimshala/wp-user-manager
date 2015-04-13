@@ -186,35 +186,35 @@ function wpum_get_registered_settings() {
 				'login_page' => array(
 					'id'      => 'login_page',
 					'name'    => __( 'Login page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_login_form] shortcode.'),
+					'desc'    => __('Select the page where you have added the login shortcode.'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'password_recovery_page' => array(
 					'id'      => 'password_recovery_page',
 					'name'    => __( 'Password recovery page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_password_recovery] shortcode.'),
+					'desc'    => __('Select the page where you have added the password recovery shortcode.'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'registration_page' => array(
 					'id'      => 'registration_page',
 					'name'    => __( 'Registration page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_register] shortcode.'),
+					'desc'    => __('Select the page where you have added the registration shortcode.'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'account_page' => array(
 					'id'      => 'account_page',
 					'name'    => __( 'Account page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_account] shortcode.'),
+					'desc'    => __('Select the page where you have added the account shortcode.'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'profile_page' => array(
 					'id'      => 'profile_page',
 					'name'    => __( 'Profile page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the [wpum_profile] shortcode.'),
+					'desc'    => __('Select the page where you have added the profile shortcode.'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
