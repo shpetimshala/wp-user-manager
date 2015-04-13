@@ -362,4 +362,111 @@ ul.wpum-user-listings {
   background: #f9f9f9;
   border-bottom: 1px solid #e5e5e5; }
 
+.wpum-profile-form fieldset,
+.wpum-default-registration-form fieldset,
+.wpum-password-form fieldset {
+  margin: 0 0 1em 0;
+  padding: 0 0 1em 0;
+  line-height: 2em;
+  border: 0;
+  border-bottom: 1px solid #eee; }
+  .wpum-profile-form fieldset label,
+  .wpum-default-registration-form fieldset label,
+  .wpum-password-form fieldset label {
+    display: block;
+    margin: 0;
+    width: 29%;
+    float: left;
+    vertical-align: middle; }
+    .wpum-profile-form fieldset label small,
+    .wpum-default-registration-form fieldset label small,
+    .wpum-password-form fieldset label small {
+      opacity: .75;
+      font-size: 0.83em; }
+  .wpum-profile-form fieldset div.field,
+  .wpum-default-registration-form fieldset div.field,
+  .wpum-password-form fieldset div.field {
+    width: 70%;
+    float: right;
+    vertical-align: middle; }
+  .wpum-profile-form fieldset input.input-text, .wpum-profile-form fieldset input.input-email, .wpum-profile-form fieldset textarea, .wpum-profile-form fieldset select,
+  .wpum-default-registration-form fieldset input.input-text,
+  .wpum-default-registration-form fieldset input.input-email,
+  .wpum-default-registration-form fieldset textarea,
+  .wpum-default-registration-form fieldset select,
+  .wpum-password-form fieldset input.input-text,
+  .wpum-password-form fieldset input.input-email,
+  .wpum-password-form fieldset textarea,
+  .wpum-password-form fieldset select {
+    margin: 0;
+    vertical-align: middle;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */ }
+  .wpum-profile-form fieldset small.description,
+  .wpum-default-registration-form fieldset small.description,
+  .wpum-password-form fieldset small.description {
+    opacity: .75;
+    font-size: 0.83em;
+    margin: 1.2em 0 0 0;
+    display: block;
+    line-height: 1.2em; }
+
+.wpum-login-form form p.login-username,
+.wpum-login-form form p.login-password,
+.wpum-login-form form p.login-remember {
+  margin: 0 0 1em 0;
+  padding: 0 0 1em 0;
+  line-height: 2em;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  zoom: 1; }
+  .wpum-login-form form p.login-username:before, .wpum-login-form form p.login-username:after,
+  .wpum-login-form form p.login-password:before,
+  .wpum-login-form form p.login-password:after,
+  .wpum-login-form form p.login-remember:before,
+  .wpum-login-form form p.login-remember:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    visibility: hidden; }
+  .wpum-login-form form p.login-username:after,
+  .wpum-login-form form p.login-password:after,
+  .wpum-login-form form p.login-remember:after {
+    clear: both; }
+.wpum-login-form form label {
+  display: block;
+  margin: 0;
+  width: 29%;
+  float: left;
+  vertical-align: middle; }
+  .wpum-login-form form label small {
+    opacity: .75;
+    font-size: 0.83em; }
+.wpum-login-form form div.field {
+  width: 70%;
+  float: right;
+  vertical-align: middle; }
+.wpum-login-form form input[type=text], .wpum-login-form form input[type=email], .wpum-login-form form input[type=password], .wpum-login-form form textarea, .wpum-login-form form select {
+  margin: 0;
+  width: 70%;
+  float: right;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */ }
+.wpum-login-form form small.description {
+  opacity: .75;
+  font-size: 0.83em;
+  margin: 1.2em 0 0 0;
+  display: block;
+  line-height: 1.2em; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */
