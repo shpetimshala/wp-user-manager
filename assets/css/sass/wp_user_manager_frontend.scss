@@ -339,6 +339,15 @@ ul.wpum-user-listings {
 	padding: .5em 1em;
 	background: #f9f9f9;
 	border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+	a {
+		&.next {
+			float: right;
+		}
+		&.prev {
+			float: left;
+		}
+	}
 }
 
 /* Form elements */

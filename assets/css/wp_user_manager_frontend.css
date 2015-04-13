@@ -346,7 +346,12 @@ ul.wpum-user-listings {
 .wpum-directory-pagination {
   padding: .5em 1em;
   background: #f9f9f9;
-  border-bottom: 1px solid #e5e5e5; }
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center; }
+  .wpum-directory-pagination a.next {
+    float: right; }
+  .wpum-directory-pagination a.prev {
+    float: left; }
 
 /* Form elements */
 .wpum-profile-form fieldset,
