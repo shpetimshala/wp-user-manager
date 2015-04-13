@@ -181,3 +181,18 @@ function wpum_profile_permalink() {
 
 }
 add_action( 'wpum_profile_permalinks', 'wpum_profile_permalink' );
+
+/**
+ * Runs pages setup
+ *
+ * @since 1.0.0
+ * @return void
+*/
+function wpum_run_pages_setup() {
+
+	if( is_admin() && isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] == 'install_pages' ) :
+		wpum_generate_pages( true );
+	endif;
+
+}
+add_action( 'admin_init', 'wpum_run_pages_setup' );

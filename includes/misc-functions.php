@@ -1180,3 +1180,107 @@ function wpum_directory_display_amount_sorter( $directory_id = 0 ) {
 	return false;
 
 }
+
+/**
+ * Generates core pages and updates settings panel with the newly created pages.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_generate_pages( $redirect = false ) {
+
+	// Generate login page
+	if ( ! wpum_get_option( 'login_page' ) ) {
+
+		$login = wp_insert_post(
+			array(
+				'post_title'     => __( 'Login' ),
+				'post_content'   => '[wpum_login_form]',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'page',
+				'comment_status' => 'closed'
+			)
+		);
+
+		wpum_update_option( 'login_page', $login );
+
+	}
+
+	// Generate password recovery page
+	if ( ! wpum_get_option( 'password_recovery_page' ) ) {
+
+		$psw = wp_insert_post(
+			array(
+				'post_title'     => __( 'Password Reset' ),
+				'post_content'   => '[wpum_password_recovery]',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'page',
+				'comment_status' => 'closed'
+			)
+		);
+
+		wpum_update_option( 'password_recovery_page', $psw );
+
+	}
+
+	// Generate password recovery page
+	if ( ! wpum_get_option( 'registration_page' ) ) {
+
+		$register = wp_insert_post(
+			array(
+				'post_title'     => __( 'Register' ),
+				'post_content'   => '[wpum_register]',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'page',
+				'comment_status' => 'closed'
+			)
+		);
+
+		wpum_update_option( 'registration_page', $register );
+
+	}
+
+	// Generate account page
+	if ( ! wpum_get_option( 'account_page' ) ) {
+
+		$account = wp_insert_post(
+			array(
+				'post_title'     => __( 'Account' ),
+				'post_content'   => '[wpum_account]',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'page',
+				'comment_status' => 'closed'
+			)
+		);
+
+		wpum_update_option( 'account_page', $account );
+
+	}
+
+	// Generate password recovery page
+	if ( ! wpum_get_option( 'profile_page' ) ) {
+
+		$profile = wp_insert_post(
+			array(
+				'post_title'     => __( 'Profile' ),
+				'post_content'   => '[wpum_profile]',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'page',
+				'comment_status' => 'closed'
+			)
+		);
+
+		wpum_update_option( 'profile_page', $profile );
+
+	}
+
+	if ( $redirect ) {
+		wp_redirect( admin_url( 'users.php?page=wpum-settings&tab=general&setup_done=true' ) );
+		exit;
+	}
+}
