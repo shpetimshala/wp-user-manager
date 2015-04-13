@@ -1213,7 +1213,7 @@ function wpum_generate_pages( $redirect = false ) {
 		$psw = wp_insert_post(
 			array(
 				'post_title'     => __( 'Password Reset' ),
-				'post_content'   => '[wpum_password_recovery]',
+				'post_content'   => '[wpum_password_recovery form_id="" login_link="yes" psw_link="no" register_link="yes" ]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
 				'post_type'      => 'page',
@@ -1231,7 +1231,7 @@ function wpum_generate_pages( $redirect = false ) {
 		$register = wp_insert_post(
 			array(
 				'post_title'     => __( 'Register' ),
-				'post_content'   => '[wpum_register]',
+				'post_content'   => '[wpum_register form_id="" login_link="yes" psw_link="yes" register_link="no" ]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
 				'post_type'      => 'page',
