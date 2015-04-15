@@ -41,10 +41,45 @@ class WPUM_Recently_Registered_Users extends WPH_Widget {
 				'std'    => __( 'Recent Users' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
+			array(
+				'name'   => __( 'Amount' ),
+				'desc'   => __('Enter the amount of users you wish to display.'),
+				'id'     => 'amount',
+				'type'   => 'text',
+				'class'  => 'widefat',
+				'std'    => '10',
+				'filter' => 'strip_tags|esc_attr'
+			),
 		);
 
 		// create widget
 		$this->create_widget( $args );
+
+	}
+
+	/**
+	 * Display widget content.
+	 *
+	 * @access private
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function widget( $args, $instance ) {
+
+		ob_start();
+
+		echo $args['before_widget'];
+		echo $args['before_title'];
+		echo $instance['title'];
+		echo $args['after_title'];
+
+		get_wpum_template( 'recently-registered.php', array( 'amount' => $instance['amount'], 'link_to_profile' => true ) );
+
+		echo $args['after_widget'];
+
+		$output = ob_get_clean();
+
+		echo $output;
 
 	}
 
