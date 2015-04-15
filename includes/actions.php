@@ -92,3 +92,15 @@ function wpum_show_user_id_column_content( $value, $column_name, $user_id ) {
     return $value;
 }
 add_action( 'manage_users_custom_column',  'wpum_show_user_id_column_content', 10, 3 );
+
+/**
+ * Register widgets
+ * 
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_register_widgets() {
+	register_widget( 'WPUM_Recently_Registered_Users' );
+}
+add_action( 'widgets_init', 'wpum_register_widgets', 1 );
