@@ -243,6 +243,8 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/profile-actions.php';
 		// Load Profiles template system
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/profile-tabs.php';
+		// Load widgets helper class
+		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
 
 	}
 
