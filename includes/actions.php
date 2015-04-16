@@ -104,5 +104,6 @@ function wpum_register_widgets() {
 	register_widget( 'WPUM_Recently_Registered_Users' );
 	register_widget( 'WPUM_Password_Recovery' );
 	register_widget( 'WPUM_Registration_Form_Widget' );
+	register_widget( 'WPUM_Login_Form_Widget' );
 }
 add_action( 'widgets_init', 'wpum_register_widgets', 1 );
