@@ -49,10 +49,6 @@ class WPUM_Form_Password extends WPUM_Form {
 	 */
 	public static function get_password_fields() {
 
-		if ( self::$fields ) {
-			return;
-		}
-
 		self::$fields = apply_filters( 'wpum_password_fields', array(
 			'user' => array(
 				'username_email' => array(
@@ -516,8 +512,8 @@ class WPUM_Form_Password extends WPUM_Form {
 				array(
 					'atts'            => $atts,
 					'form'            => self::$form_name,
-					'user_fields'     => self::get_fields( 'user' ),
-					'password_fields' => self::get_fields( 'password' ),
+					'user_fields'     => self::get_fields( 'user', __CLASS__ ),
+					'password_fields' => self::get_fields( 'password', __CLASS__ ),
 				)
 			);
 		endif;

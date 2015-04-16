@@ -175,10 +175,6 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function get_registration_fields() {
 
-		if ( self::$fields ) {
-			return;
-		}
-
 		self::$fields = array(
 			'register' => self::get_sorted_registration_fields()
 		);

@@ -305,10 +305,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function get_profile_fields() {
 
-		if ( self::$fields ) {
-			return;
-		}
-
 		self::$fields = apply_filters( 'wpum_profile_fields', array(
 			'profile' => self::get_sorted_profile_fields()
 		) );
