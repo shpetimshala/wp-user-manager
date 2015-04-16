@@ -502,3 +502,19 @@ if ( ! function_exists( 'wpum_directory_results_amount_dropdown' ) ) :
 
 	}
 endif;
+
+if ( ! function_exists( 'wpum_current_user_overview' ) ) :
+	/**
+	 * Display overview of the current user profile.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @return void.
+	 */
+	function wpum_current_user_overview() {
+
+		$current_user = wp_get_current_user();
+		get_wpum_template( 'user-overview.php', array( 'current_user' => $current_user ) );
+
+	}
+endif;

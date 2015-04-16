@@ -447,3 +447,17 @@ ul.wpum-user-listings {
 	}
 }
 
+/* profile overview */
+
+.wpum-user-overview {
+	.user-content {
+		vertical-align: middle;
+		ul {
+			margin:0px 0px;
+			li {
+				display: inline-block;
+				margin-right: 5px;
+			}
+		}
+	}
+}

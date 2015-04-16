@@ -70,6 +70,14 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
+			array(
+				'name'   => __( 'Display profile overview' ),
+				'desc'   => __('If enabled, once logged in, an overview of the current user profile will appear.'),
+				'id'     => 'current_profile',
+				'type'   =>'checkbox',
+				'std'    => 1,
+				'filter' => 'strip_tags|esc_attr',
+			),
 		);
 
 		// create widget
@@ -111,7 +119,11 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 		if( $instance['login_link'] )
 			$settings['login_link'] = 'yes';
 
-		echo wpum_login_form( $settings );
+		if( is_user_logged_in() && $instance['current_profile'] ) :
+			echo wpum_current_user_overview();
+		else :
+			echo wpum_login_form( $settings );
+		endif;
 
 		echo $args['after_widget'];
 

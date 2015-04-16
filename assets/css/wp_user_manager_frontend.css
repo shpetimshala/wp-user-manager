@@ -461,4 +461,13 @@ ul.wpum-user-listings {
   display: block;
   line-height: 1.2em; }
 
+/* profile overview */
+.wpum-user-overview .user-content {
+  vertical-align: middle; }
+  .wpum-user-overview .user-content ul {
+    margin: 0px 0px; }
+    .wpum-user-overview .user-content ul li {
+      display: inline-block;
+      margin-right: 5px; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */
