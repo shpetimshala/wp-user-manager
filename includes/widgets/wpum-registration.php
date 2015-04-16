@@ -1,6 +1,6 @@
 <?php
 /**
- * Password Recovery Form Widget.
+ * Registration Form Widget.
  *
  * @package     wp-user-manager
  * @copyright   Copyright (c) 2015, Alessandro Tesoro
@@ -12,11 +12,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * WPUM_Password_Recovery Class
+ * WPUM_Registration_Form_Widget Class
  *
  * @since 1.0.0
  */
-class WPUM_Password_Recovery extends WPH_Widget {
+class WPUM_Registration_Form_Widget extends WPH_Widget {
 
 	/**
 	 * __construct function.
@@ -28,8 +28,8 @@ class WPUM_Password_Recovery extends WPH_Widget {
 
 		// Configure widget array
 		$args = array(
-			'label'       => __( '[WPUM] Password Recovery Form' ),
-			'description' => __( 'Display a form for users to recover their password.' ),
+			'label'       => __( '[WPUM] Registration Form' ),
+			'description' => __( 'Display the registration form.' ),
 		);
 
 		$args['fields'] = array(
@@ -38,7 +38,7 @@ class WPUM_Password_Recovery extends WPH_Widget {
 				'id'     => 'title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'Reset password' ),
+				'std'    => __( 'Register' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
@@ -52,14 +52,14 @@ class WPUM_Password_Recovery extends WPH_Widget {
 				'name'     => __( 'Display password recovery link' ),
 				'id'       => 'psw_link',
 				'type'     =>'checkbox',
-				'std'      => 0,
+				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
 				'name'     => __( 'Display registration link' ),
 				'id'       => 'register_link',
 				'type'     =>'checkbox',
-				'std'      => 1,
+				'std'      => 0,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
@@ -85,12 +85,10 @@ class WPUM_Password_Recovery extends WPH_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		ob_start();
-
-		echo $args['before_widget'];
-		echo $args['before_title'];
-		echo $instance['title'];
-		echo $args['after_title'];
+		$output = $args['before_widget'];
+		$output .= $args['before_title'];
+		$output .= $instance['title'];
+		$output .= $args['after_title'];
 
 		$atts = array(
 			'form_id'       => $instance['form_id'],
@@ -101,13 +99,11 @@ class WPUM_Password_Recovery extends WPH_Widget {
 
 		// Set default values
 		if( !array_key_exists('form_id', $atts) || empty($atts['form_id']) )
-			$atts['form_id'] = 'default_password_form';
+			$atts['form_id'] = 'default_registration_form';
 
-		echo WPUM()->forms->get_form( 'password', $atts );
+		$output .= WPUM()->forms->get_form( 'register', $atts );
 
-		echo $args['after_widget'];
-		
-		$output = ob_get_clean();
+		$output .= $args['after_widget'];
 
 		echo $output;
 

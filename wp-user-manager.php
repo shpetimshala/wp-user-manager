@@ -248,6 +248,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		// Load all widgets
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-recent-users.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-password-recovery.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-registration.php';
 
 	}
 
