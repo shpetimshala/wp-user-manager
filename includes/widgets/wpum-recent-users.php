@@ -42,13 +42,22 @@ class WPUM_Recently_Registered_Users extends WPH_Widget {
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'   => __( 'Amount' ),
-				'desc'   => __('Enter the amount of users you wish to display.'),
-				'id'     => 'amount',
-				'type'   => 'text',
-				'class'  => 'widefat',
-				'std'    => '10',
-				'filter' => 'strip_tags|esc_attr'
+				'name'     => __( 'Amount' ),
+				'desc'     => __( 'Enter the amount of users you wish to display.' ),
+				'id'       => 'amount',
+				'type'     => 'text',
+				'class'    => 'widefat',
+				'std'      => '10',
+				'filter'   => 'strip_tags|esc_attr',
+				'validate' => 'numeric',
+			),
+			array(
+				'name'   => __( 'Link to user profile' ),
+				'desc'   => __( 'Enable to link to the user profile.' ),
+				'id'     => 'profile',
+				'type'   =>'checkbox',
+				'std'    => 1,
+				'filter' => 'strip_tags|esc_attr',
 			),
 		);
 
@@ -73,7 +82,11 @@ class WPUM_Recently_Registered_Users extends WPH_Widget {
 		echo $instance['title'];
 		echo $args['after_title'];
 
-		get_wpum_template( 'recently-registered.php', array( 'amount' => $instance['amount'], 'link_to_profile' => true ) );
+		if( $instance['profile'] == 1 ) {
+			$instance['profile'] = true;
+		}
+
+		get_wpum_template( 'recently-registered.php', array( 'amount' => $instance['amount'], 'link_to_profile' => $instance['profile'] ) );
 
 		echo $args['after_widget'];
 
