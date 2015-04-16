@@ -41,6 +41,35 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 				'std'    => __( 'Login' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
+			array(
+				'name'   => __( 'Redirect' ),
+				'desc'   => __('Enter the url where you wish to redirect users after login. Leave blank if not needed, will refresh current page.'),
+				'id'     => 'redirect',
+				'type'   => 'text',
+				'class'  => 'widefat',
+				'filter' => 'strip_tags|esc_attr|esc_url'
+			),
+			array(
+				'name'     => __( 'Display login link' ),
+				'id'       => 'login_link',
+				'type'     =>'checkbox',
+				'std'      => 0,
+				'filter'   => 'strip_tags|esc_attr',
+			),
+			array(
+				'name'     => __( 'Display password recovery link' ),
+				'id'       => 'psw_link',
+				'type'     =>'checkbox',
+				'std'      => 1,
+				'filter'   => 'strip_tags|esc_attr',
+			),
+			array(
+				'name'     => __( 'Display registration link' ),
+				'id'       => 'register_link',
+				'type'     =>'checkbox',
+				'std'      => 1,
+				'filter'   => 'strip_tags|esc_attr',
+			),
 		);
 
 		// create widget
@@ -64,7 +93,25 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 		echo $instance['title'];
 		echo $args['after_title'];
 
-		echo wpum_login_form();
+		// Default form settings
+		$settings = array();
+
+		// Set redirect url if not blank
+		if( !empty( $instance['redirect'] ) )
+			$settings['redirect'] = $instance['redirect'];
+
+		$settings['psw_link']      = false;
+		$settings['login_link']    = false;
+		$settings['register_link'] = false;
+
+		if( $instance['psw_link'] )
+			$settings['psw_link'] = 'yes';
+		if( $instance['register_link'] )
+			$settings['register_link'] = 'yes';
+		if( $instance['login_link'] )
+			$settings['login_link'] = 'yes';
+
+		echo wpum_login_form( $settings );
 
 		echo $args['after_widget'];
 
