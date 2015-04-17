@@ -48,7 +48,7 @@ class WPUM_Permalinks {
 
 		global $wp;
 
-		// Define args
+		// Define args for profile pages
 		$wp->add_query_var( 'user' );
 		$wp->add_query_var( 'tab' );
 
@@ -58,6 +58,13 @@ class WPUM_Permalinks {
 		add_rewrite_rule( $page_slug . '/([^/]*)/([^/]*)/page/([0-9]+)', 'index.php?page_id='. $page_id .'&user=$matches[1]&tab=$matches[2]&paged=$matches[3]', 'top' );
 		add_rewrite_rule( $page_slug . '/([^/]*)/([^/]*)', 'index.php?page_id='. $page_id .'&user=$matches[1]&tab=$matches[2]', 'top' );
 		add_rewrite_rule( $page_slug . '/([^/]*)', 'index.php?page_id='. $page_id .'&user=$matches[1]', 'top' );
+
+		// Define args for account page
+		$wp->add_query_var( 'account_tab' );
+		$account_page_id = wpum_get_core_page_id( 'account' );
+		$account_page_slug = esc_attr( get_post_field( 'post_name', intval( $account_page_id ) ) );
+
+		add_rewrite_rule( $account_page_slug . '/([^/]*)', 'index.php?page_id='. $account_page_id .'&account_tab=$matches[1]', 'top' );
 
 	}
 

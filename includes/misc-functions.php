@@ -1298,14 +1298,32 @@ function wpum_get_account_page_tabs() {
 	$tabs = array();
 
 	$tabs['account'] = array(
-		'id'    => 'account_details',
+		'id'    => 'account-details',
 		'title' => __('Edit Account'),
 	);
 	$tabs['password'] = array(
-		'id'    => 'change_password',
+		'id'    => 'change-password',
 		'title' => __('Change Password'),
 	);
 
 	return apply_filters( 'wpum_get_account_page_tabs', $tabs );
+
+}
+
+/**
+ * Generates url of a single account tab.
+ *
+ * @since 1.0.0
+ * @return string $tab_url url of the tab.
+ */
+function wpum_get_account_tab_url( $tab ) {
+
+	if( get_option( 'permalink_structure' ) == '' ) :
+		$tab_url = add_query_arg( 'account_tab', $tab, wpum_get_core_page_url( 'account' ) );
+	else :
+		$tab_url = wpum_get_core_page_url( 'account' ) . $tab;
+	endif;
+
+	return $tab_url;
 
 }
