@@ -7,6 +7,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
 ?>
 
 <div id="wpum-account-tabs" class="wpum-account-tabs">
@@ -16,7 +17,7 @@
 		<ul>
 
 		<?php foreach ($tabs as $key => $tab) : ?>
-			<li class="wpum-account-tab tab-<?php echo $key; ?>">
+			<li class="wpum-account-tab tab-<?php echo $key; ?> <?php echo $current_tab == $key || $current_tab == null && $all_tabs[0] == $key ? 'active' : ''?>">
 				<a href="<?php echo esc_url( wpum_get_account_tab_url( $tab['id'] ) ); ?>"><?php echo $tab['title']; ?></a>
 			</li>
 		<?php endforeach; ?>

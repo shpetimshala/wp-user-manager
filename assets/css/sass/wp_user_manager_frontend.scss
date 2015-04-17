@@ -448,7 +448,6 @@ ul.wpum-user-listings {
 }
 
 /* profile overview */
-
 .wpum-user-overview {
 	.user-content {
 		vertical-align: middle;
@@ -461,3 +460,8 @@ ul.wpum-user-listings {
 		}
 	}
 }
+
+/* Account page navigation */
+.wpum-account-tabs {
+	@extend .wpum-profile-tabs-holder;
+} 

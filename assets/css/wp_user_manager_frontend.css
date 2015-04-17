@@ -142,18 +142,18 @@
   text-align: center; }
 
 /* Profile Tabs */
-.wpum-profile-tabs-holder ul {
+.wpum-profile-tabs-holder ul, .wpum-account-tabs ul {
   width: 100%;
   list-style: none;
   margin: 0px;
   padding: 0px; }
-  .wpum-profile-tabs-holder ul li {
+  .wpum-profile-tabs-holder ul li, .wpum-account-tabs ul li {
     display: inline-block;
     margin: 15px 0px 0px; }
-    .wpum-profile-tabs-holder ul li.active a {
+    .wpum-profile-tabs-holder ul li.active a, .wpum-account-tabs ul li.active a {
       background-color: #e7e6e6;
       text-decoration: none; }
-    .wpum-profile-tabs-holder ul li a {
+    .wpum-profile-tabs-holder ul li a, .wpum-account-tabs ul li a {
       display: block;
       padding: 3px 12px 2px;
       margin-bottom: -1px;
@@ -163,7 +163,7 @@
       -webkit-border-radius: 2px 2px 0 0;
       -moz-border-radius: 2px 2px 0 0;
       border-radius: 2px 2px 0 0; }
-      .wpum-profile-tabs-holder ul li a:hover {
+      .wpum-profile-tabs-holder ul li a:hover, .wpum-account-tabs ul li a:hover {
         background: #f3f3f3;
         text-decoration: none; }
 
@@ -469,5 +469,7 @@ ul.wpum-user-listings {
     .wpum-user-overview .user-content ul li {
       display: inline-block;
       margin-right: 5px; }
+
+/* Account page navigation */
 
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

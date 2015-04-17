@@ -11,7 +11,7 @@
 
 <div id="wpum-account" class="wpum-account-wrapper">
 
-	<?php do_action( 'wpum_before_account', $atts ); ?>
+	<?php do_action( 'wpum_before_account', $current_tab, $all_tabs, $form, $fields, $user_id, $atts ); ?>
 
 	<?php
 
@@ -21,10 +21,10 @@
 
 			switch ( $current_tab ) {
 				case null: // Return first tab if null - meaning we're on /account/ page
-					do_action( "wpum_account_tab_{$all_tabs[0]}", $current_tab, $form, $fields, $user_id, $atts );
+					do_action( "wpum_account_tab_{$all_tabs[0]}", $current_tab, $all_tabs, $form, $fields, $user_id, $atts );
 					break;
 				case $current_tab:
-					do_action( "wpum_account_tab_{$current_tab}", $current_tab, $form, $fields, $user_id, $atts );
+					do_action( "wpum_account_tab_{$current_tab}", $current_tab, $all_tabs, $form, $fields, $user_id, $atts );
 					break;
 			}
 
@@ -43,6 +43,6 @@
 
 	?>
 
-	<?php do_action( 'wpum_after_account', $atts ); ?>
+	<?php do_action( 'wpum_after_account', $current_tab, $all_tabs, $form, $fields, $user_id, $atts ); ?>
 
 </div>
