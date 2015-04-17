@@ -7,9 +7,6 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
-
-echo get_query_var( 'account_tab' );
-
 ?>
 
 <div id="wpum-account-tabs" class="wpum-account-tabs">
@@ -25,6 +22,8 @@ echo get_query_var( 'account_tab' );
 		<?php endforeach; ?>
 
 		</ul>
+
+		<div class="wpum-clearfix"></div>
 
 	<?php endif; ?>
 

@@ -118,4 +118,26 @@ function wpum_add_account_tabs( $atts ) {
 	get_wpum_template( "account-tabs.php", array( 'tabs'  => wpum_get_account_page_tabs() ) );
 
 }
-add_action( 'wpum_before_account_form', 'wpum_add_account_tabs' );
+add_action( 'wpum_before_account', 'wpum_add_account_tabs' );
+
+/**
+ * Display content of the first tab into the account page.
+ *
+ * @since 1.0.0
+ * @access public
+ * @param array $atts.
+ * @return void
+ */
+function wpum_show_account_edit_form( $current_tab, $form, $fields, $user_id, $atts ) {
+
+	get_wpum_template( 'forms/account-form.php', 
+		array(
+			'atts'    => $atts,
+			'form'    => $form,
+			'fields'  => $fields,
+			'user_id' => $user_id
+		)
+	);
+
+}
+add_action( 'wpum_account_tab_details', 'wpum_show_account_edit_form', 10, 5 );

@@ -35,7 +35,7 @@ $all_tabs = array_keys( $tabs );
 
 <div class="wpum-profile-tabs-content">
 
-	<?php
+<?php
 
 	// Display tabs content.
 	// Check that the tab exists or - null if we're on /profile/ page.

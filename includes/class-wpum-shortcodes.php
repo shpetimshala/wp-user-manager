@@ -215,7 +215,7 @@ class WPUM_Shortcodes {
 	/**
 	 * Profile Shortcode.
 	 * Display currently logged in user profile
-	 * or selected if profile if given by URL.
+	 * or selected if profile is given by URL.
 	 *
 	 * @access public
 	 * @since  1.0.0

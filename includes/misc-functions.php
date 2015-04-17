@@ -1297,11 +1297,11 @@ function wpum_get_account_page_tabs() {
 
 	$tabs = array();
 
-	$tabs['account'] = array(
-		'id'    => 'account-details',
+	$tabs['details'] = array(
+		'id'    => 'details',
 		'title' => __('Edit Account'),
 	);
-	$tabs['password'] = array(
+	$tabs['change-password'] = array(
 		'id'    => 'change-password',
 		'title' => __('Change Password'),
 	);
@@ -1325,5 +1325,36 @@ function wpum_get_account_tab_url( $tab ) {
 	endif;
 
 	return $tab_url;
+
+}
+
+/**
+ * Checks the current active account tab (if any).
+ *
+ * @since 1.0.0
+ * @return bool|string
+ */
+function wpum_get_current_account_tab() {
+
+	$tab = ( get_query_var( 'account_tab' ) ) ? get_query_var( 'account_tab' ) : null;
+	return $tab;
+
+}
+
+/**
+ * Checks the given account tab is registered.
+ *
+ * @since 1.0.0
+ * @param string  $tab the key value of the array in wpum_get_account_page_tabs() must match slug
+ * @return bool
+ */
+function wpum_account_tab_exists( $tab ) {
+
+	$exists = false;
+
+	if ( array_key_exists( $tab, wpum_get_account_page_tabs() ) )
+		$exists = true;
+
+	return $exists;
 
 }

@@ -758,12 +758,27 @@ class WPUM_Form_Profile extends WPUM_Form {
 		// Display template
 		if( is_user_logged_in() ) :
 
+			$current_account_tab = wpum_get_current_account_tab();
+			$all_tabs = array_keys( wpum_get_account_page_tabs() );
+
+			/*
 			get_wpum_template( 'forms/account-form.php', 
 				array(
 					'atts'    => $atts,
 					'form'    => self::$form_name,
 					'fields'  => self::get_fields( 'profile' ),
 					'user_id' => self::$user->ID
+				)
+			);*/
+
+			get_wpum_template( 'account.php', 
+				array(
+					'atts'        => $atts,
+					'form'        => self::$form_name,
+					'fields'      => self::get_fields( 'profile' ),
+					'user_id'     => self::$user->ID,
+					'current_tab' => $current_account_tab,
+					'all_tabs'    => $all_tabs
 				)
 			);
 
