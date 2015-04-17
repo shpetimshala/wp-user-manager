@@ -1,8 +1,8 @@
 <?php
 /**
- * WPUM Template: Profile Form Template.
+ * WPUM Template: Account Form Template.
  *
- * Displays profile edit form.
+ * Displays account edit form.
  *
  * @package     wp-user-manager
  * @copyright   Copyright (c) 2015, Alessandro Tesoro
@@ -15,21 +15,21 @@
 
 	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) : ?>
 		<p class="wpum-message wpum-success wpum-profile-updated-message">
-			<?php echo apply_filters( 'wpum_profile_update_success_message', __( 'Profile successfully updated.' ) ); ?>
+			<?php echo apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) ); ?>
 		</p>
 	<?php endif; ?>
 
 	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) : ?>
 		<p class="wpum-message wpum-error wpum-profile-updated-message">
-			<?php echo apply_filters( 'wpum_profile_update_error_message', __( 'Something went wrong.' ) ); ?>
+			<?php echo apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) ); ?>
 		</p>
 	<?php endif; ?>
 
-	<?php do_action( 'wpum_before_profile_form_template', $atts ); ?>
+	<?php do_action( 'wpum_before_account_form', $atts ); ?>
 
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile" enctype="multipart/form-data">
 
-		<?php do_action( 'wpum_before_inside_profile_form_template', $atts ); ?>
+		<?php do_action( 'wpum_before_inside_account_form', $atts ); ?>
 
 		<!-- Start Name Fields -->
 		<?php foreach ( $fields as $key => $field ) : ?>
@@ -44,7 +44,7 @@
 		<?php endforeach; ?>
 		<!-- End Name Fields -->
 
-		<?php do_action( 'wpum_after_inside_profile_form_template', $atts ); ?>
+		<?php do_action( 'wpum_after_inside_account_form', $atts ); ?>
 
 		<?php wp_nonce_field( $form ); ?>
 
@@ -56,6 +56,6 @@
 
 	</form>
 
-	<?php do_action( 'wpum_after_profile_form_template', $atts ); ?>
+	<?php do_action( 'wpum_after_account_form', $atts ); ?>
 
 </div>

@@ -1284,3 +1284,28 @@ function wpum_generate_pages( $redirect = false ) {
 		exit;
 	}
 }
+
+/**
+ * Generates tabs for the account page.
+ * Tabs are needed to split content in multiple parts,
+ * and not produce a very long form.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_get_account_page_tabs() {
+
+	$tabs = array();
+
+	$tabs['account'] = array(
+		'id'    => 'account_details',
+		'title' => __('Edit Account'),
+	);
+	$tabs['password'] = array(
+		'id'    => 'change_password',
+		'title' => __('Change Password'),
+	);
+
+	return apply_filters( 'wpum_get_account_page_tabs', $tabs );
+
+}

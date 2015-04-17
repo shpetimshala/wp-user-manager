@@ -104,3 +104,18 @@ function wpum_user_directory_pagination( $directory_args ) {
 
 }
 add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination' );
+
+/**
+ * Adds tabs navigation on top of the account edit page.
+ *
+ * @since 1.0.0
+ * @access public
+ * @param array $atts.
+ * @return void
+ */
+function wpum_add_account_tabs( $atts ) {
+
+	get_wpum_template( "account-tabs.php", array( 'tabs'  => wpum_get_account_page_tabs() ) );
+
+}
+add_action( 'wpum_before_account_form', 'wpum_add_account_tabs' );

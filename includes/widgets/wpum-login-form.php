@@ -29,7 +29,7 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 		// Configure widget array
 		$args = array(
 			'label'       => __( '[WPUM] Login Form' ),
-			'description' => __( 'Display login form' ),
+			'description' => __( 'Display login form.' ),
 		);
 
 		$args['fields'] = array(

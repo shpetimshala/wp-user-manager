@@ -42,15 +42,12 @@ $all_tabs = array_keys( $tabs );
 	if ( $current_tab_slug === null || wpum_profile_tab_exists( $current_tab_slug ) ) {
 
 		switch ( $current_tab_slug ) {
-		case null: // Return first tab if null - meaning we're on /profile/ page
-			do_action( "wpum_profile_tab_content_{$all_tabs[0]}", $user_data, $tabs, $current_tab_slug );
-			break;
-		case $current_tab_slug:
-			do_action( "wpum_profile_tab_content_{$current_tab_slug}", $user_data, $tabs, $current_tab_slug );
-			break;
-		default:
-			// nothing here...
-			break;
+			case null: // Return first tab if null - meaning we're on /profile/ page
+				do_action( "wpum_profile_tab_content_{$all_tabs[0]}", $user_data, $tabs, $current_tab_slug );
+				break;
+			case $current_tab_slug:
+				do_action( "wpum_profile_tab_content_{$current_tab_slug}", $user_data, $tabs, $current_tab_slug );
+				break;
 		}
 
 		// Display not found error if tab doesn't exist
