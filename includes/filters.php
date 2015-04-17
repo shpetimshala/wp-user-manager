@@ -99,7 +99,7 @@ add_filter( 'upload_dir', 'wpum_upload_dir' );
  * @param       string $footer_text The existing footer text
  * @return      string
  */
-function wprm_admin_rate_us( $footer_text ) {
+function wpum_admin_rate_us( $footer_text ) {
 	
 	$screen = get_current_screen();
 
@@ -114,7 +114,7 @@ function wprm_admin_rate_us( $footer_text ) {
 	return str_replace( '</span>', '', $footer_text ) . ' | ' . $rate_text . ' <span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span><span class="dashicons dashicons-star-filled footer-star"></span></span>';
 	
 }
-add_filter( 'admin_footer_text', 'wprm_admin_rate_us' );
+add_filter( 'admin_footer_text', 'wpum_admin_rate_us' );
 
 /**
  * Add custom classes to body tag

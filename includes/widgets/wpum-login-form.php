@@ -42,6 +42,15 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
+				'name'   => __( 'Logged In title' ),
+				'desc'   => __(' This title will be displayed when logged in.'),
+				'id'     => 'logged_in_title',
+				'type'   => 'text',
+				'class'  => 'widefat',
+				'std'    => __( 'My Account' ),
+				'filter' => 'strip_tags|esc_attr'
+			),
+			array(
 				'name'   => __( 'Redirect' ),
 				'desc'   => __('Enter the url where you wish to redirect users after login. Leave blank if not needed, will refresh current page.'),
 				'id'     => 'redirect',
@@ -98,7 +107,11 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 
 		echo $args['before_widget'];
 		echo $args['before_title'];
-		echo $instance['title'];
+		if( is_user_logged_in() ) :
+			echo $instance['logged_in_title'];
+		else :
+			echo $instance['title'];
+		endif;
 		echo $args['after_title'];
 
 		// Default form settings
