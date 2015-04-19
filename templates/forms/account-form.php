@@ -14,15 +14,15 @@
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
 	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) : ?>
-		<p class="wpum-message wpum-success wpum-profile-updated-message">
+		<div class="wpum-message success"><p>
 			<?php echo apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) ); ?>
-		</p>
+		</p></div>
 	<?php endif; ?>
 
 	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) : ?>
-		<p class="wpum-message wpum-error wpum-profile-updated-message">
+		<div class="wpum-message error"><p>
 			<?php echo apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) ); ?>
-		</p>
+		</p></div>
 	<?php endif; ?>
 
 	<?php do_action( 'wpum_before_account_form', $atts ); ?>
