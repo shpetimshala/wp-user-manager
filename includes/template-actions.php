@@ -156,3 +156,25 @@ function wpum_show_psw_update_form( $current_tab, $all_tabs, $form, $fields, $us
 
 }
 add_action( 'wpum_account_tab_change-password', 'wpum_show_psw_update_form', 10, 6 );
+
+/**
+ * Display content of the first tab into the account page.
+ *
+ * @since 1.0.0
+ * @access public
+ * @param array $atts.
+ * @return void
+ */
+function wpum_show_failed_login_message() {
+
+	if( isset( $_GET['login'] ) && $_GET['login'] == 'failed' ) {
+		$args = array( 
+				'id'   => 'wpum-login-failed', 
+				'type' => 'error', 
+				'text' => __( 'Login failed: You have entered incorrect login details, please try again.' )
+		);
+		$warning = wpum_message( $args, true );
+	}
+
+}
+add_action( 'wpum_before_loginform_template', 'wpum_show_failed_login_message' );
