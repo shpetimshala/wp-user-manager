@@ -359,7 +359,7 @@ ul.wpum-user-listings {
 		padding: 0 0 1em 0;
 		line-height: 2em;
 		border: 0;
-		border-bottom: 1px solid #eee;
+		border-bottom: 1px solid $secondary_color;
 		label {
 			display: block;
 			margin: 0;
@@ -403,7 +403,7 @@ ul.wpum-user-listings {
 			padding: 0 0 1em 0;
 			line-height: 2em;
 			border: 0;
-			border-bottom: 1px solid #eee;
+			border-bottom: 1px solid $secondary_color;
 			zoom: 1;
 			&:before, &:after {
 				content: "\0020"; display: block; height: 0; visibility: hidden;
@@ -464,4 +464,6 @@ ul.wpum-user-listings {
 /* Account page navigation */
 .wpum-account-tabs {
 	@extend .wpum-profile-tabs-holder;
-} 
+	border-bottom: 1px solid $secondary_color;
+	margin-bottom: 15px;
+}

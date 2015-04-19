@@ -1291,6 +1291,7 @@ function wpum_generate_pages( $redirect = false ) {
  * and not produce a very long form.
  *
  * @since 1.0.0
+ * @todo  sort by priority for addon.
  * @return void
  */
 function wpum_get_account_page_tabs() {
