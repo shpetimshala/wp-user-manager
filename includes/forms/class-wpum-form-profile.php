@@ -664,20 +664,26 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 */
 	public static function output( $atts = array() ) {
 
+		// Get the tabs
+		$current_account_tab = wpum_get_current_account_tab();
+		$all_tabs = array_keys( wpum_get_account_page_tabs() );
+
 		// Get fields
 		self::get_profile_fields();
 
-		// Show errors from fields
-		self::show_errors();
+		// Show messages only when in first tab
+		// this is needed to prevent messages to appear twice
+		// when updating forms within another tab
+		if( $current_account_tab === null ) {
+			// Show errors from fields
+			self::show_errors();
 
-		// Show confirmation messages
-		self::show_confirmations();
+			// Show confirmation messages
+			self::show_confirmations();
+		}
 
 		// Display template
 		if( is_user_logged_in() ) :
-
-			$current_account_tab = wpum_get_current_account_tab();
-			$all_tabs = array_keys( wpum_get_account_page_tabs() );
 
 			get_wpum_template( 'account.php', 
 				array(
