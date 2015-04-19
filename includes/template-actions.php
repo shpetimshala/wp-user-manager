@@ -141,3 +141,18 @@ function wpum_show_account_edit_form( $current_tab, $all_tabs, $form, $fields, $
 
 }
 add_action( 'wpum_account_tab_details', 'wpum_show_account_edit_form', 10, 6 );
+
+/**
+ * Display content of the first tab into the account page.
+ *
+ * @since 1.0.0
+ * @access public
+ * @param array $atts.
+ * @return void
+ */
+function wpum_show_psw_update_form( $current_tab, $all_tabs, $form, $fields, $user_id, $atts ) {
+
+	echo WPUM()->forms->get_form( 'update-password' );
+
+}
+add_action( 'wpum_account_tab_change-password', 'wpum_show_psw_update_form', 10, 6 );
