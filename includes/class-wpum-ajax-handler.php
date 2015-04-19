@@ -44,7 +44,7 @@ class WPUM_Ajax_Handler {
 	public function __construct() {
 
 		// retrieve login method
-		$this->login_method = wpum_get_option( 'login_method' );
+		$this->login_method = wpum_get_option( 'login_method', 'username' );
 
 		// Login
 		add_action( 'wp_ajax_wpum_ajax_login', array( $this, 'do_ajax_login' ) );
