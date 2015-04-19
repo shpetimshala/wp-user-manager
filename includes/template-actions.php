@@ -110,7 +110,6 @@ add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination' );
  *
  * @since 1.0.0
  * @access public
- * @param array $atts.
  * @return void
  */
 function wpum_add_account_tabs( $current_tab, $all_tabs, $form, $fields, $user_id, $atts ) {
@@ -125,7 +124,6 @@ add_action( 'wpum_before_account', 'wpum_add_account_tabs', 10, 6 );
  *
  * @since 1.0.0
  * @access public
- * @param array $atts.
  * @return void
  */
 function wpum_show_account_edit_form( $current_tab, $all_tabs, $form, $fields, $user_id, $atts ) {
@@ -147,7 +145,6 @@ add_action( 'wpum_account_tab_details', 'wpum_show_account_edit_form', 10, 6 );
  *
  * @since 1.0.0
  * @access public
- * @param array $atts.
  * @return void
  */
 function wpum_show_psw_update_form( $current_tab, $all_tabs, $form, $fields, $user_id, $atts ) {
@@ -162,7 +159,6 @@ add_action( 'wpum_account_tab_change-password', 'wpum_show_psw_update_form', 10,
  *
  * @since 1.0.0
  * @access public
- * @param array $atts.
  * @return void
  */
 function wpum_show_failed_login_message() {
