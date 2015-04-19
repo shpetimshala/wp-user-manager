@@ -37,14 +37,9 @@ class WPUM_Form_Profile extends WPUM_Form {
 			self::$user = wp_get_current_user();
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
-			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
 			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
 		endif;
-
-		// Add password meter field
-		if( wpum_get_option('display_password_meter_registration') )
-			add_action( 'wpum_after_inside_profile_form_template', array( __CLASS__, 'add_password_meter_field' ) );
 
 		// Store uploaded avatar
 		if( wpum_get_option('custom_avatars') )
@@ -95,19 +90,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 				'priority'    => $new_field['order']
 			);
 
-	        // The password field needs another one to check if match on submit
-			if( $new_field['meta'] == 'password' ) {
-
-				$fields_list[ 'password_repeat' ] = array(
-					'label'       => __('Repeat Password'),
-					'type'        => 'password',
-					'required'    => false,
-					'placeholder' => null,
-					'priority'    => $new_field['order'] + 0.1
-				);
-
-			// The avatar field needs specific settings
-			} else if( $new_field['meta'] == 'user_avatar' ) {
+	        if( $new_field['meta'] == 'user_avatar' ) {
 
 				$fields_list[ 'user_avatar' ] = array(
 					'label'       => $new_field['title'],
@@ -130,8 +113,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 
         }
 
-        // Set the password field as non required on profile page
-        $fields_list[ 'password' ]['required'] = false;
+        // Remove password field from here
+        unset($fields_list['password']);
 
         // The username cannot be changed, let's remove that field since it's useless
 		unset($fields_list['username']);
@@ -180,9 +163,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 			case 'user_avatar':
 				$value = get_user_meta( self::$user->ID, 'current_user_avatar', true );
 				break;
-			default:
-				$value = null;
-				break;
 		}
 
 		return $value;
@@ -203,9 +183,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 		switch ($new_field['meta']) {
 			case 'display_name':
 				$options = self::get_display_name_options( self::$user );
-				break;
-			default:
-				$options = array();
 				break;
 		}
 
@@ -470,42 +447,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 	}
 
 	/**
-	 * Validate the password field.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function validate_password_field( $passed, $fields, $values ) {
-
-		$pwd = $values['profile']['password'];
-		$pwd_strenght = wpum_get_option('password_strength');
-
-		if( empty($pwd) )
-			return;
-
-		$containsLetter  = preg_match('/[A-Z]/', $pwd);
-		$containsDigit   = preg_match('/\d/', $pwd);
-		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);
-
-		if($pwd_strenght == 'weak') {
-			if(strlen($pwd) < 8)
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
-		}
-		if($pwd_strenght == 'medium') {
-			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
-		}
-		if($pwd_strenght == 'strong') {
-			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
-		}
-
-		return $passed;
-
-	}
-
-	/**
 	 * Validate nickname field.
 	 *
 	 * @access public
@@ -605,18 +546,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		foreach ( $values['profile'] as $meta_key => $meta_value ) {
 			switch ( $meta_key ) {
-				case 'password':
-					if( !empty( $meta_value ) && $meta_value !== $values['profile']['password_repeat'] ) :
-						self::add_error( __('Passwords do not match.') );
-						return;
-					endif;
-					if( !empty( $meta_value ) && $meta_value == $values['profile']['password_repeat'] ) :
-						$user_data += array( 'user_pass' => $meta_value );
-					endif;
-				break;
-				case 'password_repeat':
-					// do nothing
-				break;
 				case 'user_email':
 					if(is_email( $meta_value )) :
 						$user_data += array( 'user_email' => $meta_value );
@@ -699,17 +628,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		return $name;
 
-	}
-
-	/**
-	 * Add password meter field.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function add_password_meter_field( $atts ) {
-		echo '<span id="password-strength"></span>';		
 	}
 
 	/**

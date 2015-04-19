@@ -32,6 +32,12 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
+		add_filter( 'wpum_update_password_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+
+		// Add password meter field
+		if( wpum_get_option('display_password_meter_registration') )
+			add_action( 'wpum_after_inside_password_update_form', array( __CLASS__, 'add_password_meter_field' ) );
+
 	}
 
 	/**
@@ -145,7 +151,59 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 			}
 		}
 
-		return apply_filters( 'wpum_password_form_validate_fields', true, self::$fields, $values );
+		return apply_filters( 'wpum_update_password_form_validate_fields', true, self::$fields, $values );
+
+	}
+
+	/**
+	 * Add password meter field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_password_meter_field() {
+		echo '<span id="password-strength"></span>';		
+	}
+
+	/**
+	 * Validate the password field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_password_field( $passed, $fields, $values ) {
+
+		$pwd = $values['password_update']['password'];
+		$pwd_strenght = wpum_get_option('password_strength');
+
+		if( empty( $pwd ) )
+			return new WP_Error( 'password-validation-error', __( 'Enter a password.' ) );
+
+		// Check strenght
+		$containsLetter  = preg_match('/[A-Z]/', $pwd);
+		$containsDigit   = preg_match('/\d/', $pwd);
+		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $pwd);
+
+		if($pwd_strenght == 'weak') {
+			if(strlen($pwd) < 8)
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
+		}
+		if($pwd_strenght == 'medium') {
+			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+		}
+		if($pwd_strenght == 'strong') {
+			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+		}
+
+		// Check if matches repeated password
+		if( $pwd !== $values['password_update']['password_repeat'] )
+			return new WP_Error( 'password-validation-error', __( 'Passwords do not match.' ) );
+
+		return $passed;
 
 	}
 
@@ -163,6 +221,42 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		// Get posted values
 		$values = self::get_posted_fields();
+
+		if ( empty( $_POST['wpum_submit_form'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-password' ) ) {
+			return;
+		}
+
+		// Check values
+		if( empty($values) || !is_array($values) )
+			return;
+
+		// Validate required
+		if ( is_wp_error( ( $return = self::validate_fields( $values ) ) ) ) {
+			self::add_error( $return->get_error_message() );
+			return;
+		}
+
+		// Proceed to update the password
+		$user_data = array( 
+			'ID'        => get_current_user_id(),
+			'user_pass' => $values['password_update']['password']
+		);
+
+		$user_id = wp_update_user( $user_data );
+
+		if ( is_wp_error( $user_id ) ) {
+
+			self::add_error( $user_id->get_error_message() );
+
+		} else {
+
+			self::add_confirmation( __('Password successfully updated.') );
+
+		}
 
 	}
 
@@ -194,9 +288,9 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 				)
 			);
 
-		// Show psw form if not logged in
 		else :
 			
+			echo wpum_login_form();
 
 		endif;
 

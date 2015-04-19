@@ -356,7 +356,8 @@ ul.wpum-user-listings {
 /* Form elements */
 .wpum-profile-form fieldset,
 .wpum-default-registration-form fieldset,
-.wpum-password-form fieldset {
+.wpum-password-form fieldset,
+.wpum-update-password-form fieldset {
   margin: 0 0 1em 0;
   padding: 0 0 1em 0;
   line-height: 2em;
@@ -364,7 +365,8 @@ ul.wpum-user-listings {
   border-bottom: 1px solid #eee; }
   .wpum-profile-form fieldset label,
   .wpum-default-registration-form fieldset label,
-  .wpum-password-form fieldset label {
+  .wpum-password-form fieldset label,
+  .wpum-update-password-form fieldset label {
     display: block;
     margin: 0;
     width: 29%;
@@ -372,12 +374,14 @@ ul.wpum-user-listings {
     vertical-align: middle; }
     .wpum-profile-form fieldset label small,
     .wpum-default-registration-form fieldset label small,
-    .wpum-password-form fieldset label small {
+    .wpum-password-form fieldset label small,
+    .wpum-update-password-form fieldset label small {
       opacity: .75;
       font-size: 0.83em; }
   .wpum-profile-form fieldset div.field,
   .wpum-default-registration-form fieldset div.field,
-  .wpum-password-form fieldset div.field {
+  .wpum-password-form fieldset div.field,
+  .wpum-update-password-form fieldset div.field {
     width: 70%;
     float: right;
     vertical-align: middle; }
@@ -389,7 +393,11 @@ ul.wpum-user-listings {
   .wpum-password-form fieldset input.input-text,
   .wpum-password-form fieldset input.input-email,
   .wpum-password-form fieldset textarea,
-  .wpum-password-form fieldset select {
+  .wpum-password-form fieldset select,
+  .wpum-update-password-form fieldset input.input-text,
+  .wpum-update-password-form fieldset input.input-email,
+  .wpum-update-password-form fieldset textarea,
+  .wpum-update-password-form fieldset select {
     margin: 0;
     vertical-align: middle;
     width: 100%;
@@ -401,7 +409,8 @@ ul.wpum-user-listings {
     /* Opera/IE 8+ */ }
   .wpum-profile-form fieldset small.description,
   .wpum-default-registration-form fieldset small.description,
-  .wpum-password-form fieldset small.description {
+  .wpum-password-form fieldset small.description,
+  .wpum-update-password-form fieldset small.description {
     opacity: .75;
     font-size: 0.83em;
     margin: 1.2em 0 0 0;
