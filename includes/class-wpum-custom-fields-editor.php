@@ -80,7 +80,6 @@ class WPUM_Custom_Fields_Editor {
 
 			<h2 class="wpum-page-title"><?php _e( 'WP User Manager - Custom Fields Editor' ); ?></h2>
 
-			<?php echo self::navbar(); ?>
 
 			<div id="nav-menus-frame">
 
@@ -96,13 +95,19 @@ class WPUM_Custom_Fields_Editor {
 
 				<div id="menu-management-liquid">
 				
-				<?php 
+					<form method="post" action="options.php" class="wpum-fields-editor-table">
+						<?php 
 
-				$custom_fields_table = new WPUM_Custom_Fields_List();
-			    $custom_fields_table->prepare_items();
-			    $custom_fields_table->display();
+						$custom_fields_table = new WPUM_Custom_Fields_List();
+					    $custom_fields_table->prepare_items();
+					    $custom_fields_table->display();
 
-			    ?>
+					    wp_nonce_field( 'wpum_fields_editor' );
+
+					    //submit_button( __('Save fields') );
+
+					    ?>
+			    	</form>
 
 				</div>
 
@@ -150,9 +155,9 @@ class WPUM_Custom_Fields_Editor {
 
 					// Check if a page is selected, otherwise set first tab as active.
 					if( isset( $_GET['editor'] ) && $_GET['editor'] == $link['type'] || !isset( $_GET['editor'] ) && $link['type'] == 'registration' ) :
-						$output .= '<li><a href="'.$link_url.'" class="current">'. $link['title'] .'</a></li>';
+						$output .= '<li><a href="'.esc_url( $link_url ).'" class="current">'. $link['title'] .'</a></li>';
 					else : 
-						$output .= '<li><a href="'.$link_url.'">'. $link['title'] .'</a></li>';
+						$output .= '<li><a href="'. esc_url( $link_url ).'">'. $link['title'] .'</a></li>';
 					endif;
 				}
 

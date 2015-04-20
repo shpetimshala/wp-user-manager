@@ -258,6 +258,92 @@ function wpum_default_user_fields_list() {
 		'show_on_signup' => false
 	);
 
+	$fields = apply_filters( 'wpum_default_fields_list_', $fields );
+	return $fields;
+
+}
+
+/**
+ * Defines the list of registration and profile fields.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_default_fields_list() {
+
+	$fields = array();
+	
+	$fields['username'] = array(
+		'order'          => 0,
+		'title'          => __( 'Username' ),
+		'type'           => 'text',
+		'meta'           => 'username',
+		'required'       => true,
+	);
+	$fields['first_name'] = array(
+		'order'          => 1,
+		'title'          => __( 'First Name' ),
+		'type'           => 'text',
+		'meta'           => 'first_name',
+		'required'       => false,
+	);
+	$fields['last_name'] = array(
+		'order'          => 2,
+		'title'          => __( 'Last Name' ),
+		'type'           => 'text',
+		'meta'           => 'last_name',
+		'required'       => false,
+	);
+	$fields['nickname'] = array(
+		'order'          => 3,
+		'title'          => __( 'Nickname' ),
+		'type'           => 'text',
+		'meta'           => 'nickname',
+		'required'       => true,
+	);
+	$fields['display_name'] = array(
+		'order'          => 4,
+		'title'          => __( 'Display Name' ),
+		'type'           => 'select',
+		'meta'           => 'display_name',
+		'required'       => true,
+	);
+	$fields['user_email'] = array(
+		'order'          => 5,
+		'title'          => __( 'Email' ),
+		'type'           => 'email',
+		'meta'           => 'user_email',
+		'required'       => true,
+	);
+	$fields['user_url'] = array(
+		'order'          => 6,
+		'title'          => __( 'Website' ),
+		'type'           => 'text',
+		'meta'           => 'user_url',
+		'required'       => false,
+	);
+	$fields['description'] = array(
+		'order'          => 7,
+		'title'          => __( 'Description' ),
+		'type'           => 'textarea',
+		'meta'           => 'description',
+		'required'       => false,
+	);
+	$fields['password'] = array(
+		'order'          => 8,
+		'title'          => __( 'Password' ),
+		'type'           => 'password',
+		'meta'           => 'password',
+		'required'       => true,
+	);
+	$fields['user_avatar'] = array(
+		'order'          => 9,
+		'title'          => __( 'Profile Picture' ),
+		'type'           => 'file',
+		'meta'           => 'user_avatar',
+		'required'       => false,
+	);
+
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
 	return $fields;
 

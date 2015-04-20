@@ -51,7 +51,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
             'title'    => __('Field Title'),
             'type'     => __('Field Type'),
             'required' => __('Required'),
-            'actions'  => __('Actions'),
+            'edit'  => __('Edit'),
         );
 
         return $columns;
@@ -85,7 +85,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = array();
+        $data = wpum_default_fields_list();
 
         return $data;
 
@@ -109,16 +109,16 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
                 return $item['title'];
             break;
             case 'type':
-                return '';
+                return $this->parse_type( $item['type'] );
             break;
             case 'meta':
                 return $item['meta'];
             break;
             case 'required':
-                return '';
+                return $this->parse_required( $item['required'] );
             break;
-            case 'actions':
-                return '';
+            case 'edit':
+                return $this->get_edit_action( $item );
             break;
             default:
                 return null;
@@ -138,6 +138,71 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
      */
     protected function display_tablenav( $which ) {
         return null;
+    }
+
+    /**
+     * Get a list of CSS classes for the list table table tag.
+     *
+     * @access protected
+     * @return array List of CSS classes for the table tag.
+     */
+    protected function get_table_classes() {
+        return array( 'widefat', 'fixed', $this->_args['plural'] );
+    }
+
+    /**
+     * Displays a translatable string for the field type column.
+     *
+     * @access public
+     * @return string the field type name.
+     */
+    public function parse_type( $type ) {
+
+        $text = __('Text');
+
+        if( $type == 'email' ) {
+            $text = __('Email');
+        } elseif ( $type == 'select' ) {
+            $text = __('Dropdown');
+        } elseif ( $type == 'textarea' ) {
+            $text = __('Textarea');
+        } elseif ( $type == 'password' ) {
+            $text = __('Password');
+        } elseif ( $type == 'file' ) {
+            $text = __('Upload');
+        }
+
+        return apply_filters( 'wpum_fields_editor_types', $text );
+
+    }
+
+    /**
+     * Displays an icon for the required column
+     *
+     * @access public
+     * @return string whether it's required or not.
+     */
+    public function parse_required( $is_required = false ) {
+
+        $show_icon = '';
+
+        if( $is_required == true ) {
+            $show_icon = '<span class="dashicons dashicons-yes"></span>';
+        }
+
+        return $show_icon;
+
+    }
+
+    /**
+     * Displays edit button for the email.
+     *
+     * @param   array $item - The email item being passed
+     * @return  Mixed
+     */
+    private function get_edit_action( $item ) {
+        $edit_url = add_query_arg( array(), admin_url( 'users.php?page=wpum-custom-fields-editor' ) );
+        echo '<a href="'.$edit_url.'" class="button">'.__('Edit').'</a> ';
     }
 
 }

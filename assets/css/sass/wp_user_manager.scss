@@ -73,7 +73,7 @@
 	}
 }
 
-table.wpum_fields_table_list {
+table.wpum_fields_table_list, table.users_page_wpum-custom-fields-editor {
 
 	.row-dragging {
 		background-color: #ffffdc;
@@ -89,6 +89,12 @@ table.wpum_fields_table_list {
 		width: 50px;
 		border-right:1px solid #e1e1e1;
 		text-align: center;
+	}
+	td {
+		  margin-bottom: 9px;
+		  padding: 15px 10px;
+		  line-height: 1.3;
+		  vertical-align: middle;
 	}
 	td.column-order {
 		cursor: ns-resize;
@@ -183,4 +189,10 @@ body.post-type-wpum_directory {
 	#preview-action {
 		display: none;
 	}
+}
+
+/* Admin fields editor */
+
+.wpum-fields-editor-table p.submit {
+	margin: 0px;
 }
