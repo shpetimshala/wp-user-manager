@@ -14,6 +14,9 @@ jQuery(document).ready(function ($) {
 			this.order_default_fields();
 			this.restore_default_fields();
 			this.fields_window_manager();
+
+			// Testing
+			this.custom_fields_editor();
 		},
 
 		// General Functions
@@ -256,7 +259,28 @@ jQuery(document).ready(function ($) {
 
 			});
 
-		}
+		},
+
+		// Testing new editing window
+		custom_fields_editor : function() {
+
+			$('.users_page_wpum-custom-fields-editor td.column-edit a').on('click', function(e) {
+
+				e.preventDefault();
+
+				// Grab row of the selected field to edit
+				var field_row = $(this).parent().parent();
+
+				// Append editor window
+				field_row.after( WPUM_Admin.field_window() );
+
+			});
+
+		},
+
+		field_window : function() {
+
+		},
 
 	};
 
