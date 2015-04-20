@@ -227,6 +227,7 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 			// Load Default Fields Editor
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-default-fields-editor.php';
 			// Load Custom Fields Editor
+			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-custom-fields-table.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-custom-fields-editor.php';
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )

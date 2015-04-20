@@ -57,6 +57,11 @@ class WPUM_Custom_Fields_Editor {
 			),
 		);
 
+		// Load WP_List_Table
+		if( ! class_exists( 'WP_List_Table' ) ) {
+		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+		}
+
 	}
 
 	/**
@@ -91,6 +96,14 @@ class WPUM_Custom_Fields_Editor {
 
 				<div id="menu-management-liquid">
 				
+				<?php 
+
+				$custom_fields_table = new WPUM_Custom_Fields_List();
+			    $custom_fields_table->prepare_items();
+			    $custom_fields_table->display();
+
+			    ?>
+
 				</div>
 
 			</div>
@@ -134,6 +147,8 @@ class WPUM_Custom_Fields_Editor {
 				
 				foreach ( self::$nav_links as $link ) {
 					$link_url = add_query_arg( array( 'editor' => $link['type'] ), $url );
+
+					// Check if a page is selected, otherwise set first tab as active.
 					if( isset( $_GET['editor'] ) && $_GET['editor'] == $link['type'] || !isset( $_GET['editor'] ) && $link['type'] == 'registration' ) :
 						$output .= '<li><a href="'.$link_url.'" class="current">'. $link['title'] .'</a></li>';
 					else : 
