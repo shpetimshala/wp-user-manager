@@ -19,12 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Custom_Fields_Editor {
 
 	/**
+	 * Holds the editor page id.
+	 *
+	 * @since 1.0.0
+	 */
+	const Hook = 'users_page_wpum-custom-fields-editor';
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function __construct() {
+
+		add_action( 'load-'.self::Hook, array( $this, 'add_screen_meta_boxes' ) );
+		add_action( 'add_meta_boxes_'.self::Hook, array( $this, 'add_meta_box' ) );
+		add_action( 'admin_footer-'.self::Hook, array( $this, 'print_script_in_footer' ) );
 
 	}
 
@@ -37,22 +48,48 @@ class WPUM_Custom_Fields_Editor {
 	public static function editor_page() {
 
 		ob_start();
+		
 		?>
+
 		<div class="wrap">
 
-			<h2><span class="dashicons dashicons-admin-settings"></span> <?php _e( 'WP User Manager - Custom Fields Editor' ); ?></h2>
-			
+			<h2 class="wpum-page-title"><?php _e( 'WP User Manager - Custom Fields Editor' ); ?></h2>
+
 			<?php echo self::navbar(); ?>
 
 			<div id="nav-menus-frame">
 
-				<?php echo self::sidebar(); ?>
+				<div id="menu-settings-column" class="metabox-holder">
+					
+					<div class="clear"></div>
+
+					<?php do_accordion_sections( self::Hook, 'side', null ); ?>
+						
+				</div>
 
 			</div>
-		</div><!-- .wrap -->
+
+		</div>
+
 		<?php
+		
 		echo ob_get_clean();
 
+	}
+
+	/**
+	 * Trigger the add_meta_boxes hooks to allow meta boxes to be added.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function add_screen_meta_boxes() {
+ 
+	    do_action( 'add_meta_boxes_'.self::Hook, null );
+	    do_action( 'add_meta_boxes', self::Hook, null );
+	 
+	    /* Enqueue WordPress' script for handling the meta boxes */
+	    wp_enqueue_script('postbox');
 	}
 
 	/**
@@ -74,36 +111,46 @@ class WPUM_Custom_Fields_Editor {
 	}
 
 	/**
-	 * Handles the display of the editor page sidebar in the backend.
+	 * Register metaboxes.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public static function sidebar() { 
+	public function add_meta_box() {
 
-		ob_start();
-		?>
+		add_meta_box(
+			'myplugin_sectionid',
+			__( 'My Post Section Title', 'myplugin_textdomain' ),
+			array( $this, 'test' ),
+			self::Hook,
+			'side'
+		);
 
-		<div id="menu-settings-column" class="metabox-holder">
-			<div class="clear"></div>
-			<div id="side-sortables" class="accordion-container">
-				<ul class="outer-border">
-					<li class="control-section accordion-section  add-page open" id="add-page">
-						<h3 class="accordion-section-title hndle" tabindex="0"></h3>
-						<div class="accordion-section-content " style="display: block;">
+		add_meta_box(
+			'myplugin_sectionid2',
+			__( 'T1', 'myplugin_textdomain' ),
+			array( $this, 'test' ),
+			self::Hook,
+			'side'
+		);
 
-							<div class="inside"></div>
-
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<?php 
-		
-		return ob_get_clean();
 	}
 
+	function test() {
+
+	}
+
+	/**
+	 * Print metabox scripts into the footer.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function print_script_in_footer() {
+		?>
+		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
+		<?php
+	}
 }
 
 new WPUM_Custom_Fields_Editor;

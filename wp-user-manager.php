@@ -284,12 +284,13 @@ if ( ! class_exists( 'WP_User_Manager' ) ) :
 		$screen = get_current_screen();
 
 		// Load styles only on required pages.
-		if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' ):
+		if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-custom-fields-editor' ):
 
 			wp_enqueue_script( 'wpum-select2' );
 			wp_enqueue_script( 'wpum-admin-js' );
 			wp_enqueue_style( 'wpum-admin' );
 			wp_enqueue_style( 'wpum-select2' );
+			wp_enqueue_script( 'accordion' );
 
 			if ( isset( $_GET['tab'] ) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
 				wp_enqueue_script( 'jquery-ui-sortable' );
