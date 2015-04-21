@@ -93,7 +93,7 @@ class WPUM_Custom_Fields_Editor {
 				</div>
 				<!-- End Sidebar -->
 
-				<div id="menu-management-liquid">
+				<div id="menu-management-liquid" class="wpum-editor-container">
 				
 					<form method="post" action="options.php" class="wpum-fields-editor-table">
 						<?php 
@@ -103,6 +103,8 @@ class WPUM_Custom_Fields_Editor {
 					    $custom_fields_table->display();
 
 					    wp_nonce_field( 'wpum_fields_editor' );
+
+					    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 
 					    //submit_button( __('Save fields') );
 

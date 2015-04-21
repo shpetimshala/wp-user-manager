@@ -275,15 +275,48 @@ jQuery(document).ready(function ($) {
 
 				// Grab row of the selected field to edit
 				var field_row = $(this).parent().parent();
+				var field_meta = $(this).data('meta');
+				var field_nonce = $(this).next().val();
 
-				// Append editor window
-				field_row.after( WPUM_Admin.field_window() );
+				$.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: wpum_admin_js.ajax,
+					data: {
+						'action' : 'wpum_load_field_editor', // Calls the ajax action
+						'field_meta' : field_meta,
+						'field_nonce' : field_nonce
+					},
+					beforeSend: function() {
+
+						// Set height of loader indicator the same as the
+						// editor table.
+						var table_height = $( '.wp-list-table' ).height();
+						$('.wpum-table-loader').css('display','table');
+						$('.wpum-table-loader').css('height', table_height );
+						$( field_row ).addClass('editing');
+
+					},
+					success: function(results) {
+
+						// hide loader indicator
+						$( '.wpum-table-loader' ).hide();
+
+						// Now display the editor
+						$( results ).insertAfter( field_row );
+						
+					},
+					error: function(xhr, status, error) {
+
+						// hide loader indicator
+						$( '.wpum-table-loader' ).hide();
+						alert(xhr.responseText);
+
+					}
+				});
+
 
 			});
-
-		},
-
-		field_window : function() {
 
 		},
 

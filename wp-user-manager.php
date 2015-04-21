@@ -38,12 +38,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! class_exists( 'WP_User_Manager' ) ) :
 
-	/**
-	 * Main WP_User_Manager Class
-	 *
-	 * @since 1.0.0
-	 */
-	class WP_User_Manager {
+/**
+ * Main WP_User_Manager Class
+ *
+ * @since 1.0.0
+ */
+class WP_User_Manager {
 
 	/** Singleton *************************************************************/
 	/**

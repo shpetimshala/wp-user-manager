@@ -53,7 +53,7 @@
 }
 
 // Fields Editor table
-.wpum-fields-editor-container {
+.wpum-fields-editor-container, .wpum-editor-container {
 	position: relative;
 }
 
@@ -79,7 +79,7 @@ table.wpum_fields_table_list, table.users_page_wpum-custom-fields-editor {
 		background-color: #ffffdc;
 	}
 	tbody {
-		tr:hover {
+		tr:not(.wpum-fields-editor):hover {
 			background-color: #EAF9FF;
 		}
 	}
@@ -192,7 +192,34 @@ body.post-type-wpum_directory {
 }
 
 /* Admin fields editor */
-
-.wpum-fields-editor-table p.submit {
-	margin: 0px;
+.wpum-fields-editor-table {
+	tr {
+		&.editing {
+			background: #ffffdc;
+		}
+	}
+	p.submit {
+		margin: 0px;
+	}
 }
+
+.wpum-fields-editor {
+	background: #f9f9f9;
+	td {
+		border-top:1px solid #e1e1e1;
+		border-bottom: 1px solid #e1e1e1;
+	}
+	.wpum-editor-postbox {
+		margin-bottom: 0px;
+		h3 {
+			margin: 0px;
+			cursor: auto !important;
+			span {
+				padding: 5px 10px;
+				display: block;
+				font-size: smaller;
+			}
+		}
+	}
+}
+

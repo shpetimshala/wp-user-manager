@@ -201,8 +201,9 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
      * @return  Mixed
      */
     private function get_edit_action( $item ) {
-        $edit_url = add_query_arg( array(), admin_url( 'users.php?page=wpum-custom-fields-editor' ) );
-        echo '<a href="'.$edit_url.'" class="button">'.__('Edit').'</a> ';
+        $edit_url = esc_url_raw( add_query_arg( array(), admin_url( 'users.php?page=wpum-custom-fields-editor' ) ) );
+        echo '<a href="'.$edit_url.'" class="button" data-meta="'. esc_js( $item['meta'] ) .'">'.__('Edit').'</a> ';
+        wp_nonce_field( $item['meta'], $item['meta'] );
     }
 
 }

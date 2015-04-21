@@ -75,6 +75,9 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 
+		// Update Custom Fields
+		add_action( 'wp_ajax_wpum_load_field_editor', array( $this, 'load_field_editor' ) );
+
 	}
 
 	/**
@@ -510,6 +513,28 @@ class WPUM_Ajax_Handler {
 			wp_send_json_error( $return );
 
 		}
+
+	}
+
+	/**
+	 * Updates custom field
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function load_field_editor() {
+
+		// Grab details
+		$field_meta = esc_attr( $_POST['field_meta'] );
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( $field_meta, 'field_nonce' );
+		
+		// Display the editor
+		echo json_encode( wpum_display_fields_editor( $field_meta ) );
+
+		die();
 
 	}
 

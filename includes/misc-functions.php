@@ -1445,3 +1445,49 @@ function wpum_account_tab_exists( $tab ) {
 	return $exists;
 
 }
+
+/**
+ * Get a given field by meta.
+ *
+ * @since 1.0.0
+ * @param string $meta meta parameter from an array in wpum_default_fields_list() function.
+ * @return mixed $output
+ */
+function wpum_get_field_by_meta( $meta = null ) {
+
+	$all_fields = wpum_default_fields_list();
+	$custom_field = array();
+
+	if( $meta )
+		$custom_field = $all_fields[ $meta ];
+
+	return $custom_field;
+
+}
+
+/**
+ * Display fields editor in admin panel.
+ *
+ * @since 1.0.0
+ * @param string $id meta parameter of a field from the array in wpum_default_fields_list() function.
+ * @return mixed $output
+ */
+function wpum_display_fields_editor( $id ) {
+
+	$field = wpum_get_field_by_meta( $id );
+
+	$output = '<tr id="wpum-edit-field-'.esc_attr($id).'" class="wpum-fields-editor field-'.esc_attr($id).'">';
+		$output .= '<td colspan="5">';
+			$output .= '<div id="postbox-'.esc_attr($id).'" class="postbox wpum-editor-postbox">';
+				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field' ), $field['title'] ) .'</span></h3>';
+					$output .= '<div class="inside">';
+					
+					$output .= '</div>';
+			$output .= '</div>';
+		$output .= '</td>';
+
+	$output .= '</tr>';
+
+	return $output;
+
+}

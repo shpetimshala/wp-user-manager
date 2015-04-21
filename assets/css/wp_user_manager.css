@@ -35,7 +35,7 @@
   margin-left: 10px;
   color: green; }
 
-.wpum-fields-editor-container {
+.wpum-fields-editor-container, .wpum-editor-container {
   position: relative; }
 
 .wpum-table-loader {
@@ -54,7 +54,7 @@
 
 table.wpum_fields_table_list .row-dragging, table.users_page_wpum-custom-fields-editor .row-dragging {
   background-color: #ffffdc; }
-table.wpum_fields_table_list tbody tr:hover, table.users_page_wpum-custom-fields-editor tbody tr:hover {
+table.wpum_fields_table_list tbody tr:not(.wpum-fields-editor):hover, table.users_page_wpum-custom-fields-editor tbody tr:not(.wpum-fields-editor):hover {
   background-color: #EAF9FF; }
 table.wpum_fields_table_list th.column-order, table.wpum_fields_table_list td.column-order, table.users_page_wpum-custom-fields-editor th.column-order, table.users_page_wpum-custom-fields-editor td.column-order {
   max-width: 50px;
@@ -130,7 +130,24 @@ body.post-type-wpum_directory #preview-action {
   display: none; }
 
 /* Admin fields editor */
+.wpum-fields-editor-table tr.editing {
+  background: #ffffdc; }
 .wpum-fields-editor-table p.submit {
   margin: 0px; }
+
+.wpum-fields-editor {
+  background: #f9f9f9; }
+  .wpum-fields-editor td {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1; }
+  .wpum-fields-editor .wpum-editor-postbox {
+    margin-bottom: 0px; }
+    .wpum-fields-editor .wpum-editor-postbox h3 {
+      margin: 0px;
+      cursor: auto !important; }
+      .wpum-fields-editor .wpum-editor-postbox h3 span {
+        padding: 5px 10px;
+        display: block;
+        font-size: smaller; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */
