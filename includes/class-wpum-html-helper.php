@@ -22,10 +22,7 @@ class WPUM_HTML_Elements {
 	/**
 	 * Renders an HTML Dropdown
 	 *
-	 * @since 1.6
-	 *
 	 * @param array $args
-	 *
 	 * @return string
 	 */
 	public function select( $args = array() ) {
@@ -38,8 +35,8 @@ class WPUM_HTML_Elements {
 			'chosen'           => false,
 			'placeholder'      => null,
 			'multiple'         => false,
-			'show_option_all'  => _x( 'All', 'all dropdown items', 'edd' ),
-			'show_option_none' => _x( 'None', 'no dropdown items', 'edd' )
+			'show_option_all'  => _x( 'All', 'all dropdown items', 'wpum' ),
+			'show_option_none' => _x( 'None', 'no dropdown items', 'wpum' )
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -52,7 +49,7 @@ class WPUM_HTML_Elements {
 		}
 
 		if( $args['chosen'] ) {
-			$args['class'] .= ' edd-select-chosen';
+			$args['class'] .= ' wpum-select-chosen';
 		}
 
 		if( $args['placeholder'] ) {
@@ -61,7 +58,7 @@ class WPUM_HTML_Elements {
 			$placeholder = '';
 		}
 
-		$output = '<select name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( sanitize_key( str_replace( '-', '_', $args['id'] ) ) ) . '" class="edd-select ' . esc_attr( $args['class'] ) . '"' . $multiple . ' data-placeholder="' . $placeholder . '">';
+		$output = '<select name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( sanitize_key( str_replace( '-', '_', $args['id'] ) ) ) . '" class="wpum-select ' . esc_attr( $args['class'] ) . '"' . $multiple . ' data-placeholder="' . $placeholder . '">';
 
 		if ( $args['show_option_all'] ) {
 			if( $args['multiple'] ) {
@@ -103,17 +100,14 @@ class WPUM_HTML_Elements {
 	/**
 	 * Renders an HTML Checkbox
 	 *
-	 * @since 1.9
-	 *
 	 * @param array $args
-	 *
 	 * @return string
 	 */
 	public function checkbox( $args = array() ) {
 		$defaults = array(
 			'name'     => null,
 			'current'  => null,
-			'class'    => 'edd-checkbox',
+			'class'    => 'wpum-checkbox',
 			'options'  => array(
 				'disabled' => false,
 				'readonly' => false
@@ -136,8 +130,6 @@ class WPUM_HTML_Elements {
 
 	/**
 	 * Renders an HTML Text field
-	 *
-	 * @since 1.5.2
 	 *
 	 * @param array $args Arguments for the text field
 	 * @return string Text field
@@ -179,12 +171,12 @@ class WPUM_HTML_Elements {
 			}
 		}
 
-		$output = '<span id="edd-' . sanitize_key( $args['name'] ) . '-wrap">';
+		$output = '<span id="wpum-' . sanitize_key( $args['name'] ) . '-wrap">';
 
-			$output .= '<label class="edd-label" for="edd-' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
+			$output .= '<label class="wpum-label" for="wpum-' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
 
 			if ( ! empty( $args['desc'] ) ) {
-				$output .= '<span class="edd-description">' . esc_html( $args['desc'] ) . '</span>';
+				$output .= '<span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
 			}
 
 			$output .= '<input type="text" name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] )  . '" autocomplete="' . esc_attr( $args['autocomplete'] )  . '" value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" class="' . $args['class'] . '" ' . $data . '' . $disabled . '/>';
@@ -196,8 +188,6 @@ class WPUM_HTML_Elements {
 
 	/**
 	 * Renders an HTML textarea
-	 *
-	 * @since 1.9
 	 *
 	 * @param array $args Arguments for the textarea
 	 * @return string textarea
@@ -219,14 +209,14 @@ class WPUM_HTML_Elements {
 			$disabled = ' disabled="disabled"';
 		}
 
-		$output = '<span id="edd-' . sanitize_key( $args['name'] ) . '-wrap">';
+		$output = '<span id="wpum-' . sanitize_key( $args['name'] ) . '-wrap">';
 
-			$output .= '<label class="edd-label" for="edd-' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
+			$output .= '<label class="wpum-label" for="wpum-' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
 
 			$output .= '<textarea name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" class="' . $args['class'] . '"' . $disabled . '>' . esc_attr( $args['value'] ) . '</textarea>';
 
 			if ( ! empty( $args['desc'] ) ) {
-				$output .= '<span class="edd-description">' . esc_html( $args['desc'] ) . '</span>';
+				$output .= '<span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
 			}
 
 		$output .= '</span>';
