@@ -279,6 +279,13 @@ function wpum_default_fields_list() {
 		'type'           => 'text',
 		'meta'           => 'username',
 		'required'       => true,
+		'options' => array(
+			'test' => array(
+				'type' => 'text',
+				'name' => 'test',
+				'label' => __('Some label'),
+			)
+		),
 	);
 	$fields['first_name'] = array(
 		'order'          => 1,
@@ -1451,7 +1458,7 @@ function wpum_account_tab_exists( $tab ) {
  *
  * @since 1.0.0
  * @param string $meta meta parameter from an array in wpum_default_fields_list() function.
- * @return mixed $output
+ * @return array $custom_field
  */
 function wpum_get_field_by_meta( $meta = null ) {
 
@@ -1466,6 +1473,24 @@ function wpum_get_field_by_meta( $meta = null ) {
 }
 
 /**
+ * Get a given field by meta.
+ *
+ * @since 1.0.0
+ * @param string $meta meta parameter from an array in wpum_default_fields_list() function.
+ * @return bool|array $options false if no options.
+ */
+function wpum_get_field_options( $meta = null ) {
+
+	$options = false;
+	$custom_field = wpum_get_field_by_meta( $meta );
+
+	if( array_key_exists( 'options', $custom_field ) && !empty( $custom_field['options'] ) )
+		$options = $custom_field['options'];
+
+	return $options;
+}
+
+/**
  * Display fields editor in admin panel.
  *
  * @since 1.0.0
@@ -1475,14 +1500,33 @@ function wpum_get_field_by_meta( $meta = null ) {
 function wpum_display_fields_editor( $id ) {
 
 	$field = wpum_get_field_by_meta( $id );
+	$field_options = wpum_get_field_options( $id );
 
 	$output = '<tr id="wpum-edit-field-'.esc_attr($id).'" class="wpum-fields-editor field-'.esc_attr($id).'">';
 		$output .= '<td colspan="5">';
 			$output .= '<div id="postbox-'.esc_attr($id).'" class="postbox wpum-editor-postbox">';
 				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field' ), $field['title'] ) .'</span></h3>';
 					$output .= '<div class="inside">';
-					
-					
+
+					// Generate options if any
+					if( $field_options ) {
+
+						foreach ($field_options as $key => $option) {
+
+							$output .= WPUM()->html->$option['type']( 
+								array( 
+									'name'  => $option['name'],
+									'label' => $option['label'],
+								)
+							);
+
+						}
+
+					} else {
+
+						$output .= __( 'This field has no options.' );
+
+					} // End options generation
 
 					$output .= '</div>';
 			$output .= '</div>';
