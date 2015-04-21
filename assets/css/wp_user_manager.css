@@ -171,4 +171,7 @@ body.post-type-wpum_directory #preview-action {
   .wpum-fields-editor .wpum-no-options {
     padding: 10px; }
 
+body.users_page_wpum-custom-fields-editor #wpfooter {
+  display: none; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

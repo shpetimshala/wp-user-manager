@@ -307,6 +307,27 @@ function wpum_default_fields_list() {
 		'type'           => 'text',
 		'meta'           => 'first_name',
 		'required'       => false,
+		'options' => array(
+			'test' => array(
+				'type' => 'text',
+				'name' => 'test',
+				'label' => __('Some label'),
+				'desc' => 'something goes here'
+			),
+			'new' => array(
+				'type' => 'select',
+				'name' => 'new',
+				'label' => __('Some select'),
+				'choices' => array( 'asd' => 'test', 'asd2' => 'option' ),
+				'desc' => 'something goes here'
+			),
+			'check' => array(
+				'type' => 'checkbox',
+				'name' => 'check',
+				'label' => __('Some select'),
+				'desc' => 'something goes here'
+			)
+		),
 	);
 	$fields['last_name'] = array(
 		'order'          => 2,

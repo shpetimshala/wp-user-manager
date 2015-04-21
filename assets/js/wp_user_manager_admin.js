@@ -273,6 +273,10 @@ jQuery(document).ready(function ($) {
 				var field_meta = $(this).data('meta');
 				var field_nonce = $(this).next().val();
 
+				// Remove any previous editors
+				$( '.users_page_wpum-custom-fields-editor tr' ).removeClass('editing');
+				$( '.wpum-fields-editor' ).remove();
+
 				$.ajax({
 					type: "POST",
 					dataType: 'json',
