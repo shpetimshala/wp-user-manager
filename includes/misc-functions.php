@@ -1482,6 +1482,7 @@ function wpum_display_fields_editor( $id ) {
 				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field' ), $field['title'] ) .'</span></h3>';
 					$output .= '<div class="inside">';
 					
+
 					$output .= '</div>';
 			$output .= '</div>';
 		$output .= '</td>';

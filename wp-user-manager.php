@@ -77,6 +77,14 @@ class WP_User_Manager {
 	public $email_tags;
 
 	/**
+	 * HTML Element Helper Object
+	 *
+	 * @var object
+	 * @since 1.0.0
+	 */
+	public $html;
+
+	/**
 	 * Main WP_User_Manager Instance
 	 *
 	 * Insures that only one instance of WP_User_Manager exists in memory at any one
@@ -99,6 +107,7 @@ class WP_User_Manager {
 			self::$instance->emails     = new WPUM_Emails();
 			self::$instance->email_tags = new WPUM_Email_Template_Tags();
 			self::$instance->forms      = new WPUM_Forms();
+			self::$instance->html       = new WPUM_HTML_Elements();
 
 			// load admin assets css and scripts
 			add_action( 'admin_enqueue_scripts', array( self::$instance, 'admin_enqueue_scripts' ) );
