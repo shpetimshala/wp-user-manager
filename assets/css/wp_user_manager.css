@@ -168,5 +168,7 @@ body.post-type-wpum_directory #preview-action {
     font-size: 12px;
     margin-top: 10px;
     color: #A5A5A5; }
+  .wpum-fields-editor .wpum-no-options {
+    padding: 10px; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

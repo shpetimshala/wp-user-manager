@@ -304,6 +304,26 @@ jQuery(document).ready(function ($) {
 
 						// Now display the editor
 						$( results ).insertAfter( field_row );
+
+						// Scroll to the editor
+						$('html, body').animate({
+					        scrollTop: $('.wpum-fields-editor').offset().top
+					    }, 800);
+
+						// Remove the editor if cancel button is pressed.
+						$('#delete-action a').on('click', function(e) {
+							e.preventDefault();
+							
+							$( field_row ).removeClass('editing');
+							$( '.wpum-fields-editor' ).remove();
+
+							// scroll back
+							$('html, body').animate({
+						        scrollTop: $( field_row ).offset().top
+						    }, 800);
+
+							return false;
+						});
 						
 					},
 					error: function(xhr, status, error) {

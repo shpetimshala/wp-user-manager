@@ -1566,16 +1566,17 @@ function wpum_display_fields_editor( $id ) {
 
 						}
 					} else {
-						$output .= __( 'This field has no options.' );
+						$output .= '<p class="wpum-no-options">'.__( 'This field has no options.' ).'</p>';
 					} // End options generation
 
 					$output .= '<div id="major-publishing-actions">';
 						$output .= '<div id="delete-action">';
-							$output .= '<a class="button wpum-cancel-field" href="">'.__('Cancel').'</a>';
+							$output .= '<a class="button wpum-cancel-field" href="#">'.__('Cancel').'</a>';
 						$output .= '</div>';
 
 						$output .= '<div id="publishing-action">';
-							$output .= '<a class="button-primary wpum-save-field" href="">'.__('Update field').'</a>';
+							if( $field_options )
+								$output .= '<a class="button-primary wpum-save-field" href="#">'.__('Update field').'</a>';
 						$output .= '</div>';
 						$output .= '<div class="clear"></div>';
 					$output .= '</div>';
