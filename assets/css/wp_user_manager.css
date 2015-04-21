@@ -139,9 +139,13 @@ body.post-type-wpum_directory #preview-action {
   background: #f9f9f9; }
   .wpum-fields-editor td {
     border-top: 1px solid #e1e1e1;
-    border-bottom: 1px solid #e1e1e1; }
+    border-bottom: 1px solid #e1e1e1;
+    padding: 40px !important; }
   .wpum-fields-editor .wpum-editor-postbox {
     margin-bottom: 0px; }
+    .wpum-fields-editor .wpum-editor-postbox .inside {
+      padding: 0px;
+      margin-bottom: 0px; }
     .wpum-fields-editor .wpum-editor-postbox h3 {
       margin: 0px;
       cursor: auto !important; }
@@ -149,5 +153,20 @@ body.post-type-wpum_directory #preview-action {
         padding: 5px 10px;
         display: block;
         font-size: smaller; }
+  .wpum-fields-editor .wpum-editor-field {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 10px; }
+    .wpum-fields-editor .wpum-editor-field:first-child {
+      padding-top: 0px; }
+    .wpum-fields-editor .wpum-editor-field:last-child {
+      border-bottom: none; }
+    .wpum-fields-editor .wpum-editor-field input[type=text],
+    .wpum-fields-editor .wpum-editor-field select {
+      display: block;
+      width: 100%; }
+  .wpum-fields-editor .wpum-description {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #A5A5A5; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

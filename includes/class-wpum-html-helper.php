@@ -28,11 +28,12 @@ class WPUM_HTML_Elements {
 	public function select( $args = array() ) {
 		$defaults = array(
 			'options'          => array(),
+			'label'            => '',
 			'name'             => null,
 			'class'            => '',
+			'desc'             => '',
 			'id'               => '',
 			'selected'         => 0,
-			'chosen'           => false,
 			'placeholder'      => null,
 			'multiple'         => false,
 			'show_option_all'  => _x( 'All', 'all dropdown items', 'wpum' ),
@@ -48,17 +49,18 @@ class WPUM_HTML_Elements {
 			$multiple = '';
 		}
 
-		if( $args['chosen'] ) {
-			$args['class'] .= ' wpum-select-chosen';
-		}
-
 		if( $args['placeholder'] ) {
 			$placeholder = $args['placeholder'];
 		} else {
 			$placeholder = '';
 		}
 
-		$output = '<select name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( sanitize_key( str_replace( '-', '_', $args['id'] ) ) ) . '" class="wpum-select ' . esc_attr( $args['class'] ) . '"' . $multiple . ' data-placeholder="' . $placeholder . '">';
+		$output = '';
+
+		if( !empty( $args['label'] ) )
+			$output .= '<label class="wpum-label" for="' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
+
+		$output .= '<select name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( sanitize_key( str_replace( '-', '_', $args['id'] ) ) ) . '" class="wpum-select ' . esc_attr( $args['class'] ) . '"' . $multiple . ' data-placeholder="' . $placeholder . '">';
 
 		if ( $args['show_option_all'] ) {
 			if( $args['multiple'] ) {
@@ -94,6 +96,10 @@ class WPUM_HTML_Elements {
 
 		$output .= '</select>';
 
+		if ( ! empty( $args['desc'] ) ) {
+			$output .= '<span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
+		}
+		
 		return $output;
 	}
 
@@ -105,10 +111,12 @@ class WPUM_HTML_Elements {
 	 */
 	public function checkbox( $args = array() ) {
 		$defaults = array(
-			'name'     => null,
-			'current'  => null,
-			'class'    => 'wpum-checkbox',
-			'options'  => array(
+			'name'    => null,
+			'current' => null,
+			'label'   => '',
+			'desc'    => '',
+			'class'   => 'wpum-checkbox',
+			'options' => array(
 				'disabled' => false,
 				'readonly' => false
 			)
@@ -123,7 +131,11 @@ class WPUM_HTML_Elements {
 			$options .= ' readonly';
 		}
 
-		$output = '<input type="checkbox"' . $options . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" class="' . $args['class'] . ' ' . esc_attr( $args['name'] ) . '" ' . checked( 1, $args['current'], false ) . ' />';
+		$output = '<label class="wpum-label checkbox" for="' . sanitize_key( $args['name'] ) . '">' . ' <input type="checkbox"' . $options . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" class="' . $args['class'] . ' ' . esc_attr( $args['name'] ) . '" ' . checked( 1, $args['current'], false ) . ' /> '. esc_html( $args['label'] )  .' </label>';
+
+		if ( ! empty( $args['desc'] ) ) {
+			$output .= '<br/><span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
+		}
 
 		return $output;
 	}
@@ -173,13 +185,13 @@ class WPUM_HTML_Elements {
 
 		$output = '<span id="wpum-' . sanitize_key( $args['name'] ) . '-wrap">';
 
-			$output .= '<label class="wpum-label" for="wpum-' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
+			$output .= '<label class="wpum-label" for="' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
+
+			$output .= '<input type="text" name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] )  . '" autocomplete="' . esc_attr( $args['autocomplete'] )  . '" value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" class="' . $args['class'] . '" ' . $data . '' . $disabled . '/>';
 
 			if ( ! empty( $args['desc'] ) ) {
 				$output .= '<span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
 			}
-
-			$output .= '<input type="text" name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] )  . '" autocomplete="' . esc_attr( $args['autocomplete'] )  . '" value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" class="' . $args['class'] . '" ' . $data . '' . $disabled . '/>';
 
 		$output .= '</span>';
 

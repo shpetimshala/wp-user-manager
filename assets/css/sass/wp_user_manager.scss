@@ -208,9 +208,14 @@ body.post-type-wpum_directory {
 	td {
 		border-top:1px solid #e1e1e1;
 		border-bottom: 1px solid #e1e1e1;
+		padding: 40px !important;
 	}
 	.wpum-editor-postbox {
 		margin-bottom: 0px;
+		.inside {
+			padding: 0px;
+			margin-bottom:0px;
+		}
 		h3 {
 			margin: 0px;
 			cursor: auto !important;
@@ -220,6 +225,26 @@ body.post-type-wpum_directory {
 				font-size: smaller;
 			}
 		}
+	}
+	.wpum-editor-field {
+		border-bottom: 1px solid #e1e1e1;
+		padding: 10px;
+		&:first-child {
+			padding-top:0px;
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+		input[type=text],
+		select {
+			display: block;
+			width: 100%;
+		}
+	}
+	.wpum-description {
+		font-size: 12px;
+		margin-top: 10px;
+		color: #A5A5A5;
 	}
 }
 

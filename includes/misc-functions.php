@@ -284,6 +284,20 @@ function wpum_default_fields_list() {
 				'type' => 'text',
 				'name' => 'test',
 				'label' => __('Some label'),
+				'desc' => 'something goes here'
+			),
+			'new' => array(
+				'type' => 'select',
+				'name' => 'new',
+				'label' => __('Some select'),
+				'choices' => array( 'asd' => 'test', 'asd2' => 'option' ),
+				'desc' => 'something goes here'
+			),
+			'check' => array(
+				'type' => 'checkbox',
+				'name' => 'check',
+				'label' => __('Some select'),
+				'desc' => 'something goes here'
 			)
 		),
 	);
@@ -1499,35 +1513,71 @@ function wpum_get_field_options( $meta = null ) {
  */
 function wpum_display_fields_editor( $id ) {
 
-	$field = wpum_get_field_by_meta( $id );
+	$field         = wpum_get_field_by_meta( $id );
 	$field_options = wpum_get_field_options( $id );
 
 	$output = '<tr id="wpum-edit-field-'.esc_attr($id).'" class="wpum-fields-editor field-'.esc_attr($id).'">';
 		$output .= '<td colspan="5">';
 			$output .= '<div id="postbox-'.esc_attr($id).'" class="postbox wpum-editor-postbox">';
-				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field' ), $field['title'] ) .'</span></h3>';
+				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field.' ), $field['title'] ) .'</span></h3>';
 					$output .= '<div class="inside">';
 
 					// Generate options if any
 					if( $field_options ) {
-
 						foreach ($field_options as $key => $option) {
 
-							$output .= WPUM()->html->$option['type']( 
-								array( 
-									'name'  => $option['name'],
-									'label' => $option['label'],
-								)
-							);
+							$output .= '<div class="wpum-editor-field">';
+
+							// Check field type - generate option accordingly
+							switch ( $option['type'] ) {
+								case 'text':
+									$output .= WPUM()->html->$option['type']( 
+										array( 
+											'name'  => esc_attr( $option['name'] ),
+											'label' => esc_html( $option['label'] ),
+											'desc' => $option['desc']
+										)
+									);
+									break;
+								case 'select':
+									$output .= WPUM()->html->$option['type']( 
+										array( 
+											'name'  => esc_attr( $option['name'] ),
+											'label' => esc_html( $option['label'] ),
+											'options' => $option['choices'],
+											'show_option_all'  => false,
+											'show_option_none' => false,
+											'desc' => $option['desc']
+										)
+									);
+									break;
+								case 'checkbox':
+									$output .= WPUM()->html->$option['type']( 
+										array( 
+											'name'  => esc_attr( $option['name'] ),
+											'label' => esc_html( $option['label'] ),
+											'desc' => $option['desc']
+										)
+									);
+									break;
+							}
+
+							$output .= '</div>';
 
 						}
-
 					} else {
-
 						$output .= __( 'This field has no options.' );
-
 					} // End options generation
 
+					$output .= '<div id="major-publishing-actions">';
+						$output .= '<div id="delete-action">';
+							$output .= '<a class="button wpum-cancel-field" href="">'.__('Cancel').'</a>';
+						$output .= '</div>';
+
+						$output .= '<div id="publishing-action">';
+							$output .= '<a class="button-primary wpum-save-field" href="">'.__('Update field').'</a>';
+						$output .= '</div>';
+						$output .= '<div class="clear"></div>';
 					$output .= '</div>';
 			$output .= '</div>';
 		$output .= '</td>';
