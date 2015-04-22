@@ -387,15 +387,6 @@ function wpum_get_registered_settings() {
 				),
 			)
 		),
-		'default_fields' => apply_filters( 'wpum_settings_default_fields',
-			array(
-				'default_fields_editor' => array(
-					'id'   => 'default_fields_editor',
-					'name' => __( 'Default Fields Editor:', 'wpum' ),
-					'type' => 'hook'
-				),
-			)
-		),
 		'profile' => apply_filters( 'wpum_settings_profile',
 			array(
 				'profile_permalinks' => array(
@@ -582,7 +573,6 @@ function wpum_get_settings_tabs() {
 	$tabs['general']        = __( 'General', 'wpum' );
 	$tabs['registration']   = __( 'Registration', 'wpum' );
 	$tabs['emails']         = __( 'Emails', 'wpum' );
-	$tabs['default_fields'] = __( 'Fields', 'wpum' );
 	$tabs['profile']        = __( 'Profiles', 'wpum' );
 	$tabs['redirects']      = __( 'Redirects', 'wpum' );
 	$tabs['tools']          = __( 'Tools', 'wpum' );

@@ -68,9 +68,6 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
 
-		// Restore Default Fields
-		add_action( 'wp_ajax_wpum_update_single_default_field', array( $this, 'update_single_default_fields' ) );
-
 		// Update Custom Fields
 		add_action( 'wp_ajax_wpum_load_field_editor', array( $this, 'load_field_editor' ) );
 
@@ -372,57 +369,6 @@ class WPUM_Ajax_Handler {
 		);
 
 		wp_send_json_success( $return );
-
-	}
-
-	/**
-	 * Update single default field settings
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function update_single_default_fields() {
-
-		// Check our nonce and make sure it's correct.
-		$field = $_REQUEST['field'];
-		check_ajax_referer( esc_attr( $_REQUEST['field'] ), 'update_nonce' );
-
-		// Abort if something isn't right.
-		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
-			$return = array(
-				'message' => __( 'Error.' ),
-			);
-
-			wp_send_json_error( $return );
-		}
-
-		// Validate it exists
-		if ( array_key_exists( $field , wpum_default_user_fields_list() ) ) {
-
-			$get_fields = get_option( 'wpum_default_fields' );
-			$get_fields[ $field ]['required'] = esc_attr( $_REQUEST['required'] );
-			$get_fields[ $field ]['show_on_signup'] = esc_attr( $_REQUEST['show_on_signup'] );
-
-			update_option( 'wpum_default_fields', $get_fields );
-
-			$return = array(
-				'valid'   => true,
-				'message' => __( 'Field successfully updated.' ),
-			);
-
-			wp_send_json_success( $return );
-
-		} else {
-
-			$return = array(
-				'valid'   => false,
-				'message' => __( 'Something went wrong.' ),
-			);
-
-			wp_send_json_error( $return );
-
-		}
 
 	}
 
