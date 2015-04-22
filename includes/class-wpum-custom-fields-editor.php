@@ -26,14 +26,6 @@ class WPUM_Custom_Fields_Editor {
 	const Hook = 'users_page_wpum-custom-fields-editor';
 
 	/**
-	 * Links of the editor navbar
-	 *
-	 * @var object
-	 * @since 1.0.0
-	 */
-	public static $nav_links;
-
-	/**
 	 * __construct function.
 	 *
 	 * @access public
@@ -44,18 +36,6 @@ class WPUM_Custom_Fields_Editor {
 		add_action( 'load-'.self::Hook, array( $this, 'add_screen_meta_boxes' ) );
 		add_action( 'add_meta_boxes_'.self::Hook, array( $this, 'add_meta_box' ) );
 		add_action( 'admin_footer-'.self::Hook, array( $this, 'print_script_in_footer' ) );
-
-		// Navbar links
-		self::$nav_links = array(
-			array(
-				'type' => 'registration',
-				'title' => __('Registration fields')
-			),
-			array(
-				'type' => 'profile',
-				'title' => __('Profile fields')
-			),
-		);
 
 		// Load WP_List_Table
 		if( ! class_exists( 'WP_List_Table' ) ) {
@@ -106,8 +86,6 @@ class WPUM_Custom_Fields_Editor {
 
 					    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 
-					    //submit_button( __('Save fields') );
-
 					    ?>
 			    	</form>
 
@@ -136,37 +114,6 @@ class WPUM_Custom_Fields_Editor {
 	 
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
-	}
-
-	/**
-	 * Handles the display of the editor page navbar in the backend.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public static function navbar() {
-		
-		// Define base url
-		$url = admin_url( 'users.php?page=wpum-custom-fields-editor' );
-
-		$output = '<div class="wp-filter">';
-			$output .= '<ul class="filter-links">';
-				
-				foreach ( self::$nav_links as $link ) {
-					$link_url = add_query_arg( array( 'editor' => $link['type'] ), $url );
-
-					// Check if a page is selected, otherwise set first tab as active.
-					if( isset( $_GET['editor'] ) && $_GET['editor'] == $link['type'] || !isset( $_GET['editor'] ) && $link['type'] == 'registration' ) :
-						$output .= '<li><a href="'.esc_url( $link_url ).'" class="current">'. $link['title'] .'</a></li>';
-					else : 
-						$output .= '<li><a href="'. esc_url( $link_url ).'">'. $link['title'] .'</a></li>';
-					endif;
-				}
-
-			$output .= '</ul>';
-		$output .= '</div>';
-
-		return $output;
 	}
 
 	/**
