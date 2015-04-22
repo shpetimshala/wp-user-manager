@@ -165,7 +165,7 @@ function wpum_get_email( $email_id ) {
  * @return array of all the fields correctly ordered.
  */
 function wpum_sort_default_fields_table( $a, $b ) {
-	return ( $a['order'] < $b['order'] ) ? -1 : 1;
+	return ( $a['priority'] < $b['priority'] ) ? -1 : 1;
 }
 
 /**
@@ -265,9 +265,6 @@ function wpum_default_user_fields_list() {
 
 /**
  * Returns a list of user fields for the forms.
- * Fields will be ordered if a custom order has been set.
- * Options of the fields will be updated if any custom
- * option has been set through the admin panel.
  *
  * @since 1.0.0
  * @return void
@@ -371,6 +368,32 @@ function wpum_default_fields_list() {
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
 	
+	return $fields;
+
+}
+
+/**
+ * Returns a list of custom fields with custom priorities and settings
+ * set from the admin panel.
+ *
+ * @since 1.0.0
+ * @return array of all the fields.
+ */
+function wpum_get_sorted_fields() {
+
+	// Get settings from the database
+	$custom_fields_settings = get_option( 'wpum_custom_fields' );
+
+	// Get fields on file
+	$fields = wpum_default_fields_list();
+
+	// Check if anything is set into the database,
+	// and merge what's into the database with the fields on file.
+	if( is_array( $custom_fields_settings ) && !empty( $custom_fields_settings ) )
+		$fields = array_replace_recursive( $fields, $custom_fields_settings );
+	
+	uasort( $fields, 'wpum_sort_default_fields_table');
+
 	return $fields;
 
 }

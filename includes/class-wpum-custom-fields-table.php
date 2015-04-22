@@ -85,7 +85,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = wpum_default_fields_list();
+        $data = wpum_get_sorted_fields();
 
         return $data;
 
