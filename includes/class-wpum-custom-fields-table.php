@@ -103,7 +103,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
         
         switch( $column_name ) {
             case 'order':
-                return '<span class="dashicons dashicons-sort"></span>';
+                return '<a href="#" class="button"><span class="dashicons dashicons-sort"></span></a>';
             break;
             case 'title':
                 return $item['title'];

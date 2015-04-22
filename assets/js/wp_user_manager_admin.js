@@ -111,7 +111,12 @@ jQuery(document).ready(function ($) {
 								$('.wpum-table-loader').css('height', table_height );
 							},
 							success: function(results) {
+								// Update odd even table classes
+								$('.users_page_wpum-custom-fields-editor').find("tr").removeClass('alternate');
+								$('.users_page_wpum-custom-fields-editor').find("tr:even").addClass('alternate');
+								// Hide loading indicator
 								$('.wpum-table-loader').hide();
+								// Show message
 								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
 							},
 							error: function(xhr, status, error) {

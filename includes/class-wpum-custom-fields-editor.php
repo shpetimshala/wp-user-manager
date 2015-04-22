@@ -137,7 +137,7 @@ class WPUM_Custom_Fields_Editor {
 	public function help_text() {
 
 		$output = '<p>';
-			$output .= sprintf( __('Click and drag the %s button or the field order number to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>');
+			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>');
 		$output .= '</p>';
 
 		echo $output;
