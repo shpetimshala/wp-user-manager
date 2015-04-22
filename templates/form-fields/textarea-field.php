@@ -14,7 +14,7 @@
 	class="input-text <?php echo ! empty( $field['class'] ) ? $field['class'] : ''; ?>"
 	name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?>"
 	id="<?php echo esc_attr( $key ); ?>"
-	placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>"
+	placeholder="<?php echo ! empty( $field['placeholder'] ) ? esc_attr( $field['placeholder'] ) : ''; ?>"
 	maxlength="<?php echo ! empty( $field['maxlength'] ) ? $field['maxlength'] : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
 	><?php echo isset( $field['value'] ) ? esc_textarea( $field['value'] ) : ''; ?></textarea>

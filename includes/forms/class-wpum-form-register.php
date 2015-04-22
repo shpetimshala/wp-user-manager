@@ -54,18 +54,18 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		// Add honeypot spam field
 		if( wpum_get_option('enable_honeypot') ) :
-			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
+			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
 		// Add terms & conditions field
 		if( wpum_get_option('enable_terms') ) :
-			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_terms_field' ) );
+			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_terms_field' ) );
 		endif;
 		
 		// Add Role selection if enabled
 		if( wpum_get_option('allow_role_select') ) :
-			add_action( 'wpum_default_registration_fields', array( __CLASS__, 'add_role_field' ) );
+			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_role_field' ) );
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_role_field' ), 10, 3 );
 			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
@@ -81,92 +81,6 @@ class WPUM_Form_Register extends WPUM_Form {
 	}
 
 	/**
-	 * Builds a list of all the registration fields sorted
-	 * through the settings panel.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return $fields_list array of all the fields.
-	 */
-	protected static function get_sorted_registration_fields() {
-
-		$fields_list = array();
-
-		// Grab default fields list
-		$default_fields = wpum_default_user_fields_list();
-		
-		// Get the sorted list from the settings panel
-		$saved_order = get_option( 'wpum_default_fields' );
-
-		// Merge them together
-		if( $saved_order ) {
-            foreach ($saved_order as $field) {
-                $default_fields[ $field['meta'] ]['order'] = $field['order'];
-                $default_fields[ $field['meta'] ]['required'] = $field['required'];
-                $default_fields[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
-            }
-        }
-
-		// Sort all together
-        uasort( $default_fields, 'wpum_sort_default_fields_table');
-
-        // Build new list
-        foreach ($default_fields as $new_field) {
-
-        	// Check only for allowed fields
-        	switch ($new_field['show_on_signup']) {
-        		case true:
-        			$fields_list[ $new_field['meta'] ] = array(
-						'label'       => $new_field['title'],
-						'type'        => $new_field['type'],
-						'required'    => $new_field['required'],
-						'placeholder' => apply_filters( 'wpum_registration_field_placeholder', null, $new_field ),
-						'options'     => apply_filters( 'wpum_registration_field_options', null, $new_field ),
-						'priority'    => $new_field['order']
-					);
-
-        			if( $new_field['meta'] == 'user_avatar' ) {
-        				$fields_list[ 'user_avatar' ] = array(
-							'label'       => $new_field['title'],
-							'type'        => 'file',
-							'required'    => $new_field['required'],
-							'placeholder' => apply_filters( 'wpum_registration_field_placeholder', null, $new_field ),
-							'value'       => '',
-							'priority'    => $new_field['order'],
-							'ajax'        => false,
-							'multiple'    => false,
-							'allowed_mime_types' => array(
-								'jpg'  => 'image/jpeg',
-								'jpeg' => 'image/jpeg',
-								'gif'  => 'image/gif',
-								'png'  => 'image/png'
-							)
-						);
-        			}
-
-        			break;
-        		
-        		default:
-        			// do nothing
-        			break;
-        	}
-
-        }
-
-        // Remove password field if not enabled
-        if( !wpum_get_option('custom_passwords') ) {
-        	unset( $fields_list['password'] );
-        }
-
-        // Remove the user avatar field if not enabled
-		if( !wpum_get_option('custom_avatars') )
-			unset($fields_list['user_avatar']);
-
-		return apply_filters( 'wpum_default_registration_fields', $fields_list );
-
-	}
-
-	/**
 	 * Define registration fields
 	 *
 	 * @access public
@@ -175,8 +89,12 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function get_registration_fields() {
 
+		echo "<pre>";
+		print_r( wpum_get_registration_fields() );
+		echo "</pre>";
+
 		self::$fields = array(
-			'register' => self::get_sorted_registration_fields()
+			'register' => wpum_get_registration_fields()
 		);
 
 	}

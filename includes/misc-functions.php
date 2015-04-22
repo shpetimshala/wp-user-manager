@@ -179,24 +179,24 @@ function wpum_default_fields_list() {
 	$fields = array();
 	
 	$fields['username'] = array(
-		'priority'          => 0,
-		'title'          => __( 'Username' ),
+		'priority'       => 0,
+		'label'          => __( 'Username' ),
 		'type'           => 'text',
 		'meta'           => 'username',
 		'required'       => true,
 		'show_on_signup' => true
 	);
 	$fields['first_name'] = array(
-		'priority'          => 1,
-		'title'          => __( 'First Name' ),
+		'priority'       => 1,
+		'label'          => __( 'First Name' ),
 		'type'           => 'text',
 		'meta'           => 'first_name',
 		'required'       => false,
 		'show_on_signup' => false,
-		'options' => array(
-			'required' => array(
+		'settings' => array(
+			'is_required' => array(
 				'type'  => 'checkbox',
-				'name'  => 'required',
+				'name'  => 'is_required',
 				'label' => __('Set this field as required.'),
 			),
 			'show_on_signup' => array(
@@ -207,68 +207,76 @@ function wpum_default_fields_list() {
 		),
 	);
 	$fields['last_name'] = array(
-		'priority'          => 2,
-		'title'          => __( 'Last Name' ),
+		'priority'       => 2,
+		'label'          => __( 'Last Name' ),
 		'type'           => 'text',
 		'meta'           => 'last_name',
 		'required'       => false,
-		'show_on_signup' => false
+		'show_on_signup' => false,
 	);
 	$fields['nickname'] = array(
-		'priority'          => 3,
-		'title'          => __( 'Nickname' ),
+		'priority'       => 3,
+		'label'          => __( 'Nickname' ),
 		'type'           => 'text',
 		'meta'           => 'nickname',
 		'required'       => true,
 		'show_on_signup' => false
 	);
 	$fields['display_name'] = array(
-		'priority'          => 4,
-		'title'          => __( 'Display Name' ),
+		'priority'       => 4,
+		'label'          => __( 'Display Name' ),
 		'type'           => 'select',
 		'meta'           => 'display_name',
 		'required'       => true,
 		'show_on_signup' => false
 	);
 	$fields['user_email'] = array(
-		'priority'          => 5,
-		'title'          => __( 'Email' ),
+		'priority'       => 5,
+		'label'          => __( 'Email' ),
 		'type'           => 'email',
 		'meta'           => 'user_email',
 		'required'       => true,
 		'show_on_signup' => true
 	);
 	$fields['user_url'] = array(
-		'priority'          => 6,
-		'title'          => __( 'Website' ),
+		'priority'       => 6,
+		'label'          => __( 'Website' ),
 		'type'           => 'text',
 		'meta'           => 'user_url',
 		'required'       => false,
 		'show_on_signup' => false
 	);
 	$fields['description'] = array(
-		'priority'          => 7,
-		'title'          => __( 'Description' ),
+		'priority'       => 7,
+		'label'          => __( 'Description' ),
 		'type'           => 'textarea',
 		'meta'           => 'description',
 		'required'       => false,
 		'show_on_signup' => false
 	);
 	$fields['password'] = array(
-		'priority'          => 8,
-		'title'          => __( 'Password' ),
+		'priority'       => 8,
+		'label'          => __( 'Password' ),
 		'type'           => 'password',
 		'meta'           => 'password',
 		'required'       => true,
 		'show_on_signup' => true
 	);
 	$fields['user_avatar'] = array(
-		'priority'          => 9,
-		'title'          => __( 'Profile Picture' ),
-		'type'           => 'file',
-		'meta'           => 'user_avatar',
-		'required'       => false,
-		'show_on_signup' => false
+		'priority'           => 9,
+		'label'              => __( 'Profile Picture' ),
+		'type'               => 'file',
+		'meta'               => 'user_avatar',
+		'required'           => false,
+		'show_on_signup'     => true,
+		'ajax'               => false,
+		'multiple'           => false,
+		'allowed_mime_types' => array(
+			'jpg'  => 'image/jpeg',
+			'jpeg' => 'image/jpeg',
+			'gif'  => 'image/gif',
+			'png'  => 'image/png'
+		)
 	);
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
@@ -300,6 +308,45 @@ function wpum_get_sorted_fields() {
 	uasort( $fields, 'wpum_sort_default_fields_table');
 
 	return $fields;
+
+}
+
+/**
+ * Returns a list of the registrations fields.
+ *
+ * @since 1.0.0
+ * @return array of all the fields.
+ */
+function wpum_get_registration_fields() {
+
+	// Lets get the fields
+	$fields = wpum_get_sorted_fields();
+
+	// Prepare registration fields
+	$registration_fields = array();
+
+	// Now extract only the fields for the registration form.
+	foreach ( $fields as $key => $field ) {
+
+		// Get only the ones enabled.
+		switch ( $field[ 'show_on_signup' ] ) {
+			case true:
+				// merge original attributes of the field
+				$registration_fields[ $key ] = $field;
+				break;
+		}
+
+	}
+
+	// Remove password field if not enabled
+    if( !wpum_get_option('custom_passwords') )
+    	unset( $registration_fields['password'] );
+
+    // Remove the user avatar field if not enabled
+	if( !wpum_get_option('custom_avatars') )
+		unset( $registration_fields['user_avatar'] );
+
+	return apply_filters( 'wpum_get_registration_fields', $registration_fields );
 
 }
 
@@ -1431,8 +1478,8 @@ function wpum_get_field_options( $meta = null ) {
 	$options = false;
 	$custom_field = wpum_get_field_by_meta( $meta );
 
-	if( array_key_exists( 'options', $custom_field ) && !empty( $custom_field['options'] ) )
-		$options = $custom_field['options'];
+	if( array_key_exists( 'settings', $custom_field ) && !empty( $custom_field['settings'] ) )
+		$options = $custom_field['settings'];
 
 	return $options;
 }
@@ -1452,7 +1499,7 @@ function wpum_display_fields_editor( $id ) {
 	$output = '<tr id="wpum-edit-field-'.esc_attr($id).'" class="wpum-fields-editor field-'.esc_attr($id).'">';
 		$output .= '<td colspan="5">';
 			$output .= '<div id="postbox-'.esc_attr($id).'" class="postbox wpum-editor-postbox">';
-				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field.' ), $field['title'] ) .'</span></h3>';
+				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field.' ), $field['label'] ) .'</span></h3>';
 					$output .= '<div class="inside">';
 
 					// Generate options if any

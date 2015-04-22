@@ -106,7 +106,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
                 return '<a href="#" class="button"><span class="dashicons dashicons-sort"></span></a>';
             break;
             case 'title':
-                return $item['title'];
+                return $item['label'];
             break;
             case 'type':
                 return $this->parse_type( $item['type'] );
