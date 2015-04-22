@@ -76,6 +76,10 @@ class WPUM_Custom_Fields_Editor {
 		
 		?>
 
+		<pre>
+			<?php print_r( get_option( 'wpum_custom_fields' ) ); ?>
+		</pre>
+
 		<div class="wrap">
 
 			<h2 class="wpum-page-title"><?php _e( 'WP User Manager - Custom Fields Editor' ); ?></h2>

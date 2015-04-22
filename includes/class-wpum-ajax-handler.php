@@ -533,6 +533,7 @@ class WPUM_Ajax_Handler {
 		// Update the option into the database
 		update_option( 'wpum_custom_fields', $fields );
 
+		// Send message
 		$return = array(
 			'message'   => __( 'Fields order successfully updated.' ),
 		);

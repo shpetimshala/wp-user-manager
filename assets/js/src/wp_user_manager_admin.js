@@ -90,7 +90,7 @@ jQuery(document).ready(function ($) {
 		                // Update TR data
 						$(this).children('tr').each(function() {
 				            $(this).children('td:first-child').html($(this).index());
-				            $(this).data('order',$(this).index());
+				            $(this).data('priority',$(this).index());
 				        });
 						
 						// Prepare field data

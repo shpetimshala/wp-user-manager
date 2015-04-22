@@ -264,7 +264,10 @@ function wpum_default_user_fields_list() {
 }
 
 /**
- * Defines the list of registration and profile fields.
+ * Returns a list of user fields for the forms.
+ * Fields will be ordered if a custom order has been set.
+ * Options of the fields will be updated if any custom
+ * option has been set through the admin panel.
  *
  * @since 1.0.0
  * @return void
@@ -367,6 +370,7 @@ function wpum_default_fields_list() {
 	);
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
+	
 	return $fields;
 
 }
