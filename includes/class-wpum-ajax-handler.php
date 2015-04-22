@@ -61,9 +61,9 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
 		add_action( 'wp_ajax_nopriv_wpum_ajax_psw_reset', array( $this, 'password_reset' ) );
 
-		// Store the default fields order
-		add_action( 'wp_ajax_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
-		add_action( 'wp_ajax_nopriv_wpum_store_default_fields_order', array( $this, 'store_default_fields_order' ) );
+		// Avatar removal method
+		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
+		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
@@ -71,12 +71,11 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_update_single_default_field', array( $this, 'update_single_default_fields' ) );
 
-		// Avatar removal method
-		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
-		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
-
 		// Update Custom Fields
 		add_action( 'wp_ajax_wpum_load_field_editor', array( $this, 'load_field_editor' ) );
+
+		// Update custom fields order
+		add_action( 'wp_ajax_wpum_update_fields_order', array( $this, 'update_fields_order' ) );
 
 	}
 
@@ -340,49 +339,6 @@ class WPUM_Ajax_Handler {
 	}
 
 	/**
-	 * Store default fields order.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function store_default_fields_order() {
-
-		// Check our nonce and make sure it's correct.
-		check_ajax_referer( 'wpum_nonce_default_fields_table', 'wpum_backend_fields_table' );
-
-		// Abort if something isn't right.
-		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
-			$return = array(
-				'message' => __( 'Error.' ),
-			);
-
-			wp_send_json_error( $return );
-		}
-
-		$fields = array();
-
-		if ( isset( $_REQUEST['items'] ) && is_array( $_REQUEST['items'] ) ) {
-			foreach ( $_REQUEST['items'] as $field ) {
-				$fields[ $field['meta'] ]['order'] = $field['order'];
-				$fields[ $field['meta'] ]['required'] = $field['required'];
-				$fields[ $field['meta'] ]['show_on_signup'] = $field['show_on_signup'];
-				$fields[ $field['meta'] ]['meta'] = $field['meta'];
-			}
-		}
-
-		update_option( 'wpum_default_fields', $fields );
-
-		$return = array(
-			'completed' => true,
-			'message'   => __( 'Fields order successfully updated.' ),
-		);
-
-		wp_send_json_success( $return );
-
-	}
-
-	/**
 	 * Restore email into the backend.
 	 *
 	 * @access public
@@ -535,6 +491,53 @@ class WPUM_Ajax_Handler {
 		echo json_encode( wpum_display_fields_editor( $field_meta ) );
 
 		die();
+
+	}
+
+	/**
+	 * Updates custom fields order.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function update_fields_order() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'wpum_fields_editor', 'wpum_editor_nonce' );
+
+		// Abort if something isn't right.
+		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
+			$return = array(
+				'message' => __( 'Error.' ),
+			);
+			wp_send_json_error( $return );
+		}
+
+		// Prepare the array.
+		$fields = array();
+
+		// loop through each field from the table and set the array
+		if ( isset( $_POST['items'] ) && is_array( $_POST['items'] ) ) {
+			foreach ( $_REQUEST['items'] as $field ) {
+
+				$fields[ $field['meta'] ] = array(
+					'priority'       => $field['priority'],
+					'required'       => $field['required'],
+					'show_on_signup' => $field['show_on_signup'],
+				);
+
+			}
+		}
+
+		// Update the option into the database
+		update_option( 'wpum_custom_fields', $fields );
+
+		$return = array(
+			'message'   => __( 'Fields order successfully updated.' ),
+		);
+
+		wp_send_json_success( $return );
 
 	}
 

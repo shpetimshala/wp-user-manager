@@ -76,12 +76,6 @@ jQuery(document).ready(function ($) {
 		order_default_fields : function() {
 
 			if ( $.isFunction($.fn.sortable) ) {
-			    // Get the table size
-				var wpum_fields_table_h = $('.users_page_wpum-custom-fields-editor').height();
-				var wpum_fields_table_w = $('.users_page_wpum-custom-fields-editor').width();
-				
-				// Set size to the loader div
-				$('.wpum-table-loader').height( wpum_fields_table_h ).width( wpum_fields_table_w );
 
 				$(".users_page_wpum-custom-fields-editor tbody").sortable({
 					helper: this.sortable_table_fix,
@@ -98,35 +92,40 @@ jQuery(document).ready(function ($) {
 				            $(this).children('td:first-child').html($(this).index());
 				            $(this).data('order',$(this).index());
 				        });
-		                /*
 						
+						// Prepare field data
 		                dataArray = $.map($(this).children('tr'), function(el){
-					        return {'order':$(el).data('order'), 'meta':$(el).data('meta'), 'required':$(el).data('required'), 'show_on_signup':$(el).data('show_on_signup')}; 
+					        return {'priority':$(el).data('priority'), 'meta':$(el).data('meta'), 'required':$(el).data('required'), 'show_on_signup':$(el).data('show_on_signup')}; 
 					    });
 
-					    var wpum_backend_fields_table = $('#wpum_backend_fields_table').val();
+					    // Get nonce
+					    var wpum_editor_nonce = $('#_wpnonce').val();
 
 		                $.ajax({
-							type: 'GET',
+							type: 'POST',
 							dataType: 'json',
 							url: wpum_admin_js.ajax,
 							data: {
-								'action' : 'wpum_store_default_fields_order', // Calls the ajax action
+								'action' : 'wpum_update_fields_order', // Calls the ajax action
 								'items' : dataArray,
-								'wpum_backend_fields_table': wpum_backend_fields_table
+								'wpum_editor_nonce': wpum_editor_nonce
 							},
 							beforeSend: function() {
 								$('#setting-error-').remove();
+								// Set height of loader indicator the same as the
+								// editor table.
+								var table_height = $( '.wp-list-table' ).height();
 								$('.wpum-table-loader').css('display','table');
+								$('.wpum-table-loader').css('height', table_height );
 							},
 							success: function(results) {
-								$('.wpum-table-loader').css('display','none');
+								$('.wpum-table-loader').hide();
 								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
 							},
 							error: function(xhr, status, error) {
 							    alert(xhr.responseText);
 							}
-						});*/
+						});
 
 		            }
 				}).disableSelection();
