@@ -68,7 +68,7 @@ table.wpum_fields_table_list td, table.users_page_wpum-custom-fields-editor td {
   line-height: 1.3;
   vertical-align: middle; }
 table.wpum_fields_table_list td.column-order, table.users_page_wpum-custom-fields-editor td.column-order {
-  cursor: ns-resize; }
+  cursor: move; }
 table.wpum_fields_table_list .move-field, table.users_page_wpum-custom-fields-editor .move-field {
   padding-top: 3px; }
 table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-custom-fields-editor .wpum-window-hide {

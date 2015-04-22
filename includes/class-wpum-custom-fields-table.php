@@ -47,11 +47,11 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'order'    => '<span class="dashicons dashicons-sort"></span>',
+            'order'    => __('Order'),
             'title'    => __('Field Title'),
             'type'     => __('Field Type'),
             'required' => __('Required'),
-            'edit'  => __('Edit'),
+            'edit'     => __('Edit'),
         );
 
         return $columns;
@@ -103,7 +103,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
         
         switch( $column_name ) {
             case 'order':
-                return $item['priority'];
+                return '<span class="dashicons dashicons-sort"></span>';
             break;
             case 'title':
                 return $item['title'];

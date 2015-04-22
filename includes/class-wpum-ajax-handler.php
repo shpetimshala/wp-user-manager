@@ -357,12 +357,12 @@ class WPUM_Ajax_Handler {
 		}
 
 		// Delete previously saved option
-		delete_option( 'wpum_default_fields' );
+		delete_option( 'wpum_custom_fields' );
 
 		// Declare fields
-		$fields = wpum_default_user_fields_list();
+		$fields = wpum_default_fields_list();
 
-		update_option( 'wpum_default_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
+		update_option( 'wpum_custom_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
 
 		$return = array(
 			'message' => __( 'Default fields successfully restored.' ),
