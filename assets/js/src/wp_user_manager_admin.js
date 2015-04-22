@@ -228,6 +228,9 @@ jQuery(document).ready(function ($) {
 						// hide loader indicator
 						$( '.wpum-table-loader' ).hide();
 
+						// Disable drag and drop of the table
+						$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "disable" );
+
 						// Now display the editor
 						$( results ).insertAfter( field_row );
 
@@ -242,6 +245,9 @@ jQuery(document).ready(function ($) {
 							
 							$( field_row ).removeClass('editing');
 							$( '.wpum-fields-editor' ).remove();
+
+							// Enable drag and drop of the table
+							$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "enable" );
 
 							// scroll back
 							$('html, body').animate({
