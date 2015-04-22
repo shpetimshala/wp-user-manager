@@ -274,116 +274,96 @@ function wpum_default_fields_list() {
 	$fields = array();
 	
 	$fields['username'] = array(
-		'order'          => 0,
+		'priority'          => 0,
 		'title'          => __( 'Username' ),
 		'type'           => 'text',
 		'meta'           => 'username',
 		'required'       => true,
-		'options' => array(
-			'test' => array(
-				'type' => 'text',
-				'name' => 'test',
-				'label' => __('Some label'),
-				'desc' => 'something goes here'
-			),
-			'new' => array(
-				'type' => 'select',
-				'name' => 'new',
-				'label' => __('Some select'),
-				'choices' => array( 'asd' => 'test', 'asd2' => 'option' ),
-				'desc' => 'something goes here'
-			),
-			'check' => array(
-				'type' => 'checkbox',
-				'name' => 'check',
-				'label' => __('Some select'),
-				'desc' => 'something goes here'
-			)
-		),
+		'show_on_signup' => true
 	);
 	$fields['first_name'] = array(
-		'order'          => 1,
+		'priority'          => 1,
 		'title'          => __( 'First Name' ),
 		'type'           => 'text',
 		'meta'           => 'first_name',
 		'required'       => false,
+		'show_on_signup' => false,
 		'options' => array(
-			'test' => array(
-				'type' => 'text',
-				'name' => 'test',
-				'label' => __('Some label'),
-				'desc' => 'something goes here'
+			'required' => array(
+				'type'  => 'checkbox',
+				'name'  => 'required',
+				'label' => __('Set this field as required.'),
 			),
-			'new' => array(
-				'type' => 'select',
-				'name' => 'new',
-				'label' => __('Some select'),
-				'choices' => array( 'asd' => 'test', 'asd2' => 'option' ),
-				'desc' => 'something goes here'
-			),
-			'check' => array(
-				'type' => 'checkbox',
-				'name' => 'check',
-				'label' => __('Some select'),
-				'desc' => 'something goes here'
+			'show_on_signup' => array(
+				'type'  => 'checkbox',
+				'name'  => 'show_on_signup',
+				'label' => __('Display on registration form.'),
 			)
 		),
 	);
 	$fields['last_name'] = array(
-		'order'          => 2,
+		'priority'          => 2,
 		'title'          => __( 'Last Name' ),
 		'type'           => 'text',
 		'meta'           => 'last_name',
 		'required'       => false,
+		'show_on_signup' => false
 	);
 	$fields['nickname'] = array(
-		'order'          => 3,
+		'priority'          => 3,
 		'title'          => __( 'Nickname' ),
 		'type'           => 'text',
 		'meta'           => 'nickname',
 		'required'       => true,
+		'show_on_signup' => false
 	);
 	$fields['display_name'] = array(
-		'order'          => 4,
+		'priority'          => 4,
 		'title'          => __( 'Display Name' ),
 		'type'           => 'select',
 		'meta'           => 'display_name',
 		'required'       => true,
+		'show_on_signup' => false
 	);
 	$fields['user_email'] = array(
-		'order'          => 5,
+		'priority'          => 5,
 		'title'          => __( 'Email' ),
 		'type'           => 'email',
 		'meta'           => 'user_email',
 		'required'       => true,
+		'show_on_signup' => true
 	);
 	$fields['user_url'] = array(
-		'order'          => 6,
+		'priority'          => 6,
 		'title'          => __( 'Website' ),
 		'type'           => 'text',
 		'meta'           => 'user_url',
 		'required'       => false,
+		'show_on_signup' => false
 	);
 	$fields['description'] = array(
-		'order'          => 7,
+		'priority'          => 7,
 		'title'          => __( 'Description' ),
 		'type'           => 'textarea',
 		'meta'           => 'description',
 		'required'       => false,
+		'show_on_signup' => false
 	);
 	$fields['password'] = array(
-		'order'          => 8,
+		'priority'          => 8,
 		'title'          => __( 'Password' ),
 		'type'           => 'password',
 		'meta'           => 'password',
 		'required'       => true,
+		'show_on_signup' => true
 	);
 	$fields['user_avatar'] = array(
-		'order'          => 9,
+		'priority'          => 9,
 		'title'          => __( 'Profile Picture' ),
 		'type'           => 'file',
 		'meta'           => 'user_avatar',
 		'required'       => false,
+		'show_on_signup' => false
 	);
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
@@ -1556,7 +1536,7 @@ function wpum_display_fields_editor( $id ) {
 										array( 
 											'name'  => esc_attr( $option['name'] ),
 											'label' => esc_html( $option['label'] ),
-											'desc' => $option['desc']
+											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
 										)
 									);
 									break;
@@ -1568,7 +1548,7 @@ function wpum_display_fields_editor( $id ) {
 											'options' => $option['choices'],
 											'show_option_all'  => false,
 											'show_option_none' => false,
-											'desc' => $option['desc']
+											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
 										)
 									);
 									break;
@@ -1577,7 +1557,7 @@ function wpum_display_fields_editor( $id ) {
 										array( 
 											'name'  => esc_attr( $option['name'] ),
 											'label' => esc_html( $option['label'] ),
-											'desc' => $option['desc']
+											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
 										)
 									);
 									break;

@@ -103,7 +103,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
         
         switch( $column_name ) {
             case 'order':
-                return $item['order'];
+                return $item['priority'];
             break;
             case 'title':
                 return $item['title'];
@@ -206,6 +206,24 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
             echo '<a href="'.$edit_url.'" class="button" data-meta="'. esc_js( $item['meta'] ) .'">'.__('Edit').'</a> ';
             wp_nonce_field( $item['meta'], $item['meta'] );
         endif;
+    }
+
+    /**
+     * Generates content for a single row of the table
+     *
+     * @access public
+     * @param object $item The current item
+     */
+    public function single_row( $item ) {
+        static $row_class = '';
+        $row_class = ( $row_class == '' ? ' class="alternate"' : '' );
+
+        // Add id
+        $row_id = ' id="'.$item['meta'].'"';
+ 
+        echo '<tr' . $row_class . $row_id . ' data-priority="'.$item['priority'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'" data-show_on_signup="'.$item['show_on_signup'].'">';
+        $this->single_row_columns( $item );
+        echo '</tr>';
     }
 
 }
