@@ -89,6 +89,10 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function get_registration_fields() {
 
+		if ( self::$fields ) {
+			return;
+		}
+
 		self::$fields = array(
 			'register' => wpum_get_registration_fields()
 		);
