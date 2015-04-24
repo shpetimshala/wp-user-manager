@@ -1456,7 +1456,7 @@ function wpum_account_tab_exists( $tab ) {
  */
 function wpum_get_field_by_meta( $meta = null ) {
 
-	$all_fields = wpum_default_fields_list();
+	$all_fields   = wpum_default_fields_list();
 	$custom_field = array();
 
 	if( $meta )
@@ -1475,7 +1475,7 @@ function wpum_get_field_by_meta( $meta = null ) {
  */
 function wpum_get_field_options( $meta = null ) {
 
-	$options = false;
+	$options      = false;
 	$custom_field = wpum_get_field_by_meta( $meta );
 
 	if( array_key_exists( 'settings', $custom_field ) && !empty( $custom_field['settings'] ) )
@@ -1497,7 +1497,7 @@ function wpum_display_fields_editor( $id ) {
 	$field_options = wpum_get_field_options( $id );
 
 	$output = '<tr id="wpum-edit-field-'.esc_attr($id).'" class="wpum-fields-editor field-'.esc_attr($id).'">';
-		$output .= '<td colspan="5">';
+		$output .= '<td colspan="5"><form method="post" action="" class="wpum-update-single-field">';
 			$output .= '<div id="postbox-'.esc_attr($id).'" class="postbox wpum-editor-postbox">';
 				$output .= '<h3 class="hndle ui-sortable-handle"><span>'. sprintf( __( 'Editing "%s" field.' ), $field['label'] ) .'</span></h3>';
 					$output .= '<div class="inside">';
@@ -1515,28 +1515,29 @@ function wpum_display_fields_editor( $id ) {
 										array( 
 											'name'  => esc_attr( $option['name'] ),
 											'label' => esc_html( $option['label'] ),
-											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
+											'desc'  => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
 										)
 									);
 									break;
 								case 'select':
 									$output .= WPUM()->html->$option['type']( 
 										array( 
-											'name'  => esc_attr( $option['name'] ),
-											'label' => esc_html( $option['label'] ),
-											'options' => $option['choices'],
+											'name'             => esc_attr( $option['name'] ),
+											'label'            => esc_html( $option['label'] ),
+											'options'          => $option['choices'],
 											'show_option_all'  => false,
 											'show_option_none' => false,
-											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
+											'desc'             => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
 										)
 									);
 									break;
 								case 'checkbox':
 									$output .= WPUM()->html->$option['type']( 
 										array( 
-											'name'  => esc_attr( $option['name'] ),
-											'label' => esc_html( $option['label'] ),
-											'desc' => isset( $option['desc'] ) ? $option['desc'] : null
+											'name'    => esc_attr( $option['name'] ),
+											'label'   => esc_html( $option['label'] ),
+											'current' => 1,
+											'desc'    => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
 										)
 									);
 									break;
@@ -1556,12 +1557,13 @@ function wpum_display_fields_editor( $id ) {
 
 						$output .= '<div id="publishing-action">';
 							if( $field_options )
-								$output .= '<a class="button-primary wpum-save-field" href="#">'.__('Update field').'</a>';
+								$output .= '<input type="submit" class="button-primary wpum-save-field" value="'.__('Update Field').'" />';
+							$output .= wp_nonce_field( 'wpum_single_field', '_wpnonce', true, false );
 						$output .= '</div>';
 						$output .= '<div class="clear"></div>';
 					$output .= '</div>';
 			$output .= '</div>';
-		$output .= '</td>';
+		$output .= '</form></td>';
 
 	$output .= '</tr>';
 

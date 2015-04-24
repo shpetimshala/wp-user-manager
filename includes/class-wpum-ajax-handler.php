@@ -68,11 +68,14 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
 
-		// Update Custom Fields
+		// Show field editor
 		add_action( 'wp_ajax_wpum_load_field_editor', array( $this, 'load_field_editor' ) );
 
 		// Update custom fields order
 		add_action( 'wp_ajax_wpum_update_fields_order', array( $this, 'update_fields_order' ) );
+
+		// Update single custom field
+		add_action( 'wp_ajax_wpum_update_single_field', array( $this, 'update_single_field' ) );
 
 	}
 
@@ -434,7 +437,7 @@ class WPUM_Ajax_Handler {
 		check_ajax_referer( $field_meta, 'field_nonce' );
 		
 		// Display the editor
-		echo json_encode( wpum_display_fields_editor( $field_meta ) );
+		echo wp_json_encode( wpum_display_fields_editor( $field_meta ) );
 
 		die();
 
@@ -485,6 +488,72 @@ class WPUM_Ajax_Handler {
 		);
 
 		wp_send_json_success( $return );
+
+	}
+
+	/**
+	 * Update single field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function update_single_field() {
+
+		// Check our nonce and make sure it's correct.
+		check_ajax_referer( 'wpum_single_field', 'update_nonce' );
+
+		// Get the field
+		$field = esc_attr( $_POST['field'] );
+
+		// Get the submitted options
+		$field_options = $_POST['options'];
+
+		// remove what's not needed
+		unset( $field_options['_wpnonce'] );
+		unset( $field_options['_wp_http_referer'] );
+
+		// Validate it exists
+		if ( array_key_exists( $field , wpum_default_fields_list() ) ) {
+
+			// Get custom fields options
+			$get_fields = get_option( 'wpum_custom_fields' );
+
+			foreach ($field_options as $key => $value ) {
+				
+				switch ( $key ) {
+					case 'is_required':
+						$get_fields[ $field ]['required'] = ( $value !== 'no' ? true : false );
+						break;
+					case 'show_on_signup':
+						$get_fields[ $field ]['show_on_signup'] = ( $value !== 'no' ? true : false );
+						break;
+					default:
+						$get_fields[ $field ][ $key ] = apply_filters( "wpum/field_editor/$key/save", $value, $field );
+						break;
+				}
+
+			}
+
+			update_option( 'wpum_custom_fields', $get_fields );
+
+			$return = array(
+				'status'  => 'updated',
+				'message' => __( 'Field successfully updated.' ),
+			);
+
+			wp_send_json_success( $return );
+
+		} else {
+
+			$return = array(
+				'status'  => 'error',
+				'message' => __( 'Something went wrong.' ),
+			);
+
+			wp_send_json_error( $return );
+
+		}
 
 	}
 

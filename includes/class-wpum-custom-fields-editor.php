@@ -75,7 +75,6 @@ class WPUM_Custom_Fields_Editor {
 
 				<div id="menu-management-liquid" class="wpum-editor-container">
 				
-					<form method="post" action="options.php" class="wpum-fields-editor-table">
 						<?php 
 
 						$custom_fields_table = new WPUM_Custom_Fields_List();
@@ -87,7 +86,6 @@ class WPUM_Custom_Fields_Editor {
 					    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
 
 					    ?>
-			    	</form>
 
 				</div>
 
@@ -155,6 +153,7 @@ class WPUM_Custom_Fields_Editor {
 		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
 		<?php
 	}
+
 }
 
 new WPUM_Custom_Fields_Editor;

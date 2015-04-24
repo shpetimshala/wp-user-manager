@@ -131,7 +131,7 @@ class WPUM_HTML_Elements {
 			$options .= ' readonly';
 		}
 
-		$output = '<label class="wpum-label checkbox" for="' . sanitize_key( $args['name'] ) . '">' . ' <input type="checkbox"' . $options . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" class="' . $args['class'] . ' ' . esc_attr( $args['name'] ) . '" ' . checked( 1, $args['current'], false ) . ' /> '. esc_html( $args['label'] )  .' </label>';
+		$output = '<label class="wpum-label checkbox" for="' . sanitize_key( $args['name'] ) . '">' . ' <input type="checkbox"' . $options . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" class="' . $args['class'] . ' ' . esc_attr( $args['name'] ) . '" ' . checked( 1, $args['current'], false ) . ' data-unchecked-value="no" /> '. esc_html( $args['label'] )  .' </label>';
 
 		if ( ! empty( $args['desc'] ) ) {
 			$output .= '<br/><span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
