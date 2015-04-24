@@ -165,13 +165,13 @@ jQuery(document).ready(function ($) {
 							'wpum_backend_fields_restore' : wpum_restore_fields_nonce
 						},
 						beforeSend: function() {
-							$( '.wpum-spinner' ).hide();
-							$( '.wpum-ajax-done-message' ).hide();
-							$( '#wpum-restore-default-fields' ).after('<span id="wpum-spinner" class="spinner wpum-spinner"></span>');
+							$( '.wpum-spinner' ).remove();
+							$( '.wpum-ajax-done-message' ).remove();
+							$( '#wpum-restore-default-fields' ).after('<span id="wpum-spinner" class="spinner wpum-spinner is-active"></span>');
 						},
 						success: function(results) {
 							$( '#wpum-restore-default-fields' ).after( '<p class="wpum-ajax-done-message"> <span class="dashicons dashicons-yes"></span> ' + results.data.message + '</p>' );
-							$( '.wpum-spinner' ).hide();
+							$( '.wpum-spinner' ).remove();
 						},
 						error: function(xhr, status, error) {
 						    alert(xhr.responseText);
