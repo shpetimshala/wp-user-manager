@@ -114,6 +114,7 @@ jQuery(document).ready(function ($) {
 								var table_height = $( '.wp-list-table' ).height();
 								$('.wpum-table-loader').css('display','table');
 								$('.wpum-table-loader').css('height', table_height );
+								$('.wpum-table-loader #wpum-spinner').addClass('is-active');
 							},
 							success: function(results) {
 								// Update odd even table classes
@@ -121,6 +122,7 @@ jQuery(document).ready(function ($) {
 								$('.users_page_wpum-custom-fields-editor').find("tr:even").addClass('alternate');
 								// Hide loading indicator
 								$('.wpum-table-loader').hide();
+								$('.wpum-table-loader #wpum-spinner').removeClass('is-active');
 								// Show message
 								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
 							},
