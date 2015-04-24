@@ -264,8 +264,6 @@ jQuery(document).ready(function ($) {
 							// Grab field nonce 
 							var update_nonce = $( this ).find( '#_wpnonce' ).val();
 
-							$( this ).find(':checkbox:not(:checked)').attr('value', false);
-
 							// Grab values
 							var values = $(this).serializeJSON({checkboxUncheckedValue: "false"});
 
@@ -302,10 +300,17 @@ jQuery(document).ready(function ($) {
 					'options' : values
 				},
 				beforeSend: function() {
-
+					WPUM_Admin.display_loader();
+					WPUM_Admin.remove_message();
 				},
-				success: function(results) {
+				success: function( results ) {
+					WPUM_Admin.hide_loader();
+					WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
 
+					$( '.wpum-fields-editor' ).remove();
+					// Enable drag and drop of the table
+					$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "enable" );
+					
 				},
 				error: function(xhr, status, error) {
 				    alert(xhr.responseText);
@@ -313,6 +318,41 @@ jQuery(document).ready(function ($) {
 			});
 
 		},
+
+		// Display spinner
+		display_loader : function() {
+
+			// Set height of loader indicator the same as the
+			// editor table.
+			var table_height = $( '.wp-list-table' ).height();
+			$('.wpum-table-loader').css('display','table');
+			$('.wpum-table-loader').css('height', table_height );
+			$('.wpum-table-loader #wpum-spinner').addClass('is-active');
+
+		},
+		// Hide the spinner
+		hide_loader : function() {
+			$('.wpum-table-loader').hide();
+			$('.wpum-table-loader #wpum-spinner').removeClass('is-active');
+		},
+		// Display a success message
+		display_success_message : function( after, message, status, scroll ) {
+			status = status || "updated";
+			scroll = scroll || true;
+
+			$( after ).after( '<div class="wpum-message '+ status +' notice is-dismissible"><p>' + message + '</p></div>' );
+
+			if( scroll ) {
+				// scroll back
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+  				return false;
+			}
+
+		},
+
+		remove_message : function() {
+			$( '.wpum-message' ).remove();
+		}
 
 	};
 
