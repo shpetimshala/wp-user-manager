@@ -1014,7 +1014,7 @@ function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 	elseif ( empty( $email ) )
 		$default = "$host/avatar/?d=$default&amp;s={$size}";
 	elseif ( strpos( $default, 'http://' ) === 0 )
-		$default = add_query_arg( 's', $size, $default );
+		$default = esc_url( add_query_arg( 's', $size, $default ) );
 
 	if ( !empty( $email ) ) {
 		$out = "$host/avatar/";
@@ -1447,7 +1447,7 @@ function wpum_get_account_tab_url( $tab ) {
 		$tab_url = wpum_get_core_page_url( 'account' ) . $tab;
 	endif;
 
-	return $tab_url;
+	return esc_url( $tab_url );
 
 }
 

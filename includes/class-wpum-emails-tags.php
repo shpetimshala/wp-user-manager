@@ -368,5 +368,5 @@ function wpum_email_tag_recovery_url( $user_id, $private_key ) {
 
 	$url = add_query_arg( array( 'password-reset' => true, 'key' => $private_key, 'login' => $username ), get_permalink( wpum_get_option('password_recovery_page') ) );
 
-	return $url;
+	return esc_url_raw( $url );
 }

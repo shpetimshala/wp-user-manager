@@ -411,7 +411,7 @@ class WPUM_Form_Password extends WPUM_Form {
 		if ( $user instanceof WP_User ) {
 			self::change_password( $user, $password_1 );
 			do_action( 'wpum_user_reset_password', $user );
-			wp_redirect( add_query_arg( 'reset', 'true', remove_query_arg( array( 'key', 'login', 'password-reset' ) ) ) );
+			wp_redirect( esc_url( add_query_arg( 'reset', 'true', remove_query_arg( array( 'key', 'login', 'password-reset' ) ) ) ) );
 			exit;
 		}
 

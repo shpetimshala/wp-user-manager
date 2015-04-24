@@ -577,13 +577,13 @@ class WPUM_Form_Profile extends WPUM_Form {
 		if ( is_wp_error( $user_id ) ) {
 
 			$this_page = add_query_arg( array('updated' => 'error'), get_permalink() );
-			wp_redirect( $this_page );
+			wp_redirect( esc_url( $this_page ) );
 			exit();
 
 		} else {
 
 			$this_page = add_query_arg( array('updated' => 'success'), get_permalink() );
-			wp_redirect( $this_page );
+			wp_redirect( esc_url( $this_page ) );
 			exit();
 
 		}
