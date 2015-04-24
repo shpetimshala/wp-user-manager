@@ -220,6 +220,7 @@ jQuery(document).ready(function ($) {
 						var table_height = $( '.wp-list-table' ).height();
 						$('.wpum-table-loader').css('display','table');
 						$('.wpum-table-loader').css('height', table_height );
+						$('.wpum-table-loader #wpum-spinner').addClass('is-active');
 						$( field_row ).addClass('editing');
 
 					},
@@ -227,6 +228,7 @@ jQuery(document).ready(function ($) {
 
 						// hide loader indicator
 						$( '.wpum-table-loader' ).hide();
+						$('.wpum-table-loader #wpum-spinner').removeClass('is-active');
 
 						// Disable drag and drop of the table
 						$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "disable" );
