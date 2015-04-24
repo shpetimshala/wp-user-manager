@@ -437,7 +437,7 @@ class WPUM_Ajax_Handler {
 		check_ajax_referer( $field_meta, 'field_nonce' );
 		
 		// Display the editor
-		echo wp_json_encode( wpum_display_fields_editor( $field_meta ) );
+		echo wp_json_encode( WPUM_Custom_Fields_Editor::display_fields_editor( $field_meta ) );
 
 		die();
 
