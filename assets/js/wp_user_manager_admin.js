@@ -18,7 +18,7 @@ jQuery(document).ready(function ($) {
 
 		// General Functions
 		general : function() {
-			jQuery(".select2, .wppf-multiselect").select2();
+			jQuery("select.select2, .wppf-multiselect").select2();
 		},
 
 		// Ajax Function to restore emails
