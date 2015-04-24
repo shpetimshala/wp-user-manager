@@ -103,23 +103,17 @@ jQuery(document).ready(function ($) {
 								'wpum_editor_nonce': wpum_editor_nonce
 							},
 							beforeSend: function() {
-								$('#setting-error-').remove();
-								// Set height of loader indicator the same as the
-								// editor table.
-								var table_height = $( '.wp-list-table' ).height();
-								$('.wpum-table-loader').css('display','table');
-								$('.wpum-table-loader').css('height', table_height );
-								$('.wpum-table-loader #wpum-spinner').addClass('is-active');
+								WPUM_Admin.display_loader();
+								WPUM_Admin.remove_message();
 							},
 							success: function(results) {
 								// Update odd even table classes
 								$('.users_page_wpum-custom-fields-editor').find("tr").removeClass('alternate');
 								$('.users_page_wpum-custom-fields-editor').find("tr:even").addClass('alternate');
 								// Hide loading indicator
-								$('.wpum-table-loader').hide();
-								$('.wpum-table-loader #wpum-spinner').removeClass('is-active');
+								WPUM_Admin.hide_loader();
 								// Show message
-								$('.wpum-page-title').after('<div id="setting-error-" class="updated settings-error"><p><strong>' + results.data.message + '</strong></p></div>');
+								WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
 							},
 							error: function(xhr, status, error) {
 							    alert(xhr.responseText);
@@ -198,7 +192,6 @@ jQuery(document).ready(function ($) {
 				var field_nonce = $(this).next().val();
 
 				// Remove any previous editors
-				$( '.users_page_wpum-custom-fields-editor tr' ).removeClass('editing');
 				$( '.wpum-fields-editor' ).remove();
 
 				$.ajax({
@@ -214,18 +207,14 @@ jQuery(document).ready(function ($) {
 
 						// Set height of loader indicator the same as the
 						// editor table.
-						var table_height = $( '.wp-list-table' ).height();
-						$('.wpum-table-loader').css('display','table');
-						$('.wpum-table-loader').css('height', table_height );
-						$('.wpum-table-loader #wpum-spinner').addClass('is-active');
-						$( field_row ).addClass('editing');
+						WPUM_Admin.display_loader();
+						WPUM_Admin.remove_message();
 
 					},
 					success: function(results) {
 
 						// hide loader indicator
-						$( '.wpum-table-loader' ).hide();
-						$('.wpum-table-loader #wpum-spinner').removeClass('is-active');
+						WPUM_Admin.hide_loader();
 
 						// Disable drag and drop of the table
 						$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "disable" );
@@ -305,12 +294,13 @@ jQuery(document).ready(function ($) {
 				},
 				success: function( results ) {
 					WPUM_Admin.hide_loader();
-					WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
 
 					$( '.wpum-fields-editor' ).remove();
 					// Enable drag and drop of the table
 					$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "enable" );
-					
+
+					WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
+
 				},
 				error: function(xhr, status, error) {
 				    alert(xhr.responseText);
