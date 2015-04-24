@@ -1544,4 +1544,3 @@ function wpum_get_field_setting( $field_id, $option_id ) {
 
 	return $value;
 }
-

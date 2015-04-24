@@ -185,7 +185,8 @@ class WPUM_Custom_Fields_Editor {
 											array( 
 												'name'  => esc_attr( $option['name'] ),
 												'label' => esc_html( $option['label'] ),
-												'desc'  => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
+												'desc'  => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null,
+												'value' => wpum_get_field_setting( $id, $option['name'] )
 											)
 										);
 										break;
@@ -197,6 +198,7 @@ class WPUM_Custom_Fields_Editor {
 												'options'          => $option['choices'],
 												'show_option_all'  => false,
 												'show_option_none' => false,
+												'selected'         => wpum_get_field_setting( $id, $option['name'] ),
 												'desc'             => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
 											)
 										);

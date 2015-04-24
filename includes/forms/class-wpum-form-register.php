@@ -75,7 +75,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
 
 		// Store uploaded avatar
-		if( wpum_get_option('custom_avatars') )
+		if( wpum_get_option('custom_avatars') && wpum_get_field_setting( 'user_avatar', 'show_on_signup' ) === true )
 			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'add_avatar' ), 10, 3 );
 
 	}
@@ -88,10 +88,6 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @return void
 	 */
 	public static function get_registration_fields() {
-
-		echo "<pre>";
-		print_r( wpum_get_registration_fields() );
-		echo "</pre>";
 
 		self::$fields = array(
 			'register' => wpum_get_registration_fields()
