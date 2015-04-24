@@ -213,6 +213,18 @@ function wpum_default_fields_list() {
 		'meta'           => 'last_name',
 		'required'       => false,
 		'show_on_signup' => false,
+		'settings' => array(
+			'is_required' => array(
+				'type'  => 'checkbox',
+				'name'  => 'is_required',
+				'label' => __('Set this field as required.'),
+			),
+			'show_on_signup' => array(
+				'type'  => 'checkbox',
+				'name'  => 'show_on_signup',
+				'label' => __('Display on registration form.'),
+			)
+		),
 	);
 	$fields['nickname'] = array(
 		'priority'       => 3,
@@ -244,7 +256,19 @@ function wpum_default_fields_list() {
 		'type'           => 'text',
 		'meta'           => 'user_url',
 		'required'       => false,
-		'show_on_signup' => false
+		'show_on_signup' => false,
+		'settings' => array(
+			'is_required' => array(
+				'type'  => 'checkbox',
+				'name'  => 'is_required',
+				'label' => __('Set this field as required.'),
+			),
+			'show_on_signup' => array(
+				'type'  => 'checkbox',
+				'name'  => 'show_on_signup',
+				'label' => __('Display on registration form.'),
+			)
+		),
 	);
 	$fields['description'] = array(
 		'priority'       => 7,
@@ -252,7 +276,19 @@ function wpum_default_fields_list() {
 		'type'           => 'textarea',
 		'meta'           => 'description',
 		'required'       => false,
-		'show_on_signup' => false
+		'show_on_signup' => false,
+		'settings' => array(
+			'is_required' => array(
+				'type'  => 'checkbox',
+				'name'  => 'is_required',
+				'label' => __('Set this field as required.'),
+			),
+			'show_on_signup' => array(
+				'type'  => 'checkbox',
+				'name'  => 'show_on_signup',
+				'label' => __('Display on registration form.'),
+			)
+		),
 	);
 	$fields['password'] = array(
 		'priority'       => 8,
@@ -268,15 +304,14 @@ function wpum_default_fields_list() {
 		'type'               => 'file',
 		'meta'               => 'user_avatar',
 		'required'           => false,
-		'show_on_signup'     => true,
-		'ajax'               => false,
+		'show_on_signup'     => false,
 		'multiple'           => false,
 		'allowed_mime_types' => array(
 			'jpg'  => 'image/jpeg',
 			'jpeg' => 'image/jpeg',
 			'gif'  => 'image/gif',
 			'png'  => 'image/png'
-		)
+		),
 	);
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );
@@ -1483,3 +1518,30 @@ function wpum_get_field_options( $meta = null ) {
 
 	return $options;
 }
+
+/**
+ * Get the value of an option of a field.
+ *
+ * @since 1.0.0
+ * @param string $field_id id/key of the field.
+ * @param string $option_id id/key of an option of a field.
+ * @return mixed $value the value of the option saved into the database or default value from wpum_default_fields_list() function.
+ */
+function wpum_get_field_setting( $field_id, $option_id ) {
+
+	$value         = '';
+	$saved_fields  = get_option( 'wpum_custom_fields' );
+	$default_field = wpum_get_field_by_meta( $field_id );
+
+	if( $option_id == 'is_required' )
+		$option_id = 'required';
+
+	if( $saved_fields ) {
+		$value = $saved_fields[ $field_id ][ $option_id ];
+	} else {
+		$value = $default_field[ $field_id ][ $option_id ];
+	}
+
+	return $value;
+}
+

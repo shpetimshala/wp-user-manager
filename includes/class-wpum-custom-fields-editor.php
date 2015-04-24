@@ -206,7 +206,7 @@ class WPUM_Custom_Fields_Editor {
 											array( 
 												'name'    => esc_attr( $option['name'] ),
 												'label'   => esc_html( $option['label'] ),
-												'current' => 1,
+												'current' => wpum_get_field_setting( $id, $option['name'] ),
 												'desc'    => isset( $option['desc'] ) ? esc_html( $option['desc'] ) : null
 											)
 										);

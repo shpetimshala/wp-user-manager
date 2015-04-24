@@ -301,6 +301,8 @@ jQuery(document).ready(function ($) {
 
 					WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
 
+					location.reload();
+
 				},
 				error: function(xhr, status, error) {
 				    alert(xhr.responseText);
