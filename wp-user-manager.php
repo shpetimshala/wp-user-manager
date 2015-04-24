@@ -283,7 +283,9 @@ class WP_User_Manager {
 		wp_register_style( 'wpum-shortcode-manager', WPUM_PLUGIN_URL . 'includes/admin/tinymce/css/wpum_shortcodes_tinymce_style.css', WPUM_VERSION );
 		wp_register_style( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/css/select2.css', WPUM_VERSION );
 		wp_register_script( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/js/select2.min.js', 'jQuery', WPUM_VERSION, true );
+		wp_register_script( 'wpum-serializeJSON', WPUM_PLUGIN_URL . 'assets/js/vendor/jquery.serializeJSON.js', 'jQuery', WPUM_VERSION, true );
 		wp_register_script( 'wpum-admin-js', $js_dir . 'wp_user_manager_admin' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
+
 
 		// Enquery styles and scripts anywhere needed
 		wp_enqueue_style( 'wpum-shortcode-manager' );
@@ -303,13 +305,14 @@ class WP_User_Manager {
 			if ( isset( $_GET['tab'] ) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
 				wp_enqueue_script( 'jquery-ui-sortable' );
 
+			if ( $screen->base == 'users_page_wpum-custom-fields-editor' )
+				wp_enqueue_script( 'wpum-serializeJSON' );
+
 			// Backend JS Settings
 			wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
-					'ajax'    => admin_url( 'admin-ajax.php' ),
-					'confirm' => __( 'Are you sure you want to do this? This action cannot be reversed.' ),
-				) );
-
-			wp_enqueue_media();
+				'ajax'    => admin_url( 'admin-ajax.php' ),
+				'confirm' => __( 'Are you sure you want to do this? This action cannot be reversed.' ),
+			) );
 
 		endif;
 
@@ -344,7 +347,9 @@ class WP_User_Manager {
 
 		// Display password meter only if enabled
 		if ( wpum_get_option( 'display_password_meter_registration' ) && wpum_get_option( 'custom_passwords' ) ) :
+			
 			wp_enqueue_script( 'password-strength-meter' );
+			
 			wp_localize_script( 'password-strength-meter', 'pwsL10n', array(
 				'empty'  => __( 'Strength indicator' ),
 				'short'  => __( 'Very weak' ),
@@ -352,15 +357,16 @@ class WP_User_Manager {
 				'good'   => _x( 'Medium', 'password strength' ),
 				'strong' => __( 'Strong' )
 			) );
+
 		endif;
 
 		// Frontend jS Settings
 		wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
-				'ajax'                   => admin_url( 'admin-ajax.php' ),
-				'checking_credentials'   => __( 'Checking credentials...' ),
-				'pwd_meter'              => wpum_get_option( 'display_password_meter_registration' ),
-				'disable_ajax'           => wpum_get_option( 'disable_ajax' )
-			) );
+			'ajax'                 => admin_url( 'admin-ajax.php' ),
+			'checking_credentials' => __( 'Checking credentials...' ),
+			'pwd_meter'            => wpum_get_option( 'display_password_meter_registration' ),
+			'disable_ajax'         => wpum_get_option( 'disable_ajax' )
+		) );
 
 	}
 
