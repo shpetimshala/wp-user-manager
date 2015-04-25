@@ -416,6 +416,11 @@ ul.wpum-user-listings {
     margin: 1.2em 0 0 0;
     display: block;
     line-height: 1.2em; }
+  .wpum-profile-form fieldset input[type=checkbox] ~ .description,
+  .wpum-default-registration-form fieldset input[type=checkbox] ~ .description,
+  .wpum-password-form fieldset input[type=checkbox] ~ .description,
+  .wpum-update-password-form fieldset input[type=checkbox] ~ .description {
+    display: inline; }
 
 .wpum-login-form form p.login-username,
 .wpum-login-form form p.login-password,
@@ -483,5 +488,9 @@ ul.wpum-user-listings {
 .wpum-account-tabs {
   border-bottom: 1px solid #eee;
   margin-bottom: 15px; }
+
+/* helper links */
+div.wpum-helper-links p {
+  margin-bottom: 0px; }
 
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

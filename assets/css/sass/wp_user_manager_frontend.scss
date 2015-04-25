@@ -392,6 +392,9 @@ ul.wpum-user-listings {
 			display: block;
 			line-height: 1.2em;
 		}
+		input[type=checkbox] ~ .description {
+			display: inline;
+		}
 	}
 }
 
@@ -467,4 +470,11 @@ ul.wpum-user-listings {
 	@extend .wpum-profile-tabs-holder;
 	border-bottom: 1px solid $secondary_color;
 	margin-bottom: 15px;
+}
+
+/* helper links */
+div.wpum-helper-links {
+	p {
+		margin-bottom: 0px;
+	}
 }
