@@ -386,6 +386,48 @@ function wpum_get_registration_fields() {
 }
 
 /**
+ * Returns a list of the account fields.
+ * This function passes filters to parameters of each field
+ * to pre-set the values.
+ *
+ * @since 1.0.0
+ * @return array of all the fields.
+ */
+function wpum_get_account_fields() {
+
+	// Get all the fields
+	$fields = wpum_get_sorted_fields();
+
+	// Prepare account fields
+	$account_fields = array();
+
+	foreach ( $fields as $key => $field ) {
+
+		// Pass filters to the field
+		$field['placeholder'] = apply_filters( 'wpum_profile_field_placeholder', null, $field );
+		$field['options']     = apply_filters( 'wpum_profile_field_options', null, $field );
+		$field['value']       = apply_filters( 'wpum_profile_field_value', null, $field );
+
+		// add field to main array
+		$account_fields[ $key ] = $field;
+
+	}
+
+	// Remove password field from here
+	unset( $account_fields['password'] );
+
+	// The username cannot be changed, let's remove that field since it's useless
+	unset( $account_fields['username'] );
+	
+	// Remove the user avatar field if not enabled
+	if( !wpum_get_option( 'custom_avatars' ) )
+		unset( $account_fields['user_avatar'] );
+
+	return apply_filters( 'wpum_get_account_fields', $account_fields );
+
+}
+
+/**
  * Get a list of available permalink structures.
  *
  * @since 1.0.0
