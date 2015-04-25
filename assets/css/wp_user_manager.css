@@ -71,6 +71,8 @@ table.wpum_fields_table_list td, table.users_page_wpum-custom-fields-editor td {
   vertical-align: middle; }
 table.wpum_fields_table_list td.column-order, table.users_page_wpum-custom-fields-editor td.column-order {
   cursor: move; }
+  table.wpum_fields_table_list td.column-order a:hover, table.users_page_wpum-custom-fields-editor td.column-order a:hover {
+    cursor: move; }
 table.wpum_fields_table_list .move-field, table.users_page_wpum-custom-fields-editor .move-field {
   padding-top: 3px; }
 table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-custom-fields-editor .wpum-window-hide {

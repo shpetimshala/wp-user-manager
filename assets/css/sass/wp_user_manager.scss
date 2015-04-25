@@ -101,6 +101,11 @@ table.wpum_fields_table_list, table.users_page_wpum-custom-fields-editor {
 	}
 	td.column-order {
 		cursor: move;
+		a {
+			&:hover {
+				cursor: move;
+			}
+		}
 	}
 
 	.move-field {

@@ -118,31 +118,31 @@ add_action( 'widgets_init', 'wpum_register_widgets', 1 );
  */
 function wpum_authenticate_login_form( $user ) {
 
-	if ( isset( $_SERVER['HTTP_REFERER'] ) ) :
+	if ( isset( $_SERVER['HTTP_REFERER'] ) && !defined( 'DOING_AJAX' ) ) :
 
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
 
-	$error = false;
+		$error = false;
 
-	if ( $_POST['log'] == '' || $_POST['pwd'] == '' ) {
-		$error = true;
-	}
-
-	// check that were not on the default login page
-	if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $error ) {
-
-		// make sure we don't already have a failed login attempt
-		if ( !strstr( $referrer, '?login=failed' ) ) {
-			// Redirect to the login page and append a querystring of login failed
-			wp_redirect( $referrer . '?login=failed' );
-		} else {
-			wp_redirect( $referrer );
+		if ( $_POST['log'] == '' || $_POST['pwd'] == '' ) {
+			$error = true;
 		}
 
-		exit;
+		// check that were not on the default login page
+		if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $error ) {
 
-	}
+			// make sure we don't already have a failed login attempt
+			if ( !strstr( $referrer, '?login=failed' ) ) {
+				// Redirect to the login page and append a querystring of login failed
+				wp_redirect( $referrer . '?login=failed' );
+			} else {
+				wp_redirect( $referrer );
+			}
+
+			exit;
+
+		}
 
 	endif;
 
