@@ -63,7 +63,7 @@ class WPUM_Password_Recovery extends WPH_Widget {
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'   => __( 'Custom form ID' ),
+				'name'   => __( 'Custom form ID (optional)' ),
 				'id'     => 'form_id',
 				'type'   => 'text',
 				'class'  => 'widefat',
