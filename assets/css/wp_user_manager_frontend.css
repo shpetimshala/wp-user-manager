@@ -493,4 +493,14 @@ ul.wpum-user-listings {
 div.wpum-helper-links p {
   margin-bottom: 0px; }
 
+/* password strength indicator */
+#password-strength {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  margin: 13px 5px 5px 1px;
+  padding: 3px 5px;
+  text-align: center;
+  width: 200px;
+  display: block; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

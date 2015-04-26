@@ -346,7 +346,7 @@ class WP_User_Manager {
 			wp_enqueue_style( 'wpum-frontend-css' );
 
 		// Display password meter only if enabled
-		if ( wpum_get_option( 'display_password_meter_registration' ) && wpum_get_option( 'custom_passwords' ) ) :
+		if ( wpum_get_option( 'display_password_meter_registration' ) ) :
 			
 			wp_enqueue_script( 'password-strength-meter' );
 			
