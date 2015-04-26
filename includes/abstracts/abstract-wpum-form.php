@@ -34,7 +34,7 @@ abstract class WPUM_Form {
 	 */
 	public static function show_errors() {
 		foreach ( self::$errors as $error )
-			echo '<div class="wpum-message error"><p>' . $error . '</p></div>';
+			echo '<div class="wpum-message error"><p class="the-message">' . $error . '</p></div>';
 	}
 
 	/**
@@ -57,7 +57,7 @@ abstract class WPUM_Form {
 	 */
 	public static function show_confirmations() {
 		foreach ( self::$confirmations as $confirmation )
-			echo '<div class="wpum-message success"><p>' . $confirmation . '</p></div>';
+			echo '<div class="wpum-message success"><p class="the-message">' . $confirmation . '</p></div>';
 	}
 
 	/**

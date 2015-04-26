@@ -13,17 +13,27 @@
 
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
-	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) : ?>
-		<div class="wpum-message success"><p>
-			<?php echo apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) ); ?>
-		</p></div>
-	<?php endif; ?>
+	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) :
 
-	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) : ?>
-		<div class="wpum-message error"><p>
-			<?php echo apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) ); ?>
-		</p></div>
-	<?php endif; ?>
+		$args = array(
+			'id'   => 'wpum-profile-updated',
+			'type' => 'success',
+			'text' => apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) )
+		);
+		wpum_message( $args );
+
+	endif; ?>
+
+	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) :
+
+		$args = array(
+			'id'   => 'wpum-profile-error',
+			'type' => 'error',
+			'text' => apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) )
+		);
+		wpum_message( $args );
+
+	endif; ?>
 
 	<?php do_action( 'wpum_before_account_form', $atts ); ?>
 

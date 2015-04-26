@@ -14,7 +14,7 @@
 
 <div id="<?php echo esc_attr( $id ); ?>" class="wpum-message <?php echo esc_attr( $type ); ?>">
 
-	<p><?php echo $text ?></p>
+	<p class="the-message"><?php echo $text ?></p>
 
 </div>
 
