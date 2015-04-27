@@ -33,5 +33,20 @@ function wpum_install() {
 		wp_die( sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.'), 'http://www.wpupdatephp.com/contact-host/' ) . '<br/><br/>' . '<small><a href="'.admin_url().'">'.__('Back to your website.').'</a></small>' );
 	}
 
+	// Clear the permalinks
+	flush_rewrite_rules();
+
+	// Add Upgraded From Option
+	$current_version = get_option( 'wpum_version' );
+	if ( $current_version ) {
+		update_option( 'wpum_version_upgraded_from', $current_version );
+	}
+
+	// Update current version
+	update_option( 'wpum_version', WPUM_VERSION );
+
+	// Add the transient to redirect
+	set_transient( '_wpum_activation_redirect', true, 30 );
+
 }
 register_activation_hook( WPUM_PLUGIN_FILE, 'wpum_install' );
