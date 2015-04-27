@@ -952,7 +952,7 @@ function wpum_upload_file( $file, $args = array() ) {
  * @param string  $alt         Alternative text to use in image tag. Defaults to blank
  * @return false|string `<img>` tag for the user's avatar.
  */
-function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
+function get_avatar2( $id_or_email, $size = '96', $default = '', $alt = false ) {
 	if ( ! get_option( 'show_avatars' ) )
 		return false;
 
