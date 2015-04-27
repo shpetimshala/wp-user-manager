@@ -45,7 +45,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Automatic login after registration
 			if( wpum_get_option('login_after_registration') )
-				add_action( 'wpum_registration_is_complete', array( __CLASS__, 'do_login' ), 10, 3 );
+				add_action( 'wpum_after_registration', array( __CLASS__, 'do_login' ), 10, 3 );
 
 		endif;
 
@@ -67,7 +67,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		if( wpum_get_option('allow_role_select') ) :
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_role_field' ) );
 			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_role_field' ), 10, 3 );
-			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
+			add_action( 'wpum_after_registration', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
 		
 		// Exclude usernames if enabled
@@ -76,7 +76,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		// Store uploaded avatar
 		if( wpum_get_option('custom_avatars') && wpum_get_field_setting( 'user_avatar', 'show_on_signup' ) === true )
-			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'add_avatar' ), 10, 3 );
+			add_action( 'wpum_after_registration', array( __CLASS__, 'add_avatar' ), 10, 3 );
 
 	}
 
@@ -570,7 +570,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Add ability to extend registration process.
 			$user_id = $do_user;
-			do_action('wpum_registration_is_complete', $user_id, $values );
+			do_action('wpum_after_registration', $user_id, $values );
 
 		}
 
