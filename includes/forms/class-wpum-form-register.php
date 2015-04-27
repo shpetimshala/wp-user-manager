@@ -37,7 +37,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		if(wpum_get_option('custom_passwords')) :
 			
 			self::$random_password = false;
-			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 
 			// Add password meter field
 			if( wpum_get_option('display_password_meter_registration') )
@@ -50,12 +50,12 @@ class WPUM_Form_Register extends WPUM_Form {
 		endif;
 
 		// Validate Email Field
-		add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
+		add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_email_field' ), 10, 3 );
 
 		// Add honeypot spam field
 		if( wpum_get_option('enable_honeypot') ) :
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
-			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
+			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
 		// Add terms & conditions field
@@ -66,13 +66,13 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Add Role selection if enabled
 		if( wpum_get_option('allow_role_select') ) :
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_role_field' ) );
-			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_role_field' ), 10, 3 );
+			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_role_field' ), 10, 3 );
 			add_action( 'wpum_registration_is_complete', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
 		
 		// Exclude usernames if enabled
-		if( !empty(wpum_get_option('exclude_usernames') ) )
-			add_filter( 'wpum_register_form_validate_fields', array( __CLASS__, 'validate_username_field' ), 10, 3 );
+		if( !empty( wpum_get_option('exclude_usernames') ) )
+			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_username_field' ), 10, 3 );
 
 		// Store uploaded avatar
 		if( wpum_get_option('custom_avatars') && wpum_get_field_setting( 'user_avatar', 'show_on_signup' ) === true )
@@ -244,7 +244,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			}
 		}
 
-		return apply_filters( 'wpum_register_form_validate_fields', true, self::$fields, $values );
+		return apply_filters( 'wpum_validate_registration', true, self::$fields, $values );
 
 	}
 
@@ -495,10 +495,20 @@ class WPUM_Form_Register extends WPUM_Form {
 	 */
 	public static function validate_username_field( $passed, $fields, $values ) {
 
-		$username = $values['register'][ 'username' ];
+		$nickname = $values['register'][ 'username' ];
 
-		if( array_key_exists( $username , wpum_get_disabled_usernames() ) )
-			return new WP_Error( 'username-validation-error', __( 'This username cannot be used' ) );
+		if( wpum_get_option('exclude_usernames') && array_key_exists( $nickname , wpum_get_disabled_usernames() ) )
+			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.' ) );
+
+		// Check for nicknames if permalink structure requires unique nicknames.
+		if( get_option('wpum_permalink') == 'nickname'  ) :
+
+			$current_user = wp_get_current_user();
+
+			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		endif;
 
 		return $passed;
 
