@@ -174,3 +174,37 @@ function wpum_show_failed_login_message() {
 
 }
 add_action( 'wpum_before_loginform_template', 'wpum_show_failed_login_message' );
+
+/**
+ * Display update messages on the account page.
+ *
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_profile_update_messages() {
+
+	if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) :
+
+		$args = array(
+			'id'   => 'wpum-profile-updated',
+			'type' => 'success',
+			'text' => apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) )
+		);
+		wpum_message( $args );
+
+	endif;
+
+	if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) :
+
+		$args = array(
+			'id'   => 'wpum-profile-error',
+			'type' => 'error',
+			'text' => apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) )
+		);
+		wpum_message( $args );
+
+	endif;
+
+}
+add_action( 'wpum_before_account_form', 'wpum_profile_update_messages' );

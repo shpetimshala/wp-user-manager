@@ -13,28 +13,6 @@
 
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
-	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) :
-
-		$args = array(
-			'id'   => 'wpum-profile-updated',
-			'type' => 'success',
-			'text' => apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) )
-		);
-		wpum_message( $args );
-
-	endif; ?>
-
-	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'error' ) :
-
-		$args = array(
-			'id'   => 'wpum-profile-error',
-			'type' => 'error',
-			'text' => apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) )
-		);
-		wpum_message( $args );
-
-	endif; ?>
-
 	<?php do_action( 'wpum_before_account_form', $atts ); ?>
 
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile" enctype="multipart/form-data">
