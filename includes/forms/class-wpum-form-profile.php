@@ -352,7 +352,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 					if ( ! empty( $check_value ) ) {
 						foreach ( $check_value as $file_url ) {
-							if ( ( $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
+							if ( ( !empty( $file_url['url'] ) && $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
 								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
 							}
 						}
