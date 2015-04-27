@@ -118,7 +118,7 @@ add_action( 'widgets_init', 'wpum_register_widgets', 1 );
  */
 function wpum_authenticate_login_form( $user ) {
 
-	if ( isset( $_SERVER['HTTP_REFERER'] ) && !defined( 'DOING_AJAX' ) ) :
+	if ( !defined( 'DOING_AJAX' ) && isset( $_SERVER['HTTP_REFERER'] ) && isset( $_POST['log'] ) && isset( $_POST['pwd'] ) ) :
 
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
@@ -158,7 +158,7 @@ add_action( 'authenticate', 'wpum_authenticate_login_form' );
  */
 function wpum_handle_failed_login( $user ) {
 	
-	if ( isset( $_SERVER['HTTP_REFERER'] ) ) :
+	if ( isset( $_SERVER['HTTP_REFERER'] ) && !defined( 'DOING_AJAX' ) ) :
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
 
