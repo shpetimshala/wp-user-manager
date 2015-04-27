@@ -44,17 +44,17 @@ jQuery(document).ready(function ($) {
 						'wpum_nonce_login_security' : wpum_nonce
 					},
 					beforeSend: function() {
-						$( wpum_form ).find('p.wpum-message').remove();
-						$( wpum_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_form ).find('div.wpum-message').remove();
+						$( wpum_form ).prepend('<div class="wpum-message notice"><p class="the-message">' + wpum_frontend_js.checking_credentials + '</p></div>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if(results.data.loggedin === true) {
-							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
+							$( wpum_form ).find('div.wpum-message').removeClass('notice').addClass('success').children('p').text(results.data.message);
 							window.location.href = wpum_redirect;
 						} else {
-							$( wpum_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
+							$( wpum_form ).find('div.wpum-message').removeClass('notice').addClass('error').children('p').text(results.data.message);
 						}
 
 					},
@@ -134,16 +134,16 @@ jQuery(document).ready(function ($) {
 						'wpum_nonce_psw_security' : wpum_psw_nonce
 					},
 					beforeSend: function() {
-						$( wpum_psw_recovery_form ).find('p.wpum-message').remove();
-						$( wpum_psw_recovery_form ).prepend('<p class="wpum-message wpum-notice">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_psw_recovery_form ).find('div.wpum-message').remove();
+						$( wpum_psw_recovery_form ).prepend('<div class="wpum-message notice"><p class="the-message">' + wpum_frontend_js.checking_credentials + '</p></div>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if(results.data.valid === true) {
-							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
+							$( wpum_psw_recovery_form ).find('div.wpum-message').removeClass('notice').addClass('success').children('p').text(results.data.message);
 						} else {
-							$( wpum_psw_recovery_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
+							$( wpum_psw_recovery_form ).find('div.wpum-message').removeClass('notice').addClass('error').children('p').text(results.data.message);
 						}
 
 					},
@@ -187,16 +187,16 @@ jQuery(document).ready(function ($) {
 						'wpum_nonce_psw_security' : wpum_psw_reset_nonce
 					},
 					beforeSend: function() {
-						$( wpum_psw_reset_form ).find('p.wpum-message').remove();
-						$( wpum_psw_reset_form ).prepend('<p class="wpum-message wpum-notice wpum-lost-psw-message">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_psw_reset_form ).find('div.wpum-message').remove();
+						$( wpum_psw_reset_form ).prepend('<div class="wpum-message notice"><p class="the-message">' + wpum_frontend_js.checking_credentials + '</p></div>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if(results.data.completed === true) {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success wpum-lost-psw-message').text(results.data.message);
+							$( wpum_psw_reset_form ).find('div.wpum-message').removeClass('notice').addClass('success').children('p').text(results.data.message);
 						} else {
-							$( wpum_psw_reset_form ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error wpum-lost-psw-message').text(results.data.message);
+							$( wpum_psw_reset_form ).find('div.wpum-message').removeClass('notice').addClass('error').children('p').text(results.data.message);
 						}
 
 					},
@@ -229,18 +229,18 @@ jQuery(document).ready(function ($) {
 						'field_id' : wpum_field_id,
 					},
 					beforeSend: function() {
-						$( wpum_removal_button ).find('p.wpum-message').remove();
-						$( wpum_removal_button ).before('<p class="wpum-message wpum-notice wpum-avatar-message">' + wpum_frontend_js.checking_credentials + '</p>');
+						$( wpum_removal_button ).find('div.wpum-message').remove();
+						$( wpum_removal_button ).before('<div class="wpum-message notice"><p class="the-message">' + wpum_frontend_js.checking_credentials + '</p></div>');
 					},
 					success: function(results) {
 
 						// Check the response
 						if( results.data.valid === true ) {
-							$( wpum_removal_button ).prev('p').prev().remove();
-							$( '#wpum-form-profile' ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-success').text(results.data.message);
+							$( wpum_removal_button ).prev('div').prev().remove();
+							$( '#wpum-form-profile' ).find('div.wpum-message').removeClass('notice').addClass('success').children('p').text(results.data.message);
 							location.reload(true);
 						} else {
-							$( '#wpum-form-profile' ).find('p.wpum-message').removeClass('wpum-notice').addClass('wpum-error').text(results.data.message);
+							$( '#wpum-form-profile' ).find('div.wpum-message').removeClass('notice').addClass('error').children('p').text(results.data.message);
 						}
 
 					},
