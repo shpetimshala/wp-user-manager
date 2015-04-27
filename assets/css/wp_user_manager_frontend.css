@@ -421,6 +421,12 @@ ul.wpum-user-listings {
   .wpum-password-form fieldset input[type=checkbox] ~ .description,
   .wpum-update-password-form fieldset input[type=checkbox] ~ .description {
     display: inline; }
+  .wpum-profile-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
+  .wpum-default-registration-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
+  .wpum-password-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
+  .wpum-update-password-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img {
+    width: 70px;
+    height: 70px; }
 
 .wpum-login-form form p.login-username,
 .wpum-login-form form p.login-password,
@@ -500,8 +506,9 @@ div.wpum-helper-links p {
   margin: 13px 5px 5px 1px;
   padding: 3px 5px;
   text-align: center;
-  width: 200px;
-  display: block; }
+  width: 50%;
+  display: block;
+  font-size: 11px; }
 
 /* Messages */
 div.wpum-message {

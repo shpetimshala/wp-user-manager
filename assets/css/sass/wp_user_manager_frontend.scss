@@ -395,6 +395,14 @@ ul.wpum-user-listings {
 		input[type=checkbox] ~ .description {
 			display: inline;
 		}
+		&.fieldset-user_avatar {
+			.wpum-uploaded-file-preview {
+				img {
+					width: 70px;
+					height: 70px;
+				}
+			}
+		}
 	}
 }
 
@@ -486,8 +494,9 @@ div.wpum-helper-links {
 	margin: 13px 5px 5px 1px;
 	padding: 3px 5px;
 	text-align: center;
-	width: 200px;
+	width: 50%;
 	display: block;
+	font-size: 11px;
 }
 
 /* Messages */
