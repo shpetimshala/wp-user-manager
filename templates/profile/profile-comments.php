@@ -33,16 +33,14 @@ $comments = get_comments( $args );
 			<div class="wpum-single-comment" id="wpum-comment-<?php echo $comment->comment_ID;?>">
 
 			<?php
-
 				// Get Comment details
 				$comment_content = wp_trim_words( $comment->comment_content, $num_words = 13, $more = null );
 				$the_post = get_the_title( $comment->comment_post_ID );
 				$the_permalink = get_post_permalink( $comment->comment_post_ID );
 				$the_date = get_comment_date( get_option( 'date_format' ), $comment->comment_ID );
+			?>
 
-				?>
-
-				<p><?php printf( _x( '"%s" on <a href="%s">%s</a>, %s.', 'This text displays the comments left by the user on his profile page.' ), $comment_content, $the_permalink, $the_post, $the_date ); ?></p>
+			<p><?php printf( _x( '"%s" on <a href="%s">%s</a>, %s.', 'This text displays the comments left by the user on his profile page.' ), $comment_content, $the_permalink, $the_post, $the_date ); ?></p>
 
 			</div>
 
@@ -52,10 +50,10 @@ $comments = get_comments( $args );
 
 			// Display error message
 			$args = array( 
-						'id'   => 'wpum-comments-not-found', 
-						'type' => 'notice', 
-						'text' => sprintf( __( '%s has not made any comment yet.' ), $user_data->display_name )
-					);
+				'id'   => 'wpum-comments-not-found', 
+				'type' => 'notice', 
+				'text' => sprintf( __( '%s has not made any comment yet.' ), $user_data->display_name )
+			);
 			wpum_message( $args );
 
 		endif; 

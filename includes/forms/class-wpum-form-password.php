@@ -33,10 +33,10 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		// Validate username field
 		if( !isset( $_GET['password-reset'] ) )
-			add_filter( 'wpum_password_form_validate_fields', array( __CLASS__, 'validate_username' ), 10, 3 );
+			add_filter( 'wpum_password_recovery_validation', array( __CLASS__, 'validate_username' ), 10, 3 );
 
 		if( isset( $_GET['password-reset'] ) )
-			add_filter( 'wpum_password_form_validate_fields', array( __CLASS__, 'validate_passwords' ), 10, 3 );
+			add_filter( 'wpum_password_recovery_validation', array( __CLASS__, 'validate_passwords' ), 10, 3 );
 
 	}
 
@@ -212,7 +212,7 @@ class WPUM_Form_Password extends WPUM_Form {
 			}
 		}
 
-		return apply_filters( 'wpum_password_form_validate_fields', true, self::$fields, $values );
+		return apply_filters( 'wpum_password_recovery_validation', true, self::$fields, $values );
 
 	}
 

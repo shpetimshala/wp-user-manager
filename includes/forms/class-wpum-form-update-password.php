@@ -32,7 +32,7 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
-		add_filter( 'wpum_update_password_form_validate_fields', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+		add_filter( 'wpum_password_update_validation', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 
 		// Add password meter field
 		if( wpum_get_option('display_password_meter_registration') )
@@ -151,7 +151,7 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 			}
 		}
 
-		return apply_filters( 'wpum_update_password_form_validate_fields', true, self::$fields, $values );
+		return apply_filters( 'wpum_password_update_validation', true, self::$fields, $values );
 
 	}
 

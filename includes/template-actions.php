@@ -173,7 +173,7 @@ function wpum_show_failed_login_message() {
 	}
 
 }
-add_action( 'wpum_before_loginform_template', 'wpum_show_failed_login_message' );
+add_action( 'wpum_before_login_form', 'wpum_show_failed_login_message' );
 
 /**
  * Display update messages on the account page.

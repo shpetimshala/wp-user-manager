@@ -47,10 +47,10 @@ $posts_query = new WP_Query( apply_filters( 'wpum_profile_posts_query_args', $ar
 
 			// Display error message
 			$args = array( 
-						'id'   => 'wpum-posts-not-found', 
-						'type' => 'notice', 
-						'text' => sprintf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
-					);
+				'id'   => 'wpum-posts-not-found', 
+				'type' => 'notice', 
+				'text' => sprintf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
+			);
 			wpum_message( $args );
 
 		endif;

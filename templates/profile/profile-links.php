@@ -11,7 +11,7 @@
 ?>
 <ul class="wpum-user-links">
 
-	<?php do_action( 'wpum_top_user_profile_links',  $user_data ); ?>
+	<?php do_action( 'wpum_before_profile_links',  $user_data ); ?>
 
 	<li class="wpum-profile-link send-email">
 		<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-button"><?php _e( 'Send Email' );?></a>
@@ -22,6 +22,6 @@
 	</li>
 	<?php endif; ?>
 
-	<?php do_action( 'wpum_bottom_user_profile_links',  $user_data ); ?>
+	<?php do_action( 'wpum_after_profile_links',  $user_data ); ?>
 
 </ul>
