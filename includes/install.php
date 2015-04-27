@@ -34,7 +34,7 @@ function wpum_install() {
 	}
 
 	// Clear the permalinks
-	flush_rewrite_rules();
+	flush_rewrite_rules( true );
 
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );

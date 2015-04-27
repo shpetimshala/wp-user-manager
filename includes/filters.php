@@ -276,3 +276,39 @@ function wpum_directory_pre_set_amount( $args, $directory_id ) {
 
 }
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_amount', 11, 2 );
+
+/**
+ * Retrieve custom avatar if any
+ * 
+ * @since 1.0.0
+ *
+ * @param int|string|object $id_or_email A user ID,  email address, or comment object
+ * @param int     $size        Size of the avatar image
+ * @param string  $default     URL to a default image to use if no avatar is available
+ * @param string  $alt         Alternative text to use in image tag. Defaults to blank
+ * @return false|string `<img>` tag for the user's avatar.
+ */
+function wpum_get_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
+
+	$safe_alt = esc_attr( $alt );
+
+	if ( is_numeric( $id_or_email ) ) {
+		$custom_avatar = get_user_meta( $id_or_email, 'current_user_avatar', true );
+			if ( !empty( $custom_avatar ) ) {
+				$avatar = "<img alt='{$safe_alt}' src='{$custom_avatar}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
+		}
+	} else if ( is_email( $id_or_email ) && email_exists( $id_or_email ) ) {
+
+		$get_user = get_user_by( 'email', $id_or_email );
+
+		$custom_avatar = get_user_meta( $get_user->ID , 'current_user_avatar', true );
+			if ( !empty( $custom_avatar ) ) {
+				$avatar = "<img alt='{$safe_alt}' src='{$custom_avatar}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
+		}
+
+	}
+
+	return $avatar;
+
+}
+add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
