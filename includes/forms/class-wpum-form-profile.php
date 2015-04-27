@@ -496,15 +496,11 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if ( is_wp_error( $user_id ) ) {
 
-			$this_page = add_query_arg( array('updated' => 'error'), get_permalink() );
-			wp_redirect( esc_url( $this_page ) );
-			exit();
+			self::add_confirmation( apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) ) );
 
 		} else {
 
-			$this_page = add_query_arg( array('updated' => 'success'), get_permalink() );
-			wp_redirect( esc_url( $this_page ) );
-			exit();
+			self::add_confirmation( apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) ) );
 
 		}
 		
@@ -591,17 +587,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 		// Get fields
 		self::get_profile_fields();
 
-		// Show messages only when in first tab
-		// this is needed to prevent messages to appear twice
-		// when updating forms within another tab
-		if( $current_account_tab === null ) {
-			// Show errors from fields
-			self::show_errors();
-
-			// Show confirmation messages
-			self::show_confirmations();
-		}
-
 		// Display template
 		if( is_user_logged_in() ) :
 
@@ -622,7 +607,6 @@ class WPUM_Form_Profile extends WPUM_Form {
 			echo wpum_login_form();
 
 		endif;
-
 
 	}
 

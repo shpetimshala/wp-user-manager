@@ -184,6 +184,11 @@ add_action( 'wpum_before_loginform_template', 'wpum_show_failed_login_message' )
  */
 function wpum_profile_update_messages() {
 
+	// Show errors from fields
+	WPUM_Form::show_errors();
+
+	WPUM_Form::show_confirmations();
+
 	if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'success' ) :
 
 		$args = array(
