@@ -261,6 +261,9 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-registration.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-login-form.php';
 
+		// Installation Hook
+		require_once WPUM_PLUGIN_DIR . 'includes/install.php';
+
 	}
 
 	/**
