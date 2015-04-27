@@ -344,7 +344,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @return void
 	 */
 	public static function add_password_meter_field( $form, $field ) {
-		echo '<span id="password-strength"></span>';		
+		echo '<span id="password-strength">'.__('Strength Indicator').'</span>';		
 	}
 
 	/**
