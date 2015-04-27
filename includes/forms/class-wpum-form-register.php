@@ -588,11 +588,12 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Get fields
 		self::get_registration_fields();
 
-		// Show errors from fields
-		self::show_errors();
-
-		// Show confirmation messages
-		self::show_confirmations();
+		if( isset( $_POST['submit_wpum_register'] ) ) {
+			// Show errors from fields
+			self::show_errors();
+			// Show confirmation messages
+			self::show_confirmations();
+		}
 
 		// Display template
 		if( !get_option( 'users_can_register' ) ) :

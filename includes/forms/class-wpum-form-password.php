@@ -491,11 +491,12 @@ class WPUM_Form_Password extends WPUM_Form {
 		// Get fields
 		self::get_password_fields();
 
-		// Show errors from fields
-		self::show_errors();
-
-		// Show confirmation messages
-		self::show_confirmations();
+		if( isset( $_POST['submit_wpum_password'] ) ) {
+			// Show errors from fields
+			self::show_errors();
+			// Show confirmation messages
+			self::show_confirmations();
+		}
 
 		// Display template
 		if( is_user_logged_in() ) :
