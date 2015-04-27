@@ -37,8 +37,8 @@ class WPUM_Form_Profile extends WPUM_Form {
 			self::$user = wp_get_current_user();
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
-			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_nickname_field' ), 10, 3 );
-			add_filter( 'wpum_profile_form_validate_fields', array( __CLASS__, 'validate_email_field' ), 10, 3 );
+			add_filter( 'wpum_account_update_validation', array( __CLASS__, 'validate_email_field' ), 10, 3 );
+			add_filter( 'wpum_account_update_validation', array( __CLASS__, 'validate_nickname' ), 10, 3 );
 		endif;
 
 		// Store uploaded avatar
@@ -362,35 +362,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			}
 		}
 
-		return apply_filters( 'wpum_profile_form_validate_fields', true, self::$fields, $values );
-
-	}
-
-	/**
-	 * Validate nickname field.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function validate_nickname_field( $passed, $fields, $values ) {
-
-		$username = $values['profile'][ 'nickname' ];
-
-		if( wpum_get_option('exclude_usernames') && array_key_exists( $username , wpum_get_disabled_usernames() ) )
-			return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
-
-		// Check for nicknames if permalink structure requires unique nicknames.
-		if( get_option('wpum_permalink') == 'nickname'  ) :
-
-			$current_user = wp_get_current_user();
-
-			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
-				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
-
-		endif;
-
-		return $passed;
+		return apply_filters( 'wpum_account_update_validation', true, self::$fields, $values );
 
 	}
 
@@ -411,6 +383,34 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if( email_exists( $email ) && $email !== self::$user->user_email )
 			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
+
+		return $passed;
+
+	}
+
+	/**
+	 * Validate nickname field.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function validate_nickname( $passed, $fields, $values ) {
+
+		$nickname = $values['profile'][ 'nickname' ];
+
+		if( wpum_get_option('exclude_usernames') && array_key_exists( $nickname , wpum_get_disabled_usernames() ) )
+			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.' ) );
+
+		// Check for nicknames if permalink structure requires unique nicknames.
+		if( get_option('wpum_permalink') == 'nickname'  ) :
+
+			$current_user = wp_get_current_user();
+
+			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+
+		endif;
 
 		return $passed;
 
