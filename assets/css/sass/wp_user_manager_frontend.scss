@@ -10,7 +10,7 @@
 @import 'columns';
 
 // Honeypot field
-.wpum-default-registration-form {
+.wpum-registration-form {
 	.fieldset-comments, .wpum-honeypot-field {
 		display: none !important; // need to force this because some themes overwrite this.
 	}
@@ -352,7 +352,7 @@ ul.wpum-user-listings {
 
 /* Form elements */
 .wpum-profile-form,
-.wpum-default-registration-form,
+.wpum-registration-form,
 .wpum-password-form,
 .wpum-update-password-form {
 	fieldset {

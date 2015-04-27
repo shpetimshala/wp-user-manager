@@ -589,10 +589,10 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Display error message
 			$message = array( 
-						'id'   => 'wpum-registrations-disabled', 
-						'type' => 'notice', 
-						'text' => __( 'Registrations are currently disabled.' )
-					);
+				'id'   => 'wpum-registrations-disabled', 
+				'type' => 'notice', 
+				'text' => __( 'Registrations are currently disabled.' )
+			);
 			wpum_message( $message );
 
 		elseif( is_user_logged_in() ) :
@@ -606,7 +606,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Show register form if not logged in
 		else :
 
-			get_wpum_template( 'forms/default-registration-form.php', 
+			get_wpum_template( 'forms/registration-form.php', 
 				array(
 					'atts' => $atts,
 					'form' => self::$form_name,

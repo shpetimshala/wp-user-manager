@@ -85,7 +85,7 @@
   margin-right: 6.1224%;
   width: 20.4082%; }
 
-.wpum-default-registration-form .fieldset-comments, .wpum-default-registration-form .wpum-honeypot-field {
+.wpum-registration-form .fieldset-comments, .wpum-registration-form .wpum-honeypot-field {
   display: none !important; }
 
 .wpum-clearfix {
@@ -355,7 +355,7 @@ ul.wpum-user-listings {
 
 /* Form elements */
 .wpum-profile-form fieldset,
-.wpum-default-registration-form fieldset,
+.wpum-registration-form fieldset,
 .wpum-password-form fieldset,
 .wpum-update-password-form fieldset {
   margin: 0 0 1em 0;
@@ -364,7 +364,7 @@ ul.wpum-user-listings {
   border: 0;
   border-bottom: 1px solid #eee; }
   .wpum-profile-form fieldset label,
-  .wpum-default-registration-form fieldset label,
+  .wpum-registration-form fieldset label,
   .wpum-password-form fieldset label,
   .wpum-update-password-form fieldset label {
     display: block;
@@ -373,23 +373,23 @@ ul.wpum-user-listings {
     float: left;
     vertical-align: middle; }
     .wpum-profile-form fieldset label small,
-    .wpum-default-registration-form fieldset label small,
+    .wpum-registration-form fieldset label small,
     .wpum-password-form fieldset label small,
     .wpum-update-password-form fieldset label small {
       opacity: .75;
       font-size: 0.83em; }
   .wpum-profile-form fieldset div.field,
-  .wpum-default-registration-form fieldset div.field,
+  .wpum-registration-form fieldset div.field,
   .wpum-password-form fieldset div.field,
   .wpum-update-password-form fieldset div.field {
     width: 70%;
     float: right;
     vertical-align: middle; }
   .wpum-profile-form fieldset input.input-text, .wpum-profile-form fieldset input.input-email, .wpum-profile-form fieldset textarea, .wpum-profile-form fieldset select,
-  .wpum-default-registration-form fieldset input.input-text,
-  .wpum-default-registration-form fieldset input.input-email,
-  .wpum-default-registration-form fieldset textarea,
-  .wpum-default-registration-form fieldset select,
+  .wpum-registration-form fieldset input.input-text,
+  .wpum-registration-form fieldset input.input-email,
+  .wpum-registration-form fieldset textarea,
+  .wpum-registration-form fieldset select,
   .wpum-password-form fieldset input.input-text,
   .wpum-password-form fieldset input.input-email,
   .wpum-password-form fieldset textarea,
@@ -408,7 +408,7 @@ ul.wpum-user-listings {
     box-sizing: border-box;
     /* Opera/IE 8+ */ }
   .wpum-profile-form fieldset small.description,
-  .wpum-default-registration-form fieldset small.description,
+  .wpum-registration-form fieldset small.description,
   .wpum-password-form fieldset small.description,
   .wpum-update-password-form fieldset small.description {
     opacity: .75;
@@ -417,12 +417,12 @@ ul.wpum-user-listings {
     display: block;
     line-height: 1.2em; }
   .wpum-profile-form fieldset input[type=checkbox] ~ .description,
-  .wpum-default-registration-form fieldset input[type=checkbox] ~ .description,
+  .wpum-registration-form fieldset input[type=checkbox] ~ .description,
   .wpum-password-form fieldset input[type=checkbox] ~ .description,
   .wpum-update-password-form fieldset input[type=checkbox] ~ .description {
     display: inline; }
   .wpum-profile-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
-  .wpum-default-registration-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
+  .wpum-registration-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
   .wpum-password-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img,
   .wpum-update-password-form fieldset.fieldset-user_avatar .wpum-uploaded-file-preview img {
     width: 70px;
