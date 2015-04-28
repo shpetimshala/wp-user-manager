@@ -15,3 +15,15 @@ delete_option( 'wpum_settings' );
 delete_option( 'wpum_emails' );
 delete_option( 'wpum_permalink' );
 delete_option( 'wpum_custom_fields' );
+
+// Delete post type contents
+$wpum_post_types = array( 'wpum_directory' );
+
+foreach ( $wpum_post_types as $post_type ) {
+	$items = get_posts( array( 'post_type' => $post_type, 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids' ) );
+	if ( $items ) {
+		foreach ( $items as $item ) {
+			wp_delete_post( $item, true);
+		}
+	}
+}
