@@ -57,6 +57,14 @@ function wpum_install() {
 
 	update_option( 'wpum_emails', $default_emails );
 
+	// Let's set some default options
+	wpum_update_option( 'enable_honeypot', true ); // enable antispam honeypot by default.
+	wpum_update_option( 'email_template', 'none' ); // set no template as default.
+	wpum_update_option( 'from_email', get_option( 'admin_email' ) ); // set admin email as default.
+	wpum_update_option( 'from_name', get_option( 'blogname' ) ); // set blogname as default mail from.
+	wpum_update_option( 'guests_can_view_profiles', true );
+	wpum_update_option( 'members_can_view_profiles', true );
+
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );
 	if ( $current_version ) {
