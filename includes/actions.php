@@ -178,3 +178,20 @@ function wpum_handle_failed_login( $user ) {
 	
 }
 add_action( 'wp_login_failed', 'wpum_handle_failed_login' );
+
+/**
+ * Displays a message if php version is lower than required one.
+ *
+ * @since 1.0.0
+ * @access public
+ * @return void
+ */
+function wpum_php_is_old() {
+	if ( version_compare( PHP_VERSION, '5.3', '<' ) ) { ?>
+		<div class="error">
+			<p><?php echo sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.'), 'http://www.wpupdatephp.com/contact-host/' ); ?></p>
+		</div>
+	<?php
+	}
+}
+add_action( 'admin_notices', 'wpum_php_is_old' );
