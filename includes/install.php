@@ -36,6 +36,27 @@ function wpum_install() {
 	// Clear the permalinks
 	flush_rewrite_rules( true );
 
+	// Setup default emails content
+	$default_emails = array();
+
+	// Delete the option
+	delete_option( 'wpum_emails' );
+
+	// Get all registered emails
+	$emails = WPUM_Emails_Editor::get_emails_list();
+
+	// Cycle through the emails and build the list
+	foreach ( $emails as $email ) {
+		if ( method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_subject" ) && method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_message" ) ) {
+			$default_emails[ $email['id'] ] = array(
+				'subject' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_subject" ),
+				'message' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_message" ),
+			);
+		}
+	}
+
+	update_option( 'wpum_emails', $default_emails );
+
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );
 	if ( $current_version ) {
