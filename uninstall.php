@@ -10,11 +10,8 @@
 // Exit if accessed directly
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;
 
-// Delete options
-delete_option( 'wpum_settings' );
-delete_option( 'wpum_emails' );
-delete_option( 'wpum_permalink' );
-delete_option( 'wpum_custom_fields' );
+// Load WPUM file
+include_once( 'wp-user-manager.php' );
 
 // Delete post type contents
 $wpum_post_types = array( 'wpum_directory' );
@@ -27,3 +24,18 @@ foreach ( $wpum_post_types as $post_type ) {
 		}
 	}
 }
+
+// Delete created pages
+$wpum_pages = array( 'login_page', 'password_recovery_page', 'registration_page', 'account_page', 'profile_page' );
+foreach ( $wpum_pages as $p ) {
+	$page = wpum_get_option( $p, false );
+	if ( $page ) {
+		wp_delete_post( $page, false );
+	}
+}
+
+// Delete options
+delete_option( 'wpum_settings' );
+delete_option( 'wpum_emails' );
+delete_option( 'wpum_permalink' );
+delete_option( 'wpum_custom_fields' );
