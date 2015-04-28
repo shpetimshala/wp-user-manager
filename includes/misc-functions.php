@@ -312,6 +312,18 @@ function wpum_default_fields_list() {
 			'gif'  => 'image/gif',
 			'png'  => 'image/png'
 		),
+		'settings' => array(
+			'is_required' => array(
+				'type'  => 'checkbox',
+				'name'  => 'is_required',
+				'label' => __('Set this field as required.'),
+			),
+			'show_on_signup' => array(
+				'type'  => 'checkbox',
+				'name'  => 'show_on_signup',
+				'label' => __('Display on registration form.'),
+			)
+		),
 	);
 
 	$fields = apply_filters( 'wpum_default_fields_list', $fields );

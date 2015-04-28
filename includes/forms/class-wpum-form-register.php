@@ -45,7 +45,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Automatic login after registration
 			if( wpum_get_option('login_after_registration') )
-				add_action( 'wpum_after_registration', array( __CLASS__, 'do_login' ), 10, 3 );
+				add_action( 'wpum_after_registration', array( __CLASS__, 'do_login' ), 11, 3 );
 
 		endif;
 
