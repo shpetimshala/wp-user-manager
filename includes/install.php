@@ -64,7 +64,8 @@ function wpum_install() {
 	wpum_update_option( 'from_name', get_option( 'blogname' ) ); // set blogname as default mail from.
 	wpum_update_option( 'guests_can_view_profiles', true );
 	wpum_update_option( 'members_can_view_profiles', true );
-	update_option( 'users_can_register', true );
+	update_option( 'users_can_register', true ); // Enable registrations.
+	update_option( 'wpum_permalink', 'user_id' ); // Set default user permalinks
 
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );
