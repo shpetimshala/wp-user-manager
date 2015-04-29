@@ -166,7 +166,7 @@ class WPUM_Getting_Started {
 			
 			<h1><?php printf( __( 'Welcome to WP User Manager %s', 'wpum' ), WPUM_VERSION ); ?></h1>
 			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! WP User Manager %s is ready to provide improved control over your WordPress users.', 'wpum' ), WPUM_VERSION ); ?></div>
-			<div class="wpum-badge"><?php printf( __( 'Version %s', 'edd' ), WPUM_VERSION ); ?></div>
+			<div class="wpum-badge"><?php printf( __( 'Version %s', 'wpum' ), WPUM_VERSION ); ?></div>
 
 			<?php $this->tabs(); ?>
 
@@ -186,10 +186,47 @@ class WPUM_Getting_Started {
 		<div class="wrap about-wrap">
 			
 			<h1><?php printf( __( 'Welcome to WP User Manager %s', 'wpum' ), WPUM_VERSION ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! WP User Manager %s is ready to provide improved control over your WordPress users.', 'wpum' ), WPUM_VERSION ); ?></div>
-			<div class="wpum-badge"><?php printf( __( 'Version %s', 'edd' ), WPUM_VERSION ); ?></div>
+			<div class="about-text"><?php printf( __( 'Thank you for installing the latest version! WP User Manager %s is ready to provide improved control over your WordPress users.', 'wpum' ), WPUM_VERSION ); ?></div>
+			<div class="wpum-badge"><?php printf( __( 'Version %s', 'wpum' ), WPUM_VERSION ); ?></div>
 
 			<?php $this->tabs(); ?>
+
+			<p class="about-description"><?php _e('Use the tips below to get started using WP User Manager. You will be up and running in no time!'); ?></p>
+
+			<div id="welcome-panel" class="welcome-panel" style="padding-top:0px;">
+					<div class="welcome-panel-content">
+						<div class="welcome-panel-column-container">
+							<div class="welcome-panel-column">
+								
+								<h4><?php _e( 'Configure WP User Manager' );?></h4>
+								<a class="button button-primary button-hero" href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=general&wpum_action=install_pages' ); ?>"><?php _e('Install required pages'); ?></a>
+
+								<ul>
+									<li><a href="#" class="welcome-icon dashicons-lock" target="_blank"><?php _e('Strengthen your passwords'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-admin-network" target="_blank"><?php _e('Setup login method'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-email-alt" target="_blank"><?php _e('Customize notifications'); ?></a></li>
+								</ul>
+
+							</div>
+							<div class="welcome-panel-column">
+								<h4><?php _e( 'Administration Tools' ); ?></h4>
+								<ul>
+									<li><a href="#" class="welcome-icon dashicons-admin-users" target="_blank"><?php _e('Customize profiles'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-groups" target="_blank"><?php _e('Create user directories'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-minus" target="_blank"><?php _e('Manage admin bar'); ?></a></li>
+									<li><a href="#" class="welcome-icon dashicons-migrate" target="_blank"><?php _e('Configure redirects'); ?></a></li>
+								</ul>
+							</div>
+							<div class="welcome-panel-column welcome-panel-last">
+								<h4><?php _e('Documentation &amp; Support'); ?></h4>
+								<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __( 'Looking for help? <a href="%s" target="_blank">WP User Manager documentation</a> has got you covered.' ), '#' ); ?> <br/><br/><a href="#" class="button" target="_blank"><?php _e('Read documentation') ;?></a></p>
+								
+								<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __('We do all we can to provide every user with the best support possible. If you encounter a problem or have a question, please <a href="#" target="_blank">contact us.</a>'), '#' ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
 		</div>
 		<?php
@@ -208,7 +245,7 @@ class WPUM_Getting_Started {
 			
 			<h1><?php printf( __( 'Welcome to WP User Manager %s', 'wpum' ), WPUM_VERSION ); ?></h1>
 			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! WP User Manager %s is ready to provide improved control over your WordPress users.', 'wpum' ), WPUM_VERSION ); ?></div>
-			<div class="wpum-badge"><?php printf( __( 'Version %s', 'edd' ), WPUM_VERSION ); ?></div>
+			<div class="wpum-badge"><?php printf( __( 'Version %s', 'wpum' ), WPUM_VERSION ); ?></div>
 
 			<?php $this->tabs(); ?>
 
