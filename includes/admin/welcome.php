@@ -146,9 +146,6 @@ class WPUM_Getting_Started {
 			<a class="nav-tab <?php echo $selected == 'wpum-getting-started' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpum-getting-started' ), 'index.php' ) ) ); ?>">
 				<?php _e( 'Getting Started', 'wpum' ); ?>
 			</a>
-			<a class="nav-tab <?php echo $selected == 'wpum-changelog' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpum-changelog' ), 'index.php' ) ) ); ?>">
-				<?php _e( 'Changelog', 'wpum' ); ?>
-			</a>
 		</h2>
 		<?php
 	}
