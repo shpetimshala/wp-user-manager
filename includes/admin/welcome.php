@@ -54,15 +54,6 @@ class WPUM_Getting_Started {
 			array( $this, 'about_screen' )
 		);
 
-		// Changelog Page
-		add_dashboard_page(
-			__( 'WP User Manager Changelog', 'wpum' ),
-			__( 'WP User Manager Changelog', 'wpum' ),
-			$this->minimum_capability,
-			'wpum-changelog',
-			array( $this, 'changelog_screen' )
-		);
-
 		// Getting Started Page
 		add_dashboard_page(
 			__( 'Getting started with WP User Manager', 'wpum' ),
@@ -83,9 +74,7 @@ class WPUM_Getting_Started {
 	 */
 	public function admin_head() {
 		remove_submenu_page( 'index.php', 'wpum-about' );
-		remove_submenu_page( 'index.php', 'wpum-changelog' );
 		remove_submenu_page( 'index.php', 'wpum-getting-started' );
-		remove_submenu_page( 'index.php', 'wpum-credits' );
 
 		// Badge for welcome page
 		$badge_url = WPUM_PLUGIN_URL . 'images/badge.png';
@@ -167,6 +156,8 @@ class WPUM_Getting_Started {
 
 			<?php $this->tabs(); ?>
 
+			<p class="about-description"><?php _e('Come back at a later point when major updates are released.'); ?></p>
+
 		</div>
 		<?php
 	}
@@ -245,27 +236,6 @@ class WPUM_Getting_Started {
 
 		</div>
 
-		<?php
-	}
-
-	/**
-	 * Render Getting Started Screen
-	 *
-	 * @access public
-	 * @since 1.0
-	 * @return void
-	 */
-	public function changelog_screen() {
-		?>
-		<div class="wrap about-wrap">
-			
-			<h1><?php printf( __( 'Welcome to WP User Manager %s', 'wpum' ), WPUM_VERSION ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! WP User Manager %s is ready to provide improved control over your WordPress users.', 'wpum' ), WPUM_VERSION ); ?></div>
-			<div class="wpum-badge"><?php printf( __( 'Version %s', 'wpum' ), WPUM_VERSION ); ?></div>
-
-			<?php $this->tabs(); ?>
-
-		</div>
 		<?php
 	}
 
