@@ -496,11 +496,15 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if ( is_wp_error( $user_id ) ) {
 
-			self::add_confirmation( apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) ) );
+			$this_page = add_query_arg( array( 'updated' => 'error' ), get_permalink() );
+			wp_redirect( esc_url( $this_page ) );
+			exit();
 
 		} else {
 
-			self::add_confirmation( apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) ) );
+			$this_page = add_query_arg( array( 'updated' => 'success' ), get_permalink() );
+			wp_redirect( esc_url( $this_page ) );
+			exit();
 
 		}
 		
