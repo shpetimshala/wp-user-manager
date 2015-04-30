@@ -327,14 +327,14 @@ class WPUM_Emails {
 	 */
 	public static function default_register_mail_message() {
 		
-		$message = 'Hello {username},<br/><br/>
+		$message = 'Hello {username},
 
-			Welcome to {sitename},<br/><br/>
+Welcome to {sitename},
 
-			These are your account details<br/><br/>
+These are your account details
 
-			Username: {username},<br/>
-			Password: {password}';
+Username: {username},
+Password: {password}';
 		
 		return apply_filters( 'wpum_default_register_mail_message', $message );
 
@@ -362,16 +362,16 @@ class WPUM_Emails {
 	 */
 	public static function default_password_mail_message() {
 		
-		$message = 'Hello {username},<br/><br/>
+		$message = 'Hello {username},
 
-			You are receiving this message because you or somebody else has attempted to
-			reset your password on {sitename}.<br/><br/>
-			
-			If this was a mistake, just ignore this email and nothing will happen.<br/><br/>
+You are receiving this message because you or somebody else has attempted to reset your password on {sitename}.
 
-			To reset your password, visit the following address:<br/><br/>
+If this was a mistake, just ignore this email and nothing will happen.
 
-			{recovery_url}';
+To reset your password, visit the following address:
+
+<a href="{recovery_url}">{recovery_url}</a>
+';
 		
 		return apply_filters( 'wpum_default_password_mail_message', $message );
 
