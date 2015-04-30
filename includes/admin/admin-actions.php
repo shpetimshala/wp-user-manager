@@ -196,3 +196,25 @@ function wpum_run_pages_setup() {
 
 }
 add_action( 'admin_init', 'wpum_run_pages_setup' );
+
+
+/**
+ * Add new quicktag when editing email.
+ *
+ * @since 1.0.0
+ * @return void
+*/
+function wpum_new_line_quicktag() {
+
+	$screen = get_current_screen();
+
+	if ( wp_script_is( 'quicktags' ) && $screen->base == 'users_page_wpum-edit-email' ) {
+	?>
+	<script type="text/javascript">
+	QTags.addButton( 'br', "<?php _e('Add New Line');?>", '<br/>', '', 's', "<?php _e('Add New Line');?>", 1 );
+	</script>
+	<?php
+	}
+
+}
+add_action( 'admin_print_footer_scripts', 'wpum_new_line_quicktag' );

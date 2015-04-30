@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class WPUM_Emails_Editor {
 
+	public $allowed_email_tags;
+
 	/**
 	 * __construct function.
 	 *
@@ -25,6 +27,16 @@ class WPUM_Emails_Editor {
 	 * @return void
 	 */
 	public function __construct() {
+
+		$this->allowed_email_tags = array(
+		    'a' => array(
+		        'href' => array(),
+		        'title' => array()
+		    ),
+			'br'     => array(),
+			'em'     => array(),
+			'strong' => array(),
+		);
 		
 		if( ! class_exists( 'WP_List_Table' ) ) {
 		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
@@ -132,7 +144,7 @@ class WPUM_Emails_Editor {
 
 		// Store the data
 		$subject = isset( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : sprintf( __('%s email'), $data['email_id'] );
-		$message = isset( $data['message'] ) ? wp_kses( $data['message'], wp_kses_allowed_html( 'post' ) ) : false;
+		$message = isset( $data['message'] ) ? wp_kses( $data['message'], $this->allowed_email_tags ) : false;
 
 		$emails = self::get_default_emails();
 

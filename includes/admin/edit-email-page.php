@@ -15,6 +15,21 @@ $email_id = esc_attr( $_GET['email-id'] );
 $email_title = esc_attr( $_GET['email-title'] );
 $get_emails = get_option('wpum_emails');
 $this_email = $get_emails[ $email_id ];
+
+// Editor Args
+
+$editor_args = array( 
+	'textarea_name' => 'message',
+	'media_buttons' => false,
+	'textarea_rows' => 10,
+	'teeny'         => true,
+	'dfw'           => false,
+	'tinymce'       => false,
+	'quicktags'     => 	array(
+		'buttons' => 'strong,em,link,block,del,ins,img,ul,ol,li,close'
+	)
+);
+
 ?>
 <div class="wrap">
 
@@ -38,7 +53,7 @@ $this_email = $get_emails[ $email_id ];
 					<label for="wpum-notice-message"><?php _e( 'Email Message:' ); ?></label>
 				</th>
 				<td>
-					<?php wp_editor( wpautop( wp_kses_post( wptexturize( $this_email['message'] ) ) ), 'message', array( 'textarea_name' => 'message', 'media_buttons' => false, 'textarea_rows' => 10 ) ); ?>
+					<?php wp_editor( wp_kses_post( wptexturize( $this_email['message'] ) ), 'message', $editor_args ); ?>
 					<p class="description"><?php _e( 'The email message to be sent into the notification. The following template tags can be used in the message:' ); ?></p>
 					<br/><p><?php echo wpum_get_emails_tags_list(); ?></p>
 				</td>
