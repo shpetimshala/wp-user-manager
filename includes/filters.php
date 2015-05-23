@@ -319,7 +319,7 @@ add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
 /**
  * Highlight which pages are selected as plugin's core page
  * within the Pages management screen.
- * 
+ *
  * @since 1.0.0
  * @param array $post_states An array of post display states.
  * @param int   $post        The post ID.
@@ -327,20 +327,16 @@ add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
  */
 function wpum_highlight_pages( $post_states, $post ) {
 
-	if( !defined( 'WPUM_DISABLE_STATES' ) ) {
-
-		if( wpum_get_core_page_id( 'login' ) == $post->ID ) {
-			$post_states['page_for_login'] = __( 'Login Page' );
-		} else if( wpum_get_core_page_id( 'account' ) == $post->ID ) {
-			$post_states['page_for_account'] = __( 'Account Page' );
-		} else if( wpum_get_core_page_id( 'password' ) == $post->ID ) {
-			$post_states['page_for_password'] = __( 'Password Recovery Page' );
-		} else if( wpum_get_core_page_id( 'register' ) == $post->ID ) {
-			$post_states['page_for_registration'] = __( 'Registration Page' );
-		} else if( wpum_get_core_page_id( 'profile' ) == $post->ID ) {
-			$post_states['page_for_profiles'] = __( 'Profiles Page' );
-		}
-
+	if( wpum_get_core_page_id( 'login' ) == $post->ID ) {
+		$post_states['page_for_login'] = __( 'Login Page' );
+	} else if( wpum_get_core_page_id( 'account' ) == $post->ID ) {
+		$post_states['page_for_account'] = __( 'Account Page' );
+	} else if( wpum_get_core_page_id( 'password' ) == $post->ID ) {
+		$post_states['page_for_password'] = __( 'Password Recovery Page' );
+	} else if( wpum_get_core_page_id( 'register' ) == $post->ID ) {
+		$post_states['page_for_registration'] = __( 'Registration Page' );
+	} else if( wpum_get_core_page_id( 'profile' ) == $post->ID ) {
+		$post_states['page_for_profiles'] = __( 'Profiles Page' );
 	}
 
 	return $post_states;
