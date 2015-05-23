@@ -129,12 +129,17 @@ class WPUM_Getting_Started {
 		$selected = isset( $_GET['page'] ) ? $_GET['page'] : 'wpum-about';
 		?>
 		<h2 class="nav-tab-wrapper">
+			
+			<?php if( WPUM_VERSION > 1 ) : ?>
 			<a class="nav-tab <?php echo $selected == 'wpum-about' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpum-about' ), 'index.php' ) ) ); ?>">
 				<?php _e( "What's New", 'wpum' ); ?>
 			</a>
+			<?php endif; ?>
+			
 			<a class="nav-tab <?php echo $selected == 'wpum-getting-started' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpum-getting-started' ), 'index.php' ) ) ); ?>">
 				<?php _e( 'Getting Started', 'wpum' ); ?>
 			</a>
+			
 		</h2>
 		<?php
 	}
