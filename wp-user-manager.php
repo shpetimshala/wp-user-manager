@@ -207,15 +207,15 @@ class WP_User_Manager {
 		// Plugin's actions
 		require_once WPUM_PLUGIN_DIR . 'includes/actions.php';
 		// Forms
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-forms.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
 		// Shortcodes
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-shortcodes.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-shortcodes.php';
 		// Emails
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails.php';
 		// Emails Tags
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-tags.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-tags.php';
 		// Load html helper class
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-html-helper.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-html-helper.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -230,23 +230,23 @@ class WP_User_Manager {
 			// Display Settings Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			// Load Emails Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-editor.php';
 			// Load Emails List Table
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-emails-list.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-list.php';
 			// Load Custom Fields Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-custom-fields-table.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-custom-fields-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-custom-fields-table.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-custom-fields-editor.php';
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
 		}
 
 		// Directory for WPUM
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-directory.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-directory.php';
 		// Ajax Handler
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-ajax-handler.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-ajax-handler.php';
 		// Permalinks for WPUM
-		require_once WPUM_PLUGIN_DIR . 'includes/class-wpum-permalinks.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-permalinks.php';
 		// Template actions
 		require_once WPUM_PLUGIN_DIR . 'includes/template-actions.php';
 		// Load Profiles template system
