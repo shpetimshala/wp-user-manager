@@ -59,16 +59,7 @@ class WPUM_Custom_Fields_Editor {
 		<div class="wrap">
 
 			<h2 class="wpum-page-title">
-				<?php 
-					if( isset( $_GET['edit-field'] ) && !empty( $_GET['edit-field'] ) ) :
-
-						$field = wpum_get_field_by_meta( $_GET['edit-field'] );
-
-						echo sprintf( __( 'Editing "%s" Field' ), $field['label'] );
-					else:
-						_e( 'WP User Manager - Custom Fields Editor' );
-					endif;
-				?>
+				<?php _e( 'WP User Manager - Custom Fields Editor' ); ?>
 			</h2>
 
 			<div id="nav-menus-frame">

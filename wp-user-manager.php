@@ -234,8 +234,8 @@ class WP_User_Manager {
 			// Load Emails List Table
 			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-list.php';
 			// Load Custom Fields Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-custom-fields-table.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-custom-fields-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
