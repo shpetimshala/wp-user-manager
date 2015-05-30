@@ -55,7 +55,7 @@ class WPUM_Forms {
 	public function load_form_class( $form_name ) {
 		// Load the form abtract
 		if ( ! class_exists( 'WPUM_Form' ) )
-			include( 'abstracts/abstract-wpum-form.php' );
+			include( WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-form.php' );
 
 		// Now try to load the form_name
 		$form_class  = 'WPUM_Form_' . str_replace( '-', '_', $form_name );

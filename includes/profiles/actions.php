@@ -37,7 +37,6 @@ function wpum_profile_force_404_error() {
 }
 add_action( 'template_redirect', 'wpum_profile_force_404_error' );
 
-if ( ! function_exists( 'wpum_profile_show_user_name' ) ) :
 /**
  * Display user name in profile.php template.
  * 
@@ -61,9 +60,7 @@ function wpum_profile_show_user_name( $user_data ) {
 
 }
 add_action( 'wpum_main_profile_details', 'wpum_profile_show_user_name', 10 );
-endif;
 
-if ( ! function_exists( 'wpum_profile_show_user_description' ) ) :
 /**
  * Display user description in profile.php template.
  * 
@@ -82,9 +79,7 @@ function wpum_profile_show_user_description( $user_data ) {
 
 }
 add_action( 'wpum_main_profile_details', 'wpum_profile_show_user_description', 10 );
-endif;
 
-if ( ! function_exists( 'wpum_profile_show_user_links' ) ) :
 /**
  * Display user name in profile.php template.
  * 
@@ -101,4 +96,3 @@ function wpum_profile_show_user_links( $user_data ) {
 
 }
 add_action( 'wpum_secondary_profile_details', 'wpum_profile_show_user_links', 10 );
-endif;

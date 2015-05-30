@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Form_Profile extends WPUM_Form {
 
 	public static $form_name = 'profile';
+	
 	private static $user;
 
 	/**

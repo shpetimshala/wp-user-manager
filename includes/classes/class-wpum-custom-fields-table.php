@@ -47,11 +47,13 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'order'    => __('Order'),
-            'title'    => __('Field Title'),
-            'type'     => __('Field Type'),
-            'required' => __('Required'),
-            'edit'     => __('Edit'),
+            'order'        => __('Order'),
+            'title'        => __('Field Title'),
+            'type'         => __('Field Type'),
+            'required'     => __('Required'),
+            'registration' => __('Registration'),
+            'profile'      => __('Profile'),
+            'edit'         => __('Edit'),
         );
 
         return $columns;
@@ -103,7 +105,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
         
         switch( $column_name ) {
             case 'order':
-                return '<a href="#" class="button"><span class="dashicons dashicons-sort"></span></a>';
+                return '<a href="#"><span class="dashicons dashicons-menu"></span></a>';
             break;
             case 'title':
                 return $item['label'];
@@ -118,7 +120,7 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
                 return $this->parse_required( $item['required'] );
             break;
             case 'edit':
-                return $this->get_edit_action( $item );
+                return $this->get_actions( $item );
             break;
             default:
                 return null;
@@ -200,11 +202,14 @@ class WPUM_Custom_Fields_List extends WP_List_Table {
      * @param   array $item - The email item being passed
      * @return  Mixed
      */
-    private function get_edit_action( $item ) {
+    private function get_actions( $item ) {
+
         if( wpum_get_field_options( $item['meta'] ) ) :
-            $edit_url = esc_url_raw( add_query_arg( array(), admin_url( 'users.php?page=wpum-custom-fields-editor' ) ) );
-            echo '<a href="'.$edit_url.'" class="button" data-meta="'. esc_js( $item['meta'] ) .'">'.__('Edit').'</a> ';
-            wp_nonce_field( $item['meta'], $item['meta'] );
+
+            $edit_url = add_query_arg( array('edit-field' => $item['meta'] ), admin_url( 'users.php?page=wpum-custom-fields-editor' ) );
+
+            echo '<a href="'.esc_url( $edit_url ).'" data-meta="'. esc_js( $item['meta'] ) .'">'.__( 'Edit' ).'</a> ';
+
         endif;
     }
 

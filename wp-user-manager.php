@@ -250,9 +250,9 @@ class WP_User_Manager {
 		// Template actions
 		require_once WPUM_PLUGIN_DIR . 'includes/template-actions.php';
 		// Load Profiles template system
-		require_once WPUM_PLUGIN_DIR . 'includes/profiles/profile-actions.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/profiles/actions.php';
 		// Load Profiles template system
-		require_once WPUM_PLUGIN_DIR . 'includes/profiles/profile-tabs.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/profiles/tabs.php';
 		// Load widgets helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
 		// Load all widgets

@@ -58,8 +58,18 @@ class WPUM_Custom_Fields_Editor {
 
 		<div class="wrap">
 
-			<h2 class="wpum-page-title"><?php _e( 'WP User Manager - Custom Fields Editor' ); ?></h2>
+			<h2 class="wpum-page-title">
+				<?php 
+					if( isset( $_GET['edit-field'] ) && !empty( $_GET['edit-field'] ) ) :
 
+						$field = wpum_get_field_by_meta( $_GET['edit-field'] );
+
+						echo sprintf( __( 'Editing "%s" Field' ), $field['label'] );
+					else:
+						_e( 'WP User Manager - Custom Fields Editor' );
+					endif;
+				?>
+			</h2>
 
 			<div id="nav-menus-frame">
 
@@ -76,16 +86,15 @@ class WPUM_Custom_Fields_Editor {
 				<div id="menu-management-liquid" class="wpum-editor-container">
 				
 						<?php 
-
-						$custom_fields_table = new WPUM_Custom_Fields_List();
-					    $custom_fields_table->prepare_items();
-					    $custom_fields_table->display();
-
-					    wp_nonce_field( 'wpum_fields_editor' );
-
-					    echo '<div class="wpum-table-loader"><span id="wpum-spinner" class="spinner wpum-spinner"></span></div></div>';
-
+							$custom_fields_table = new WPUM_Custom_Fields_List();
+					    	$custom_fields_table->prepare_items();
+					    	$custom_fields_table->display();
+					    	wp_nonce_field( 'wpum_fields_editor' );
 					    ?>
+
+					    <div class="wpum-table-loader">
+					    	<span id="wpum-spinner" class="spinner wpum-spinner"></span>
+					    </div>
 
 				</div>
 
@@ -96,6 +105,22 @@ class WPUM_Custom_Fields_Editor {
 		<?php
 		
 		echo ob_get_clean();
+
+	}
+
+	/**
+	 * Content of the first metabox.
+	 *
+	 * @access public
+	 * @return mixed content of the "how it works" metabox.
+	 */
+	public static function help_text( $current_menu = null ) {
+
+		$output = '<p>';
+			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>');
+		$output .= '</p>';
+
+		echo $output;
 
 	}
 
@@ -113,7 +138,6 @@ class WPUM_Custom_Fields_Editor {
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
 	}
-
 	/**
 	 * Register metaboxes.
 	 *
@@ -121,37 +145,7 @@ class WPUM_Custom_Fields_Editor {
 	 * @return void
 	 */
 	public function add_meta_box() {
-
 		add_meta_box( 'wpum_fields_editor_help', __( 'How it works' ), array( $this, 'help_text' ), self::Hook, 'side' );
-
-	}
-
-	/**
-	 * Content of the first metabox.
-	 *
-	 * @access public
-	 * @return mixed content of the "how it works" metabox.
-	 */
-	public function help_text() {
-
-		$output = '<p>';
-			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>');
-		$output .= '</p>';
-
-		echo $output;
-
-	}
-
-	/**
-	 * Print metabox scripts into the footer.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function print_script_in_footer() {
-		?>
-		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
-		<?php
 	}
 
 	/**
@@ -241,6 +235,18 @@ class WPUM_Custom_Fields_Editor {
 
 		return $output;
 
+	}
+
+	/**
+	 * Print metabox scripts into the footer.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function print_script_in_footer() {
+		?>
+		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
+		<?php
 	}
 
 }
