@@ -247,9 +247,9 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-permalinks.php';
 		// Template actions
 		require_once WPUM_PLUGIN_DIR . 'includes/template-actions.php';
-		// Load Profiles template system
+		// Load Profiles
+		require_once WPUM_PLUGIN_DIR . 'includes/profiles/functions.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/actions.php';
-		// Load Profiles template system
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/tabs.php';
 		// Load widgets helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
