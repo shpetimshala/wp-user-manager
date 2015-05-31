@@ -158,6 +158,23 @@ function wpum_option_restore_default_fields() {
 }
 add_action( 'wpum_restore_default_fields', 'wpum_option_restore_default_fields' );
 
+/**
+ * Function to display content of the "restore_default_fields" option.
+ *
+ * @since 1.0.0
+ * @return array
+*/
+function wpum_option_restore_pages() {
+
+	$output = '<a id="wpum-restore-pages" href="'.esc_url( add_query_arg( array('tool' => 'restore-pages') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default pages').'</a>';
+	$output .= '<br/><p class="description">' . __('Click the button to restore the default core pages of the plugin.') . '</p>';
+	$output .= wp_nonce_field( "wpum_nonce_default_pages_restore", "wpum_backend_pages_restore" );
+
+	echo $output;
+
+}
+add_action( 'wpum_restore_pages', 'wpum_option_restore_pages' );
+
 
 /**
  * Function to display content of the "wpum_profile_permalink" option.
@@ -190,7 +207,7 @@ add_action( 'wpum_profile_permalinks', 'wpum_profile_permalink' );
 */
 function wpum_run_pages_setup() {
 
-	if( is_admin() && isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] == 'install_pages' ) :
+	if( is_admin() && current_user_can( 'manage_options' ) && isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] == 'install_pages' || is_admin() && current_user_can( 'manage_options' ) && isset( $_GET['tool'] ) && $_GET['tool'] == 'restore-pages' ) :
 		wpum_generate_pages( true );
 	endif;
 

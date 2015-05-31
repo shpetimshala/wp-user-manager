@@ -463,6 +463,11 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Restore default fields:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'restore_pages' => array(
+					'id'   => 'restore_pages',
+					'name' => __( 'Restore Pages:', 'wpum' ),
+					'type' => 'hook'
+				),
 				'disable_ajax' => array(
 					'id'   => 'disable_ajax',
 					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
