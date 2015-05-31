@@ -199,7 +199,7 @@ class WP_User_Manager {
 		// Load Misc Functions
 		require_once WPUM_PLUGIN_DIR . 'includes/misc-functions.php';
 		// Templates
-		require_once WPUM_PLUGIN_DIR . 'includes/templates.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/templates-loader.php';
 		// Plugin's filters
 		require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 		// Plugin's actions
