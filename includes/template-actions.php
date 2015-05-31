@@ -58,54 +58,6 @@ add_action( 'wpum_after_password_form_template', 'wpum_add_helper_links', 10, 1 
 add_action( 'wpum_after_register_form_template', 'wpum_add_helper_links', 10, 1 );
 
 /**
- * Adds total number of users found on top of the directory.
- *
- * @since 1.0.0
- * @access public
- * @param array   $directory_args directory arguments.
- * @see
- * @return void
- */
-function wpum_directory_topbar( $directory_args ) {
-
-	get_wpum_template( "directory/top-bar.php", array(
-			'users_found'  => $directory_args['users_found'],
-			//'search_form'  => $directory_args['search_form'], Search form under construction
-			'directory_id' => $directory_args['directory_id']
-		) );
-
-}
-add_action( 'wpum_before_user_directory', 'wpum_directory_topbar' );
-
-/**
- * Adds pagination at the bottom of the user directory.
- *
- * @since 1.0.0
- * @access public
- * @param array   $directory_args directory arguments.
- * @see
- * @return void
- */
-function wpum_user_directory_pagination( $directory_args ) {
-
-	echo '<div class="wpum-directory-pagination">';
-
-	echo paginate_links( array(
-			'base'      => get_pagenum_link( 1 ) . '%_%',
-			'format'    => isset( $_GET['sort'] ) || isset( $_GET['amount'] ) ? '&paged=%#%' : '?paged=%#%',
-			'current'   => $directory_args['paged'],
-			'total'     => $directory_args['total_pages'],
-			'prev_text' => __( 'Previous page' ),
-			'next_text' => __( 'Next page' )
-		)
-	);
-
-	echo '</div>';
-
-}
-add_action( 'wpum_after_user_directory', 'wpum_user_directory_pagination' );
-
-/**
  * Adds tabs navigation on top of the account edit page.
  *
  * @since 1.0.0
