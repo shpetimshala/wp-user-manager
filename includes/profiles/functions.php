@@ -219,3 +219,147 @@ if ( ! function_exists( 'wpum_current_user_overview' ) ) :
 
 	}
 endif;
+
+/**
+ * Checks if guests can view profiles.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_guests_can_view_profiles() {
+
+	$pass = false;
+
+	if ( wpum_get_option( 'guests_can_view_profiles' ) )
+		$pass = true;
+
+	return $pass;
+}
+
+/**
+ * Checks if members can view profiles.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_members_can_view_profiles() {
+
+	$pass = false;
+
+	if ( wpum_get_option( 'members_can_view_profiles' ) )
+		$pass = true;
+
+	return $pass;
+
+}
+
+/**
+ * Checks if viewing single profile page.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_is_single_profile() {
+
+	$who = ( get_query_var( 'user' ) ) ? get_query_var( 'user' ) : false;
+
+	return $who;
+
+}
+
+/**
+ * Checks if profiles are available.
+ *
+ * @since 1.0.0
+ * @return bool
+ */
+function wpum_can_access_profile() {
+
+	$pass = true;
+
+	// Check if not logged in and on profile page - no given user
+	if ( !is_user_logged_in() && !wpum_is_single_profile() ) {
+		// Display error message
+		$args = array(
+			'id'   => 'wpum-guests-disabled',
+			'type' => 'notice',
+			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
+		);
+		wpum_message( $args );
+		$pass = false;
+	}
+
+	// Block guests on single profile page if option disabled
+	if ( !is_user_logged_in() && wpum_is_single_profile() && !wpum_guests_can_view_profiles() ) {
+		// Display error message
+		$args = array(
+			'id'   => 'wpum-guests-disabled',
+			'type' => 'notice',
+			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
+		);
+		wpum_message( $args );
+		$pass = false;
+	}
+
+	// Block members on single profile page if option disabled
+	if ( is_user_logged_in() && wpum_is_single_profile() && !wpum_members_can_view_profiles() ) {
+		// Display error message
+		$args = array(
+			'id'   => 'wpum-no-access',
+			'type' => 'notice',
+			'text' => __( 'You are not authorized to access this area.' )
+		);
+		wpum_message( $args );
+		$pass = false;
+	}
+
+	return apply_filters( 'wpum_can_access_profile', $pass );
+
+}
+
+/**
+ * Checks the current active tab (if any).
+ *
+ * @since 1.0.0
+ * @return bool|string
+ */
+function wpum_get_current_profile_tab() {
+
+	$tab = ( get_query_var( 'tab' ) ) ? get_query_var( 'tab' ) : null;
+	return $tab;
+
+}
+
+/**
+ * Checks the given profile tab is registered.
+ *
+ * @since 1.0.0
+ * @param string  $tab the key value of the array in wpum_get_user_profile_tabs() must match slug
+ * @return bool
+ */
+function wpum_profile_tab_exists( $tab ) {
+
+	$exists = false;
+
+	if ( array_key_exists( $tab, wpum_get_user_profile_tabs() ) )
+		$exists = true;
+
+	return $exists;
+
+}
+
+/**
+ * Returns the permalink of a profile tab.
+ *
+ * @since 1.0.0
+ * @return bool|string
+ */
+function wpum_get_profile_tab_permalink( $user_data, $tab ) {
+
+	$tab_slug = $tab['slug'];
+	$base_link = wpum_get_user_profile_url( $user_data );
+
+	$tab_permalink = $base_link . '/' . $tab_slug;
+
+	return $tab_permalink;
+}
