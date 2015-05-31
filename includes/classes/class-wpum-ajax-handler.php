@@ -186,11 +186,11 @@ class WPUM_Ajax_Handler {
 		// Cycle through the emails and build the list
 		foreach ( $emails as $email ) {
 
-			if ( method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_subject" ) && method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_message" ) ) {
+			if ( function_exists( "wpum_default_{$email['id']}_mail_subject" ) && function_exists( "wpum_default_{$email['id']}_mail_message" ) ) {
 
 				$default_emails[ $email['id'] ] = array(
-					'subject' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_subject" ),
-					'message' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_message" ),
+					'subject' => call_user_func( "wpum_default_{$email['id']}_mail_subject" ),
+					'message' => call_user_func( "wpum_default_{$email['id']}_mail_message" ),
 				);
 
 			}

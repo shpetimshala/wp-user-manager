@@ -209,9 +209,9 @@ class WP_User_Manager {
 		// Shortcodes
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-shortcodes.php';
 		// Emails
-		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails.php';
 		// Emails Tags
-		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-tags.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-tags.php';
 		// Load html helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-html-helper.php';
 
@@ -228,9 +228,9 @@ class WP_User_Manager {
 			// Display Settings Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			// Load Emails Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-editor.php';
-			// Load Emails List Table
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-emails-list.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/emails/functions.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-list.php';
 			// Load Custom Fields Editor
 			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
@@ -251,9 +251,8 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/functions.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/actions.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/tabs.php';
-		// Load widgets helper class
-		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
 		// Load all widgets
+		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-recent-users.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-password-recovery.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-registration.php';
