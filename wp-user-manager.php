@@ -210,6 +210,7 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-shortcodes.php';
 		// Emails
 		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/emails/functions.php';
 		// Emails Tags
 		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-tags.php';
 		// Load html helper class
@@ -227,8 +228,9 @@ class WP_User_Manager {
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-actions.php';
 			// Display Settings Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
-			// Load Emails Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/emails/functions.php';
+			// Load Emails
+			require_once WPUM_PLUGIN_DIR . 'includes/emails/registration-email.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/emails/password-recovery-email.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-editor.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-list.php';
 			// Load Custom Fields Editor

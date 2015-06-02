@@ -68,34 +68,6 @@ class WPUM_Emails_Editor {
 	}
 
 	/**
-	 * Defines the list of emails.
-	 *
-	 * @since 1.0.0
-	 * @return array
-	*/
-	public static function get_emails_list() {
-
-		$emails_list = array();
-
-		// Registration Email
-		$emails_list[ 'register' ] = array(
-			'id'          => 'register',
-			'title'       => __('Registration Email'),
-			'description' => __('This is the email that is sent to the user upon successful registration.'),
-        );
-
-        // Password Recovery Email
-		$emails_list[ 'password' ] = array(
-			'id'          => 'password',
-			'title'       => __('Password Recovery'),
-			'description' => __('This is the email that is sent to the user when recovering the password.'),
-        );
-
-		return apply_filters( 'wpum_emails_list', $emails_list );
-
-	}
-
-	/**
 	 * Displays the page that handles the email editor output.
 	 *
 	 * @since 1.0.0
@@ -146,8 +118,6 @@ class WPUM_Emails_Editor {
 		$subject = isset( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : sprintf( __('%s email'), $data['email_id'] );
 		$message = isset( $data['message'] ) ? wp_kses( $data['message'], $this->allowed_email_tags ) : false;
 
-		$emails = self::get_default_emails();
-
 		$emails[ esc_attr( $data['email_id'] ) ] = array(
 			'subject'     => $subject,
 			'message'     => $message,
@@ -156,36 +126,6 @@ class WPUM_Emails_Editor {
 		update_option( 'wpum_emails', $emails );
 
 		wp_redirect( admin_url( 'users.php?page=wpum-settings&tab=emails&emails-updated=true' ) ); exit;
-
-	}
-
-	/**
-	 * Register default emails
-	 *
-	 * @since 1.0.0
-	 * @return void
-	*/
-	public function get_default_emails() {
-
-		$emails = get_option( 'wpum_emails', array() );
-
-		if( empty( $emails ) ) {
-
-			$emails['register'] = array(
-				'email_id' => 'register',
-				'subject'  => wpum_default_register_mail_subject(),
-				'message'  => wpum_default_register_mail_message()
-			);
-
-			$emails['password'] = array(
-				'email_id' => 'password',
-				'subject'  => wpum_default_password_mail_subject(),
-				'message'  => wpum_default_password_mail_message()
-			);
-
-		}
-		
-		return apply_filters( 'wpum_emails', $emails );
 
 	}
 

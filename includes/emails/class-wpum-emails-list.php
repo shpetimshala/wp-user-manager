@@ -83,7 +83,7 @@ class WPUM_Emails_List extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = WPUM_Emails_Editor::get_emails_list();
+        $data = wpum_get_emails();
 
         return $data;
 
@@ -141,7 +141,15 @@ class WPUM_Emails_List extends WP_List_Table {
      */
     private function table_actions( $item ) {
 
-        $edit_url = add_query_arg( array('email-id' => $item['id'], 'email-title' => $item['title'], 'wpum_action' => 'edit'), admin_url( 'users.php?page=wpum-edit-email' ) );
+        $edit_url = add_query_arg( 
+            array(
+                'email-id' => $item['id'],
+                'email-title' => $item['title'],
+                'wpum_action' => 'edit'
+            ), 
+            admin_url( 'users.php?page=wpum-edit-email' )
+        );
+        
         echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__('Edit Email').'</a> ';
 
     }

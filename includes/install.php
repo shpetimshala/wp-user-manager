@@ -38,24 +38,10 @@ function wpum_install() {
 
 	// Setup default emails content
 	$default_emails = array();
-
 	// Delete the option
 	delete_option( 'wpum_emails' );
-
 	// Get all registered emails
-	$emails = WPUM_Emails_Editor::get_emails_list();
-
-	// Cycle through the emails and build the list
-	foreach ( $emails as $email ) {
-		if ( method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_subject" ) && method_exists( 'WPUM_Emails', "default_{$email['id']}_mail_message" ) ) {
-			$default_emails[ $email['id'] ] = array(
-				'subject' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_subject" ),
-				'message' => call_user_func( "WPUM_Emails::default_{$email['id']}_mail_message" ),
-			);
-		}
-	}
-
-	update_option( 'wpum_emails', $default_emails );
+	wpum_register_emails();
 
 	// Let's set some default options
 	wpum_update_option( 'enable_honeypot', true ); // enable antispam honeypot by default.

@@ -327,16 +327,18 @@ add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
  */
 function wpum_highlight_pages( $post_states, $post ) {
 
+	$icon = '<i class="wpum-shortcodes-icon"></i>';
+
 	if( wpum_get_core_page_id( 'login' ) == $post->ID ) {
-		$post_states['page_for_login'] = __( 'Login Page' );
+		$post_states['page_for_login'] = $icon;
 	} else if( wpum_get_core_page_id( 'account' ) == $post->ID ) {
-		$post_states['page_for_account'] = __( 'Account Page' );
+		$post_states['page_for_account'] = $icon;
 	} else if( wpum_get_core_page_id( 'password' ) == $post->ID ) {
-		$post_states['page_for_password'] = __( 'Password Recovery Page' );
+		$post_states['page_for_password'] = $icon;
 	} else if( wpum_get_core_page_id( 'register' ) == $post->ID ) {
-		$post_states['page_for_registration'] = __( 'Registration Page' );
+		$post_states['page_for_registration'] = $icon;
 	} else if( wpum_get_core_page_id( 'profile' ) == $post->ID ) {
-		$post_states['page_for_profiles'] = __( 'Profiles Page' );
+		$post_states['page_for_profiles'] = $icon;
 	}
 
 	return $post_states;

@@ -214,7 +214,6 @@ function wpum_run_pages_setup() {
 }
 add_action( 'admin_init', 'wpum_run_pages_setup' );
 
-
 /**
  * Add new quicktag when editing email.
  *

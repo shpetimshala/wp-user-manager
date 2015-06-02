@@ -69,6 +69,46 @@ class WPUM_Emails {
 	private $heading = '';
 
 	/**
+	 * The name of the email.
+	 * Used during save/retrieval
+	 *
+	 * @since 1.0.0
+	 */
+	var $name = '';
+
+	/**
+	 * The title of the email. 
+	 * Used within the editor.
+	 *
+	 * @since 1.0.0
+	 */
+	var $title = '';
+
+	/**
+	 * The description of the email. 
+	 * Used within the editor.
+	 *
+	 * @since 1.0.0
+	 */
+	var $description = '';
+
+	/**
+	 * The subject of the email.
+	 * Used only as default option of the email editor.
+	 *
+	 * @since 1.0.0
+	 */
+	var $subject = '';
+
+	/**
+	 * The message of the email.
+	 * Used only as default option of the email editor.
+	 *
+	 * @since 1.0.0
+	 */
+	var $message = '';
+
+	/**
 	 * Get things going
 	 *
 	 * @since 1.0.0
@@ -81,6 +121,9 @@ class WPUM_Emails {
 
 		add_action( 'wpum_email_send_before', array( $this, 'send_before' ) );
 		add_action( 'wpum_email_send_after', array( $this, 'send_after' ) );
+
+		// Register Emails
+		add_filter( 'wpum/get_emails', array( $this, 'get_emails' ), 10, 1 );
 
 	}
 
@@ -303,6 +346,31 @@ class WPUM_Emails {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Get a list of registered emails.
+	 *
+	 * @since 1.0.0
+	 * @return $emails array - Array list of the available emails.
+	 */
+	public function get_emails( $emails ) {
+		
+		if( !empty( $this->name ) ) :
+
+			$emails[ $this->name ] = array(
+				'id'          => $this->name,
+				'title'       => $this->title,
+				'description' => $this->description,
+				'subject'     => $this->subject,
+				'message'     => $this->message
+			);
+
+		endif;
+
+		// return array
+		return $emails;
+
 	}
 
 }

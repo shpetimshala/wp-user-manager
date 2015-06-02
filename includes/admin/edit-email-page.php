@@ -11,13 +11,12 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$email_id = esc_attr( $_GET['email-id'] );
+$email_id    = esc_attr( $_GET['email-id'] );
 $email_title = esc_attr( $_GET['email-title'] );
-$get_emails = get_option('wpum_emails');
-$this_email = $get_emails[ $email_id ];
+$get_emails  = get_option('wpum_emails');
+$this_email  = $get_emails[ $email_id ];
 
 // Editor Args
-
 $editor_args = array( 
 	'textarea_name' => 'message',
 	'media_buttons' => false,

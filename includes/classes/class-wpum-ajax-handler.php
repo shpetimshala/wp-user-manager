@@ -174,30 +174,11 @@ class WPUM_Ajax_Handler {
 			wp_send_json_error( $return );
 		}
 
-		// Default emails array
-		$default_emails = array();
-
-		// Delete the option
+		// Delete the option first
 		delete_option( 'wpum_emails' );
-
+		
 		// Get all registered emails
-		$emails = WPUM_Emails_Editor::get_emails_list();
-
-		// Cycle through the emails and build the list
-		foreach ( $emails as $email ) {
-
-			if ( function_exists( "wpum_default_{$email['id']}_mail_subject" ) && function_exists( "wpum_default_{$email['id']}_mail_message" ) ) {
-
-				$default_emails[ $email['id'] ] = array(
-					'subject' => call_user_func( "wpum_default_{$email['id']}_mail_subject" ),
-					'message' => call_user_func( "wpum_default_{$email['id']}_mail_message" ),
-				);
-
-			}
-
-		}
-
-		update_option( 'wpum_emails', $default_emails );
+		wpum_register_emails();
 
 		$return = array(
 			'message' => __( 'Emails successfully restored.' ),
