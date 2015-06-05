@@ -33,7 +33,6 @@ function wpum_admin_cssjs() {
 	wp_register_script( 'wpum-serializeJSON', WPUM_PLUGIN_URL . 'assets/js/vendor/jquery.serializeJSON.js', 'jQuery', WPUM_VERSION, true );
 	wp_register_script( 'wpum-admin-js', $js_dir . 'wp_user_manager_admin' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
 
-
 	// Enquery styles and scripts anywhere needed
 	wp_enqueue_style( 'wpum-shortcode-manager' );
 
@@ -41,7 +40,7 @@ function wpum_admin_cssjs() {
 	$screen = get_current_screen();
 
 	// Load styles only on required pages.
-	if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-custom-fields-editor' ):
+	if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-custom-fields-editor' || $screen->base == 'users_page_wpum-profile-fields' ):
 
 		wp_enqueue_script( 'wpum-select2' );
 		wp_enqueue_script( 'wpum-admin-js' );

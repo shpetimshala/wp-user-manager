@@ -178,4 +178,9 @@ body.post-type-wpum_directory #preview-action {
 body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-type-wpum_directory #visibility {
   display: none; }
 
+.wpum-fields-editor-wrap .wpum-page-title {
+  margin-bottom: 10px; }
+.wpum-fields-editor-wrap .wp-filter {
+  margin-bottom: 10px; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

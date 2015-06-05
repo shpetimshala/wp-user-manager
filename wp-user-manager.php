@@ -85,6 +85,14 @@ class WP_User_Manager {
 	public $html;
 
 	/**
+	 * Field Groups DB Object
+	 *
+	 * @var object
+	 * @since 1.0.0
+	 */
+	public $field_groups;
+
+	/**
 	 * Main WP_User_Manager Instance
 	 *
 	 * Insures that only one instance of WP_User_Manager exists in memory at any one
@@ -104,10 +112,11 @@ class WP_User_Manager {
 			self::$instance = new WP_User_Manager;
 			self::$instance->setup_constants();
 			self::$instance->includes();
-			self::$instance->emails     = new WPUM_Emails();
-			self::$instance->email_tags = new WPUM_Email_Template_Tags();
-			self::$instance->forms      = new WPUM_Forms();
-			self::$instance->html       = new WPUM_HTML_Elements();
+			self::$instance->emails       = new WPUM_Emails();
+			self::$instance->email_tags   = new WPUM_Email_Template_Tags();
+			self::$instance->forms        = new WPUM_Forms();
+			self::$instance->html         = new WPUM_HTML_Elements();
+			self::$instance->field_groups = new WPUM_DB_Field_Groups();
 
 		}
 
@@ -210,11 +219,13 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-shortcodes.php';
 		// Emails
 		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/emails/functions.php';
-		// Emails Tags
 		require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-tags.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/emails/functions.php';
 		// Load html helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-html-helper.php';
+		// Load db helper class
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-db.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-field-groups.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -229,13 +240,14 @@ class WP_User_Manager {
 			// Display Settings Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			// Load Emails
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/emails/class-wpum-emails-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/emails/class-wpum-emails-list.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/registration-email.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/password-recovery-email.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-editor.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/emails/class-wpum-emails-list.php';
 			// Load Custom Fields Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-fields-editor.php';
+			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
+			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
