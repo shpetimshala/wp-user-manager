@@ -229,6 +229,7 @@ class WP_User_Manager {
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			
 			// Load Welcome Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/welcome.php';
 			// Load Settings Pages
@@ -246,8 +247,7 @@ class WP_User_Manager {
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/password-recovery-email.php';
 			// Load Custom Fields Editor
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/fields/class-wpum-fields-editor.php';
-			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
-			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
+
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
@@ -301,7 +301,3 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
-
-$test = WPUM()->field_groups->get_groups();
-
-print_r( $test );
