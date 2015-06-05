@@ -92,6 +92,29 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	}
 
 	/**
+	 * Delete a group
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function delete( $id = false ) {
+
+		if ( empty( $id ) ) {
+			return false;
+		}
+
+		if ( $id > 0 ) {
+
+			global $wpdb;
+			return $wpdb->delete( $this->table_name, array( 'id' => $id ), array( '%d' ) );
+
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
