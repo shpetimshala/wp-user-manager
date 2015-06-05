@@ -245,7 +245,7 @@ class WP_User_Manager {
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/registration-email.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/emails/password-recovery-email.php';
 			// Load Custom Fields Editor
-			require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-fields-editor.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/fields/class-wpum-fields-editor.php';
 			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-table.php';
 			//require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-fields-editor.php';
 			// Custom Fields Framework

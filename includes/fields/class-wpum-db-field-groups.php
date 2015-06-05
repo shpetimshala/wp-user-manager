@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.0.0
  */
-class WPUM_DB_Field_Groups extends WPUM_DB  {
+class WPUM_DB_Field_Groups extends WPUM_DB {
 
 	/**
 	 * Get things started
