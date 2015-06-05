@@ -35,6 +35,63 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	}
 
 	/**
+	 * Get columns and formats
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function get_columns() {
+		return array(
+			'id'          => '%d',
+			'name'        => '%s',
+			'description' => '%s',
+			'can_delete'  => '%s'
+		);
+	}
+
+	/**
+	 * Get default column values
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function get_column_defaults() {
+		return array(
+			'id'          => 0,
+			'name'        => '',
+			'description' => '',
+			'can_delete'  => true
+		);
+	}
+
+	/**
+	 * Add a group
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function add( $args = array() ) {
+
+		$defaults = array(
+			'id'          => false,
+			'name'        => false,
+			'description' => '',
+			'can_delete'  => true
+		);
+
+		// Parse incoming $args into an array and merge it with $defaults
+		$args = wp_parse_args( $args, $defaults );
+
+		// Bail if no group name
+		if ( empty( $args['name'] ) ) {
+			return false;
+		}
+
+		return $this->insert( $args, 'field_group' );
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
