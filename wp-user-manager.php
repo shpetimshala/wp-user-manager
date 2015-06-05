@@ -224,7 +224,7 @@ class WP_User_Manager {
 		// Load html helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-html-helper.php';
 		// Load db helper class
-		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-db.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-db.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-field-groups.php';
 
 		// Files loaded only on the admin side
