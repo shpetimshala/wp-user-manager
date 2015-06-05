@@ -301,3 +301,7 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
+
+$test = WPUM()->field_groups->get_groups();
+
+print_r( $test );

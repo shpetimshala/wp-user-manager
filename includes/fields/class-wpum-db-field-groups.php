@@ -115,6 +115,47 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	}
 
 	/**
+	 * Get a list of groups
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  array list of groups
+	*/
+	public function get_groups( $args = array() ) {
+
+		global $wpdb;
+
+		$defaults = array(
+			'number'       => 20,
+			'offset'       => 0,
+			'orderby'      => 'id',
+			'order'        => 'DESC'
+		);
+
+		$args  = wp_parse_args( $args, $defaults );
+
+		if( $args['number'] < 1 ) {
+			$args['number'] = 999999999999;
+		}
+
+		$where = '';
+
+		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? 'id' : $args['orderby'];
+
+		$cache_key = md5( 'wpum_field_groups_' . serialize( $args ) );
+
+		$field_groups = wp_cache_get( $cache_key, 'field_groups' );
+
+		if( $field_groups === false ) {
+			$field_groups = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ) );
+			wp_cache_set( $cache_key, $field_groups, 'field_groups', 3600 );
+		}
+
+		return $field_groups;
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
