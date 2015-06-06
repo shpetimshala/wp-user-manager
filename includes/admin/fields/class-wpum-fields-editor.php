@@ -298,9 +298,12 @@ class WPUM_Fields_Editor {
 			'class'        => 'textarea',
 		);
 
+		// Prepare delete url
+		$delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'group' => $this->group->id ), admin_url( 'users.php?page=wpum-profile-fields' ) ), 'delete', 'nonce' );
+
 		?>
 
-		<form method="post" action="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>">
+		<form method="post" action="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>" id="wpum-group-settings-edit">
 
 			<div class="wpum-group-settings">
 				<?php echo WPUM()->html->text( $name_args ); ?>
@@ -310,7 +313,7 @@ class WPUM_Fields_Editor {
 			<div id="major-publishing-actions">
 				<div id="delete-action">
 					<?php if( !$this->group->is_primary && $this->group->can_delete ) : ?>
-						<a class="submitdelete deletion" href=""><?php _e('Delete Group'); ?></a>
+						<a class="submitdelete deletion" href="<?php echo $delete_url; ?>"><?php _e('Delete Group'); ?></a>
 					<?php endif; ?>
 				</div>
 				<div id="publishing-action">
@@ -334,6 +337,24 @@ class WPUM_Fields_Editor {
 	 * @access private
 	 */
 	public function process_group() {
+
+		// Process the group delete action
+
+		if( isset( $_GET['action'] ) && $_GET['action'] == 'delete' && isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) {
+
+			// nonce verification
+			if ( ! wp_verify_nonce( $_GET['nonce'], 'delete' ) ) {
+				return;
+			}
+
+			if( WPUM()->field_groups->delete( (int) $_GET['group'] ) ) {
+				// Redirect now
+				$admin_url = add_query_arg( array( 'message' => 'group_delete_success' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+				wp_redirect( $admin_url );
+				exit();
+			}
+
+		}
 
 		// Check whether the group settings form has been submitted
 		if( isset( $_POST['wpum-action'] ) && $_POST['wpum-action'] == 'edit_group' ) {

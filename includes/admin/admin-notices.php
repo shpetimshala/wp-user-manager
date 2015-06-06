@@ -65,8 +65,17 @@ function wpum_admin_messages() {
 		endif;
 	}
 
-	if( $screen->base == 'users_page_wpum-profile-fields' && isset( $_GET['message'] ) && $_GET['message'] == 'group_success' ) {
-		add_settings_error( 'wpum-notices', 'group-updated', __( 'Field group successfully updated.', 'wpum' ), 'updated' );
+	// messages for the groups page
+	if( $screen->base == 'users_page_wpum-profile-fields' ) {
+
+		if( isset( $_GET['message'] ) && $_GET['message'] == 'group_success' ) :
+			add_settings_error( 'wpum-notices', 'group-updated', __( 'Field group successfully updated.', 'wpum' ), 'updated' );
+		endif;
+
+		if( isset( $_GET['message'] ) && $_GET['message'] == 'group_delete_success' ) :
+			add_settings_error( 'wpum-notices', 'group-deleted', __( 'Field group successfully deleted.', 'wpum' ), 'updated' );
+		endif;
+
 	}
 
 	settings_errors( 'wpum-notices' );
