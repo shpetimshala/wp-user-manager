@@ -116,18 +116,25 @@ class WPUM_Fields_Editor {
 
 		else:  
 			$output = '<div class="wp-filter">';
-				$output .= '<ul class="filter-links">';
-					
-					foreach ( $groups as $key => $group ) {
+			
+			// Get all groups into an array for the dropdown menu.
+			$options = array();
+			foreach ( $groups as $key => $group ) {
+				$options += array( $group->id => $group->name );
+			}
+ 
+			// Generate dropdown menu
+			$args = array(
+				'options'          => $options,
+				'label'            => __('Select a field group to edit:'),
+				'id'               => 'wpum-group-selector',
+				'multiple'         => false,
+				'show_option_all'  => false,
+				'show_option_none' => false
+			);
 
-						$url = add_query_arg( array( 'action' => 'edit', 'group' => absint( $group->id ) ), admin_url( 'users.php?page=wpum-profile-fields' ) );
-						$selected = ( isset( $_GET['group'] ) && $_GET['group'] == $group->id || !isset( $_GET['group'] ) && $key == 0 ) ? 'current' : null;
-						
-						$output .= '<li><a class="'. $selected .'" href="'. esc_url( $url ) .'">'. esc_html( $group->name ) .'</a></li>';
+			$output .= '<p>' . WPUM()->html->select( $args ) . '</p>';
 
-					}
-
-				$output .= '</ul>';
 			$output .= '</div>';
 		endif;
 
