@@ -26,6 +26,27 @@ class WPUM_Fields_Editor {
 	const hook = 'users_page_wpum-profile-fields';
 
 	/**
+	 * The Database Abstraction
+	 *
+	 * @since  1.0.0
+	 */
+	protected $db;
+
+	/**
+	 * Holds the group id.
+	 *
+	 * @since 1.0.0
+	 */
+	var $group_id = null;
+
+	/**
+	 * Holds the group.
+	 *
+	 * @since 1.0.0
+	 */
+	var $group = null;
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
@@ -33,15 +54,36 @@ class WPUM_Fields_Editor {
 	 */
 	public function __construct() {
 
+		$this->db = new WPUM_DB_Field_Groups;
+
+		// loads metaboxes functions
 		add_action( 'load-'.self::hook, array( $this, 'add_screen_meta_boxes' ) );
 		add_action( 'add_meta_boxes_'.self::hook, array( $this, 'add_meta_box' ) );
 		add_action( 'admin_footer-'.self::hook, array( $this, 'print_script_in_footer' ) );
+
+		// Detect if a group is being edited
+		if( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) )
+			$this->groupd_id = intval( $_GET['group'] );
+
+		// Get selected group - set it as primary if no group is selected
+		if( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) {
+
+			// Get primary group
+			$this->group = $this->db->get_group_by( 'id', $_GET['group'] );
+
+		} else {
+
+			// Get primary group
+			$this->group = $this->db->get_group_by( 'primary' );
+
+		}
 
 		// Load WP_List_Table
 		if( ! class_exists( 'WP_List_Table' ) ) {
 		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 		}
 
+		// Extedn WP_List_Table
 		require_once WPUM_PLUGIN_DIR . 'includes/admin/fields/class-wpum-groups-fields.php';
 
 	}
@@ -82,9 +124,7 @@ class WPUM_Fields_Editor {
 				<!-- End Sidebar -->
 
 				<div id="menu-management-liquid" class="wpum-editor-container">
-					
 					<?php echo self::group_table(); ?>
-
 				</div>
 
 			</div>
@@ -188,7 +228,8 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'wpum_fields_editor_help', __( 'How it works' ), array( $this, 'help_text' ), self::hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_edit_group', __( 'Group Settings' ), array( $this, 'group_settings' ), self::hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_help', __( 'Fields Order' ), array( $this, 'help_text' ), self::hook, 'side' );
 	}
 
 	/**
@@ -221,6 +262,57 @@ class WPUM_Fields_Editor {
 		<p><span class="dashicons dashicons-info"></span> <?php _e('Fields in the "Primary" group will appear on the signup page.') ;?></p>
 
 		<?php
+	}
+
+	/**
+	 * Display the interface to edit the group.
+	 *
+	 * @access private
+	 */
+	public function group_settings() {
+
+		// Name Field Args
+		$name_args = array(
+			'name'         => 'name',
+			'value'        => $this->group->name,
+			'label'        => __('Group name'),
+			'class'        => 'text',
+		);
+
+		// Description field args
+		$description_args = array(
+			'name'         => 'description',
+			'value'        => $this->group->description,
+			'label'        => __('Group description'),
+			'class'        => 'textarea',
+		);
+
+		?>
+
+		<div class="wpum-group-settings">
+
+			<?php echo WPUM()->html->text( $name_args ); ?>
+
+			<?php echo WPUM()->html->textarea( $description_args ); ?>
+
+		</div>
+
+		<div id="major-publishing-actions">
+			<div id="delete-action">
+				<?php if( !$this->group->is_primary ) : ?>
+					<a class="submitdelete deletion" href=""><?php _e('Delete Group'); ?></a>
+				<?php endif; ?>
+			</div>
+
+			<div id="publishing-action">
+				<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+
+		<?php
+
 	}
 
 	/**

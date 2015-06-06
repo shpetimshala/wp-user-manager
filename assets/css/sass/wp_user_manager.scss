@@ -277,4 +277,32 @@ body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-t
 	.submit-btn {
 		margin-left: 5px;
 	}
+
+	#wpum_fields_editor_edit_group {
+		.accordion-section-content {
+			padding-left:0px;
+			padding-right: 0px;
+			padding-bottom: 0px;
+		}
+	}
+
+	.wpum-group-settings {
+		padding: 0px 20px 10px 20px;
+		label {
+			font-weight: bold;
+			margin-bottom: 5px;
+			display: block;
+		}
+		input[type=text], textarea {
+			width: 100%;
+		}
+		textarea {
+			height: 100px;
+		}
+		> span {
+			display: block;
+			margin-bottom: 15px;
+		}
+	}
+
 }

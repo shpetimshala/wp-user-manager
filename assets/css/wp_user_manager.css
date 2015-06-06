@@ -186,5 +186,22 @@ body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-t
   margin-left: 10px; }
 .wpum-fields-editor-wrap .submit-btn {
   margin-left: 5px; }
+.wpum-fields-editor-wrap #wpum_fields_editor_edit_group .accordion-section-content {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px; }
+.wpum-fields-editor-wrap .wpum-group-settings {
+  padding: 0px 20px 10px 20px; }
+  .wpum-fields-editor-wrap .wpum-group-settings label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; }
+  .wpum-fields-editor-wrap .wpum-group-settings input[type=text], .wpum-fields-editor-wrap .wpum-group-settings textarea {
+    width: 100%; }
+  .wpum-fields-editor-wrap .wpum-group-settings textarea {
+    height: 100px; }
+  .wpum-fields-editor-wrap .wpum-group-settings > span {
+    display: block;
+    margin-bottom: 15px; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */

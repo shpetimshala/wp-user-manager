@@ -171,6 +171,63 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	}
 
 	/**
+	 * Retrieves a single group from the database
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @param  string $column id or primary
+	 * @param  mixed  $value  the id to search
+	 * @return mixed          Upon success, an object of the group. Upon failure, NULL
+	 */
+	public function get_group_by( $field = 'id', $value = 0 ) {
+		global $wpdb;
+
+		if ( empty( $field ) || $field == 'id' && empty( $value ) ) {
+			return NULL;
+		}
+
+		if ( 'id' == $field ) {
+			// Make sure the value is numeric to avoid casting objects, for example,
+			// to int 1.
+			if ( ! is_numeric( $value ) ) {
+				return false;
+			}
+
+			$value = intval( $value );
+
+			if ( $value < 1 ) {
+				return false;
+			}
+
+		}
+
+		if( $field == 'primary' ) {
+			$value = true;
+		}
+
+		if ( ! $value ) {
+			return false;
+		}
+
+		switch ( $field ) {
+			case 'id':
+				$db_field = 'id';
+				break;
+			case 'primary':
+				$db_field = 'is_primary';
+				break;
+			default:
+				return false;
+		}
+
+		if ( ! $group = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE $db_field = %s LIMIT 1", $value ) ) ) {
+			return false;
+		}
+
+		return $group;
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
