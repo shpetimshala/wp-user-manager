@@ -56,11 +56,6 @@ class WPUM_Fields_Editor {
 
 		$this->db = new WPUM_DB_Field_Groups;
 
-		// loads metaboxes functions
-		add_action( 'load-'.self::hook, array( $this, 'load_editor' ) );
-		add_action( 'add_meta_boxes_'.self::hook, array( $this, 'add_meta_box' ) );
-		add_action( 'admin_footer-'.self::hook, array( $this, 'print_script_in_footer' ) );
-
 		// Detect if a group is being edited
 		if( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) )
 			$this->groupd_id = intval( $_GET['group'] );
@@ -77,6 +72,14 @@ class WPUM_Fields_Editor {
 			$this->group = $this->db->get_group_by( 'primary' );
 
 		}
+
+		// loads metaboxes functions
+		add_action( 'load-'.self::hook, array( $this, 'load_editor' ) );
+		add_action( 'add_meta_boxes_'.self::hook, array( $this, 'add_meta_box' ) );
+		add_action( 'admin_footer-'.self::hook, array( $this, 'print_script_in_footer' ) );
+
+		// Append group saving process
+		add_action( 'wpum_edit_group', array( $this, 'process_group' ) );
 
 		// Load WP_List_Table
 		if( ! class_exists( 'WP_List_Table' ) ) {
@@ -306,12 +309,13 @@ class WPUM_Fields_Editor {
 
 			<div id="major-publishing-actions">
 				<div id="delete-action">
-					<?php if( !$this->group->is_primary ) : ?>
+					<?php if( !$this->group->is_primary && $this->group->can_delete ) : ?>
 						<a class="submitdelete deletion" href=""><?php _e('Delete Group'); ?></a>
 					<?php endif; ?>
 				</div>
 				<div id="publishing-action">
-					<input type="hidden" name="action" value="save_group_settings">
+					<input type="hidden" name="wpum-action" value="edit_group"/>
+					<input type="hidden" name="group" value="<?php echo ( isset( $_GET['group'] ) ) ? $_GET['group'] : $this->group->id; ?>"/>
 					<?php wp_nonce_field( 'wpum_group_settings' ); ?>
 					<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
 				</div>
@@ -329,10 +333,10 @@ class WPUM_Fields_Editor {
 	 *
 	 * @access private
 	 */
-	protected function process_group() {
+	public function process_group() {
 
 		// Check whether the group settings form has been submitted
-		if( isset( $_POST['action'] ) && $_POST['action'] == 'save_group_settings' ) {
+		if( isset( $_POST['wpum-action'] ) && $_POST['wpum-action'] == 'edit_group' ) {
 
 			// nonce verification
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wpum_group_settings' ) ) {
@@ -340,7 +344,7 @@ class WPUM_Fields_Editor {
 			}
 
 			// bail if something is wrong
-			if( !is_numeric( $this->group->id ) && !current_user_can( 'manage_options' ) )
+			if( !is_numeric( $_POST['group'] ) && !current_user_can( 'manage_options' ) )
 				return;
 
 			$args = array(
@@ -348,7 +352,7 @@ class WPUM_Fields_Editor {
 				'description' => wp_kses_post( $_POST['description'] )
 			);
 
-			WPUM()->field_groups->update( $this->group->id, $args );
+			WPUM()->field_groups->update( (int) $_POST['group'], $args );
 
 			// Redirect now
 			$admin_url = add_query_arg( array( 'message' => 'group_success' ), admin_url( 'users.php?page=wpum-profile-fields' ) );

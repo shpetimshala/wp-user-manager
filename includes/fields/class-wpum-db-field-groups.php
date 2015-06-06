@@ -108,8 +108,8 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 
 		if ( $id > 0 ) {
 
-			if( $this->is_primary( $id ) ) {
-				wp_die( 'You cannot delete the primary group.' );
+			if( $this->is_primary( $id ) && ! $this->can_delete( $id ) ) {
+				wp_die( 'You cannot delete this group.' );
 			}
 
 			global $wpdb;
@@ -171,6 +171,18 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	public function is_primary( $group_id = '' ) {
 
 		return (bool) $this->get_column_by( 'id', 'is_primary', $group_id );
+
+	}
+
+	/**
+	 * Checks if a group can be deleted
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function can_delete( $group_id = '' ) {
+
+		return (bool) $this->get_column_by( 'id', 'can_delete', $group_id );
 
 	}
 
