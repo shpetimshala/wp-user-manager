@@ -173,6 +173,7 @@ class WPUM_Fields_Editor {
 						'label'            => __('Select a field group to edit:'),
 						'id'               => 'wpum-group-selector',
 						'name'             => 'group',
+						'selected'         => ( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) ? $_GET['group'] : false,
 						'multiple'         => false,
 						'show_option_all'  => false,
 						'show_option_none' => false

@@ -170,7 +170,7 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	*/
 	public function is_primary( $group_id = '' ) {
 
-		return (bool) $this->get_column_by( 'id', 'id', $group_id );
+		return (bool) $this->get_column_by( 'id', 'is_primary', $group_id );
 
 	}
 
