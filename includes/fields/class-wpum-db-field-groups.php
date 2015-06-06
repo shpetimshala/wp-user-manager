@@ -108,6 +108,10 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 
 		if ( $id > 0 ) {
 
+			if( $this->is_primary( $id ) ) {
+				wp_die( 'You cannot delete the primary group.' );
+			}
+
 			global $wpdb;
 			return $wpdb->delete( $this->table_name, array( 'id' => $id ), array( '%d' ) );
 

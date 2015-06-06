@@ -57,7 +57,7 @@ class WPUM_Fields_Editor {
 		$this->db = new WPUM_DB_Field_Groups;
 
 		// loads metaboxes functions
-		add_action( 'load-'.self::hook, array( $this, 'add_screen_meta_boxes' ) );
+		add_action( 'load-'.self::hook, array( $this, 'load_editor' ) );
 		add_action( 'add_meta_boxes_'.self::hook, array( $this, 'add_meta_box' ) );
 		add_action( 'admin_footer-'.self::hook, array( $this, 'print_script_in_footer' ) );
 
@@ -213,13 +213,17 @@ class WPUM_Fields_Editor {
 	 * @access public
 	 * @return void
 	 */
-	public function add_screen_meta_boxes() {
+	public function load_editor() {
  
 	    do_action( 'add_meta_boxes_'.self::hook, null );
 	    do_action( 'add_meta_boxes', self::hook, null );
 	 
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
+
+	    // Process group settings update
+	    $this->process_group();
+
 	}
 	/**
 	 * Register metaboxes.
@@ -253,13 +257,16 @@ class WPUM_Fields_Editor {
 	 *
 	 * @access private
 	 */
-	private static function primary_message() {
+	public static function primary_message() {
 
 		if( isset( $_GET['group'] ) && !WPUM()->field_groups->is_primary( intval( $_GET['group'] ) ) )
 			return;
 		?>
 
-		<p><span class="dashicons dashicons-info"></span> <?php _e('Fields in the "Primary" group will appear on the signup page.') ;?></p>
+		<p>
+			<span class="dashicons dashicons-info"></span>
+			<?php _e('Fields into this group will appear on the signup page.') ;?>
+		</p>
 
 		<?php
 	}
@@ -289,29 +296,65 @@ class WPUM_Fields_Editor {
 
 		?>
 
-		<div class="wpum-group-settings">
+		<form method="post" action="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>">
 
-			<?php echo WPUM()->html->text( $name_args ); ?>
-
-			<?php echo WPUM()->html->textarea( $description_args ); ?>
-
-		</div>
-
-		<div id="major-publishing-actions">
-			<div id="delete-action">
-				<?php if( !$this->group->is_primary ) : ?>
-					<a class="submitdelete deletion" href=""><?php _e('Delete Group'); ?></a>
-				<?php endif; ?>
+			<div class="wpum-group-settings">
+				<?php echo WPUM()->html->text( $name_args ); ?>
+				<?php echo WPUM()->html->textarea( $description_args ); ?>
 			</div>
 
-			<div id="publishing-action">
-				<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
+			<div id="major-publishing-actions">
+				<div id="delete-action">
+					<?php if( !$this->group->is_primary ) : ?>
+						<a class="submitdelete deletion" href=""><?php _e('Delete Group'); ?></a>
+					<?php endif; ?>
+				</div>
+				<div id="publishing-action">
+					<input type="hidden" name="action" value="save_group_settings">
+					<?php wp_nonce_field( 'wpum_group_settings' ); ?>
+					<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
+				</div>
+				<div class="clear"></div>
 			</div>
-			
-			<div class="clear"></div>
-		</div>
+
+		</form>
 
 		<?php
+
+	}
+
+	/**
+	 * Process the update of the group settings
+	 *
+	 * @access private
+	 */
+	protected function process_group() {
+
+		// Check whether the group settings form has been submitted
+		if( isset( $_POST['action'] ) && $_POST['action'] == 'save_group_settings' ) {
+
+			// nonce verification
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wpum_group_settings' ) ) {
+				return;
+			}
+
+			// bail if something is wrong
+			if( !is_numeric( $this->group->id ) && !current_user_can( 'manage_options' ) )
+				return;
+
+			$args = array(
+				'name'        => sanitize_text_field( $_POST['name'] ),
+				'description' => wp_kses_post( $_POST['description'] )
+			);
+
+			WPUM()->field_groups->update( $this->group->id, $args );
+
+			// Redirect now
+			$admin_url = add_query_arg( array( 'message' => 'group_success' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+			wp_redirect( $admin_url );
+			exit();
+
+		}
 
 	}
 

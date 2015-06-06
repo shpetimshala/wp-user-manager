@@ -65,6 +65,10 @@ function wpum_admin_messages() {
 		endif;
 	}
 
+	if( $screen->base == 'users_page_wpum-profile-fields' && isset( $_GET['message'] ) && $_GET['message'] == 'group_success' ) {
+		add_settings_error( 'wpum-notices', 'group-updated', __( 'Field group successfully updated.', 'wpum' ), 'updated' );
+	}
+
 	settings_errors( 'wpum-notices' );
 
 }
