@@ -116,24 +116,33 @@ class WPUM_Fields_Editor {
 
 		else:  
 			$output = '<div class="wp-filter">';
-			
-			// Get all groups into an array for the dropdown menu.
-			$options = array();
-			foreach ( $groups as $key => $group ) {
-				$options += array( $group->id => $group->name );
-			}
- 
-			// Generate dropdown menu
-			$args = array(
-				'options'          => $options,
-				'label'            => __('Select a field group to edit:'),
-				'id'               => 'wpum-group-selector',
-				'multiple'         => false,
-				'show_option_all'  => false,
-				'show_option_none' => false
-			);
+				$output .= '<form method="get" action="'. admin_url( 'users.php?page=wpum-profile-fields' ) .'">';
 
-			$output .= '<p>' . WPUM()->html->select( $args ) . '</p>';
+					$output .= '<input type="hidden" name="page" value="wpum-profile-fields">';
+					$output .= '<input type="hidden" name="action" value="edit">';
+
+					// Get all groups into an array for the dropdown menu.
+					$options = array();
+					foreach ( $groups as $key => $group ) {
+						$options += array( $group->id => $group->name );
+					}
+		 
+					// Generate dropdown menu
+					$args = array(
+						'options'          => $options,
+						'label'            => __('Select a field group to edit:'),
+						'id'               => 'wpum-group-selector',
+						'name'             => 'group',
+						'multiple'         => false,
+						'show_option_all'  => false,
+						'show_option_none' => false
+					);
+
+					$output .= '<p>' . WPUM()->html->select( $args );
+						$output .= '<span class="submit-btn"><input type="submit" class="button-secondary" value="'.__('Select').'"></span>';
+					$output .= '</p>';
+
+				$output .= '</form>';
 
 			$output .= '</div>';
 		endif;
@@ -205,7 +214,7 @@ class WPUM_Fields_Editor {
 	 */
 	private static function primary_message() {
 
-		if( isset( $_GET['group'] ) )
+		if( isset( $_GET['group'] ) && !WPUM()->field_groups->is_primary( intval( $_GET['group'] ) ) )
 			return;
 		?>
 
