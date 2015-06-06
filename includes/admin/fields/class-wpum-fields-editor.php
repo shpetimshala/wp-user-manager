@@ -108,20 +108,28 @@ class WPUM_Fields_Editor {
 		// Get all groups
 		$groups = WPUM()->field_groups->get_groups( array( 'order' => 'ASC' ) );
 
-		$output = '<div class="wp-filter">';
-			$output .= '<ul class="filter-links">';
-				
-				foreach ( $groups as $key => $group ) {
+		if( empty( $groups ) ) :
 
-					$url = add_query_arg( array( 'action' => 'edit', 'group' => absint( $group->id ) ), admin_url( 'users.php?page=wpum-profile-fields' ) );
-					$selected = ( isset( $_GET['group'] ) && $_GET['group'] == $group->id || !isset( $_GET['group'] ) && $key == 0 ) ? 'current' : null;
+			$output = '<div class="message error"><p>';
+				$output .= __('It seems you do not have any field groups. Please deactivate and re-activate the plugin.');
+			$output .= '</p></div>';
+
+		else:  
+			$output = '<div class="wp-filter">';
+				$output .= '<ul class="filter-links">';
 					
-					$output .= '<li><a class="'. $selected .'" href="'. esc_url( $url ) .'">'. esc_html( $group->name ) .'</a></li>';
+					foreach ( $groups as $key => $group ) {
 
-				}
+						$url = add_query_arg( array( 'action' => 'edit', 'group' => absint( $group->id ) ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+						$selected = ( isset( $_GET['group'] ) && $_GET['group'] == $group->id || !isset( $_GET['group'] ) && $key == 0 ) ? 'current' : null;
+						
+						$output .= '<li><a class="'. $selected .'" href="'. esc_url( $url ) .'">'. esc_html( $group->name ) .'</a></li>';
 
-			$output .= '</ul>';
-		$output .= '</div>';
+					}
+
+				$output .= '</ul>';
+			$output .= '</div>';
+		endif;
 
 		return $output;
 

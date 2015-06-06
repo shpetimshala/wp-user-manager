@@ -45,7 +45,8 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 			'id'          => '%d',
 			'name'        => '%s',
 			'description' => '%s',
-			'can_delete'  => '%s'
+			'can_delete'  => '%s',
+			'is_primary'  => '%s'
 		);
 	}
 
@@ -60,7 +61,8 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 			'id'          => 0,
 			'name'        => '',
 			'description' => '',
-			'can_delete'  => true
+			'can_delete'  => true,
+			'is_primary'  => false
 		);
 	}
 
@@ -76,7 +78,8 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 			'id'          => false,
 			'name'        => false,
 			'description' => '',
-			'can_delete'  => true
+			'can_delete'  => true,
+			'is_primary'  => false
 		);
 
 		// Parse incoming $args into an array and merge it with $defaults
@@ -156,6 +159,18 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	}
 
 	/**
+	 * Checks if is a primary group
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function is_primary( $group_id = '' ) {
+
+		return (bool) $this->get_column_by( 'id', 'id', $group_id );
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
@@ -173,8 +188,10 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 		description mediumtext NOT NULL,
 		group_order bigint(20) NOT NULL DEFAULT '0',
 		can_delete tinyint(1) NOT NULL,
+		is_primary bool NOT NULL DEFAULT '0',
 		PRIMARY KEY  (id),
-		KEY can_delete (can_delete)
+		KEY can_delete (can_delete),
+		UNIQUE KEY is_primary (is_primary)
 		) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );
