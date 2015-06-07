@@ -95,7 +95,18 @@ class WPUM_Groups_Fields extends WP_List_Table {
      */
     private function table_data() {
 
-        $data = array();
+        $which_group = null;
+
+        // Detect if a group is selected -
+        // if not get the primary group ID.
+        if( isset( $_GET['group'] ) ) {
+            $which_group = (int) $_GET['group'];
+        } else {
+            $primary_group = WPUM()->field_groups->get_group_by('primary');
+            $which_group = $primary_group->id;
+        }
+
+        $data = WPUM()->fields->get_by_group( array( 'id' => $which_group, 'array' => true ) );
 
         return $data;
 
@@ -116,18 +127,15 @@ class WPUM_Groups_Fields extends WP_List_Table {
                 return '<a href="#"><span class="dashicons dashicons-menu"></span></a>';
             break;
             case 'title':
-                return $item['label'];
+                return $item['name'];
             break;
             case 'type':
                 return $this->parse_type( $item['type'] );
             break;
-            case 'meta':
-                return $item['meta'];
-            break;
             case 'required':
-                return $this->parse_required( $item['required'] );
+                return $this->parse_required( $item['is_required'] );
             break;
-            case 'edit':
+            case 'actions':
                 return $this->get_actions( $item );
             break;
             default:
@@ -205,20 +213,24 @@ class WPUM_Groups_Fields extends WP_List_Table {
     }
 
     /**
-     * Displays edit button for the email.
+     * Display action buttons for the fields.
      *
-     * @param   array $item - The email item being passed
+     * @param   array $item
      * @return  Mixed
      */
     private function get_actions( $item ) {
 
-        if( wpum_get_field_options( $item['meta'] ) ) :
+        $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+        echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__( 'Edit' ).'</a> ';
 
-            $edit_url = add_query_arg( array('edit-field' => $item['meta'] ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+        // Display delete button if field can be deleted.
+        if( $item['can_delete'] ) {
+            
+            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-profile-fields' ) ), 'delete', 'nonce' );
+            echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete' ).'</a> ';
 
-            echo '<a href="'.esc_url( $edit_url ).'" data-meta="'. esc_js( $item['meta'] ) .'">'.__( 'Edit' ).'</a> ';
+        }
 
-        endif;
     }
 
     /**
@@ -232,9 +244,9 @@ class WPUM_Groups_Fields extends WP_List_Table {
         $row_class = ( $row_class == '' ? ' class="alternate"' : '' );
 
         // Add id
-        $row_id = ' id="'.$item['meta'].'"';
+        $row_id = ' id="'.$item['name'].'"';
  
-        echo '<tr' . $row_class . $row_id . ' data-priority="'.$item['priority'].'" data-meta="'.$item['meta'].'" data-required="'.$item['required'].'" data-show_on_signup="'.$item['show_on_signup'].'">';
+        echo '<tr' . $row_class . $row_id . ' ">';
         $this->single_row_columns( $item );
         echo '</tr>';
     }

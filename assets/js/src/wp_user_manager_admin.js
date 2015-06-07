@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
 			this.order_default_fields();
 			this.restore_default_fields();
 			this.custom_fields_editor();
-			this.delete_field_group();
+			this.confirm_dialog();
 		},
 
 		// General Functions
@@ -353,9 +353,9 @@ jQuery(document).ready(function ($) {
 		},
 
 		// Ask to confirm before deleting field group
-		delete_field_group : function() {
+		confirm_dialog : function() {
 
-			$('#wpum-group-settings-edit a.submitdelete').click(function(e){
+			$('#wpum-group-settings-edit a.submitdelete, .wpum-confirm-dialog').click(function(e){
 			    return confirm( wpum_admin_js.confirm );
 			})
 
