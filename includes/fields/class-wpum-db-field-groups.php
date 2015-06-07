@@ -262,9 +262,9 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 		group_order bigint(20) NOT NULL DEFAULT '0',
 		can_delete tinyint(1) NOT NULL,
 		is_primary bool NOT NULL DEFAULT '0',
-		PRIMARY KEY  (id),
+		PRIMARY KEY (id),
 		KEY can_delete (can_delete),
-		UNIQUE KEY is_primary (is_primary)
+		KEY is_primary (is_primary)
 		) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );

@@ -176,7 +176,7 @@ class WPUM_Fields_Editor {
 						'label'            => __('Select a field group to edit:'),
 						'id'               => 'wpum-group-selector',
 						'name'             => 'group',
-						'selected'         => ( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) ? $_GET['group'] : false,
+						'selected'         => ( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) ? (int) $_GET['group'] : false,
 						'multiple'         => false,
 						'show_option_all'  => false,
 						'show_option_none' => false
@@ -285,7 +285,7 @@ class WPUM_Fields_Editor {
 		// Name Field Args
 		$name_args = array(
 			'name'         => 'name',
-			'value'        => $this->group->name,
+			'value'        => esc_html( $this->group->name ),
 			'label'        => __('Group name'),
 			'class'        => 'text',
 		);
@@ -293,13 +293,13 @@ class WPUM_Fields_Editor {
 		// Description field args
 		$description_args = array(
 			'name'         => 'description',
-			'value'        => $this->group->description,
+			'value'        => esc_html( $this->group->description ),
 			'label'        => __('Group description'),
 			'class'        => 'textarea',
 		);
 
 		// Prepare delete url
-		$delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'group' => $this->group->id ), admin_url( 'users.php?page=wpum-profile-fields' ) ), 'delete', 'nonce' );
+		$delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'group' => (int) $this->group->id ), admin_url( 'users.php?page=wpum-profile-fields' ) ), 'delete', 'nonce' );
 
 		?>
 
@@ -318,7 +318,7 @@ class WPUM_Fields_Editor {
 				</div>
 				<div id="publishing-action">
 					<input type="hidden" name="wpum-action" value="edit_group"/>
-					<input type="hidden" name="group" value="<?php echo ( isset( $_GET['group'] ) ) ? $_GET['group'] : $this->group->id; ?>"/>
+					<input type="hidden" name="group" value="<?php echo ( isset( $_GET['group'] ) ) ? (int) $_GET['group'] : (int) $this->group->id; ?>"/>
 					<?php wp_nonce_field( 'wpum_group_settings' ); ?>
 					<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
 				</div>
