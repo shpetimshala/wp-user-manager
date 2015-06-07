@@ -14,7 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 $email_id    = esc_attr( $_GET['email-id'] );
 $email_title = esc_attr( $_GET['email-title'] );
 $get_emails  = get_option('wpum_emails');
-$this_email  = $get_emails[ $email_id ];
+
+// Verify if this email is stored already
+if( in_array( $email_id , $get_emails ) ) {
+	$this_email = $get_emails[ $email_id ];
+} else {
+	$this_email = array( 
+		'subject' => call_user_func( "WPUM_{$email_id}_Email::subject" ),
+		'message' => call_user_func( "WPUM_{$email_id}_Email::message" )
+	);
+}
 
 // Editor Args
 $editor_args = array( 

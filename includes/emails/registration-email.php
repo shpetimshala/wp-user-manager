@@ -12,12 +12,12 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * WPUM_Registration_Email Class
+ * WPUM_register_Email Class
  * This class registers a new email for the editor.
  * 
  * @since 1.0.0
  */
-class WPUM_Registration_Email extends WPUM_Emails {
+class WPUM_register_Email extends WPUM_Emails {
 	
 	/**
 	 * This function sets up a custom email.
@@ -33,7 +33,7 @@ class WPUM_Registration_Email extends WPUM_Emails {
 		$this->description = __( "This is the email that is sent to the user upon successful registration." );
 		$this->subject     = $this->subject();
 		$this->message     = $this->message();
-		
+
 		// do not delete!
     	parent::__construct();
 	}
@@ -44,11 +44,11 @@ class WPUM_Registration_Email extends WPUM_Emails {
 	 * @since 1.0.0
 	 * @return  void
 	 */
-	function subject() {
+	public static function subject() {
 
 		$subject = sprintf( __('Your %s Account'), get_option( 'blogname' ) );
 
-		return apply_filters( "wpum/email/subject={$this->name}", $subject );
+		return $subject;
 
 	}
 
@@ -58,21 +58,18 @@ class WPUM_Registration_Email extends WPUM_Emails {
 	 * @since 1.0.0
 	 * @return  void
 	 */
-	function message() {
+	public static function message() {
 
-		$message = 'Hello {username},
-
-Welcome to {sitename},
-
-These are your account details
-
-Username: {username},
-Password: {password}';
+		$message = __( "Hello {username}, \n\n" );
+		$message .= __( "Welcome to {sitename}, \n\n" );
+		$message .= __( "These are your account details \n\n");
+		$message .= __( "Username: {username},\n" );
+		$message .= __( "Password: {password}" );
 		
-		return apply_filters( "wpum/email/message={$this->name}", $message );
+		return $message;
 
 	}
 	
 }
 
-new WPUM_Registration_Email();
+new WPUM_register_Email();

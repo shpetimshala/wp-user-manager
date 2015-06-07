@@ -12,12 +12,12 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * WPUM_PSW_Recovery_Email Class
+ * WPUM_password_Email Class
  * This class registers a new email for the editor.
  * 
  * @since 1.0.0
  */
-class WPUM_PSW_Recovery_Email extends WPUM_Emails {
+class WPUM_password_Email extends WPUM_Emails {
 	
 	/**
 	 * This function sets up a custom email.
@@ -44,7 +44,7 @@ class WPUM_PSW_Recovery_Email extends WPUM_Emails {
 	 * @since 1.0.0
 	 * @return  void
 	 */
-	function subject() {
+	public static function subject() {
 
 		$subject = sprintf( __('Reset Your %s Password'), get_option( 'blogname' ) );
 
@@ -58,18 +58,13 @@ class WPUM_PSW_Recovery_Email extends WPUM_Emails {
 	 * @since 1.0.0
 	 * @return  void
 	 */
-	function message() {
+	public static function message() {
 
-		$message = 'Hello {username},
-
-You are receiving this message because you or somebody else has attempted to reset your password on {sitename}.
-
-If this was a mistake, just ignore this email and nothing will happen.
-
-To reset your password, visit the following address:
-
-{recovery_url}
-';
+		$message = __( "Hello {username}, \n\n" );
+		$message .= __( "You are receiving this message because you or somebody else has attempted to reset your password on {sitename}.\n\n" );
+		$message .= __( "If this was a mistake, just ignore this email and nothing will happen.\n\n" );
+		$message .= __( "To reset your password, visit the following address:\n\n" );
+		$message .= __( "{recovery_url}" );
 		
 		return apply_filters( 'wpum_default_password_mail_message', $message );
 
@@ -77,4 +72,4 @@ To reset your password, visit the following address:
 	
 }
 
-new WPUM_PSW_Recovery_Email();
+new WPUM_password_Email();
