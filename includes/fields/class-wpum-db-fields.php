@@ -76,6 +76,36 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'allow_custom_visibility' => 'disallowed',
 			'options'                 => false
 		);
+	}com
+
+	/**
+	 * Add a field
+	 *
+	 * @see get_column_defaults for default parameters.
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function add( $args = array() ) {
+
+		$defaults = $this->get_column_defaults();
+
+		// Parse incoming $args into an array and merge it with $defaults
+		$args = wp_parse_args( $args, $defaults );
+
+		// group_id is required
+		if ( empty( $args['group_id'] ) || !is_numeric( $args['group_id'] ) ) {
+			return false;
+		}
+
+		// Bail if no field name
+		if ( empty( $args['name'] ) ) {
+			return false;
+		}
+
+		// Todo: check for field type existance.
+
+		return $this->insert( $args, 'field' );
+
 	}
 
 	/**

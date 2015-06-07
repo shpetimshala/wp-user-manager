@@ -311,3 +311,14 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
+
+/*
+$args = array(
+			'group_id'                => 1,
+			'type'                    => 'text',
+			'name'                    => 'Second Field',
+			'description'             => 'description of the field',
+		);
+
+WPUM()->fields->add( $args );
+*/
