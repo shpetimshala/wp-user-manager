@@ -76,7 +76,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'allow_custom_visibility' => 'disallowed',
 			'options'                 => false
 		);
-	}com
+	}
 
 	/**
 	 * Add a field
@@ -105,6 +105,45 @@ class WPUM_DB_Fields extends WPUM_DB {
 		// Todo: check for field type existance.
 
 		return $this->insert( $args, 'field' );
+
+	}
+
+	/**
+	 * Delete a field
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function delete( $id = false ) {
+
+		if ( empty( $id ) ) {
+			return false;
+		}
+
+		if ( $id > 0 ) {
+
+			if( !$this->can_delete( $id ) ) {
+				wp_die( 'You cannot delete this field.' );
+			}
+
+			global $wpdb;
+			return $wpdb->delete( $this->table_name, array( 'id' => $id ), array( '%d' ) );
+
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Checks if a field can be deleted
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function can_delete( $field_id = '' ) {
+
+		return (bool) $this->get_column_by( 'id', 'can_delete', $field_id );
 
 	}
 
