@@ -144,7 +144,7 @@ class WPUM_Emails_List extends WP_List_Table {
         $edit_url = add_query_arg( 
             array(
                 'email-id' => $item['id'],
-                'email-title' => $item['title'],
+                'email-title' => urlencode($item['title']),
                 'wpum_action' => 'edit'
             ), 
             admin_url( 'users.php?page=wpum-edit-email' )

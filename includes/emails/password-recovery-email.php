@@ -48,7 +48,7 @@ class WPUM_password_Email extends WPUM_Emails {
 
 		$subject = sprintf( __('Reset Your %s Password'), get_option( 'blogname' ) );
 
-		return apply_filters( 'wpum_default_password_mail_subject', $subject );
+		return $subject;
 
 	}
 
@@ -66,7 +66,7 @@ class WPUM_password_Email extends WPUM_Emails {
 		$message .= __( "To reset your password, visit the following address:\n\n" );
 		$message .= __( "{recovery_url}" );
 		
-		return apply_filters( 'wpum_default_password_mail_message', $message );
+		return $message;
 
 	}
 	
