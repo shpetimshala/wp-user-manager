@@ -148,6 +148,63 @@ class WPUM_DB_Fields extends WPUM_DB {
 	}
 
 	/**
+	 * Get all fields of a group
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function get_by_group( $args = array() ) {
+
+		global $wpdb;
+
+		$defaults = array(
+			'id'      => '',
+			'number'  => 20,
+			'offset'  => 0,
+			'orderby' => 'id',
+			'order'   => 'DESC'
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		if( $args['number'] < 1 ) {
+			$args['number'] = 999999999999;
+		}
+
+		if( empty( $args['id'] ) )
+			return false;
+
+		$where = '';
+
+		// specific customers
+		if( ! empty( $args['id'] ) ) {
+
+			if( is_array( $args['id'] ) ) {
+				$ids = implode( ',', $args['id'] );
+			} else {
+				$ids = intval( $args['id'] );
+			}
+
+			$where .= "WHERE `group_id` IN( {$ids} ) ";
+
+		}
+
+		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? 'id' : $args['orderby'];
+
+		$cache_key = md5( 'wpum_fields_' . serialize( $args ) );
+
+		$fields = wp_cache_get( $cache_key, 'fields' );
+
+		if( $fields === false ) {
+			$fields = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ) );
+			wp_cache_set( $cache_key, $fields, 'fields', 3600 );
+		}
+
+		return $fields;
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
