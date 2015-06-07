@@ -93,6 +93,14 @@ class WP_User_Manager {
 	public $field_groups;
 
 	/**
+	 * Fields DB Object
+	 *
+	 * @var object
+	 * @since 1.0.0
+	 */
+	public $fields;
+
+	/**
 	 * Main WP_User_Manager Instance
 	 *
 	 * Insures that only one instance of WP_User_Manager exists in memory at any one
@@ -109,7 +117,7 @@ class WP_User_Manager {
 
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WP_User_Manager ) ) {
 
-			self::$instance = new WP_User_Manager;
+			self::$instance               = new WP_User_Manager;
 			self::$instance->setup_constants();
 			self::$instance->includes();
 			self::$instance->emails       = new WPUM_Emails();
@@ -117,6 +125,7 @@ class WP_User_Manager {
 			self::$instance->forms        = new WPUM_Forms();
 			self::$instance->html         = new WPUM_HTML_Elements();
 			self::$instance->field_groups = new WPUM_DB_Field_Groups();
+			self::$instance->fields       = new WPUM_DB_Fields();
 
 		}
 
@@ -226,6 +235,7 @@ class WP_User_Manager {
 		// Load db helper class
 		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-db.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-field-groups.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-fields.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {

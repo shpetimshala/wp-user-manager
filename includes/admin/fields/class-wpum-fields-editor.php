@@ -339,7 +339,6 @@ class WPUM_Fields_Editor {
 	public function process_group() {
 
 		// Process the group delete action
-
 		if( isset( $_GET['action'] ) && $_GET['action'] == 'delete' && isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) {
 
 			// nonce verification
