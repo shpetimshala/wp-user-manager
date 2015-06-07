@@ -127,7 +127,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
                 return '<a href="#"><span class="dashicons dashicons-menu"></span></a>';
             break;
             case 'title':
-                return $item['name'];
+                return esc_html( stripslashes( $item['name'] ) );
             break;
             case 'type':
                 return $this->parse_type( $item['type'] );
@@ -226,7 +226,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
         // Display delete button if field can be deleted.
         if( $item['can_delete'] ) {
             
-            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-profile-fields' ) ), 'delete', 'nonce' );
+            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
             echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete' ).'</a> ';
 
         }
