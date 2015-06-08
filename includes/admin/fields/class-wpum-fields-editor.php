@@ -40,6 +40,13 @@ class WPUM_Fields_Editor {
 	protected $db;
 
 	/**
+	 * Database abstraction for field.
+	 *
+	 * @since 1.0.0
+	 */
+	protected $field_db = null;
+
+	/**
 	 * Holds the group id.
 	 *
 	 * @since 1.0.0
@@ -52,6 +59,13 @@ class WPUM_Fields_Editor {
 	 * @since 1.0.0
 	 */
 	var $group = null;
+
+	/**
+	 * Holds the field.
+	 *
+	 * @since 1.0.0
+	 */
+	var $field = null;
 
 	/**
 	 * __construct function.
@@ -69,21 +83,27 @@ class WPUM_Fields_Editor {
 
 		// Get selected group - set it as primary if no group is selected
 		if( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) {
-
 			// Get primary group
 			$this->group = $this->db->get_group_by( 'id', $_GET['group'] );
-
 		} else {
-
 			// Get primary group
 			$this->group = $this->db->get_group_by( 'primary' );
+		}
 
+		// Detect if a field is being edited
+		if( isset( $_GET['field'] ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit_field' ) {
+			$this->field_db = new WPUM_DB_Fields;
+			$this->field = $this->field_db->get( (int) $_GET['field'] );
 		}
 
 		// loads metaboxes functions
 		add_action( 'load-'.self::editor_hook, array( $this, 'load_editor' ) );
 		add_action( 'add_meta_boxes_'.self::editor_hook, array( $this, 'add_meta_box' ) );
 		add_action( 'admin_footer-'.self::editor_hook, array( $this, 'print_script_in_footer' ) );
+
+		// Build the main section of the editor
+		add_action( 'wpum/fields/editor/single', array($this, 'field_title_editor') );
+		add_action( 'wpum/fields/editor/single', array($this, 'field_description_editor') );
 
 		// Loads metaboxes functions for single field editor page
 		add_action( 'load-'.self::single_field_hook, array( $this, 'single_field_load_editor' ) );
@@ -283,7 +303,10 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function single_field_add_meta_box() {
-		add_meta_box( 'test', __( 'Test' ), array( $this, 'help_text' ), self::single_field_hook, 'normal' );
+
+		// Add Field Requirement metabox
+		add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
+
 	}
 
 	/**
@@ -455,32 +478,13 @@ class WPUM_Fields_Editor {
 		if( !isset( $_GET['field'] ) || !is_numeric( $_GET['field'] ) )
 			wp_die( 'To edit a field please go to Users -> Profile fields' );
 
-		// Store the selected field into a variable
-		$the_field = WPUM()->fields->get( $_GET['field'] );
-
-		// Prepare configuration for fields
-		$field_name_args = array(
-			'name'         => 'name',
-			'value'        => esc_html( $the_field->name ),
-			'label'        => false,
-			'placeholder' => __('Enter a name for this field'),
-			'class'        => 'text',
-		);
-
-		$description_settings = array( 
-			'media_buttons' => false,
-			'teeny' => true,
-			'quicktags' => false,
-			'textarea_rows' => 3
-		);
-
 		?>
 		
 		<div class="wrap wpum-fields-editor-wrap">
 
 			<h2 class="wpum-page-title">
-				<?php echo sprintf( __( 'Editing "%s" field' ), $the_field->name ); ?>
-				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2">Back to editor</a>
+				<?php echo __( 'Editing field' ); ?>
+				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2"><?php _e('Back to editor'); ?></a>
 			</h2>
 
 			<form name="wpum-edit-field-form" action="#" method="post" id="wpum-edit-field-form" autocomplete="off">
@@ -489,19 +493,33 @@ class WPUM_Fields_Editor {
 						
 						<div id="post-body-content">
 
-							<div id="titlediv">
-								<div id="titlewrap">
-									<?php echo WPUM()->html->text( $field_name_args ); ?>
-								</div>
-							</div>
+							<?php do_action( 'wpum/fields/editor/single' ); ?>
 
-							<div class="description-editor">
-								<h3><?php _e('Field Description (optional)'); ?></h3>
-								<?php wp_editor( $the_field->description, 'edit_field', $description_settings ); ?>
+							<div id="normal-metaboxes-wrapper">
 								<?php do_meta_boxes( self::single_field_hook, 'normal', null ); ?>
 							</div>
 
 						</div><!-- #post body content -->
+
+						<div id="postbox-container-1" class="postbox-container">
+							<div id="save-field-container" >
+
+								<!-- save field box -->
+								<div id="save-field" class="postbox">
+									<h3 class="hndle ui-sortable-handle"><span><?php _e('Save Field'); ?></span></h3>
+									<div id="major-publishing-actions">
+										<div id="publishing-action">
+											<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Field'); ?>"></div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+								<!-- save field box -->
+
+								<?php do_meta_boxes( self::single_field_hook, 'side', null ); ?>
+
+							</div>
+						</div><!-- postbox-container sidebar -->
 
 					</div> 
 				</div>
@@ -512,6 +530,81 @@ class WPUM_Fields_Editor {
 		<?php
 		
 		echo ob_get_clean();
+
+	}
+
+	/**
+	 * Render the title editor for the single field editor page.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function field_title_editor() {
+
+		// Prepare configuration for fields
+		$field_name_args = array(
+			'name'         => 'name',
+			'value'        => esc_html( $this->field->name ),
+			'label'        => false,
+			'placeholder' => __('Enter a name for this field'),
+			'class'        => 'text',
+		);
+
+		?>
+
+		<div id="titlediv">
+			<div id="titlewrap">
+				<?php echo WPUM()->html->text( $field_name_args ); ?>
+				<?php do_action( 'wpum_test' ); ?>
+			</div>
+		</div>
+
+		<?php
+
+	}
+
+	/**
+	 * Render the description editor for the single field editor page.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function field_description_editor() {
+
+		$description_settings = array( 
+			'media_buttons' => false,
+			'teeny' => true,
+			'quicktags' => false,
+			'textarea_rows' => 3
+		);
+
+		?>
+
+		<div class="description-editor">
+			<h3><?php _e('Field Description (optional)'); ?></h3>
+			<?php wp_editor( $this->field->description, 'edit_field', $description_settings ); ?>
+		</div>
+
+		<?php
+
+	}
+
+	/**
+	 * Render the requirement settings for the field editor.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function requirement_setting() {
+
+		$args = array(
+			'name'    => 'set_as_required',
+			'current' => $this->field->is_required,
+			'label'   => __('Set this field as required ?'),
+			'desc'    => __('If enabled, the user will be forced to fill in this field.'),
+		);
+
+		echo WPUM()->html->checkbox( $args );
 
 	}
 

@@ -129,5 +129,9 @@ table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-profile-fi
   background-color: #fff; }
 #wpum-edit-field-form .description-editor {
   margin-top: 20px; }
+#wpum-edit-field-form #normal-metaboxes-wrapper {
+  margin-top: 20px; }
+#wpum-edit-field-form #save-field-container {
+  width: 280px; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */
