@@ -94,12 +94,8 @@ jQuery(document).ready(function ($) {
 					        return { 'priority':$(el).data('priority'), 'field_id':$(el).data('field-id') }; 
 					    });
 
-		                console.log( dataArray );
-
 					    // Get nonce
 					    var wpum_editor_nonce = $('#wpum_fields_editor_nonce').val();
-
-					    console.log( wpum_editor_nonce );
 
 		                $.ajax({
 							type: 'POST',
