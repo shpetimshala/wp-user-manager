@@ -99,7 +99,6 @@ class WPUM_Fields_Editor {
 		// loads metaboxes functions
 		add_action( 'load-'.self::editor_hook, array( $this, 'load_editor' ) );
 		add_action( 'add_meta_boxes_'.self::editor_hook, array( $this, 'add_meta_box' ) );
-		add_action( 'admin_footer-'.self::editor_hook, array( $this, 'print_script_in_footer' ) );
 
 		// Build the main section of the editor
 		add_action( 'wpum/fields/editor/single', array($this, 'field_title_editor') );
@@ -108,7 +107,6 @@ class WPUM_Fields_Editor {
 		// Loads metaboxes functions for single field editor page
 		add_action( 'load-'.self::single_field_hook, array( $this, 'single_field_load_editor' ) );
 		add_action( 'add_meta_boxes_'.self::single_field_hook, array( $this, 'single_field_add_meta_box' ) );
-		add_action( 'admin_footer-'.self::single_field_hook, array( $this, 'print_script_in_footer' ) );
 
 		// Append group saving process
 		add_action( 'wpum_edit_group', array( $this, 'process_group' ) );
@@ -453,18 +451,6 @@ class WPUM_Fields_Editor {
 	}
 
 	/**
-	 * Print metabox scripts into the footer.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function print_script_in_footer() {
-		?>
-		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
-		<?php
-	}
-
-	/**
 	 * Render single field editor page.
 	 *
 	 * @access public
@@ -601,7 +587,7 @@ class WPUM_Fields_Editor {
 			'name'    => 'set_as_required',
 			'current' => $this->field->is_required,
 			'label'   => __('Set this field as required ?'),
-			'desc'    => __('If enabled, the user will be forced to fill in this field.'),
+			'desc'    => __('Enable to force the user to fill this field.'),
 		);
 
 		echo WPUM()->html->checkbox( $args );

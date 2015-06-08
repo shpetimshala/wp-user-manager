@@ -204,4 +204,33 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 		width: 280px;
 	}
 
+	#wpum_field_requirement {
+
+		.inside {
+			padding-top: 10px;
+		}
+
+		.wpum-description {
+			font-size: 12px;
+			margin-top: 10px;
+			font-style: italic;
+			color: #969696;
+			display: inline-block;
+		}
+
+	}
+
+}
+
+/* Hide screen options window */ 
+body.users_page_wpum-profile-fields,
+body.users_page_wpum-edit-field {
+	#screen-options-link-wrap, .postbox .handlediv {
+		display: none;
+	}
+
+	#poststuff h3 span, #poststuff h3 {
+		cursor: auto;
+	}
+
 }
