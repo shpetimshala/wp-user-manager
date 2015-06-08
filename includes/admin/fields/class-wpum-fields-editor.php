@@ -23,7 +23,14 @@ class WPUM_Fields_Editor {
 	 *
 	 * @since 1.0.0
 	 */
-	const hook = 'users_page_wpum-profile-fields';
+	const editor_hook = 'users_page_wpum-profile-fields';
+
+	/**
+	 * Holds the signle field editor page id.
+	 *
+	 * @since 1.0.0
+	 */
+	const single_field_hook = 'users_page_wpum-edit-field';
 
 	/**
 	 * The Database Abstraction
@@ -74,9 +81,14 @@ class WPUM_Fields_Editor {
 		}
 
 		// loads metaboxes functions
-		add_action( 'load-'.self::hook, array( $this, 'load_editor' ) );
-		add_action( 'add_meta_boxes_'.self::hook, array( $this, 'add_meta_box' ) );
-		add_action( 'admin_footer-'.self::hook, array( $this, 'print_script_in_footer' ) );
+		add_action( 'load-'.self::editor_hook, array( $this, 'load_editor' ) );
+		add_action( 'add_meta_boxes_'.self::editor_hook, array( $this, 'add_meta_box' ) );
+		add_action( 'admin_footer-'.self::editor_hook, array( $this, 'print_script_in_footer' ) );
+
+		// Loads metaboxes functions for single field editor page
+		add_action( 'load-'.self::single_field_hook, array( $this, 'single_field_load_editor' ) );
+		add_action( 'add_meta_boxes_'.self::single_field_hook, array( $this, 'single_field_add_meta_box' ) );
+		add_action( 'admin_footer-'.self::single_field_hook, array( $this, 'print_script_in_footer' ) );
 
 		// Append group saving process
 		add_action( 'wpum_edit_group', array( $this, 'process_group' ) );
@@ -121,7 +133,7 @@ class WPUM_Fields_Editor {
 					
 					<div class="clear"></div>
 
-					<?php do_accordion_sections( self::hook, 'side', null ); ?>
+					<?php do_accordion_sections( self::editor_hook, 'side', null ); ?>
 						
 				</div>
 				<!-- End Sidebar -->
@@ -225,8 +237,8 @@ class WPUM_Fields_Editor {
 	 */
 	public function load_editor() {
  
-	    do_action( 'add_meta_boxes_'.self::hook, null );
-	    do_action( 'add_meta_boxes', self::hook, null );
+	    do_action( 'add_meta_boxes_'.self::editor_hook, null );
+	    do_action( 'add_meta_boxes', self::editor_hook, null );
 	 
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
@@ -235,6 +247,24 @@ class WPUM_Fields_Editor {
 	    $this->process_group();
 
 	}
+
+	/**
+	 * Trigger the add_meta_boxes hooks to allow meta boxes to be added
+	 * on the single field editor page.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function single_field_load_editor() {
+ 
+	    do_action( 'add_meta_boxes_'.self::single_field_hook, null );
+	    do_action( 'add_meta_boxes', self::single_field_hook, null );
+	 
+	    /* Enqueue WordPress' script for handling the meta boxes */
+	    wp_enqueue_script('postbox');
+
+	}
+
 	/**
 	 * Register metaboxes.
 	 *
@@ -242,8 +272,18 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'wpum_fields_editor_edit_group', __( 'Group Settings' ), array( $this, 'group_settings' ), self::hook, 'side' );
-		add_meta_box( 'wpum_fields_editor_help', __( 'Fields Order' ), array( $this, 'help_text' ), self::hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_edit_group', __( 'Group Settings' ), array( $this, 'group_settings' ), self::editor_hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_help', __( 'Fields Order' ), array( $this, 'help_text' ), self::editor_hook, 'side' );
+	}
+
+	/**
+	 * Register metaboxes for the single field editor.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function single_field_add_meta_box() {
+		add_meta_box( 'test', __( 'Test' ), array( $this, 'help_text' ), self::single_field_hook, 'normal' );
 	}
 
 	/**
@@ -399,6 +439,80 @@ class WPUM_Fields_Editor {
 		?>
 		<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>
 		<?php
+	}
+
+	/**
+	 * Render single field editor page.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public static function edit_field_page() {
+
+		ob_start();
+
+		// Prevent access to this page is no field id is passed.
+		if( !isset( $_GET['field'] ) || !is_numeric( $_GET['field'] ) )
+			wp_die( 'To edit a field please go to Users -> Profile fields' );
+
+		// Store the selected field into a variable
+		$the_field = WPUM()->fields->get( $_GET['field'] );
+
+		// Prepare configuration for fields
+		$field_name_args = array(
+			'name'         => 'name',
+			'value'        => esc_html( $the_field->name ),
+			'label'        => false,
+			'placeholder' => __('Enter a name for this field'),
+			'class'        => 'text',
+		);
+
+		$description_settings = array( 
+			'media_buttons' => false,
+			'teeny' => true,
+			'quicktags' => false,
+			'textarea_rows' => 3
+		);
+
+		?>
+		
+		<div class="wrap wpum-fields-editor-wrap">
+
+			<h2 class="wpum-page-title">
+				<?php echo sprintf( __( 'Editing "%s" field' ), $the_field->name ); ?>
+				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2">Back to editor</a>
+			</h2>
+
+			<form name="wpum-edit-field-form" action="#" method="post" id="wpum-edit-field-form" autocomplete="off">
+				<div id="poststuff">
+					<div id="post-body" class="metabox-holder columns-2">
+						
+						<div id="post-body-content">
+
+							<div id="titlediv">
+								<div id="titlewrap">
+									<?php echo WPUM()->html->text( $field_name_args ); ?>
+								</div>
+							</div>
+
+							<div class="description-editor">
+								<h3><?php _e('Field Description (optional)'); ?></h3>
+								<?php wp_editor( $the_field->description, 'edit_field', $description_settings ); ?>
+								<?php do_meta_boxes( self::single_field_hook, 'normal', null ); ?>
+							</div>
+
+						</div><!-- #post body content -->
+
+					</div> 
+				</div>
+			</form>
+
+		</div>
+
+		<?php
+		
+		echo ob_get_clean();
+
 	}
 
 }

@@ -40,7 +40,7 @@ function wpum_admin_cssjs() {
 	$screen = get_current_screen();
 
 	// Load styles only on required pages.
-	if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-custom-fields-editor' || $screen->base == 'users_page_wpum-profile-fields' ):
+	if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-edit-field' || $screen->base == 'users_page_wpum-profile-fields' ):
 
 		wp_enqueue_script( 'wpum-select2' );
 		wp_enqueue_script( 'wpum-admin-js' );
