@@ -5,7 +5,7 @@
  *
  * @abstract
  * @author      Mike Jolley
- * @author      Alesssandro Tesoro
+ * @author      Alessandro Tesoro
  */
 abstract class WPUM_Form {
 

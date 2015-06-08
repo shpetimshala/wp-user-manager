@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Abstract WPUM_Field_Type class.
  *
  * @abstract
- * @author      Alesssandro Tesoro
+ * @author      Alessandro Tesoro
  */
 abstract class WPUM_Field_Type {
 
