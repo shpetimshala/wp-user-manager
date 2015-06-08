@@ -86,7 +86,6 @@ jQuery(document).ready(function ($) {
 		                
 		                // Update TR data
 						$(this).children('tr').each(function() {
-				            $(this).children('td:first-child').html($(this).index());
 				            $(this).data('priority',$(this).index());
 				        });
 						
@@ -184,42 +183,6 @@ jQuery(document).ready(function ($) {
 			    
 			    }
 
-			});
-
-		},
-
-		// Updates the single field
-		update_custom_field : function( values, nonce, field_id ) {
-
-			$.ajax({
-				type: 'POST',
-				dataType: 'json',
-				url: wpum_admin_js.ajax,
-				data: {
-					'action' : 'wpum_update_single_field', // Calls the ajax action
-					'update_nonce' : nonce,
-					'field' : field_id,
-					'options' : values
-				},
-				beforeSend: function() {
-					WPUM_Admin.display_loader();
-					WPUM_Admin.remove_message();
-				},
-				success: function( results ) {
-					WPUM_Admin.hide_loader();
-
-					$( '.wpum-fields-editor' ).remove();
-					// Enable drag and drop of the table
-					$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "enable" );
-
-					WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
-
-					location.reload();
-
-				},
-				error: function(xhr, status, error) {
-				    alert(xhr.responseText);
-				}
 			});
 
 		},

@@ -68,14 +68,8 @@ class WPUM_Ajax_Handler {
 		// Restore Default Fields
 		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
 
-		// Show field editor
-		add_action( 'wp_ajax_wpum_load_field_editor', array( $this, 'load_field_editor' ) );
-
 		// Update custom fields order
 		add_action( 'wp_ajax_wpum_update_fields_order', array( $this, 'update_fields_order' ) );
-
-		// Update single custom field
-		add_action( 'wp_ajax_wpum_update_single_field', array( $this, 'update_single_field' ) );
 
 	}
 
