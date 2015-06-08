@@ -246,7 +246,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
         // Add id
         $row_id = ' id="'.$item['name'].'"';
  
-        echo '<tr' . $row_class . $row_id . ' ">';
+        echo '<tr' . $row_class . $row_id . ' data-priority="' .$item['field_order']. '" data-field-id="' .$item['id']. '">';
         $this->single_row_columns( $item );
         echo '</tr>';
     }

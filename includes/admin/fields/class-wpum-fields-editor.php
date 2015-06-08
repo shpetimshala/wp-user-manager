@@ -127,7 +127,13 @@ class WPUM_Fields_Editor {
 				<!-- End Sidebar -->
 
 				<div id="menu-management-liquid" class="wpum-editor-container">
+					
 					<?php echo self::group_table(); ?>
+
+					<div class="wpum-table-loader">
+						<span id="wpum-spinner" class="spinner wpum-spinner"></span>
+					</div>
+
 				</div>
 
 			</div>
@@ -207,7 +213,7 @@ class WPUM_Fields_Editor {
 		$custom_fields_table->prepare_items();
 		$custom_fields_table->display();
 		
-		wp_nonce_field( 'wpum_fields_editor' );
+		wp_nonce_field( 'wpum_fields_editor_nonce', 'wpum_fields_editor_nonce' );
 
 	}
 

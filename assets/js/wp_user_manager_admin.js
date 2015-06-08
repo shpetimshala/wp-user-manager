@@ -11,9 +11,8 @@ jQuery(document).ready(function ($) {
 		init : function() {
 			this.general();
 			this.restore_emails();
-			this.order_default_fields();
+			this.drag_and_drop_fields_table();
 			this.restore_default_fields();
-			this.custom_fields_editor();
 			this.confirm_dialog();
 		},
 
@@ -66,11 +65,11 @@ jQuery(document).ready(function ($) {
 		},
 
 		// Re-order the fields into the admin panel
-		order_default_fields : function() {
+		drag_and_drop_fields_table : function() {
 
 			if ( $.isFunction($.fn.sortable) ) {
 
-				$(".users_page_wpum-custom-fields-editor tbody").sortable({
+				$(".users_page_wpum-profile-fields tbody").sortable({
 					helper: this.sortable_table_fix,
 					axis: "y",
 					cursor: 'pointer',
@@ -88,11 +87,15 @@ jQuery(document).ready(function ($) {
 						
 						// Prepare field data
 		                dataArray = $.map($(this).children('tr'), function(el){
-					        return {'priority':$(el).data('priority'), 'meta':$(el).data('meta'), 'required':$(el).data('required'), 'show_on_signup':$(el).data('show_on_signup')}; 
+					        return { 'priority':$(el).data('priority'), 'field_id':$(el).data('field-id') }; 
 					    });
 
+		                console.log( dataArray );
+
 					    // Get nonce
-					    var wpum_editor_nonce = $('#_wpnonce').val();
+					    var wpum_editor_nonce = $('#wpum_fields_editor_nonce').val();
+
+					    console.log( wpum_editor_nonce );
 
 		                $.ajax({
 							type: 'POST',
@@ -109,8 +112,8 @@ jQuery(document).ready(function ($) {
 							},
 							success: function(results) {
 								// Update odd even table classes
-								$('.users_page_wpum-custom-fields-editor').find("tr").removeClass('alternate');
-								$('.users_page_wpum-custom-fields-editor').find("tr:even").addClass('alternate');
+								$('.users_page_wpum-profile-fields').find("tr").removeClass('alternate');
+								$('.users_page_wpum-profile-fields').find("tr:even").addClass('alternate');
 								// Hide loading indicator
 								WPUM_Admin.hide_loader();
 								// Show message
@@ -175,102 +178,6 @@ jQuery(document).ready(function ($) {
 			        return false;
 			    
 			    }
-
-			});
-
-		},
-
-		// Custom Fields Editor
-		custom_fields_editor : function() {
-
-			$('.users_page_wpum-custom-fields-editor td.column-edit a').on('click', function(e) {
-
-				e.preventDefault();
-
-				// Grab row of the selected field to edit
-				var field_row = $(this).parent().parent();
-				var field_meta = $(this).data('meta');
-				var field_nonce = $(this).next().val();
-
-				// Remove any previous editors
-				$( '.wpum-fields-editor' ).remove();
-
-				$.ajax({
-					type: "POST",
-					dataType: 'json',
-					url: wpum_admin_js.ajax,
-					data: {
-						'action' : 'wpum_load_field_editor', // Calls the ajax action
-						'field_meta' : field_meta,
-						'field_nonce' : field_nonce
-					},
-					beforeSend: function() {
-
-						// Set height of loader indicator the same as the
-						// editor table.
-						WPUM_Admin.display_loader();
-						WPUM_Admin.remove_message();
-
-					},
-					success: function(results) {
-
-						// hide loader indicator
-						WPUM_Admin.hide_loader();
-
-						// Disable drag and drop of the table
-						$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "disable" );
-
-						// Now display the editor
-						$( results ).insertAfter( field_row );
-
-						// Scroll to the editor
-						$('html, body').animate({
-					        scrollTop: $('.wpum-fields-editor').offset().top
-					    }, 800);
-
-						// Remove the editor if cancel button is pressed.
-						$('#delete-action a').on('click', function(e) {
-							e.preventDefault();
-							
-							$( field_row ).removeClass('editing');
-							$( '.wpum-fields-editor' ).remove();
-
-							// Enable drag and drop of the table
-							$( '.users_page_wpum-custom-fields-editor tbody' ).sortable( "enable" );
-
-							// scroll back
-							$('html, body').animate({
-						        scrollTop: $( field_row ).offset().top
-						    }, 800);
-
-							return false;
-						});
-
-						// Perform field update
-						$('.wpum-fields-editor form').on('submit', function(e) {
-							
-							e.preventDefault();
-
-							// Grab field nonce 
-							var update_nonce = $( this ).find( '#_wpnonce' ).val();
-
-							// Grab values
-							var values = $(this).serializeJSON({checkboxUncheckedValue: "false"});
-
-							// Send field update
-							WPUM_Admin.update_custom_field( values, update_nonce, field_meta );							
-
-						});
-						
-					},
-					error: function(xhr, status, error) {
-
-						// hide loader indicator
-						$( '.wpum-table-loader' ).hide();
-						alert(xhr.responseText);
-
-					}
-				});
 
 			});
 
