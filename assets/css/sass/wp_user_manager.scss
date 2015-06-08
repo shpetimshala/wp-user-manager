@@ -52,137 +52,6 @@
 	color: green;
 }
 
-// Fields Editor table
-.wpum-fields-editor-container, .wpum-editor-container {
-	position: relative;
-}
-
-.wpum-table-loader {
-	background-color: rgba(255, 255, 255, 0.7);
-	position:absolute;
-	width:100%;
-	height:100%;
-	top: 0;
-	cursor: wait;
-	display: none;
-	span {
-		background-position: center center;
-		display: table-cell;
-	    text-align: center;
-	    vertical-align: middle;
-	}
-}
-
-table.wpum_fields_table_list, table.users_page_wpum-custom-fields-editor {
-
-	.row-dragging {
-		background-color: #ffffdc;
-	}
-	tbody {
-		tr:not(.wpum-fields-editor):hover {
-			background-color: #EAF9FF;
-		}
-	}
-	th.column-order, td.column-order {
-		max-width: 50px;
-		min-width: 50px;
-		width: 50px;
-		border-right:1px solid #e1e1e1;
-		text-align: center;
-		a.button {
-			padding-top:2px;
-		}
-	}
-	td {
-		  margin-bottom: 9px;
-		  padding: 15px 10px;
-		  line-height: 1.3;
-		  vertical-align: middle;
-	}
-	td.column-order {
-		cursor: move;
-		a {
-			&:hover {
-				cursor: move;
-			}
-		}
-	}
-
-	.move-field {
-		padding-top: 3px;
-	}
-
-	.wpum-window-hide {
-		display: none;
-	}
-
-	.wpum-fields-window-editor {
-		.media-frame-title, .media-frame-content, .media-frame-toolbar {
-			left: 0px;
-		}
-		.media-modal {
-			  top: 25%;
-			  left: 25%;
-			  right: 25%;
-			  bottom: 25%;
-		}
-		.media-frame-content {
-			top: 50px;
-		}
-
-		.section {
-		  padding: 18px 20px;
-		  -webkit-box-sizing: border-box;
-		  -moz-box-sizing: border-box;
-		  box-sizing: border-box;
-		  border-bottom: 1px solid #dfdfdf;
-		  position: relative;
-		  clear: both;
-		}
-
-		.section-description {
-		  width: 89%;
-		  float: right;
-		  font-size: 12px;
-		  strong {
-		  	font-size: 14px;
-			margin-bottom: 5px;
-			display: block;
-		  }
-		  span {
-		  	margin: 0 0 15px 0;
-			padding: 0;
-		  }
-		}
-
-		.section-form-element {
-		  width: 9%;
-		  float: left;
-		}
-
-		.section_clearfix:after {
-		  content: '.';
-		  display: block;
-		  overflow: hidden;
-		  visibility: hidden;
-		  width: 0;
-		  height: 0;
-		  clear: both;
-		}
-
-		.button-primary {
-			float: none;
-		}
-
-		.modal-spinner {
-			display: inline-block;
-			margin-top: 20px;
-		}
-
-	}
-
-}
-
 .footer-star {
 	font-size: 14px;
 	margin-top:3px;
@@ -191,71 +60,10 @@ table.wpum_fields_table_list, table.users_page_wpum-custom-fields-editor {
 }
 
 /* Hide slug */
-
 body.post-type-wpum_directory {
 	#edit-slug-box,
 	#preview-action {
 		display: none;
-	}
-}
-
-/* Admin fields editor */
-.wpum-fields-editor-table {
-	tr {
-		&.editing {
-			background: #ffffdc;
-		}
-	}
-	p.submit {
-		margin: 0px;
-	}
-}
-
-.wpum-fields-editor {
-	background: #f9f9f9;
-	td {
-		border-top:1px solid #e1e1e1;
-		border-bottom: 1px solid #e1e1e1;
-		padding: 40px !important;
-	}
-	.wpum-editor-postbox {
-		margin-bottom: 0px;
-		.inside {
-			padding: 0px;
-			margin-bottom:0px;
-		}
-		h3 {
-			margin: 0px;
-			cursor: auto !important;
-			span {
-				padding: 5px 10px;
-				display: block;
-				font-size: smaller;
-			}
-		}
-	}
-	.wpum-editor-field {
-		border-bottom: 1px solid #e1e1e1;
-		padding: 10px;
-		&:first-child {
-			padding-top:0px;
-		}
-		&:last-child {
-			border-bottom: none;
-		}
-		input[type=text],
-		select {
-			display: block;
-			width: 100%;
-		}
-	}
-	.wpum-description {
-		font-size: 12px;
-		margin-top: 10px;
-		color: #A5A5A5;
-	}
-	.wpum-no-options {
-		padding: 10px;
 	}
 }
 
@@ -303,6 +111,71 @@ body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-t
 			display: block;
 			margin-bottom: 15px;
 		}
+	}
+}
+
+// Fields Editor table
+.wpum-editor-container {
+	position: relative;
+}
+
+.wpum-table-loader {
+	background-color: rgba(255, 255, 255, 0.7);
+	position:absolute;
+	width:100%;
+	height:100%;
+	top: 0;
+	cursor: wait;
+	display: none;
+	span {
+		background-position: center center;
+		display: table-cell;
+	    text-align: center;
+	    vertical-align: middle;
+	}
+}
+
+table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
+
+	.row-dragging {
+		background-color: #ffffdc;
+	}
+	tbody {
+		tr:not(.wpum-fields-editor):hover {
+			background-color: #EAF9FF;
+		}
+	}
+	th.column-order, td.column-order {
+		max-width: 50px;
+		min-width: 50px;
+		width: 50px;
+		border-right:1px solid #e1e1e1;
+		text-align: center;
+		a.button {
+			padding-top:2px;
+		}
+	}
+	td {
+		  margin-bottom: 9px;
+		  padding: 10px 10px;
+		  line-height: 1.3;
+		  vertical-align: middle;
+	}
+	td.column-order {
+		cursor: move;
+		a {
+			&:hover {
+				cursor: move;
+			}
+		}
+	}
+
+	.move-field {
+		padding-top: 3px;
+	}
+
+	.wpum-window-hide {
+		display: none;
 	}
 
 }

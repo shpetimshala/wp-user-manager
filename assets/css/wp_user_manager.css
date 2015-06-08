@@ -35,93 +35,6 @@
   margin-left: 10px;
   color: green; }
 
-.wpum-fields-editor-container, .wpum-editor-container {
-  position: relative; }
-
-.wpum-table-loader {
-  background-color: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  cursor: wait;
-  display: none; }
-  .wpum-table-loader span {
-    background-position: center center;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle; }
-
-table.wpum_fields_table_list .row-dragging, table.users_page_wpum-custom-fields-editor .row-dragging {
-  background-color: #ffffdc; }
-table.wpum_fields_table_list tbody tr:not(.wpum-fields-editor):hover, table.users_page_wpum-custom-fields-editor tbody tr:not(.wpum-fields-editor):hover {
-  background-color: #EAF9FF; }
-table.wpum_fields_table_list th.column-order, table.wpum_fields_table_list td.column-order, table.users_page_wpum-custom-fields-editor th.column-order, table.users_page_wpum-custom-fields-editor td.column-order {
-  max-width: 50px;
-  min-width: 50px;
-  width: 50px;
-  border-right: 1px solid #e1e1e1;
-  text-align: center; }
-  table.wpum_fields_table_list th.column-order a.button, table.wpum_fields_table_list td.column-order a.button, table.users_page_wpum-custom-fields-editor th.column-order a.button, table.users_page_wpum-custom-fields-editor td.column-order a.button {
-    padding-top: 2px; }
-table.wpum_fields_table_list td, table.users_page_wpum-custom-fields-editor td {
-  margin-bottom: 9px;
-  padding: 15px 10px;
-  line-height: 1.3;
-  vertical-align: middle; }
-table.wpum_fields_table_list td.column-order, table.users_page_wpum-custom-fields-editor td.column-order {
-  cursor: move; }
-  table.wpum_fields_table_list td.column-order a:hover, table.users_page_wpum-custom-fields-editor td.column-order a:hover {
-    cursor: move; }
-table.wpum_fields_table_list .move-field, table.users_page_wpum-custom-fields-editor .move-field {
-  padding-top: 3px; }
-table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-custom-fields-editor .wpum-window-hide {
-  display: none; }
-table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-title, table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-content, table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-toolbar, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .media-frame-title, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .media-frame-content, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .media-frame-toolbar {
-  left: 0px; }
-table.wpum_fields_table_list .wpum-fields-window-editor .media-modal, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .media-modal {
-  top: 25%;
-  left: 25%;
-  right: 25%;
-  bottom: 25%; }
-table.wpum_fields_table_list .wpum-fields-window-editor .media-frame-content, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .media-frame-content {
-  top: 50px; }
-table.wpum_fields_table_list .wpum-fields-window-editor .section, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section {
-  padding: 18px 20px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border-bottom: 1px solid #dfdfdf;
-  position: relative;
-  clear: both; }
-table.wpum_fields_table_list .wpum-fields-window-editor .section-description, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section-description {
-  width: 89%;
-  float: right;
-  font-size: 12px; }
-  table.wpum_fields_table_list .wpum-fields-window-editor .section-description strong, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section-description strong {
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: block; }
-  table.wpum_fields_table_list .wpum-fields-window-editor .section-description span, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section-description span {
-    margin: 0 0 15px 0;
-    padding: 0; }
-table.wpum_fields_table_list .wpum-fields-window-editor .section-form-element, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section-form-element {
-  width: 9%;
-  float: left; }
-table.wpum_fields_table_list .wpum-fields-window-editor .section_clearfix:after, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .section_clearfix:after {
-  content: '.';
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
-  clear: both; }
-table.wpum_fields_table_list .wpum-fields-window-editor .button-primary, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .button-primary {
-  float: none; }
-table.wpum_fields_table_list .wpum-fields-window-editor .modal-spinner, table.users_page_wpum-custom-fields-editor .wpum-fields-window-editor .modal-spinner {
-  display: inline-block;
-  margin-top: 20px; }
-
 .footer-star {
   font-size: 14px;
   margin-top: 3px;
@@ -132,48 +45,6 @@ table.wpum_fields_table_list .wpum-fields-window-editor .modal-spinner, table.us
 body.post-type-wpum_directory #edit-slug-box,
 body.post-type-wpum_directory #preview-action {
   display: none; }
-
-/* Admin fields editor */
-.wpum-fields-editor-table tr.editing {
-  background: #ffffdc; }
-.wpum-fields-editor-table p.submit {
-  margin: 0px; }
-
-.wpum-fields-editor {
-  background: #f9f9f9; }
-  .wpum-fields-editor td {
-    border-top: 1px solid #e1e1e1;
-    border-bottom: 1px solid #e1e1e1;
-    padding: 40px !important; }
-  .wpum-fields-editor .wpum-editor-postbox {
-    margin-bottom: 0px; }
-    .wpum-fields-editor .wpum-editor-postbox .inside {
-      padding: 0px;
-      margin-bottom: 0px; }
-    .wpum-fields-editor .wpum-editor-postbox h3 {
-      margin: 0px;
-      cursor: auto !important; }
-      .wpum-fields-editor .wpum-editor-postbox h3 span {
-        padding: 5px 10px;
-        display: block;
-        font-size: smaller; }
-  .wpum-fields-editor .wpum-editor-field {
-    border-bottom: 1px solid #e1e1e1;
-    padding: 10px; }
-    .wpum-fields-editor .wpum-editor-field:first-child {
-      padding-top: 0px; }
-    .wpum-fields-editor .wpum-editor-field:last-child {
-      border-bottom: none; }
-    .wpum-fields-editor .wpum-editor-field input[type=text],
-    .wpum-fields-editor .wpum-editor-field select {
-      display: block;
-      width: 100%; }
-  .wpum-fields-editor .wpum-description {
-    font-size: 12px;
-    margin-top: 10px;
-    color: #A5A5A5; }
-  .wpum-fields-editor .wpum-no-options {
-    padding: 10px; }
 
 body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-type-wpum_directory #visibility {
   display: none; }
@@ -203,5 +74,48 @@ body.users_page_wpum-custom-fields-editor #screen-options-link-wrap, body.post-t
   .wpum-fields-editor-wrap .wpum-group-settings > span {
     display: block;
     margin-bottom: 15px; }
+
+.wpum-editor-container {
+  position: relative; }
+
+.wpum-table-loader {
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  cursor: wait;
+  display: none; }
+  .wpum-table-loader span {
+    background-position: center center;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle; }
+
+table.wpum_fields_table_list .row-dragging, table.users_page_wpum-profile-fields .row-dragging {
+  background-color: #ffffdc; }
+table.wpum_fields_table_list tbody tr:not(.wpum-fields-editor):hover, table.users_page_wpum-profile-fields tbody tr:not(.wpum-fields-editor):hover {
+  background-color: #EAF9FF; }
+table.wpum_fields_table_list th.column-order, table.wpum_fields_table_list td.column-order, table.users_page_wpum-profile-fields th.column-order, table.users_page_wpum-profile-fields td.column-order {
+  max-width: 50px;
+  min-width: 50px;
+  width: 50px;
+  border-right: 1px solid #e1e1e1;
+  text-align: center; }
+  table.wpum_fields_table_list th.column-order a.button, table.wpum_fields_table_list td.column-order a.button, table.users_page_wpum-profile-fields th.column-order a.button, table.users_page_wpum-profile-fields td.column-order a.button {
+    padding-top: 2px; }
+table.wpum_fields_table_list td, table.users_page_wpum-profile-fields td {
+  margin-bottom: 9px;
+  padding: 10px 10px;
+  line-height: 1.3;
+  vertical-align: middle; }
+table.wpum_fields_table_list td.column-order, table.users_page_wpum-profile-fields td.column-order {
+  cursor: move; }
+  table.wpum_fields_table_list td.column-order a:hover, table.users_page_wpum-profile-fields td.column-order a:hover {
+    cursor: move; }
+table.wpum_fields_table_list .move-field, table.users_page_wpum-profile-fields .move-field {
+  padding-top: 3px; }
+table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-profile-fields .wpum-window-hide {
+  display: none; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */
