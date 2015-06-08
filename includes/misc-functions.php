@@ -1056,24 +1056,6 @@ function wpum_get_field_by_meta( $meta = null ) {
 }
 
 /**
- * Get a given field by meta.
- *
- * @since 1.0.0
- * @param string $meta meta parameter from an array in wpum_default_fields_list() function.
- * @return bool|array $options false if no options.
- */
-function wpum_get_field_options( $meta = null ) {
-
-	$options      = false;
-	$custom_field = wpum_get_field_by_meta( $meta );
-
-	if( array_key_exists( 'settings', $custom_field ) && !empty( $custom_field['settings'] ) )
-		$options = $custom_field['settings'];
-
-	return $options;
-}
-
-/**
  * Get the value of an option of a field.
  *
  * @since 1.0.0

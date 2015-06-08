@@ -23,8 +23,17 @@ class WPUM_Field_Type_Text extends WPUM_Field_Type {
 		// DO NOT DELETE
 		parent::__construct();
 
-		$this->name = _x( 'Text Field', 'field type name', 'wpum' );
-		$this->type = 'text';
+		$this->name  = _x( 'Text Field', 'field type name', 'wpum' );
+		$this->type  = 'text';
+		$this->class = __CLASS__;
+
+	}
+
+	public static function options() {
+
+		$options = array('test' => 1);
+
+		return $options;
 
 	}
 

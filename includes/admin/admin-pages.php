@@ -39,4 +39,5 @@ add_action( 'admin_menu', 'wpum_add_options_link', 10 );
  */
 function wpum_hide_admin_pages() {
 	remove_submenu_page( 'users.php', 'wpum-edit-email' );
+	remove_submenu_page( 'users.php', 'wpum-edit-field' );
 }

@@ -56,13 +56,22 @@ abstract class WPUM_Field_Type {
 	public $supports_multiple = true;
 
 	/**
+	 * Class name.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public $class = '';
+
+	/**
 	 * Get things started
 	 *
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
-		add_filter( "wpum/get_field_types", array( $this, 'get_field_types' ), 10, 1 );
+		add_filter( "wpum/field/types", array( $this, 'get_field_types' ), 10, 1 );
+		add_filter( "wpum/field/types/classes", array( $this, 'get_field_classes' ), 11, 1 );
 
 	}
 
@@ -96,6 +105,32 @@ abstract class WPUM_Field_Type {
 		// return array
 		return $fields;
 
+	}
+
+	/**
+	 * Get registered field php class names.
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	 */
+	public function get_field_classes() {
+		
+		// add to array
+		$classes[ $this->type ] = $this->class;
+		
+		// return array
+		return $classes;
+
+	}
+
+	/**
+	 * Use this method to register options for the field.
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	 */
+	public static function options() {
+		return array();
 	}
 
 }

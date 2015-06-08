@@ -305,6 +305,10 @@ class WPUM_Fields_Editor {
 		// Add Field Requirement metabox
 		add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
+		// Add field options metabox
+		if( wpum_field_type_exists( $this->field->type ) && wpum_field_type_has_options( $this->field->type ) )
+			add_meta_box( 'wpum_field_options', __( 'Settings' ), array( $this, 'field_settings' ), self::single_field_hook, 'normal' );
+
 	}
 
 	/**
@@ -591,6 +595,19 @@ class WPUM_Fields_Editor {
 		);
 
 		echo WPUM()->html->checkbox( $args );
+
+	}
+
+	/**
+	 * Render the options for the selected field.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function field_settings() {
+
+		// Get field options
+		$options = wpum_get_field_options( $this->field->type );
 
 	}
 
