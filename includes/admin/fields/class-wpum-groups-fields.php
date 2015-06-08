@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * WPUM_Custom_Fields_List
+ * WPUM_Groups_Fields
  * Create a table with the list of default fields.
  * 
  * @since 1.0.0

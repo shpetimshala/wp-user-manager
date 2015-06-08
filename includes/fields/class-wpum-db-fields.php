@@ -197,13 +197,13 @@ class WPUM_DB_Fields extends WPUM_DB {
 
 		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? 'id' : $args['orderby'];
 
-		$cache_key = md5( 'wpum_fields_' . serialize( $args ) );
+		$cache_key = md5( 'wpum_fields_by_group_' . serialize( $args ) );
 
-		$fields = wp_cache_get( $cache_key, 'fields' );
+		$fields = wp_cache_get( $cache_key, 'fields_by_group' );
 
 		if( $fields === false ) {
 			$fields = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ), $return_type );
-			wp_cache_set( $cache_key, $fields, 'fields', 3600 );
+			wp_cache_set( $cache_key, $fields, 'fields_by_group', 3600 );
 		}
 
 		return $fields;

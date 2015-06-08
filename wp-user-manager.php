@@ -236,6 +236,8 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-db.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-field-groups.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-fields.php';
+		// Load fields helpers
+		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-field-type.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
