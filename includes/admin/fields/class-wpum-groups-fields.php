@@ -106,7 +106,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
             $which_group = $primary_group->id;
         }
 
-        $data = WPUM()->fields->get_by_group( array( 'id' => $which_group, 'array' => true ) );
+        $data = WPUM()->fields->get_by_group( array( 'id' => $which_group, 'array' => true, 'orderby' => 'field_order', 'order' => 'ASC' ) );
 
         return $data;
 
