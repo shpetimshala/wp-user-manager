@@ -53,6 +53,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'can_delete'              => '%s',
 			'default_visibility'      => '%s',
 			'allow_custom_visibility' => '%s',
+			'meta'                    => '%s',
 			'options'                 => '%s'
 		);
 	}
@@ -76,6 +77,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'can_delete'              => true,
 			'default_visibility'      => 'public',
 			'allow_custom_visibility' => 'disallowed',
+			'meta'                    => '',
 			'options'                 => false
 		);
 	}
@@ -160,12 +162,13 @@ class WPUM_DB_Fields extends WPUM_DB {
 		global $wpdb;
 
 		$defaults = array(
-			'id'      => '',
-			'array'   => false,
-			'number'  => 20,
-			'offset'  => 0,
-			'orderby' => 'id',
-			'order'   => 'DESC'
+			'id'           => '',
+			'array'        => false,
+			'registration' => false,
+			'number'       => 20,
+			'offset'       => 0,
+			'orderby'      => 'id',
+			'order'        => 'DESC'
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -179,7 +182,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 
 		$where = '';
 
-		// specific fields
+		// specific fields in a group
 		if( ! empty( $args['id'] ) ) {
 
 			if( is_array( $args['id'] ) ) {
@@ -190,6 +193,15 @@ class WPUM_DB_Fields extends WPUM_DB {
 
 			$where .= "WHERE `group_id` IN( {$ids} ) ";
 
+		}
+
+		// only registration fields ?
+		if( $args['registration'] === true ) {
+			if( ! empty( $where ) ) {
+				$where .= " AND `show_on_registration` = 1";
+			} else {
+				$where .= "WHERE `show_on_registration` = 1";
+			}
 		}
 
 		// Return as array?
@@ -237,6 +249,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 		default_visibility varchar(150) NOT NULL DEFAULT 'public',
 		allow_custom_visibility varchar(150) NOT NULL DEFAULT 'disallowed',
 		options longtext DEFAULT NULL,
+		meta longtext DEFAULT NULL,
 		PRIMARY KEY (id),
 		KEY group_id (group_id),
 		KEY field_order (field_order),

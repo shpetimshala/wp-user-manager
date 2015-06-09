@@ -58,14 +58,14 @@ function wpum_admin_messages() {
 	if( isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] == 'check_folder_permission' ) {
 
 		$upload_dir = wp_upload_dir();
-		if( !wp_is_writable( $upload_dir['path'] ) ) :
+		if( ! wp_is_writable( $upload_dir['path'] ) ) :
 			add_settings_error( 'wpum-notices', 'permission-error', sprintf( __( 'Your uploads folder in "%s" is not writable. <br/>Avatar uploads will not work, please adjust folder permission.<br/><br/> <a href="%s" class="button" target="_blank">Read More</a>', 'wpum' ), $upload_dir['basedir'], 'http://www.wpbeginner.com/wp-tutorials/how-to-fix-image-upload-issue-in-wordpress/' ), 'error' );
 		else :
 			add_settings_error( 'wpum-notices', 'permission-success', sprintf( __( 'No issues detected.', 'wpum' ), admin_url( 'users.php?page=wpum-settings&tab=profile' ) ), 'updated notice is-dismissible' );
 		endif;
 	}
 
-	// messages for the groups page
+	// messages for the groups and fields pages
 	if( $screen->base == 'users_page_wpum-profile-fields' ) {
 
 		if( isset( $_GET['message'] ) && $_GET['message'] == 'group_success' ) :
