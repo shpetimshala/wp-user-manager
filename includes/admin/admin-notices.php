@@ -76,6 +76,10 @@ function wpum_admin_messages() {
 			add_settings_error( 'wpum-notices', 'group-deleted', __( 'Field group successfully deleted.', 'wpum' ), 'updated' );
 		endif;
 
+		if( isset( $_GET['message'] ) && $_GET['message'] == 'field_saved' ) :
+			add_settings_error( 'wpum-notices', 'field-saved', __( 'Field successfully updated.', 'wpum' ), 'updated' );
+		endif;
+
 	}
 
 	settings_errors( 'wpum-notices' );
