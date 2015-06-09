@@ -180,13 +180,13 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
         if( $type == 'email' ) {
             $text = __('Email');
-        } elseif ( $type == 'select' ) {
+        } elseif ( $type == 'select' || $type == 'display_name' ) {
             $text = __('Dropdown');
         } elseif ( $type == 'textarea' ) {
             $text = __('Textarea');
         } elseif ( $type == 'password' ) {
             $text = __('Password');
-        } elseif ( $type == 'file' ) {
+        } elseif ( $type == 'file' || $type == 'avatar' ) {
             $text = __('Upload');
         }
 
