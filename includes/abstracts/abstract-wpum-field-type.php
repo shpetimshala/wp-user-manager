@@ -97,7 +97,7 @@ abstract class WPUM_Field_Type {
 	 * @access  public
 	 * @since   1.0.0
 	 */
-	public function get_field_types() {
+	public function get_field_types( $fields ) {
 		
 		$l10n = array(
 			'basic' => __('Basic'),
@@ -129,7 +129,7 @@ abstract class WPUM_Field_Type {
 	 * @access  public
 	 * @since   1.0.0
 	 */
-	public function get_field_classes() {
+	public function get_field_classes( $classes ) {
 		
 		// add to array
 		$classes[ $this->type ] = $this->class;

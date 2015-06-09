@@ -238,7 +238,12 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-fields.php';
 		// Load fields helpers
 		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-field-type.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/fields/text-field.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/avatar.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/display_name.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/email.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/nickname.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/password.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/username.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/functions.php';
 
 		// Files loaded only on the admin side
