@@ -36,8 +36,6 @@ class WPUM_Field_Type_Avatar extends WPUM_Field_Type {
 		$this->class            = __CLASS__;
 		// Set registration
 		$this->set_registration = false;
-		// Set requirement
-		$this->set_requirement  = false;
 
 	}
 
