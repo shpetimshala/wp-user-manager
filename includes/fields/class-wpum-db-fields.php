@@ -150,30 +150,6 @@ class WPUM_DB_Fields extends WPUM_DB {
 	}
 
 	/**
-	 * Checks if a field can be displayed on the registration form.
-	 *
-	 * @access  public
-	 * @since   1.0.0
-	*/
-	public function __show_on_registration( $field_id = '' ) {
-
-		$pass = false;
-		
-		// Case 1 - check if gro
-		$case_1 = (bool) $this->get_column_by( 'id', 'show_on_registration', $field_id );
-	 	
-	 	// Case 2 -
-	 	$group_id = $this->get_column_by( 'id', 'group_id', $field_id );
-	 	$case_2 = WPUM()->field_groups->is_primary( $group_id );
-
-	 	if( $case_1 && $case_2 )
-	 		$pass = true;
-
-		return $pass;
-
-	}
-
-	/**
 	 * Get all fields of a group
 	 *
 	 * @access  public

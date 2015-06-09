@@ -55,29 +55,24 @@ function wpum_field_type_exists( $type = '' ) {
 }
 
 /**
- * Verify if a field type has options
+ * Get the class of a field type and returns the object.
  *
  * @since 1.0.0
  * @param  $type type of field
- * @return bool - true | false.
+ * @return object - class.
  */
-function wpum_field_type_has_options( $type = '' ) {
+function wpum_get_field_type_object( $type = '' ) {
 
-	$pass = false;
+	$object = null;
 
 	$field_types = wpum_get_field_classes();
 
 	if( !empty( $type ) && wpum_field_type_exists( $type ) ) {
 		$class = $field_types[ $type ];
-		$options = call_user_func( "$class::options" );
-
-		if( !empty( $options ) )
-			$pass = true;
-
+		$object = new $class;
 	}
 
-	return $pass;
-
+	return $object;
 }
 
 /**

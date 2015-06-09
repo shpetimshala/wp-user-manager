@@ -56,6 +56,14 @@ abstract class WPUM_Field_Type {
 	public $supports_multiple = true;
 
 	/**
+	 * If this is set, the editor will allow customization of primary field options.
+	 *
+	 * @since 1.0.0
+	 * @var bool Can this field be added multiple times to a group?.
+	 */
+	public $primary_options = true;
+
+	/**
 	 * Class name.
 	 *
 	 * @since 1.0.0

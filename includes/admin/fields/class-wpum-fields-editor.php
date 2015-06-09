@@ -557,7 +557,6 @@ class WPUM_Fields_Editor {
 		<div id="titlediv">
 			<div id="titlewrap">
 				<?php echo WPUM()->html->text( $field_name_args ); ?>
-				<?php do_action( 'wpum_test' ); ?>
 			</div>
 		</div>
 
