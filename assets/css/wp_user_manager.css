@@ -133,9 +133,11 @@ table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-profile-fi
   margin-top: 20px; }
 #wpum-edit-field-form #save-field-container {
   width: 280px; }
-#wpum-edit-field-form #wpum_field_requirement .inside {
+#wpum-edit-field-form #wpum_field_requirement .inside,
+#wpum-edit-field-form #wpum_field_on_registration .inside {
   padding-top: 10px; }
-#wpum-edit-field-form #wpum_field_requirement .wpum-description {
+#wpum-edit-field-form #wpum_field_requirement .wpum-description,
+#wpum-edit-field-form #wpum_field_on_registration .wpum-description {
   font-size: 12px;
   margin-top: 10px;
   font-style: italic;

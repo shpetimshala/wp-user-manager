@@ -29,14 +29,6 @@ class WPUM_Field_Type_Text extends WPUM_Field_Type {
 
 	}
 
-	public static function options() {
-
-		$options = array('test' => 1);
-
-		return $options;
-
-	}
-
 }
 
 new WPUM_Field_Type_Text;

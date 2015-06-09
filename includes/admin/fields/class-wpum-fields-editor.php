@@ -111,6 +111,9 @@ class WPUM_Fields_Editor {
 		// Append group saving process
 		add_action( 'wpum_edit_group', array( $this, 'process_group' ) );
 
+		// Append groupfield saving process
+		add_action( 'wpum_save_field', array( $this, 'process_field' ) );
+
 		// Load WP_List_Table
 		if( ! class_exists( 'WP_List_Table' ) ) {
 		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
@@ -306,9 +309,12 @@ class WPUM_Fields_Editor {
 		add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
 		// Add field options metabox
-		if( wpum_field_type_exists( $this->field->type ) && wpum_field_type_has_options( $this->field->type ) )
-			add_meta_box( 'wpum_field_options', __( 'Settings' ), array( $this, 'field_settings' ), self::single_field_hook, 'normal' );
+		//if( wpum_field_type_exists( $this->field->type ) && wpum_field_type_has_options( $this->field->type ) )
+		//	add_meta_box( 'wpum_field_options', __( 'Settings' ), array( $this, 'field_settings' ), self::single_field_hook, 'normal' );
 
+		// Add option to display on registration form if it's in primary group.
+		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) )
+			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
 	}
 
 	/**
@@ -499,6 +505,12 @@ class WPUM_Fields_Editor {
 									<h3 class="hndle ui-sortable-handle"><span><?php _e('Save Field'); ?></span></h3>
 									<div id="major-publishing-actions">
 										<div id="publishing-action">
+
+											<input type="hidden" name="wpum-action" value="save_field"/>
+											<input type="hidden" name="from_group" value="<?php echo ( isset( $_GET['from_group'] ) ) ? (int) $_GET['from_group'] : false; ?>"/>
+											<input type="hidden" name="which_field" value="<?php echo ( isset( $_GET['field'] ) ) ? (int) $_GET['field'] : false; ?>"/>
+											<?php wp_nonce_field( 'wpum_save_field' ); ?>
+
 											<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Field'); ?>"></div>
 											<div class="clear"></div>
 										</div>
@@ -572,7 +584,7 @@ class WPUM_Fields_Editor {
 
 		<div class="description-editor">
 			<h3><?php _e('Field Description (optional)'); ?></h3>
-			<?php wp_editor( $this->field->description, 'edit_field', $description_settings ); ?>
+			<?php wp_editor( $this->field->description, 'field_description', $description_settings ); ?>
 		</div>
 
 		<?php
@@ -599,15 +611,86 @@ class WPUM_Fields_Editor {
 	}
 
 	/**
-	 * Render the options for the selected field.
+	 * Render the requirement settings for the field editor.
 	 *
+	 * @access public
+	 * @return void
+	 */
+	public function field_on_registration() {
+
+		$args = array(
+			'name'    => 'show_on_registration',
+			'current' => $this->field->show_on_registration,
+			'label'   => __('Display this field on registration ?'),
+			'desc'    => __('Enable to display this field on the registration form.'),
+		);
+
+		echo WPUM()->html->checkbox( $args );
+
+	}
+
+	/**
+	 * Render the options for the selected field.
+	 * 
+	 * @todo  to complete - this function does nothing now.
 	 * @access public
 	 * @return void
 	 */
 	public function field_settings() {
 
 		// Get field options
-		$options = wpum_get_field_options( $this->field->type );
+		//$options = wpum_get_field_options( $this->field->type );
+		// To complete.
+
+	}
+
+	/**
+	 * Save the field to the database
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function process_field() {
+
+		// Check whether the form has been submitted
+		if( isset( $_POST['wpum-action'] ) && $_POST['wpum-action'] == 'save_field' ) {
+
+			// nonce verification
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wpum_save_field' ) ) {
+				return;
+			}
+
+			// bail if something is wrong
+			if( !isset( $_POST['from_group'] ) || !isset( $_POST['which_field'] ) || !is_admin() || !current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			// store information into variable
+			$field_id = (int) $_POST['which_field'];
+			$group_id = (int) $_POST['from_group'];
+
+			// Prepare array
+			$args = array(
+				'name'                 => sanitize_text_field( $_POST['name'] ),
+				'description'          => wp_kses_post( $_POST['field_description'] ),
+				'is_required'          => isset( $_POST['set_as_required'] ) ? (bool) $_POST['set_as_required'] : false,
+				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration'] : false
+			);
+
+			// Allow plugins to extend the save process
+			do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id );
+
+			// Save the field
+			if( WPUM()->fields->update( $field_id, $args ) ) {
+
+				// Redirect now
+				$admin_url = add_query_arg( array( 'message' => 'field_saved' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+				wp_redirect( $admin_url );
+				exit();
+
+			}
+
+		}
 
 	}
 

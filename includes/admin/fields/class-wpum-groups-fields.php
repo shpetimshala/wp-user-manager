@@ -220,7 +220,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
      */
     private function get_actions( $item ) {
 
-        $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-edit-field' ) );
+        $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => $item['id'], 'from_group' => $item['group_id'] ), admin_url( 'users.php?page=wpum-edit-field' ) );
         echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__( 'Edit' ).'</a> ';
 
         // Display delete button if field can be deleted.

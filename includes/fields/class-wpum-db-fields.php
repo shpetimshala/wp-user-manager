@@ -49,6 +49,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'description'             => '%s',
 			'field_order'             => '%d',
 			'is_required'             => '%s',
+			'show_on_registration'    => '%s',
 			'can_delete'              => '%s',
 			'default_visibility'      => '%s',
 			'allow_custom_visibility' => '%s',
@@ -71,6 +72,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 			'description'             => '',
 			'field_order'             => false,
 			'is_required'             => false,
+			'show_on_registration'    => false,
 			'can_delete'              => true,
 			'default_visibility'      => 'public',
 			'allow_custom_visibility' => 'disallowed',
@@ -144,6 +146,30 @@ class WPUM_DB_Fields extends WPUM_DB {
 	public function can_delete( $field_id = '' ) {
 
 		return (bool) $this->get_column_by( 'id', 'can_delete', $field_id );
+
+	}
+
+	/**
+	 * Checks if a field can be displayed on the registration form.
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function __show_on_registration( $field_id = '' ) {
+
+		$pass = false;
+		
+		// Case 1 - check if gro
+		$case_1 = (bool) $this->get_column_by( 'id', 'show_on_registration', $field_id );
+	 	
+	 	// Case 2 -
+	 	$group_id = $this->get_column_by( 'id', 'group_id', $field_id );
+	 	$case_2 = WPUM()->field_groups->is_primary( $group_id );
+
+	 	if( $case_1 && $case_2 )
+	 		$pass = true;
+
+		return $pass;
 
 	}
 
@@ -230,6 +256,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 		description longtext NOT NULL,
 		field_order bigint(20) NOT NULL DEFAULT '0',
 		is_required tinyint(1) NOT NULL DEFAULT '0',
+		show_on_registration tinyint(1) NOT NULL DEFAULT '0',
 		can_delete tinyint(1) NOT NULL DEFAULT '1',
 		default_visibility varchar(150) NOT NULL DEFAULT 'public',
 		allow_custom_visibility varchar(150) NOT NULL DEFAULT 'disallowed',
@@ -238,7 +265,8 @@ class WPUM_DB_Fields extends WPUM_DB {
 		KEY group_id (group_id),
 		KEY field_order (field_order),
 		KEY can_delete (can_delete),
-		KEY is_required (is_required)
+		KEY is_required (is_required),
+		KEY show_on_registration (show_on_registration),
 		) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );
