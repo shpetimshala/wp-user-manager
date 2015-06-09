@@ -56,12 +56,20 @@ abstract class WPUM_Field_Type {
 	public $supports_multiple = true;
 
 	/**
-	 * If this is set, the editor will allow customization of primary field options.
+	 * If this is set, the editor will allow to decide whether this field can be displayed on registration form.
 	 *
 	 * @since 1.0.0
-	 * @var bool Can this field be added multiple times to a group?.
+	 * @var bool.
 	 */
-	public $primary_options = true;
+	public $set_registration = false;
+
+	/**
+	 * If this is set, the editor will allow to decide whether this field can change it's requirement setting.
+	 *
+	 * @since 1.0.0
+	 * @var bool.
+	 */
+	public $set_requirement = true;
 
 	/**
 	 * Class name.

@@ -68,6 +68,13 @@ class WPUM_Fields_Editor {
 	var $field = null;
 
 	/**
+	 * Holds the field type object.
+	 *
+	 * @since 1.0.0
+	 */
+	var $field_object = null;
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
@@ -94,6 +101,7 @@ class WPUM_Fields_Editor {
 		if( isset( $_GET['field'] ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit_field' ) {
 			$this->field_db = new WPUM_DB_Fields;
 			$this->field = $this->field_db->get( (int) $_GET['field'] );
+			$this->field_object = wpum_get_field_type_object( $this->field->type );
 		}
 
 		// loads metaboxes functions
@@ -306,14 +314,11 @@ class WPUM_Fields_Editor {
 	public function single_field_add_meta_box() {
 
 		// Add Field Requirement metabox
-		add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
-
-		// Add field options metabox
-		//if( wpum_field_type_exists( $this->field->type ) && wpum_field_type_has_options( $this->field->type ) )
-		//	add_meta_box( 'wpum_field_options', __( 'Settings' ), array( $this, 'field_settings' ), self::single_field_hook, 'normal' );
+		if( $this->field_object->set_requirement )
+			add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
 		// Add option to display on registration form if it's in primary group.
-		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) )
+		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration )
 			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
 	}
 
@@ -629,21 +634,6 @@ class WPUM_Fields_Editor {
 	}
 
 	/**
-	 * Render the options for the selected field.
-	 * 
-	 * @todo  to complete - this function does nothing now.
-	 * @access public
-	 * @return void
-	 */
-	public function field_settings() {
-
-		// Get field options
-		//$options = wpum_get_field_options( $this->field->type );
-		// To complete.
-
-	}
-
-	/**
 	 * Save the field to the database
 	 *
 	 * @access public
@@ -676,8 +666,14 @@ class WPUM_Fields_Editor {
 				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration'] : false
 			);
 
+			// Unset options from being saved if field type doesn't support them
+			if( ! $this->field_object->set_registration )
+				unset( $args['show_on_registration'] );
+			if( ! $this->field_object->set_requirement )
+				unset( $args['is_required'] );
+
 			// Allow plugins to extend the save process
-			do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id );
+			do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id, $this->field, $this->field_object );
 
 			// Save the field
 			if( WPUM()->fields->update( $field_id, $args ) ) {
