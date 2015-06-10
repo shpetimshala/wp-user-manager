@@ -351,7 +351,7 @@ class WPUM_Fields_Editor {
 
 		<p>
 			<span class="dashicons dashicons-info"></span>
-			<?php _e('Fields into this group can appear on the signup page.') ;?>
+			<?php _e('Fields into this group will appear on the signup page.') ;?>
 		</p>
 
 		<?php
