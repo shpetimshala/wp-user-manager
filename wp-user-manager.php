@@ -222,8 +222,6 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/filters.php';
 		// Plugin's actions
 		require_once WPUM_PLUGIN_DIR . 'includes/actions.php';
-		// Forms
-		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
 		// Shortcodes
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-shortcodes.php';
 		// Emails
@@ -244,7 +242,10 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/nickname.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/password.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/username.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/text.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/functions.php';
+		// Forms
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {

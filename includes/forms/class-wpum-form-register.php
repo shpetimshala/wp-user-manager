@@ -19,7 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class WPUM_Form_Register extends WPUM_Form {
 
+	/**
+	 * The name of the form
+	 */
 	public static $form_name = 'register';
+	
+	/**
+	 * Password Method
+	 */
 	public static $random_password = true;
 
 	/**
@@ -37,7 +44,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		if(wpum_get_option('custom_passwords')) :
 			
 			self::$random_password = false;
-			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_password_field' ), 10, 3 );
+			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 
 			// Add password meter field
 			if( wpum_get_option('display_password_meter_registration') )
@@ -50,12 +57,12 @@ class WPUM_Form_Register extends WPUM_Form {
 		endif;
 
 		// Validate Email Field
-		add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_email_field' ), 10, 3 );
+		add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_email_field' ), 10, 3 );
 
 		// Add honeypot spam field
 		if( wpum_get_option('enable_honeypot') ) :
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_honeypot_field' ) );
-			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
+			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_honeypot_field' ), 10, 3 );
 		endif;
 
 		// Add terms & conditions field
@@ -66,18 +73,17 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Add Role selection if enabled
 		if( wpum_get_option('allow_role_select') ) :
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_role_field' ) );
-			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_role_field' ), 10, 3 );
+			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_role_field' ), 10, 3 );
 			add_action( 'wpum_after_registration', array( __CLASS__, 'save_role' ), 10, 10 );
 		endif;
 		
 		// Exclude usernames if enabled
 		if( !empty( wpum_get_option('exclude_usernames') ) )
-			add_filter( 'wpum_validate_registration', array( __CLASS__, 'validate_username_field' ), 10, 3 );
+			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_username_field' ), 10, 3 );
 
 		// Store uploaded avatar
 		if( wpum_get_option('custom_avatars') && wpum_get_field_setting( 'user_avatar', 'show_on_signup' ) === true )
 			add_action( 'wpum_after_registration', array( __CLASS__, 'add_avatar' ), 10, 3 );
-
 	}
 
 	/**
@@ -96,155 +102,6 @@ class WPUM_Form_Register extends WPUM_Form {
 		self::$fields = array(
 			'register' => wpum_get_registration_fields()
 		);
-
-	}
-
-	/**
-	 * Get submitted fields values.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return $values array of data from the fields.
-	 */
-	protected static function get_posted_fields() {
-
-		// Get fields
-		self::get_registration_fields();
-
-		$values = array();
-
-		foreach ( self::$fields as $group_key => $group_fields ) {
-			foreach ( $group_fields as $key => $field ) {
-				// Get the value
-				$field_type = str_replace( '-', '_', $field['type'] );
-
-				if ( method_exists( __CLASS__, "get_posted_{$field_type}_field" ) ) {
-					$values[ $group_key ][ $key ] = call_user_func( __CLASS__ . "::get_posted_{$field_type}_field", $key, $field );
-				} else {
-					$values[ $group_key ][ $key ] = self::get_posted_field( $key, $field );
-				}
-
-				// Set fields value
-				self::$fields[ $group_key ][ $key ]['value'] = $values[ $group_key ][ $key ];
-			}
-		}
-
-		return $values;
-	}
-
-	/**
-	 * Goes through fields and sanitizes them.
-	 *
-	 * @access public
-	 * @param array|string $value The array or string to be sanitized.
-	 * @since 1.0.0
-	 * @return array|string $value The sanitized array (or string from the callback)
-	 */
-	public static function sanitize_posted_field( $value ) {
-		// Decode URLs
-		if ( is_string( $value ) && ( strstr( $value, 'http:' ) || strstr( $value, 'https:' ) ) ) {
-			$value = urldecode( $value );
-		}
-
-		// Santize value
-		$value = is_array( $value ) ? array_map( array( __CLASS__, 'sanitize_posted_field' ), $value ) : sanitize_text_field( stripslashes( trim( $value ) ) );
-
-		return $value;
-	}
-
-	/**
-	 * Get the value of submitted fields.
-	 *
-	 * @access protected
-	 * @param  string $key
-	 * @param  array $field
-	 * @since 1.0.0
-	 * @return array|string content of the submitted field
-	 */
-	protected static function get_posted_field( $key, $field ) {
-		return isset( $_POST[ $key ] ) ? self::sanitize_posted_field( $_POST[ $key ] ) : '';
-	}
-
-	/**
-	 * Get the value of a posted multiselect field
-	 * @param  string $key
-	 * @param  array $field
-	 * @return array
-	 */
-	protected static function get_posted_multiselect_field( $key, $field ) {
-		return isset( $_POST[ $key ] ) ? array_map( 'sanitize_text_field', $_POST[ $key ] ) : array();
-	}
-
-	/**
-	 * Get the value of a posted textarea field
-	 * @param  string $key
-	 * @param  array $field
-	 * @return string
-	 */
-	protected static function get_posted_textarea_field( $key, $field ) {
-		return isset( $_POST[ $key ] ) ? wp_kses_post( trim( stripslashes( $_POST[ $key ] ) ) ) : '';
-	}
-
-	/**
-	 * Get the value of a posted textarea field
-	 * @param  string $key
-	 * @param  array $field
-	 * @return string
-	 */
-	protected static function get_posted_wp_editor_field( $key, $field ) {
-		return self::get_posted_textarea_field( $key, $field );
-	}
-
-	/**
-	 * Get the value of a posted file field
-	 *
-	 * @since 1.0.0
-	 * @param  string $key
-	 * @param  array $field
-	 * @return string|array
-	 */
-	protected static function get_posted_file_field( $key, $field ) {
-		$file = wpum_trigger_upload_file( $key, $field );
-
-		if ( ! $file ) {
-			$file = '';
-		}
-
-		return $file;
-	}
-
-	/**
-	 * Validate the posted fields
-	 *
-	 * @return bool on success, WP_ERROR on failure
-	 */
-	protected static function validate_fields( $values ) {
-
-		foreach ( self::$fields as $group_key => $group_fields ) {
-			foreach ( $group_fields as $key => $field ) {
-				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
-					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field' ), $field['label'] ) );
-				}
-				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
-					
-					if( is_wp_error( $values[ $group_key ][ $key ] ) )
-						return new WP_Error( 'validation-error', $values[ $group_key ][ $key ]->get_error_message() );
-
-					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
-
-					if ( ! empty( $check_value ) ) {
-						foreach ( $check_value as $file_url ) {
-							if ( ( $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
-								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
-							}
-						}
-					}
-
-				}
-			}
-		}
-
-		return apply_filters( 'wpum_validate_registration', true, self::$fields, $values );
 
 	}
 
@@ -272,13 +129,13 @@ class WPUM_Form_Register extends WPUM_Form {
 		}
 
 		// Validate required
-		if ( is_wp_error( ( $return = self::validate_fields( $values ) ) ) ) {
+		if ( is_wp_error( ( $return = self::validate_fields( $values, self::$form_name ) ) ) ) {
 			self::add_error( $return->get_error_message() );
 			return;
 		}
 
 		// Let's do the registration
-		self::do_registration( $values['register']['username'], $values['register']['user_email'], $values );
+		//self::do_registration( $values['register']['username'], $values['register']['user_email'], $values );
 
 	}
 
