@@ -56,11 +56,11 @@ class WPUM_Form_Register extends WPUM_Form {
 			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_password' ), 10, 3 );
 
 			if( wpum_get_option('display_password_meter_registration') ) {
-				add_action( 'wpum_after_single_password_field', array( __CLASS__, 'add_psw_meter' ), 10, 2 );
+				add_action( 'wpum/form/register/after/field=password', array( __CLASS__, 'add_psw_meter' ), 10 );
 			}
 
 			if( wpum_get_option('login_after_registration') ) {
-				add_action( 'wpum_after_registration', array( __CLASS__, 'do_login' ), 11, 3 );
+				add_action( 'wpum/form/register/success', array( __CLASS__, 'do_login' ), 11, 3 );
 			}
 
 		}
@@ -101,7 +101,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			
 			add_action( 'wpum_get_registration_fields', array( __CLASS__, 'add_role' ) );
 			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_role' ), 10, 3 );
-			add_action( 'wpum_after_registration', array( __CLASS__, 'save_role' ), 10, 10 );
+			add_action( 'wpum/form/register/success', array( __CLASS__, 'save_role' ), 10, 10 );
 
 		}
 
@@ -116,7 +116,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		 * Store uploaded avatars into the database.
 		 */
 		if( wpum_get_option('custom_avatars') && WPUM()->fields->show_on_registration( 'user_avatar' ) ) {
-			add_action( 'wpum_after_registration', array( __CLASS__, 'save_avatar' ), 10, 3 );
+			add_action( 'wpum/form/register/success', array( __CLASS__, 'save_avatar' ), 10, 3 );
 		}
 
 	}
@@ -180,7 +180,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function add_psw_meter( $form, $field ) {
+	public static function add_psw_meter( $field ) {
 		echo '<span id="password-strength">' . __( 'Strength Indicator' ) . '</span>';		
 	}
 
@@ -421,7 +421,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		}
 
 		// Let's do the registration
-		//self::do_registration( $values['register']['username'], $values['register']['user_email'], $values );
+		self::do_registration( $values['register']['username'], $values['register']['user_email'], $values );
 
 	}
 
@@ -453,15 +453,16 @@ class WPUM_Form_Register extends WPUM_Form {
 		} else {
 
 			// Send notification if password is manually added by the user.
-			if(!self::$random_password):
+			if( ! self::$random_password ):
 				wp_new_user_notification( $do_user, $pwd );
 			endif;
 
-			self::add_confirmation( apply_filters( 'wpum_registration_success_message', __( 'Registration complete.' ) ) );
+			self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.' ) ) );
 
 			// Add ability to extend registration process.
 			$user_id = $do_user;
-			do_action('wpum_after_registration', $user_id, $values );
+			
+			do_action( "wpum/form/register/success" , $user_id, $values );
 
 		}
 

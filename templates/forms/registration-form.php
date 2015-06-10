@@ -22,9 +22,9 @@
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key ); ?>">
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
-					<?php do_action( "wpum_before_single_{$field['type']}_field", $form, $field ); ?>
+					<?php do_action( "wpum/form/{$form}/before/field={$key}", $field ); ?>
 					<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
-					<?php do_action( "wpum_after_single_{$field['type']}_field", $form, $field ); ?>
+					<?php do_action( "wpum/form/{$form}/after/field={$key}", $field ); ?>
 				</div>
 			</fieldset>
 		<?php endforeach; ?>
