@@ -12,11 +12,11 @@
 ?>
 <div id="wpum-form-register-<?php echo esc_attr( $atts['form_id'] );?>" class="wpum-registration-form-wrapper">
 
-	<?php do_action( "wpum/templates/before/form={$form}", $atts ); ?>
+	<?php do_action( 'wpum_before_register_form_template', $atts ); ?>
 
 	<form action="#" method="post" id="wpum-register-<?php echo esc_attr( $atts['form_id'] );?>" class="wpum-registration-form" name="wpum-register-<?php echo esc_attr( $atts['form_id'] );?>" enctype="multipart/form-data">
 
-		<?php do_action( "wpum/templates/top/inside/form={$form}", $atts ); ?>
+		<?php do_action( 'wpum_before_inside_register_form_template', $atts ); ?>
 
 		<?php foreach ( $register_fields as $key => $field ) : ?>
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key ); ?>">
@@ -29,7 +29,7 @@
 			</fieldset>
 		<?php endforeach; ?>
 
-		<?php do_action( "wpum/templates/bottom/inside/form={$form}", $atts ); ?>
+		<?php do_action( 'wpum_after_inside_register_form_template', $atts ); ?>
 
 		<?php wp_nonce_field( $form ); ?>
 
@@ -40,6 +40,6 @@
 
 	</form>
 
-	<?php do_action( "wpum/templates/after/form={$form}", $atts ); ?>
+	<?php do_action( 'wpum_after_register_form_template', $atts ); ?>
 
 </div>

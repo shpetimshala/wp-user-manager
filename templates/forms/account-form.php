@@ -13,11 +13,11 @@
 
 <div id="wpum-form-profile" class="wpum-profile-form-wrapper">
 
-	<?php do_action( "wpum/templates/before/form={$form}", $atts ); ?>
+	<?php do_action( 'wpum_before_account_form', $atts ); ?>
 
 	<form action="#" method="post" id="wpum-profile" class="wpum-profile-form" name="wpum-profile" enctype="multipart/form-data">
 
-		<?php do_action( "wpum/templates/top/inside/form={$form}", $atts ); ?>
+		<?php do_action( 'wpum_top_account_form', $atts ); ?>
 
 		<!-- Start Name Fields -->
 		<?php foreach ( $fields as $key => $field ) : ?>
@@ -32,7 +32,7 @@
 		<?php endforeach; ?>
 		<!-- End Name Fields -->
 
-		<?php do_action( "wpum/templates/bottom/inside/form={$form}", $atts ); ?>
+		<?php do_action( 'wpum_bottom_account_form', $atts ); ?>
 
 		<?php wp_nonce_field( $form ); ?>
 
@@ -44,6 +44,6 @@
 
 	</form>
 
-	<?php do_action( "wpum/templates/after/form={$form}", $atts ); ?>
+	<?php do_action( 'wpum_after_account_form', $atts ); ?>
 
 </div>
