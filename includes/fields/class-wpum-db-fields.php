@@ -152,6 +152,18 @@ class WPUM_DB_Fields extends WPUM_DB {
 	}
 
 	/**
+	 * Checks if a field is visible into the registration form
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	*/
+	public function show_on_registration( $field_meta = '' ) {
+
+		return (bool) $this->get_column_by( 'show_on_registration', 'meta', $field_meta );
+
+	}
+
+	/**
 	 * Get all fields of a group
 	 *
 	 * @access  public
