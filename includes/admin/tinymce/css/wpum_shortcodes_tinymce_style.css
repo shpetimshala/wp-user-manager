@@ -37,3 +37,9 @@ i.wpum-shortcodes-icon:before {
 body .mce-window .mce-container-body.mce-abs-layout {
 	overflow-y: hidden;
 }
+
+td.page-title span.post-state i.wpum-shortcodes-icon:before {
+	font-size: 14px;
+	font-weight: normal;
+	color: #ADADAD;
+}
