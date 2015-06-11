@@ -159,16 +159,6 @@ function wpum_get_email( $email_id ) {
 }
 
 /**
- * Sort default fields table in the admin panel
- *
- * @since 1.0.0
- * @return array of all the fields correctly ordered.
- */
-function wpum_sort_default_fields_table( $a, $b ) {
-	return ( $a['priority'] < $b['priority'] ) ? -1 : 1;
-}
-
-/**
  * Get a list of available permalink structures.
  *
  * @since 1.0.0
@@ -766,46 +756,20 @@ function wpum_account_tab_exists( $tab ) {
 }
 
 /**
- * Get a given field by meta.
+ * Get the login redirect url
  *
  * @since 1.0.0
- * @param string $meta meta parameter from an array in wpum_default_fields_list() function.
- * @return array $custom_field
+ * @return mixed
  */
-function wpum_get_field_by_meta( $meta = null ) {
+function wpum_get_login_redirect_url() {
 
-	$all_fields   = wpum_default_fields_list();
-	$custom_field = array();
+	$url = site_url( $_SERVER['REQUEST_URI'] );
 
-	if( $meta )
-		$custom_field = $all_fields[ $meta ];
-
-	return $custom_field;
-
-}
-
-/**
- * Get the value of an option of a field.
- *
- * @since 1.0.0
- * @param string $field_id id/key of the field.
- * @param string $option_id id/key of an option of a field.
- * @return mixed $value the value of the option saved into the database or default value from wpum_default_fields_list() function.
- */
-function wpum_get_field_setting( $field_id, $option_id ) {
-
-	$value         = '';
-	$saved_fields  = get_option( 'wpum_custom_fields' );
-	$default_field = wpum_get_field_by_meta( $field_id );
-
-	if( $option_id == 'is_required' )
-		$option_id = 'required';
-
-	if( $saved_fields ) {
-		$value = $saved_fields[ $field_id ][ $option_id ];
-	} else {
-		$value = $default_field[ $field_id ][ $option_id ];
+	$selected_page = wpum_get_option( 'login_redirect' );
+	if( $selected_page ) {
+		$url = get_permalink( $selected_page );
 	}
 
-	return $value;
+	return esc_url( $url );
+
 }

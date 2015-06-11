@@ -109,7 +109,7 @@ if ( ! function_exists( 'wpum_login_form' ) ) :
 
 		$defaults = array(
 			'echo'           => true,
-			'redirect'       => esc_url( get_permalink() ),
+			'redirect'       => wpum_get_login_redirect_url(),
 			'form_id'        => null,
 			'label_username' => wpum_get_username_label(),
 			'label_password' => __( 'Password' ),
