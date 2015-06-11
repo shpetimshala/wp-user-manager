@@ -440,8 +440,10 @@ class WPUM_Form_Profile extends WPUM_Form {
 		// Display template
 		if( is_user_logged_in() ) :
 
-			// Show errors from fields
-			self::show_errors();
+			if( isset( $_POST['submit_wpum_profile'] ) ) {
+				// Show errors from fields
+				self::show_errors();
+			}
 			
 			get_wpum_template( 'account.php', 
 				array(
