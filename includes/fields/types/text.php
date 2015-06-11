@@ -29,7 +29,7 @@ class WPUM_Field_Type_Text extends WPUM_Field_Type {
 		parent::__construct();
 
 		// Label of this field type
-		$this->name             = _x( 'Username', 'field type name', 'wpum' );
+		$this->name             = _x( 'Text', 'field type name', 'wpum' );
 		// Field type name
 		$this->type             = 'text';
 		// Class of this field

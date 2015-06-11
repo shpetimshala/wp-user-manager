@@ -156,3 +156,68 @@ function wpum_get_registration_fields() {
 	return apply_filters( 'wpum_get_registration_fields', $fields );
 
 }
+
+/**
+ * Get the list of account fields formatted into an array.
+ * The format of the array is used by the forms.
+ *
+ * @since 1.0.0
+ * @return array - list of fields.
+ */
+function wpum_get_account_fields() {
+
+	// Get fields from the database
+	$primary_group = WPUM()->field_groups->get_group_by('primary');
+
+	$args = array(
+		'id'           => $primary_group->id,
+		'array'        => true,
+		'number'       => -1,
+		'orderby'      => 'field_order',
+		'order'        => 'ASC'
+	);
+
+	$data = WPUM()->fields->get_by_group( $args );
+
+	// Manipulate fields list into a list formatted for the forms API.
+	$fields = array();
+	
+	// Loop through the found fields
+	foreach ( $data as $key => $field ) {
+		
+		// Adjust field type parameter if no field type template is defined.
+		switch ( $field['type'] ) {
+			case 'username':
+				$field['type'] = 'text';
+				break;
+			case 'avatar':
+				$field['type'] = 'file';
+				break;
+		}
+
+		$fields[ $field['meta'] ] = array(
+			'priority'    => $field['field_order'],
+			'label'       => $field['name'],
+			'type'        => $field['type'],
+			'meta'        => $field['meta'],
+			'required'    => $field['is_required'],
+			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
+			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
+			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
+		);
+
+	}
+
+	// Remove password field from here
+	unset( $fields['password'] );
+
+	// The username cannot be changed, let's remove that field since it's useless
+	unset( $fields['username'] );
+	
+	// Remove the user avatar field if not enabled
+	if( ! wpum_get_option( 'custom_avatars' ) )
+		unset( $fields['user_avatar'] );
+
+	return apply_filters( 'wpum_get_account_fields', $fields );
+
+}
