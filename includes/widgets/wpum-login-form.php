@@ -51,14 +51,6 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'   => __( 'Redirect' ),
-				'desc'   => __('Enter the url where you wish to redirect users after login. Leave blank if not needed, will refresh current page.'),
-				'id'     => 'redirect',
-				'type'   => 'text',
-				'class'  => 'widefat',
-				'filter' => 'strip_tags|esc_attr|esc_url'
-			),
-			array(
 				'name'     => __( 'Display login link' ),
 				'id'       => 'login_link',
 				'type'     =>'checkbox',
@@ -117,9 +109,7 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 		// Default form settings
 		$settings = array();
 
-		// Set redirect url if not blank
-		if( !empty( $instance['redirect'] ) )
-			$settings['redirect'] = $instance['redirect'];
+		$settings['redirect'] = wpum_get_login_redirect_url();
 
 		$settings['psw_link']      = false;
 		$settings['login_link']    = false;
