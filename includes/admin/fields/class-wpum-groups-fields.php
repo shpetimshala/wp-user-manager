@@ -220,13 +220,13 @@ class WPUM_Groups_Fields extends WP_List_Table {
      */
     private function get_actions( $item ) {
 
-        $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => $item['id'], 'from_group' => $item['group_id'] ), admin_url( 'users.php?page=wpum-edit-field' ) );
+        $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => sanitize_key( $item['id'] ), 'from_group' => sanitize_key( $item['group_id'] ) ), admin_url( 'users.php?page=wpum-edit-field' ) );
         echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__( 'Edit' ).'</a> ';
 
         // Display delete button if field can be deleted.
         if( $item['can_delete'] ) {
             
-            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => $item['id'] ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
+            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => sanitize_key( $item['id'] ) ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
             echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete' ).'</a> ';
 
         }
@@ -246,7 +246,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
         // Add id
         $row_id = ' id="'.$item['name'].'"';
  
-        echo '<tr' . $row_class . $row_id . ' data-priority="' .$item['field_order']. '" data-field-id="' .$item['id']. '">';
+        echo '<tr' . $row_class . $row_id . ' data-priority="' .$item['field_order']. '" data-field-id="' . sanitize_key( $item['id'] ). '">';
         $this->single_row_columns( $item );
         echo '</tr>';
     }

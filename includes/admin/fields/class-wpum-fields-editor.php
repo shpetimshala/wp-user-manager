@@ -579,8 +579,8 @@ class WPUM_Fields_Editor {
 
 		$description_settings = array( 
 			'media_buttons' => false,
-			'teeny' => true,
-			'quicktags' => false,
+			'teeny'         => true,
+			'quicktags'     => false,
 			'textarea_rows' => 3
 		);
 
