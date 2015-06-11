@@ -136,11 +136,12 @@ function wpum_get_registration_fields() {
 		}
 
 		$fields[ $field['meta'] ] = array(
-			'priority'       => $field['field_order'],
-			'label'          => $field['name'],
-			'type'           => $field['type'],
-			'meta'           => $field['meta'],
-			'required'       => $field['is_required'],
+			'priority'    => $field['field_order'],
+			'label'       => $field['name'],
+			'type'        => $field['type'],
+			'meta'        => $field['meta'],
+			'required'    => $field['is_required'],
+			'description' => $field['description'],
 		);
 
 	}
@@ -207,6 +208,7 @@ function wpum_get_account_fields() {
 			'type'        => $field['type'],
 			'meta'        => $field['meta'],
 			'required'    => $field['is_required'],
+			'description' => $field['description'],
 			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
 			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
