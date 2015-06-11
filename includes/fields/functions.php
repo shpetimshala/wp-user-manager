@@ -255,3 +255,136 @@ function wpum_get_field_input_html( $key, $field ) {
 	}
 
 }
+
+/**
+ * Wrapper function to install groups database table and install primary group.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_install_groups() {
+
+	// Create database table for field groups
+	@WPUM()->field_groups->create_table();
+	
+	// Add primary group
+	$field_groups_args = array(
+		'id'         => 1,
+		'name'       => 'Primary',
+		'can_delete' => false,
+		'is_primary' => true
+	);
+	WPUM()->field_groups->add( $field_groups_args );
+
+}
+
+/**
+ * Wrapper function to install fields database table and install primary fields.
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function wpum_install_fields() {
+
+	// Get primary group id
+	$primary_group = WPUM()->field_groups->get_group_by( 'primary' );
+
+	// Install fields
+	$fields = array(
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'username',
+			'name'                    => 'Username',
+			'is_required'             => true,
+			'show_on_registration'    => true,
+			'can_delete'              => false,
+			'meta'                    => 'username',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'email',
+			'name'                    => 'Email',
+			'is_required'             => true,
+			'show_on_registration'    => true,
+			'can_delete'              => false,
+			'meta'                    => 'user_email',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'password',
+			'name'                    => 'Password',
+			'is_required'             => true,
+			'show_on_registration'    => true,
+			'can_delete'              => false,
+			'meta'                    => 'password',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'text',
+			'name'                    => 'First Name',
+			'is_required'             => false,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'first_name',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'text',
+			'name'                    => 'Last Name',
+			'is_required'             => false,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'last_name',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'nickname',
+			'name'                    => 'Nickname',
+			'is_required'             => true,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'nickname',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'display_name',
+			'name'                    => 'Display Name',
+			'is_required'             => true,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'display_name',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'text',
+			'name'                    => 'Website',
+			'is_required'             => false,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'user_url',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'textarea',
+			'name'                    => 'Description',
+			'is_required'             => false,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'description',
+		),
+		array(
+			'group_id'                => $primary_group->id,
+			'type'                    => 'avatar',
+			'name'                    => 'Profile Picture',
+			'is_required'             => false,
+			'show_on_registration'    => false,
+			'can_delete'              => false,
+			'meta'                    => 'user_avatar',
+		)
+	);
+	
+	foreach ( $fields as $field ) {
+		WPUM()->fields->add( $field );
+	}
+
+}

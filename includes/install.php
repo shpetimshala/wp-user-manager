@@ -34,12 +34,14 @@ function wpum_install() {
 	}
 
 	// Clear the permalinks
-	flush_rewrite_rules( true );
+	flush_rewrite_rules();
 
 	// Setup default emails content
 	$default_emails = array();
+	
 	// Delete the option
 	delete_option( 'wpum_emails' );
+	
 	// Get all registered emails
 	wpum_register_emails();
 
@@ -52,6 +54,12 @@ function wpum_install() {
 	wpum_update_option( 'members_can_view_profiles', true );
 	update_option( 'users_can_register', true ); // Enable registrations.
 	update_option( 'wpum_permalink', 'user_id' ); // Set default user permalinks
+
+	// Create groups table and 1st group
+	wpum_install_groups();
+
+	// Create fields table and primary fields
+	wpum_install_fields();
 
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );
