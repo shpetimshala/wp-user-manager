@@ -460,7 +460,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			if( array_key_exists( 'last_name' , $values['register'] ) )
 				update_user_meta( $user_id, 'last_name', $values['register']['last_name'] );
 			if( array_key_exists( 'user_url' , $values['register'] ) )
-				wp_update_user( array( 'ID' => $user_id, 'user_url' => $values['register']['user_url'] );
+				wp_update_user( array( 'ID' => $user_id, 'user_url' => $values['register']['user_url'] ) );
 			if( array_key_exists( 'description' , $values['register'] ) )
 				update_user_meta( $user_id, 'description', $values['register']['description'] );
 
