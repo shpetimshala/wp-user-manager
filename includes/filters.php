@@ -226,7 +226,7 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 
 	// Check whether a sorting method is set from frontend
 	if( isset( $_GET['sort'] ) && array_key_exists( $_GET['sort'] , wpum_get_directory_sorting_methods() ) )
-		$sorting_method = $_GET['sort'];
+		$sorting_method = sanitize_key( $_GET['sort'] );
 
 	switch ( $sorting_method ) {
 		case 'user_nicename':
@@ -270,7 +270,7 @@ function wpum_directory_pre_set_amount( $args, $directory_id ) {
 	$can_sort = wpum_directory_display_amount_sorter( $directory_id );
 
 	if( $can_sort && isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) )
-		$args['number'] = $_GET['amount'];
+		$args['number'] = sanitize_key( $_GET['amount'] );
 
 	return $args;
 
@@ -327,7 +327,7 @@ add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
  */
 function wpum_highlight_pages( $post_states, $post ) {
 
-	$icon = '<i class="wpum-shortcodes-icon"></i>';
+	$icon = '<i class="wpum-shortcodes-icon" title="'.__( 'WPUM Page' ).'"></i>';
 
 	if( wpum_get_core_page_id( 'login' ) == $post->ID ) {
 		$post_states['page_for_login'] = $icon;
