@@ -452,6 +452,18 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		} else {
 
+			$user_id = $do_user;
+			
+			// Set some meta if available
+			if( array_key_exists( 'first_name' , $values['register'] ) )
+				update_user_meta( $user_id, 'first_name', $values['register']['first_name'] );
+			if( array_key_exists( 'last_name' , $values['register'] ) )
+				update_user_meta( $user_id, 'last_name', $values['register']['last_name'] );
+			if( array_key_exists( 'user_url' , $values['register'] ) )
+				wp_update_user( array( 'ID' => $user_id, 'user_url' => $values['register']['user_url'] );
+			if( array_key_exists( 'description' , $values['register'] ) )
+				update_user_meta( $user_id, 'description', $values['register']['description'] );
+
 			// Send notification if password is manually added by the user.
 			if( ! self::$random_password ):
 				wp_new_user_notification( $do_user, $pwd );
@@ -459,9 +471,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.' ) ) );
 
-			// Add ability to extend registration process.
-			$user_id = $do_user;
-			
+			// Add ability to extend registration process.				
 			do_action( "wpum/form/register/success" , $user_id, $values );
 
 		}
