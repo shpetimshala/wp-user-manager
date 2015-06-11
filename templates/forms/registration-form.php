@@ -23,7 +23,7 @@
 				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum/form/{$form}/before/field={$key}", $field ); ?>
-					<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
+					<?php echo wpum_get_field_input_html( $key, $field ); ?>
 					<?php do_action( "wpum/form/{$form}/after/field={$key}", $field ); ?>
 				</div>
 			</fieldset>

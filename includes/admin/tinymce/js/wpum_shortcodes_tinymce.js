@@ -45,12 +45,6 @@
 										},
 										{
 											type: 'textbox', 
-											name: 'redirect', 
-											label: 'Redirect URL (optional)',
-											value: ''
-										},
-										{
-											type: 'textbox', 
 											name: 'label_username', 
 											label: 'Username label (optional)',
 											value: ''
@@ -99,7 +93,7 @@
 										}
 									],
 									onsubmit: function( e ) {
-										editor.insertContent( '[wpum_login_form id="' + e.data.id + '" redirect="' + e.data.redirect + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" profile="' + e.data.profile + '" login_link="' + e.data.login_link + '" psw_link="' + e.data.psw_link + '" register_link="' + e.data.register_link + '" ]');
+										editor.insertContent( '[wpum_login_form id="' + e.data.id + '" label_username="' + e.data.label_username + '" label_password="' + e.data.label_password + '" label_remember="' + e.data.label_remember + '" label_log_in="' + e.data.label_log_in + '" profile="' + e.data.profile + '" login_link="' + e.data.login_link + '" psw_link="' + e.data.psw_link + '" register_link="' + e.data.register_link + '" ]');
 									}
 								});
 							}

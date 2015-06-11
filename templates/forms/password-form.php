@@ -53,7 +53,7 @@ if ( isset( $_GET['password-reset'] ) ) {
 				<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
 					<label for="<?php esc_attr_e( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
-						<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
+						<?php echo wpum_get_field_input_html( $key, $field ); ?>
 					</div>
 				</fieldset>
 			<?php endforeach; ?>

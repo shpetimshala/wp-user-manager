@@ -54,7 +54,6 @@ class WPUM_Shortcodes {
 
 		extract( shortcode_atts( array(
 			'id'             => '',
-			'redirect'       => '',
 			'label_username' => '',
 			'label_password' => '',
 			'label_remember' => '',
@@ -63,6 +62,8 @@ class WPUM_Shortcodes {
 			'psw_link'       => '',
 			'register_link'  => ''
 		), $atts ) );
+
+		$redirect = get_permalink( wpum_get_option('login_redirect') );
 
 		// Set default values if options missing
 		if(empty($id))
@@ -80,7 +81,7 @@ class WPUM_Shortcodes {
 
 		$args = array(
 			'echo'           => true,
-			'redirect'       => esc_url($redirect),
+			'redirect'       => esc_url( $redirect ),
 			'form_id'        => esc_attr($id),
 			'label_username' => esc_attr($label_username),
 			'label_password' => esc_attr($label_password),

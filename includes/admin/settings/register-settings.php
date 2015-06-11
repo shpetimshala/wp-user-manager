@@ -428,6 +428,13 @@ function wpum_get_registered_settings() {
 		),
 		'redirects' => apply_filters( 'wpum_settings_redirects',
 			array(
+				'login_redirect' => array(
+					'id'      => 'login_redirect',
+					'name'    => __( 'Login redirect:', 'wpum' ),
+					'desc'    => __('Select the page where you want to redirect users after they login. If empty will return to the current page.'),
+					'type'    => 'select',
+					'options' => wpum_get_pages()
+				),
 				'logout_redirect' => array(
 					'id'      => 'logout_redirect',
 					'name'    => __( 'Logout redirect:', 'wpum' ),
