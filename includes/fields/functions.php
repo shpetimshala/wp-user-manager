@@ -227,3 +227,29 @@ function wpum_get_account_fields() {
 	return apply_filters( 'wpum_get_account_fields', $fields );
 
 }
+
+/**
+ * Displays the html of a field within a form.
+ *
+ * @since 1.0.0
+ * @return mixed
+ */
+function wpum_get_field_input_html( $key, $field ) {
+
+	if( wpum_field_type_exists( $field['type'] ) ) {
+
+		$object = wpum_get_field_type_object( $field['type'] );
+
+		if ( method_exists( $object->class, "input_html" ) ) {
+			echo call_user_func( $object->class . "::input_html", $key, $field );
+		} else {
+			get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) );
+		}
+
+	} else {
+
+		echo __( 'This field type has no output' );
+
+	}
+
+}
