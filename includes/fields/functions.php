@@ -190,6 +190,12 @@ function wpum_get_account_fields() {
 			case 'username':
 				$field['type'] = 'text';
 				break;
+			case 'nickname':
+				$field['type'] = 'text';
+				break;
+			case 'display_name':
+				$field['type'] = 'select';
+				break;
 			case 'avatar':
 				$field['type'] = 'file';
 				break;

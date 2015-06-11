@@ -34,19 +34,20 @@ class WPUM_Form_Profile extends WPUM_Form {
 		add_action( 'wp', array( __CLASS__, 'process' ) );
 
 		// Set values to the fields
-		if( ! is_admin() ) :
+		if( ! is_admin() ) {
 			
 			self::$user = wp_get_current_user();
 			add_filter( 'wpum_profile_field_value', array( __CLASS__, 'set_fields_values' ), 10, 3 );
 			add_filter( 'wpum_profile_field_options', array( __CLASS__, 'set_fields_options' ), 10, 3 );
-			add_filter( 'wpum_account_update_validation', array( __CLASS__, 'validate_email_field' ), 10, 3 );
-			add_filter( 'wpum_account_update_validation', array( __CLASS__, 'validate_nickname' ), 10, 3 );
+			add_filter( 'wpum/form/validate=profile', array( __CLASS__, 'validate_email' ), 10, 3 );
+			add_filter( 'wpum/form/validate=profile', array( __CLASS__, 'validate_nickname' ), 10, 3 );
 		
-		endif;
+		}
 
 		// Store uploaded avatar
-		if( wpum_get_option( 'custom_avatars' ) )
+		if( wpum_get_option( 'custom_avatars' ) ) {
 			add_action( 'wpum_after_user_update', array( __CLASS__, 'add_avatar' ), 10, 3 );
+		}
 
 	}
 
@@ -218,7 +219,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function validate_email_field( $passed, $fields, $values ) {
+	public static function validate_email( $passed, $fields, $values ) {
 
 		$email = $values['profile'][ 'user_email' ];
 
@@ -285,7 +286,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		}
 
 		// Validate required
-		if ( is_wp_error( ( $return = self::validate_fields( $values ) ) ) ) {
+		if ( is_wp_error( ( $return = self::validate_fields( $values, self::$form_name ) ) ) ) {
 			self::add_error( $return->get_error_message() );
 			return;
 		}

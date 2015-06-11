@@ -239,10 +239,13 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/avatar.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/display_name.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/email.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/file.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/nickname.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/password.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/select.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/username.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/text.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/textarea.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/functions.php';
 		// Forms
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
