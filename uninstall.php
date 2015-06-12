@@ -39,3 +39,7 @@ delete_option( 'wpum_settings' );
 delete_option( 'wpum_emails' );
 delete_option( 'wpum_permalink' );
 delete_option( 'wpum_custom_fields' );
+
+// Remove all database tables
+$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "wpum_fields" );
+$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "wpum_field_groups" );
