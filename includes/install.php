@@ -64,6 +64,9 @@ function wpum_install() {
 	// Create fields table and primary fields
 	wpum_install_fields();
 
+	// Store plugin installation date
+    add_option( 'wpum_activation_date', strtotime( "now" ) );
+
 	// Add Upgraded From Option
 	$current_version = get_option( 'wpum_version' );
 	if ( $current_version ) {
