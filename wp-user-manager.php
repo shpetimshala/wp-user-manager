@@ -274,6 +274,10 @@ class WP_User_Manager {
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
+
+			// Load Addons Page
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/addons.php';
+
 		}
 
 		// Directory for WPUM

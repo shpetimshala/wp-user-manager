@@ -44,3 +44,12 @@ td.page-title span.post-state i.wpum-shortcodes-icon:before {
 	color: #ADADAD;
 	font-style: normal;
 }
+
+.wpum-addons {
+	padding: 3px 6px;
+	border-radius: 2px;
+	color: #0073aa;
+  	background: #e0e0e0;
+	border-radius: 3px;
+	font-weight: bold;
+}
