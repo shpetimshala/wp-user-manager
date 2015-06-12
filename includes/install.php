@@ -33,8 +33,8 @@ function wpum_install() {
 		wp_die( sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.'), 'http://www.wpupdatephp.com/contact-host/' ) . '<br/><br/>' . '<small><a href="'.admin_url().'">'.__('Back to your website.').'</a></small>' );
 	}
 
-	// Clear the permalinks
-	flush_rewrite_rules();
+	// Install default pages
+	wpum_generate_pages();
 
 	// Setup default emails content
 	$default_emails = array();
@@ -54,6 +54,9 @@ function wpum_install() {
 	wpum_update_option( 'members_can_view_profiles', true );
 	update_option( 'users_can_register', true ); // Enable registrations.
 	update_option( 'wpum_permalink', 'user_id' ); // Set default user permalinks
+
+	// Clear the permalinks
+	flush_rewrite_rules();
 
 	// Create groups table and 1st group
 	wpum_install_groups();
