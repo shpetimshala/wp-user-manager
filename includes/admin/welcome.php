@@ -191,7 +191,6 @@ class WPUM_Getting_Started {
 					<div class="welcome-panel-column-container">
 						<div class="welcome-panel-column">
 							<h4><?php _e( 'Configure WP User Manager' );?></h4>
-							<a class="button button-primary button-hero" href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=general&wpum_action=install_pages' ); ?>"><?php _e('Install required pages'); ?></a>
 							<ul>
 								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[password_strength]" class="welcome-icon dashicons-lock" target="_blank"><?php _e('Strengthen your passwords'); ?></a></li>
 								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[login_method]" class="welcome-icon dashicons-admin-network" target="_blank"><?php _e('Setup login method'); ?></a></li>
@@ -199,10 +198,9 @@ class WPUM_Getting_Started {
 							</ul>
 						</div>
 						<div class="welcome-panel-column">
-							<h4><?php _e( 'Administration Tools' ); ?></h4>
 							<ul>
 								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=profile' ); ?>" class="welcome-icon dashicons-admin-users" target="_blank"><?php _e('Customize profiles'); ?></a></li>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-custom-fields-editor' ); ?>" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields'); ?></a></li>
 								<li><a href="<?php echo admin_url( 'edit.php?post_type=wpum_directory' ); ?>" class="welcome-icon dashicons-groups" target="_blank"><?php _e('Create user directories'); ?></a></li>
 							</ul>
 						</div>
