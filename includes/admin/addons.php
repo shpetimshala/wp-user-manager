@@ -21,17 +21,7 @@ class WPUM_Addons {
 	/**
 	 * API URL
 	 */
-	protected $api = 'http://dev:8888/wpusermanager/edd-api/products/';
-
-	/**
-	 * API KEY
-	 */
-	protected $api_key = '0537d69e173c5033aa5c1ca324074d11';
-
-	/**
-	 * API Token
-	 */
-	protected $token = '0f61d70069c523d44b05772dc3ba22f5';
+	protected $api = 'http://dev:8888/wpum/edd-api/products/';
 
 	/**
 	 * __construct function.
@@ -40,15 +30,6 @@ class WPUM_Addons {
 	 * @return void
 	 */
 	public function __construct() {
-
-		// Setup the api url.
-		$this->api = add_query_arg( 
-			array( 
-				'key'   => $this->api_key,
-				'token' => $this->token
-			),
-			$this->api
-		);
 
 		add_filter( 'install_plugins_tabs', array( $this, 'wpum_add_addon_tab' ) );
 		add_action( 'install_plugins_wpum_addons', array( $this, 'wpum_addons_page' ) );
