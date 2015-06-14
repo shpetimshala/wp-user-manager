@@ -21,7 +21,7 @@ class WPUM_Addons {
 	/**
 	 * API URL
 	 */
-	protected $api = 'http://dev:8888/wpum/edd-api/products/';
+	protected $api = 'http://wpusermanager.com/edd-api/products/';
 
 	/**
 	 * All addons
@@ -39,7 +39,7 @@ class WPUM_Addons {
 		if( is_admin() && isset( $_GET['tab'] ) && $_GET['tab'] == 'wpum_addons' ) {
 
 			// Get the transient
-			$cached_feed = get_transient( 'wpum_addons_feed1' );
+			$cached_feed = get_transient( 'wpum_addons_feed' );
 
 			// Check if feed exist -
 			// if feed exists get content from cached feed.
@@ -55,7 +55,7 @@ class WPUM_Addons {
 				if ( ! is_wp_error( $feed ) ) {
 
 					$feed_content = wp_remote_retrieve_body( $feed );
-					set_transient( 'wpum_addons_feed1', $feed_content, 3600 );
+					set_transient( 'wpum_addons_feed', $feed_content, 3600 );
 					$this->addons = json_decode( $feed_content );
 
 				}
@@ -128,16 +128,16 @@ class WPUM_Addons {
 
 		echo '<div class="plugin-card">';
 			echo '<div class="plugin-card-top">';
-				echo '<a href="'.$addon->link.'" target="_blank" class="thickbox plugin-icon"><img src=""></a>';
+				echo '<a href="'.$addon->link.'" target="_blank" class="plugin-icon"><img src="'. $addon->thumbnail .'"></a>';
 				echo '<div class="name column-name" style="margin-right:0px">';
-					echo '<h4><a href="'.$addon->link.'" target="_blank" class="thickbox">'. $addon->title .'</a></h4>';
+					echo '<h4><a href="'.$addon->link.'" target="_blank">'. $addon->title .'</a></h4>';
 				echo '</div>';
-				echo '<div class="desc column-description">';
-					echo '<p>'.$addon->content.'</p>';
+				echo '<div class="desc column-description" style="margin-right:0px">';
+					echo '<p>'. wp_trim_words( $addon->content, 35 ) .'</p>';
 				echo '</div>';
 			echo '</div>';
 			echo '<div class="plugin-card-bottom">';
-				echo '<a target="_blank" href="'.$addon->link.'" class="button-primary" style="display:block; text-align:center;">'.__('View More Info').'</a>';
+				echo '<a target="_blank" href="'.$addon->link.'" class="button" style="display:block; text-align:center;">'.__('Read More').'</a>';
 			echo '</div>';
 		echo '</div>';
 
