@@ -24,12 +24,45 @@ class WPUM_Addons {
 	protected $api = 'http://dev:8888/wpum/edd-api/products/';
 
 	/**
+	 * All addons
+	 */
+	var $addons = null;
+
+	/**
 	 * __construct function.
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function __construct() {
+
+		if( is_admin() && isset( $_GET['tab'] ) && $_GET['tab'] == 'wpum_addons' ) {
+
+			// Get the transient
+			$cached_feed = get_transient( 'wpum_addons_feed1' );
+
+			// Check if feed exist -
+			// if feed exists get content from cached feed.
+			if ($cached_feed) {
+				
+				$this->addons = json_decode( $cached_feed );
+
+			// Feed is not cached, get content from live api.
+			} else {
+
+				$feed = wp_remote_get( $this->api, array( 'sslverify' => false ) );
+
+				if ( ! is_wp_error( $feed ) ) {
+
+					$feed_content = wp_remote_retrieve_body( $feed );
+					set_transient( 'wpum_addons_feed1', $feed_content, 3600 );
+					$this->addons = json_decode( $feed_content );
+
+				}
+
+			}
+
+		}
 
 		add_filter( 'install_plugins_tabs', array( $this, 'wpum_add_addon_tab' ) );
 		add_action( 'install_plugins_wpum_addons', array( $this, 'wpum_addons_page' ) );
@@ -61,6 +94,24 @@ class WPUM_Addons {
 
 		<div class="wp-list-table widefat plugin-install">
 
+			<?php if( empty( $this->addons ) ) : ?>
+			
+				<p><?php echo sprintf( __('Looks like there was a problem while retrieving the list of addons. Please visit <a href="%s">%s</a> if you are looking for the WP User Manager addons.'), 'http://wpusermanager.com/addons/', 'http://wpusermanager.com/addons/' ); ?></p>
+			
+			<?php else : ?>
+				
+				<br/>
+				
+				<div id="the-list">
+
+					<?php foreach ( $this->addons->products as $addon ) {
+						$this->display_addon( $addon->info );
+					} ?>
+
+				</div>
+
+			<?php endif; ?>
+
 		</div>
 
 		<?php
@@ -73,23 +124,21 @@ class WPUM_Addons {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	protected function display_addon() {
+	protected function display_addon( $addon ) {
 
-		echo '<div id="the-list">';
-				echo '<div class="plugin-card">';
-					echo '<div class="plugin-card-top">';
-						echo '<a href="" target="_blank" class="thickbox plugin-icon"><img src=""></a>';
-						echo '<div class="name column-name" style="margin-right:0px">';
-							echo '<h4><a href="" target="_blank" class="thickbox"></a></h4>';
-						echo '</div>';
-						echo '<div class="desc column-description">';
-							echo '<p></p>';
-						echo '</div>';
-					echo '</div>';
-					echo '<div class="plugin-card-bottom">';
-						echo '<a target="_blank" href="" class="button-primary" style="display:block; text-align:center;"></a>';
-					echo '</div>';
+		echo '<div class="plugin-card">';
+			echo '<div class="plugin-card-top">';
+				echo '<a href="'.$addon->link.'" target="_blank" class="thickbox plugin-icon"><img src=""></a>';
+				echo '<div class="name column-name" style="margin-right:0px">';
+					echo '<h4><a href="'.$addon->link.'" target="_blank" class="thickbox">'. $addon->title .'</a></h4>';
 				echo '</div>';
+				echo '<div class="desc column-description">';
+					echo '<p>'.$addon->content.'</p>';
+				echo '</div>';
+			echo '</div>';
+			echo '<div class="plugin-card-bottom">';
+				echo '<a target="_blank" href="'.$addon->link.'" class="button-primary" style="display:block; text-align:center;">'.__('View More Info').'</a>';
+			echo '</div>';
 		echo '</div>';
 
 	}
