@@ -65,9 +65,6 @@ class WPUM_Ajax_Handler {
 		add_action( 'wp_ajax_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 		add_action( 'wp_ajax_nopriv_wpum_remove_avatar', array( $this, 'remove_user_avatar' ) );
 
-		// Restore Default Fields
-		add_action( 'wp_ajax_wpum_restore_default_fields', array( $this, 'restore_default_fields' ) );
-
 		// Update custom fields order
 		add_action( 'wp_ajax_wpum_update_fields_order', array( $this, 'update_fields_order' ) );
 
@@ -310,43 +307,6 @@ class WPUM_Ajax_Handler {
 		}
 
 		die();
-
-	}
-
-	/**
-	 * Restore email into the backend.
-	 *
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function restore_default_fields() {
-
-		// Check our nonce and make sure it's correct.
-		check_ajax_referer( 'wpum_nonce_default_fields_restore', 'wpum_backend_fields_restore' );
-
-		// Abort if something isn't right.
-		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
-			$return = array(
-				'message' => __( 'Error.' ),
-			);
-
-			wp_send_json_error( $return );
-		}
-
-		// Delete previously saved option
-		delete_option( 'wpum_custom_fields' );
-
-		// Declare fields
-		$fields = wpum_default_fields_list();
-
-		update_option( 'wpum_custom_fields', apply_filters( 'wpum_default_fields_restore', $fields ) );
-
-		$return = array(
-			'message' => __( 'Default fields successfully restored.' ),
-		);
-
-		wp_send_json_success( $return );
 
 	}
 
