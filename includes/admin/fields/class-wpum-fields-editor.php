@@ -331,7 +331,7 @@ class WPUM_Fields_Editor {
 	public static function help_text( $current_menu = null ) {
 
 		$output = '<p>';
-			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-sort"></span>');
+			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-menu"></span>');
 		$output .= '</p>';
 
 		echo $output;
