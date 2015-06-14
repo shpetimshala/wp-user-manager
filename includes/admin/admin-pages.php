@@ -27,6 +27,7 @@ function wpum_add_options_link() {
 	$wpum_settings_page = add_users_page( __( 'WPUM Edit Field' ), __( 'Edit Field' ), 'manage_options', 'wpum-edit-field', 'WPUM_Fields_Editor::edit_field_page' );
 	$wpum_settings_page = add_users_page( __('WP User Manager Settings'), __('WPUM Settings'), 'manage_options', 'wpum-settings', 'wpum_options_page' );
 	$wpum_settings_page = add_users_page( __('WP User Manager Email Editor'), __('WPUM Email Editor'), 'manage_options', 'wpum-edit-email', 'WPUM_Emails_Editor::get_emails_editor_page' );
+	$wpum_settings_page = add_users_page( __('WP User Manager Addons'), __('WPUM Addons'), 'manage_options', 'plugin-install.php?tab=wpum_addons');
 
 	add_action( 'admin_head', 'wpum_hide_admin_pages' );
 

@@ -204,7 +204,7 @@ class WP_User_Manager {
 	 * @return void
 	 */
 	private function includes() {
-
+		
 		global $wpum_options;
 
 		require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
