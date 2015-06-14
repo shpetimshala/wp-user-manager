@@ -17,7 +17,6 @@ jQuery(document).ready(function ($) {
 			this.general();
 			this.restore_emails();
 			this.drag_and_drop_fields_table();
-			this.restore_default_fields();
 			this.confirm_dialog();
 		},
 
