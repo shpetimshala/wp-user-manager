@@ -465,11 +465,6 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Restore default emails:', 'wpum' ),
 					'type' => 'hook'
 				),
-				'restore_default_fields' => array(
-					'id'   => 'restore_default_fields',
-					'name' => __( 'Restore default fields:', 'wpum' ),
-					'type' => 'hook'
-				),
 				'restore_pages' => array(
 					'id'   => 'restore_pages',
 					'name' => __( 'Restore Pages:', 'wpum' ),
