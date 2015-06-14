@@ -142,24 +142,7 @@ function wpum_option_restore_emails() {
 add_action( 'wpum_restore_emails', 'wpum_option_restore_emails' );
 
 /**
- * Function to display content of the "restore_default_fields" option.
- *
- * @since 1.0.0
- * @return array
-*/
-function wpum_option_restore_default_fields() {
-
-	$output = '<a id="wpum-restore-default-fields" href="'.esc_url( add_query_arg( array('tool' => 'restore-default-fields') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default fields settings').'</a>';
-	$output .= '<br/><p class="description">' . __('Click the button to restore the default fields settings.') . '</p>';
-	$output .= wp_nonce_field( "wpum_nonce_default_fields_restore", "wpum_backend_fields_restore" );
-
-	echo $output;
-
-}
-add_action( 'wpum_restore_default_fields', 'wpum_option_restore_default_fields' );
-
-/**
- * Function to display content of the "restore_default_fields" option.
+ * Function to display content of the "restore_default_pages" option.
  *
  * @since 1.0.0
  * @return array
@@ -174,7 +157,6 @@ function wpum_option_restore_pages() {
 
 }
 add_action( 'wpum_restore_pages', 'wpum_option_restore_pages' );
-
 
 /**
  * Function to display content of the "wpum_profile_permalink" option.
