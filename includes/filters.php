@@ -345,3 +345,24 @@ function wpum_highlight_pages( $post_states, $post ) {
 
 }
 add_filter( 'display_post_states', 'wpum_highlight_pages', 10, 2 );
+
+/**
+ * Adjust body class on admin panel
+ *
+ * @since 1.0.0
+ * @return array
+ */
+function wpum_admin_body_classes( $classes ) {
+
+	$screen = get_current_screen();
+
+	if( $screen->base == 'plugin-install' && isset( $_GET['tab'] ) && $_GET['tab'] == 'wpum_addons' ) {
+		$classes .= 'wpum_addons_page';
+	}
+
+	return $classes;
+
+}
+add_filter( 'admin_body_class', 'wpum_admin_body_classes' );
+
+

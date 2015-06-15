@@ -53,3 +53,12 @@ td.page-title span.post-state i.wpum-shortcodes-icon:before {
 	border-radius: 3px;
 	font-weight: bold;
 }
+
+body.wpum_addons_page .search-plugins,
+body.wpum_addons_page li.plugin-install-featured,
+body.wpum_addons_page li.plugin-install-popular,
+body.wpum_addons_page li.plugin-install-recommended,
+body.wpum_addons_page li.plugin-install-favorites,
+body.wpum_addons_page .add-new-h2 {
+	display: none !important;
+}
