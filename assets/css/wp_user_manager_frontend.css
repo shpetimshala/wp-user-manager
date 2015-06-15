@@ -107,6 +107,10 @@
   max-width: 100%;
   height: auto; }
 
+.wpum-single-profile .wpum-user-details {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px 25px; }
 .wpum-single-profile .wpum-user-links {
   margin: 15px 0px 10px 0px;
   padding: 0px; }
@@ -134,6 +138,10 @@
   font-weight: bold; }
 .wpum-single-profile .wpum-user-description p:last-child {
   margin-bottom: 0px; }
+.wpum-single-profile .wpum-profile-tabs-content {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 20px; }
 
 .wpum-align-right {
   text-align: right; }
@@ -142,30 +150,37 @@
   text-align: center; }
 
 /* Profile Tabs */
-.wpum-profile-tabs-holder ul, .wpum-account-tabs ul {
-  width: 100%;
-  list-style: none;
-  margin: 0px;
-  padding: 0px; }
-  .wpum-profile-tabs-holder ul li, .wpum-account-tabs ul li {
-    display: inline-block;
-    margin: 15px 0px 0px; }
-    .wpum-profile-tabs-holder ul li.active a, .wpum-account-tabs ul li.active a {
-      background-color: #eee;
-      text-decoration: none; }
-    .wpum-profile-tabs-holder ul li a, .wpum-account-tabs ul li a {
-      display: block;
-      padding: 3px 12px 2px;
-      margin-bottom: -1px;
-      line-height: 32px;
-      height: 32px;
-      outline: none;
-      -webkit-border-radius: 2px 2px 0 0;
-      -moz-border-radius: 2px 2px 0 0;
-      border-radius: 2px 2px 0 0; }
-      .wpum-profile-tabs-holder ul li a:hover, .wpum-account-tabs ul li a:hover {
-        background: #fbfbfb;
-        text-decoration: none; }
+.wpum-profile-tabs-holder, .wpum-account-tabs {
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-top: 0px; }
+  .wpum-profile-tabs-holder ul, .wpum-account-tabs ul {
+    width: 100%;
+    list-style: none;
+    margin: 0px;
+    padding: 0px; }
+    .wpum-profile-tabs-holder ul li, .wpum-account-tabs ul li {
+      display: inline-block;
+      margin: 0px; }
+      .wpum-profile-tabs-holder ul li.active a, .wpum-account-tabs ul li.active a {
+        background-color: #fff;
+        text-decoration: none;
+        margin-bottom: -1px;
+        border-bottom: 1px solid #fff; }
+        .wpum-profile-tabs-holder ul li.active a:hover, .wpum-account-tabs ul li.active a:hover {
+          background-color: #fff; }
+      .wpum-profile-tabs-holder ul li a, .wpum-account-tabs ul li a {
+        display: block;
+        padding: 5px 12px 5px;
+        line-height: 32px;
+        height: 32px;
+        outline: none; }
+        .wpum-profile-tabs-holder ul li a:hover, .wpum-account-tabs ul li a:hover {
+          background: #eaeaea;
+          text-decoration: none; }
+
+.wpum-single-profile ul.wpum-profile-tabs {
+  margin-bottom: 0px; }
 
 /* Profile details */
 .wpum-single-profile .wpum-user-details-list dl {
