@@ -13,6 +13,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;
 // Load WPUM file
 include_once( 'wp-user-manager.php' );
 
+global $wpdb;
+
 // Delete post type contents
 $wpum_post_types = array( 'wpum_directory' );
 

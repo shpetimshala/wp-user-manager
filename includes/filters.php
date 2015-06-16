@@ -364,5 +364,3 @@ function wpum_admin_body_classes( $classes ) {
 
 }
 add_filter( 'admin_body_class', 'wpum_admin_body_classes' );
-
-
