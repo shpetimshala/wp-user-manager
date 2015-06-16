@@ -38,8 +38,8 @@ function wpum_plugin_row_meta( $input, $file ) {
 		return $input;
 
 	$links = array(
-		'<a href="http://support.wp-user-manager.com" target="_blank">' . esc_html__( 'Documentation', 'wpum' ) . '</a>',
-		'<a href="http://wp-user-manager.com/addons/" target="_blank">' . esc_html__( 'Add Ons', 'wpum' ) . '</a>',
+		'<a href="http://wpusermanager.com" target="_blank">' . esc_html__( 'Documentation', 'wpum' ) . '</a>',
+		'<a href="http://wpusermanager.com/addons/" target="_blank">' . esc_html__( 'Extensions', 'wpum' ) . '</a>',
 	);
 
 	$input = array_merge( $input, $links );
