@@ -119,7 +119,7 @@ function wpum_show_failed_login_message() {
 		$args = array( 
 				'id'   => 'wpum-login-failed', 
 				'type' => 'error', 
-				'text' => __( 'Login failed: You have entered incorrect login details, please try again.' )
+				'text' => __( 'Login failed: You have entered incorrect login details, please try again.', 'wpum' )
 		);
 		$warning = wpum_message( $args, true );
 	}
@@ -139,7 +139,7 @@ function wpum_profile_update_messages() {
 		$args = array(
 			'id'   => 'wpum-profile-updated',
 			'type' => 'success',
-			'text' => apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.' ) )
+			'text' => apply_filters( 'wpum_account_update_success_message', __( 'Profile successfully updated.', 'wpum' ) )
 		);
 		wpum_message( $args );
 	endif;
@@ -147,7 +147,7 @@ function wpum_profile_update_messages() {
 		$args = array(
 			'id'   => 'wpum-profile-error',
 			'type' => 'error',
-			'text' => apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.' ) )
+			'text' => apply_filters( 'wpum_account_update_error_message', __( 'Something went wrong.', 'wpum' ) )
 		);
 		wpum_message( $args );
 	endif;

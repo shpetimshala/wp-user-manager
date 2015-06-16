@@ -28,42 +28,42 @@ class WPUM_Registration_Form_Widget extends WPH_Widget {
 
 		// Configure widget array
 		$args = array(
-			'label'       => __( '[WPUM] Registration Form' ),
-			'description' => __( 'Display the registration form.' ),
+			'label'       => __( '[WPUM] Registration Form', 'wpum' ),
+			'description' => __( 'Display the registration form.', 'wpum' ),
 		);
 
 		$args['fields'] = array(
 			array(
-				'name'   => __( 'Title' ),
+				'name'   => __( 'Title', 'wpum' ),
 				'id'     => 'title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'Register' ),
+				'std'    => __( 'Register', 'wpum' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'     => __( 'Display login link' ),
+				'name'     => __( 'Display login link', 'wpum' ),
 				'id'       => 'login_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display password recovery link' ),
+				'name'     => __( 'Display password recovery link', 'wpum' ),
 				'id'       => 'psw_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display registration link' ),
+				'name'     => __( 'Display registration link', 'wpum' ),
 				'id'       => 'register_link',
 				'type'     =>'checkbox',
 				'std'      => 0,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'   => __( 'Custom form ID (optional)' ),
+				'name'   => __( 'Custom form ID (optional)', 'wpum' ),
 				'id'     => 'form_id',
 				'type'   => 'text',
 				'class'  => 'widefat',

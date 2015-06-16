@@ -250,7 +250,7 @@ function wpum_get_field_input_html( $key, $field ) {
 
 	} else {
 
-		echo __( 'This field type has no output' );
+		echo __( 'This field type has no output', 'wpum' );
 
 	}
 

@@ -32,7 +32,7 @@ if ( isset( $_GET['password-reset'] ) ) {
 	<!-- Display only when psw reset -->
 	<?php if ( isset( $_GET['reset'] ) && $_GET['reset'] == true ) : ?>
 		<p class="wpum-message wpum-success wpum-lost-psw-message">
-			<?php echo apply_filters( 'wpum_reset_successful_password_message', __( 'Your password has been reset.' ) ); ?>
+			<?php echo apply_filters( 'wpum_reset_successful_password_message', __( 'Your password has been reset.', 'wpum' ) ); ?>
 		</p>
 	<?php endif; ?>
 	<!-- Display only when psw reset -->
@@ -45,13 +45,13 @@ if ( isset( $_GET['password-reset'] ) ) {
 		<?php if ( isset( $_GET['password-reset'] ) && $_GET['password-reset'] == true ) : ?>
 
 			<p class="wpum-message wpum-info wpum-lost-psw-message">
-				<?php echo apply_filters( 'wpum_reset_password_message', __( 'Enter a new password below.' ) ); ?>
+				<?php echo apply_filters( 'wpum_reset_password_message', __( 'Enter a new password below.', 'wpum' ) ); ?>
 			</p>
 
 			<!-- Start Password Replace Fields -->
 			<?php foreach ( $password_fields as $key => $field ) : ?>
-				<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
-					<label for="<?php esc_attr_e( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+				<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?>">
+					<label for="<?php esc_attr_e( $key, 'wpum' ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 						<?php echo wpum_get_field_input_html( $key, $field ); ?>
 					</div>
@@ -62,13 +62,13 @@ if ( isset( $_GET['password-reset'] ) ) {
 		<?php else : ?>
 
 			<p class="wpum-message wpum-info wpum-lost-psw-message">
-				<?php echo apply_filters( 'wpum_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.' ) ); ?>
+				<?php echo apply_filters( 'wpum_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'wpum' ) ); ?>
 			</p>
 
 			<!-- Start Password User Fields -->
 			<?php foreach ( $user_fields as $key => $field ) : ?>
-				<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
-					<label for="<?php esc_attr_e( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+				<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?>">
+					<label for="<?php esc_attr_e( $key, 'wpum' ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 						<?php get_wpum_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field ) ); ?>
 					</div>
@@ -87,7 +87,7 @@ if ( isset( $_GET['password-reset'] ) ) {
 			<input type="hidden" name="wpum_password_form_status" id="wpum_password_form_status" value="<?php echo $form_status; ?>" />
 			<input type="hidden" name="wpum_psw_reset_key" value="<?php echo esc_attr( $reset_key ); ?>" />
 			<input type="hidden" name="wpum_psw_reset_login" value="<?php echo esc_attr( $login ); ?>" />
-			<input type="submit" id="submit_wpum_password" name="submit_wpum_password" class="button" value="<?php _e( 'Reset Password' ); ?>" />
+			<input type="submit" id="submit_wpum_password" name="submit_wpum_password" class="button" value="<?php _e( 'Reset Password', 'wpum' ); ?>" />
 		</p>
 
 	</form>

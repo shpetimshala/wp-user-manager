@@ -29,8 +29,8 @@ class WPUM_password_Email extends WPUM_Emails {
 		
 		// Configure Email
 		$this->name        = 'password';
-		$this->title       = __( "Password Recovery Email" );
-		$this->description = __( "This is the email that is sent to the visitor upon password reset request." );
+		$this->title       = __( "Password Recovery Email", 'wpum' );
+		$this->description = __( "This is the email that is sent to the visitor upon password reset request.", 'wpum' );
 		$this->subject     = $this->subject();
 		$this->message     = $this->message();
 		
@@ -46,7 +46,7 @@ class WPUM_password_Email extends WPUM_Emails {
 	 */
 	public static function subject() {
 
-		$subject = sprintf( __('Reset Your %s Password'), get_option( 'blogname' ) );
+		$subject = sprintf( __('Reset Your %s Password', 'wpum'), get_option( 'blogname' ) );
 
 		return $subject;
 
@@ -60,11 +60,11 @@ class WPUM_password_Email extends WPUM_Emails {
 	 */
 	public static function message() {
 
-		$message = __( "Hello {username}, \n\n" );
-		$message .= __( "You are receiving this message because you or somebody else has attempted to reset your password on {sitename}.\n\n" );
-		$message .= __( "If this was a mistake, just ignore this email and nothing will happen.\n\n" );
-		$message .= __( "To reset your password, visit the following address:\n\n" );
-		$message .= __( "{recovery_url}" );
+		$message = __( "Hello {username}, \n\n", 'wpum' );
+		$message .= __( "You are receiving this message because you or somebody else has attempted to reset your password on {sitename}.\n\n", 'wpum' );
+		$message .= __( "If this was a mistake, just ignore this email and nothing will happen.\n\n", 'wpum' );
+		$message .= __( "To reset your password, visit the following address:\n\n", 'wpum' );
+		$message .= __( "{recovery_url}", 'wpum' );
 		
 		return $message;
 

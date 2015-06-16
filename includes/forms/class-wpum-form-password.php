@@ -52,7 +52,7 @@ class WPUM_Form_Password extends WPUM_Form {
 		self::$fields = apply_filters( 'wpum_password_fields', array(
 			'user' => array(
 				'username_email' => array(
-					'label'       => __( 'Username or email' ),
+					'label'       => __( 'Username or email', 'wpum' ),
 					'type'        => 'text',
 					'required'    => true,
 					'placeholder' => '',
@@ -61,14 +61,14 @@ class WPUM_Form_Password extends WPUM_Form {
 			),
 			'password' => array(
 				'password_1' => array(
-					'label'       => __( 'New password' ),
+					'label'       => __( 'New password', 'wpum' ),
 					'type'        => 'password',
 					'required'    => true,
 					'placeholder' => '',
 					'priority'    => 1
 				),
 				'password_2' => array(
-					'label'       => __( 'Re-enter new password' ),
+					'label'       => __( 'Re-enter new password', 'wpum' ),
 					'type'        => 'password',
 					'required'    => true,
 					'placeholder' => '',
@@ -103,7 +103,7 @@ class WPUM_Form_Password extends WPUM_Form {
 		$username = $values['user'][ 'username_email' ];
 
 		if( is_email( $username ) && !email_exists( $username ) || !is_email( $username ) && !username_exists( $username ) )
-			return new WP_Error( 'username-validation-error', __( 'This user could not be found.' ) );
+			return new WP_Error( 'username-validation-error', __( 'This user could not be found.', 'wpum' ) );
 
 		return $passed;
 
@@ -122,11 +122,11 @@ class WPUM_Form_Password extends WPUM_Form {
 		$password_2 = $values['password'][ 'password_2' ];
 
 		if ( empty( $password_1 ) || empty( $password_2 ) ) {
-			return new WP_Error( 'password-validation-error', __( 'Please enter your password.' ) );
+			return new WP_Error( 'password-validation-error', __( 'Please enter your password.', 'wpum' ) );
 		}
 
 		if ( $password_1 !== $password_2 ) {
-			return new WP_Error( 'password-validation-error-2', __( 'Passwords do not match.' ) );
+			return new WP_Error( 'password-validation-error-2', __( 'Passwords do not match.', 'wpum' ) );
 		}
 
 		return $passed;
@@ -196,12 +196,12 @@ class WPUM_Form_Password extends WPUM_Form {
 		do_action( 'lostpassword_post' );
 
 		if ( ! $user_data ) {
-			self::add_error( __( 'Invalid username or e-mail.' ) );
+			self::add_error( __( 'Invalid username or e-mail.', 'wpum' ) );
 			return;
 		}
 
 		if ( is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
-			self::add_error( __( 'Invalid username or e-mail.' ) );
+			self::add_error( __( 'Invalid username or e-mail.', 'wpum' ) );
 			return;
 		}
 
@@ -215,12 +215,12 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		if ( ! $allow ) {
 
-			self::add_error( __( 'Password reset is not allowed for this user' ) );
+			self::add_error( __( 'Password reset is not allowed for this user', 'wpum' ) );
 			return;
 
 		} elseif ( is_wp_error( $allow ) ) {
 
-			self::add_error( __( 'Password reset is not allowed for this user' ) );
+			self::add_error( __( 'Password reset is not allowed for this user', 'wpum' ) );
 			return;
 		}
 
@@ -251,7 +251,7 @@ class WPUM_Form_Password extends WPUM_Form {
 			WPUM()->emails->__set( 'heading', __( 'Password Recovery', 'wpum' ) );
 			WPUM()->emails->send( $user_email, $password_email['subject'], $message );
 
-			self::add_confirmation( __('Check your e-mail for the confirmation link.') );
+			self::add_confirmation( __('Check your e-mail for the confirmation link.', 'wpum') );
 
 		} else {
 
@@ -307,12 +307,12 @@ class WPUM_Form_Password extends WPUM_Form {
 		$key = preg_replace( '/[^a-z0-9]/i', '', $key );
 
 		if ( empty( $key ) || ! is_string( $key ) ) {
-			self::add_error( __( 'Invalid key.' ) );
+			self::add_error( __( 'Invalid key.', 'wpum' ) );
 			return false;
 		}
 
 		if ( empty( $login ) || ! is_string( $login ) ) {
-			self::add_error( __( 'Invalid key.' ) );
+			self::add_error( __( 'Invalid key.', 'wpum' ) );
 			return false;
 		}
 
@@ -328,7 +328,7 @@ class WPUM_Form_Password extends WPUM_Form {
 		}
 
 		if ( empty( $user ) || empty( $valid ) ) {
-			self::add_error( __( 'Invalid key.' ) );
+			self::add_error( __( 'Invalid key.', 'wpum' ) );
 			return false;
 		}
 

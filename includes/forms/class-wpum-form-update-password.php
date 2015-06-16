@@ -52,14 +52,14 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 		self::$fields = apply_filters( 'wpum_password_update_fields', array(
 			'password_update' => array(
 				'password' => array(
-					'label'       => __( 'Password' ),
+					'label'       => __( 'Password', 'wpum' ),
 					'type'        => 'password',
 					'required'    => false,
 					'placeholder' => '',
 					'priority'    => 1
 				),
 				'password_repeat' => array(
-					'label'       => __( 'Repeat Password' ),
+					'label'       => __( 'Repeat Password', 'wpum' ),
 					'type'        => 'password',
 					'required'    => false,
 					'placeholder' => '',
@@ -78,7 +78,7 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 	 * @return void
 	 */
 	public static function add_password_meter_field() {
-		echo '<span id="password-strength">'.__('Strength Indicator').'</span>';		
+		echo '<span id="password-strength">'.__('Strength Indicator', 'wpum').'</span>';		
 	}
 
 	/**
@@ -94,7 +94,7 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 		$pwd_strenght = wpum_get_option('password_strength');
 
 		if( empty( $pwd ) )
-			return new WP_Error( 'password-validation-error', __( 'Enter a password.' ) );
+			return new WP_Error( 'password-validation-error', __( 'Enter a password.', 'wpum' ) );
 
 		// Check strenght
 		$containsLetter  = preg_match('/[A-Z]/', $pwd);
@@ -103,20 +103,20 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		if($pwd_strenght == 'weak') {
 			if(strlen($pwd) < 8)
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.', 'wpum' ) );
 		}
 		if($pwd_strenght == 'medium') {
 			if( !$containsLetter || !$containsDigit || strlen($pwd) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.', 'wpum' ) );
 		}
 		if($pwd_strenght == 'strong') {
 			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen($pwd) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.', 'wpum' ) );
 		}
 
 		// Check if matches repeated password
 		if( $pwd !== $values['password_update']['password_repeat'] )
-			return new WP_Error( 'password-validation-error', __( 'Passwords do not match.' ) );
+			return new WP_Error( 'password-validation-error', __( 'Passwords do not match.', 'wpum' ) );
 
 		return $passed;
 
@@ -169,7 +169,7 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		} else {
 
-			self::add_confirmation( __('Password successfully updated.') );
+			self::add_confirmation( __('Password successfully updated.', 'wpum') );
 
 		}
 

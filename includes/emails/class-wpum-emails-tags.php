@@ -275,22 +275,22 @@ function wpum_setup_email_tags() {
 	$email_tags = array(
 		array(
 			'tag'         => 'sitename',
-			'description' => __( 'Your site name' ),
+			'description' => __( 'Your site name', 'wpum' ),
 			'function'    => 'wpum_email_tag_sitename'
 		),
 		array(
 			'tag'         => 'username',
-			'description' => __( 'Displays the username.' ),
+			'description' => __( 'Displays the username.', 'wpum' ),
 			'function'    => 'wpum_email_tag_username'
 		),
 		array(
 			'tag'         => 'password',
-			'description' => __( 'Displays the user password. If the "custom passwords" option is enabled, the password will not be displayed into the email.' ),
+			'description' => __( 'Displays the user password. If the "custom passwords" option is enabled, the password will not be displayed into the email.', 'wpum' ),
 			'function'    => 'wpum_email_tag_password'
 		),
 		array(
 			'tag'         => 'recovery_url',
-			'description' => __( 'Displays the password recovery url needed for the user to reset his password.' ),
+			'description' => __( 'Displays the password recovery url needed for the user to reset his password.', 'wpum' ),
 			'function'    => 'wpum_email_tag_recovery_url'
 		),
 	);
@@ -335,7 +335,7 @@ function wpum_email_tag_password( $user_id, $private_key ) {
 	$pwd = $private_key;
 
 	if( wpum_get_option('custom_passwords') )
-		$pwd = __('the password you chose upon registration.');
+		$pwd = __('the password you chose upon registration.', 'wpum');
 
 	return $pwd;
 }

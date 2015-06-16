@@ -199,12 +199,12 @@ if ( !class_exists('Pretty_Metabox') ) {
 
 			// Check that the id exists
 			if( ! array_key_exists( 'id', $meta_box ) ) {
-				$errors->add( 'metabox-id-missing', __('Error: metabox must have an id.','wppf') );
+				$errors->add( 'metabox-id-missing', __('Error: metabox must have an id.','wppf', 'wpum') );
 			}
 
 			// Check that the title exists
 			if( ! array_key_exists( 'title', $meta_box ) ) {
-				$errors->add( 'metabox-title-missing', sprintf( __('Error: metabox "%s" must have a title.','wppf'), $meta_box['id'] ) );
+				$errors->add( 'metabox-title-missing', sprintf( __('Error: metabox "%s" must have a title.','wppf', 'wpum'), $meta_box['id'] ) );
 			}
 
 			return $errors;

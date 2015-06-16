@@ -186,35 +186,35 @@ function wpum_get_registered_settings() {
 				'login_page' => array(
 					'id'      => 'login_page',
 					'name'    => __( 'Login page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the login shortcode.'),
+					'desc'    => __('Select the page where you have added the login shortcode.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'password_recovery_page' => array(
 					'id'      => 'password_recovery_page',
 					'name'    => __( 'Password recovery page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the password recovery shortcode.'),
+					'desc'    => __('Select the page where you have added the password recovery shortcode.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'registration_page' => array(
 					'id'      => 'registration_page',
 					'name'    => __( 'Registration page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the registration shortcode.'),
+					'desc'    => __('Select the page where you have added the registration shortcode.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'account_page' => array(
 					'id'      => 'account_page',
 					'name'    => __( 'Account page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the account shortcode.'),
+					'desc'    => __('Select the page where you have added the account shortcode.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'profile_page' => array(
 					'id'      => 'profile_page',
 					'name'    => __( 'Profile page:', 'wpum' ),
-					'desc'    => __('Select the page where you have added the profile shortcode.'),
+					'desc'    => __('Select the page where you have added the profile shortcode.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
@@ -226,14 +226,14 @@ function wpum_get_registered_settings() {
 				'password_strength' => array(
 					'id'      => 'password_strength',
 					'name'    => __( 'Minimum Password Strength:', 'wpum' ),
-					'desc'    => __('Select the required password strength. This will be forced on registration and account page.'),
+					'desc'    => __('Select the required password strength. This will be forced on registration and account page.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_psw_lengths()
 				),
 				'display_password_meter_registration' => array(
 					'id'   => 'display_password_meter_registration',
 					'name' => __( 'Display password meter:', 'wpum' ),
-					'desc' => __('Enable to display a password meter on registration page and account page.'),
+					'desc' => __('Enable to display a password meter on registration page and account page.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'header_n' => array(
@@ -250,21 +250,21 @@ function wpum_get_registered_settings() {
 				'display_registration_link' => array(
 					'id'   => 'display_registration_link',
 					'name' => __( 'Display registration link:', 'wpum' ),
-					'desc' => __('Enable to display a registration link into the login form.'),
+					'desc' => __('Enable to display a registration link into the login form.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'display_password_link' => array(
 					'id'   => 'display_password_link',
 					'name' => __( 'Display password recovery link:', 'wpum' ),
-					'desc' => __('Enable to display a password recovery link into the login form.'),
+					'desc' => __('Enable to display a password recovery link into the login form.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'adminbar_roles' => array(
 					'id'          => 'adminbar_roles',
 					'name'        => __( 'Admin Bar:', 'wpum' ),
-					'desc'        => __('Hide admin bar for specific user roles.'),
+					'desc'        => __('Hide admin bar for specific user roles.', 'wpum'),
 					'type'        => 'multiselect',
-					'placeholder' => __('Select the user roles from the list.'),
+					'placeholder' => __('Select the user roles from the list.', 'wpum'),
 					'class'       => 'select2',
 					'options'     => wpum_get_roles()
 				),
@@ -285,21 +285,21 @@ function wpum_get_registered_settings() {
 				'custom_passwords' => array(
 					'id'   => 'custom_passwords',
 					'name' => __( 'Users custom passwords:', 'wpum' ),
-					'desc' => __('Enable to allow users to set custom passwords on the registration page.'),
+					'desc' => __('Enable to allow users to set custom passwords on the registration page.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'allow_role_select' => array(
 					'id'   => 'allow_role_select',
 					'name' => __( 'Allow role section:', 'wpum' ),
-					'desc' => __('Enable to allow users to select a user role on registration.'),
+					'desc' => __('Enable to allow users to select a user role on registration.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'register_roles' => array(
 					'id'          => 'register_roles',
 					'name'        => __( 'Allowed Roles:', 'wpum' ),
-					'desc'        => __('Select which roles can be selected upon registration.'),
+					'desc'        => __('Select which roles can be selected upon registration.', 'wpum'),
 					'type'        => 'multiselect',
-					'placeholder' => __('Select the user roles from the list.'),
+					'placeholder' => __('Select the user roles from the list.', 'wpum'),
 					'class'       => 'select2',
 					'options'     => wpum_get_roles()
 				),
@@ -311,13 +311,13 @@ function wpum_get_registered_settings() {
 				'enable_terms' => array(
 					'id'   => 'enable_terms',
 					'name' => __( 'Enable terms &amp conditions:', 'wpum' ),
-					'desc' => __('Enable to force users to agree to your terms before registering an account.'),
+					'desc' => __('Enable to force users to agree to your terms before registering an account.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'terms_page' => array(
 					'id'      => 'terms_page',
 					'name'    => __( 'Terms Page:', 'wpum' ),
-					'desc'    => __('Select the page that contains your terms.'),
+					'desc'    => __('Select the page that contains your terms.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
@@ -329,13 +329,13 @@ function wpum_get_registered_settings() {
 				'enable_honeypot' => array(
 					'id'   => 'enable_honeypot',
 					'name' => __( 'Anti-spam Honeypot:', 'wpum' ),
-					'desc' => __('Enables honeypot spam protection technique.'),
+					'desc' => __('Enables honeypot spam protection technique.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'login_after_registration' => array(
 					'id'   => 'login_after_registration',
 					'name' => __( 'Login after registration:', 'wpum' ),
-					'desc' => __('Enable this option to authenticate users after registration.'),
+					'desc' => __('Enable this option to authenticate users after registration.', 'wpum'),
 					'type' => 'checkbox'
 				),
 			)
@@ -345,14 +345,14 @@ function wpum_get_registered_settings() {
 				'from_name' => array(
 					'id'   => 'from_name',
 					'name' => __( 'From Name:', 'wpum' ),
-					'desc' => __( 'The name emails are said to come from. This should probably be your site name.' ),
+					'desc' => __( 'The name emails are said to come from. This should probably be your site name.', 'wpum' ),
 					'type' => 'text',
 					'std'  => get_option( 'blogname' )
 				),
 				'from_email' => array(
 					'id'   => 'from_email',
 					'name' => __( 'From Email:', 'wpum' ),
-					'desc' => __( 'This will act as the "from" and "reply-to" address.' ),
+					'desc' => __( 'This will act as the "from" and "reply-to" address.', 'wpum' ),
 					'type' => 'text',
 					'std'  => get_option( 'admin_email' )
 				),
@@ -376,13 +376,13 @@ function wpum_get_registered_settings() {
 				'disable_admin_register_email' => array(
 					'id'   => 'disable_admin_register_email',
 					'name' => __( 'Disable admin registration email:', 'wpum' ),
-					'desc' => __( 'Enable this option to stop receiving notifications when a new user registers.' ),
+					'desc' => __( 'Enable this option to stop receiving notifications when a new user registers.', 'wpum' ),
 					'type' => 'checkbox'
 				),
 				'disable_admin_password_recovery_email' => array(
 					'id'   => 'disable_admin_password_recovery_email',
 					'name' => __( 'Disable admin password recovery email:', 'wpum' ),
-					'desc' => __( 'Enable this option to stop receiving notifications when a new user resets his password.' ),
+					'desc' => __( 'Enable this option to stop receiving notifications when a new user resets his password.', 'wpum' ),
 					'type' => 'checkbox'
 				),
 			)
@@ -431,28 +431,28 @@ function wpum_get_registered_settings() {
 				'login_redirect' => array(
 					'id'      => 'login_redirect',
 					'name'    => __( 'Login redirect:', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users after they login. If empty will return to the current page.'),
+					'desc'    => __('Select the page where you want to redirect users after they login. If empty will return to the current page.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'logout_redirect' => array(
 					'id'      => 'logout_redirect',
 					'name'    => __( 'Logout redirect:', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php'),
+					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'wp_login_signup_redirect' => array(
 					'id'      => 'wp_login_signup_redirect',
 					'name'    => __( 'Backend register redirect:', 'wpum' ),
-					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>'), site_url( 'wp-login.php?action=register' ) ),
+					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>', 'wpum'), site_url( 'wp-login.php?action=register' ) ),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
 				'backend_profile_redirect' => array(
 					'id'      => 'backend_profile_redirect',
 					'name'    => __( 'Backend profile redirect:', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users who try to access their profile on the backend.'),
+					'desc'    => __('Select the page where you want to redirect users who try to access their profile on the backend.', 'wpum'),
 					'type'    => 'select',
 					'options' => wpum_get_pages()
 				),
@@ -473,13 +473,13 @@ function wpum_get_registered_settings() {
 				'disable_ajax' => array(
 					'id'   => 'disable_ajax',
 					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
-					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.' ),
+					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.', 'wpum' ),
 					'type' => 'checkbox'
 				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',
 					'name' => __( 'Excluded usernames:', 'wpum' ),
-					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. Separate each username on a new line.'),
+					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. Separate each username on a new line.', 'wpum'),
 					'type' => 'textarea'
 				),
 			)

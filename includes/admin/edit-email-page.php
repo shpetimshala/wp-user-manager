@@ -41,7 +41,7 @@ $editor_args = array(
 ?>
 <div class="wrap">
 
-	<h2 class="wpum-page-title"><?php printf( __( 'WP User Manager - Editing "%s"', 'wpum' ), $email_title ); ?> <a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=emails' );?>" class="add-new-h2"><?php _e('Back to settings page &raquo;');?></a></h2>
+	<h2 class="wpum-page-title"><?php printf( __( 'WP User Manager - Editing "%s"', 'wpum' ), $email_title ); ?> <a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=emails' );?>" class="add-new-h2"><?php _e('Back to settings page &raquo;', 'wpum');?></a></h2>
 
 	<form id="wpum-edit-email" action="" method="post">
 		<table class="form-table">
@@ -49,20 +49,20 @@ $editor_args = array(
 				
 				<tr>
 					<th scope="row" valign="top">
-						<label for="wpum-email-subject"><?php _e( 'Email Subject:' ); ?></label>
+						<label for="wpum-email-subject"><?php _e( 'Email Subject:', 'wpum' ); ?></label>
 					</th>
 					<td>
 						<input name="subject" id="wpum-email-subject" type="text" value="<?php echo esc_attr( stripslashes( $this_email['subject'] ) ); ?>" style="width: 300px;"/>
-						<p class="description"><?php _e( 'The subject line of the email' ); ?></p>
+						<p class="description"><?php _e( 'The subject line of the email', 'wpum' ); ?></p>
 					</td>
 				</tr>
 				<tr>
 				<th scope="row" valign="top">
-					<label for="wpum-notice-message"><?php _e( 'Email Message:' ); ?></label>
+					<label for="wpum-notice-message"><?php _e( 'Email Message:', 'wpum' ); ?></label>
 				</th>
 				<td>
 					<?php wp_editor( wp_kses_post( wptexturize( $this_email['message'] ) ), 'message', $editor_args ); ?>
-					<p class="description"><?php _e( 'The email message to be sent into the notification. The following template tags can be used in the message:' ); ?></p>
+					<p class="description"><?php _e( 'The email message to be sent into the notification. The following template tags can be used in the message:', 'wpum' ); ?></p>
 					<br/><p><?php echo wpum_get_emails_tags_list(); ?></p>
 				</td>
 			</tr>

@@ -116,14 +116,14 @@ class WPUM_Directory {
 
 		$general_options = array(
 			'id'     => 'wpum_directory_general_options',
-			'title'  => __( 'General Settings' ),
+			'title'  => __( 'General Settings', 'wpum' ),
 			'pages'  => array( 'wpum_directory' ),
 			'fields' => array(
 				array(
 					'id'      => 'directory_roles',
-					'name'    => __( 'User Roles' ),
-					'sub'     => __( 'Leave blank to display all user roles.' ),
-					'desc'    => __( 'Select the user roles you wish to display into this directory.' ),
+					'name'    => __( 'User Roles', 'wpum' ),
+					'sub'     => __( 'Leave blank to display all user roles.', 'wpum' ),
+					'desc'    => __( 'Select the user roles you wish to display into this directory.', 'wpum' ),
 					'type'    => 'multiselect',
 					'options' => wpum_get_roles( true )
 				),
@@ -137,22 +137,22 @@ class WPUM_Directory {
 				),*/
 				array(
 					'id'   => 'excluded_ids',
-					'name' => __( 'Exclude users' ),
-					'sub'  => __( 'Comma separated list of users id you wish to exclude.' ),
-					'desc' => sprintf( __(' Example: type %s to exclude users with those id(s).'), '<code>1, 6, 89</code>' ),
+					'name' => __( 'Exclude users', 'wpum' ),
+					'sub'  => __( 'Comma separated list of users id you wish to exclude.', 'wpum' ),
+					'desc' => sprintf( __(' Example: type %s to exclude users with those id(s).', 'wpum'), '<code>1, 6, 89</code>' ),
 					'type' => 'text',
 				),
 				array(
 					'id'   => 'profiles_per_page',
-					'name' => __( 'Profiles per page' ),
-					'sub'  => __( 'Select how many profiles you wish to display per page.' ),
+					'name' => __( 'Profiles per page', 'wpum' ),
+					'sub'  => __( 'Select how many profiles you wish to display per page.', 'wpum' ),
 					'type' => 'number',
 					'std'  => 10
 				),
 				array(
 					'id'      => 'directory_template',
-					'name'    => __( 'Directory Template' ),
-					'desc'    => __( 'Select a template from the list.' ),
+					'name'    => __( 'Directory Template', 'wpum' ),
+					'desc'    => __( 'Select a template from the list.', 'wpum' ),
 					'type'    => 'select',
 					'options' => wpum_get_directory_templates()
 				),
@@ -165,28 +165,28 @@ class WPUM_Directory {
 		// Build the sorting metabox options
 		$sorting_options = array(
 			'id'     => 'wpum_directory_sorting_options',
-			'title'  => __( 'Users sorting' ),
+			'title'  => __( 'Users sorting', 'wpum' ),
 			'pages'  => array( 'wpum_directory' ),
 			'fields' => array(
 				array(
 					'id'   => 'display_sorter',
-					'name' => __( 'Display sorter' ),
-					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the sorting options.' ),
+					'name' => __( 'Display sorter', 'wpum' ),
+					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the sorting options.', 'wpum' ),
 					'type' => 'checkbox',
 					'std'  => 1
 				),
 				array(
 					'id'   => 'display_amount',
-					'name' => __( 'Display amount filter' ),
-					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the results amount filter.' ),
+					'name' => __( 'Display amount filter', 'wpum' ),
+					'desc' => __( 'Enable this setting to display a dropdown menu into the directory with the results amount filter.', 'wpum' ),
 					'type' => 'checkbox',
 					'std'  => 1
 				),
 				array(
 					'id'      => 'default_sorting_method',
-					'name'    => __( 'Sorting method' ),
-					'sub'     => __( 'Select the sorting method for the directory' ),
-					'desc'    => __('If the sorter field is visible, this will be used as default option.'),
+					'name'    => __( 'Sorting method', 'wpum' ),
+					'sub'     => __( 'Select the sorting method for the directory', 'wpum' ),
+					'desc'    => __('If the sorter field is visible, this will be used as default option.', 'wpum'),
 					'type'    => 'select',
 					'std'     => 'newest',
 					'options' => wpum_get_directory_sorting_methods()
@@ -212,10 +212,10 @@ class WPUM_Directory {
 
 		unset( $columns['date'], $columns['author'] );
 
-		$columns["roles"]             = __( 'User Roles' );
+		$columns["roles"]             = __( 'User Roles', 'wpum' );
 		//$columns["search_form"]       = __( 'Display search form' ); Under construction
-		$columns["profiles_per_page"] = __( 'Profiles per page' );
-		$columns["shortcode"]         = __( 'Shortcode' );
+		$columns["profiles_per_page"] = __( 'Profiles per page', 'wpum' );
+		$columns["shortcode"]         = __( 'Shortcode', 'wpum' );
 
 		return $columns;
 	}
@@ -237,7 +237,7 @@ class WPUM_Directory {
 				if( $roles ) {
 					echo implode( ', ', $roles );
 				} else {
-					echo __( 'All' );
+					echo __( 'All', 'wpum' );
 				}
 				break;
 			case 'search_form':
@@ -287,15 +287,15 @@ class WPUM_Directory {
 
 		$messages['wpum_directory'] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => __( 'Directory updated.' ),
-			2  => __( 'Custom field updated.' ),
-			3  => __( 'Custom field deleted.'),
-			4  => __( 'Directory updated.' ),
+			1  => __( 'Directory updated.', 'wpum' ),
+			2  => __( 'Custom field updated.', 'wpum' ),
+			3  => __( 'Custom field deleted.', 'wpum'),
+			4  => __( 'Directory updated.', 'wpum' ),
 			/* translators: %s: date and time of the revision */
-			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Directory restored to revision from %s' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6  => sprintf( __( 'Directory created. Use the following shortcode to display this directory %s' ), '<code>[wpum_user_directory id="'.$post_ID.'"]</code>' ),
-			7  => __( 'Directory saved.' ),
-			8  => __( 'Directory submitted.' ),
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Directory restored to revision from %s', 'wpum' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => sprintf( __( 'Directory created. Use the following shortcode to display this directory %s', 'wpum' ), '<code>[wpum_user_directory id="'.$post_ID.'"]</code>' ),
+			7  => __( 'Directory saved.', 'wpum' ),
+			8  => __( 'Directory submitted.', 'wpum' ),
 		);
 
 		return $messages;
@@ -320,11 +320,11 @@ class WPUM_Directory {
 		);
 
 		$bulk_messages['wpum_directory'] = array(
-			'updated'   => _n( '%s directory updated.', '%s directory updated.', $bulk_counts['updated'], 'wprm' ),
-			'locked'    => _n( '%s directory not updated, somebody is editing it.', '%s directories not updated, somebody is editing them.', $bulk_counts['locked'], 'wprm' ),
-			'deleted'   => _n( '%s directory permanently deleted.', '%s directories permanently deleted.', $bulk_counts['deleted'], 'wprm' ),
-			'trashed'   => _n( '%s directory has been deleted.', '%s directories have been deleted.', $bulk_counts['trashed'], 'wprm' ),
-			'untrashed' => _n( '%s directory restored from the Trash.', '%s directories restored from the Trash.', $bulk_counts['untrashed'], 'wprm' ),
+			'updated'   => _n( '%s directory updated.', '%s directory updated.', $bulk_counts['updated'], 'wprm', 'wpum' ),
+			'locked'    => _n( '%s directory not updated, somebody is editing it.', '%s directories not updated, somebody is editing them.', $bulk_counts['locked'], 'wprm', 'wpum' ),
+			'deleted'   => _n( '%s directory permanently deleted.', '%s directories permanently deleted.', $bulk_counts['deleted'], 'wprm', 'wpum' ),
+			'trashed'   => _n( '%s directory has been deleted.', '%s directories have been deleted.', $bulk_counts['trashed'], 'wprm', 'wpum' ),
+			'untrashed' => _n( '%s directory restored from the Trash.', '%s directories restored from the Trash.', $bulk_counts['untrashed'], 'wprm', 'wpum' ),
 		);
 
 		return $bulk_messages;

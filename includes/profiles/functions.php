@@ -126,19 +126,19 @@ if ( ! function_exists( 'wpum_get_user_profile_tabs' ) ) :
 
 		$tabs['about'] = array(
 			'id'       => 'profile_details',
-			'title'    => __( 'Overview' ),
+			'title'    => __( 'Overview', 'wpum' ),
 			'slug'     => 'about',
 		);
 
 		$tabs['posts'] = array(
 			'id'       => 'profile_posts',
-			'title'    => __( 'Posts' ),
+			'title'    => __( 'Posts', 'wpum' ),
 			'slug'     => 'posts',
 		);
 
 		$tabs['comments'] = array(
 			'id'       => 'profile_comments',
-			'title'    => __( 'Comments' ),
+			'title'    => __( 'Comments', 'wpum' ),
 			'slug'     => 'comments',
 		);
 
@@ -283,7 +283,7 @@ function wpum_can_access_profile() {
 		$args = array(
 			'id'   => 'wpum-guests-disabled',
 			'type' => 'notice',
-			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
+			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
 		);
 		wpum_message( $args );
 		$pass = false;
@@ -295,7 +295,7 @@ function wpum_can_access_profile() {
 		$args = array(
 			'id'   => 'wpum-guests-disabled',
 			'type' => 'notice',
-			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
+			'text' => sprintf( __( 'This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum' ), wpum_get_core_page_url( 'login' ), wpum_get_core_page_url( 'register' )  )
 		);
 		wpum_message( $args );
 		$pass = false;
@@ -307,7 +307,7 @@ function wpum_can_access_profile() {
 		$args = array(
 			'id'   => 'wpum-no-access',
 			'type' => 'notice',
-			'text' => __( 'You are not authorized to access this area.' )
+			'text' => __( 'You are not authorized to access this area.', 'wpum' )
 		);
 		wpum_message( $args );
 		$pass = false;

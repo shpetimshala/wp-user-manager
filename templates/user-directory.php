@@ -45,7 +45,7 @@ if( $directory_args['template'] ) {
 		$args = array( 
 			'id'   => 'wpum-no-user-found', 
 			'type' => 'notice', 
-			'text' => __( 'No users have been found' )
+			'text' => __( 'No users have been found', 'wpum' )
 		);
 		$warning = wpum_message( $args, true );
 

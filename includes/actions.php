@@ -189,7 +189,7 @@ add_action( 'wp_login_failed', 'wpum_handle_failed_login' );
 function wpum_php_is_old() {
 	if ( version_compare( PHP_VERSION, '5.3', '<' ) ) { ?>
 		<div class="error">
-			<p><?php echo sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.'), 'http://www.wpupdatephp.com/contact-host/' ); ?></p>
+			<p><?php echo sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.', 'wpum'), 'http://www.wpupdatephp.com/contact-host/' ); ?></p>
 		</div>
 	<?php
 	}

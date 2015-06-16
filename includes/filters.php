@@ -56,7 +56,7 @@ add_filter( 'plugin_row_meta', 'wpum_plugin_row_meta', 10, 2 );
  * @return array
  */
 function wpum_add_user_id_column( $columns ) {
-    $columns['user_id'] = __( 'User ID' );
+    $columns['user_id'] = __( 'User ID', 'wpum' );
     return $columns;
 }
 add_filter( 'manage_users_columns', 'wpum_add_user_id_column' );
@@ -106,7 +106,7 @@ function wpum_admin_rate_us( $footer_text ) {
 	if ( $screen->base !== 'users_page_wpum-settings' )
 		return;
 
-	$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">WP User Manager</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'wprm' ),
+	$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">WP User Manager</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'wprm', 'wpum' ),
 		'https://wpusermanager.com',
 		'http://wordpress.org/support/view/plugin-reviews/wp-user-manager?filter=5#postform'
 	);
@@ -327,7 +327,7 @@ add_filter('get_avatar', 'wpum_get_avatar', 1, 5);
  */
 function wpum_highlight_pages( $post_states, $post ) {
 
-	$icon = '<i class="wpum-shortcodes-icon" title="'.__( 'WPUM Page' ).'"></i>';
+	$icon = '<i class="wpum-shortcodes-icon" title="'.__( 'WPUM Page', 'wpum' ).'"></i>';
 
 	if( wpum_get_core_page_id( 'login' ) == $post->ID ) {
 		$post_states['page_for_login'] = $icon;

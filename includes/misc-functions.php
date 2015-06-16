@@ -169,18 +169,18 @@ function wpum_get_permalink_structures() {
 	$structures = array(
 		'user_id' => array(
 			'name'   => 'user_id',
-			'label'  => _x( 'Display user ID', 'Permalink structure' ),
+			'label'  => _x( 'Display user ID', 'Permalink structure', 'wpum' ),
 			'sample' => '123'
 		),
 		'username' => array(
 			'name'   => 'username',
-			'label'  => _x( 'Display username', 'Permalink structure' ),
-			'sample' => _x( 'username', 'Example of permalink setting' )
+			'label'  => _x( 'Display username', 'Permalink structure', 'wpum' ),
+			'sample' => _x( 'username', 'Example of permalink setting', 'wpum' )
 		),
 		'nickname' => array(
 			'name'   => 'nickname',
-			'label'  => _x( 'Display nickname', 'Permalink structure' ),
-			'sample' => _x( 'nickname', 'Example of permalink setting' )
+			'label'  => _x( 'Display nickname', 'Permalink structure', 'wpum' ),
+			'sample' => _x( 'nickname', 'Example of permalink setting', 'wpum' )
 		),
 	);
 
@@ -411,10 +411,10 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 		foreach ( $files_to_upload as $file_key => $file_to_upload ) {
 
 			if ( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
-				return new WP_Error( 'validation-error', sprintf( __( 'Allowed files types are: %s' ), implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
+				return new WP_Error( 'validation-error', sprintf( __( 'Allowed files types are: %s', 'wpum' ), implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
 
 			if ( defined( 'WPUM_MAX_AVATAR_SIZE' ) && $field_key == 'user_avatar' && $file_to_upload['size'] > WPUM_MAX_AVATAR_SIZE )
-				return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.' ) );
+				return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.', 'wpum' ) );
 
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
@@ -500,9 +500,9 @@ function wpum_upload_file( $file, $args = array() ) {
 
 	if ( ! in_array( $file['type'], $args['allowed_mime_types'] ) ) {
 		if ( $args['file_label'] ) {
-			return new WP_Error( 'upload', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s' ), $args['file_label'], $file['type'], implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
+			return new WP_Error( 'upload', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s', 'wpum' ), $args['file_label'], $file['type'], implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
 		} else {
-			return new WP_Error( 'upload', sprintf( __( 'Uploaded files need to be one of the following file types: %s' ), implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
+			return new WP_Error( 'upload', sprintf( __( 'Uploaded files need to be one of the following file types: %s', 'wpum' ), implode( ', ', array_keys( $args['allowed_mime_types'] ) ) ) );
 		}
 	} else {
 		$upload = wp_handle_upload( $file, apply_filters( 'submit_wpum_handle_upload_overrides', array( 'test_form' => false ) ) );
@@ -553,8 +553,8 @@ function wpum_max_upload_size( $field_name ) {
 function wpum_check_permissions_button() {
 
 	$output = '<br/><br/>';
-	$output .= '<a class="button" href="'.admin_url( 'users.php?page=wpum-settings&tab=profile&wpum_action=check_folder_permission' ).'">'.__( 'Verify upload permissions' ).'</a>';
-	$output .= '<p class="description">'.__( 'Press the button above if avatar uploads does not work.' ).'</p>';
+	$output .= '<a class="button" href="'.admin_url( 'users.php?page=wpum-settings&tab=profile&wpum_action=check_folder_permission' ).'">'.__( 'Verify upload permissions', 'wpum' ).'</a>';
+	$output .= '<p class="description">'.__( 'Press the button above if avatar uploads does not work.', 'wpum' ).'</p>';
 
 	return $output;
 
@@ -589,7 +589,7 @@ function wpum_generate_pages( $redirect = false ) {
 
 		$login = wp_insert_post(
 			array(
-				'post_title'     => __( 'Login' ),
+				'post_title'     => __( 'Login', 'wpum' ),
 				'post_content'   => '[wpum_login_form]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
@@ -607,7 +607,7 @@ function wpum_generate_pages( $redirect = false ) {
 
 		$psw = wp_insert_post(
 			array(
-				'post_title'     => __( 'Password Reset' ),
+				'post_title'     => __( 'Password Reset', 'wpum' ),
 				'post_content'   => '[wpum_password_recovery form_id="" login_link="yes" psw_link="no" register_link="yes" ]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
@@ -625,7 +625,7 @@ function wpum_generate_pages( $redirect = false ) {
 
 		$register = wp_insert_post(
 			array(
-				'post_title'     => __( 'Register' ),
+				'post_title'     => __( 'Register', 'wpum' ),
 				'post_content'   => '[wpum_register form_id="" login_link="yes" psw_link="yes" register_link="no" ]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
@@ -643,7 +643,7 @@ function wpum_generate_pages( $redirect = false ) {
 
 		$account = wp_insert_post(
 			array(
-				'post_title'     => __( 'Account' ),
+				'post_title'     => __( 'Account', 'wpum' ),
 				'post_content'   => '[wpum_account]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
@@ -661,7 +661,7 @@ function wpum_generate_pages( $redirect = false ) {
 
 		$profile = wp_insert_post(
 			array(
-				'post_title'     => __( 'Profile' ),
+				'post_title'     => __( 'Profile', 'wpum' ),
 				'post_content'   => '[wpum_profile]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
@@ -695,11 +695,11 @@ function wpum_get_account_page_tabs() {
 
 	$tabs['details'] = array(
 		'id'    => 'details',
-		'title' => __('Edit Account'),
+		'title' => __('Edit Account', 'wpum'),
 	);
 	$tabs['change-password'] = array(
 		'id'    => 'change-password',
-		'title' => __('Change Password'),
+		'title' => __('Change Password', 'wpum'),
 	);
 
 	return apply_filters( 'wpum_get_account_page_tabs', $tabs );

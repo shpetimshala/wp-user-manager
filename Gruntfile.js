@@ -78,6 +78,21 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+		addtextdomain: {
+	        target: {
+	            files: {
+	                src: [
+	                    '*.php',
+	                    '**/*.php',
+	                    '!.sass-cache/**',
+	                    '!assets/**',
+	                    '!images/**',
+	                    '!node_modules/**',
+	                    '!tests/**'
+	                ]
+	            }
+	        }
+	    },
 		makepot: {
             target: {
                 options: {
@@ -178,7 +193,8 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	
 	// Default task.
-	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin', 'makepot'] );
+	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'makepot', ['makepot'] );
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 

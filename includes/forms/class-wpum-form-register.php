@@ -158,15 +158,15 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		if( $pwd_strenght == 'weak' ) {
 			if( strlen( $pwd ) < 8)
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long.', 'wpum' ) );
 		}
 		if( $pwd_strenght == 'medium' ) {
 			if( ! $containsLetter || ! $containsDigit || strlen( $pwd ) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.', 'wpum' ) );
 		}
 		if( $pwd_strenght == 'strong' ) {
 			if( ! $containsLetter || ! $containsDigit || ! $containsSpecial || strlen( $pwd ) < 8 )
-				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.' ) );
+				return new WP_Error( 'password-validation-error', __( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.', 'wpum' ) );
 		}
 
 		return $passed;
@@ -181,7 +181,7 @@ class WPUM_Form_Register extends WPUM_Form {
 	 * @return void
 	 */
 	public static function add_psw_meter( $field ) {
-		echo '<span id="password-strength">' . __( 'Strength Indicator' ) . '</span>';		
+		echo '<span id="password-strength">' . __( 'Strength Indicator', 'wpum' ) . '</span>';		
 	}
 
 	/**
@@ -219,10 +219,10 @@ class WPUM_Form_Register extends WPUM_Form {
 		$mail = $values['register'][ 'user_email' ];
 
 		if( ! is_email( $mail ) )
-			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.' ) );
+			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.', 'wpum' ) );
 
 		if( email_exists( $mail ) )
-			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
+			return new WP_Error( 'email-validation-error', __( 'Email address already exists.', 'wpum' ) );
 
 		return $passed;
 
@@ -262,7 +262,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		$fake_field = $values['register'][ 'comments' ];
 
 		if( $fake_field )
-			return new WP_Error( 'honeypot-validation-error', __( 'Failed Honeypot validation' ) );
+			return new WP_Error( 'honeypot-validation-error', __( 'Failed Honeypot validation', 'wpum' ) );
 
 		return $passed;
 
@@ -278,9 +278,9 @@ class WPUM_Form_Register extends WPUM_Form {
 	public static function add_terms( $fields ) {
 
 		$fields[ 'terms' ] = array(
-			'label'       => __('Terms &amp; Conditions'),
+			'label'       => __('Terms &amp; Conditions', 'wpum'),
 			'type'        => 'checkbox',
-			'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.'), get_permalink( wpum_get_option('terms_page') ) ),
+			'description' => sprintf(__('By registering to this website you agree to the <a href="%s" target="_blank">terms &amp; conditions</a>.', 'wpum'), get_permalink( wpum_get_option('terms_page') ) ),
 			'required'    => true,
 			'priority'    => 9999,
 		);
@@ -299,11 +299,11 @@ class WPUM_Form_Register extends WPUM_Form {
 	public static function add_role( $fields ) {
 		
 		$fields[ 'role' ] = array(
-			'label'       => __('Select Role'),
+			'label'       => __('Select Role', 'wpum'),
 			'type'        => 'select',
 			'required'    => true,
 			'options'     => wpum_get_allowed_user_roles(),
-			'description' => __('Select your user role'),
+			'description' => __('Select your user role', 'wpum'),
 			'priority'    => 9999,
 		);
 
@@ -324,7 +324,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		$selected_roles = array_flip( wpum_get_option( 'register_roles' ) );
 
 		if( !array_key_exists( $role_field , $selected_roles ) )
-			return new WP_Error( 'role-validation-error', __( 'Select a valid role from the list.' ) );
+			return new WP_Error( 'role-validation-error', __( 'Select a valid role from the list.', 'wpum' ) );
 
 		return $passed;
 
@@ -356,7 +356,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		$nickname = $values['register'][ 'username' ];
 
 		if( wpum_get_option('exclude_usernames') && array_key_exists( $nickname , wpum_get_disabled_usernames() ) )
-			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.' ) );
+			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.', 'wpum' ) );
 
 		// Check for nicknames if permalink structure requires unique nicknames.
 		if( get_option('wpum_permalink') == 'nickname'  ) :
@@ -364,7 +364,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			$current_user = wp_get_current_user();
 
 			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
-				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.', 'wpum' ) );
 
 		endif;
 
@@ -469,7 +469,7 @@ class WPUM_Form_Register extends WPUM_Form {
 				wp_new_user_notification( $do_user, $pwd );
 			endif;
 
-			self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.' ) ) );
+			self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.', 'wpum' ) ) );
 
 			// Add ability to extend registration process.				
 			do_action( "wpum/form/register/success" , $user_id, $values );
@@ -504,7 +504,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			$message = array( 
 				'id'   => 'wpum-registrations-disabled', 
 				'type' => 'notice', 
-				'text' => __( 'Registrations are currently disabled.' )
+				'text' => __( 'Registrations are currently disabled.', 'wpum' )
 			);
 			wpum_message( $message );
 

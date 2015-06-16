@@ -69,11 +69,11 @@ class WPUM_Shortcodes {
 		if(empty($label_username))
 			$label_username = wpum_get_username_label();
 		if(empty($label_password))
-			$label_password = __('Password');
+			$label_password = __('Password', 'wpum');
 		if(empty($label_remember))
-			$label_remember = __('Remember Me');
+			$label_remember = __('Remember Me', 'wpum');
 		if(empty($label_log_in))
-			$label_log_in = __('Login');
+			$label_log_in = __('Login', 'wpum');
 
 		$args = array(
 			'echo'           => true,
@@ -136,13 +136,13 @@ class WPUM_Shortcodes {
 
 		extract( shortcode_atts( array(
 			'redirect' => '',
-			'label'    => __('Logout')
+			'label'    => __('Logout', 'wpum')
 		), $atts ) );
 
 		$output = null;
 
 		if(is_user_logged_in())
-			$output = sprintf( __('<a href="%s">%s</a>'), wpum_logout_url($redirect), esc_attr($label) );
+			$output = sprintf( __('<a href="%s">%s</a>', 'wpum'), wpum_logout_url($redirect), esc_attr($label) );
 
 		return $output;
 
@@ -328,7 +328,7 @@ class WPUM_Shortcodes {
 			$args = array( 
 				'id'   => 'wpum-guests-disabled', 
 				'type' => 'notice', 
-				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( apply_filters( 'wpum_restrict_logged_in_message', $args ), true );
 
@@ -367,7 +367,7 @@ class WPUM_Shortcodes {
 			$args = array( 
 				'id'   => 'wpum-guests-disabled', 
 				'type' => 'notice', 
-				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( apply_filters( 'wpum_restrict_to_users_message', $args ), true );
 
@@ -408,7 +408,7 @@ class WPUM_Shortcodes {
 			$args = array( 
 				'id'   => 'wpum-guests-disabled', 
 				'type' => 'notice', 
-				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( apply_filters( 'wpum_restrict_to_user_roles_args', $args ), true );
 
@@ -445,7 +445,7 @@ class WPUM_Shortcodes {
 			$args = array( 
 				'id'   => 'wpum-no-user-directory-id', 
 				'type' => 'error', 
-				'text' => __( 'Something went wrong, you have not set a directory ID or the directory is not published.' )
+				'text' => __( 'Something went wrong, you have not set a directory ID or the directory is not published.', 'wpum' )
 			);
 			$warning = wpum_message( $args, true );
 			return;

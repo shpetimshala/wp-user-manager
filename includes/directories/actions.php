@@ -49,8 +49,8 @@ function wpum_user_directory_pagination( $directory_args ) {
 			'format'    => isset( $_GET['sort'] ) || isset( $_GET['amount'] ) ? '&paged=%#%' : '?paged=%#%',
 			'current'   => $directory_args['paged'],
 			'total'     => $directory_args['total_pages'],
-			'prev_text' => __( 'Previous page' ),
-			'next_text' => __( 'Next page' )
+			'prev_text' => __( 'Previous page', 'wpum' ),
+			'next_text' => __( 'Next page', 'wpum' )
 		)
 	);
 

@@ -161,7 +161,7 @@ class WPUM_Getting_Started {
 
 			<?php $this->tabs(); ?>
 
-			<p class="about-description"><?php _e('Come back at a later point when major updates are released.'); ?></p>
+			<p class="about-description"><?php _e('Come back at a later point when major updates are released.', 'wpum'); ?></p>
 
 		</div>
 		<?php
@@ -184,30 +184,30 @@ class WPUM_Getting_Started {
 
 			<?php $this->tabs(); ?>
 
-			<p class="about-description"><?php _e('Use the tips below to get started using WP User Manager. You will be up and running in no time!'); ?></p>
+			<p class="about-description"><?php _e('Use the tips below to get started using WP User Manager. You will be up and running in no time!', 'wpum'); ?></p>
 
 			<div id="welcome-panel" class="welcome-panel" style="padding-top:0px;">
 				<div class="welcome-panel-content">
 					<div class="welcome-panel-column-container">
 						<div class="welcome-panel-column">
-							<h4><?php _e( 'Configure WP User Manager' );?></h4>
+							<h4><?php _e( 'Configure WP User Manager', 'wpum' );?></h4>
 							<ul>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[password_strength]" class="welcome-icon dashicons-lock" target="_blank"><?php _e('Strengthen your passwords'); ?></a></li>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[login_method]" class="welcome-icon dashicons-admin-network" target="_blank"><?php _e('Setup login method'); ?></a></li>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=emails' ); ?>" class="welcome-icon dashicons-email-alt" target="_blank"><?php _e('Customize notifications'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[password_strength]" class="welcome-icon dashicons-lock" target="_blank"><?php _e('Strengthen your passwords', 'wpum'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>#wpum_settings[login_method]" class="welcome-icon dashicons-admin-network" target="_blank"><?php _e('Setup login method', 'wpum'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=emails' ); ?>" class="welcome-icon dashicons-email-alt" target="_blank"><?php _e('Customize notifications', 'wpum'); ?></a></li>
 							</ul>
 						</div>
 						<div class="welcome-panel-column">
-							<h4><?php _e( 'Customize Profiles' );?></h4>
+							<h4><?php _e( 'Customize Profiles', 'wpum' );?></h4>
 							<ul>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=profile' ); ?>" class="welcome-icon dashicons-admin-users" target="_blank"><?php _e('Customize profiles'); ?></a></li>
-								<li><a href="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields'); ?></a></li>
-								<li><a href="<?php echo admin_url( 'edit.php?post_type=wpum_directory' ); ?>" class="welcome-icon dashicons-groups" target="_blank"><?php _e('Create user directories'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=profile' ); ?>" class="welcome-icon dashicons-admin-users" target="_blank"><?php _e('Customize profiles', 'wpum'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields', 'wpum'); ?></a></li>
+								<li><a href="<?php echo admin_url( 'edit.php?post_type=wpum_directory' ); ?>" class="welcome-icon dashicons-groups" target="_blank"><?php _e('Create user directories', 'wpum'); ?></a></li>
 							</ul>
 						</div>
 						<div class="welcome-panel-column welcome-panel-last">
-							<h4><?php _e('Documentation'); ?></h4>
-							<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __( 'Looking for help? <a href="%s" target="_blank">WP User Manager documentation</a> has got you covered.' ), 'http://documentation.wpusermanager.com' ); ?> <br/><br/><a href="http://documentation.wpusermanager.com" class="button" target="_blank"><?php _e('Read documentation') ;?></a></p>
+							<h4><?php _e('Documentation', 'wpum'); ?></h4>
+							<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __( 'Looking for help? <a href="%s" target="_blank">WP User Manager documentation</a> has got you covered.', 'wpum' ), 'http://documentation.wpusermanager.com' ); ?> <br/><br/><a href="http://documentation.wpusermanager.com" class="button" target="_blank"><?php _e('Read documentation', 'wpum') ;?></a></p>
 						</div>
 					</div>
 				</div>
@@ -218,20 +218,20 @@ class WPUM_Getting_Started {
 				<div class="feature-section col two-col">
 
 					<div>
-						<h3><?php _e('Looking for help ?'); ?></h3>
-						<p><?php echo sprintf( __('We do all we can to provide every user with the best support possible. If you encounter a problem or have a question, please <a href="%s" target="_blank">contact us.</a> Make sure you <a href="%s">read the documentation</a> first.'), 'http://wpusermanager.com/contacts', 'http://documentation.wpusermanager.com' ); ?></p>
+						<h3><?php _e('Looking for help ?', 'wpum'); ?></h3>
+						<p><?php echo sprintf( __('We do all we can to provide every user with the best support possible. If you encounter a problem or have a question, please <a href="%s" target="_blank">contact us.</a> Make sure you <a href="%s">read the documentation</a> first.', 'wpum'), 'http://wpusermanager.com/contacts', 'http://documentation.wpusermanager.com' ); ?></p>
 					</div>
 					
 					<div class="last-feature">
-						<h3><?php _e('Get Notified of Extension Releases'); ?></h3>
-						<p><?php echo sprintf( __('New extensions that make WP User Manager even more powerful will be released soon. Subscribe to the newsletter to stay up to date with our latest releases. Signup now to ensure you do not miss a release!'), '#' ); ?></p>
-						<a href="http://wpusermanager.com/newsletter" class="button"><?php _e('Signup Now'); ?> &raquo;</a>
+						<h3><?php _e('Get Notified of Extension Releases', 'wpum'); ?></h3>
+						<p><?php echo sprintf( __('New extensions that make WP User Manager even more powerful will be released soon. Subscribe to the newsletter to stay up to date with our latest releases. Signup now to ensure you do not miss a release!', 'wpum'), '#' ); ?></p>
+						<a href="http://wpusermanager.com/newsletter" class="button"><?php _e('Signup Now', 'wpum'); ?> &raquo;</a>
 					</div>
 
 					<hr>
 
 					<div class="return-to-dashboard">
-						<a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>"><?php _e('Go To WP User Manager &rarr; Settings'); ?></a>
+						<a href="<?php echo admin_url( 'users.php?page=wpum-settings' ); ?>"><?php _e('Go To WP User Manager &rarr; Settings', 'wpum'); ?></a>
 					</div>
 				
 				</div>

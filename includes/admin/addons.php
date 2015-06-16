@@ -77,7 +77,7 @@ class WPUM_Addons {
 	 */
 	public function wpum_add_addon_tab( $tabs ) {
 		
-		$tabs['wpum_addons'] = __( 'WP User Manager ' ) . '<span class="wpum-addons">'.__('Addons').'</span>' ;
+		$tabs['wpum_addons'] = __( 'WP User Manager ', 'wpum' ) . '<span class="wpum-addons">'.__('Addons', 'wpum').'</span>' ;
 		return $tabs;
 
 	}
@@ -96,7 +96,7 @@ class WPUM_Addons {
 
 			<?php if( empty( $this->addons ) ) : ?>
 			
-				<p><?php echo sprintf( __('Looks like there was a problem while retrieving the list of addons. Please visit <a href="%s">%s</a> if you are looking for the WP User Manager addons.'), 'http://wpusermanager.com/addons/', 'http://wpusermanager.com/addons/' ); ?></p>
+				<p><?php echo sprintf( __('Looks like there was a problem while retrieving the list of addons. Please visit <a href="%s">%s</a> if you are looking for the WP User Manager addons.', 'wpum'), 'http://wpusermanager.com/addons/', 'http://wpusermanager.com/addons/' ); ?></p>
 			
 			<?php else : ?>
 				
@@ -137,7 +137,7 @@ class WPUM_Addons {
 				echo '</div>';
 			echo '</div>';
 			echo '<div class="plugin-card-bottom">';
-				echo '<a target="_blank" href="'.$addon->link.'" class="button" style="display:block; text-align:center;">'.__('Read More').'</a>';
+				echo '<a target="_blank" href="'.$addon->link.'" class="button" style="display:block; text-align:center;">'.__('Read More', 'wpum').'</a>';
 			echo '</div>';
 		echo '</div>';
 

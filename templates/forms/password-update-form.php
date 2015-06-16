@@ -19,8 +19,8 @@
 
 		<!-- Start Name Fields -->
 		<?php foreach ( $password_fields as $key => $field ) : ?>
-			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key ); ?>">
-				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
+			<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key, 'wpum' ); ?>">
+				<label for="<?php esc_attr_e( $key, 'wpum' ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum_before_single_{$field['type']}_field", $form, $field ); ?>
 					<?php echo wpum_get_field_input_html( $key, $field ); ?>
@@ -36,7 +36,7 @@
 
 		<p class="wpum-submit">
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="submit" id="submit_wpum_update_password" name="submit_wpum_update_password" class="button" value="<?php _e( 'Update Password' ); ?>" />
+			<input type="submit" id="submit_wpum_update_password" name="submit_wpum_update_password" class="button" value="<?php _e( 'Update Password', 'wpum' ); ?>" />
 		</p>
 
 	</form>

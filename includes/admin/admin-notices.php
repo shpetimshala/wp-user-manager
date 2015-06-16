@@ -40,7 +40,7 @@ function wpum_admin_messages() {
 
 		// Display error if no core page is setup
 		if ( !wpum_get_option('login_page') || !wpum_get_option('password_recovery_page') || !wpum_get_option('registration_page') || !wpum_get_option('account_page') || !wpum_get_option('profile_page') ) {
-			add_settings_error( 'wpum-notices', 'page-missing', __('One or more WPUM pages are not configured.') . ' ' . sprintf( __('<a href="%s" class="button-primary">Click here to setup your pages</a>'), admin_url( 'users.php?page=wpum-settings&tab=general&wpum_action=install_pages' ) ), 'error' );	
+			add_settings_error( 'wpum-notices', 'page-missing', __('One or more WPUM pages are not configured.', 'wpum') . ' ' . sprintf( __('<a href="%s" class="button-primary">Click here to setup your pages</a>', 'wpum'), admin_url( 'users.php?page=wpum-settings&tab=general&wpum_action=install_pages' ) ), 'error' );	
 		}
 
 		// Display error if wrong permalinks

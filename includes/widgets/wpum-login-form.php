@@ -28,52 +28,52 @@ class WPUM_Login_Form_Widget extends WPH_Widget {
 
 		// Configure widget array
 		$args = array(
-			'label'       => __( '[WPUM] Login Form' ),
-			'description' => __( 'Display login form.' ),
+			'label'       => __( '[WPUM] Login Form', 'wpum' ),
+			'description' => __( 'Display login form.', 'wpum' ),
 		);
 
 		$args['fields'] = array(
 			array(
-				'name'   => __( 'Title' ),
+				'name'   => __( 'Title', 'wpum' ),
 				'id'     => 'title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'Login' ),
+				'std'    => __( 'Login', 'wpum' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'   => __( 'Logged In title' ),
-				'desc'   => __(' This title will be displayed when logged in.'),
+				'name'   => __( 'Logged In title', 'wpum' ),
+				'desc'   => __(' This title will be displayed when logged in.', 'wpum'),
 				'id'     => 'logged_in_title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'My Account' ),
+				'std'    => __( 'My Account', 'wpum' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'     => __( 'Display login link' ),
+				'name'     => __( 'Display login link', 'wpum' ),
 				'id'       => 'login_link',
 				'type'     =>'checkbox',
 				'std'      => 0,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display password recovery link' ),
+				'name'     => __( 'Display password recovery link', 'wpum' ),
 				'id'       => 'psw_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display registration link' ),
+				'name'     => __( 'Display registration link', 'wpum' ),
 				'id'       => 'register_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'   => __( 'Display profile overview' ),
-				'desc'   => __('If enabled, once logged in, an overview of the current user profile will appear.'),
+				'name'   => __( 'Display profile overview', 'wpum' ),
+				'desc'   => __('If enabled, once logged in, an overview of the current user profile will appear.', 'wpum'),
 				'id'     => 'current_profile',
 				'type'   =>'checkbox',
 				'std'    => 1,

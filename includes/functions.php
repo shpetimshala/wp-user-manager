@@ -21,9 +21,9 @@ if ( ! function_exists( 'wpum_get_login_methods' ) ) :
 	 */
 	function wpum_get_login_methods() {
 		return apply_filters( 'wpum_get_login_methods', array(
-				'username'       => __( 'Username only' ),
-				'email'          => __( 'Email only' ),
-				'username_email' => __( 'Username or Email' ),
+				'username'       => __( 'Username only', 'wpum' ),
+				'email'          => __( 'Email only', 'wpum' ),
+				'username_email' => __( 'Username or Email', 'wpum' ),
 			) );
 	}
 endif;
@@ -38,10 +38,10 @@ if ( ! function_exists( 'wpum_get_psw_lengths' ) ) :
 	 */
 	function wpum_get_psw_lengths() {
 		return apply_filters( 'wpum_get_psw_lengths', array(
-				''       => __( 'Disabled' ),
-				'weak'   => __( 'Weak' ),
-				'medium' => __( 'Medium' ),
-				'strong' => __( 'Strong' ),
+				''       => __( 'Disabled', 'wpum' ),
+				'weak'   => __( 'Weak', 'wpum' ),
+				'medium' => __( 'Medium', 'wpum' ),
+				'strong' => __( 'Strong', 'wpum' ),
 			) );
 	}
 endif;
@@ -84,12 +84,12 @@ if ( ! function_exists( 'wpum_get_username_label' ) ) :
 	 */
 	function wpum_get_username_label() {
 
-		$label = __( 'Username' );
+		$label = __( 'Username', 'wpum' );
 
 		if ( wpum_get_option( 'login_method' ) == 'email' ) {
-			$label = __( 'Email' );
+			$label = __( 'Email', 'wpum' );
 		} else if ( wpum_get_option( 'login_method' ) == 'username_email' ) {
-				$label = __( 'Username or email' );
+				$label = __( 'Username or email', 'wpum' );
 			}
 
 		return $label;
@@ -112,9 +112,9 @@ if ( ! function_exists( 'wpum_login_form' ) ) :
 			'redirect'       => wpum_get_login_redirect_url(),
 			'form_id'        => null,
 			'label_username' => wpum_get_username_label(),
-			'label_password' => __( 'Password' ),
-			'label_remember' => __( 'Remember Me' ),
-			'label_log_in'   => __( 'Login' ),
+			'label_password' => __( 'Password', 'wpum' ),
+			'label_remember' => __( 'Remember Me', 'wpum' ),
+			'label_log_in'   => __( 'Login', 'wpum' ),
 			'id_username'    => 'user_login',
 			'id_password'    => 'user_pass',
 			'id_remember'    => 'rememberme',

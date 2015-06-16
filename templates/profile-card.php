@@ -39,10 +39,10 @@ if ( $template ) {
 		<?php if ( $display_buttons ) : ?>
 
 			<?php if ( $link_to_profile ) : ?>
-				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>" class="wpum-card-button"><?php _e( 'View Profile' );?></a>
+				<a href="<?php echo wpum_get_user_profile_url( $user_data ); ?>" class="wpum-card-button"><?php _e( 'View Profile', 'wpum' );?></a>
 			<?php endif; ?>
 
-			<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-card-button"><?php _e( 'Send Email' );?></a>
+			<a href="mailto:<?php echo antispambot( $user_data->user_email );?>" class="wpum-card-button"><?php _e( 'Send Email', 'wpum' );?></a>
 
 		<?php endif; ?>
 

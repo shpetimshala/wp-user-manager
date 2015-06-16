@@ -57,7 +57,7 @@ $all_tabs = array_keys( $tabs );
 		$args = array(
 			'id'   => 'wpum-not-found',
 			'type' => 'notice',
-			'text' => __( 'Content not found.' )
+			'text' => __( 'Content not found.', 'wpum' )
 		);
 		wpum_message( $args );
 

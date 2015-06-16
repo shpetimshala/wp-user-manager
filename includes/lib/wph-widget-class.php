@@ -423,7 +423,7 @@ if ( ! class_exists( 'WPH_Widget' ) )
 
             $value = isset( $key['value'] ) ? $key['value'] : $key['std'];
 
-            $out .= 'id="' . esc_attr( $key['_id'] ) . '" name="' . esc_attr( $key['_name'] ) . '" value="' . esc_attr__( $value ) . '" ';
+            $out .= 'id="' . esc_attr( $key['_id'] ) . '" name="' . esc_attr( $key['_name'] ) . '" value="' . esc_attr__( $value, 'wpum' ) . '" ';
 
             if ( isset( $key['size'] ) )
                 $out .= 'size="' . esc_attr( $key['size'] ) . '" ';             
@@ -534,7 +534,7 @@ if ( ! class_exists( 'WPH_Widget' ) )
                 foreach ( $key['fields'] as $field => $option ) 
                 {
 
-                    $out .= '<option value="' . esc_attr__( $option['value'] ) . '" ';
+                    $out .= '<option value="' . esc_attr__( $option['value'], 'wpum' ) . '" ';
 
                     if ( esc_attr( $selected ) == $option['value'] )
                         $out .= ' selected="selected" ';
@@ -625,7 +625,7 @@ if ( ! class_exists( 'WPH_Widget' ) )
 
             $value = isset( $key['value'] ) ? $key['value'] : $key['std'];
 
-            $out .= 'id="' . esc_attr( $key['_id'] ) . '" name="' . esc_attr( $key['_name'] ) . '" value="' . esc_attr__( $value ) . '" ';
+            $out .= 'id="' . esc_attr( $key['_id'] ) . '" name="' . esc_attr( $key['_name'] ) . '" value="' . esc_attr__( $value, 'wpum' ) . '" ';
 
             if ( isset( $key['size'] ) )
                 $out .= 'size="' . esc_attr( $key['size'] ) . '" ';             

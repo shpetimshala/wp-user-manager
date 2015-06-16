@@ -70,10 +70,10 @@ function wp_new_user_notification( $user_id, $plaintext_pass ) {
 
 	// Send notification to admin if not disabled.
 	if ( !wpum_get_option( 'disable_admin_register_email' ) ) {
-		$message  = sprintf( __( 'New user registration on your site %s:' ), $blogname ) . "\r\n\r\n";
-		$message .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
-		$message .= sprintf( __( 'E-mail: %s' ), $user->user_email ) . "\r\n";
-		wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration' ), $blogname ), $message );
+		$message  = sprintf( __( 'New user registration on your site %s:', 'wpum' ), $blogname ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Username: %s', 'wpum' ), $user->user_login ) . "\r\n\r\n";
+		$message .= sprintf( __( 'E-mail: %s', 'wpum' ), $user->user_email ) . "\r\n";
+		wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'wpum' ), $blogname ), $message );
 	}
 
 	/* == Send notification to the user now == */

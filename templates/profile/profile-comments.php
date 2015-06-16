@@ -40,7 +40,7 @@ $comments = get_comments( $args );
 				$the_date = get_comment_date( get_option( 'date_format' ), $comment->comment_ID );
 			?>
 
-			<p><?php printf( _x( '"%s" on <a href="%s">%s</a>, %s.', 'This text displays the comments left by the user on his profile page.' ), $comment_content, $the_permalink, $the_post, $the_date ); ?></p>
+			<p><?php printf( _x( '"%s" on <a href="%s">%s</a>, %s.', 'This text displays the comments left by the user on his profile page.', 'wpum' ), $comment_content, $the_permalink, $the_post, $the_date ); ?></p>
 
 			</div>
 
@@ -52,7 +52,7 @@ $comments = get_comments( $args );
 			$args = array( 
 				'id'   => 'wpum-comments-not-found', 
 				'type' => 'notice', 
-				'text' => sprintf( __( '%s has not made any comment yet.' ), $user_data->display_name )
+				'text' => sprintf( __( '%s has not made any comment yet.', 'wpum' ), $user_data->display_name )
 			);
 			wpum_message( $args );
 

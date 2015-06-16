@@ -46,9 +46,9 @@ if ( ! class_exists( 'WPPF_Image_Field' ) ) {
 		static function normalize_field( $field ) {
 
 			$field = wp_parse_args( $field, array(
-				'button_label' => __('Upload'),
-				'frame_title' => __('Select or upload an image'),
-				'frame_button' => __('Insert image')
+				'button_label' => __('Upload', 'wpum'),
+				'frame_title' => __('Select or upload an image', 'wpum'),
+				'frame_button' => __('Insert image', 'wpum')
 			) );
 
 			return $field;

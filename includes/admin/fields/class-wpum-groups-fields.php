@@ -45,7 +45,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
      * @access public
      */
     public function no_items() {
-        _e( 'No fields have been found.' );
+        _e( 'No fields have been found.', 'wpum' );
     }
 
     /**
@@ -57,11 +57,11 @@ class WPUM_Groups_Fields extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'order'    => __('Order'),
-            'title'    => __('Field Title'),
-            'type'     => __('Field Type'),
-            'required' => __('Required'),
-            'actions'  => __('Actions'),
+            'order'    => __('Order', 'wpum'),
+            'title'    => __('Field Title', 'wpum'),
+            'type'     => __('Field Type', 'wpum'),
+            'required' => __('Required', 'wpum'),
+            'actions'  => __('Actions', 'wpum'),
         );
 
         return $columns;
@@ -176,18 +176,18 @@ class WPUM_Groups_Fields extends WP_List_Table {
      */
     public function parse_type( $type ) {
 
-        $text = __('Text');
+        $text = __('Text', 'wpum');
 
         if( $type == 'email' ) {
-            $text = __('Email');
+            $text = __('Email', 'wpum');
         } elseif ( $type == 'select' || $type == 'display_name' ) {
-            $text = __('Dropdown');
+            $text = __('Dropdown', 'wpum');
         } elseif ( $type == 'textarea' ) {
-            $text = __('Textarea');
+            $text = __('Textarea', 'wpum');
         } elseif ( $type == 'password' ) {
-            $text = __('Password');
+            $text = __('Password', 'wpum');
         } elseif ( $type == 'file' || $type == 'avatar' ) {
-            $text = __('Upload');
+            $text = __('Upload', 'wpum');
         }
 
         return apply_filters( 'wpum_fields_editor_types', $text );
@@ -221,13 +221,13 @@ class WPUM_Groups_Fields extends WP_List_Table {
     private function get_actions( $item ) {
 
         $edit_url = add_query_arg( array( 'action' => 'edit_field', 'field' => sanitize_key( $item['id'] ), 'from_group' => sanitize_key( $item['group_id'] ) ), admin_url( 'users.php?page=wpum-edit-field' ) );
-        echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__( 'Edit' ).'</a> ';
+        echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__( 'Edit', 'wpum' ).'</a> ';
 
         // Display delete button if field can be deleted.
         if( $item['can_delete'] ) {
             
             $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => sanitize_key( $item['id'] ) ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
-            echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete' ).'</a> ';
+            echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete', 'wpum' ).'</a> ';
 
         }
 

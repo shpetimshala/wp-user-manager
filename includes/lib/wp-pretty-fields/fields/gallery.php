@@ -87,11 +87,11 @@ if ( ! class_exists( 'WPPF_Gallery_Field' ) ) {
 		static function normalize_field( $field ) {
 
 			$field = wp_parse_args( $field, array(
-				'button_create'  => __('Add/Edit Gallery'),
-				'button_delete'  => __('Delete Gallery'),
-				'frame_title'    => __('Select or upload images to create a gallery'),
-				'frame_button'   => __('Insert gallery'),
-				'delete_message' => __('Are you sure you want to delete the gallery?')				
+				'button_create'  => __('Add/Edit Gallery', 'wpum'),
+				'button_delete'  => __('Delete Gallery', 'wpum'),
+				'frame_title'    => __('Select or upload images to create a gallery', 'wpum'),
+				'frame_button'   => __('Insert gallery', 'wpum'),
+				'delete_message' => __('Are you sure you want to delete the gallery?', 'wpum')				
 			) );
 
 			return $field;

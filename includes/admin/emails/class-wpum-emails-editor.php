@@ -61,7 +61,7 @@ class WPUM_Emails_Editor {
 	    $wpum_emails_table->prepare_items();
 	    $wpum_emails_table->display();
 
-	    echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.') . '</p>';
+	    echo '<p class="description">' . __('Click the "Edit Email" button to customize notifications.', 'wpum') . '<br/>' . __('Only the emails into the list above, will use the "From Name" and "From Email" options above.', 'wpum') . '</p>';
 
 		echo ob_get_clean();
 
@@ -77,7 +77,7 @@ class WPUM_Emails_Editor {
 
 		// Abort if not correctly loaded
 		if ( !isset( $_GET['wpum_action'] ) || isset( $_GET['wpum_action'] ) && $_GET['wpum_action'] !== 'edit' || !current_user_can( 'manage_options' ) || !isset( $_GET['email-id'] ) || !isset( $_GET['email-title'] ) ) {
-			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message', 'wpum' ), '1.0.0' );
 			return;
 		}
 
@@ -100,22 +100,22 @@ class WPUM_Emails_Editor {
 		}
 
 		if( ! current_user_can( 'manage_options' ) ) {
-			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message', 'wpum' ), '1.0.0' );
 			return;
 		}
 
 		if( ! wp_verify_nonce( $data['wpum-email-nonce'], 'wpum_email_nonce' ) ) {
-			_doing_it_wrong( __FUNCTION__ , _x( 'Nonce verification failed', '_doing_it_wrong error message' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'Nonce verification failed', '_doing_it_wrong error message', 'wpum' ), '1.0.0' );
 			return;
 		}
 
 		if( ! isset( $data['email_id'] ) ) {
-			_doing_it_wrong( __FUNCTION__ , _x( 'No email ID was provided', '_doing_it_wrong error message' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'No email ID was provided', '_doing_it_wrong error message', 'wpum' ), '1.0.0' );
 			return;
 		}
 
 		// Store the data
-		$subject = isset( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : sprintf( __('%s email'), $data['email_id'] );
+		$subject = isset( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : sprintf( __('%s email', 'wpum'), $data['email_id'] );
 		$message = isset( $data['message'] ) ? wp_kses( $data['message'], $this->allowed_email_tags ) : false;
 
 		$emails[ esc_attr( $data['email_id'] ) ] = array(

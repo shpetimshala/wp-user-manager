@@ -30,12 +30,12 @@ $posts_query = new WP_Query( apply_filters( 'wpum_profile_posts_query_args', $ar
 						
 					<ul class="wpum-post-meta">
 						<li>
-							<strong><?php _e( 'Posted on:' ); ?></strong>
+							<strong><?php _e( 'Posted on:', 'wpum' ); ?></strong>
 							<?php echo get_the_date(); ?> -
 						</li>
 						<li>
-							<strong><?php _e( 'Comments:' ); ?></strong>
-							<?php comments_popup_link( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?>
+							<strong><?php _e( 'Comments:', 'wpum' ); ?></strong>
+							<?php comments_popup_link( __( 'No Comments', 'wpum' ), __( '1 Comment', 'wpum' ), __( '% Comments', 'wpum' ) ); ?>
 						</li>
 					</ul>
 
@@ -49,7 +49,7 @@ $posts_query = new WP_Query( apply_filters( 'wpum_profile_posts_query_args', $ar
 			$args = array( 
 				'id'   => 'wpum-posts-not-found', 
 				'type' => 'notice', 
-				'text' => sprintf( __( '%s did not submit any posts yet.' ), $user_data->display_name )
+				'text' => sprintf( __( '%s did not submit any posts yet.', 'wpum' ), $user_data->display_name )
 			);
 			wpum_message( $args );
 

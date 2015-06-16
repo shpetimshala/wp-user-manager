@@ -147,7 +147,7 @@ class WPUM_Fields_Editor {
 		<div class="wrap wpum-fields-editor-wrap">
 
 			<h2 class="wpum-page-title">
-				<?php _e( 'WP User Manager - Fields Editor' ); ?>
+				<?php _e( 'WP User Manager - Fields Editor', 'wpum' ); ?>
 				<?php do_action( 'wpum/fields/editor/title' ); ?>
 			</h2>
 
@@ -201,7 +201,7 @@ class WPUM_Fields_Editor {
 		if( empty( $groups ) ) :
 
 			$output = '<div class="message error"><p>';
-				$output .= __('It seems you do not have any field groups. Please deactivate and re-activate the plugin.');
+				$output .= __('It seems you do not have any field groups. Please deactivate and re-activate the plugin.', 'wpum');
 			$output .= '</p></div>';
 
 		else:  
@@ -220,7 +220,7 @@ class WPUM_Fields_Editor {
 					// Generate dropdown menu
 					$args = array(
 						'options'          => $options,
-						'label'            => __('Select a field group to edit:'),
+						'label'            => __('Select a field group to edit:', 'wpum'),
 						'id'               => 'wpum-group-selector',
 						'name'             => 'group',
 						'selected'         => ( isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) ? (int) $_GET['group'] : false,
@@ -230,7 +230,7 @@ class WPUM_Fields_Editor {
 					);
 
 					$output .= '<p>' . WPUM()->html->select( $args );
-						$output .= '<span class="submit-btn"><input type="submit" class="button-secondary" value="'.__('Select').'"></span>';
+						$output .= '<span class="submit-btn"><input type="submit" class="button-secondary" value="'.__('Select', 'wpum').'"></span>';
 					$output .= '</p>';
 
 				$output .= '</form>';
@@ -301,8 +301,8 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'wpum_fields_editor_edit_group', __( 'Group Settings' ), array( $this, 'group_settings' ), self::editor_hook, 'side' );
-		add_meta_box( 'wpum_fields_editor_help', __( 'Fields Order' ), array( $this, 'help_text' ), self::editor_hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_edit_group', __( 'Group Settings', 'wpum' ), array( $this, 'group_settings' ), self::editor_hook, 'side' );
+		add_meta_box( 'wpum_fields_editor_help', __( 'Fields Order', 'wpum' ), array( $this, 'help_text' ), self::editor_hook, 'side' );
 	}
 
 	/**
@@ -315,11 +315,11 @@ class WPUM_Fields_Editor {
 
 		// Add Field Requirement metabox
 		if( $this->field_object->set_requirement )
-			add_meta_box( 'wpum_field_requirement', __( 'Requirement' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_field_requirement', __( 'Requirement', 'wpum' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
 		// Add option to display on registration form if it's in primary group.
 		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration )
-			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form', 'wpum' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
 	}
 
 	/**
@@ -331,7 +331,7 @@ class WPUM_Fields_Editor {
 	public static function help_text( $current_menu = null ) {
 
 		$output = '<p>';
-			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.'), '<span class="dashicons dashicons-menu"></span>');
+			$output .= sprintf( __('Click and drag the %s button to change the order of the fields.', 'wpum'), '<span class="dashicons dashicons-menu"></span>');
 		$output .= '</p>';
 
 		echo $output;
@@ -351,7 +351,7 @@ class WPUM_Fields_Editor {
 
 		<p>
 			<span class="dashicons dashicons-info"></span>
-			<?php _e('Fields into this group can appear on the signup page.') ;?>
+			<?php _e('Fields into this group can appear on the signup page.', 'wpum') ;?>
 		</p>
 
 		<?php
@@ -368,7 +368,7 @@ class WPUM_Fields_Editor {
 		$name_args = array(
 			'name'         => 'name',
 			'value'        => esc_html( $this->group->name ),
-			'label'        => __('Group name'),
+			'label'        => __('Group name', 'wpum'),
 			'class'        => 'text',
 		);
 
@@ -376,7 +376,7 @@ class WPUM_Fields_Editor {
 		$description_args = array(
 			'name'         => 'description',
 			'value'        => esc_html( $this->group->description ),
-			'label'        => __('Group description'),
+			'label'        => __('Group description', 'wpum'),
 			'class'        => 'textarea',
 		);
 
@@ -395,14 +395,14 @@ class WPUM_Fields_Editor {
 			<div id="major-publishing-actions">
 				<div id="delete-action">
 					<?php if( !$this->group->is_primary && $this->group->can_delete ) : ?>
-						<a class="submitdelete deletion" href="<?php echo $delete_url; ?>"><?php _e('Delete Group'); ?></a>
+						<a class="submitdelete deletion" href="<?php echo $delete_url; ?>"><?php _e('Delete Group', 'wpum'); ?></a>
 					<?php endif; ?>
 				</div>
 				<div id="publishing-action">
 					<input type="hidden" name="wpum-action" value="edit_group"/>
 					<input type="hidden" name="group" value="<?php echo ( isset( $_GET['group'] ) ) ? (int) $_GET['group'] : (int) $this->group->id; ?>"/>
 					<?php wp_nonce_field( 'wpum_group_settings' ); ?>
-					<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings'); ?>">
+					<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Group Settings', 'wpum'); ?>">
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -484,8 +484,8 @@ class WPUM_Fields_Editor {
 		<div class="wrap wpum-fields-editor-wrap">
 
 			<h2 class="wpum-page-title">
-				<?php echo __( 'Editing field' ); ?>
-				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2"><?php _e('Back to editor'); ?></a>
+				<?php echo __( 'Editing field', 'wpum' ); ?>
+				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2"><?php _e('Back to editor', 'wpum'); ?></a>
 			</h2>
 
 			<form name="wpum-edit-field-form" action="#" method="post" id="wpum-edit-field-form" autocomplete="off">
@@ -507,7 +507,7 @@ class WPUM_Fields_Editor {
 
 								<!-- save field box -->
 								<div id="save-field" class="postbox">
-									<h3 class="hndle ui-sortable-handle"><span><?php _e('Save Field'); ?></span></h3>
+									<h3 class="hndle ui-sortable-handle"><span><?php _e('Save Field', 'wpum'); ?></span></h3>
 									<div id="major-publishing-actions">
 										<div id="publishing-action">
 
@@ -516,7 +516,7 @@ class WPUM_Fields_Editor {
 											<input type="hidden" name="which_field" value="<?php echo ( isset( $_GET['field'] ) ) ? (int) $_GET['field'] : false; ?>"/>
 											<?php wp_nonce_field( 'wpum_save_field' ); ?>
 
-											<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Field'); ?>"></div>
+											<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php _e('Save Field', 'wpum'); ?>"></div>
 											<div class="clear"></div>
 										</div>
 									</div>
@@ -553,7 +553,7 @@ class WPUM_Fields_Editor {
 			'name'         => 'name',
 			'value'        => esc_html( $this->field->name ),
 			'label'        => false,
-			'placeholder' => __('Enter a name for this field'),
+			'placeholder' => __('Enter a name for this field', 'wpum'),
 			'class'        => 'text',
 		);
 
@@ -587,7 +587,7 @@ class WPUM_Fields_Editor {
 		?>
 
 		<div class="description-editor">
-			<h3><?php _e('Field Description (optional)'); ?></h3>
+			<h3><?php _e('Field Description (optional)', 'wpum'); ?></h3>
 			<?php wp_editor( $this->field->description, 'field_description', $description_settings ); ?>
 		</div>
 
@@ -606,8 +606,8 @@ class WPUM_Fields_Editor {
 		$args = array(
 			'name'    => 'set_as_required',
 			'current' => $this->field->is_required,
-			'label'   => __('Set this field as required ?'),
-			'desc'    => __('Enable to force the user to fill this field.'),
+			'label'   => __('Set this field as required ?', 'wpum'),
+			'desc'    => __('Enable to force the user to fill this field.', 'wpum'),
 		);
 
 		echo WPUM()->html->checkbox( $args );
@@ -625,8 +625,8 @@ class WPUM_Fields_Editor {
 		$args = array(
 			'name'    => 'show_on_registration',
 			'current' => $this->field->show_on_registration,
-			'label'   => __('Display this field on registration ?'),
-			'desc'    => __('Enable to display this field on the registration form.'),
+			'label'   => __('Display this field on registration ?', 'wpum'),
+			'desc'    => __('Enable to display this field on the registration form.', 'wpum'),
 		);
 
 		echo WPUM()->html->checkbox( $args );

@@ -126,7 +126,7 @@ class WPUM_Ajax_Handler {
 			
 			$return = array(
 				'loggedin' => false,
-				'message'  => __( 'Wrong username or password.' ),
+				'message'  => __( 'Wrong username or password.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -135,7 +135,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'loggedin' => true,
-				'message'  => __( 'Login successful.' ),
+				'message'  => __( 'Login successful.', 'wpum' ),
 			);
 
 			wp_send_json_success( $return );
@@ -159,7 +159,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message' => __( 'Error.' ),
+				'message' => __( 'Error.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -172,7 +172,7 @@ class WPUM_Ajax_Handler {
 		wpum_register_emails();
 
 		$return = array(
-			'message' => __( 'Emails successfully restored.' ),
+			'message' => __( 'Emails successfully restored.', 'wpum' ),
 		);
 
 		wp_send_json_success( $return );
@@ -201,7 +201,7 @@ class WPUM_Ajax_Handler {
 			
 			$return = array(
 				'valid'   => false,
-				'message' => __( 'This user could not be found.' ),
+				'message' => __( 'This user could not be found.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -217,7 +217,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => true,
-				'message' => __( 'Check your e-mail for the confirmation link.' ),
+				'message' => __( 'Check your e-mail for the confirmation link.', 'wpum' ),
 			);
 
 			wp_send_json_success( $return );
@@ -226,7 +226,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => false,
-				'message' => __( 'Something went wrong.' ),
+				'message' => __( 'Something went wrong.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -260,7 +260,7 @@ class WPUM_Ajax_Handler {
 			
 			$return = array(
 				'completed' => false,
-				'message'   => __( 'Please enter your password.' ),
+				'message'   => __( 'Please enter your password.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -272,7 +272,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'completed' => false,
-				'message'   => __( 'Passwords do not match.' ),
+				'message'   => __( 'Passwords do not match.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -290,7 +290,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'completed' => true,
-				'message'	=> __( 'Your password has been reset.' ),
+				'message'	=> __( 'Your password has been reset.', 'wpum' ),
 			);
 
 			wp_send_json_success( $return );
@@ -299,7 +299,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'completed' => false,
-				'message'	=> __( 'Something went wrong.' ),
+				'message'	=> __( 'Something went wrong.', 'wpum' ),
 			);
 
 			wp_send_json_error( $return );
@@ -338,7 +338,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => true,
-				'message' => apply_filters( 'wpum_avatar_deleted_success_message', __( 'Your profile picture has been deleted.' ) )
+				'message' => apply_filters( 'wpum_avatar_deleted_success_message', __( 'Your profile picture has been deleted.', 'wpum' ) )
 			);
 
 			wp_send_json_success( $return );
@@ -347,7 +347,7 @@ class WPUM_Ajax_Handler {
 
 			$return = array(
 				'valid'   => false,
-				'message' => __( 'Something went wrong.' )
+				'message' => __( 'Something went wrong.', 'wpum' )
 			);
 
 			wp_send_json_error( $return );
@@ -371,7 +371,7 @@ class WPUM_Ajax_Handler {
 		// Abort if something isn't right.
 		if ( !is_admin() || !current_user_can( 'manage_options' ) ) {
 			$return = array(
-				'message' => __( 'Error.' ),
+				'message' => __( 'Error.', 'wpum' ),
 			);
 			wp_send_json_error( $return );
 		}
@@ -388,14 +388,14 @@ class WPUM_Ajax_Handler {
 			}
 		} else {
 			$return = array(
-				'message' => __( 'Error.' ),
+				'message' => __( 'Error.', 'wpum' ),
 			);
 			wp_send_json_error( $return );
 		}
 
 		// Send message
 		$return = array(
-			'message'   => __( 'Fields order successfully updated.' ),
+			'message'   => __( 'Fields order successfully updated.', 'wpum' ),
 		);
 
 		wp_send_json_success( $return );

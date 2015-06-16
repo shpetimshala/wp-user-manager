@@ -47,9 +47,9 @@ class WPUM_Emails_List extends WP_List_Table {
     public function get_columns() {
         
         $columns = array(
-            'title' => __('Email Title'),
-            'description' => __('Email Description'),
-            'actions' => __('Actions'),
+            'title' => __('Email Title', 'wpum'),
+            'description' => __('Email Description', 'wpum'),
+            'actions' => __('Actions', 'wpum'),
         );
 
         return $columns;
@@ -150,7 +150,7 @@ class WPUM_Emails_List extends WP_List_Table {
             admin_url( 'users.php?page=wpum-edit-email' )
         );
         
-        echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__('Edit Email').'</a> ';
+        echo '<a href="'.esc_url( $edit_url ).'" class="button">'.__('Edit Email', 'wpum').'</a> ';
 
     }
 

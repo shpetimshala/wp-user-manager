@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return array
 */
 function wpum_add_links_to_settings_title() {
-	echo '<a href="http://support.wp-user-manager.com" class="add-new-h2" target="_blank">'.__('Documentation').'</a>';
-	echo '<a href="http://wp-user-manager.com/addons" class="add-new-h2" target="_blank">'.__('Add Ons').'</a>';
+	echo '<a href="http://support.wp-user-manager.com" class="add-new-h2" target="_blank">'.__('Documentation', 'wpum').'</a>';
+	echo '<a href="http://wp-user-manager.com/addons" class="add-new-h2" target="_blank">'.__('Add Ons', 'wpum').'</a>';
 }
 add_action( 'wpum_next_to_settings_title', 'wpum_add_links_to_settings_title' );
 
@@ -99,7 +99,7 @@ function wpum_option_registration_role() {
 	$role = get_option( 'default_role' );
 
 	$output = '<span class="wpum-role-option">'.$role.'.</span>';
-	$output .= '<br/><small>'.sprintf( __('The default user role for registrations can be changed in <a href="%s">Settings -> General</a>'), admin_url( 'options-general.php#default_role' ) ).'</small>';
+	$output .= '<br/><small>'.sprintf( __('The default user role for registrations can be changed in <a href="%s">Settings -> General</a>', 'wpum'), admin_url( 'options-general.php#default_role' ) ).'</small>';
 
 	echo $output;
 
@@ -132,8 +132,8 @@ add_action( 'admin_init', 'wpum_process_actions' );
 */
 function wpum_option_restore_emails() {
 
-	$output = '<a id="wpum-restore-emails" href="'.esc_url( add_query_arg( array('tool' => 'restore-email') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default emails').'</a>';
-	$output .= '<br/><p class="description">' . __('Click the button to restore the default emails content and subject.') . '</p>';
+	$output = '<a id="wpum-restore-emails" href="'.esc_url( add_query_arg( array('tool' => 'restore-email') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default emails', 'wpum').'</a>';
+	$output .= '<br/><p class="description">' . __('Click the button to restore the default emails content and subject.', 'wpum') . '</p>';
 	$output .= wp_nonce_field( "wpum_nonce_login_form", "wpum_backend_security" );
 
 	echo $output;
@@ -149,8 +149,8 @@ add_action( 'wpum_restore_emails', 'wpum_option_restore_emails' );
 */
 function wpum_option_restore_pages() {
 
-	$output = '<a id="wpum-restore-pages" href="'.esc_url( add_query_arg( array('tool' => 'restore-pages') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default pages').'</a>';
-	$output .= '<br/><p class="description">' . __('Click the button to restore the default core pages of the plugin.') . '</p>';
+	$output = '<a id="wpum-restore-pages" href="'.esc_url( add_query_arg( array('tool' => 'restore-pages') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore default pages', 'wpum').'</a>';
+	$output .= '<br/><p class="description">' . __('Click the button to restore the default core pages of the plugin.', 'wpum') . '</p>';
 	$output .= wp_nonce_field( "wpum_nonce_default_pages_restore", "wpum_backend_pages_restore" );
 
 	echo $output;
@@ -166,12 +166,12 @@ add_action( 'wpum_restore_pages', 'wpum_option_restore_pages' );
 */
 function wpum_profile_permalink() {
 
-	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s'), wpum_get_core_page_url('profile'), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
-	$output .= '<p class="description">' . sprintf( __('You can change the profiles permalink structure into your <a href="%s">permalink settings page</a>.'), admin_url( 'options-permalink.php' ) ) . '</p>';
+	$output = '<p>'. sprintf(__('Current profile permalink structure: %s%s', 'wpum'), wpum_get_core_page_url('profile'), get_option( 'wpum_permalink', 'user_id' ) ) . '</p>';
+	$output .= '<p class="description">' . sprintf( __('You can change the profiles permalink structure into your <a href="%s">permalink settings page</a>.', 'wpum'), admin_url( 'options-permalink.php' ) ) . '</p>';
 
 	// Display error if something is wrong
 	if( !wpum_get_core_page_id( 'profile' ) )
-		$output = '<p style="color:red;"><strong>'. __('Your users profile page is not configured.') .'</strong>'. ' ' . sprintf( __('<a href="%s">Setup your profile page here.</a>'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ) .'</p>';
+		$output = '<p style="color:red;"><strong>'. __('Your users profile page is not configured.', 'wpum') .'</strong>'. ' ' . sprintf( __('<a href="%s">Setup your profile page here.</a>', 'wpum'), admin_url( 'users.php?page=wpum-settings&tab=general' ) ) .'</p>';
 
 	if( get_option('permalink_structure' ) == '' )
 		$output = '<p style="color:red;"><strong>' . sprintf(__( 'You must <a href="%s">change your permalinks</a> to anything else other than "default" for profiles to work.', 'wpum' ), admin_url( 'options-permalink.php' ) ) .'</strong></p>' ;	
@@ -209,7 +209,7 @@ function wpum_new_line_quicktag() {
 	if ( wp_script_is( 'quicktags' ) && $screen->base == 'users_page_wpum-edit-email' ) {
 	?>
 	<script type="text/javascript">
-	QTags.addButton( 'br', "<?php _e('Add New Line');?>", '<br/>', '', 's', "<?php _e('Add New Line');?>", 1 );
+	QTags.addButton( 'br', "<?php _e('Add New Line', 'wpum');?>", '<br/>', '', 's', "<?php _e('Add New Line', 'wpum');?>", 1 );
 	</script>
 	<?php
 	}
@@ -257,7 +257,7 @@ function wpum_display_rating_notice() {
 
     ?>
     <div class="updated">
-        <p><?php echo sprintf( __( "Hey, looks like you've been using the <b>WP User Manager</b> plugin for some time now - that's awesome! <br/> Could you please give it a review on wordpress.org ? Just to help us spread the word and boost our motivation :) <br/> <br/><a href='%s' class='button button-primary' target='_blank'>Yes, you deserve it!</a> - <a href='%s'>I've already done this!</a>" ), $url_rate, esc_url( $remove_url ) ); ?></p>
+        <p><?php echo sprintf( __( "Hey, looks like you've been using the <b>WP User Manager</b> plugin for some time now - that's awesome! <br/> Could you please give it a review on wordpress.org ? Just to help us spread the word and boost our motivation :) <br/> <br/><a href='%s' class='button button-primary' target='_blank'>Yes, you deserve it!</a> - <a href='%s'>I've already done this!</a>", 'wpum' ), $url_rate, esc_url( $remove_url ) ); ?></p>
     </div>
     <?php
 }

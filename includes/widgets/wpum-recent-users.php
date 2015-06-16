@@ -28,22 +28,22 @@ class WPUM_Recently_Registered_Users extends WPH_Widget {
 
 		// Configure widget array
 		$args = array(
-			'label'       => __( '[WPUM] Recent Users' ),
-			'description' => __( 'Display a list of recently registered users.' ),
+			'label'       => __( '[WPUM] Recent Users', 'wpum' ),
+			'description' => __( 'Display a list of recently registered users.', 'wpum' ),
 		);
 
 		$args['fields'] = array(
 			array(
-				'name'   => __( 'Title' ),
+				'name'   => __( 'Title', 'wpum' ),
 				'id'     => 'title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'Recent Users' ),
+				'std'    => __( 'Recent Users', 'wpum' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'     => __( 'Amount' ),
-				'desc'     => __( 'Enter the amount of users you wish to display.' ),
+				'name'     => __( 'Amount', 'wpum' ),
+				'desc'     => __( 'Enter the amount of users you wish to display.', 'wpum' ),
 				'id'       => 'amount',
 				'type'     => 'text',
 				'class'    => 'widefat',
@@ -52,8 +52,8 @@ class WPUM_Recently_Registered_Users extends WPH_Widget {
 				'validate' => 'numeric',
 			),
 			array(
-				'name'   => __( 'Link to user profile' ),
-				'desc'   => __( 'Enable to link to the user profile.' ),
+				'name'   => __( 'Link to user profile', 'wpum' ),
+				'desc'   => __( 'Enable to link to the user profile.', 'wpum' ),
 				'id'     => 'profile',
 				'type'   =>'checkbox',
 				'std'    => 1,

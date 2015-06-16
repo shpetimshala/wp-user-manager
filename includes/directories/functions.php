@@ -135,7 +135,7 @@ endif;
 function wpum_get_directory_templates() {
 
 	// Default template has empty key.
-	$templates = array( '' => __( 'Default template' ) );
+	$templates = array( '' => __( 'Default template', 'wpum' ) );
 
 	return apply_filters( 'wpum_get_directory_templates', $templates );
 
@@ -263,11 +263,11 @@ function wpum_get_directory_sorting_methods() {
 
 	// Let's add the default sorting methods
 	$methods = array(
-		'user_nicename' => __( 'By nickname' ),
-		'newest'        => __( 'Newest users first' ),
-		'oldest'        => __( 'Oldest users first' ),
-		'name'          => __( 'First name' ),
-		'last_name'     => __( 'Last Name' )
+		'user_nicename' => __( 'By nickname', 'wpum' ),
+		'newest'        => __( 'Newest users first', 'wpum' ),
+		'oldest'        => __( 'Oldest users first', 'wpum' ),
+		'name'          => __( 'First name', 'wpum' ),
+		'last_name'     => __( 'Last Name', 'wpum' )
 	);
 
 	return apply_filters( 'wpum_get_directory_sorting_methods', $methods );

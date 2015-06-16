@@ -30,7 +30,7 @@ function wpum_install() {
 	// Check PHP Version and deactivate & die if it doesn't meet minimum requirements.
 	if ( version_compare(PHP_VERSION, '5.3', '<') ) {
 		deactivate_plugins( plugin_basename( WPUM_PLUGIN_FILE ) );
-		wp_die( sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.'), 'http://www.wpupdatephp.com/contact-host/' ) . '<br/><br/>' . '<small><a href="'.admin_url().'">'.__('Back to your website.').'</a></small>' );
+		wp_die( sprintf( __( 'This plugin requires a minimum PHP Version 5.3 to be installed on your host. <a href="%s" target="_blank">Click here to read how you can update your PHP version</a>.', 'wpum'), 'http://www.wpupdatephp.com/contact-host/' ) . '<br/><br/>' . '<small><a href="'.admin_url().'">'.__('Back to your website.', 'wpum').'</a></small>' );
 	}
 
 	// Install default pages

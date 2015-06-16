@@ -14,7 +14,7 @@ if ( !is_object( $user_data ) ) {
 	$args = array(
 		'id'   => 'wpum-profile-not-found',
 		'type' => 'error',
-		'text' => __( 'User not found.' )
+		'text' => __( 'User not found.', 'wpum' )
 	);
 	wpum_message( $args );
 	return;

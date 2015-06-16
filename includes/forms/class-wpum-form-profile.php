@@ -228,7 +228,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			return;
 
 		if( email_exists( $email ) && $email !== self::$user->user_email )
-			return new WP_Error( 'email-validation-error', __( 'Email address already exists.' ) );
+			return new WP_Error( 'email-validation-error', __( 'Email address already exists.', 'wpum' ) );
 
 		return $passed;
 
@@ -246,7 +246,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		$nickname = $values['profile'][ 'nickname' ];
 
 		if( wpum_get_option('exclude_usernames') && array_key_exists( $nickname , wpum_get_disabled_usernames() ) )
-			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.' ) );
+			return new WP_Error( 'nickname-validation-error', __( 'This nickname cannot be used.', 'wpum' ) );
 
 		// Check for nicknames if permalink structure requires unique nicknames.
 		if( get_option('wpum_permalink') == 'nickname'  ) :
@@ -254,7 +254,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 			$current_user = wp_get_current_user();
 
 			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
-				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.' ) );
+				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.', 'wpum' ) );
 
 		endif;
 
@@ -316,7 +316,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 					if(is_email( $meta_value )) :
 						$user_data += array( 'user_email' => $meta_value );
 					else :
-						self::add_error( __('Please enter a valid email address.') );
+						self::add_error( __('Please enter a valid email address.', 'wpum') );
 						return;
 					endif;
 				break;

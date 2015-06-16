@@ -88,7 +88,7 @@ if ( !class_exists('Pretty_User_Metabox') ) {
 			$errors = new WP_Error();
 			// Check that the id exists
 			if( ! array_key_exists( 'id', $meta_box ) ) {
-				$errors->add( 'metabox-id-missing', __( 'Error: user metabox must have an ID.','wppf' ) );
+				$errors->add( 'metabox-id-missing', __( 'Error: user metabox must have an ID.','wppf', 'wpum' ) );
 			}
 			return $errors;
 		}

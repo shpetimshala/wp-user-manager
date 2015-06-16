@@ -109,17 +109,17 @@ if ( !class_exists('Pretty_Taxonomy_Metabox') ) {
 
 			// Check that the id exists
 			if( ! array_key_exists( 'id', $meta_box ) ) {
-				$errors->add( 'metabox-id-missing', sprintf( __('Error: metabox "%s" must have an ID.','wppf'), self::get_id() ) );
+				$errors->add( 'metabox-id-missing', sprintf( __('Error: metabox "%s" must have an ID.','wppf', 'wpum'), self::get_id() ) );
 			}
 
 			// Check that the taxonomy exists
 			if( ! array_key_exists( 'taxonomy', $meta_box ) ) {
-				$errors->add( 'metabox-taxonomy-missing', sprintf( __('Error: metabox "%s" must have a taxonomy parameter assigned.','wppf'), self::get_id() ) );
+				$errors->add( 'metabox-taxonomy-missing', sprintf( __('Error: metabox "%s" must have a taxonomy parameter assigned.','wppf', 'wpum'), self::get_id() ) );
 			}
 
 			// Check that the taxonomy exists
 			if( !is_array($meta_box['taxonomy']) ) {
-				$errors->add( 'metabox-taxonomy-array', sprintf( __('Error: metabox "%s" taxonomy parameter must be an array.','wppf'), self::get_id() ) );
+				$errors->add( 'metabox-taxonomy-array', sprintf( __('Error: metabox "%s" taxonomy parameter must be an array.','wppf', 'wpum'), self::get_id() ) );
 			}
 
 			return $errors;

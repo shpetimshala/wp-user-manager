@@ -100,7 +100,7 @@ abstract class WPUM_Field_Type {
 	public function get_field_types( $fields ) {
 		
 		$l10n = array(
-			'basic' => __('Basic'),
+			'basic' => __('Basic', 'wpum'),
 		);
 		
 		// If no category is selected - add it to the basic category

@@ -101,7 +101,7 @@ class WPUM_Permalinks {
 
 		<?php } else { ?>
 
-			<p><?php _e( 'These settings control the permalinks used for users profiles. These settings only apply when <strong>not using "default" permalinks above</strong>.' ); ?></p>
+			<p><?php _e( 'These settings control the permalinks used for users profiles. These settings only apply when <strong>not using "default" permalinks above</strong>.', 'wpum' ); ?></p>
 
 			<table class="form-table">
 				<tbody>
@@ -150,7 +150,7 @@ class WPUM_Permalinks {
 
 		// Bail if no cap
 		if ( ! current_user_can( 'manage_options' ) ) {
-			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__ , _x( 'You have no rights to access this page', '_doing_it_wrong error message', 'wpum' ), '1.0.0' );
 			return;
 		}
 

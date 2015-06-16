@@ -19,8 +19,8 @@
 		<?php do_action( 'wpum_before_inside_register_form_template', $atts ); ?>
 
 		<?php foreach ( $register_fields as $key => $field ) : ?>
-			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key ); ?>">
-				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label']; ?></label>
+			<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php esc_attr_e( $key, 'wpum' ); ?>">
+				<label for="<?php esc_attr_e( $key, 'wpum' ); ?>"><?php echo $field['label']; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum/form/{$form}/before/field={$key}", $field ); ?>
 					<?php echo wpum_get_field_input_html( $key, $field ); ?>
@@ -35,7 +35,7 @@
 
 		<p>
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
-			<input type="submit" id="submit_wpum_register" name="submit_wpum_register" class="button" value="<?php _e( 'Register' ); ?>" />
+			<input type="submit" id="submit_wpum_register" name="submit_wpum_register" class="button" value="<?php _e( 'Register', 'wpum' ); ?>" />
 		</p>
 
 	</form>

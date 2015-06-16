@@ -38,7 +38,7 @@ $users = wpum_get_recent_users( $amount );
 	$args = array(
 		'id'   => 'wpum-users-not-found',
 		'type' => 'error',
-		'text' => __( 'No user has been found.' )
+		'text' => __( 'No user has been found.', 'wpum' )
 	);
 	wpum_message( $args );
 

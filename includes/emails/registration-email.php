@@ -29,8 +29,8 @@ class WPUM_register_Email extends WPUM_Emails {
 		
 		// Configure Email
 		$this->name        = 'register';
-		$this->title       = __( "Registration Email" );
-		$this->description = __( "This is the email that is sent to the user upon successful registration." );
+		$this->title       = __( "Registration Email", 'wpum' );
+		$this->description = __( "This is the email that is sent to the user upon successful registration.", 'wpum' );
 		$this->subject     = $this->subject();
 		$this->message     = $this->message();
 
@@ -46,7 +46,7 @@ class WPUM_register_Email extends WPUM_Emails {
 	 */
 	public static function subject() {
 
-		$subject = sprintf( __('Your %s Account'), get_option( 'blogname' ) );
+		$subject = sprintf( __('Your %s Account', 'wpum'), get_option( 'blogname' ) );
 
 		return $subject;
 
@@ -60,11 +60,11 @@ class WPUM_register_Email extends WPUM_Emails {
 	 */
 	public static function message() {
 
-		$message = __( "Hello {username}, \n\n" );
-		$message .= __( "Welcome to {sitename}, \n\n" );
-		$message .= __( "These are your account details \n\n");
-		$message .= __( "Username: {username},\n" );
-		$message .= __( "Password: {password}" );
+		$message = __( "Hello {username}, \n\n", 'wpum' );
+		$message .= __( "Welcome to {sitename}, \n\n", 'wpum' );
+		$message .= __( "These are your account details \n\n", 'wpum');
+		$message .= __( "Username: {username},\n", 'wpum' );
+		$message .= __( "Password: {password}", 'wpum' );
 		
 		return $message;
 

@@ -28,42 +28,42 @@ class WPUM_Password_Recovery extends WPH_Widget {
 
 		// Configure widget array
 		$args = array(
-			'label'       => __( '[WPUM] Password Recovery Form' ),
-			'description' => __( 'Display a form for users to recover their password.' ),
+			'label'       => __( '[WPUM] Password Recovery Form', 'wpum' ),
+			'description' => __( 'Display a form for users to recover their password.', 'wpum' ),
 		);
 
 		$args['fields'] = array(
 			array(
-				'name'   => __( 'Title' ),
+				'name'   => __( 'Title', 'wpum' ),
 				'id'     => 'title',
 				'type'   => 'text',
 				'class'  => 'widefat',
-				'std'    => __( 'Reset password' ),
+				'std'    => __( 'Reset password', 'wpum' ),
 				'filter' => 'strip_tags|esc_attr'
 			),
 			array(
-				'name'     => __( 'Display login link' ),
+				'name'     => __( 'Display login link', 'wpum' ),
 				'id'       => 'login_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display password recovery link' ),
+				'name'     => __( 'Display password recovery link', 'wpum' ),
 				'id'       => 'psw_link',
 				'type'     =>'checkbox',
 				'std'      => 0,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'     => __( 'Display registration link' ),
+				'name'     => __( 'Display registration link', 'wpum' ),
 				'id'       => 'register_link',
 				'type'     =>'checkbox',
 				'std'      => 1,
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			array(
-				'name'   => __( 'Custom form ID (optional)' ),
+				'name'   => __( 'Custom form ID (optional)', 'wpum' ),
 				'id'     => 'form_id',
 				'type'   => 'text',
 				'class'  => 'widefat',
