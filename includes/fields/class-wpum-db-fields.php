@@ -267,7 +267,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 		KEY field_order (field_order),
 		KEY can_delete (can_delete),
 		KEY is_required (is_required),
-		KEY show_on_registration (show_on_registration),
+		KEY show_on_registration (show_on_registration)
 		) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );

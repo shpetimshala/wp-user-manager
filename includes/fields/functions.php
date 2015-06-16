@@ -286,6 +286,9 @@ function wpum_install_groups() {
  */
 function wpum_install_fields() {
 
+	// Create database table for field groups
+	@WPUM()->fields->create_table();
+
 	// Get primary group id
 	$primary_group = WPUM()->field_groups->get_group_by( 'primary' );
 
