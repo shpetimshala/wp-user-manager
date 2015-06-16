@@ -96,6 +96,9 @@ module.exports = function( grunt ) {
 		makepot: {
             target: {
                 options: {
+                	exclude: [
+	                    'assets/.*', 'images/.*', 'node_modules/.*', 'tests/.*'   
+	                ],
                     domainPath: '/languages',
                     mainFile: 'wp-user-manager.php',
                     potFilename: 'wpum.pot',
@@ -195,7 +198,7 @@ module.exports = function( grunt ) {
 	// Default task.
 	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin', 'makepot'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
-	grunt.registerTask( 'makepot', ['makepot'] );
+	grunt.registerTask( 'do_pot', ['makepot'] );
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
 	grunt.util.linefeed = '\n';
