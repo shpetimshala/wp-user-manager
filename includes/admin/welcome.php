@@ -198,6 +198,7 @@ class WPUM_Getting_Started {
 							</ul>
 						</div>
 						<div class="welcome-panel-column">
+							<h4><?php _e( 'Customize Profiles' );?></h4>
 							<ul>
 								<li><a href="<?php echo admin_url( 'users.php?page=wpum-settings&tab=profile' ); ?>" class="welcome-icon dashicons-admin-users" target="_blank"><?php _e('Customize profiles'); ?></a></li>
 								<li><a href="<?php echo admin_url( 'users.php?page=wpum-profile-fields' ); ?>" class="welcome-icon dashicons-admin-settings" target="_blank"><?php _e('Customize fields'); ?></a></li>
@@ -206,7 +207,7 @@ class WPUM_Getting_Started {
 						</div>
 						<div class="welcome-panel-column welcome-panel-last">
 							<h4><?php _e('Documentation'); ?></h4>
-							<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __( 'Looking for help? <a href="%s" target="_blank">WP User Manager documentation</a> has got you covered.' ), '#' ); ?> <br/><br/><a href="#" class="button" target="_blank"><?php _e('Read documentation') ;?></a></p>
+							<p class="welcome-icon welcome-learn-more"><?php echo sprintf( __( 'Looking for help? <a href="%s" target="_blank">WP User Manager documentation</a> has got you covered.' ), 'http://documentation.wpusermanager.com' ); ?> <br/><br/><a href="http://documentation.wpusermanager.com" class="button" target="_blank"><?php _e('Read documentation') ;?></a></p>
 						</div>
 					</div>
 				</div>
@@ -218,13 +219,13 @@ class WPUM_Getting_Started {
 
 					<div>
 						<h3><?php _e('Looking for help ?'); ?></h3>
-						<p><?php echo sprintf( __('We do all we can to provide every user with the best support possible. If you encounter a problem or have a question, please <a href="#" target="_blank">contact us.</a> Make sure you <a href="%s">read the documentation</a> first.'), '#', '#' ); ?></p>
+						<p><?php echo sprintf( __('We do all we can to provide every user with the best support possible. If you encounter a problem or have a question, please <a href="%s" target="_blank">contact us.</a> Make sure you <a href="%s">read the documentation</a> first.'), 'http://wpusermanager.com/contacts', 'http://documentation.wpusermanager.com' ); ?></p>
 					</div>
 					
 					<div class="last-feature">
 						<h3><?php _e('Get Notified of Extension Releases'); ?></h3>
 						<p><?php echo sprintf( __('New extensions that make WP User Manager even more powerful will be released soon. Subscribe to the newsletter to stay up to date with our latest releases. Signup now to ensure you do not miss a release!'), '#' ); ?></p>
-						<a href="#" class="button"><?php _e('Signup Now'); ?> &raquo;</a>
+						<a href="http://wpusermanager.com/newsletter" class="button"><?php _e('Signup Now'); ?> &raquo;</a>
 					</div>
 
 					<hr>
