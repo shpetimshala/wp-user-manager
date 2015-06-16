@@ -78,7 +78,20 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-		
+		makepot: {
+            target: {
+                options: {
+                    domainPath: '/languages',
+                    mainFile: 'wp-user-manager.php',
+                    potFilename: 'wpum.pot',
+                    potHeaders: {
+                        poedit: true,                 // Includes common Poedit headers.
+                        'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
+                    }, 
+                    type: 'wp-plugin'
+                }
+            }
+        },
 		cssmin: {
 			options: {
 				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
@@ -157,19 +170,16 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
+	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	
 	// Default task.
-	
 	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'sass', 'cssmin'] );
-	
-	
+	grunt.registerTask( 'makepot', ['makepot'] );
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
 	grunt.util.linefeed = '\n';
