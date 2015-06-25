@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return array
 */
 function wpum_add_links_to_settings_title() {
-	echo '<a href="http://support.wp-user-manager.com" class="add-new-h2" target="_blank">'.__('Documentation', 'wpum').'</a>';
-	echo '<a href="http://wp-user-manager.com/addons" class="add-new-h2" target="_blank">'.__('Add Ons', 'wpum').'</a>';
+	echo '<a href="http://docs.wpusermanager.com" class="add-new-h2" target="_blank">'.__('Documentation', 'wpum').'</a>';
+	echo '<a href="http://wpusermanager.com/addons" class="add-new-h2" target="_blank">'.__('Add Ons', 'wpum').'</a>';
 }
 add_action( 'wpum_next_to_settings_title', 'wpum_add_links_to_settings_title' );
 
