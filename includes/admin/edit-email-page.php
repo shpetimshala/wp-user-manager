@@ -16,7 +16,7 @@ $email_title = esc_attr( $_GET['email-title'] );
 $get_emails  = get_option('wpum_emails');
 
 // Verify if this email is stored already
-if( in_array( $email_id , $get_emails ) ) {
+if( array_key_exists( $email_id , $get_emails ) ) {
 	$this_email = $get_emails[ $email_id ];
 } else {
 	$this_email = array( 
