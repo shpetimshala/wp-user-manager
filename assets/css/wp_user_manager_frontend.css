@@ -551,4 +551,23 @@ div.wpum-message {
     border-color: #bce8f1;
     color: #3a87ad; }
 
+/* Styling for account page tabs */
+#wpum-account-forms-tabs {
+  margin-bottom: 30px; }
+  #wpum-account-forms-tabs ul {
+    list-style: none;
+    margin: 0; }
+    #wpum-account-forms-tabs ul li {
+      display: inline-block;
+      margin: 0 15px 0px 0px; }
+      #wpum-account-forms-tabs ul li a {
+        padding: 10px 15px;
+        border-radius: 3px; }
+        #wpum-account-forms-tabs ul li a:hover {
+          text-decoration: none;
+          background: #fcfcfc; }
+      #wpum-account-forms-tabs ul li.active a {
+        background: #efefef;
+        text-decoration: none; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

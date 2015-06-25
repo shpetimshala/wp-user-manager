@@ -196,7 +196,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	
 	// Default task.
-	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin', 'makepot'] );
+	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'do_pot', ['makepot'] );
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );

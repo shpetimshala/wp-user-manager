@@ -10,14 +10,14 @@
 
 ?>
 
-<div id="wpum-account-tabs" class="wpum-account-tabs">
+<div id="wpum-account-forms-tabs" class="wpum-account-forms-tabs">
 
 	<?php if( $tabs && is_array( $tabs ) ) : ?>
 
 		<ul>
 
-		<?php foreach ($tabs as $key => $tab) : ?>
-			<li class="wpum-account-tab tab-<?php echo $key; ?> <?php echo $current_tab == $key || $current_tab == null && $all_tabs[0] == $key ? 'active' : ''?>">
+		<?php foreach ( $tabs as $key => $tab ) : ?>
+			<li class="wpum-form-tab tab-<?php echo $key; ?> <?php echo $current_tab == $key || $current_tab == null && $all_tabs[0] == $key ? 'active' : ''?>">
 				<a href="<?php echo esc_url( wpum_get_account_tab_url( $tab['id'] ) ); ?>"><?php echo $tab['title']; ?></a>
 			</li>
 		<?php endforeach; ?>
