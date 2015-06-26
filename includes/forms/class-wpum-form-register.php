@@ -469,7 +469,11 @@ class WPUM_Form_Register extends WPUM_Form {
 				wp_new_user_notification( $do_user, $pwd );
 			endif;
 
-			self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.', 'wpum' ) ) );
+			if( self::$random_password ) :
+				self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete.', 'wpum' ) ) );
+			else :
+				self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete. We have sent you a confirmation email with your password.', 'wpum' ) ) );
+			endif;
 
 			// Add ability to extend registration process.				
 			do_action( "wpum/form/register/success" , $user_id, $values );
