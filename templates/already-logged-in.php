@@ -19,7 +19,7 @@ get_currentuserinfo();
 
 <div id="wpum-form-<?php echo $args['form_id'];?>" class="wpum-login-form loggedin">
 
-	<p><?php printf( __( 'Your are currently logged in as %s. <a href="%s">Logout &raquo;</a>', 'wpum' ), $current_user->display_name, wpum_logout_url( get_permalink() ) );?></p>
+	<p><?php printf( __( 'Your are currently logged in as %s. <a href="%s">Logout &raquo;</a>', 'wpum' ), $current_user->display_name, wpum_logout_url() );?></p>
 
 </div>
 
