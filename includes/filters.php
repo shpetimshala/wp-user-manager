@@ -38,7 +38,7 @@ function wpum_plugin_row_meta( $input, $file ) {
 		return $input;
 
 	$links = array(
-		'<a href="http://documentation.wpusermanager.com" target="_blank">' . esc_html__( 'Documentation', 'wpum' ) . '</a>',
+		'<a href="http://docs.wpusermanager.com" target="_blank">' . esc_html__( 'Documentation', 'wpum' ) . '</a>',
 		'<a href="http://wpusermanager.com/addons/" target="_blank">' . esc_html__( 'Extensions', 'wpum' ) . '</a>',
 	);
 
