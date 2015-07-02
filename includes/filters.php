@@ -106,7 +106,7 @@ function wpum_admin_rate_us( $footer_text ) {
 	if ( $screen->base !== 'users_page_wpum-settings' )
 		return;
 
-	$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">WP User Manager</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'wprm', 'wpum' ),
+	$rate_text = sprintf( __( 'Please support the future of <a href="%1$s" target="_blank">WP User Manager</a> by <a href="%2$s" target="_blank">rating us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'wprm', 'wpum' ),
 		'https://wpusermanager.com',
 		'http://wordpress.org/support/view/plugin-reviews/wp-user-manager?filter=5#postform'
 	);
