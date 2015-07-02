@@ -458,6 +458,10 @@ function wpum_get_registered_settings() {
 				),
 			)
 		),
+		/** Extension Settings */
+		'extensions' => apply_filters('wpum_settings_extensions',
+			array()
+		),
 		'tools' => apply_filters( 'wpum_settings_tools',
 			array(
 				'restore_emails' => array(
@@ -582,6 +586,11 @@ function wpum_get_settings_tabs() {
 	$tabs['emails']         = __( 'Emails', 'wpum' );
 	$tabs['profile']        = __( 'Profiles', 'wpum' );
 	$tabs['redirects']      = __( 'Redirects', 'wpum' );
+
+	if( ! empty( $settings['extensions'] ) ) {
+		$tabs['extensions'] = __( 'Extensions', 'wpum' );
+	}
+
 	$tabs['tools']          = __( 'Tools', 'wpum' );
 
 	return apply_filters( 'wpum_settings_tabs', $tabs );
