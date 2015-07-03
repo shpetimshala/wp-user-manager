@@ -2,27 +2,76 @@
 Author URI: https://wpusermanager.com
 Plugin URI: https://wpusermanager.com
 Contributors: alessandro.tesoro, wpusermanager
-Tags: wpusermanager, themesdepot, Alessandro Tesoro
+Tags: avatar, avatar upload, author, author profile, community, front-end login, front-end registration, gravatar, custom avatar, login, login page, registration, registration page, admin bar, hide admin bar, custom field registration, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, member profile, members profiles, member, member directory, members, profile, profile builder, profiles, registration, restrict content, content restriction, content protection, restrict, sign in, sign up, social login, user, user profile, user profiles, user roles, user-fields, users
 Requires at least: 4.1
 Tested up to: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable Tag: 1.0.10
+Stable Tag: 1.0
 License: GNU Version 2 or Any Later Version
 
-WP User Manager is the best solution to manage your users and create frontend user profiles.
+WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
 == Description ==
 
-Create customized user profiles and easily add custom user registration, login and password recovery forms to your WordPress website. WP User Manager is the best solution to manage your users.
+= WP User Manager =
+
+Managing your members, creating front-end profiles and custom login and registration pages should be easy. With this plugin, it finally is.
+
+[WP User Manager](http://wpusermanager.com) lets you create highly customizable user profiles. You easily add custom user registration, login and password recovery forms to your WordPress website. [WP User Manager](http://wpusermanager.com) is the best solution to manage your users.
+
+= Smart & Effective =
+[WP User Manager](http://wpusermanager.com) is a simple-to-use solution to manage your WordPress community and create beautiful user profiles. Powerful and flexible, yet easy to setup and use, WPUM takes care of all your users needs and saves you time. 
+
+= Features included =
+
+- [Frontend Forms](http://wpusermanager.com/features/front-end-forms/).
+- [Custom Email Notifications](http://wpusermanager.com/features/custom-email-notifications/).
+- [Custom avatars](http://wpusermanager.com/features/custom-avatars/).
+- [Elegant user profiles](http://wpusermanager.com/features/elegant-user-profiles/).
+- [Shortcodes editor](http://wpusermanager.com/features/shortcodes/).
+- [Beautiful user directories](http://wpusermanager.com/features/user-directories/).
+- [Seo URLs](http://wpusermanager.com/features/seo/).
+- [Content restriction](http://wpusermanager.com/features/content-restriction/).
+- [Passwords management](http://wpusermanager.com/features/passwords-management/).
+- [Custom fields editor](http://wpusermanager.com/features/custom-fields/).
+- [Custom widgets](http://wpusermanager.com/features/custom-widgets/).
+- [Custom redirects](http://wpusermanager.com/features/custom-redirects/).
+- [Powerful tools](http://wpusermanager.com/features/tools/).
+- [Developers friendly](http://wpusermanager.com/features/developers-friendly/).
+- [Extensive documentation](http://docs.wpusermanager.com).
+- Translation Ready
+
+Read more about our features on [wpusermanager.com](http://wpusermanager.com/features/)
+
+= Free Extensions =
+
+- [Google reCAPTCHA](http://wpusermanager.com/addons/recaptcha): Stop spam registrations on your website for free.
+
+[View all extensions](http://wpusermanager.com/addons)
+
+= Support =
+
+Support is provided only through our [support forum](http://wpusermanager.com/support/). Join our [support forum](http://wpusermanager.com/register/) to ask questions and get help regarding WP User Manager. Free support is provided exclusively for bugs and help using the plugin. Please read the support policy [http://wpusermanager.com/support-policy/](http://wpusermanager.com/support-policy/).
 
 == Installation ==
 
-1. Upload "wp-user-manager" folder to the "/wp-content/plugins/" directory. 
-1. Activate the plugin through the "Plugins" menu in WordPress.
+Please read our detailed documentation here [http://docs.wpusermanager.com/category/13-installation](http://docs.wpusermanager.com/category/13-installation)
 
 == Frequently Asked Questions ==
 
+= FAQ & Tutorials =
+[http://docs.wpusermanager.com/category/66-faq-tutorials](http://docs.wpusermanager.com/category/66-faq-tutorials)
+
+= General questions =
+[http://wpusermanager.com/faq/](http://wpusermanager.com/faq/)
+
 == Screenshots ==
 
+View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpusermanager.com/screenshots/)
+
 == Changelog ==
+
+ = 1.0.0 =
+ Just released ;)
+
