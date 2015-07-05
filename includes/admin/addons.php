@@ -21,7 +21,7 @@ class WPUM_Addons {
 	/**
 	 * API URL
 	 */
-	protected $api = 'http://wpusermanager.com/edd-api/products/';
+	protected $api = 'http://wpusermanager.com/?feed=addons';
 
 	/**
 	 * All addons
@@ -45,7 +45,7 @@ class WPUM_Addons {
 			// if feed exists get content from cached feed.
 			if ($cached_feed) {
 				
-				$this->addons = json_decode( $cached_feed );
+				$this->addons = $cached_feed;
 
 			// Feed is not cached, get content from live api.
 			} else {
@@ -56,7 +56,7 @@ class WPUM_Addons {
 
 					$feed_content = wp_remote_retrieve_body( $feed );
 					set_transient( 'wpum_addons_feed', $feed_content, 3600 );
-					$this->addons = json_decode( $feed_content );
+					$this->addons = $feed_content;
 
 				}
 
@@ -104,9 +104,7 @@ class WPUM_Addons {
 				
 				<div id="the-list">
 
-					<?php foreach ( $this->addons->products as $addon ) {
-						$this->display_addon( $addon->info );
-					} ?>
+					<?php echo $this->addons; ?>
 
 				</div>
 
@@ -116,31 +114,6 @@ class WPUM_Addons {
 
 		<?php
 			
-	}
-
-	/**
-	 * Handles the display of each single addon.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	protected function display_addon( $addon ) {
-
-		echo '<div class="plugin-card">';
-			echo '<div class="plugin-card-top">';
-				echo '<a href="'.$addon->link.'" target="_blank" class="plugin-icon"><img src="'. $addon->thumbnail .'"></a>';
-				echo '<div class="name column-name" style="margin-right:0px">';
-					echo '<h4><a href="'.$addon->link.'" target="_blank">'. $addon->title .'</a></h4>';
-				echo '</div>';
-				echo '<div class="desc column-description" style="margin-right:0px">';
-					echo '<p>'. wp_trim_words( $addon->content, 35 ) .'</p>';
-				echo '</div>';
-			echo '</div>';
-			echo '<div class="plugin-card-bottom">';
-				echo '<a target="_blank" href="'.$addon->link.'" class="button" style="display:block; text-align:center;">'.__('Read More', 'wpum').'</a>';
-			echo '</div>';
-		echo '</div>';
-
 	}
 
 }
