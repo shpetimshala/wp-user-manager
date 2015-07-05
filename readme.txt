@@ -20,6 +20,8 @@ Managing your members, creating front-end profiles and custom login and registra
 
 [WP User Manager](http://wpusermanager.com) lets you create highly customizable user profiles. You easily add custom user registration, login and password recovery forms to your WordPress website. [WP User Manager](http://wpusermanager.com) is the best solution to manage your users.
 
+[website](http://wpusermanager.com) | [addons](http://wpusermanager.com/addons) | [documentation](http://docs.wpusermanager.com/) | [support](http://wpusermanager.com/support/)
+
 = Smart & Effective =
 [WP User Manager](http://wpusermanager.com) is a simple-to-use solution to manage your WordPress community and create beautiful user profiles. Powerful and flexible, yet easy to setup and use, WPUM takes care of all your users needs and saves you time. 
 
@@ -54,11 +56,17 @@ Read more about our features on [wpusermanager.com](http://wpusermanager.com/fea
 
 Support is provided only through our [support forum](http://wpusermanager.com/support/). Join our [support forum](http://wpusermanager.com/register/) to ask questions and get help regarding WP User Manager. Free support is provided exclusively for bugs and help using the plugin. Please read the support policy [http://wpusermanager.com/support-policy/](http://wpusermanager.com/support-policy/).
 
+Before opening a [support topic](http://wpusermanager.com/support/) please read the [faqs](http://docs.wpusermanager.com/category/66-faq-tutorials) and [documentation](http://docs.wpusermanager.com/).
+
 == Installation ==
 
 Please read our detailed documentation here [http://docs.wpusermanager.com/category/13-installation](http://docs.wpusermanager.com/category/13-installation)
 
 == Frequently Asked Questions ==
+
+= Where can i find the documentation =
+
+Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 
 = FAQ & Tutorials =
 [http://docs.wpusermanager.com/category/66-faq-tutorials](http://docs.wpusermanager.com/category/66-faq-tutorials)
@@ -74,4 +82,3 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
  = 1.0.0 =
  Just released ;)
-

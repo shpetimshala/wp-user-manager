@@ -474,12 +474,6 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Restore Pages:', 'wpum' ),
 					'type' => 'hook'
 				),
-				'disable_ajax' => array(
-					'id'   => 'disable_ajax',
-					'name' => __( 'Disable ajax on frontend:', 'wpum' ),
-					'desc' => __( 'Enable this option to remove ajax functionalities from your frontend.', 'wpum' ),
-					'type' => 'checkbox'
-				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',
 					'name' => __( 'Excluded usernames:', 'wpum' ),
