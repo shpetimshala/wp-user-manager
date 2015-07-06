@@ -173,12 +173,12 @@ module.exports = function( grunt ) {
 			main: {
 				options: {
 					mode: 'zip',
-					archive: './release/wp_user_manager.<%= pkg.version %>.zip'
+					archive: './release/wp-user-manager.<%= pkg.version %>.zip'
 				},
 				expand: true,
 				cwd: 'release/<%= pkg.version %>/',
 				src: ['**/*'],
-				dest: 'wp_user_manager/'
+				dest: 'wp-user-manager/'
 			}		
 		}
 	} );
