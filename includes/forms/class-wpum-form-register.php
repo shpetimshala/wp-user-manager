@@ -108,7 +108,9 @@ class WPUM_Form_Register extends WPUM_Form {
 		/**
 		 * Prevent users from using specific usernames if enabled
 		 */
-		if( !empty( wpum_get_option( 'exclude_usernames' ) ) ) {
+		$exclude_usernames = wpum_get_option( 'exclude_usernames' );
+
+		if( ! empty( $exclude_usernames ) ) {
 			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_username' ), 10, 3 );
 		}
 
