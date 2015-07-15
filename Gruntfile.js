@@ -184,7 +184,7 @@ module.exports = function( grunt ) {
 		            branch: 'master'
 		        }
 		    }
-		}
+		},
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
@@ -298,13 +298,22 @@ module.exports = function( grunt ) {
 				}]
 			}
 		},
+		changelog: {
+		  release: {
+		    options: {
+		      version: '<%= pkg.version %>',
+		      labels: ['added', 'fixed'],
+		      template: 'grouped'
+		    }
+		  }
+		}
 	} );
 	
 	// Default task.
 	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'do_pot', ['makepot'] );
-
+	grunt.registerTask( 'changelog', [ 'changelog' ] );
 	grunt.registerTask( 'version_number', [ 'replace:readme_txt', 'replace:init_php' ] );
 	grunt.registerTask( 'pre_vcs', [ 'version_number' ] );
 	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
