@@ -364,3 +364,10 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
+
+if( !is_admin() ) {
+	echo "<pre>";
+	print_r( get_option('wpum_emails') );
+	echo "</pre>";
+}
+

@@ -123,7 +123,14 @@ class WPUM_Emails_Editor {
 			'message'     => $message,
 		);
 
-		update_option( 'wpum_emails', $emails );
+		// Get current emails
+		$current_emails = get_option( 'wpum_emails' );
+
+		// Merge new and old
+		$new_emails = array_merge( $current_emails, $emails );
+
+		// Update database option
+		update_option( 'wpum_emails', $new_emails );
 
 		wp_redirect( admin_url( 'users.php?page=wpum-settings&tab=emails&emails-updated=true' ) ); exit;
 
