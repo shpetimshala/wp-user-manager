@@ -252,7 +252,10 @@ class WPUM_Getting_Started {
 	 * @return void
 	 */
 	public function welcome() {
+
 		global $wpum_options;
+
+		$major_wpum_version = substr( WPUM_VERSION, 0, strrpos( WPUM_VERSION, '.' ) );
 
 		// Bail if no activation redirect
 		if ( ! get_transient( '_wpum_activation_redirect' ) )
@@ -269,7 +272,7 @@ class WPUM_Getting_Started {
 
 		if( ! $upgrade ) { // First time install
 			wp_safe_redirect( admin_url( 'index.php?page=wpum-getting-started' ) ); exit;
-		} else { // Update
+		} else if( version_compare( get_option( 'wpum_version_upgraded_from' ), $major_wpum_version, '<' ) ) { // Update
 			wp_safe_redirect( admin_url( 'index.php?page=wpum-about' ) ); exit;
 		}
 	}
