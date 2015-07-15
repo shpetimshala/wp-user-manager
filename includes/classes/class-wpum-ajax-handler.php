@@ -115,7 +115,7 @@ class WPUM_Ajax_Handler {
 			// Deletes previously selected avatar.
 			$previous_avatar = get_user_meta( $user_id, "_current_{$field_id}_path", true );
 			if( $previous_avatar )
-				unlink( $previous_avatar );
+				wp_delete_file( $previous_avatar );
 
 			delete_user_meta( $user_id, "_current_{$field_id}_path" );
 
