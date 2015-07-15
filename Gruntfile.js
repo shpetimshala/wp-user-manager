@@ -1,5 +1,8 @@
 module.exports = function( grunt ) {
 
+	// load all grunt tasks in package.json matching the `grunt-*` pattern
+	require( 'load-grunt-tasks' )( grunt );
+
 	// Project configuration
 	grunt.initConfig( {
 		pkg:    grunt.file.readJSON( 'package.json' ),
@@ -147,8 +150,41 @@ module.exports = function( grunt ) {
 			}
 		},
 		clean: {
-			main: ['release/<%= pkg.version %>']
+			main: ['release/<%= pkg.version %>'],
+			post_build: [
+               'build'
+           	]
 		},
+		gittag: {
+           addtag: {
+               options: {
+                   tag: '<%= pkg.version %>',
+                   message: 'Version <%= pkg.version %>'
+               }
+           }
+		},
+		gitcommit: {
+		    commit: {
+		        options: {
+		            message: 'Version <%= pkg.version %>',
+		            noVerify: true,
+		            noStatus: false,
+		            allowEmpty: true
+		        },
+		        files: {
+		            src: [ 'readme.txt', 'wp-user-manager.php', 'package.json' ]
+		        }
+		    }
+		},
+		gitpush: {
+		    push: {
+		        options: {
+		            tags: true,
+		            remote: 'origin',
+		            branch: 'master'
+		        }
+		    }
+		}
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
@@ -167,7 +203,67 @@ module.exports = function( grunt ) {
 					'!.gitmodules'
 				],
 				dest: 'release/<%= pkg.version %>/'
-			}		
+			},
+			svn_trunk: {
+               options : {
+                   mode :true
+               },
+               src:  [
+                   '**',
+					'!node_modules/**',
+					'!release/**',
+					'!.git/**',
+					'!.sass-cache/**',
+					'!css/src/**',
+					'!js/src/**',
+					'!img/src/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!.gitignore',
+					'!.gitmodules'
+               ],
+               dest: 'build/<%= pkg.name %>/trunk/'
+           },
+           svn_tag: {
+               options : {
+                   mode :true
+               },
+               src:  [
+                   '**',
+					'!node_modules/**',
+					'!release/**',
+					'!.git/**',
+					'!.sass-cache/**',
+					'!css/src/**',
+					'!js/src/**',
+					'!img/src/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!.gitignore',
+					'!.gitmodules'
+               ],
+               dest: 'build/<%= pkg.name %>/tags/<%= pkg.version %>/'
+           }	
+		},
+		svn_checkout: {
+           make_local: {
+               repos: [
+                   {
+                       path: [ 'build' ],
+                       repo: 'http://plugins.svn.wordpress.org/wp-user-manager'
+                   }
+               ]
+           }
+       	},
+		push_svn: {
+		    options: {
+		        remove: true
+		    },
+		    main: {
+		        src: 'release/<%= pkg.name %>',
+		        dest: 'http://plugins.svn.wordpress.org/wp-user-manager',
+		        tmp: 'build/make_svn'
+		    }
 		},
 		compress: {
 			main: {
@@ -180,25 +276,41 @@ module.exports = function( grunt ) {
 				src: ['**/*'],
 				dest: 'wp-user-manager/'
 			}		
-		}
+		},
+		replace: {
+			readme_txt: {
+				src: [ 'readme.txt' ],
+				overwrite: true,
+				replacements: [{
+					from: /Stable tag: (.*)/,
+					to: "Stable tag: <%= pkg.version %>"
+				}]
+			},
+			init_php: {
+				src: [ 'wp-user-manager.php' ],
+				overwrite: true,
+				replacements: [{
+					from: /Version:\s*(.*)/,
+					to: "Version: <%= pkg.version %>"
+				}, {
+					from: /define\(\s*'WPUM_VERSION',\s*'(.*)'\s*\);/,
+					to: "define( 'WPUM_VERSION', '<%= pkg.version %>' );"
+				}]
+			}
+		},
 	} );
-	
-	// Load other tasks
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks( 'grunt-contrib-clean' );
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-compress' );
-	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	
 	// Default task.
 	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'do_pot', ['makepot'] );
+
+	grunt.registerTask( 'version_number', [ 'replace:readme_txt', 'replace:init_php' ] );
+	grunt.registerTask( 'pre_vcs', [ 'version_number' ] );
+	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
+	grunt.registerTask( 'do_git', [  'gitcommit', 'gittag', 'gitpush' ] );
+	grunt.registerTask( 'release', [ 'pre_vcs', 'do_svn', 'do_git', 'clean:post_build' ] );
+
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
 	grunt.util.linefeed = '\n';
