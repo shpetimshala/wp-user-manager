@@ -150,7 +150,7 @@ module.exports = function( grunt ) {
 			}
 		},
 		clean: {
-			main: ['release/<%= pkg.version %>'],
+			main: ['release'],
 			post_build: [
                'build'
            	]
@@ -260,7 +260,7 @@ module.exports = function( grunt ) {
 		        remove: true
 		    },
 		    main: {
-		        src: 'release/<%= pkg.name %>',
+		        src: 'build/<%= pkg.name %>',
 		        dest: 'http://plugins.svn.wordpress.org/wp-user-manager',
 		        tmp: 'build/make_svn'
 		    }

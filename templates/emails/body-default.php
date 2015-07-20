@@ -2,7 +2,7 @@
 /**
  * Email Body
  *
- * @author 		Easy Digital Downloads
+ * 
  * @version     1.0.0
  */
 

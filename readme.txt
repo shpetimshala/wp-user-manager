@@ -85,12 +85,12 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 == Changelog ==
 
 = 1.0.1 =
-Added: russian language file support. Thanks to Ctajleh
-Adjusted: use WP core function when a user deletes the avatar
-Adjusted: redirect to welcome screen only for major updates
-Fixed: show correct success message upon registration when random password is generated
-Fixed: install tables, fields and groups only if first install
-Fixed: emails editor not saving emails correctly
+- Added: russian language file support. Thanks to Ctajleh
+- Adjusted: use WP core function when a user deletes the avatar
+- Adjusted: redirect to welcome screen only for major updates
+- Fixed: show correct success message upon registration when random password is generated
+- Fixed: install tables, fields and groups only if first install
+- Fixed: emails editor not saving emails correctly
 
 = 1.0.0 =
  Just released ;)
