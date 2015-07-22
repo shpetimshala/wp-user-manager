@@ -493,7 +493,6 @@ class WPUM_Shortcodes {
 			'directory_id' => $directory_id,
 			'paged'        => $paged,
 			//'search_form'  => wpum_directory_has_search_form( $directory_id ), Search form is under construction.
-			'template'     => wpum_directory_has_custom_template( $directory_id )
 		);
 
 		// Load the template
