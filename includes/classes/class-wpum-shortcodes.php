@@ -292,9 +292,14 @@ class WPUM_Shortcodes {
 			$display_buttons = false;
 		}
 
-		get_wpum_template( 'profile-card.php', array( 
+		// Detect which template should be loaded
+		$card_template = 'profile-card.php';
+		if( ! empty( $template ) ) {
+			$card_template = "profile-card-{$template}.php";
+		}
+
+		get_wpum_template( $card_template, array( 
 				'user_data'       => get_user_by( 'id', intval( $user_id ) ),
-				'template'        => $template,
 				'wrapper_id'      => $wrapper_id,
 				'link_to_profile' => $link_to_profile,
 				'display_buttons' => $display_buttons,
