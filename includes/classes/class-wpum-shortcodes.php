@@ -468,6 +468,13 @@ class WPUM_Shortcodes {
 		);
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
+		// Detect which template we should be using.
+		$template = "user-directory.php";
+		if( wpum_directory_has_custom_template( $directory_id ) ) {
+			$template_tag = wpum_directory_has_custom_template( $directory_id );
+			$template = "user-directory-{$template_tag}.php";
+		}
+
 		// Build Pagination Count
 		// Modify $number var if a custom amount is set from the frontend
 		// This updates the pagination too.
@@ -490,7 +497,7 @@ class WPUM_Shortcodes {
 		);
 
 		// Load the template
-		get_wpum_template( 'user-directory.php', array( 'directory_args' => $directory_args ) );
+		get_wpum_template( $template, array( 'directory_args' => $directory_args ) );
 
 		$output = ob_get_clean();
 
