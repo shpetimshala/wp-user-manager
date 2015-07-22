@@ -96,6 +96,9 @@ module.exports = function( grunt ) {
 	            }
 	        }
 	    },
+	    other: {
+			changelog: 'changelog.md'
+		},
 		makepot: {
             target: {
                 options: {
@@ -298,22 +301,35 @@ module.exports = function( grunt ) {
 				}]
 			}
 		},
-		changelog: {
-		  release: {
-		    options: {
-		      version: '<%= pkg.version %>',
-		      labels: ['added:', 'fixed:', 'adjusted:'],
-		      template: 'grouped'
+		git_changelog: {
+		    extended: {
+		      options: {
+		        repo_url: 'https://github.com/alessandrotesoro/wp-user-manager',
+		        app_name : 'Git changelog extended',
+		        file : 'EXTENDEDCHANGELOG.md',
+		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING',
+		        debug: true,
+		        tag : false //False for commits since the beggining 
+		      }
+		    },
+		    fromCertainTag: {
+		      options: {
+		        repo_url: 'https://github.com/alessandrotesoro/wp-user-manager',
+		        app_name : 'My project name',
+		        file : 'certainTag.md',
+		        tag : '0.0.1'
+		      }
 		    }
 		  }
-		}
 	} );
 	
+	grunt.loadNpmTasks('git-changelog');
+
 	// Default task.
 	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'do_pot', ['makepot'] );
-	//grunt.registerTask( 'changelog', [ 'changelog' ] );
+	grunt.registerTask( 'do_changelog', ['git_changelog'] );
 	grunt.registerTask( 'version_number', [ 'replace:readme_txt', 'replace:init_php' ] );
 	grunt.registerTask( 'pre_vcs', [ 'version_number' ] );
 	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
