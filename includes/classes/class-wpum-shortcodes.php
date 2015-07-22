@@ -469,9 +469,9 @@ class WPUM_Shortcodes {
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Detect which template we should be using.
-		$template = "user-directory.php";
-		if( wpum_directory_has_custom_template( $directory_id ) ) {
-			$template_tag = wpum_directory_has_custom_template( $directory_id );
+		$template     = "user-directory.php";
+		$template_tag = wpum_directory_has_custom_template( $directory_id );
+		if( $template_tag ) {
 			$template = "user-directory-{$template_tag}.php";
 		}
 
