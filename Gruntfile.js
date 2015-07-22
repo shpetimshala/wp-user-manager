@@ -302,7 +302,7 @@ module.exports = function( grunt ) {
 		  release: {
 		    options: {
 		      version: '<%= pkg.version %>',
-		      labels: ['added', 'fixed'],
+		      labels: ['added:', 'fixed:', 'adjusted:'],
 		      template: 'grouped'
 		    }
 		  }
@@ -313,7 +313,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'default', ['concat', 'uglify', 'sass', 'cssmin'] );
 	grunt.registerTask( 'textdomain', ['addtextdomain'] );
 	grunt.registerTask( 'do_pot', ['makepot'] );
-	grunt.registerTask( 'changelog', [ 'changelog' ] );
+	//grunt.registerTask( 'changelog', [ 'changelog' ] );
 	grunt.registerTask( 'version_number', [ 'replace:readme_txt', 'replace:init_php' ] );
 	grunt.registerTask( 'pre_vcs', [ 'version_number' ] );
 	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
