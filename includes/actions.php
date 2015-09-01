@@ -99,6 +99,7 @@ add_action( 'widgets_init', 'wpum_register_widgets', 1 );
 /**
  * Authenticate the user and decide which login method to use.
  *
+ * @since 1.0.3
  * @param  string $user     user object
  * @param  string $username typed username
  * @param  string $password typed password
