@@ -174,6 +174,12 @@ function wpum_authenticate_login_form( $user ) {
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
 
+		// remove previously added query strings
+		$referrer = add_query_arg( array(
+			'login' => false,
+			'captcha' => false
+		), $referrer );
+
 		$error = false;
 
 		if ( $_POST['log'] == '' || $_POST['pwd'] == '' ) {
@@ -183,13 +189,11 @@ function wpum_authenticate_login_form( $user ) {
 		// check that were not on the default login page
 		if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $error ) {
 
-			// make sure we don't already have a failed login attempt
-			if ( !strstr( $referrer, '?login=failed' ) ) {
-				// Redirect to the login page and append a querystring of login failed
-				wp_redirect( $referrer . '?login=failed' );
-			} else {
-				wp_redirect( $referrer );
-			}
+			$referrer =  add_query_arg( array(
+				'login' => 'failed'
+			), $referrer );
+
+			wp_redirect( esc_url( $referrer ) );
 
 			exit;
 
@@ -213,15 +217,20 @@ function wpum_handle_failed_login( $user ) {
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
 
+		// remove previously added query strings
+		$referrer = add_query_arg( array(
+			'login' => false,
+			'captcha' => false
+		), $referrer );
+
 		// check that were not on the default login page
 		if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $user!=null ) {
-			// make sure we don't already have a failed login attempt
-			if ( !strstr( $referrer, '?login=failed' ) ) {
-				// Redirect to the login page and append a querystring of login failed
-				wp_redirect( $referrer . '?login=failed' );
-			} else {
-				wp_redirect( $referrer );
-			}
+
+			$referrer =  add_query_arg( array(
+				'login' => 'failed'
+			), $referrer );
+
+			wp_redirect( esc_url( $referrer ) );
 
 			exit;
 		}
