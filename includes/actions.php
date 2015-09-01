@@ -97,6 +97,68 @@ function wpum_register_widgets() {
 add_action( 'widgets_init', 'wpum_register_widgets', 1 );
 
 /**
+ * Authenticate the user and decide which login method to use.
+ *
+ * @param  string $user     user object
+ * @param  string $username typed username
+ * @param  string $password typed password
+ * @return void Results of autheticating via wp_authenticate_username_password(), using the username found when looking up via email.
+ */
+function wpum_authenticate_login_method( $user, $username, $password ) {
+
+	// Get default login method
+	$login_method = wpum_get_option( 'login_method', 'username' );
+
+	// Authenticate via email only
+	if( $login_method == 'email'  ) {
+
+		if ( is_a( $user, 'WP_User' ) )
+			return $user;
+
+			if( !empty( $username ) && is_email( $username ) ) {
+
+				$user = get_user_by( 'email', $username );
+
+				if ( isset( $user, $user->user_login, $user->user_status ) && 0 == (int) $user->user_status )
+					$username = $user->user_login;
+
+				return wp_authenticate_username_password( null, $username, $password );
+
+			}
+
+	} else if( $login_method == 'username_email' ) {
+
+		if ( is_a( $user, 'WP_User' ) )
+			return $user;
+
+			$username = sanitize_user( $username );
+
+			if( !empty( $username ) && is_email( $username ) ) {
+
+				$user = get_user_by( 'email', $username );
+
+				if ( isset( $user, $user->user_login, $user->user_status ) && 0 == (int) $user->user_status )
+					$username = $user->user_login;
+
+				return wp_authenticate_username_password( null, $username, $password );
+
+			} else {
+
+				return wp_authenticate_username_password( null, $username, $password );
+
+			}
+
+	}
+
+}
+
+// Run filters only when alternative methods are selected
+if( wpum_get_option( 'login_method') !== 'username' ) {
+	remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
+	add_filter( 'authenticate', 'wpum_authenticate_login_method', 20, 3 );
+}
+
+/**
  * Authenticates the login form, if failed
  * returns back to the page where it came from.
  *
