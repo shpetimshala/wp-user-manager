@@ -20,31 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WPUM_Ajax_Handler {
 
 	/**
-	 * Store login method
-	 *
-	 * @var login_method.
-	 * @since 1.0.0
-	 */
-	var $login_method;
-
-	/**
-	 * Store password method
-	 *
-	 * @var random_password.
-	 * @since 1.0.0
-	 */
-	public static $random_password = true;
-
-	/**
 	 * __construct function.
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function __construct() {
-
-		// retrieve login method
-		$this->login_method = wpum_get_option( 'login_method', 'username' );
 
 		// Restore Email
 		add_action( 'wp_ajax_wpum_restore_emails', array( $this, 'restore_emails' ) );
