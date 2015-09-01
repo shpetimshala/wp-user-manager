@@ -157,7 +157,7 @@ add_action( 'authenticate', 'wpum_authenticate_login_form' );
  * @return void
  */
 function wpum_handle_failed_login( $user ) {
-	
+
 	if ( isset( $_SERVER['HTTP_REFERER'] ) && !defined( 'DOING_AJAX' ) ) :
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
@@ -175,7 +175,7 @@ function wpum_handle_failed_login( $user ) {
 			exit;
 		}
 	endif;
-	
+
 }
 add_action( 'wp_login_failed', 'wpum_handle_failed_login' );
 
