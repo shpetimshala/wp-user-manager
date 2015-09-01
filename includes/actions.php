@@ -12,18 +12,6 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Add nonce field to login form needed for ajax validation
- *
- * @since 1.0.0
- * @access public
- * @return string nonce field
- */
-function wpum_add_nonce_to_login_form() {
-	return wp_nonce_field( "wpum_nonce_login_form", "wpum_nonce_login_security" );
-}
-add_action( 'login_form_bottom', 'wpum_add_nonce_to_login_form' );
-
-/**
  * Stops users from accessing wp-login.php?action=register
  *
  * @since 1.0.0
