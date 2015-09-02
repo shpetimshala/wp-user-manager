@@ -49,7 +49,7 @@ module.exports = function( grunt ) {
 					exports: true,
 					module:  false
 				}
-			}		
+			}
 		},
 		uglify: {
 			all: {
@@ -72,7 +72,7 @@ module.exports = function( grunt ) {
 		test:   {
 			files: ['assets/js/test/**/*.js']
 		},
-		
+
 		sass:   {
 			all: {
 				files: {
@@ -103,7 +103,7 @@ module.exports = function( grunt ) {
             target: {
                 options: {
                 	exclude: [
-	                    'assets/.*', 'images/.*', 'node_modules/.*', 'tests/.*'   
+	                    'assets/.*', 'images/.*', 'node_modules/.*', 'tests/.*'
 	                ],
                     domainPath: '/languages',
                     mainFile: 'wp-user-manager.php',
@@ -111,7 +111,7 @@ module.exports = function( grunt ) {
                     potHeaders: {
                         poedit: true,                 // Includes common Poedit headers.
                         'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
-                    }, 
+                    },
                     type: 'wp-plugin'
                 }
             }
@@ -126,16 +126,16 @@ module.exports = function( grunt ) {
 			},
 			minify: {
 				expand: true,
-				
-				cwd: 'assets/css/',				
+
+				cwd: 'assets/css/',
 				src: ['*.css', '!*.min.css'],
-				
+
 				dest: 'assets/css/',
 				ext: '.min.css'
 			}
 		},
 		watch:  {
-			
+
 			sass: {
 				files: ['assets/css/sass/*.scss'],
 				tasks: ['sass', 'cssmin'],
@@ -143,7 +143,7 @@ module.exports = function( grunt ) {
 					debounceDelay: 500
 				}
 			},
-			
+
 			scripts: {
 				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
 				tasks: ['concat', 'uglify'],
@@ -246,7 +246,7 @@ module.exports = function( grunt ) {
 					'!.gitmodules'
                ],
                dest: 'build/<%= pkg.name %>/tags/<%= pkg.version %>/'
-           }	
+           }
 		},
 		svn_checkout: {
            make_local: {
@@ -278,7 +278,7 @@ module.exports = function( grunt ) {
 				cwd: 'release/<%= pkg.version %>/',
 				src: ['**/*'],
 				dest: 'wp-user-manager/'
-			}		
+			}
 		},
 		replace: {
 			readme_txt: {
@@ -307,9 +307,9 @@ module.exports = function( grunt ) {
 		        repo_url: 'https://github.com/alessandrotesoro/wp-user-manager',
 		        app_name : 'Git changelog extended',
 		        file : 'EXTENDEDCHANGELOG.md',
-		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING',
+		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING|^updated',
 		        debug: true,
-		        tag : false //False for commits since the beggining 
+		        tag : false //False for commits since the beggining
 		      }
 		    },
 		    fromCertainTag: {
@@ -322,7 +322,7 @@ module.exports = function( grunt ) {
 		    }
 		  }
 	} );
-	
+
 	grunt.loadNpmTasks('git-changelog');
 
 	// Default task.

@@ -440,7 +440,6 @@ class WPUM_Form_Register extends WPUM_Form {
 		if( self::$random_password ) {
 
 			$do_user = self::random_psw_registration( $username, $email );
-			//$do_user = register_new_user($username, $email);
 
 		} else {
 
