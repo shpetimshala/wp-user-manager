@@ -336,7 +336,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'do_git', [  'gitcommit', 'gittag', 'gitpush' ] );
 	grunt.registerTask( 'release', [ 'pre_vcs', 'do_svn', 'do_git', 'clean:post_build' ] );
 
-	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
+	grunt.registerTask( 'build', ['clean', 'copy', 'compress'] );
 
 	grunt.util.linefeed = '\n';
 };
