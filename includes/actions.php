@@ -97,7 +97,7 @@ function wpum_register_widgets() {
 add_action( 'widgets_init', 'wpum_register_widgets', 1 );
 
 /**
- * Add hidden field into login form to identify login_form_middle
+ * Add hidden field into login form to identify login
  * has been made from a wpum login form
  *
  * @since 1.0.5
