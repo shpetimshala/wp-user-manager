@@ -763,7 +763,7 @@ function wpum_account_tab_exists( $tab ) {
  */
 function wpum_get_login_redirect_url() {
 
-	$url = site_url( $_SERVER['REQUEST_URI'] );
+	$url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	$url = add_query_arg( array(
 		'login' => false,
