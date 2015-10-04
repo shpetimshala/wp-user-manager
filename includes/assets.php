@@ -30,7 +30,6 @@ function wpum_admin_cssjs() {
 	wp_register_style( 'wpum-shortcode-manager', WPUM_PLUGIN_URL . 'includes/admin/tinymce/css/wpum_shortcodes_tinymce_style.css', WPUM_VERSION );
 	wp_register_style( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/css/select2.css', WPUM_VERSION );
 	wp_register_script( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/js/select2.min.js', 'jQuery', WPUM_VERSION, true );
-	wp_register_script( 'wpum-serializeJSON', WPUM_PLUGIN_URL . 'assets/js/vendor/jquery.serializeJSON.js', 'jQuery', WPUM_VERSION, true );
 	wp_register_script( 'wpum-admin-js', $js_dir . 'wp_user_manager_admin' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
 
 	// Enquery styles and scripts anywhere needed
@@ -90,7 +89,7 @@ function wpum_frontend_cssjs() {
 	$parent_theme_style_sheet   = trailingslashit( get_template_directory()   ) . $templates_dir . $file;
 	$parent_theme_style_sheet_2 = trailingslashit( get_template_directory()   ) . $templates_dir . 'wp_user_manager_frontend.css';
 	$wpum_plugin_style_sheet     = trailingslashit( wpum_get_templates_dir()    ) . $file;
-	
+
 	// Look in the child theme directory first, followed by the parent theme, followed by the WPUM core templates directory
 	// Also look for the min version first, followed by non minified version, even if SCRIPT_DEBUG is not enabled.
 	// This allows users to copy just wp_user_manager_frontend.css to their theme
@@ -124,9 +123,9 @@ function wpum_frontend_cssjs() {
 
 	// Display password meter only if enabled
 	if ( wpum_get_option( 'display_password_meter_registration' ) ) :
-			
+
 		wp_enqueue_script( 'password-strength-meter' );
-			
+
 		wp_localize_script( 'password-strength-meter', 'pwsL10n', array(
 			'empty'  => __( 'Strength indicator', 'wpum' ),
 			'short'  => __( 'Very weak', 'wpum' ),
