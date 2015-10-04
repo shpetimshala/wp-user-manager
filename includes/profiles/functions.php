@@ -398,7 +398,7 @@ function wpum_can_access_profile() {
 	}
 
 	// Block members on single profile page if option disabled
-	if ( is_user_logged_in() && ! wpum_members_can_view_profiles() && ! wpum_is_own_profile() ) {
+	if ( is_user_logged_in() && wpum_is_single_profile() && ! wpum_members_can_view_profiles() && ! wpum_is_own_profile() ) {
 		// Display error message
 		$args = array(
 			'id'   => 'wpum-no-access',
