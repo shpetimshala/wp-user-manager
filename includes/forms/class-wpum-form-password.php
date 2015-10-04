@@ -160,7 +160,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		// Check what the form status we should process
 		if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'recover' ) {
-			
+
 			self::retrieve_password( $values['user'][ 'username_email' ] );
 
 		} else if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'reset' ) {
@@ -264,7 +264,7 @@ class WPUM_Form_Password extends WPUM_Form {
 	}
 
 	/**
-	 * Process the password reset form. 
+	 * Process the password reset form.
 	 * This is the function that actually changes the password of the user.
 	 *
 	 * @access public
@@ -344,7 +344,7 @@ class WPUM_Form_Password extends WPUM_Form {
 	 * @return void
 	 */
 	public static function change_password( $user, $new_pass ) {
-		
+
 		do_action( 'password_reset', $user, $new_pass );
 
 		wp_set_password( $new_pass, $user->ID );
@@ -362,7 +362,7 @@ class WPUM_Form_Password extends WPUM_Form {
 	 * @return void
 	 */
 	public static function output( $atts = array() ) {
-		
+
 		// Get fields
 		self::get_password_fields();
 
@@ -376,7 +376,7 @@ class WPUM_Form_Password extends WPUM_Form {
 		// Display template
 		if( is_user_logged_in() ) :
 
-			get_wpum_template( 'already-logged-in.php', 
+			get_wpum_template( 'already-logged-in.php',
 				array(
 					'args' => $atts
 				)
@@ -384,7 +384,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		// Show psw form if not logged in
 		else :
-			get_wpum_template( 'forms/password-form.php', 
+			get_wpum_template( 'forms/password-form.php',
 				array(
 					'atts'            => $atts,
 					'form'            => self::$form_name,

@@ -66,7 +66,7 @@ if ( ! function_exists( 'wpum_logout_url' ) ) :
 			$redirect = esc_url( $custom_redirect );
 		} else if ( wpum_get_option( 'logout_redirect' ) ) {
 				$redirect = esc_url( get_permalink( wpum_get_option( 'logout_redirect' ) ) );
-			}
+		}
 
 		return wp_logout_url( apply_filters( 'wpum_logout_url', $redirect, $custom_redirect ) );
 
@@ -90,7 +90,7 @@ if ( ! function_exists( 'wpum_get_username_label' ) ) :
 			$label = __( 'Email', 'wpum' );
 		} else if ( wpum_get_option( 'login_method' ) == 'username_email' ) {
 				$label = __( 'Username or email', 'wpum' );
-			}
+		}
 
 		return $label;
 
@@ -137,8 +137,8 @@ if ( ! function_exists( 'wpum_login_form' ) ) :
 
 			get_wpum_template( 'forms/login-form.php', array( 'args' => $args ) );
 
-		// Display helper links
-		do_action( 'wpum_do_helper_links', $args['login_link'], $args['register_link'], $args['psw_link'] );
+			// Display helper links
+			do_action( 'wpum_do_helper_links', $args['login_link'], $args['register_link'], $args['psw_link'] );
 
 		endif;
 

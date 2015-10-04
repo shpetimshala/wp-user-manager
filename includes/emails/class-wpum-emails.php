@@ -77,7 +77,7 @@ class WPUM_Emails {
 	var $name = '';
 
 	/**
-	 * The title of the email. 
+	 * The title of the email.
 	 * Used within the editor.
 	 *
 	 * @since 1.0.0
@@ -85,7 +85,7 @@ class WPUM_Emails {
 	var $title = '';
 
 	/**
-	 * The description of the email. 
+	 * The description of the email.
 	 * Used within the editor.
 	 *
 	 * @since 1.0.0
@@ -355,7 +355,7 @@ class WPUM_Emails {
 	 * @return $emails array - Array list of the available emails.
 	 */
 	public function get_emails( $emails ) {
-		
+
 		if( !empty( $this->name ) ) :
 
 			$emails[ $this->name ] = array(

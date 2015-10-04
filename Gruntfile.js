@@ -304,20 +304,10 @@ module.exports = function( grunt ) {
 		git_changelog: {
 		    extended: {
 		      options: {
-		        repo_url: 'https://github.com/alessandrotesoro/wp-user-manager',
-		        app_name : 'Git changelog extended',
-		        file : 'EXTENDEDCHANGELOG.md',
+		        app_name : 'WP User Manager Changelog',
+		        file : 'changelog.md',
 		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING|^updated',
-		        debug: true,
-		        tag : false //False for commits since the beggining
-		      }
-		    },
-		    fromCertainTag: {
-		      options: {
-		        repo_url: 'https://github.com/alessandrotesoro/wp-user-manager',
-		        app_name : 'My project name',
-		        file : 'certainTag.md',
-		        tag : '0.0.1'
+        		tag : false //False for commits since the beggining
 		      }
 		    }
 		  }
