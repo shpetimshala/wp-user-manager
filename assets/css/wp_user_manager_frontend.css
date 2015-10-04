@@ -570,4 +570,7 @@ div.wpum-message {
         background: #efefef;
         text-decoration: none; }
 
+.wpum-required-star {
+  color: #b94a48; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */
