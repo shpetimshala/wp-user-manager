@@ -49,7 +49,7 @@ td.page-title span.post-state i.wpum-shortcodes-icon:before {
 	padding: 3px 6px;
 	border-radius: 2px;
 	color: #0073aa;
-  	background: #e0e0e0;
+  background: #e0e0e0;
 	border-radius: 3px;
 	font-weight: bold;
 }
@@ -68,3 +68,7 @@ body.wpum_addons_page h2 .button-primary { position: absolute; }
 body.wpum_addons_page .wpum-extension { float: left; margin: 0 15px 15px 0; background: #fff; border: 1px solid #ccc; width: 320px; padding: 14px; height: 340px; position: relative; }
 body.wpum_addons_page .wpum-extension h3 { margin: 0 0 8px; font-size: 18px;  }
 body.wpum_addons_page .wpum-extension .wp-post-image { width: 100%; height: auto; }
+
+#widgets-right .widgets-holder-wrap .description {
+	padding-left: 0;
+}
