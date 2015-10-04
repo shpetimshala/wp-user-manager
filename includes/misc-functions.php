@@ -778,3 +778,13 @@ function wpum_get_login_redirect_url() {
 	return esc_url( $url );
 
 }
+
+/**
+ * Displays psw indicator.
+ *
+ * @since 1.1.0
+ * @return mixed
+ */
+function wpum_psw_indicator() {
+	echo '<span id="password-strength">' . __( 'Strength Indicator', 'wpum' ) . '</span>';
+}
