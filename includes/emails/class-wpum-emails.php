@@ -168,13 +168,11 @@ class WPUM_Emails {
 	 * @since 1.0.0
 	 */
 	public function get_content_type() {
-		if ( ! $this->content_type && $this->html ) {
-			$this->content_type = apply_filters( 'wpum_email_default_content_type', 'text/html', $this );
-		} else if ( ! $this->html ) {
-			$this->content_type = 'text/plain';
-		}
+
+		$this->content_type = 'text/html';
 
 		return apply_filters( 'wpum_email_content_type', $this->content_type, $this );
+
 	}
 
 	/**
@@ -272,6 +270,7 @@ class WPUM_Emails {
 		$message = str_replace( '{email}', $message, $body );
 
 		return apply_filters( 'wpum_email_message', $message, $this );
+
 	}
 
 	/**
@@ -294,11 +293,19 @@ class WPUM_Emails {
 		$subject = $this->parse_tags( $subject );
 		$message = $this->parse_tags( $message );
 
-		$message = $this->build_email( $message );
+		if( $this->get_template() == 'none' ) {
+			add_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ) );
+		} else {
+			$message = $this->build_email( $message );
+		}
 
 		$attachments = apply_filters( 'wpum_email_attachments', $attachments, $this );
 
 		$sent = wp_mail( $to, $subject, $message, $this->get_headers(), $attachments );
+
+		if( $this->get_template() == 'none' ) {
+			remove_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ) );
+		}
 
 		do_action( 'wpum_email_send_after', $this );
 

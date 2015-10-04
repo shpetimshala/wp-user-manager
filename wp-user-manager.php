@@ -364,3 +364,13 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
+
+/*
+echo "<pre>";
+var_dump( get_option('wpum_emails') );
+echo "</pre>";*/
+
+
+function set_html_content_type() {
+	return 'text/html';
+}

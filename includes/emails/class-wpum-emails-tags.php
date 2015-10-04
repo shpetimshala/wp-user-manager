@@ -14,12 +14,12 @@
  * in a function hooked to the 'wpum_email_tags' action
  *
  * @package     wp-user-manager
- * @author   	Copyright (c) 2014, Pippin Williamson
+ * @author   		Copyright (c) 2014, Pippin Williamson
  * @author      Barry Kooij
  * @author      Alessandro Tesoro
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
- * 
+ *
  */
 
 // Exit if accessed directly
