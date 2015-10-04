@@ -276,3 +276,22 @@ function wpum_php_is_old() {
 	}
 }
 add_action( 'admin_notices', 'wpum_php_is_old' );
+
+/**
+ * Add a "view profile" link to the admin user table.
+ *
+ * @since 1.1.0
+ * @param  array $actions     list of actions
+ * @param  object $user_object user details
+ * @return array              list of actions
+ */
+function wpum_admin_user_action_link( $actions, $user_object ) {
+
+	if( wpum_get_core_page_id( 'profile' ) ) :
+		$actions['view_profile'] = '<a href="'. wpum_get_user_profile_url( $user_object ) .'">'. esc_html__( 'View Profile' ) .'</a>';
+	endif;
+
+	return $actions;
+
+}
+add_filter( 'user_row_actions', 'wpum_admin_user_action_link', 10, 2 );
