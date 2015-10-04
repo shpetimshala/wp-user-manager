@@ -27,13 +27,14 @@ function wpum_admin_cssjs() {
 
 	// Styles & scripts
 	wp_register_style( 'wpum-admin', $css_dir . 'wp_user_manager' . $suffix . '.css', WPUM_VERSION );
-	wp_register_style( 'wpum-shortcode-manager', WPUM_PLUGIN_URL . 'includes/admin/tinymce/css/wpum_shortcodes_tinymce_style.css', WPUM_VERSION );
+	wp_register_style( 'wpum-admin-general', WPUM_PLUGIN_URL . 'assets/css/wp_user_manager_admin_general.css', WPUM_VERSION );
 	wp_register_style( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/css/select2.css', WPUM_VERSION );
 	wp_register_script( 'wpum-select2', WPUM_PLUGIN_URL . 'assets/select2/js/select2.min.js', 'jQuery', WPUM_VERSION, true );
+	wp_register_script( 'wpum-serializeJSON', WPUM_PLUGIN_URL . 'assets/js/vendor/jquery.serializeJSON.js', 'jQuery', WPUM_VERSION, true );
 	wp_register_script( 'wpum-admin-js', $js_dir . 'wp_user_manager_admin' . $suffix . '.js', 'jQuery', WPUM_VERSION, true );
 
 	// Enquery styles and scripts anywhere needed
-	wp_enqueue_style( 'wpum-shortcode-manager' );
+	wp_enqueue_style( 'wpum-admin-general' );
 
 	// Enqueue styles & scripts on admin page only
 	$screen = get_current_screen();
