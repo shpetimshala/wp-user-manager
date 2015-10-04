@@ -238,7 +238,7 @@ function wpum_get_registered_settings() {
 				'display_password_meter_registration' => array(
 					'id'   => 'display_password_meter_registration',
 					'name' => __( 'Display password meter:', 'wpum' ),
-					'desc' => __('Enable to display a password meter on registration page and account page.', 'wpum'),
+					'desc' => __('Enable to display a password meter into the forms.', 'wpum'),
 					'type' => 'checkbox'
 				),
 				'header_n' => array(
@@ -716,7 +716,7 @@ function wpum_text_callback( $args ) {
  */
 function wpum_number_callback( $args ) {
 	global $wpum_options;
-    
+
     if ( isset( $wpum_options[ $args['id'] ] ) )
 		$value = $wpum_options[ $args['id'] ];
 	else
