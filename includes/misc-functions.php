@@ -803,6 +803,6 @@ function wpum_registration_redirect_url() {
 		$url = get_permalink( wpum_get_option( 'registration_redirect' ) );
 	}
 
-	return apply_filters( 'wpum_registraction_redirect_url', $url );
+	return apply_filters( 'wpum_registration_redirect_url', $url );
 
 }
