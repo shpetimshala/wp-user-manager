@@ -39,7 +39,7 @@ class WPUM_Form_Password extends WPUM_Form {
 			add_filter( 'wpum/form/validate=password', array( __CLASS__, 'validate_passwords' ), 10, 3 );
 
 		// Add password meter field
-		if( wpum_get_option('display_password_meter_registration') )
+		if( wpum_get_option('display_password_meter_registration') && isset( $_GET['password-reset'] ) )
 			add_action( 'wpum_after_inside_password_form_template', 'wpum_psw_indicator' );
 
 	}
@@ -64,7 +64,7 @@ class WPUM_Form_Password extends WPUM_Form {
 				),
 			),
 			'password' => array(
-				'password_1' => array(
+				'password' => array(
 					'label'       => __( 'New password', 'wpum' ),
 					'type'        => 'password',
 					'required'    => true,
@@ -83,7 +83,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		// Temporarily remove fields if not into password reset form
 		if( !isset( $_GET['password-reset'] ) ) :
-			unset( self::$fields['password']['password_1'] );
+			unset( self::$fields['password']['password'] );
 			unset( self::$fields['password']['password_2'] );
 		endif;
 
@@ -122,7 +122,7 @@ class WPUM_Form_Password extends WPUM_Form {
 	 */
 	public static function validate_passwords( $passed, $fields, $values ) {
 
-		$password_1 = $values['password'][ 'password_1' ];
+		$password_1 = $values['password'][ 'password' ];
 		$password_2 = $values['password'][ 'password_2' ];
 
 		if ( empty( $password_1 ) || empty( $password_2 ) ) {
@@ -169,7 +169,7 @@ class WPUM_Form_Password extends WPUM_Form {
 
 		} else if ( !empty( $_POST['wpum_password_form_status'] ) && $_POST['wpum_password_form_status'] == 'reset' ) {
 
-			self::reset_password( $values['password'][ 'password_1' ], $values['password'][ 'password_2' ], $_POST['wpum_psw_reset_key'], $_POST['wpum_psw_reset_login'] );
+			self::reset_password( $values['password'][ 'password' ], $values['password'][ 'password_2' ], $_POST['wpum_psw_reset_key'], $_POST['wpum_psw_reset_login'] );
 
 		}
 
