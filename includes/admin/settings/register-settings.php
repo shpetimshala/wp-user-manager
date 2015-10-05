@@ -436,7 +436,7 @@ function wpum_get_registered_settings() {
 			array(
 				'login_redirect' => array(
 					'id'      => 'login_redirect',
-					'name'    => __( 'Login redirect:', 'wpum' ),
+					'name'    => __( 'Login', 'wpum' ),
 					'desc'    => __('Select the page where you want to redirect users after they login. If empty will return to the current page.', 'wpum'),
 					'type'    => 'select',
 					'class'   => 'select2',
@@ -444,15 +444,23 @@ function wpum_get_registered_settings() {
 				),
 				'logout_redirect' => array(
 					'id'      => 'logout_redirect',
-					'name'    => __( 'Logout redirect:', 'wpum' ),
+					'name'    => __( 'Logout', 'wpum' ),
 					'desc'    => __('Select the page where you want to redirect users after they logout. If empty will return to wp-login.php', 'wpum'),
+					'type'    => 'select',
+					'class'   => 'select2',
+					'options' => wpum_get_pages()
+				),
+				'registration_redirect' => array(
+					'id'      => 'registration_redirect',
+					'name'    => __( 'Registration Redirect', 'wpum' ),
+					'desc'    => __('Select the page where you want to redirect users after they successfully register. If empty a message will be displayed instead.', 'wpum'),
 					'type'    => 'select',
 					'class'   => 'select2',
 					'options' => wpum_get_pages()
 				),
 				'wp_login_signup_redirect' => array(
 					'id'      => 'wp_login_signup_redirect',
-					'name'    => __( 'Backend register redirect:', 'wpum' ),
+					'name'    => __( 'Backend register', 'wpum' ),
 					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to signup through <a href="%s">the default registration page on wp-login.php</a>', 'wpum'), site_url( 'wp-login.php?action=register' ) ),
 					'type'    => 'select',
 					'class'   => 'select2',
@@ -460,7 +468,7 @@ function wpum_get_registered_settings() {
 				),
 				'wp_login_password_redirect' => array(
 					'id'      => 'wp_login_password_redirect',
-					'name'    => __( 'Backend lost password redirect:', 'wpum' ),
+					'name'    => __( 'Backend lost password', 'wpum' ),
 					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to recover a lost password through <a href="%s">the default password recovery page on wp-login.php</a>', 'wpum'), site_url( 'wp-login.php?action=lostpassword' ) ),
 					'type'    => 'select',
 					'class'   => 'select2',
@@ -468,7 +476,7 @@ function wpum_get_registered_settings() {
 				),
 				'backend_profile_redirect' => array(
 					'id'      => 'backend_profile_redirect',
-					'name'    => __( 'Backend profile redirect:', 'wpum' ),
+					'name'    => __( 'Backend profile', 'wpum' ),
 					'desc'    => __('Select the page where you want to redirect users who try to access their profile on the backend.', 'wpum'),
 					'type'    => 'select',
 					'class'   => 'select2',

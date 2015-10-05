@@ -788,3 +788,21 @@ function wpum_get_login_redirect_url() {
 function wpum_psw_indicator() {
 	echo '<span id="password-strength">' . __( 'Strength Indicator', 'wpum' ) . '</span>';
 }
+
+/**
+ * Returns the url where users are redirected after a successfull registration.
+ *
+ * @since 1.1.0
+ * @return string redirect url
+ */
+function wpum_registration_redirect_url() {
+
+	$url = false;
+
+	if( wpum_get_option( 'registration_redirect' ) ) {
+		$url = get_permalink( wpum_get_option( 'registration_redirect' ) );
+	}
+
+	return apply_filters( 'wpum_registraction_redirect_url', $url );
+
+}
