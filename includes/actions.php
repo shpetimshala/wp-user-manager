@@ -30,6 +30,24 @@ function wpum_restrict_wp_register() {
 add_action( 'login_form_register', 'wpum_restrict_wp_register' );
 
 /**
+ * Stops users from accessing wp-login.php?action=lostpassword
+ *
+ * @since 1.1.0
+ * @access public
+ * @return void
+ */
+function wpum_restrict_wp_lostpassword() {
+
+	if ( wpum_get_option( 'wp_login_password_redirect' ) ):
+		$permalink = wpum_get_option( 'wp_login_password_redirect' );
+		wp_redirect( esc_url( get_permalink( $permalink ) ) );
+		exit();
+	endif;
+
+}
+add_action( 'login_form_lostpassword', 'wpum_restrict_wp_lostpassword' );
+
+/**
  * Stops users from seeing the admin bar on the frontend.
  *
  * @since 1.0.0

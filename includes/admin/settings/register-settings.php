@@ -458,6 +458,14 @@ function wpum_get_registered_settings() {
 					'class'   => 'select2',
 					'options' => wpum_get_pages()
 				),
+				'wp_login_password_redirect' => array(
+					'id'      => 'wp_login_password_redirect',
+					'name'    => __( 'Backend lost password redirect:', 'wpum' ),
+					'desc'    => sprintf(__('Select a page if you wish to redirect users who try to recover a lost password through <a href="%s">the default password recovery page on wp-login.php</a>', 'wpum'), site_url( 'wp-login.php?action=lostpassword' ) ),
+					'type'    => 'select',
+					'class'   => 'select2',
+					'options' => wpum_get_pages()
+				),
 				'backend_profile_redirect' => array(
 					'id'      => 'backend_profile_redirect',
 					'name'    => __( 'Backend profile redirect:', 'wpum' ),
