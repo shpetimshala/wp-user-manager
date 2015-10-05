@@ -18,6 +18,7 @@ jQuery(document).ready(function ($) {
 			this.restore_emails();
 			this.drag_and_drop_fields_table();
 			this.confirm_dialog();
+			this.admin_upload();
 		},
 
 		// General Functions
@@ -63,9 +64,9 @@ jQuery(document).ready(function ($) {
 					});
 
 			    } else {
-			        
+
 			        return false;
-			    
+
 			    }
 
 			});
@@ -86,15 +87,15 @@ jQuery(document).ready(function ($) {
 					delay: 150,
 					handle: ".column-order, .move-field",
 					update: function(event, ui) {
-		                
+
 		                // Update TR data
 						$(this).children('tr').each(function() {
 				            $(this).data('priority',$(this).index());
 				        });
-						
+
 						// Prepare field data
 		                dataArray = $.map($(this).children('tr'), function(el){
-					        return { 'priority':$(el).data('priority'), 'field_id':$(el).data('field-id') }; 
+					        return { 'priority':$(el).data('priority'), 'field_id':$(el).data('field-id') };
 					    });
 
 					    // Get nonce
@@ -184,6 +185,52 @@ jQuery(document).ready(function ($) {
 			$('#wpum-group-settings-edit a.submitdelete, .wpum-confirm-dialog').click(function(e){
 			    return confirm( wpum_admin_js.confirm );
 			})
+
+		},
+
+		// Handles files upload in admin panel
+		admin_upload : function() {
+
+			// Uploading files
+			var file_frame;
+			window.formfield = '';
+
+			$( document.body ).on('click', '.wpum_settings_upload_button', function(e) {
+
+					e.preventDefault();
+
+					var button = $(this);
+
+					window.formfield = $(this).parent().prev();
+
+					// If the media frame already exists, reopen it.
+					if ( file_frame ) {
+						file_frame.open();
+						return;
+					}
+
+					// Create the media frame.
+			    file_frame = wp.media.frames.file_frame = wp.media({
+			      title: wpum_admin_js.upload_title,
+			      button: {
+			        text: wpum_admin_js.use_this_file,
+			      },
+			      multiple: false  // Set to true to allow multiple files to be selected
+			    });
+
+					// When an image is selected, run a callback.
+			    file_frame.on( 'select', function() {
+			      // We set multiple to false so only get one image from the uploader
+			      attachment = file_frame.state().get('selection').first().toJSON();
+
+						// Send file url to text field
+						window.formfield.val( attachment.url );
+			    });
+
+			    // Finally, open the modal
+			    file_frame.open();
+
+			});
 
 		}
 

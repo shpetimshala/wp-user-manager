@@ -47,6 +47,7 @@ function wpum_admin_cssjs() {
 		wp_enqueue_style( 'wpum-admin' );
 		wp_enqueue_style( 'wpum-select2' );
 		wp_enqueue_script( 'accordion' );
+		wp_enqueue_media();
 
 		if ( isset( $_GET['tab'] ) && $_GET['tab'] == 'default_fields' && $screen->base == 'users_page_wpum-settings' )
 			wp_enqueue_script( 'jquery-ui-sortable' );
@@ -56,8 +57,10 @@ function wpum_admin_cssjs() {
 
 		// Backend JS Settings
 		wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
-			'ajax'    => admin_url( 'admin-ajax.php' ),
-			'confirm' => __( 'Are you sure you want to do this? This action cannot be reversed.', 'wpum' ),
+			'ajax'          => admin_url( 'admin-ajax.php' ),
+			'confirm'       => __( 'Are you sure you want to do this? This action cannot be reversed.', 'wpum' ),
+			'use_this_file' => __( 'Use This File' ),
+			'upload_title'  => __( 'Upload or select a file' ),
 		) );
 
 	endif;
