@@ -96,8 +96,7 @@ class WPUM_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 			$item->url = $item->guid;
 		}
 
-		if ( ! in_array( array( 'wpum-menu', 'wpum-'. $item->post_excerpt .'-nav' ), $item->classes ) ) {
-			$item->classes[] = 'wpum-menu';
+		if ( ! in_array( array( 'wpum-'. $item->post_excerpt .'-nav' ), $item->classes ) ) {
 			$item->classes[] = 'wpum-'. $item->post_excerpt .'-nav';
 		}
 

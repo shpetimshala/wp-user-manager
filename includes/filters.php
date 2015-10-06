@@ -402,16 +402,8 @@ function wpum_setup_nav_menu_item( $menu_item ) {
 		$menu_classes = implode( ' ', $menu_item->classes );
 	}
 
-	// We use information stored in the CSS class to determine what kind of
-	// menu item this is, and how it should be treated
-	preg_match( '/\swpum-(.*)-nav/', $menu_classes, $matches );
-
-	if ( empty( $matches[1] ) ) {
-		return $menu_item;
-	}
-
-	switch ( $matches[1] ) {
-		case 'logout':
+	switch ( $menu_classes ) {
+		case 'wpum-logout-nav':
 			if ( ! is_user_logged_in() ) {
 				$menu_item->_invalid = true;
 			} else {
