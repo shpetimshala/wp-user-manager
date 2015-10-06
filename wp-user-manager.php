@@ -275,15 +275,18 @@ class WP_User_Manager {
 			// Load Custom Fields Editor
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/fields/class-wpum-fields-editor.php';
 
+			// Load admin menu manager functionalities
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-walker-nav-menu-checklist.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/menu-functions.php';
+			// Load dashboard widget
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
+
 			// Custom Fields Framework
 			if ( ! class_exists( 'Pretty_Metabox' ) )
 				require_once WPUM_PLUGIN_DIR . 'includes/lib/wp-pretty-fields/wp-pretty-fields.php';
 
 			// Load Addons Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/addons.php';
-
-			// Load dashboard widget
-			require_once WPUM_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
 
 		}
 
@@ -367,13 +370,3 @@ function WPUM() {
 
 // Get WPUM Running
 WPUM();
-
-/*
-echo "<pre>";
-var_dump( get_option('wpum_emails') );
-echo "</pre>";*/
-
-
-function set_html_content_type() {
-	return 'text/html';
-}
