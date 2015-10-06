@@ -95,6 +95,8 @@ function wpum_load_dashboard_users_overview() {
 
   <div class="wpum_dashboard_widget">
 
+    <?php do_action( 'wpum_dashboard_widget_top' ); ?>
+
     <ul class="wpum_status_list">
 
       <li class="fullwidth users-today">
@@ -115,6 +117,8 @@ function wpum_load_dashboard_users_overview() {
       </li>
 
     </ul>
+
+    <?php do_action( 'wpum_dashboard_widget_bottom' ); ?>
 
   </div>
 
