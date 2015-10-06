@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function wpum_admin_menu_metabox() {
 	add_meta_box( 'add-wpum-nav-menu', esc_html__( 'WP User Manager' ), 'wpum_admin_do_wp_nav_menu_metabox', 'nav-menus', 'side', 'default' );
-	//add_action( 'admin_print_footer_scripts', 'wpum_admin_wp_nav_menu_restrict_items' );
+	add_action( 'admin_print_footer_scripts', 'wpum_admin_wp_nav_menu_restrict_items' );
 }
 add_action( 'load-nav-menus.php', 'wpum_admin_menu_metabox' );
 
@@ -110,4 +110,26 @@ function wpum_nav_menu_get_loggedin_pages() {
 
 	return $page_args;
 
+}
+
+/**
+ * Restrict various items from view if editing a wpum menu.
+ *
+ * @since 1.1.0
+ * @return void
+ */
+function wpum_admin_wp_nav_menu_restrict_items() {
+?>
+	<script type="text/javascript">
+	jQuery( '#menu-to-edit').on( 'click', 'a.item-edit', function() {
+		var settings  = jQuery(this).closest( '.menu-item-bar' ).next( '.menu-item-settings' );
+		var css_class = settings.find( '.edit-menu-item-classes' );
+
+		if( css_class.val().match("^wpum-") ) {
+			css_class.attr( 'readonly', 'readonly' );
+			settings.find( '.field-url' ).css( 'display', 'none' );
+		}
+	});
+	</script>
+<?php
 }
