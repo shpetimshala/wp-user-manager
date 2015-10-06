@@ -39,11 +39,12 @@ function wpum_admin_cssjs() {
 	// Enqueue styles & scripts on admin page only
 	$screen = get_current_screen();
 
+	wp_enqueue_script( 'wpum-admin-js' );
+
 	// Load styles only on required pages.
 	if ( $screen->base == 'users_page_wpum-settings' || $screen->id == 'wpum_directory' || $screen->base == 'users_page_wpum-edit-field' || $screen->base == 'users_page_wpum-profile-fields' ):
 
 		wp_enqueue_script( 'wpum-select2' );
-		wp_enqueue_script( 'wpum-admin-js' );
 		wp_enqueue_style( 'wpum-admin' );
 		wp_enqueue_style( 'wpum-select2' );
 		wp_enqueue_script( 'accordion' );
@@ -55,15 +56,15 @@ function wpum_admin_cssjs() {
 		if ( $screen->base == 'users_page_wpum-custom-fields-editor' )
 			wp_enqueue_script( 'wpum-serializeJSON' );
 
-		// Backend JS Settings
-		wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
-			'ajax'          => admin_url( 'admin-ajax.php' ),
-			'confirm'       => __( 'Are you sure you want to do this? This action cannot be reversed.', 'wpum' ),
-			'use_this_file' => __( 'Use This File' ),
-			'upload_title'  => __( 'Upload or select a file' ),
-		) );
-
 	endif;
+
+	// Backend JS Settings
+	wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
+		'ajax'          => admin_url( 'admin-ajax.php' ),
+		'confirm'       => __( 'Are you sure you want to do this? This action cannot be reversed.', 'wpum' ),
+		'use_this_file' => __( 'Use This File' ),
+		'upload_title'  => __( 'Upload or select a file' ),
+	) );
 
 }
 add_action( 'admin_enqueue_scripts', 'wpum_admin_cssjs' );

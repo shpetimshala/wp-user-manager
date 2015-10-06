@@ -282,6 +282,9 @@ class WP_User_Manager {
 			// Load Addons Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/addons.php';
 
+			// Load dashboard widget
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
+
 		}
 
 		// Directory for WPUM

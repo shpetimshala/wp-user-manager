@@ -77,7 +77,8 @@ module.exports = function( grunt ) {
 			all: {
 				files: {
 					'assets/css/wp_user_manager.css': 'assets/css/sass/wp_user_manager.scss',
-					'assets/css/wp_user_manager_frontend.css': 'assets/css/sass/wp_user_manager_frontend.scss'
+					'assets/css/wp_user_manager_frontend.css': 'assets/css/sass/wp_user_manager_frontend.scss',
+					'assets/css/wp_user_manager_admin_general.css': 'assets/css/sass/wp_user_manager_admin_general.scss',
 				}
 			}
 		},
