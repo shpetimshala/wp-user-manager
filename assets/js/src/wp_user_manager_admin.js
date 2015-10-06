@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
 		// General Functions
 		general : function() {
 
-			if (typeof select2 !== 'undefined' && $.isFunction( select2 )) {
+			if ( $.isFunction($.fn.select2) ) {
 
 				jQuery("select.select2").select2({
 					width: 'resolve'

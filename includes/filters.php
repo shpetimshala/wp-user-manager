@@ -374,11 +374,53 @@ function wpum_adjust_mime_types( $upload_mimes ) {
 
 	$allowed_types = array(
 		'jpg|jpeg|jpe' => 'image/jpeg',
-		'gif' => 'image/gif',
-		'png' => 'image/png'
+		'gif'          => 'image/gif',
+		'png'          => 'image/png'
 	);
 
 	$upload_mimes = array_intersect_key( $upload_mimes, $allowed_types );
 
 	return $upload_mimes;
 }
+
+/**
+ * Properly setup links for wpum powered nav menu items.
+ *
+ * @param  object $menu_item the menu item object
+ * @return object            the modified menu item object
+ */
+function wpum_setup_nav_menu_item( $menu_item ) {
+
+	if ( is_admin() ) {
+		return $menu_item;
+	}
+
+	// Prevent a notice error when using the customizer
+	$menu_classes = $menu_item->classes;
+
+	if ( is_array( $menu_classes ) ) {
+		$menu_classes = implode( ' ', $menu_item->classes );
+	}
+
+	// We use information stored in the CSS class to determine what kind of
+	// menu item this is, and how it should be treated
+	preg_match( '/\swpum-(.*)-nav/', $menu_classes, $matches );
+
+	if ( empty( $matches[1] ) ) {
+		return $menu_item;
+	}
+
+	switch ( $matches[1] ) {
+		case 'logout':
+			if ( ! is_user_logged_in() ) {
+				$menu_item->_invalid = true;
+			} else {
+				$menu_item->url = wpum_logout_url();
+			}
+			break;
+	}
+
+	return $menu_item;
+
+}
+add_filter( 'wp_setup_nav_menu_item', 'wpum_setup_nav_menu_item', 10, 1 );
