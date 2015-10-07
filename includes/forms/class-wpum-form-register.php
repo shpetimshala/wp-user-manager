@@ -461,7 +461,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Send notification if password is manually added by the user.
 			if( ! self::$random_password ):
-				wp_new_user_notification( $do_user, $pwd );
+				wpum_new_user_notification( $do_user, $pwd );
 			endif;
 
 			if( self::$random_password ) :
@@ -492,7 +492,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$do_user = wp_create_user( $username, $pwd, $email );
 
-		wp_new_user_notification( $do_user, $pwd );
+		wpum_new_user_notification( $do_user, $pwd );
 
 		return $do_user;
 

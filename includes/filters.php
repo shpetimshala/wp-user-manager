@@ -367,6 +367,8 @@ add_filter( 'admin_body_class', 'wpum_admin_body_classes' );
 
 /**
  * Filter allowed file types on upload forms.
+ *
+ * @since 1.0.0
  * @param  array $upload_mimes list of file types
  * @return array $upload_mimes list of file types
  */
@@ -387,6 +389,7 @@ function wpum_adjust_mime_types( $upload_mimes ) {
  * Properly setup links for wpum powered nav menu items.
  * Determines which links should be displayed and what their url should be.
  *
+ * @since 1.1.0
  * @param  object $menu_item the menu item object
  * @return object            the modified menu item object
  */
