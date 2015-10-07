@@ -234,24 +234,21 @@ function wpum_get_core_page_url( $page ) {
 	$url = null;
 
 	switch ( $page ) {
-	case 'login':
-		$url = esc_url( get_permalink( wpum_get_core_page_id( 'login' ) ) );
-		break;
-	case 'register':
-		$url = esc_url( get_permalink( wpum_get_core_page_id( 'register' ) ) );
-		break;
-	case 'password':
-		$url = esc_url( get_permalink( wpum_get_core_page_id( 'password' ) ) );
-		break;
-	case 'account':
-		$url = esc_url( get_permalink( wpum_get_core_page_id( 'account' ) ) );
-		break;
-	case 'profile':
-		$url = esc_url( get_permalink( wpum_get_core_page_id( 'profile' ) ) );
-		break;
-	default:
-		// nothing
-		break;
+		case 'login':
+			$url = esc_url( get_permalink( wpum_get_core_page_id( 'login' ) ) );
+			break;
+		case 'register':
+			$url = esc_url( get_permalink( wpum_get_core_page_id( 'register' ) ) );
+			break;
+		case 'password':
+			$url = esc_url( get_permalink( wpum_get_core_page_id( 'password' ) ) );
+			break;
+		case 'account':
+			$url = esc_url( get_permalink( wpum_get_core_page_id( 'account' ) ) );
+			break;
+		case 'profile':
+			$url = esc_url( get_permalink( wpum_get_core_page_id( 'profile' ) ) );
+			break;
 	}
 
 	return $url;
@@ -775,7 +772,7 @@ function wpum_get_login_redirect_url() {
 		$url = get_permalink( $selected_page );
 	}
 
-	return esc_url( $url );
+	return apply_filters( 'wpum_login_redirect_url', esc_url( $url ) );
 
 }
 
