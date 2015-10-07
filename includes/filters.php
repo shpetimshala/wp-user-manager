@@ -453,6 +453,10 @@ function wpum_login_redirect_detection( $url ) {
 
 	if( isset( $_GET[ 'redirect_to' ] ) && $_GET['redirect_to'] !== '' ) {
 		$url = urldecode( $_GET['redirect_to'] );
+	} elseif ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] !== '' ) {
+		$url = $_SERVER['HTTP_REFERER'];
+	} elseif( wpum_get_option( 'login_redirect' ) ) {
+		$url = get_permalink( wpum_get_option( 'login_redirect' ) );
 	}
 
 	return esc_url( $url );

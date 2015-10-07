@@ -765,13 +765,7 @@ function wpum_get_login_redirect_url() {
 	$url = add_query_arg( array(
 		'login'       => false,
 		'captcha'     => false,
-		'redirect_to' => ( isset( $_GET['redirect_to'] ) && $_GET['redirect_to'] !== '' ) ? urlencode( $_GET['redirect_to'] ): false,
 	), $url );
-
-	$selected_page = wpum_get_option( 'login_redirect' );
-	if( $selected_page ) {
-		$url = get_permalink( $selected_page );
-	}
 
 	return apply_filters( 'wpum_login_redirect_url', esc_url( $url ) );
 
