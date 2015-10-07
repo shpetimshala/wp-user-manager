@@ -124,13 +124,21 @@ add_action( 'widgets_init', 'wpum_register_widgets', 1 );
  */
 function wpum_add_field_to_login( $content, $args ) {
 
+	$output = '';
+
 	// Check if it's a wpum login form.
-	// We add the hidden field only to forms powered by wpum
+	// We add the hidden field only to forms powered by wpum,
 	// to avoid conflicts with other login forms.
-	// Only a wpum login form would have the login_link key
+	// Only a wpum login form would have the login_link key.
 	if( is_array( $args ) && in_array( 'login_link' , $args ) ) {
-		return '<input type="hidden" name="wpum_is_login_form" value="wpum">';
+		$output .= '<input type="hidden" name="wpum_is_login_form" value="wpum">';
 	}
+
+	// Store redirect url if specified
+	$redirect = ( isset( $_GET['redirect_to'] ) && $_GET['redirect_to'] !=='' ) ? urlencode( $_GET['redirect_to'] ) : false;
+	$output .= '<input type="hidden" name="wpum_test" value="'.$redirect.'">';
+
+	return $output;
 
 }
 add_action( 'login_form_middle', 'wpum_add_field_to_login', 10, 2 );
@@ -208,15 +216,15 @@ if( ( wpum_get_option( 'login_method') == 'email' || wpum_get_option( 'login_met
  */
 function wpum_authenticate_login_form( $user ) {
 
-	if ( !defined( 'DOING_AJAX' ) && isset( $_SERVER['HTTP_REFERER'] ) && isset( $_POST['log'] ) && isset( $_POST['pwd'] ) ) :
+	if ( ! defined( 'DOING_AJAX' ) && isset( $_SERVER['HTTP_REFERER'] ) && isset( $_POST['log'] ) && isset( $_POST['pwd'] ) ) :
 
 		// check what page the login attempt is coming from
 		$referrer = $_SERVER['HTTP_REFERER'];
 
 		// remove previously added query strings
 		$referrer = add_query_arg( array(
-			'login' => false,
-			'captcha' => false
+			'login'       => false,
+			'captcha'     => false
 		), $referrer );
 
 		$error = false;
@@ -226,14 +234,14 @@ function wpum_authenticate_login_form( $user ) {
 		}
 
 		// check that were not on the default login page
-		if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $error ) {
+		if ( ! empty( $referrer ) && ! strstr( $referrer, 'wp-login' ) && ! strstr( $referrer, 'wp-admin' ) && $error ) {
 
 			$referrer =  add_query_arg( array(
-				'login' => 'failed'
+				'login' => 'failed',
+				'redirect_to' => ( isset( $_POST['redirect_to'] ) && $_POST['redirect_to'] !== '' ) ? urlencode( $_POST['redirect_to'] ): false
 			), $referrer );
 
-			wp_redirect( esc_url( $referrer ) );
-
+			wp_redirect( esc_url_raw( $referrer ) );
 			exit;
 
 		}
@@ -258,20 +266,21 @@ function wpum_handle_failed_login( $user ) {
 
 		// remove previously added query strings
 		$referrer = add_query_arg( array(
-			'login' => false,
-			'captcha' => false
+			'login'       => false,
+			'captcha'     => false
 		), $referrer );
 
 		// check that were not on the default login page
-		if ( !empty( $referrer ) && !strstr( $referrer, 'wp-login' ) && !strstr( $referrer, 'wp-admin' ) && $user!=null ) {
+		if ( ! empty( $referrer ) && ! strstr( $referrer, 'wp-login' ) && ! strstr( $referrer, 'wp-admin' ) && $user != null ) {
 
 			$referrer =  add_query_arg( array(
-				'login' => 'failed'
+				'login'       => 'failed',
+				'redirect_to' => ( isset( $_POST['redirect_to'] ) && $_POST['redirect_to'] !== '' ) ? urlencode( $_POST['redirect_to'] ): false
 			), $referrer );
 
-			wp_redirect( esc_url( $referrer ) );
-
+			wp_redirect( esc_url_raw( $referrer ) );
 			exit;
+
 		}
 	endif;
 

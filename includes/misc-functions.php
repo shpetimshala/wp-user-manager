@@ -763,8 +763,9 @@ function wpum_get_login_redirect_url() {
 	$url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	$url = add_query_arg( array(
-		'login' => false,
-		'captcha' => false
+		'login'       => false,
+		'captcha'     => false,
+		'redirect_to' => ( isset( $_GET['redirect_to'] ) && $_GET['redirect_to'] !== '' ) ? urlencode( $_GET['redirect_to'] ): false,
 	), $url );
 
 	$selected_page = wpum_get_option( 'login_redirect' );
