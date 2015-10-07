@@ -307,7 +307,7 @@ module.exports = function( grunt ) {
 		      options: {
 		        app_name : 'WP User Manager Changelog',
 		        file : 'changelog.md',
-		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING|^updated',
+		        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING|^updated|^adjusted',
         		tag : false //False for commits since the beggining
 		      }
 		    }

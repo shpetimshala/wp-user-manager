@@ -441,3 +441,21 @@ function wpum_setup_nav_menu_item( $menu_item ) {
 
 }
 add_filter( 'wp_setup_nav_menu_item', 'wpum_setup_nav_menu_item', 10, 1 );
+
+/**
+ * Allows login form to redirect to an url specified into a query string.
+ *
+ * @since 1.1.0
+ * @param  string $url url
+ * @return string      url specified into the query string
+ */
+function wpum_login_redirect_detection( $url ) {
+
+	if( isset( $_GET[ 'redirect_to' ] ) && $_GET['redirect_to'] !== '' ) {
+		$url = urldecode( $_GET['redirect_to'] );
+	}
+
+	return esc_url( $url );
+
+}
+add_filter( 'wpum_login_redirect_url', 'wpum_login_redirect_detection', 99, 1 );
