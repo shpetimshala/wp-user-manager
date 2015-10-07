@@ -30,6 +30,7 @@ class WPUM_Shortcodes {
 		add_filter( 'widget_text', 'do_shortcode' );
 		add_shortcode( 'wpum_login_form', array( $this, 'wpum_login_form' ) );
 		add_shortcode( 'wpum_logout', array( $this, 'wpum_logout' ) );
+		add_shortcode( 'wpum_login', array( $this, 'wpum_login' ) );
 		add_shortcode( 'wpum_register', array( $this, 'wpum_registration' ) );
 		add_shortcode( 'wpum_password_recovery', array( $this, 'wpum_password' ) );
 		add_shortcode( 'wpum_account', array( $this, 'wpum_account' ) );
@@ -126,7 +127,7 @@ class WPUM_Shortcodes {
 	}
 
 	/**
-	 * Login Form Shortcode
+	 * Render logout url
 	 *
 	 * @access public
 	 * @since  1.0.0
@@ -141,8 +142,34 @@ class WPUM_Shortcodes {
 
 		$output = null;
 
-		if(is_user_logged_in())
-			$output = sprintf( __('<a href="%s">%s</a>', 'wpum'), wpum_logout_url($redirect), esc_attr($label) );
+		if( is_user_logged_in() )
+			$output = sprintf( __('<a href="%s">%s</a>', 'wpum'), wpum_logout_url( $redirect ), esc_attr( $label ) );
+
+		return $output;
+
+	}
+
+	/**
+	 * Login Form Shortcode
+	 *
+	 * @access public
+	 * @since  1.0.0
+	 * @return $output shortcode output
+	 */
+	public function wpum_login( $atts, $content=null ) {
+
+		extract( shortcode_atts( array(
+			'redirect' => '',
+			'label'    => esc_html__( 'Login', 'wpum' )
+		), $atts ) );
+
+		$url = wpum_get_core_page_url( 'login' );
+
+		if( ! empty( $redirect ) ) {
+			$url = add_query_arg( array( 'redirect_to' => urlencode( $redirect ) ), $url );
+		}
+
+		$output = '<a href="'. esc_url( $url ) .'" class="wpum-login-link">'.esc_html( $label ).'</a>';
 
 		return $output;
 
