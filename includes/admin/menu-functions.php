@@ -43,15 +43,27 @@ function wpum_admin_do_wp_nav_menu_metabox() {
 	$tabs['loggedin']['label']  = __( 'Logged-In' );
 	$tabs['loggedin']['pages']  = wpum_nav_menu_get_loggedin_pages();
 
+	$tabs['loggedout']['label']  = __( 'Logged-Out' );
+	$tabs['loggedout']['pages']  = wpum_nav_menu_get_loggedout_pages();
+
 	?>
 
 	<div id="wpum-menu" class="posttypediv">
-		<h4><?php _e( 'Logged-In' ) ?></h4>
-		<p><?php _e( '<em>Logged-In</em> links are not visible to visitors who are not logged in.' ) ?></p>
+		<h4><?php esc_html_e( 'Logged-In' ) ?></h4>
+		<p><?php esc_html_e( 'Logged-In links are not visible to visitors who are not logged in.' ) ?></p>
 
 		<div id="tabs-panel-posttype-<?php echo $post_type_name; ?>-loggedin" class="tabs-panel tabs-panel-active">
 		  <ul id="wpum-menu-checklist-loggedin" class="categorychecklist form-no-clear">
 		    <?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $tabs['loggedin']['pages'] ), 0, (object) $args );?>
+		  </ul>
+		</div>
+
+		<h4><?php esc_html_e( 'Logged-Out' ) ?></h4>
+		<p><?php esc_html_e( 'Logged-Out links are not visible to users who are logged in.' ) ?></p>
+
+		<div id="tabs-panel-posttype-<?php echo $post_type_name; ?>-loggedin" class="tabs-panel tabs-panel-active">
+		  <ul id="wpum-menu-checklist-loggedin" class="categorychecklist form-no-clear">
+		    <?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $tabs['loggedout']['pages'] ), 0, (object) $args );?>
 		  </ul>
 		</div>
 
@@ -80,12 +92,67 @@ function wpum_nav_menu_get_loggedin_pages() {
 	$wpum_menu_items = array();
 
 	$wpum_menu_items[] = array(
+		'name' => __( 'Edit Account' ),
+		'slug' => 'account',
+		'link' => wpum_get_core_page_url( 'account' ),
+	);
+	$wpum_menu_items[] = array(
 		'name' => __( 'Log out' ),
 		'slug' => 'logout',
 		'link' => wpum_logout_url(),
 	);
 
 	$wpum_menu_items = apply_filters( 'wpum_nav_menu_get_loggedin_pages', $wpum_menu_items );
+
+	// If there's nothing to show, we're done
+	if ( count( $wpum_menu_items ) < 1 ) {
+		return false;
+	}
+
+	$page_args = array();
+
+	foreach ( $wpum_menu_items as $wpum_item ) {
+		$page_args[ $wpum_item['slug'] ] = (object) array(
+			'ID'             => -1,
+			'post_title'     => $wpum_item['name'],
+			'post_author'    => 0,
+			'post_date'      => 0,
+			'post_excerpt'   => $wpum_item['slug'],
+			'post_type'      => 'page',
+			'post_status'    => 'publish',
+			'comment_status' => 'closed',
+			'guid'           => $wpum_item['link']
+		);
+	}
+
+	return $page_args;
+
+}
+
+/**
+ * Create a fake post object for the wp menu manager.
+ * This function creates the list of Logged-Out only pages,
+ * for the admin menu manager.
+ *
+ * @since 1.1.0
+ * @return void
+ */
+function wpum_nav_menu_get_loggedout_pages() {
+
+	$wpum_menu_items = array();
+
+	$wpum_menu_items[] = array(
+		'name' => __( 'Register' ),
+		'slug' => 'register',
+		'link' => wpum_get_core_page_url( 'register' ),
+	);
+	$wpum_menu_items[] = array(
+		'name' => __( 'Log in' ),
+		'slug' => 'login',
+		'link' => wpum_get_core_page_url( 'login' ),
+	);
+
+	$wpum_menu_items = apply_filters( 'wpum_nav_menu_get_loggedout_pages', $wpum_menu_items );
 
 	// If there's nothing to show, we're done
 	if ( count( $wpum_menu_items ) < 1 ) {

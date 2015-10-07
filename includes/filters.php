@@ -385,6 +385,7 @@ function wpum_adjust_mime_types( $upload_mimes ) {
 
 /**
  * Properly setup links for wpum powered nav menu items.
+ * Determines which links should be displayed and what their url should be.
  *
  * @param  object $menu_item the menu item object
  * @return object            the modified menu item object
@@ -403,12 +404,33 @@ function wpum_setup_nav_menu_item( $menu_item ) {
 	}
 
 	switch ( $menu_classes ) {
+		case 'wpum-register-nav':
+				if ( is_user_logged_in() ) {
+					$menu_item->_invalid = true;
+				} else {
+					$menu_item->url = wpum_get_core_page_url( 'register' );
+				}
+			break;
+		case 'wpum-login-nav':
+				if ( is_user_logged_in() ) {
+					$menu_item->_invalid = true;
+				} else {
+					$menu_item->url = wpum_get_core_page_url( 'login' );
+				}
+			break;
+		case 'wpum-account-nav':
+				if ( ! is_user_logged_in() ) {
+					$menu_item->_invalid = true;
+				} else {
+					$menu_item->url = wpum_get_core_page_url( 'account' );
+				}
+			break;
 		case 'wpum-logout-nav':
-			if ( ! is_user_logged_in() ) {
-				$menu_item->_invalid = true;
-			} else {
-				$menu_item->url = wpum_logout_url();
-			}
+				if ( ! is_user_logged_in() ) {
+					$menu_item->_invalid = true;
+				} else {
+					$menu_item->url = wpum_logout_url();
+				}
 			break;
 	}
 
