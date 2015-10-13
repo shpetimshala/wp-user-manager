@@ -104,7 +104,7 @@ module.exports = function( grunt ) {
             target: {
                 options: {
                 	exclude: [
-	                    'assets/.*', 'images/.*', 'node_modules/.*', 'tests/.*'
+	                    'assets/.*', 'images/.*', 'node_modules/.*', 'tests/.*', 'release/.*', 'build/.*'
 	                ],
                     domainPath: '/languages',
                     mainFile: 'wp-user-manager.php',
