@@ -71,7 +71,7 @@ Please read our detailed documentation here [http://docs.wpusermanager.com/categ
 
 == Frequently Asked Questions ==
 
-= Where can i find the documentation =
+= Where can I find the documentation =
 
 Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 
@@ -86,6 +86,32 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.1.0 =
+- **Added**: Users Overview admin dashboard widget
+- **Added**: Improved WordPress menu manager with logged-in and logged-out user specific links
+- **Added**: Login link shortcode
+- **Added**: Visually highlight required fields
+- **Added**: "View Profile" link into admin users table
+- **Added**: Login form can now redirect to previously visited page
+- **Added**: Login form can now redirect to another page via url query string redirect_to
+- **Added**: You can now redirect users to a new page after successful Registration
+- **Added**: Password meter to password recovery form
+- **Added**: You can now upload a custom logo above html emails
+- **Added**: You can now redirect users to another page when they try to reset their password through the wp-login.php form
+- **Added**: Password strength meter will now show different colors based on password strength
+- **Added**: Simplified Chinese translation
+- Tweaked: adjusted widget field description alignment into admin panel
+- Tweaked: text spacing in plaintext emails
+- Tweaked: simplified description of options into plugin settings panel
+- Tweaked: removed duplicated code
+- Fixed: users unable to view their own profile pages when members not allowed to view other users profiles
+
+- Developers: introduced wpum_new_user_notification function to send registration email
+- Developers: introduced wpum_get_core_page_url filter
+- Developers: introduced wpum_login_redirect_url filters
+- Developers: added wpum_dashboard_widget_top and wpum_dashboard_widget_bottom actions
+- Developers: introduced wpum_registration_redirect_url function
 
 = 1.0.5 =
 - added: German language support. Thanks to Tobias
