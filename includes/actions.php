@@ -315,7 +315,7 @@ add_action( 'admin_notices', 'wpum_php_is_old' );
 function wpum_admin_user_action_link( $actions, $user_object ) {
 
 	if( wpum_get_core_page_id( 'profile' ) ) :
-		$actions['view_profile'] = '<a href="'. wpum_get_user_profile_url( $user_object ) .'">'. esc_html__( 'View Profile' ) .'</a>';
+		$actions['view_profile'] = '<a href="'. wpum_get_user_profile_url( $user_object ) .'">'. esc_html__( 'View Profile', 'wpum' ) .'</a>';
 	endif;
 
 	return $actions;

@@ -62,8 +62,8 @@ function wpum_admin_cssjs() {
 	wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
 		'ajax'          => admin_url( 'admin-ajax.php' ),
 		'confirm'       => __( 'Are you sure you want to do this? This action cannot be reversed.', 'wpum' ),
-		'use_this_file' => __( 'Use This File' ),
-		'upload_title'  => __( 'Upload or select a file' ),
+		'use_this_file' => __( 'Use This File', 'wpum' ),
+		'upload_title'  => __( 'Upload or select a file', 'wpum' ),
 	) );
 
 }

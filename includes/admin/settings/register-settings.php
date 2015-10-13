@@ -371,8 +371,8 @@ function wpum_get_registered_settings() {
 				),
 				'email_logo' => array(
 					'id'   => 'email_logo',
-					'name' => __( 'Logo' ),
-					'desc' => __( 'Upload or choose a logo to be displayed at the top of emails. Displayed on HTML emails only.' ),
+					'name' => __( 'Logo', 'wpum' ),
+					'desc' => __( 'Upload or choose a logo to be displayed at the top of emails. Displayed on HTML emails only.', 'wpum' ),
 					'type' => 'upload'
 				),
 				'emails_editor' => array(
@@ -969,7 +969,7 @@ function wpum_upload_callback( $args ) {
 	}
 	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
 	$html = '<input type="text" class="' . $size . '-text" id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
-	$html .= '<span>&nbsp;<input type="button" class="wpum_settings_upload_button button-secondary" value="' . __( 'Upload File' ) . '"/></span>';
+	$html .= '<span>&nbsp;<input type="button" class="wpum_settings_upload_button button-secondary" value="' . __( 'Upload File', 'wpum' ) . '"/></span>';
 	$html .= '<label for="wpum_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 	echo $html;
 

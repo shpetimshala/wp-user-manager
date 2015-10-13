@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
  */
 function wpum_admin_menu_metabox() {
-	add_meta_box( 'add-wpum-nav-menu', esc_html__( 'WP User Manager' ), 'wpum_admin_do_wp_nav_menu_metabox', 'nav-menus', 'side', 'default' );
+	add_meta_box( 'add-wpum-nav-menu', esc_html__( 'WP User Manager', 'wpum' ), 'wpum_admin_do_wp_nav_menu_metabox', 'nav-menus', 'side', 'default' );
 	add_action( 'admin_print_footer_scripts', 'wpum_admin_wp_nav_menu_restrict_items' );
 }
 add_action( 'load-nav-menus.php', 'wpum_admin_menu_metabox' );
@@ -40,17 +40,17 @@ function wpum_admin_do_wp_nav_menu_metabox() {
 
 	$tabs = array();
 
-	$tabs['loggedin']['label']  = __( 'Logged-In' );
+	$tabs['loggedin']['label']  = __( 'Logged-In', 'wpum' );
 	$tabs['loggedin']['pages']  = wpum_nav_menu_get_loggedin_pages();
 
-	$tabs['loggedout']['label']  = __( 'Logged-Out' );
+	$tabs['loggedout']['label']  = __( 'Logged-Out', 'wpum' );
 	$tabs['loggedout']['pages']  = wpum_nav_menu_get_loggedout_pages();
 
 	?>
 
 	<div id="wpum-menu" class="posttypediv">
-		<h4><?php esc_html_e( 'Logged-In' ) ?></h4>
-		<p><?php esc_html_e( 'Logged-In links are not visible to visitors who are not logged in.' ) ?></p>
+		<h4><?php esc_html_e( 'Logged-In', 'wpum' ) ?></h4>
+		<p><?php esc_html_e( 'Logged-In links are not visible to visitors who are not logged in.', 'wpum' ) ?></p>
 
 		<div id="tabs-panel-posttype-<?php echo $post_type_name; ?>-loggedin" class="tabs-panel tabs-panel-active">
 		  <ul id="wpum-menu-checklist-loggedin" class="categorychecklist form-no-clear">
@@ -58,8 +58,8 @@ function wpum_admin_do_wp_nav_menu_metabox() {
 		  </ul>
 		</div>
 
-		<h4><?php esc_html_e( 'Logged-Out' ) ?></h4>
-		<p><?php esc_html_e( 'Logged-Out links are not visible to users who are logged in.' ) ?></p>
+		<h4><?php esc_html_e( 'Logged-Out', 'wpum' ) ?></h4>
+		<p><?php esc_html_e( 'Logged-Out links are not visible to users who are logged in.', 'wpum' ) ?></p>
 
 		<div id="tabs-panel-posttype-<?php echo $post_type_name; ?>-loggedin" class="tabs-panel tabs-panel-active">
 		  <ul id="wpum-menu-checklist-loggedin" class="categorychecklist form-no-clear">
@@ -69,7 +69,7 @@ function wpum_admin_do_wp_nav_menu_metabox() {
 
 		<p class="button-controls">
 			<span class="add-to-menu">
-				<input type="submit"<?php if ( function_exists( 'wp_nav_menu_disabled_check' ) ) : wp_nav_menu_disabled_check( $nav_menu_selected_id ); endif; ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu' ); ?>" name="add-custom-menu-item" id="submit-wpum-menu" />
+				<input type="submit"<?php if ( function_exists( 'wp_nav_menu_disabled_check' ) ) : wp_nav_menu_disabled_check( $nav_menu_selected_id ); endif; ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'wpum' ); ?>" name="add-custom-menu-item" id="submit-wpum-menu" />
 				<span class="spinner"></span>
 			</span>
 		</p>
@@ -92,12 +92,12 @@ function wpum_nav_menu_get_loggedin_pages() {
 	$wpum_menu_items = array();
 
 	$wpum_menu_items[] = array(
-		'name' => __( 'Edit Account' ),
+		'name' => __( 'Edit Account', 'wpum' ),
 		'slug' => 'account',
 		'link' => wpum_get_core_page_url( 'account' ),
 	);
 	$wpum_menu_items[] = array(
-		'name' => __( 'Log out' ),
+		'name' => __( 'Log out', 'wpum' ),
 		'slug' => 'logout',
 		'link' => wpum_logout_url(),
 	);
@@ -142,12 +142,12 @@ function wpum_nav_menu_get_loggedout_pages() {
 	$wpum_menu_items = array();
 
 	$wpum_menu_items[] = array(
-		'name' => __( 'Register' ),
+		'name' => __( 'Register', 'wpum' ),
 		'slug' => 'register',
 		'link' => wpum_get_core_page_url( 'register' ),
 	);
 	$wpum_menu_items[] = array(
-		'name' => __( 'Log in' ),
+		'name' => __( 'Log in', 'wpum' ),
 		'slug' => 'login',
 		'link' => wpum_get_core_page_url( 'login' ),
 	);

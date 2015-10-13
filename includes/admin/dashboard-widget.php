@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function wpum_register_dashboard_widgets() {
 
   if( current_user_can( apply_filters( 'wpum_stats_cap', 'manage_options' ) ) ) {
-    wp_add_dashboard_widget( 'wpum_dashboard_users', __( 'WP User Manager Overview' ), 'wpum_dashboard_users_overview' );
+    wp_add_dashboard_widget( 'wpum_dashboard_users', __( 'WP User Manager Overview', 'wpum' ), 'wpum_dashboard_users_overview' );
   }
 
 }
@@ -91,7 +91,7 @@ function wpum_load_dashboard_users_overview() {
   );
   $registered_this_year = new WP_User_Query( $query_this_year );
 
-  $users = esc_html_x( 'Users', 'Used within the dashboard widget' );
+  $users = esc_html_x( 'Users', 'Used within the dashboard widget', 'wpum' );
 
   ?>
 
@@ -102,20 +102,20 @@ function wpum_load_dashboard_users_overview() {
     <ul class="wpum_status_list">
 
       <li class="fullwidth users-today">
-        <?php echo sprintf( esc_html__( '%s Registered today' ), '<strong><span class="amount">' . $registered_today->get_total() . ' ' . $users . '</span></strong>' ); ?>
+        <?php echo sprintf( esc_html__( '%s Registered today', 'wpum' ), '<strong><span class="amount">' . $registered_today->get_total() . ' ' . $users . '</span></strong>' ); ?>
       </li>
 
       <li class="users-this-week spacer">
-        <?php echo sprintf( esc_html__( '%s Registered this week' ), '<strong><span class="amount">'.$registered_this_week->get_total() . ' ' . $users . '</span></strong>' ); ?>
+        <?php echo sprintf( esc_html__( '%s Registered this week', 'wpum' ), '<strong><span class="amount">'.$registered_this_week->get_total() . ' ' . $users . '</span></strong>' ); ?>
       </li>
       <li class="users-this-month">
-        <?php echo sprintf( esc_html__( '%s Registered this month' ), '<strong><span class="amount">'.$registered_this_month->get_total() . ' ' . $users . '</span></strong>' ); ?>
+        <?php echo sprintf( esc_html__( '%s Registered this month', 'wpum' ), '<strong><span class="amount">'.$registered_this_month->get_total() . ' ' . $users . '</span></strong>' ); ?>
       </li>
       <li class="users-last-month spacer">
-        <?php echo sprintf( esc_html__( '%s Registered last month' ), '<strong><span class="amount">'.$registered_last_month->get_total() . ' ' . $users . '</span></strong>' ); ?>
+        <?php echo sprintf( esc_html__( '%s Registered last month', 'wpum' ), '<strong><span class="amount">'.$registered_last_month->get_total() . ' ' . $users . '</span></strong>' ); ?>
       </li>
       <li class="users-this-year">
-        <?php echo sprintf( esc_html__( '%s Registered this year' ), '<strong><span class="amount">'.$registered_this_year->get_total() . ' ' . $users . '</span></strong>' ); ?>
+        <?php echo sprintf( esc_html__( '%s Registered this year', 'wpum' ), '<strong><span class="amount">'.$registered_this_year->get_total() . ' ' . $users . '</span></strong>' ); ?>
       </li>
 
     </ul>

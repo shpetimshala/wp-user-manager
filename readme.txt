@@ -56,6 +56,8 @@ Read more about our features on [wpusermanager.com](http://wpusermanager.com/fea
 - English
 - Russian (thanks to Ctajleh)
 - French (thanks to Doxtra)
+- German (thanks to Tobias)
+- Simplified Chinese ( thanks to Changmeng )
 
 = Support =
 
