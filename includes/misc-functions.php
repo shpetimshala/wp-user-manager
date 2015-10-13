@@ -199,24 +199,21 @@ function wpum_get_core_page_id( $page ) {
 	$id = null;
 
 	switch ( $page ) {
-	case 'login':
-		$id = wpum_get_option( 'login_page' );
-		break;
-	case 'register':
-		$id = wpum_get_option( 'registration_page' );
-		break;
-	case 'password':
-		$id = wpum_get_option( 'password_recovery_page' );
-		break;
-	case 'account':
-		$id = wpum_get_option( 'account_page' );
-		break;
-	case 'profile':
-		$id = wpum_get_option( 'profile_page' );
-		break;
-	default:
-		// nothing
-		break;
+		case 'login':
+			$id = wpum_get_option( 'login_page' );
+			break;
+		case 'register':
+			$id = wpum_get_option( 'registration_page' );
+			break;
+		case 'password':
+			$id = wpum_get_option( 'password_recovery_page' );
+			break;
+		case 'account':
+			$id = wpum_get_option( 'account_page' );
+			break;
+		case 'profile':
+			$id = wpum_get_option( 'profile_page' );
+			break;
 	}
 
 	return $id;
@@ -251,7 +248,7 @@ function wpum_get_core_page_url( $page ) {
 			break;
 	}
 
-	return $url;
+	return apply_filters( 'wpum_get_core_page_url', $url, $page );
 }
 
 /**

@@ -340,13 +340,13 @@ function wpum_is_own_profile() {
 
 		switch ( $structure ) {
 		  case 'user_id':
-		    $check = $current_profile === $user->ID ? true : false;
+		    $check = $current_profile == $user->ID ? true : false;
 		    break;
 		  case 'username':
-		    $check = $current_profile === $user->user_login ? true : false;
+		    $check = $current_profile == $user->user_login ? true : false;
 		    break;
 		  case 'nickname':
-		    $check = $current_profile === $user->user_nicename ? true : false;
+		    $check = $current_profile == $user->user_nicename ? true : false;
 		    break;
 		}
 
@@ -407,6 +407,7 @@ function wpum_can_access_profile() {
 		);
 		wpum_message( $args );
 		$pass = false;
+
 	}
 
 	return apply_filters( 'wpum_can_access_profile', $pass );
