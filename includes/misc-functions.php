@@ -807,3 +807,33 @@ function wpum_is_func_disabled( $function ) {
 	$disabled = explode( ',',  ini_get( 'disable_functions' ) );
 	return in_array( $function, $disabled );
 }
+
+/**
+ * Gets file extension of a file.
+ *
+ * @since 1.2.0
+ * @param  string $str file name
+ * @return string      extension of the file
+ */
+function wpum_get_file_extension( $str ) {
+	$parts = explode( '.', $str );
+	return end( $parts );
+}
+
+/**
+ * Covert object data to array.
+ *
+ * @since 1.2.0
+ * @param  array|object $data data to pass and convert.
+ * @return array
+ */
+function wpum_object_to_array( $data ) {
+	if ( is_array( $data ) || is_object( $data ) ) {
+		$result = array();
+		foreach ( $data as $key => $value ) {
+			$result[ $key ] = wpum_object_to_array( $value );
+		}
+		return $result;
+	}
+	return $data;
+}
