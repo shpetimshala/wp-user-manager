@@ -110,10 +110,11 @@ class WPUM_Fields_Data_Template {
 	public $user_id;
 
   /**
-	 * Get things going.
-	 *
-	 * @since 1.2.0
-	 */
+   * Let's get things going.
+   *
+   * @since 1.2.0
+   * @param string $args [description]
+   */
 	public function __construct( $args = '' ) {
 
 	}
