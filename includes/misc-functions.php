@@ -795,3 +795,15 @@ function wpum_registration_redirect_url() {
 	return apply_filters( 'wpum_registration_redirect_url', $url );
 
 }
+
+/**
+ * Check whether a function is disabled.
+ *
+ * @since 1.2.0
+ * @param  string  $function name of the function
+ * @return boolean
+ */
+function wpum_is_func_disabled( $function ) {
+	$disabled = explode( ',',  ini_get( 'disable_functions' ) );
+	return in_array( $function, $disabled );
+}

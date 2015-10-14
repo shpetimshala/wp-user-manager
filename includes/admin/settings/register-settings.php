@@ -512,6 +512,11 @@ function wpum_get_registered_settings() {
 					'desc' => '<br/>'.__('Enter the usernames that you wish to disable. Separate each username on a new line.', 'wpum'),
 					'type' => 'textarea'
 				),
+				'export_settings' => array(
+					'id'   => 'export_settings',
+					'name' => __( 'Export Settings', 'wpum' ),
+					'type' => 'hook'
+				),
 			)
 		),
 	);
