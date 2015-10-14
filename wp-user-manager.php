@@ -233,6 +233,7 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-db.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-field-groups.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-db-fields.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/class-wpum-fields-data-template.php';
 		// Load fields helpers
 		require_once WPUM_PLUGIN_DIR . 'includes/abstracts/abstract-wpum-field-type.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/avatar.php';
