@@ -188,7 +188,8 @@ function wpum_process_settings_import() {
 
 	update_option( 'wpum_settings', $settings );
 
-	wp_safe_redirect( admin_url( 'users.php?page=wpum-tools&wpum-message=settings-imported' ) ); exit;
+	$url = add_query_arg( array( 'message' => 'settings_imported' ), admin_url( 'users.php?page=wpum-tools' ) );
+	wp_safe_redirect( $url ); exit;
 
 }
 add_action( 'admin_init', 'wpum_process_settings_import' );
