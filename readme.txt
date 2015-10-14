@@ -88,6 +88,9 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 == Changelog ==
 
 = 1.1.0 =
+
+Checkout an overview of all the new features here [http://wpusermanager.com/?p=16082](http://wpusermanager.com/?p=16082)
+
 - **Added**: Users Overview admin dashboard widget
 - **Added**: Improved WordPress menu manager with logged-in and logged-out user specific links
 - **Added**: Login link shortcode
