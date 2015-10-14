@@ -23,7 +23,7 @@ function wpum_tools_page() {
 
   ?>
 
-  <div class="wrap">
+  <div class="wrap" id="wpum-tools-page">
 
 		<h2 class="wpum-page-title"><?php printf( __( 'WP User Manager Tools', 'wpum' ), WPUM_VERSION ); ?> <?php do_action('wpum_next_to_settings_title');?></h2>
 
