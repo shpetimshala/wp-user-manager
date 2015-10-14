@@ -8,115 +8,106 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined('ABSPATH') ) {
+    exit;
+}
 
 /**
  * WPUM_Fields_Data_Template Class.
- *
  * The profile fields loop class.
  *
  * @since 1.2.0
  */
 class WPUM_Fields_Data_Template {
 
-  /**
-   * The loop iterator.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $current_group = -1;
+    /**
+     * The loop iterator.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $current_group = -1;
 
-  /**
-   * The number of groups returned by the query.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $group_count;
+    /**
+     * The number of groups returned by the query.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $group_count;
 
-  /**
-   * List of groups found by the query.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var array
-   */
-	public $groups;
+    /**
+     * List of groups found by the query.
+     *
+     * @since 1.2.0
+     * @var array
+     */
+    public $groups;
 
-  /**
-   * The current group object being iterated on.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var object
-   */
-	public $group;
+    /**
+     * The current group object being iterated on.
+     *
+     * @since 1.2.0
+     * @var object
+     */
+    public $group;
 
-  /**
-   * The current field.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $current_field = -1;
+    /**
+     * The current field.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $current_field = -1;
 
-  /**
-   * The field count.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $field_count;
+    /**
+     * The field count.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $field_count;
 
-  /**
-   * Whether the field has data.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var bool
-   */
-	public $field_has_data;
+    /**
+     * Whether the field has data.
+     *
+     * @since 1.2.0
+     * @var bool
+     */
+    public $field_has_data;
 
-  /**
-   * The field.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $field;
+    /**
+     * The field.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $field;
 
-  /**
-   * Flag to check whether the loop is currently being iterated.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var bool
-   */
-	public $in_the_loop;
+    /**
+     * Flag to check whether the loop is currently being iterated.
+     *
+     * @since 1.2.0
+     * @var bool
+     */
+    public $in_the_loop;
 
-  /**
-   * The user id.
-   *
-   * @since 1.2.0
-   * @access public
-   * @var int
-   */
-	public $user_id;
+    /**
+     * The user id.
+     *
+     * @since 1.2.0
+     * @var int
+     */
+    public $user_id;
 
-  /**
-   * Let's get things going.
-   *
-   * @since 1.2.0
-   * @param string $args [description]
-   */
-	public function __construct( $args = '' ) {
+    /**
+     * Let's get things going.
+     *
+     * @since 1.2.0
+     * @param array $args arguments.
+     */
+    public function __construct( $args = '' ) {
 
-	}
+    }
 
 }
