@@ -274,7 +274,7 @@ function wpum_get_field_groups( $args = array() ) {
 			$groups[ $key ][ 'fields' ] = WPUM()->fields->get_by_group( array(
 				'id'      => $group['id'],
 				'orderby' => 'field_order',
-				'order'   => 'ASC'
+				'order'   => 'ASC',
 			) );
 		}
 	}

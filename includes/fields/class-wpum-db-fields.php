@@ -174,13 +174,14 @@ class WPUM_DB_Fields extends WPUM_DB {
 		global $wpdb;
 
 		$defaults = array(
-			'id'           => '',
-			'array'        => false,
-			'registration' => false,
-			'number'       => 20,
-			'offset'       => 0,
-			'orderby'      => 'id',
-			'order'        => 'DESC'
+			'id'             => '',
+			'array'          => false,
+			'registration'   => false,
+			'number'         => -1,
+			'offset'         => 0,
+			'orderby'        => 'id',
+			'order'          => 'DESC',
+			'exclude_fields' => false,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -205,6 +206,23 @@ class WPUM_DB_Fields extends WPUM_DB {
 
 			$where .= "WHERE `group_id` IN( {$ids} ) ";
 
+		}
+
+		// If we have items to exclude, exclude them.
+		if( ! empty( $exclude_fields ) ) {
+			$exclude  = implode( ',', $excludes );
+
+			$where .= "AND `ID` NOT IN (%s) ";
+		}
+
+		// If we have items to exclude, exclude them.
+		if( ! empty( $args['exclude_fields'] ) ) {
+			$exclude  = explode( ',', $args['exclude_fields'] );
+			if( ! empty( $where ) && is_array( $exclude ) ) {
+				foreach ( $exclude as $key => $value ) {
+					$where .= " AND `ID` NOT IN( {$value} ) ";
+				}
+			}
 		}
 
 		// only registration fields ?
