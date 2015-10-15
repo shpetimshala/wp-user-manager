@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * WPUM_Groups_Fields
  * Create a table with the list of default fields.
- * 
+ *
  * @since 1.0.0
  */
 class WPUM_Groups_Fields extends WP_List_Table {
@@ -55,7 +55,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
      * @return Array
      */
     public function get_columns() {
-        
+
         $columns = array(
             'order'    => __('Order', 'wpum'),
             'title'    => __('Field Title', 'wpum'),
@@ -69,7 +69,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
     /**
      * Define which columns are hidden
-     * 
+     *
      * @since 1.0.0
      * @return Array
      */
@@ -79,7 +79,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
     /**
      * Define the sortable columns
-     * 
+     *
      * @since 1.0.0
      * @return Array
      */
@@ -89,7 +89,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
     /**
      * Get the table data
-     * 
+     *
      * @since 1.0.0
      * @return Array
      */
@@ -121,7 +121,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
      * @return Mixed
      */
     public function column_default( $item, $column_name ) {
-        
+
         switch( $column_name ) {
             case 'order':
                 return '<a href="#"><span class="dashicons dashicons-menu"></span></a>';
@@ -225,7 +225,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
         // Display delete button if field can be deleted.
         if( $item['can_delete'] ) {
-            
+
             $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => sanitize_key( $item['id'] ) ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
             echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete', 'wpum' ).'</a> ';
 
@@ -245,7 +245,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
         // Add id
         $row_id = ' id="'.$item['name'].'"';
- 
+
         echo '<tr' . $row_class . $row_id . ' data-priority="' .$item['field_order']. '" data-field-id="' . sanitize_key( $item['id'] ). '">';
         $this->single_row_columns( $item );
         echo '</tr>';

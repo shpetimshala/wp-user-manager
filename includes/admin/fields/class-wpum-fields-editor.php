@@ -141,7 +141,7 @@ class WPUM_Fields_Editor {
 	public static function editor_page() {
 
 		ob_start();
-		
+
 		?>
 
 		<div class="wrap wpum-fields-editor-wrap">
@@ -151,7 +151,10 @@ class WPUM_Fields_Editor {
 				<?php do_action( 'wpum/fields/editor/title' ); ?>
 			</h2>
 
-			<?php echo self::navbar(); ?>
+			<div class="wp-filter">
+				<?php echo self::navbar(); ?>
+				<?php do_action( 'wpum/fields/editor/navbar' ); ?>
+			</div>
 
 			<?php echo self::primary_message(); ?>
 
@@ -159,16 +162,16 @@ class WPUM_Fields_Editor {
 
 				<!-- Sidebar -->
 				<div id="menu-settings-column" class="metabox-holder">
-					
+
 					<div class="clear"></div>
 
 					<?php do_accordion_sections( self::editor_hook, 'side', null ); ?>
-						
+
 				</div>
 				<!-- End Sidebar -->
 
 				<div id="menu-management-liquid" class="wpum-editor-container">
-					
+
 					<?php echo self::group_table(); ?>
 
 					<div class="wpum-table-loader">
@@ -182,7 +185,7 @@ class WPUM_Fields_Editor {
 		</div>
 
 		<?php
-		
+
 		echo ob_get_clean();
 
 	}
@@ -204,9 +207,9 @@ class WPUM_Fields_Editor {
 				$output .= __('It seems you do not have any field groups. Please deactivate and re-activate the plugin.', 'wpum');
 			$output .= '</p></div>';
 
-		else:  
-			$output = '<div class="wp-filter">';
-				$output .= '<form method="get" action="'. admin_url( 'users.php?page=wpum-profile-fields' ) .'">';
+		else:
+
+				$output = '<form method="get" action="'. admin_url( 'users.php?page=wpum-profile-fields' ) .'">';
 
 					$output .= '<input type="hidden" name="page" value="wpum-profile-fields">';
 					$output .= '<input type="hidden" name="action" value="edit">';
@@ -216,7 +219,7 @@ class WPUM_Fields_Editor {
 					foreach ( $groups as $key => $group ) {
 						$options += array( $group->id => $group->name );
 					}
-		 
+
 					// Generate dropdown menu
 					$args = array(
 						'options'          => $options,
@@ -235,7 +238,6 @@ class WPUM_Fields_Editor {
 
 				$output .= '</form>';
 
-			$output .= '</div>';
 		endif;
 
 		return $output;
@@ -253,7 +255,7 @@ class WPUM_Fields_Editor {
 		$custom_fields_table = new WPUM_Groups_Fields();
 		$custom_fields_table->prepare_items();
 		$custom_fields_table->display();
-		
+
 		wp_nonce_field( 'wpum_fields_editor_nonce', 'wpum_fields_editor_nonce' );
 
 	}
@@ -265,10 +267,10 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function load_editor() {
- 
+
 	    do_action( 'add_meta_boxes_'.self::editor_hook, null );
 	    do_action( 'add_meta_boxes', self::editor_hook, null );
-	 
+
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
 
@@ -285,10 +287,10 @@ class WPUM_Fields_Editor {
 	 * @return void
 	 */
 	public function single_field_load_editor() {
- 
+
 	    do_action( 'add_meta_boxes_'.self::single_field_hook, null );
 	    do_action( 'add_meta_boxes', self::single_field_hook, null );
-	 
+
 	    /* Enqueue WordPress' script for handling the meta boxes */
 	    wp_enqueue_script('postbox');
 
@@ -480,7 +482,7 @@ class WPUM_Fields_Editor {
 			wp_die( 'To edit a field please go to Users -> Profile fields' );
 
 		?>
-		
+
 		<div class="wrap wpum-fields-editor-wrap">
 
 			<h2 class="wpum-page-title">
@@ -491,7 +493,7 @@ class WPUM_Fields_Editor {
 			<form name="wpum-edit-field-form" action="#" method="post" id="wpum-edit-field-form" autocomplete="off">
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-2">
-						
+
 						<div id="post-body-content">
 
 							<?php do_action( 'wpum/fields/editor/single' ); ?>
@@ -528,14 +530,14 @@ class WPUM_Fields_Editor {
 							</div>
 						</div><!-- postbox-container sidebar -->
 
-					</div> 
+					</div>
 				</div>
 			</form>
 
 		</div>
 
 		<?php
-		
+
 		echo ob_get_clean();
 
 	}
@@ -577,7 +579,7 @@ class WPUM_Fields_Editor {
 	 */
 	public function field_description_editor() {
 
-		$description_settings = array( 
+		$description_settings = array(
 			'media_buttons' => false,
 			'teeny'         => true,
 			'quicktags'     => false,
