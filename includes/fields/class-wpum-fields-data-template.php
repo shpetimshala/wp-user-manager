@@ -8,9 +8,7 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined('ABSPATH') ) {
-    exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * WPUM_Fields_Data_Template Class.
@@ -107,6 +105,22 @@ class WPUM_Fields_Data_Template {
      * @param array $args arguments.
      */
     public function __construct( $args = '' ) {
+
+        $defaults = array(
+            'user_id'           => false,
+            'fields_group_id'   => false,
+            'hide_empty_groups' => false,
+            'hide_empty_fields' => false,
+            'exclude_groups'    => false,
+            'exclude_fields'    => false
+        );
+
+        // Parse incoming $args into an array and merge it with $defaults
+		$args = wp_parse_args( $args, $defaults );
+
+        $this->groups      = wpum_get_field_groups( $args );
+        $this->group_count = count( $this->groups );
+        $this->user_id     = $args['user_id'];
 
     }
 
