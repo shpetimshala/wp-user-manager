@@ -249,3 +249,36 @@ function wpum_get_field_input_html( $key, $field ) {
 	}
 
 }
+
+/**
+ * Retrieve a specific field groups, populated with fields and associated user data.
+ *
+ * @param  array $args arguments for the query.
+ * @return array       list of groups and fields with associated data.
+ */
+function wpum_get_field_groups( $args = array() ) {
+
+	$defaults = array(
+		'orderby' => 'id',
+		'order'   => 'ASC',
+		'array'   => true,
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$groups = WPUM()->field_groups->get_groups( $args );
+
+	// Merge fields for each group
+	if( ! empty( $groups ) ) {
+		foreach ( $groups as $key => $group ) {
+			$groups[ $key ][ 'fields' ] = WPUM()->fields->get_by_group( array(
+				'id'      => $group['id'],
+				'orderby' => 'field_order',
+				'order'   => 'ASC'
+			) );
+		}
+	}
+
+	return apply_filters( 'wpum_get_field_groups', $groups, $args );
+
+}

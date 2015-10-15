@@ -136,7 +136,8 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 			'number'       => 20,
 			'offset'       => 0,
 			'orderby'      => 'id',
-			'order'        => 'DESC'
+			'order'        => 'DESC',
+			'array'        => false,
 		);
 
 		$args  = wp_parse_args( $args, $defaults );
@@ -147,6 +148,11 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 
 		$where = '';
 
+		// Return as array?
+		$return_type = 'OBJECT';
+		if( $args['array'] === true )
+			$return_type = 'ARRAY_A';
+
 		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? 'id' : $args['orderby'];
 
 		$cache_key = md5( 'wpum_field_groups_' . serialize( $args ) );
@@ -154,7 +160,7 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 		$field_groups = wp_cache_get( $cache_key, 'field_groups' );
 
 		if( $field_groups === false ) {
-			$field_groups = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ) );
+			$field_groups = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ), $return_type );
 			wp_cache_set( $cache_key, $field_groups, 'field_groups', 3600 );
 		}
 

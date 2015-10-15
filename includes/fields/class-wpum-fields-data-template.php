@@ -108,7 +108,8 @@ class WPUM_Fields_Data_Template {
 
         $defaults = array(
             'user_id'           => false,
-            'fields_group_id'   => false,
+            'field_group_id'    => false,
+            'number'            => false,
             'hide_empty_groups' => false,
             'hide_empty_fields' => false,
             'exclude_groups'    => false,
