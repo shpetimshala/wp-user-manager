@@ -371,4 +371,4 @@ function WPUM() {
 // Get WPUM Running
 WPUM();
 
-print_r( new WPUM_Fields_Data_Template( array( 'field_group_id' => 1, 'hide_empty_groups' => false ) ) );
+print_r( new WPUM_Fields_Data_Template( array( 'hide_empty_groups' => false, 'exclude_groups' => '7,9' ) ) );

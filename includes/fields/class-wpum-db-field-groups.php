@@ -133,11 +133,12 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 		global $wpdb;
 
 		$defaults = array(
-			'number'       => 20,
-			'offset'       => 0,
-			'orderby'      => 'id',
-			'order'        => 'DESC',
-			'array'        => false,
+			'number'         => 20,
+			'offset'         => 0,
+			'orderby'        => 'id',
+			'order'          => 'DESC',
+			'exclude_groups' => false,
+			'array'          => false,
 		);
 
 		$args  = wp_parse_args( $args, $defaults );
@@ -147,6 +148,23 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 		}
 
 		$where = '';
+
+		// If we have groups to exclude, exclude them.
+		if( ! empty( $args['exclude_groups'] ) ) {
+
+			$exclude_groups = explode( ',', $args['exclude_groups'] );
+
+			if( is_array( $exclude_groups ) ) {
+				foreach ( $exclude_groups as $key => $group_id ) {
+					if( $key == 0 ) {
+						$where .= "WHERE `ID` NOT IN( {$group_id} )";
+					} elseif( $key > 0 ) {
+						$where .= " AND `ID` NOT IN( {$group_id} )";
+					}
+				}
+			}
+
+		}
 
 		// Return as array?
 		$return_type = 'OBJECT';

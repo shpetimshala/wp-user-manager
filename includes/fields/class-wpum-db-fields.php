@@ -209,13 +209,6 @@ class WPUM_DB_Fields extends WPUM_DB {
 		}
 
 		// If we have items to exclude, exclude them.
-		if( ! empty( $exclude_fields ) ) {
-			$exclude  = implode( ',', $excludes );
-
-			$where .= "AND `ID` NOT IN (%s) ";
-		}
-
-		// If we have items to exclude, exclude them.
 		if( ! empty( $args['exclude_fields'] ) ) {
 			$exclude  = explode( ',', $args['exclude_fields'] );
 			if( ! empty( $where ) && is_array( $exclude ) ) {
