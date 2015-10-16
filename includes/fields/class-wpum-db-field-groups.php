@@ -197,11 +197,12 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 	 *
 	 * @access public
 	 * @since  1.0.0
-	 * @param  string $column id or primary
-	 * @param  mixed  $value  the id to search
-	 * @return mixed          Upon success, an object of the group. Upon failure, NULL
+	 * @param  string $column id or primary.
+	 * @param  mixed  $value  the id to search.
+	 * @param  bool   $array  whether content returned should be an array.
+	 * @return mixed
 	 */
-	public function get_group_by( $field = 'id', $value = 0 ) {
+	public function get_group_by( $field = 'id', $value = 0, $array = false ) {
 		global $wpdb;
 
 		if ( empty( $field ) || $field == 'id' && empty( $value ) ) {
@@ -227,6 +228,11 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 			$value = true;
 		}
 
+		// Return as array?
+		$return_type = 'OBJECT';
+		if( $array === true )
+			$return_type = 'ARRAY_A';
+
 		if ( ! $value ) {
 			return false;
 		}
@@ -242,7 +248,7 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 				return false;
 		}
 
-		if ( ! $group = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE $db_field = %s LIMIT 1", $value ), ARRAY_A ) ) {
+		if ( ! $group = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE $db_field = %s LIMIT 1", $value ), $return_type ) ) {
 			return false;
 		}
 

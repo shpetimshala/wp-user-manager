@@ -260,7 +260,7 @@ function wpum_get_field_groups( $args = array() ) {
 
 	if( $args['field_group_id'] && is_int( $args['field_group_id'] ) ) {
 		$groups = array();
-		$groups[] = WPUM()->field_groups->get_group_by( 'id', absint( $args['field_group_id'] ) );
+		$groups[] = WPUM()->field_groups->get_group_by( 'id', absint( $args['field_group_id'] ), true );
 	} else {
 		$groups = WPUM()->field_groups->get_groups( $args );
 	}
