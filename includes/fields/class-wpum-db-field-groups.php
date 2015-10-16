@@ -242,7 +242,7 @@ class WPUM_DB_Field_Groups extends WPUM_DB {
 				return false;
 		}
 
-		if ( ! $group = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE $db_field = %s LIMIT 1", $value ) ) ) {
+		if ( ! $group = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE $db_field = %s LIMIT 1", $value ), ARRAY_A ) ) {
 			return false;
 		}
 

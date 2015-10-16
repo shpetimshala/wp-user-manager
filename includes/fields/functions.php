@@ -258,7 +258,12 @@ function wpum_get_field_input_html( $key, $field ) {
  */
 function wpum_get_field_groups( $args = array() ) {
 
-	$groups = WPUM()->field_groups->get_groups( $args );
+	if( $args['field_group_id'] && is_int( $args['field_group_id'] ) ) {
+		$groups = array();
+		$groups[] = WPUM()->field_groups->get_group_by( 'id', absint( $args['field_group_id'] ) );
+	} else {
+		$groups = WPUM()->field_groups->get_groups( $args );
+	}
 
 	// Merge fields for each group
 	if( ! empty( $groups ) ) {
