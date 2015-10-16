@@ -371,4 +371,4 @@ function WPUM() {
 // Get WPUM Running
 WPUM();
 
-//print_r( wpum_get_field_groups() );
+print_r( new WPUM_Fields_Data_Template );

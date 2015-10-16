@@ -258,24 +258,24 @@ function wpum_get_field_input_html( $key, $field ) {
  */
 function wpum_get_field_groups( $args = array() ) {
 
-	$defaults = array(
-		'orderby' => 'id',
-		'order'   => 'ASC',
-		'array'   => true,
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-
 	$groups = WPUM()->field_groups->get_groups( $args );
 
 	// Merge fields for each group
 	if( ! empty( $groups ) ) {
 		foreach ( $groups as $key => $group ) {
-			$groups[ $key ][ 'fields' ] = WPUM()->fields->get_by_group( array(
-				'id'      => $group['id'],
+
+			$fields = WPUM()->fields->get_by_group( array(
+				'id'      => absint( $group['id'] ),
 				'orderby' => 'field_order',
 				'order'   => 'ASC',
 			) );
+
+			if( empty( $fields ) && $args['hide_empty_groups'] === true ) {
+				unset( $groups[ $key ] );
+			} else {
+				$groups[ $key ][ 'fields' ] = $fields;
+			}
+
 		}
 	}
 

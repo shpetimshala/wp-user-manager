@@ -110,10 +110,13 @@ class WPUM_Fields_Data_Template {
             'user_id'           => false,
             'field_group_id'    => false,
             'number'            => false,
-            'hide_empty_groups' => false,
+            'hide_empty_groups' => true,
             'hide_empty_fields' => false,
             'exclude_groups'    => false,
-            'exclude_fields'    => false
+            'exclude_fields'    => false,
+            'orderby'           => 'id',
+    		'order'             => 'ASC',
+    		'array'             => true
         );
 
         // Parse incoming $args into an array and merge it with $defaults
