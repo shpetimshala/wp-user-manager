@@ -208,17 +208,17 @@ class WPUM_Fields_Data_Template {
     /**
      * Setup global variable for current group within the loop.
      *
-     * @global $group
+     * @global $wpum_fields_group
      * @since 1.2.0
      * @access public
      * @return [type] [description]
      */
     public function the_profile_group() {
 
-        global $group;
+        global $wpum_fields_group;
 
         $this->in_the_loop = true;
-        $group = $this->next_group();
+        $wpum_fields_group = $this->next_group();
 
         if( 0 === $this->current_group ) {
             do_action( 'wpum_field_groups_loop_start' );
