@@ -251,7 +251,7 @@ function wpum_get_field_input_html( $key, $field ) {
 }
 
 /**
- * Retrieve a specific field groups, populated with fields and associated user data.
+ * Retrieve field groups, populated with fields and associated user data.
  *
  * @param  array $args arguments for the query.
  * @return array       list of groups and fields with associated data.
@@ -285,5 +285,91 @@ function wpum_get_field_groups( $args = array() ) {
 	}
 
 	return apply_filters( 'wpum_get_field_groups', $groups, $args );
+
+}
+
+function wpum_has_profile_fields( $args = '' ) {
+
+	global $wpum_profile_template;
+
+	$defaults = array(
+		'user_id'           => 1,
+		'field_group_id'    => false,
+		'number'            => false,
+		'hide_empty_groups' => true,
+		'hide_empty_fields' => false,
+		'exclude_groups'    => false,
+		'exclude_fields'    => false,
+		'orderby'           => 'id',
+		'order'             => 'ASC',
+		'array'             => true
+	);
+
+	// Parse incoming $args into an array and merge it with $defaults
+	$args = wp_parse_args( $args, $defaults );
+
+	$wpum_profile_template = new WPUM_Fields_Data_Template( $args );
+
+	return apply_filters( 'wpum_has_profile_fields', $wpum_profile_template->has_groups(), $wpum_profile_template );
+
+}
+
+function wpum_profile_field_groups() {
+
+	global $wpum_profile_template;
+	return $wpum_profile_template->profile_groups();
+
+}
+
+function wpum_the_profile_field_group() {
+
+	global $wpum_profile_template;
+	return $wpum_profile_template->the_profile_group();
+
+}
+
+function wpum_field_group_has_fields() {
+
+	global $wpum_profile_template;
+	return $wpum_profile_template->has_fields();
+
+}
+
+function wpum_get_field_group_id() {
+
+	global $group;
+	return apply_filters( 'wpum_get_field_group_id', $group['id'] );
+
+}
+
+function wpum_the_field_group_id() {
+
+	echo wpum_get_field_group_id();
+
+}
+
+function wpum_the_field_group_name() {
+
+	echo wpum_get_field_group_name();
+
+}
+
+function wpum_get_field_group_name() {
+
+	global $group;
+	return apply_filters( 'wpum_get_field_group_name', $group['name'] );
+
+}
+
+function wpum_the_field_group_slug() {
+
+	echo wpum_get_field_group_slug();
+
+}
+
+function wpum_get_field_group_slug() {
+
+	global $group;
+	return apply_filters( 'wpum_get_field_group_slug', sanitize_title( $group['name'] ) );
 
 }

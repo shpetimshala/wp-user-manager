@@ -128,4 +128,77 @@ class WPUM_Fields_Data_Template {
 
     }
 
+    /**
+     * Whether there are groups available.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return boolean
+     */
+    public function has_groups() {
+
+        if( ! empty( $this->group_count ) ) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public function next_group() {
+
+        $this->current_group++;
+
+        $this->group = $this->groups[ $this->current_group ];
+        $this->field_count = 0;
+
+        if( ! empty( $this->group->fields ) ) {
+            $this->group->fields = apply_filters( 'wpum_group_fields', $this->group->fields, $this->group->id );
+            $this->field_count = count( $this->group->fields );
+        }
+
+        return $this->group;
+
+    }
+
+    public function rewind_groups() {
+
+        $this->current_group = -1;
+        if( $this->group_count > 0 ) {
+            $this->group = $this->groups[0];
+        }
+
+    }
+
+    public function profile_groups() {
+
+        if( $this->current_group + 1 < $this->group_count ) {
+            return true;
+        } elseif ( $this->current_group + 1 == $this->group_count ) {
+
+            do_action( 'wpum_field_groups_loop_end' );
+
+            $this->rewind_groups();
+
+        }
+
+        $this->in_the_loop = false;
+
+        return false;
+
+    }
+
+    public function the_profile_group() {
+
+        global $group;
+
+        $this->in_the_loop = true;
+        $group = $this->next_group();
+
+        if( 0 === $this->current_group ) {
+            do_action( 'wpum_field_groups_loop_start' );
+        }
+
+    }
+
 }
