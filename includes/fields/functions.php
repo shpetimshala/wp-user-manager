@@ -253,6 +253,7 @@ function wpum_get_field_input_html( $key, $field ) {
 /**
  * Retrieve field groups, populated with fields and associated user data.
  *
+ * @since 1.2.0
  * @param  array $args arguments for the query.
  * @return array       list of groups and fields with associated data.
  */
@@ -288,6 +289,14 @@ function wpum_get_field_groups( $args = array() ) {
 
 }
 
+/**
+ * Use this function to start a loop of profile fields.
+ *
+ * @since 1.2.0
+ * @global $wpum_profile_template
+ * @param  string  $args arguments to create the loop.
+ * @return boolean       whether there's any group found.
+ */
 function wpum_has_profile_fields( $args = '' ) {
 
 	global $wpum_profile_template;
@@ -300,12 +309,9 @@ function wpum_has_profile_fields( $args = '' ) {
 		'hide_empty_fields' => false,
 		'exclude_groups'    => false,
 		'exclude_fields'    => false,
-		'orderby'           => 'id',
-		'order'             => 'ASC',
-		'array'             => true
 	);
 
-	// Parse incoming $args into an array and merge it with $defaults
+	// Parse incoming $args into an array and merge it with $defaults.
 	$args = wp_parse_args( $args, $defaults );
 
 	$wpum_profile_template = new WPUM_Fields_Data_Template( $args );
@@ -314,6 +320,13 @@ function wpum_has_profile_fields( $args = '' ) {
 
 }
 
+/**
+ * Setup the profile fields loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_profile_template
+ * @return bool
+ */
 function wpum_profile_field_groups() {
 
 	global $wpum_profile_template;
@@ -321,6 +334,13 @@ function wpum_profile_field_groups() {
 
 }
 
+/**
+ * Setup the current field group within the loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_profile_template
+ * @return array the current group within the loop.
+ */
 function wpum_the_profile_field_group() {
 
 	global $wpum_profile_template;
@@ -328,6 +348,13 @@ function wpum_the_profile_field_group() {
 
 }
 
+/**
+ * Whether the current group within the loop has fields.
+ *
+ * @since 1.2.0
+ * @global $wpum_profile_template
+ * @return array the current group fields within the loop.
+ */
 function wpum_field_group_has_fields() {
 
 	global $wpum_profile_template;
@@ -335,6 +362,13 @@ function wpum_field_group_has_fields() {
 
 }
 
+/**
+ * Return the group id number of a group within the loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_fields_group
+ * @return string the current group id.
+ */
 function wpum_get_field_group_id() {
 
 	global $group;
@@ -342,18 +376,23 @@ function wpum_get_field_group_id() {
 
 }
 
+/**
+ * Echo the group id number of a group within the loop.
+ *
+ * @since 1.2.0
+ * @return void
+ */
 function wpum_the_field_group_id() {
-
 	echo wpum_get_field_group_id();
-
 }
 
-function wpum_the_field_group_name() {
-
-	echo wpum_get_field_group_name();
-
-}
-
+/**
+ * Return the name of a group within the loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_fields_group
+ * @return string
+ */
 function wpum_get_field_group_name() {
 
 	global $group;
@@ -361,15 +400,36 @@ function wpum_get_field_group_name() {
 
 }
 
-function wpum_the_field_group_slug() {
-
-	echo wpum_get_field_group_slug();
-
+/**
+ * Echo the name of a group within the loop.
+ *
+ * @since 1.2.0
+ * @return void
+ */
+function wpum_the_field_group_name() {
+	echo wpum_get_field_group_name();
 }
 
+/**
+ * Return the slug of a group within the loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_fields_group
+ * @return string
+ */
 function wpum_get_field_group_slug() {
 
 	global $group;
 	return apply_filters( 'wpum_get_field_group_slug', sanitize_title( $group['name'] ) );
 
+}
+
+/**
+ * Echo the slug of a group within the loop.
+ *
+ * @since 1.2.0
+ * @return void
+ */
+function wpum_the_field_group_slug() {
+	echo wpum_get_field_group_slug();
 }
