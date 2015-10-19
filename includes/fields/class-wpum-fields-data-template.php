@@ -145,6 +145,13 @@ class WPUM_Fields_Data_Template {
 
     }
 
+    /**
+     * Get next group within the loop.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return array
+     */
     public function next_group() {
 
         $this->current_group++;
@@ -161,6 +168,13 @@ class WPUM_Fields_Data_Template {
 
     }
 
+    /**
+     * Rewind groups.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return void
+     */
     public function rewind_groups() {
 
         $this->current_group = -1;
@@ -170,24 +184,35 @@ class WPUM_Fields_Data_Template {
 
     }
 
+    /**
+     * Check whether we've reached the end of the loop or keep looping.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return bool
+     */
     public function profile_groups() {
 
         if( $this->current_group + 1 < $this->group_count ) {
             return true;
         } elseif ( $this->current_group + 1 == $this->group_count ) {
-
             do_action( 'wpum_field_groups_loop_end' );
-
             $this->rewind_groups();
-
         }
 
         $this->in_the_loop = false;
-
         return false;
 
     }
 
+    /**
+     * Setup global variable for current group within the loop.
+     *
+     * @global $group
+     * @since 1.2.0
+     * @access public
+     * @return [type] [description]
+     */
     public function the_profile_group() {
 
         global $group;
