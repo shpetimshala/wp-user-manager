@@ -293,13 +293,13 @@ function wpum_get_field_groups( $args = array() ) {
  * Use this function to start a loop of profile fields.
  *
  * @since 1.2.0
- * @global $wpum_profile_template
+ * @global $wpum_profile_fields
  * @param  string  $args arguments to create the loop.
  * @return boolean       whether there's any group found.
  */
 function wpum_has_profile_fields( $args = '' ) {
 
-	global $wpum_profile_template;
+	global $wpum_profile_fields;
 
 	$defaults = array(
 		'user_id'           => 1,
@@ -314,9 +314,9 @@ function wpum_has_profile_fields( $args = '' ) {
 	// Parse incoming $args into an array and merge it with $defaults.
 	$args = wp_parse_args( $args, $defaults );
 
-	$wpum_profile_template = new WPUM_Fields_Data_Template( $args );
+	$wpum_profile_fields = new WPUM_Fields_Data_Template( $args );
 
-	return apply_filters( 'wpum_has_profile_fields', $wpum_profile_template->has_groups(), $wpum_profile_template );
+	return apply_filters( 'wpum_has_profile_fields', $wpum_profile_fields->has_groups(), $wpum_profile_fields );
 
 }
 
@@ -324,13 +324,13 @@ function wpum_has_profile_fields( $args = '' ) {
  * Setup the profile fields loop.
  *
  * @since 1.2.0
- * @global $wpum_profile_template
+ * @global $wpum_profile_fields
  * @return bool
  */
 function wpum_profile_field_groups() {
 
-	global $wpum_profile_template;
-	return $wpum_profile_template->profile_groups();
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->profile_groups();
 
 }
 
@@ -338,13 +338,13 @@ function wpum_profile_field_groups() {
  * Setup the current field group within the loop.
  *
  * @since 1.2.0
- * @global $wpum_profile_template
+ * @global $wpum_profile_fields
  * @return array the current group within the loop.
  */
 function wpum_the_profile_field_group() {
 
-	global $wpum_profile_template;
-	return $wpum_profile_template->the_profile_group();
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->the_profile_group();
 
 }
 
@@ -352,13 +352,13 @@ function wpum_the_profile_field_group() {
  * Whether the current group within the loop has fields.
  *
  * @since 1.2.0
- * @global $wpum_profile_template
+ * @global $wpum_profile_fields
  * @return array the current group fields within the loop.
  */
 function wpum_field_group_has_fields() {
 
-	global $wpum_profile_template;
-	return $wpum_profile_template->has_fields();
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->has_fields();
 
 }
 
