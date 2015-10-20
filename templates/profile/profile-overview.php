@@ -48,6 +48,12 @@
 
 			<?php wpum_the_field_group_name(); ?>
 
+			<?php if ( wpum_field_group_has_fields() ) : ?>
+
+				asdsad
+
+			<?php endif; ?>
+
 		<?php endwhile; ?>
 
 	<?php endif; ?>
