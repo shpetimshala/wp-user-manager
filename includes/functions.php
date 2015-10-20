@@ -150,7 +150,7 @@ endif;
  *
  * @since 1.2.0
  * @param  int $user_id id number of a registered user.
- * @return string          email address of the user.
+ * @return string          email address of the user or empty if not found.
  */
 function wpum_get_user_email( $user_id ) {
 
@@ -167,8 +167,8 @@ function wpum_get_user_email( $user_id ) {
  * Get username of a register user.
  *
  * @since 1.2.0
- * @param  string $user_id id number of a registered user.
- * @return string          the username of the user.
+ * @param  int $user_id id number of a registered user.
+ * @return string          the username of the user or empty if not found.
  */
 function wpum_get_user_username( $user_id ) {
 
@@ -178,5 +178,23 @@ function wpum_get_user_username( $user_id ) {
 	$username = ( isset( $user->data->user_login ) ) ? $user->data->user_login : '';
 
 	return $username;
+
+}
+
+/**
+ * Get displayed name of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the displayed name of the user or empty if not found.
+ */
+function wpum_get_user_displayname( $user_id ) {
+
+	$display_name = '';
+
+	$user = new WP_User( $user_id );
+	$display_name = ( isset( $user->data->display_name ) ) ? $user->data->display_name : '';
+
+	return $display_name;
 
 }
