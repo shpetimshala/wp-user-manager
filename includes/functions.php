@@ -157,6 +157,7 @@ function wpum_get_user_email( $user_id ) {
 	$email = '';
 
 	$user = new WP_User( $user_id );
+	print_r( $user );
 	$email = ( isset( $user->data->user_email ) ) ? $user->data->user_email : '';
 
 	return $email;
@@ -214,5 +215,20 @@ function wpum_get_user_website( $user_id ) {
 	$website = ( isset( $user->data->user_url ) ) ? $user->data->user_url : '';
 
 	return $website;
+
+}
+
+/**
+ * Get the description of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the description of a registered user or empty if not found.
+ */
+function wpum_get_user_description( $user_id ) {
+
+	$description = get_user_meta( $user_id, 'description', $single = true );
+
+	return $description;
 
 }
