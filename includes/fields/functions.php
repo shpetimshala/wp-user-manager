@@ -312,7 +312,7 @@ function wpum_get_field_groups( $args = array() ) {
 				'id'      => absint( $group['id'] ),
 				'orderby' => 'field_order',
 				'order'   => 'ASC',
-				'array' => true
+				'array'   => true
 			) );
 
 			if( empty( $fields ) && $args['hide_empty_groups'] === true ) {
@@ -325,15 +325,15 @@ function wpum_get_field_groups( $args = array() ) {
 						unset( $fields[ $field_key ] );
 					} else {
 						$fields[ $field_key ]['value'] = wpum_get_field_value( $args['user_id'], $field['meta'] );
+						$fields[ $field_key ] = wpum_array_to_object( $fields[ $field_key ] );
 					}
 
 				}
 
-				echo "<pre>";
-				print_r( $fields );
-				echo "</pre>";
+				$fields = array_values( $fields );
 
 				$groups[ $key ][ 'fields' ] = $fields;
+
 			}
 
 		}

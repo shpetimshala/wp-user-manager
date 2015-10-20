@@ -157,7 +157,6 @@ function wpum_get_user_email( $user_id ) {
 	$email = '';
 
 	$user = new WP_User( $user_id );
-	print_r( $user );
 	$email = ( isset( $user->data->user_email ) ) ? $user->data->user_email : '';
 
 	return $email;

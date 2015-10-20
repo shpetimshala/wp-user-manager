@@ -49,9 +49,7 @@
 			<?php wpum_the_field_group_name(); ?>
 
 			<?php if ( wpum_field_group_has_fields() ) : ?>
-
-				asdsad
-
+				asdad
 			<?php endif; ?>
 
 		<?php endwhile; ?>
