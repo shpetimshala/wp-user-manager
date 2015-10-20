@@ -144,3 +144,21 @@ function wpum_login_form( $args = array() ) {
 
 }
 endif;
+
+/**
+ * Get email address of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          email address of the user.
+ */
+function wpum_get_user_email( $user_id ) {
+
+	$email = '';
+
+	$user = new WP_User( $user_id );
+	$email = ( isset( $user->data->user_email ) ) ? $user->data->user_email : '';
+
+	return $email;
+
+}

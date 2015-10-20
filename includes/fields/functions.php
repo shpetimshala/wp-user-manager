@@ -267,6 +267,9 @@ function wpum_get_field_value( $user_id, $field_meta ) {
 	}
 
 	switch ( $field_meta ) {
+		case 'user_email':
+			$field_data = wpum_get_user_email( $user_id );
+			break;
 		default:
 			$field_data = get_user_meta( $user_id, $field_meta, $single = true );
 			break;
