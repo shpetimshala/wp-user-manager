@@ -198,3 +198,21 @@ function wpum_get_user_displayname( $user_id ) {
 	return $display_name;
 
 }
+
+/**
+ * Get website url of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the website url of the user or empty if not found.
+ */
+function wpum_get_user_website( $user_id ) {
+
+	$website = '';
+
+	$user = new WP_User( $user_id );
+	$website = ( isset( $user->data->user_url ) ) ? $user->data->user_url : '';
+
+	return $website;
+
+}

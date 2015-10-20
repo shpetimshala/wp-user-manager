@@ -276,6 +276,9 @@ function wpum_get_field_value( $user_id, $field_meta ) {
 		case 'display_name':
 			$field_data = wpum_get_user_displayname( $user_id );
 			break;
+		case 'user_url':
+			$field_data = wpum_get_user_website( $user_id );
+			break;
 		default:
 			$field_data = get_user_meta( $user_id, $field_meta, $single = true );
 			break;
