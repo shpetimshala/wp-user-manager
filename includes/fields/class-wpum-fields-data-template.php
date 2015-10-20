@@ -233,9 +233,10 @@ class WPUM_Fields_Data_Template {
         for ( $i = 0, $count = count( $this->group['fields'] ); $i < $count; ++$i ) {
             $field = &$this->group['fields'][ $i ];
 
+            /*
             echo "<pre>";
             print_r( $field  );
-            echo "</pre>";
+            echo "</pre>";*/
 
             if ( ! empty( $field->data ) && ( $field->data->value != null ) ) {
                 $has_data = true;

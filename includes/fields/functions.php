@@ -251,6 +251,32 @@ function wpum_get_field_input_html( $key, $field ) {
 }
 
 /**
+ * Get value of a user custom field given the user id and field meta key.
+ *
+ * @since 1.2.0
+ * @param  string $user_id    the id number of the user.
+ * @param  string $field_meta the metakey of the field
+ * @return mixed
+ */
+function wpum_get_field_value( $user_id, $field_meta ) {
+
+	$field_data = false;
+
+	if( empty( $user_id ) || ! is_int( $user_id ) ) {
+		return false;
+	}
+
+	switch ( $field_meta ) {
+		default:
+			$field_data = get_user_meta( $user_id, $field_meta, $single = true );
+			break;
+	}
+
+	return maybe_unserialize( $field_data );
+
+}
+
+/**
  * Retrieve field groups, populated with fields and associated user data.
  *
  * @since 1.2.0
@@ -274,11 +300,21 @@ function wpum_get_field_groups( $args = array() ) {
 				'id'      => absint( $group['id'] ),
 				'orderby' => 'field_order',
 				'order'   => 'ASC',
+				'array' => true
 			) );
 
 			if( empty( $fields ) && $args['hide_empty_groups'] === true ) {
 				unset( $groups[ $key ] );
 			} else {
+
+				foreach ( $fields as $field_key => $field ) {
+					$fields[ $field_key ]['value'] = wpum_get_field_value( $args['user_id'], $field['meta'] );
+				}
+
+				echo "<pre>";
+				print_r( $fields );
+				echo "</pre>";
+
 				$groups[ $key ][ 'fields' ] = $fields;
 			}
 
