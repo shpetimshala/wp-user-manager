@@ -162,3 +162,21 @@ function wpum_get_user_email( $user_id ) {
 	return $email;
 
 }
+
+/**
+ * Get username of a register user.
+ *
+ * @since 1.2.0
+ * @param  string $user_id id number of a registered user.
+ * @return string          the username of the user.
+ */
+function wpum_get_user_username( $user_id ) {
+
+	$username = '';
+
+	$user = new WP_User( $user_id );
+	$username = ( isset( $user->data->user_login ) ) ? $user->data->user_login : '';
+
+	return $username;
+
+}
