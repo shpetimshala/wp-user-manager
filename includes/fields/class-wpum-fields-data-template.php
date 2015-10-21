@@ -159,6 +159,8 @@ class WPUM_Fields_Data_Template {
         $this->group = $this->groups[ $this->current_group ];
         $this->field_count = 0;
 
+        $this->group = wpum_array_to_object( $this->group );
+
         if( ! empty( $this->group->fields ) ) {
             $this->group->fields = apply_filters( 'wpum_group_fields', $this->group->fields, $this->group->id );
             $this->field_count = count( $this->group->fields );
@@ -226,27 +228,11 @@ class WPUM_Fields_Data_Template {
 
     }
 
-    public function has_fields() {
-
-        $has_data = false;
-
-        for ( $i = 0, $count = count( $this->group['fields'] ); $i < $count; ++$i ) {
-            $field = &$this->group['fields'][ $i ];
-
-            if ( ! empty( $field->value ) ) {
-                $has_data = true;
-            }
-		}
-
-        return $has_data;
-
-    }
-
     public function next_field() {
 
         $this->current_field++;
 
-        $this->field = $this->group['fields'][ $this->current_field ];
+        $this->field = $this->group->fields[ $this->current_field ];
 
         return $this->field;
 
@@ -256,20 +242,37 @@ class WPUM_Fields_Data_Template {
 
         $this->current_field = -1;
         if( $this->field_count > 0 ) {
-            $this->field = $this->group['fields'][0];
+            $this->field = $this->group->fields[0];
         }
+
+    }
+
+    public function has_fields() {
+
+        $has_data = false;
+
+        for ( $i = 0, $count = count( $this->group->fields ); $i < $count; ++$i ) {
+            $field = &$this->group->fields[ $i ];
+
+            if ( ! empty( $field->value ) || ( '0' === $field->value ) ) {
+                $has_data = true;
+            }
+		}
+
+        return $has_data;
 
     }
 
     public function profile_fields() {
 
         if ( $this->current_field + 1 < $this->field_count ) {
-            return true;
-        } elseif ( $this->current_field + 1 == $this->field_count ) {
-            $this->rewind_fields();
-        }
+			return true;
+		} elseif ( $this->current_field + 1 == $this->field_count ) {
+			// Do some cleaning up after the loop
+			$this->rewind_fields();
+		}
 
-        return false;
+		return false;
 
     }
 
@@ -277,18 +280,18 @@ class WPUM_Fields_Data_Template {
 
         global $wpum_field;
 
-        $wpum_field = $this->next_field();
+		$wpum_field = $this->next_field();
 
-        if ( ! empty( $wpum_field->data ) && ( ! empty( $wpum_field->data->value ) || ( '0' === $wpum_field->data->value ) ) ) {
-            $value = maybe_unserialize( $wpum_field->data->value );
-        } else {
-            $value = false;
-        }
+		if ( ! empty( $wpum_field->value ) ) {
+			$value = maybe_unserialize( $wpum_field->value );
+		} else {
+			$value = false;
+		}
 
-        if ( ! empty( $value ) || ( '0' === $value ) ) {
-            $this->field_has_data = true;
-        } else {
-            $this->field_has_data = false;
+		if ( ! empty( $value ) || ( '0' === $value ) ) {
+			$this->field_has_data = true;
+		} else {
+			$this->field_has_data = false;
 		}
 
 	}

@@ -412,7 +412,7 @@ function wpum_the_profile_field_group() {
 function wpum_get_field_group_id() {
 
 	global $wpum_fields_group;
-	return apply_filters( 'wpum_get_field_group_id', $wpum_fields_group['id'] );
+	return apply_filters( 'wpum_get_field_group_id', $wpum_fields_group->id );
 
 }
 
@@ -436,7 +436,7 @@ function wpum_the_field_group_id() {
 function wpum_get_field_group_name() {
 
 	global $wpum_fields_group;
-	return apply_filters( 'wpum_get_field_group_name', $wpum_fields_group['name'] );
+	return apply_filters( 'wpum_get_field_group_name', $wpum_fields_group->name );
 
 }
 
@@ -460,7 +460,7 @@ function wpum_the_field_group_name() {
 function wpum_get_field_group_slug() {
 
 	global $wpum_fields_group;
-	return apply_filters( 'wpum_get_field_group_slug', sanitize_title( $wpum_fields_group['name'] ) );
+	return apply_filters( 'wpum_get_field_group_slug', sanitize_title( $wpum_fields_group->name ) );
 
 }
 
@@ -483,7 +483,7 @@ function wpum_the_field_group_slug() {
 function wpum_get_field_group_description() {
 
 	global $wpum_fields_group;
-	return apply_filters( 'wpum_get_field_group_description', $wpum_fields_group['description'] );
+	return apply_filters( 'wpum_get_field_group_description', $wpum_fields_group->description );
 
 }
 
@@ -509,4 +509,29 @@ function wpum_field_group_has_fields() {
 	global $wpum_profile_fields;
 	return $wpum_profile_fields->has_fields();
 
+}
+
+function wpum_profile_fields() {
+
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->profile_fields();
+
+}
+
+function wpum_the_profile_field() {
+
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->the_profile_field();
+
+}
+
+function wpum_get_the_field_id() {
+
+	global $wpum_field;
+	return apply_filters( 'wpum_get_the_field_id', $wpum_field->id );
+
+}
+
+function wpum_the_field_id() {
+	echo wpum_get_the_field_id();
 }

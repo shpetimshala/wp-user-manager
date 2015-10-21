@@ -42,14 +42,20 @@
 
 	<!-- test -->
 
-	<?php if ( wpum_has_profile_fields() ) : ?>
+	<?php if ( wpum_has_profile_fields( ) ) : ?>
 
 		<?php while ( wpum_profile_field_groups() ) : wpum_the_profile_field_group(); ?>
 
-			<?php wpum_the_field_group_name(); ?>
-
 			<?php if ( wpum_field_group_has_fields() ) : ?>
-				asdad
+
+				<p><?php wpum_the_field_group_name(); ?> has fields</p>
+
+				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
+
+					<?php wpum_the_field_id(); ?>
+
+				<?php endwhile; ?>
+
 			<?php endif; ?>
 
 		<?php endwhile; ?>
