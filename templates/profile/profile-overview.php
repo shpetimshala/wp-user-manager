@@ -52,7 +52,7 @@
 
 				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
 
-					<?php wpum_the_field_id(); ?>
+					<?php wpum_the_field_name(); ?>
 
 				<?php endwhile; ?>
 
