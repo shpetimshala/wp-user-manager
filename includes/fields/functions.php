@@ -628,3 +628,17 @@ function wpum_is_field_required() {
 	return apply_filters( 'wpum_is_field_required', $wpum_field->is_required, $wpum_field->id );
 
 }
+
+/**
+ * Verify whether the current field within the loop is a registration field.
+ *
+ * @since 1.2.0
+ * @global $wpum_field
+ * @return bool
+ */
+function wpum_is_registration_field() {
+
+	global $wpum_field;
+	return apply_filters( 'wpum_is_registration_field', $wpum_field->show_on_registration, $wpum_field->id );
+
+}
