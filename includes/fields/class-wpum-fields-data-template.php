@@ -213,7 +213,7 @@ class WPUM_Fields_Data_Template {
      * @global $wpum_fields_group
      * @since 1.2.0
      * @access public
-     * @return [type] [description]
+     * @return void
      */
     public function the_profile_group() {
 
@@ -228,25 +228,13 @@ class WPUM_Fields_Data_Template {
 
     }
 
-    public function next_field() {
-
-        $this->current_field++;
-
-        $this->field = $this->group->fields[ $this->current_field ];
-
-        return $this->field;
-
-    }
-
-    public function rewind_fields() {
-
-        $this->current_field = -1;
-        if( $this->field_count > 0 ) {
-            $this->field = $this->group->fields[0];
-        }
-
-    }
-
+    /**
+     * Verify whether the current group within the loop has fields.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return boolean
+     */
     public function has_fields() {
 
         $has_data = false;
@@ -263,19 +251,65 @@ class WPUM_Fields_Data_Template {
 
     }
 
+    /**
+     * Proceed to next field within the loop.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return object field details.
+     */
+    public function next_field() {
+
+        $this->current_field++;
+        $this->field = $this->group->fields[ $this->current_field ];
+
+        return $this->field;
+
+    }
+
+    /**
+     * Cleanup the fields loop once it ends.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return void
+     */
+    public function rewind_fields() {
+
+        $this->current_field = -1;
+        if( $this->field_count > 0 ) {
+            $this->field = $this->group->fields[0];
+        }
+
+    }
+
+    /**
+     * Start the fields loop.
+     *
+     * @since 1.2.0
+     * @access public
+     * @return mixed
+     */
     public function profile_fields() {
 
         if ( $this->current_field + 1 < $this->field_count ) {
-			return true;
-		} elseif ( $this->current_field + 1 == $this->field_count ) {
-			// Do some cleaning up after the loop
-			$this->rewind_fields();
-		}
+            return true;
+        } elseif ( $this->current_field + 1 == $this->field_count ) {
+	        $this->rewind_fields();
+        }
 
 		return false;
 
     }
 
+    /**
+     * Setup global variable for field within the loop.
+     *
+     * @since 1.2.0
+     * @access public
+     * @global $wpum_field
+     * @return void
+     */
     public function the_profile_field() {
 
         global $wpum_field;
