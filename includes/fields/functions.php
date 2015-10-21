@@ -614,3 +614,17 @@ function wpum_get_field_description() {
 function wpum_the_field_description() {
 	echo wpum_get_field_description();
 }
+
+/**
+ * Verify whether the current field within the loop is required.
+ *
+ * @since 1.2.0
+ * @global $wpum_field
+ * @return bool
+ */
+function wpum_is_field_required() {
+
+	global $wpum_field;
+	return apply_filters( 'wpum_is_field_required', $wpum_field->is_required, $wpum_field->id );
+
+}
