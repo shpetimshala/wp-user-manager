@@ -642,3 +642,17 @@ function wpum_is_registration_field() {
 	return apply_filters( 'wpum_is_registration_field', $wpum_field->show_on_registration, $wpum_field->id );
 
 }
+
+/**
+ * Retrieve the current field type within a loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_field
+ * @return string the type of the field.
+ */
+function wpum_get_field_type() {
+
+	global $wpum_field;
+	return $wpum_field->type;
+
+}
