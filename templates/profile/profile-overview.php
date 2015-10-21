@@ -50,7 +50,8 @@
 
 				<p><?php wpum_the_field_group_name(); ?> has fields</p>
 
-				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
+				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field();
+				?>
 
 					<?php wpum_the_field_name(); ?>
 

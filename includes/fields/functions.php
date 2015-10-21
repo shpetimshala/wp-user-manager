@@ -550,7 +550,7 @@ function wpum_the_profile_field() {
 function wpum_get_field_id() {
 
 	global $wpum_field;
-	return apply_filters( 'wpum_get_the_field_id', $wpum_field->id );
+	return apply_filters( 'wpum_get_field_id', $wpum_field->id );
 
 }
 
@@ -575,7 +575,7 @@ function wpum_the_field_id() {
 function wpum_get_field_name() {
 
 	global $wpum_field;
-	return apply_filters( 'wpum_get_the_field_name', $wpum_field->name, $wpum_field->id );
+	return apply_filters( 'wpum_get_field_name', $wpum_field->name, $wpum_field->id );
 
 }
 
@@ -583,9 +583,34 @@ function wpum_get_field_name() {
  * Echo the current field name within a loop.
  *
  * @since 1.2.0
- * @see wpum_get_the_field_name()
+ * @see wpum_get_field_name()
  * @return void
  */
 function wpum_the_field_name() {
 	echo wpum_get_field_name();
+}
+
+/**
+ * Retrieve the current field description within a loop.
+ *
+ * @since 1.2.0
+ * @global $wpum_field
+ * @return string description of the field.
+ */
+function wpum_get_field_description() {
+
+	global $wpum_field;
+	return apply_filters( 'wpum_get_field_description', $wpum_field->description, $wpum_field->id );
+
+}
+
+/**
+ * Echo the current field description within a loop.
+ *
+ * @since 1.2.0
+ * @see wpum_get_field_description()
+ * @return void
+ */
+function wpum_the_field_description() {
+	echo wpum_get_field_description();
 }
