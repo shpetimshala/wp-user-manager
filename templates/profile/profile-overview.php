@@ -41,25 +41,18 @@
 	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
 
 	<!-- test -->
-
 	<?php if ( wpum_has_profile_fields( ) ) : ?>
 
 		<?php while ( wpum_profile_field_groups() ) : wpum_the_profile_field_group(); ?>
 
 			<?php if ( wpum_field_group_has_fields() ) : ?>
 
-				<p><?php wpum_the_field_group_name(); ?> has fields</p>
-
-				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); global $wpum_field;
-
-				echo "<pre>";
-				print_r( $wpum_field );
-				echo "</pre>";
-				?>
-
-					<?php wpum_the_field_name(); ?>
-
+				<dl>
+				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
+					<dt><?php wpum_the_field_name(); ?>:</dt>
+			    <dd>test</dd>
 				<?php endwhile; ?>
+				</dl>
 
 			<?php endif; ?>
 
