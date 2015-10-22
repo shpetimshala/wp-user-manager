@@ -248,6 +248,7 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/text.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/textarea.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/number.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/url.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/functions.php';
 		// Forms
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
