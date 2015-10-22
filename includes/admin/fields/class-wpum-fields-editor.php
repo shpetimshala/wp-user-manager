@@ -681,7 +681,11 @@ class WPUM_Fields_Editor {
 			if( WPUM()->fields->update( $field_id, $args ) ) {
 
 				// Redirect now
-				$admin_url = add_query_arg( array( 'message' => 'field_saved' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+				$admin_url = add_query_arg( array(
+					'message' => 'field_saved',
+					'action'  => 'edit',
+					'group' => $group_id
+				), admin_url( 'users.php?page=wpum-profile-fields' ) );
 				wp_redirect( $admin_url );
 				exit();
 
