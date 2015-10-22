@@ -147,7 +147,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 	*/
 	public function can_delete( $field_id = '' ) {
 
-		return (bool) $this->get_column_by( 'id', 'can_delete', $field_id );
+		return (bool) $this->get_column_by( 'can_delete', 'id', $field_id );
 
 	}
 
