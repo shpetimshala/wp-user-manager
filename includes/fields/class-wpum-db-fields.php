@@ -126,7 +126,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 
 		if ( $id > 0 ) {
 
-			if( !$this->can_delete( $id ) ) {
+			if( ! $this->can_delete( $id ) ) {
 				wp_die( 'You cannot delete this field.' );
 			}
 

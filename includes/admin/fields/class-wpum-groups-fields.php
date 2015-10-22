@@ -226,7 +226,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
         // Display delete button if field can be deleted.
         if( $item['can_delete'] ) {
 
-            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => sanitize_key( $item['id'] ) ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}", 'nonce' );
+            $delete_url = wp_nonce_url( add_query_arg( array( 'action' => 'delete_field', 'field' => sanitize_key( $item['id'] ) ), admin_url( 'users.php?page=wpum-profile-fields' ) ), "delete_field_{$item['id']}" );
             echo '<a href="'.esc_url( $delete_url ).'" class="button wpum-confirm-dialog">'.__( 'Delete', 'wpum' ).'</a> ';
 
         }

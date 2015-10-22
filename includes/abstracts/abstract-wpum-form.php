@@ -78,9 +78,6 @@ abstract class WPUM_Form {
 	 */
 	public static function get_posted_fields() {
 
-		// Get fields
-		//self::get_registration_fields();
-
 		$values = array();
 
 		foreach ( self::$fields as $group_key => $group_fields ) {
