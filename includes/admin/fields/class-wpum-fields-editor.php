@@ -481,13 +481,16 @@ class WPUM_Fields_Editor {
 		if( !isset( $_GET['field'] ) || !is_numeric( $_GET['field'] ) )
 			wp_die( 'To edit a field please go to Users -> Profile fields' );
 
+			$current_group = ( isset( $_GET['from_group'] ) && is_numeric( $_GET['from_group'] ) ) ? $_GET['from_group'] : false;
+			$editor_url = add_query_arg( array( 'action' => 'edit', 'group' => $current_group ), admin_url( 'users.php?page=wpum-profile-fields' ) );
+
 		?>
 
 		<div class="wrap wpum-fields-editor-wrap">
 
 			<h2 class="wpum-page-title">
 				<?php echo __( 'Editing field', 'wpum' ); ?>
-				<a href="<?php echo esc_url( admin_url( 'users.php?page=wpum-profile-fields' ) ); ?>" class="add-new-h2"><?php _e('Back to editor', 'wpum'); ?></a>
+				<a href="<?php echo esc_url( $editor_url ); ?>" class="add-new-h2"><?php _e('Back to editor', 'wpum'); ?></a>
 			</h2>
 
 			<form name="wpum-edit-field-form" action="#" method="post" id="wpum-edit-field-form" autocomplete="off">
