@@ -22,15 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function wpum_get_field_types( $exclude_primary = true, $type = 'basic' ) {
 
 	$field_types = apply_filters( 'wpum/field/types', array() );
+	$field_types = $field_types[ $type ];
 
-	/*
 	if( $exclude_primary ) {
-		foreach ( $field_types as $category => $fields ) {
-
+		foreach ( $field_types as $type => $name ) {
+			if( $type == 'avatar' || $type == 'display_name' || $type == 'nickname' || $type == 'username' )
+				unset( $field_types[ $type ] );
 		}
-	}*/
-
-	//$field_types = $field_types[ $type ];
+	}
 
 	return $field_types;
 
