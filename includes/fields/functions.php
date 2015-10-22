@@ -15,10 +15,25 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Gets list of registered field types.
  *
  * @since 1.0.0
- * @return array $field_types - list of field types.
+ * @param  bool $exclude_primary whether or not to exclude fields that should not be modified.
+ * @param  string $type the category to retrieve
+ * @return array                  list of fields split by categories.
  */
-function wpum_get_field_types() {
-	return apply_filters( 'wpum/field/types', array() );
+function wpum_get_field_types( $exclude_primary = true, $type = 'basic' ) {
+
+	$field_types = apply_filters( 'wpum/field/types', array() );
+
+	/*
+	if( $exclude_primary ) {
+		foreach ( $field_types as $category => $fields ) {
+
+		}
+	}*/
+
+	//$field_types = $field_types[ $type ];
+
+	return $field_types;
+
 }
 
 /**

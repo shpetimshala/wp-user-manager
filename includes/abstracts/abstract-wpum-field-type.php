@@ -100,29 +100,17 @@ abstract class WPUM_Field_Type {
 	 *
 	 * @since 1.0.0
 	 * @param  array $fields field types
-	 * @return object        field types list split into categories.
+	 * @return array        field types list split into categories.
 	 */
 	public function get_field_types( $fields ) {
-
-		$l10n = array(
-			'basic'    => esc_html__( 'Basic', 'wpum' ),
-			'advanced' => esc_html__( 'Advanced', 'wpum' )
-		);
 
 		// If no category is selected - add it to the basic category.
 		if( ! $this->category ) {
 			$this->category = 'basic';
 		}
 
-		// Set the category.
-		if( isset( $l10n[ $this->category ] ) ) {
-			$cat = $l10n[ $this->category ];
-		} else {
-			$cat = $this->category;
-		}
-
 		// add to array.
-		$fields[ $cat ][ $this->type ] = $this->name;
+		$fields[ $this->category ][ $this->type ] = $this->name;
 
 		// return array.
 		return $fields;
