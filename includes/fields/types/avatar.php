@@ -29,15 +29,17 @@ class WPUM_Field_Type_Avatar extends WPUM_Field_Type {
 		parent::__construct();
 
 		// Label of this field type
-		$this->name             = _x( 'Avatar', 'field type name', 'wpum' );
+		$this->name              = _x( 'Avatar', 'field type name', 'wpum' );
 		// Field type name
-		$this->type             = 'avatar';
+		$this->type              = 'avatar';
 		// Class of this field
-		$this->class            = __CLASS__;
+		$this->class             = __CLASS__;
 		// Set registration
-		$this->set_registration = true;
+		$this->set_registration  = true;
 		// Set requirement
-		$this->set_requirement = true;
+		$this->set_requirement   = true;
+		// Cannot be used multiple times.
+		$this->supports_multiple = false;
 
 	}
 

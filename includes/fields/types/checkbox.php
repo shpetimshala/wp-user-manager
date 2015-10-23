@@ -37,7 +37,7 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 		// Set registration
 		$this->set_registration = true;
 		// Set requirement
-		$this->set_requirement = true;
+		$this->set_requirement  = true;
 
 	}
 
