@@ -146,9 +146,7 @@ class WPUM_DB_Fields extends WPUM_DB {
 	 * @since   1.0.0
 	*/
 	public function can_delete( $field_id = '' ) {
-
 		return (bool) $this->get_column_by( 'can_delete', 'id', $field_id );
-
 	}
 
 	/**
@@ -158,9 +156,18 @@ class WPUM_DB_Fields extends WPUM_DB {
 	 * @since   1.0.0
 	*/
 	public function show_on_registration( $field_meta = '' ) {
-
 		return (bool) $this->get_column_by( 'show_on_registration', 'meta', $field_meta );
+	}
 
+	/**
+	 * Retrieve the type of a field.
+	 *
+	 * @param  string $field_id the id number of the field.
+	 * @return string           the field type.
+	 * @since 1.2.0
+	 */
+	public function get_type( $field_id = '' ) {
+		return $this->get_column_by( 'type', 'id', $field_id );
 	}
 
 	/**

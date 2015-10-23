@@ -86,18 +86,18 @@ function wpum_get_field_type_object( $type = '' ) {
 }
 
 /**
- * Get the options of a field type
+ * Get the options of a field type.
  *
  * @since 1.0.0
  * @param  $type type of field
  * @return array - list of options.
  */
-function wpum_get_field_options( $type = '' ) {
+function wpum_get_field_type_options( $type = '' ) {
 
 	$options = array();
 	$field_types = wpum_get_field_classes();
 
-	if( !empty( $type ) && wpum_field_type_exists( $type ) ) {
+	if( ! empty( $type ) && wpum_field_type_exists( $type ) ) {
 		$class = $field_types[ $type ];
 		$options = call_user_func( "$class::options" );
 	}
