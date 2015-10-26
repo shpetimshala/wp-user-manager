@@ -416,22 +416,22 @@ class WPUM_Fields_Editor {
 	}
 
 	/**
-	 * Process the update of the group settings
+	 * Process the update of the group settings.
 	 *
 	 * @access private
 	 */
 	public function process_group() {
 
-		// Process the group delete action
+		// Process the group delete action.
 		if( isset( $_GET['action'] ) && $_GET['action'] == 'delete' && isset( $_GET['group'] ) && is_numeric( $_GET['group'] ) ) {
 
-			// nonce verification
+			// nonce verification.
 			if ( ! wp_verify_nonce( $_GET['nonce'], 'delete' ) ) {
 				return;
 			}
 
 			if( WPUM()->field_groups->delete( (int) $_GET['group'] ) ) {
-				// Redirect now
+				// Redirect now.
 				$admin_url = add_query_arg( array( 'message' => 'group_delete_success' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
 				wp_redirect( $admin_url );
 				exit();
@@ -439,7 +439,7 @@ class WPUM_Fields_Editor {
 
 		}
 
-		// Check whether the group settings form has been submitted
+		// Check whether the group settings form has been submitted.
 		if( isset( $_POST['wpum-action'] ) && $_POST['wpum-action'] == 'edit_group' ) {
 
 			// nonce verification
@@ -447,8 +447,8 @@ class WPUM_Fields_Editor {
 				return;
 			}
 
-			// bail if something is wrong
-			if( !is_numeric( $_POST['group'] ) && !current_user_can( 'manage_options' ) )
+			// bail if something is wrong.
+			if( ! is_numeric( $_POST['group'] ) && ! current_user_can( 'manage_options' ) )
 				return;
 
 			$args = array(
@@ -677,11 +677,11 @@ class WPUM_Fields_Editor {
 			if( ! $this->field_object->set_requirement )
 				unset( $args['is_required'] );
 
-			// Allow plugins to extend the save process
-			do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id, $this->field, $this->field_object );
-
 			// Save the field
 			if( WPUM()->fields->update( $field_id, $args ) ) {
+
+				// Allow plugins to extend the save process
+				do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id, $this->field, $this->field_object );
 
 				// Redirect now
 				$admin_url = add_query_arg( array(
