@@ -22,7 +22,7 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 	 * Constructor for the field type
 	 *
 	 * @since 1.0.0
- 	 */
+	*/
 	public function __construct() {
 
 		// DO NOT DELETE.
@@ -38,6 +38,28 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 		$this->set_registration = true;
 		// Set requirement
 		$this->set_requirement  = true;
+
+	}
+
+	/**
+	 * Method to register options for fields.
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 * @return array list of options.
+	 */
+	public static function options() {
+
+		$options = array();
+
+		$options[] = array(
+			'name'     => 'rel',
+			'label'    => esc_html__( 'Nofollow' ),
+			'desc'     => esc_html__( 'Enable this option to specify that the search spiders should not follow this link' ),
+			'type'     => 'checkbox',
+		);
+
+		return $options;
 
 	}
 
