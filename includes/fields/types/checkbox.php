@@ -22,7 +22,7 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 	 * Constructor for the field type
 	 *
 	 * @since 1.0.0
- 	 */
+	*/
 	public function __construct() {
 
 		// DO NOT DELETE
@@ -38,6 +38,28 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 		$this->set_registration = true;
 		// Set requirement
 		$this->set_requirement  = true;
+
+	}
+
+	/**
+	 * Method to register options for fields.
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 * @return array list of options.
+	 */
+	public static function options() {
+
+		$options = array();
+
+		$options[] = array(
+			'name'     => 'checked',
+			'label'    => esc_html__( 'Enabled by default' ),
+			'desc'     => esc_html__( 'Enable this option to set this checkbox as enabeld by default.' ),
+			'type'     => 'checkbox',
+		);
+
+		return $options;
 
 	}
 
