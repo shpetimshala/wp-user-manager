@@ -55,7 +55,7 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 		$options[] = array(
 			'name'     => 'rel',
 			'label'    => esc_html__( 'Nofollow' ),
-			'desc'     => esc_html__( 'Enable this option to specify that the search spiders should not follow this link' ),
+			'desc'     => esc_html__( 'Enable this option to specify that the search spiders should not follow this link.' ),
 			'type'     => 'checkbox',
 		);
 

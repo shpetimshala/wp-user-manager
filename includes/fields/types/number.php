@@ -22,7 +22,7 @@ class WPUM_Field_Type_Number extends WPUM_Field_Type {
 	 * Constructor for the field type
 	 *
 	 * @since 1.0.0
- 	 */
+	*/
 	public function __construct() {
 
 		// DO NOT DELETE.
@@ -38,6 +38,34 @@ class WPUM_Field_Type_Number extends WPUM_Field_Type {
 		$this->set_registration = true;
 		// Set requirement
 		$this->set_requirement  = true;
+
+	}
+
+	/**
+	 * Method to register options for fields.
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 * @return array list of options.
+	 */
+	public static function options() {
+
+		$options = array();
+
+		$options[] = array(
+			'name'     => 'min',
+			'label'    => esc_html__( 'Minimum value' ),
+			'desc'     => esc_html__( 'Specifies the minimum value allowed, leave blank if not needed.' ),
+			'type'     => 'text',
+		);
+		$options[] = array(
+			'name'     => 'max',
+			'label'    => esc_html__( 'Maximum value' ),
+			'desc'     => esc_html__( 'Specifies the maximum value allowed, leave blank if not needed.' ),
+			'type'     => 'text',
+		);
+
+		return $options;
 
 	}
 
