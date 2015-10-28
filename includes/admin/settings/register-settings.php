@@ -252,18 +252,6 @@ function wpum_get_registered_settings() {
 					'type'    => 'select',
 					'options' => wpum_get_login_methods()
 				),
-				'display_registration_link' => array(
-					'id'   => 'display_registration_link',
-					'name' => __( 'Display registration link:', 'wpum' ),
-					'desc' => __('Enable to display a registration link into the login form.', 'wpum'),
-					'type' => 'checkbox'
-				),
-				'display_password_link' => array(
-					'id'   => 'display_password_link',
-					'name' => __( 'Display password recovery link:', 'wpum' ),
-					'desc' => __('Enable to display a password recovery link into the login form.', 'wpum'),
-					'type' => 'checkbox'
-				),
 				'adminbar_roles' => array(
 					'id'          => 'adminbar_roles',
 					'name'        => __( 'Admin Bar:', 'wpum' ),
