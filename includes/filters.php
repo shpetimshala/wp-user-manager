@@ -435,6 +435,13 @@ function wpum_setup_nav_menu_item( $menu_item ) {
 					$menu_item->url = wpum_logout_url();
 				}
 			break;
+		case 'wpum-psw-recovery-nav':
+				if ( is_user_logged_in() ) {
+					$menu_item->_invalid = true;
+				} else {
+					$menu_item->url = wpum_get_core_page_url( 'password' );
+				}
+			break;
 	}
 
 	return $menu_item;
