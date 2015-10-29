@@ -431,6 +431,18 @@ class WPUM_Fields_Editor {
 			}
 
 			if( WPUM()->field_groups->delete( (int) $_GET['group'] ) ) {
+
+				// Get all fields of the group and delete them too.
+				$args = array(
+					'id'           => (int) $_GET['group'],
+					'number'       => -1,
+				);
+				$fields = WPUM()->fields->get_by_group( $args );
+
+				foreach ( $fields as $field_to_delete ) {
+					WPUM()->fields->delete( $field_to_delete->id );
+				}
+
 				// Redirect now.
 				$admin_url = add_query_arg( array( 'message' => 'group_delete_success' ), admin_url( 'users.php?page=wpum-profile-fields' ) );
 				wp_redirect( $admin_url );
