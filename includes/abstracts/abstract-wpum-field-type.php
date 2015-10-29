@@ -76,6 +76,14 @@ abstract class WPUM_Field_Type {
 	public $set_requirement = true;
 
 	/**
+	 * If this is set, the editor will allow to create selectable options for this field.
+	 *
+	 * @since 1.2.0
+	 * @var bool.
+	 */
+	public $has_repeater = false;
+
+	/**
 	 * Class name.
 	 *
 	 * @since 1.0.0
