@@ -209,9 +209,6 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$mail = $values['register'][ 'user_email' ];
 
-		if( ! is_email( $mail ) )
-			return new WP_Error( 'email-validation-error', __( 'Please enter a valid email address.', 'wpum' ) );
-
 		if( email_exists( $mail ) )
 			return new WP_Error( 'email-validation-error', __( 'Email address already exists.', 'wpum' ) );
 

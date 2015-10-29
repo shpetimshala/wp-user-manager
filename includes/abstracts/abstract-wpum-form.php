@@ -195,8 +195,15 @@ abstract class WPUM_Form {
 
 		foreach ( self::$fields as $group_key => $group_fields ) {
 			foreach ( $group_fields as $key => $field ) {
+
+				// Validate required fields.
 				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
 					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field', 'wpum' ), $field['label'] ) );
+				}
+
+				// Validate email fields.
+				if ( 'email' === $field['type'] && ! is_email( $values[ $group_key ][ $key ] ) ) {
+					return new WP_Error( 'email-validation-error', sprintf( __( 'Please enter a valid email address for the "%s" field.', 'wpum' ), $field['label'] ) );
 				}
 
 				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
