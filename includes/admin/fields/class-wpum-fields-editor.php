@@ -434,8 +434,8 @@ class WPUM_Fields_Editor {
 
 				// Get all fields of the group and delete them too.
 				$args = array(
-					'id'           => (int) $_GET['group'],
-					'number'       => -1,
+					'id'     => (int) $_GET['group'],
+					'number' => -1,
 				);
 				$fields = WPUM()->fields->get_by_group( $args );
 
