@@ -40,24 +40,41 @@
 
 	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
 
-	<!-- test -->
+	<!-- Start fields loop -->
 	<?php if ( wpum_has_profile_fields() ) : ?>
 
 		<?php while ( wpum_profile_field_groups() ) : wpum_the_profile_field_group(); ?>
 
+			<!-- do we have fields ? -->
 			<?php if ( wpum_field_group_has_fields() ) : ?>
 
+				<!-- group name -->
+				<?php if( wpum_get_field_group_name() ) : ?>
+					<h3 class="group-title"><?php echo esc_html( wpum_get_field_group_name() ); ?></h3>
+				<?php endif; ?>
+				<!-- end group name -->
+
+				<!-- group description -->
+				<?php if( wpum_get_field_group_description() ) : ?>
+					<p class="group-description"><?php echo esc_html( wpum_get_field_group_description() ); ?><p>
+				<?php endif; ?>
+				<!-- end group description -->
+
+				<!-- loop through each field -->
 				<dl>
 				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
 					<dt><?php wpum_the_field_name(); ?>:</dt>
 			    <dd>test</dd>
 				<?php endwhile; ?>
 				</dl>
+				<!-- end loop through each field -->
 
 			<?php endif; ?>
+			<!-- end fields check -->
 
 		<?php endwhile; ?>
 
 	<?php endif; ?>
+	<!-- end fields loop -->
 
 </div>
