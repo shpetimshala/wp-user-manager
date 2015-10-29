@@ -59,9 +59,6 @@ function wpum_get_roles( $force = false ) {
 
 	$roles = $wp_roles->get_names();
 
-	// Remove administrator role for safety
-	unset( $roles['administrator'] );
-
 	return apply_filters( 'wpum_get_roles', $roles );
 }
 
