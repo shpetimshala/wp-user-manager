@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * WPUM_Groups_Fields
- * Create a table with the list of default fields.
+ * Create a table with the list of fields.
  *
  * @since 1.0.0
  */
@@ -45,7 +45,7 @@ class WPUM_Groups_Fields extends WP_List_Table {
      * @access public
      */
     public function no_items() {
-        _e( 'No fields have been found.', 'wpum' );
+        esc_html_e( 'No fields have been found.', 'wpum' );
     }
 
     /**
@@ -57,11 +57,11 @@ class WPUM_Groups_Fields extends WP_List_Table {
     public function get_columns() {
 
         $columns = array(
-            'order'    => __('Order', 'wpum'),
-            'title'    => __('Field Title', 'wpum'),
-            'type'     => __('Field Type', 'wpum'),
-            'required' => __('Required', 'wpum'),
-            'actions'  => __('Actions', 'wpum'),
+            'order'    => esc_html__('Order', 'wpum'),
+            'title'    => esc_html__('Field Title', 'wpum'),
+            'type'     => esc_html__('Field Type', 'wpum'),
+            'required' => esc_html__('Required', 'wpum'),
+            'actions'  => esc_html__('Actions', 'wpum'),
         );
 
         return $columns;
@@ -176,21 +176,33 @@ class WPUM_Groups_Fields extends WP_List_Table {
      */
     public function parse_type( $type ) {
 
-        $text = __('Text', 'wpum');
+        $text = esc_html__( 'Text', 'wpum' );
 
-        if( $type == 'email' ) {
-            $text = __('Email', 'wpum');
-        } elseif ( $type == 'select' || $type == 'display_name' ) {
-            $text = __('Dropdown', 'wpum');
-        } elseif ( $type == 'textarea' ) {
-            $text = __('Textarea', 'wpum');
-        } elseif ( $type == 'password' ) {
-            $text = __('Password', 'wpum');
-        } elseif ( $type == 'file' || $type == 'avatar' ) {
-            $text = __('Upload', 'wpum');
+        switch ( $type ) {
+            case 'select':
+                $text = esc_html__( 'Dropdown' );
+                break;
+            case 'display_name':
+                $text = esc_html__( 'Dropdown' );
+                break;
+            case 'file':
+                $text = esc_html__( 'Upload' );
+                break;
+            case 'avatar':
+                $text = esc_html__( 'Upload' );
+                break;
+            case 'username':
+                $text = esc_html__( 'Text' );
+                break;
+            case 'nickname':
+                $text = esc_html__( 'Text' );
+                break;
+            default:
+                $text = esc_html( $type );
+                break;
         }
 
-        return apply_filters( 'wpum_fields_editor_types', $text );
+        return ucfirst( apply_filters( 'wpum_fields_editor_types', $text ) );
 
     }
 
