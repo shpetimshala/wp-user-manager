@@ -198,7 +198,8 @@ class WPUM_Groups_Fields extends WP_List_Table {
                 $text = esc_html__( 'Text' );
                 break;
             default:
-                $text = esc_html( $type );
+                $object = wpum_get_field_type_object( $type );
+                $text   = $object->name;
                 break;
         }
 
