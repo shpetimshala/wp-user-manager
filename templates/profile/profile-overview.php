@@ -41,7 +41,7 @@
 	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
 
 	<!-- test -->
-	<?php if ( wpum_has_profile_fields( ) ) : ?>
+	<?php if ( wpum_has_profile_fields() ) : ?>
 
 		<?php while ( wpum_profile_field_groups() ) : wpum_the_profile_field_group(); ?>
 

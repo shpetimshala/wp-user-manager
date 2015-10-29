@@ -339,7 +339,7 @@ function wpum_get_field_groups( $args = array() ) {
 						unset( $fields[ $field_key ] );
 					} else {
 						$fields[ $field_key ]['value'] = wpum_get_field_value( $args['user_id'], $field['meta'] );
-						$fields[ $field_key ] = wpum_array_to_object( $fields[ $field_key ] );
+						$fields[ $field_key ]          = wpum_array_to_object( $fields[ $field_key ] );
 					}
 
 				}
