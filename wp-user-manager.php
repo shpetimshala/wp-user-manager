@@ -246,6 +246,7 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/nickname.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/number.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/password.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/radio.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/select.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/text.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/textarea.php';
