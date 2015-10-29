@@ -75,9 +75,9 @@ function wpum_get_allowed_user_roles() {
 	if ( ! isset( $wp_roles ) )
 		$wp_roles = new WP_Roles();
 
-	$user_roles = array();
-	$selected_roles = wpum_get_option( 'register_roles' );
-	$allowed_user_roles = is_array( $selected_roles ) ? $selected_roles : array( $selected_roles );
+	$user_roles         = array();
+	$selected_roles     = wpum_get_option( 'register_roles' );
+	$allowed_user_roles = is_array( $selected_roles ) ? $selected_roles: array( $selected_roles );
 
 	foreach ( $allowed_user_roles as $role ) {
 		$user_roles[ $role ] = $wp_roles->roles[ $role ]['name'];
