@@ -38,10 +38,10 @@ class WPUM_Field_Type_Dropdown extends WPUM_Field_Type {
 		$this->class            = __CLASS__;
 
 		// Set registration
-		$this->set_registration = false;
+		$this->set_registration = true;
 
 		// Set requirement
-		$this->set_requirement  = false;
+		$this->set_requirement  = true;
 
 		// Add repeater to this field type.
 		$this->has_repeater     = true;
