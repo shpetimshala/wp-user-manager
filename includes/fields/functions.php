@@ -762,10 +762,20 @@ function wpum_get_the_field_value() {
  */
 function wpum_unserialize_profile_field( $value, $type ) {
 
-	if ( is_serialized( $value ) ) {
-		$field_value = maybe_unserialize( $value );
-		$field_value = implode( ', ', $field_value );
-		return $field_value;
+	$type_object = wpum_get_field_type_object( $type );
+
+	if ( method_exists( $type_object->class, "output_html" ) ) {
+
+		return call_user_func( $type_object->class . "::output_html", $value );
+
+	} else {
+
+		if ( is_serialized( $value ) ) {
+			$field_value = maybe_unserialize( $value );
+			$field_value = implode( ', ', $field_value );
+			return $field_value;
+		}
+
 	}
 
 	return $value;

@@ -41,6 +41,21 @@ class WPUM_Field_Type_Email extends WPUM_Field_Type {
 
 	}
 
+	/**
+	 * Method that decides how the field should displayed into user profiles.
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 * @return mixed
+	 */
+	public static function output_html( $value ) {
+
+		$mail_output = '<a href="mailto:' . antispambot( $value ) .'">' . antispambot( $value ) . '</a>';
+
+		return $mail_output;
+
+	}
+
 }
 
 new WPUM_Field_Type_Email;
