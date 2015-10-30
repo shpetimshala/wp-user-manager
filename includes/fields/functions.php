@@ -564,7 +564,7 @@ function wpum_the_profile_field() {
 function wpum_get_field_id() {
 
 	global $wpum_field;
-	return apply_filters( 'wpum_get_field_id', $wpum_field->id );
+	return $wpum_field->id;
 
 }
 
@@ -576,7 +576,7 @@ function wpum_get_field_id() {
  * @return void
  */
 function wpum_the_field_id() {
-	echo wpum_get_field_id();
+	echo (int) wpum_get_field_id();
 }
 
 /**
@@ -669,4 +669,48 @@ function wpum_get_field_type() {
 	global $wpum_field;
 	return $wpum_field->type;
 
+}
+
+/**
+ * Retrieve the classes for the field element as an array.
+ *
+ * @param  string $class custom class to add to the field.
+ * @return array        list of all classes.
+ * @since 1.2.0
+ */
+function wpum_get_field_css_class( $class = false ) {
+
+	global $wpum_profile_fields;
+
+	$classes = array();
+
+	if ( ! empty( $class ) ) {
+		$classes[] = sanitize_title( esc_attr( $class ) );
+	}
+
+	// Add a class with the field id.
+	$classes[] = 'field_' . $wpum_profile_fields->field->id;
+
+	// Add a class with the field name.
+	$classes[] = 'field_' . sanitize_title( $wpum_profile_fields->field->name );
+
+	// Add a class with the field type.
+	$classes[] = 'field_type_' . sanitize_title( $wpum_profile_fields->field->type );
+
+	// Sanitize all classes.
+	$classes = array_map( 'esc_attr', $classes );
+
+	return apply_filters( 'wpum_field_css_class', $classes, $class );
+
+}
+
+/**
+ * Display the css classes applied to a field.
+ *
+ * @param  string $class custom class to add to the fields.
+ * @return void
+ * @since 1.2.0
+ */
+function wpum_the_field_css_class( $class = false ) {
+	echo join( ' ', wpum_get_field_css_class( $class ) );
 }

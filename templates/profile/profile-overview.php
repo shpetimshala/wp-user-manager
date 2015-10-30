@@ -58,7 +58,7 @@
 				<!-- loop through each field -->
 				<dl>
 				<?php while ( wpum_profile_fields() ) : wpum_the_profile_field(); ?>
-					<dt><?php wpum_the_field_name(); ?>:</dt>
+					<dt class="<?php wpum_the_field_css_class(); ?>"><?php wpum_the_field_name(); ?>:</dt>
 			    <dd>test</dd>
 				<?php endwhile; ?>
 				</dl>
