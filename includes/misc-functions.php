@@ -113,49 +113,6 @@ function wpum_get_disabled_usernames() {
 }
 
 /**
- * Gets all the email templates that have been registerd. The list is extendable
- * and more templates can be added.
- *
- * @since 1.0.0
- * @return array $templates All the registered email templates
- */
-function wpum_get_email_templates() {
-	$templates = new WPUM_Emails;
-	return $templates->get_templates();
-}
-
-/**
- * Checks whether a given email id exists into the database.
- *
- * @since 1.0.0
- * @return bool
- */
-function wpum_email_exists( $email_id ) {
-
-	$exists = false;
-	$emails = get_option( 'wpum_emails', array() );
-
-	if ( array_key_exists( $email_id, $emails ) )
-		$exists = true;
-
-	return $exists;
-}
-
-/**
- * Get an email from the database.
- *
- * @since 1.0.0
- * @return array email details containing subject and message
- */
-function wpum_get_email( $email_id ) {
-
-	$emails = get_option( 'wpum_emails', array() );
-
-	return $emails[ $email_id ];
-
-}
-
-/**
  * Get a list of available permalink structures.
  *
  * @since 1.0.0
@@ -548,22 +505,6 @@ function wpum_check_permissions_button() {
 	$output .= '<p class="description">'.__( 'Press the button above if avatar uploads does not work.', 'wpum' ).'</p>';
 
 	return $output;
-
-}
-
-/**
- * List of fields to retrieve during the WP_User_Query for user directories.
- * Limiting the query to certain fields, speeds it up.
- *
- * @since 1.0.0
- * @see https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
- * @return array $fields - https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
- */
-function wpum_get_user_query_fields() {
-
-	$fields = array( 'ID', 'display_name', 'user_login', 'user_nicename', 'user_email', 'user_url', 'user_registered' );
-
-	return apply_filters( 'wpum_get_user_query_fields', $fields );
 
 }
 
