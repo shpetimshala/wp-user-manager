@@ -157,10 +157,10 @@ function wpum_get_registration_fields() {
 	}
 
 	// Remove password field if not enabled
-    if( ! wpum_get_option('custom_passwords') )
-    	unset( $fields['password'] );
+	if( ! wpum_get_option('custom_passwords') )
+		unset( $fields['password'] );
 
-    // Remove the user avatar field if not enabled
+	// Remove the user avatar field if not enabled
 	if( ! wpum_get_option('custom_avatars') )
 		unset( $fields['user_avatar'] );
 
