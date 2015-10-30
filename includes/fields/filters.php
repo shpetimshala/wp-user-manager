@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Adjust the output of the user website field to display an html anchor tag.
  * Because this field is stored into the database as a text field,
  * the default output would be just text, we use the filter within the loop,
- * to change it's output.
+ * to change it's output to a link.
  *
  * @param  string $value the value of field.
  * @param  string $type  field type.

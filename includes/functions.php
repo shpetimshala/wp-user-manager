@@ -231,3 +231,26 @@ function wpum_get_user_description( $user_id ) {
 	return $description;
 
 }
+
+/**
+ * Get a formatted registration date of a user.
+ * The date is formatted based on the admin settings.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the formatted registration date.
+ */
+function wpum_get_user_registration_date( $user_id ) {
+
+	$date = '';
+
+	$user = new WP_User( $user_id );
+	$date = ( isset( $user->data->user_registered ) ) ? $user->data->user_registered : '';
+
+	if( ! empty( $date ) ) {
+		$date = date_i18n( get_option('date_format'), strtotime( $date ) );
+	}
+
+	return $date;
+
+}

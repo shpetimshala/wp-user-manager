@@ -35,7 +35,7 @@
 		<?php endif; ?>
 
 	    <dt><?php _e( 'Registered', 'wpum' );?>:</dt>
-	    <dd><?php echo date( get_option( 'date_format' ), strtotime( $user_data->user_registered ) ); ?></dd>
+	    <dd><?php echo wpum_get_user_registration_date( 1 ); ?></dd>
 	</dl>
 
 	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
