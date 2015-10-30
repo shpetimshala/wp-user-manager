@@ -61,9 +61,9 @@
 
 					<?php if ( wpum_field_has_data() ) : ?>
 					<dt class="<?php wpum_the_field_css_class(); ?>"><?php wpum_the_field_name(); ?>:</dt>
-			    <dd>test</dd>
+			    <dd><?php wpum_the_field_value(); ?></dd>
 					<?php endif; ?>
-					
+
 				<?php endwhile; ?>
 				</dl>
 				<!-- end loop through each field -->

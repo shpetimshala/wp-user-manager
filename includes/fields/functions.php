@@ -718,12 +718,66 @@ function wpum_the_field_css_class( $class = false ) {
 /**
  * Verify if a field has user data.
  *
- * @since 1.2.0
  * @return boolean
+ * @since 1.2.0
  */
 function wpum_field_has_data() {
 
 	global $wpum_profile_fields;
 	return $wpum_profile_fields->field_has_data;
 
+}
+
+/**
+ * Retrieve the value of a field within the loop.
+ *
+ * @return mixed
+ * @since 1.2.0
+ */
+function wpum_get_the_field_value() {
+
+	global $wpum_field;
+
+	$wpum_field->value = wpum_unserialize_profile_field( $wpum_field->value, $wpum_field->type );
+
+	/**
+	 * Filters the profile field value.
+	 *
+	 * @param string $value Value for the profile field.
+	 * @param string $type  Type for the profile field.
+	 * @param int    $id    ID for the profile field.
+	 * @since 1.2.0
+	 */
+	return apply_filters( 'wpum_get_the_field_value', $wpum_field->value, $wpum_field->type, $wpum_field->id );
+
+}
+
+/**
+ * Unserialize the value of a field.
+ *
+ * @param  mixed $value the value of a field.
+ * @param string $type the field type string.
+ * @return string        the value of a field.
+ * @since 1.2.0
+ */
+function wpum_unserialize_profile_field( $value, $type ) {
+
+	if ( is_serialized( $value ) ) {
+		$field_value = maybe_unserialize( $value );
+		$field_value = implode( ', ', $field_value );
+		return $field_value;
+	}
+
+	return $value;
+
+}
+
+/**
+ * Output the value of a field within the loop.
+ *
+ * @return void
+ * @since 1.2.0
+ */
+function wpum_the_field_value() {
+	echo wpum_get_the_field_value();
 }
