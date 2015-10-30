@@ -45,20 +45,15 @@
 
 		<?php while ( wpum_profile_field_groups() ) : wpum_the_profile_field_group(); ?>
 
-			<!-- do we have fields ? -->
 			<?php if ( wpum_field_group_has_fields() ) : ?>
 
-				<!-- group name -->
 				<?php if( wpum_get_field_group_name() ) : ?>
 					<h3 class="group-title"><?php echo esc_html( wpum_get_field_group_name() ); ?></h3>
 				<?php endif; ?>
-				<!-- end group name -->
 
-				<!-- group description -->
 				<?php if( wpum_get_field_group_description() ) : ?>
 					<p class="group-description"><?php echo esc_html( wpum_get_field_group_description() ); ?><p>
 				<?php endif; ?>
-				<!-- end group description -->
 
 				<!-- loop through each field -->
 				<dl>
@@ -70,7 +65,6 @@
 				<!-- end loop through each field -->
 
 			<?php endif; ?>
-			<!-- end fields check -->
 
 		<?php endwhile; ?>
 
