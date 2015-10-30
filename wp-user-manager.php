@@ -253,22 +253,20 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/url.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/username.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/functions.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/filters.php';
 		// Forms
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
 
 		// Files loaded only on the admin side
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
-			// Load Welcome Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/welcome.php';
-			// Load Settings Pages
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-pages.php';
-			// Load Admin Notices
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-notices.php';
-			// Load Admin Actions
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-actions.php';
-			// Display Settings Page
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-functions.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
+
 			// Load Emails
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/emails/class-wpum-emails-editor.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/emails/class-wpum-emails-list.php';
@@ -289,7 +287,6 @@ class WP_User_Manager {
 
 			// Load Tools Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/tools.php';
-
 			// Load Addons Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/addons.php';
 
