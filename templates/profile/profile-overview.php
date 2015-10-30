@@ -13,33 +13,6 @@
 
 	<?php do_action( 'wpum_before_user_details_list', $user_data, $tabs, $slug ); ?>
 
-	<dl>
-		<?php if ( $user_data->first_name || $user_data->last_name ) : ?>
-	    <dt><?php _e( 'Name', 'wpum' );?>:</dt>
-	    <dd><?php echo $user_data->first_name; ?> <?php echo $user_data->last_name; ?></dd>
-		<?php endif; ?>
-
-	    <?php if ( $user_data->user_nicename ) : ?>
-	    <dt><?php _e( 'Nickname', 'wpum' );?>:</dt>
-	    <dd><?php echo $user_data->user_nicename; ?></dd>
-		<?php endif; ?>
-
-		<?php if ( $user_data->user_email ) : ?>
-	    <dt><?php _e( 'Email', 'wpum' );?>:</dt>
-	    <dd><a href="mailto:<?php echo antispambot( $user_data->user_email );?>"><?php echo antispambot( $user_data->user_email ); ?></a></dd>
-		<?php endif; ?>
-
-		<?php if ( $user_data->user_url ) : ?>
-	    <dt><?php _e( 'Website', 'wpum' );?>:</dt>
-	    <dd><a href="<?php echo esc_url( $user_data->user_url ); ?>" rel="nofollow" target="_blank"><?php echo esc_url( $user_data->user_url ); ?></a></dd>
-		<?php endif; ?>
-
-	    <dt><?php _e( 'Registered', 'wpum' );?>:</dt>
-	    <dd><?php echo wpum_get_user_registration_date( 1 ); ?></dd>
-	</dl>
-
-	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
-
 	<!-- Start fields loop -->
 	<?php if ( wpum_has_profile_fields() ) : ?>
 
@@ -74,5 +47,7 @@
 
 	<?php endif; ?>
 	<!-- end fields loop -->
+
+	<?php do_action( 'wpum_after_user_details_list', $user_data, $tabs, $slug ); ?>
 
 </div>
