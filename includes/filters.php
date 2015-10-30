@@ -470,3 +470,27 @@ function wpum_login_redirect_detection( $url ) {
 
 }
 add_filter( 'wpum_login_redirect_url', 'wpum_login_redirect_detection', 99, 1 );
+
+/**
+ * Adjust the output of the user website field to display an html anchor tag.
+ * Because this field is stored into the database as a text field,
+ * the default output would be just text, we use the filter within the loop,
+ * to change it's output.
+ *
+ * @param  string $value the value of field.
+ * @param  string $type  field type.
+ * @param  string $meta  field meta key.
+ * @param  int $id    the field id number.
+ * @return mixed        html output of this field.
+ * @since 1.2.0
+ */
+function wpum_adjust_website_meta_output( $value, $type, $meta, $id ) {
+
+	if( $meta == 'user_url' ) {
+		$value = '<a href="'.esc_url( $value ).'" rel="nofollow">'. esc_url( $value ) .'</a>';
+	}
+
+	return $value;
+
+}
+add_filter( 'wpum_get_the_field_value', 'wpum_adjust_website_meta_output', 10, 4 );

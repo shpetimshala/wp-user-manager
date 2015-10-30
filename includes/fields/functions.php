@@ -745,10 +745,11 @@ function wpum_get_the_field_value() {
 	 *
 	 * @param string $value Value for the profile field.
 	 * @param string $type  Type for the profile field.
+	 * @param string $meta  the meta of the profile field.
 	 * @param int    $id    ID for the profile field.
 	 * @since 1.2.0
 	 */
-	return apply_filters( 'wpum_get_the_field_value', $wpum_field->value, $wpum_field->type, $wpum_field->id );
+	return apply_filters( 'wpum_get_the_field_value', $wpum_field->value, $wpum_field->type, $wpum_field->meta, $wpum_field->id );
 
 }
 
