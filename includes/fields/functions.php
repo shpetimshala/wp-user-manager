@@ -714,3 +714,16 @@ function wpum_get_field_css_class( $class = false ) {
 function wpum_the_field_css_class( $class = false ) {
 	echo join( ' ', wpum_get_field_css_class( $class ) );
 }
+
+/**
+ * Verify if a field has user data.
+ *
+ * @since 1.2.0
+ * @return boolean
+ */
+function wpum_field_has_data() {
+
+	global $wpum_profile_fields;
+	return $wpum_profile_fields->field_has_data;
+
+}
