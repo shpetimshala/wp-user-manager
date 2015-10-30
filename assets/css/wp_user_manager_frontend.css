@@ -191,7 +191,7 @@
   float: left;
   font-weight: bold;
   margin-right: 10px;
-  padding: 5px;
+  padding: 5px 5px 5px 0px;
   width: 110px;
   border-right: 2px solid #f6f6f6;
   overflow: hidden;
@@ -201,6 +201,9 @@
 .wpum-single-profile .wpum-user-details-list dl dd {
   margin: 2px 0;
   padding: 5px 0; }
+.wpum-single-profile .wpum-user-details-list .group-title {
+  margin-top: 0;
+  margin-bottom: 1rem; }
 
 /* profile posts */
 .wpum-single-profile .wpum-post-meta {
