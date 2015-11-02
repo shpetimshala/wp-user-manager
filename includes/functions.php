@@ -254,3 +254,43 @@ function wpum_get_user_registration_date( $user_id ) {
 	return $date;
 
 }
+
+/**
+ * Get first name of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the first name or empty if not found.
+ */
+function wpum_get_user_fname( $user_id ) {
+
+	$fname = '';
+
+	$user = new WP_User( $user_id );
+	$fname = ( isset( $user->first_name ) ) ? $user->first_name : '';
+
+	return $fname;
+
+}
+
+/**
+ * Get last name of a registered user.
+ *
+ * @since 1.2.0
+ * @param  int $user_id id number of a registered user.
+ * @return string          the last name or empty if not found.
+ */
+function wpum_get_user_lname( $user_id ) {
+
+	$lname = '';
+
+	$user = new WP_User( $user_id );
+	$lname = ( isset( $user->last_name ) ) ? $user->last_name : '';
+
+	return $lname;
+
+}
+
+function wpum_get_displayed_user_id() {
+	return 1;
+}

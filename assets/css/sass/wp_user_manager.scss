@@ -205,7 +205,8 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 	}
 
 	#wpum_field_requirement,
-	#wpum_field_on_registration {
+	#wpum_field_on_registration,
+	#wpum_field_adjust_name {
 
 		.inside {
 			padding-top: 10px;
@@ -223,7 +224,7 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 
 }
 
-/* Hide screen options window */ 
+/* Hide screen options window */
 body.users_page_wpum-profile-fields,
 body.users_page_wpum-edit-field {
 	#screen-options-link-wrap, .postbox .handlediv {

@@ -322,6 +322,11 @@ class WPUM_Fields_Editor {
 		// Add option to display on registration form if it's in primary group.
 		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration )
 			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form', 'wpum' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
+
+		// Add name adjustment option.
+		if( $this->field->meta == 'first_name' || $this->field->meta == 'last_name' )
+			add_meta_box( 'wpum_field_adjust_name', __( 'Display full name', 'wpum' ), array( $this, 'name_setting' ), self::single_field_hook, 'side' );
+
 	}
 
 	/**
@@ -604,7 +609,7 @@ class WPUM_Fields_Editor {
 		?>
 
 		<div class="description-editor">
-			<h3><?php _e('Field Description (optional)', 'wpum'); ?></h3>
+			<h3><?php esc_html_e('Field Description (optional)', 'wpum'); ?></h3>
 			<?php wp_editor( $this->field->description, 'field_description', $description_settings ); ?>
 		</div>
 
@@ -623,8 +628,8 @@ class WPUM_Fields_Editor {
 		$args = array(
 			'name'    => 'set_as_required',
 			'current' => $this->field->is_required,
-			'label'   => __('Set this field as required ?', 'wpum'),
-			'desc'    => __('Enable to force the user to fill this field.', 'wpum'),
+			'label'   => esc_html__('Set this field as required', 'wpum'),
+			'desc'    => esc_html__('Enable to force the user to fill this field.', 'wpum'),
 		);
 
 		echo WPUM()->html->checkbox( $args );
@@ -642,8 +647,27 @@ class WPUM_Fields_Editor {
 		$args = array(
 			'name'    => 'show_on_registration',
 			'current' => $this->field->show_on_registration,
-			'label'   => __('Display this field on registration ?', 'wpum'),
-			'desc'    => __('Enable to display this field on the registration form.', 'wpum'),
+			'label'   => esc_html__('Display this field on registration', 'wpum'),
+			'desc'    => esc_html__('Enable to display this field on the registration form.', 'wpum'),
+		);
+
+		echo WPUM()->html->checkbox( $args );
+
+	}
+
+	/**
+	 * Render the full name setting for the field editor.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function name_setting() {
+
+		$args = array(
+			'name'    => 'display_full_name',
+			'current' => wpum_get_field_option( $this->field->id, 'display_full_name' ) ? true : false,
+			'label'   => esc_html__( 'Display full name', 'wpum' ),
+			'desc'    => esc_html__( 'Enable to display the user full name instead.', 'wpum' ),
 		);
 
 		echo WPUM()->html->checkbox( $args );
@@ -692,6 +716,13 @@ class WPUM_Fields_Editor {
 			// Save the field
 			if( WPUM()->fields->update( $field_id, $args ) ) {
 
+				// Verify whether the "display full name" option has been checked or not.
+				// If it's checked, then we store the value into the field options.
+				$display_full_name = isset( $_POST['display_full_name'] ) ? (bool) $_POST['display_full_name'] : false;
+				if( $display_full_name ) {
+					wpum_update_field_option( $field_id, 'display_full_name', true );
+				}
+
 				// Allow plugins to extend the save process
 				do_action( 'wpum/fields/editor/single/before_save', $field_id, $group_id, $this->field, $this->field_object );
 
@@ -701,7 +732,9 @@ class WPUM_Fields_Editor {
 					'action'  => 'edit',
 					'group' => $group_id
 				), admin_url( 'users.php?page=wpum-profile-fields' ) );
+
 				wp_redirect( $admin_url );
+
 				exit();
 
 			}

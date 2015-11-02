@@ -34,3 +34,28 @@ function wpum_adjust_website_meta_output( $value, $type, $meta, $id ) {
 
 }
 add_filter( 'wpum_get_the_field_value', 'wpum_adjust_website_meta_output', 10, 4 );
+
+/**
+ * Adjust the output of the first name/last name field to display a full name if the option is enabled.
+ * If the option is enabled into the first name field, WPUM will display the first name + last name,
+ * if the option is enabled into the last name field, WPUM will display the last name + first name.
+ *
+ * @param  string $value the value of field.
+ * @param  string $type  field type.
+ * @param  string $meta  field meta key.
+ * @param  int $id    the field id number.
+ * @return mixed        html output of this field.
+ * @since 1.2.0
+ */
+function wpum_adjust_name_meta_output( $value, $type, $meta, $id ) {
+
+	if( $meta == 'first_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+		$value = $value . ' ' . wpum_get_user_lname( wpum_get_displayed_user_id() );
+	} elseif( $meta == 'last_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+		$value = $value . ' ' . wpum_get_user_fname( wpum_get_displayed_user_id() );
+	}
+
+	return $value;
+
+}
+add_filter( 'wpum_get_the_field_value', 'wpum_adjust_name_meta_output', 10, 4 );
