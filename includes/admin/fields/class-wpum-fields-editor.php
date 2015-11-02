@@ -718,9 +718,16 @@ class WPUM_Fields_Editor {
 
 				// Verify whether the "display full name" option has been checked or not.
 				// If it's checked, then we store the value into the field options.
-				$display_full_name = isset( $_POST['display_full_name'] ) ? (bool) $_POST['display_full_name'] : false;
-				if( $display_full_name ) {
-					wpum_update_field_option( $field_id, 'display_full_name', true );
+				if( $this->field->meta == 'first_name' || $this->field->meta == 'last_name' ) {
+
+					$display_full_name = isset( $_POST['display_full_name'] ) ? (bool) $_POST['display_full_name'] : false;
+
+					if( $display_full_name ) {
+						wpum_update_field_option( $field_id, 'display_full_name', true );
+					} elseif ( $display_full_name === false ) {
+						wpum_delete_field_option( $field_id, 'display_full_name' );
+					}
+
 				}
 
 				// Allow plugins to extend the save process

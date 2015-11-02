@@ -1006,6 +1006,40 @@ function wpum_update_field_option( $field_id, $option, $value ) {
 }
 
 /**
+ * Helper function to delete an option of a field.
+ *
+ * @param  int    $field_id the field id number.
+ * @param  string $option   the option that needs to be removed.
+ * @return mixed
+ * @since 1.2.0
+ */
+function wpum_delete_field_option( $field_id, $option ) {
+
+	$all_options = wpum_get_field_options( $field_id );
+
+	$option = trim( $option );
+
+	if ( empty( $option ) ) {
+		return false; }
+
+	if( is_array( $all_options ) && ! empty( $all_options ) ) {
+
+		$all_options = maybe_unserialize( $all_options );
+
+		if( array_key_exists( $option , $all_options ) ) {
+			unset( $all_options[ $option ] );
+
+			if ( is_array( $all_options ) ) {
+				WPUM()->fields->update( $field_id, array( 'options' => maybe_serialize( $all_options ) ) );
+			}
+
+		}
+
+	}
+
+}
+
+/**
  * Retrieve a single field option from the database.
  *
  * @param  int    $field_id the id of the field.
