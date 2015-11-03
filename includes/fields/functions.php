@@ -370,7 +370,7 @@ function wpum_has_profile_fields( $args = '' ) {
 	global $wpum_profile_fields;
 
 	$defaults = array(
-		'user_id'           => 1,
+		'user_id'           => absint( wpum_get_displayed_user_id() ),
 		'field_group_id'    => false,
 		'number'            => false,
 		'hide_empty_groups' => true,
