@@ -28,15 +28,17 @@ class WPUM_Field_Type_File extends WPUM_Field_Type {
 		// DO NOT DELETE
 		parent::__construct();
 
-		// Label of this field type
+		// Label of this field type.
 		$this->name             = _x( 'File', 'field type name', 'wpum' );
-		// Field type name
+		// Field type name.
 		$this->type             = 'file';
-		// Class of this field
+		// Field category.
+		$this->category         = 'advanced';
+		// Class of this field.
 		$this->class            = __CLASS__;
-		// Set registration
+		// Set registration.
 		$this->set_registration = true;
-		// Set requirement
+		// Set requirement.
 		$this->set_requirement  = true;
 
 	}
