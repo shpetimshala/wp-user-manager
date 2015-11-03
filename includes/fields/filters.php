@@ -49,10 +49,14 @@ add_filter( 'wpum_get_the_field_value', 'wpum_adjust_website_meta_output', 10, 4
  */
 function wpum_adjust_name_meta_output( $value, $type, $meta, $id ) {
 
-	if( $meta == 'first_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
-		$value = $value . ' ' . wpum_get_user_lname( wpum_get_displayed_user_id() );
-	} elseif( $meta == 'last_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
-		$value = $value . ' ' . wpum_get_user_fname( wpum_get_displayed_user_id() );
+	if( wpum_is_single_profile() ) {
+
+		if( $meta == 'first_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+			$value = $value . ' ' . wpum_get_user_lname( wpum_get_displayed_user_id() );
+		} elseif( $meta == 'last_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+			$value = $value . ' ' . wpum_get_user_fname( wpum_get_displayed_user_id() );
+		}
+
 	}
 
 	return $value;
