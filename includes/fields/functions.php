@@ -327,7 +327,8 @@ function wpum_get_field_groups( $args = array() ) {
 				'orderby'        => 'field_order',
 				'order'          => 'ASC',
 				'array'          => true,
-				'exclude_fields' => array_key_exists( 'exclude_fields' , $args ) ? $args['exclude_fields'] : false;
+				'number'         => array_key_exists( 'number_fields' , $args ) ? $args['number_fields']:   false,
+				'exclude_fields' => array_key_exists( 'exclude_fields' , $args ) ? $args['exclude_fields']: false
 			);
 
 			$fields = WPUM()->fields->get_by_group( $get_fields_by_group_args );
@@ -376,10 +377,10 @@ function wpum_has_profile_fields( $args = '' ) {
 		'user_id'           => absint( wpum_get_displayed_user_id() ),
 		'field_group_id'    => false,
 		'number'            => false,
+		'number_fields'     => false,
 		'hide_empty_groups' => true,
-		'hide_empty_fields' => false,
 		'exclude_groups'    => false,
-		'exclude_fields'    => false,
+		'exclude_fields'    => false
 	);
 
 	// Parse incoming $args into an array and merge it with $defaults.
