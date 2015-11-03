@@ -383,8 +383,13 @@ function wpum_has_profile_fields( $args = '' ) {
 		'exclude_fields'    => false
 	);
 
-	// Parse incoming $args into an array and merge it with $defaults.
-	$args = wp_parse_args( $args, $defaults );
+	/**
+	 * Filters the query arguments to retrieve fields from the database.
+	 *
+	 * @since 1.2.0
+	 * @return array.
+	 */
+	$args = apply_filters( 'wpum_has_profile_fields_query', wp_parse_args( $args, $defaults ) );
 
 	$wpum_profile_fields = new WPUM_Fields_Data_Template( $args );
 
