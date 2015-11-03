@@ -379,7 +379,7 @@ function wpum_has_profile_fields( $args = '' ) {
 		'hide_empty_groups' => true,
 		'hide_empty_fields' => false,
 		'exclude_groups'    => false,
-		'exclude_fields'    => '1',
+		'exclude_fields'    => false,
 	);
 
 	// Parse incoming $args into an array and merge it with $defaults.
