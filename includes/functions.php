@@ -291,6 +291,47 @@ function wpum_get_user_lname( $user_id ) {
 
 }
 
+/**
+ * Retrieve the user id number of the currently displayed user.
+ * This function works only within the profile page.
+ *
+ * @since 1.2.0
+ * @return mixed user id if found - false if not found.
+ */
 function wpum_get_displayed_user_id() {
-	return 1;
+
+	$user_id   = false;
+	$who       = wpum_is_single_profile();
+	$structure = get_option( 'wpum_permalink', 'user_id' );
+
+	if( $who && ! empty ( $structure ) ) {
+
+		switch ( $structure ) {
+			case 'user_id':
+				$user_id = esc_attr( $who );
+				break;
+			case 'username':
+				$retrieve = get_user_by( 'login', esc_attr( $who ) );
+				$user_id  = $retrieve->data->ID;
+				break;
+			case 'nickname':
+					// WP_User_Query arguments.
+					$args = array (
+						'search'         => esc_attr( $who ),
+						'search_columns' => array( 'user_nicename' ),
+					);
+
+					// The User Query.
+					$user_query = new WP_User_Query( $args );
+					$user_query = $user_query->get_results();
+
+					$user_id = $user_query[0]->data->ID;
+				break;
+
+		}
+
+	}
+
+	return $user_id;
+
 }
