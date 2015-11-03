@@ -62,7 +62,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		$value = null;
 
-		switch ($new_field['meta']) {
+		switch ( $new_field['meta'] ) {
 			case 'first_name':
 				$value = self::$user->user_firstname;
 				break;
@@ -104,7 +104,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		$options = array();
 
-		switch ($new_field['meta']) {
+		switch ( $new_field['meta'] ) {
 			case 'display_name':
 				$options = self::get_display_name_options( self::$user );
 				break;
@@ -132,20 +132,24 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		if ( !empty($user->first_name) )
 			$public_display['display_firstname'] = $user->first_name;
+
 		if ( !empty($user->last_name) )
 			$public_display['display_lastname'] = $user->last_name;
+
 		if ( !empty($user->first_name) && !empty($user->last_name) ) {
 			$public_display['display_firstlast'] = $user->first_name . ' ' . $user->last_name;
 			$public_display['display_lastfirst'] = $user->last_name . ' ' . $user->first_name;
 		}
+
 		if ( !in_array( $user->display_name, $public_display ) ) // Only add this if it isn't duplicated elsewhere
 			$public_display = array( 'display_displayname' => $user->display_name ) + $public_display;
+
 		$public_display = array_map( 'trim', $public_display );
 		$public_display = array_unique( $public_display );
 
 		// Add options to original array
 		foreach ( $public_display as $id => $item ) {
-			$options += array($id => $item);
+			$options += array( $id => $item );
 		}
 
 		return $options;
@@ -172,7 +176,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 		$selected_value = $user_login;
 
-		switch ($selected_name) {
+		switch ( $selected_name ) {
 			case $nickname:
 				$selected_value = 'display_nickname';
 				break;
@@ -311,18 +315,24 @@ class WPUM_Form_Profile extends WPUM_Form {
 		$user_data = array( 'ID' => self::$user->ID );
 
 		foreach ( $values['profile'] as $meta_key => $meta_value ) {
+
 			switch ( $meta_key ) {
+
 				case 'user_email':
-					if(is_email( $meta_value )) :
+
+					if( is_email( $meta_value ) ) :
 						$user_data += array( 'user_email' => $meta_value );
 					else :
-						self::add_error( __('Please enter a valid email address.', 'wpum') );
+						self::add_error( __( 'Please enter a valid email address.', 'wpum') );
 						return;
 					endif;
+
 				break;
+
 				case 'display_name':
 					$user_data += array( 'display_name' => self::store_display_name( $values['profile'], $meta_value ) );
 				break;
+
 				case 'nickname':
 					$user_data += array( 'user_nicename' => $meta_value );
 					$user_data += array( 'nickname' => $meta_value );
@@ -331,10 +341,12 @@ class WPUM_Form_Profile extends WPUM_Form {
 				default:
 					$user_data += array( $meta_key => $meta_value );
 					break;
+
 			}
+
 		}
 
-		do_action('wpum_before_user_update', $user_data, $values, self::$user->ID );
+		do_action( 'wpum_before_user_update', $user_data, $values, self::$user->ID );
 
 		$user_id = wp_update_user( $user_data );
 
