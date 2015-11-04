@@ -199,9 +199,8 @@ function wpum_get_account_fields() {
 		// Adjust field type parameter if no field type template is defined.
 		switch ( $field['type'] ) {
 			case 'username':
-				$field['type'] = 'text';
-				break;
 			case 'nickname':
+			case 'url':
 				$field['type'] = 'text';
 				break;
 			case 'display_name':
