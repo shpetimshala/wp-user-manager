@@ -211,7 +211,7 @@ function wpum_get_account_fields() {
 				break;
 		}
 
-		$fields[ $field['meta'] ] = array(
+		$fields[ $field['meta'] ] = apply_filters( 'wpum_account_field', array(
 			'priority'    => $field['field_order'],
 			'label'       => $field['name'],
 			'type'        => $field['type'],
@@ -221,7 +221,7 @@ function wpum_get_account_fields() {
 			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
 			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
-		);
+		), $field['id'] );
 
 	}
 
