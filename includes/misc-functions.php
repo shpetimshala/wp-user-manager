@@ -1000,7 +1000,8 @@ function wpum_update_field_option( $field_id, $option, $value ) {
 
 	if ( is_array( $all_options ) ) {
 		$all_options[ $option ] = $value;
-		WPUM()->fields->update( $field_id, array( 'options' => maybe_serialize( $all_options ) ) );
+		$all_options = maybe_serialize( $all_options );
+		WPUM()->fields->update( $field_id, array( 'options' => $all_options ) );
 	}
 
 }

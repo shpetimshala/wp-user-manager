@@ -58,38 +58,37 @@ class WPUM_Form_Profile extends WPUM_Form {
 	 * @since 1.0.0
 	 * @return $value value of the field.
 	 */
-	public static function set_fields_values( $default, $new_field ) {
+	public static function set_fields_values( $default, $field ) {
 
-		$value = null;
-
-		switch ( $new_field['meta'] ) {
+		switch ( $field['meta'] ) {
 			case 'first_name':
-				$value = self::$user->user_firstname;
+				return self::$user->user_firstname;
 				break;
 			case 'last_name':
-				$value = self::$user->user_lastname;
+				return self::$user->user_lastname;
 				break;
 			case 'nickname':
-				$value = self::$user->user_nicename;
+				return self::$user->user_nicename;
 				break;
 			case 'user_email':
-				$value = self::$user->user_email;
+				return self::$user->user_email;
 				break;
 			case 'user_url':
-				$value = self::$user->user_url;
+				return self::$user->user_url;
 				break;
 			case 'description':
-				$value = self::$user->description;
+				return self::$user->description;
 				break;
 			case 'display_name':
-				$value = self::get_selected_name();
+				return self::get_selected_name();
 				break;
 			case 'user_avatar':
-				$value = get_user_meta( self::$user->ID, 'current_user_avatar', true );
+				return get_user_meta( self::$user->ID, 'current_user_avatar', true );
+				break;
+			default:
+				return apply_filters( 'wpum_edit_account_field_value', null, $field, self::$user->ID );
 				break;
 		}
-
-		return $value;
 
 	}
 
