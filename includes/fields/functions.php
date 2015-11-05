@@ -775,14 +775,21 @@ function wpum_unserialize_profile_field( $value, $type ) {
 
 	if ( method_exists( $type_object->class, "output_html" ) ) {
 
-		return call_user_func( $type_object->class . "::output_html", $value );
+		$value = call_user_func( $type_object->class . "::output_html", $value );
 
 	} else {
 
 		if ( is_serialized( $value ) ) {
+
 			$field_value = maybe_unserialize( $value );
 			$field_value = implode( ', ', $field_value );
-			return $field_value;
+			$value = $field_value;
+
+		} elseif( is_array( $value ) ) {
+
+			$field_value = implode( ', ', $value );
+			$value = $field_value;
+
 		}
 
 	}

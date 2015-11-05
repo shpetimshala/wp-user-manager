@@ -53,13 +53,32 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 		$options = array();
 
 		$options[] = array(
-			'name'     => 'checked',
-			'label'    => esc_html__( 'Enabled by default' ),
-			'desc'     => esc_html__( 'Enable this option to set this checkbox as enabeld by default.' ),
-			'type'     => 'checkbox',
+			'name'  => 'checked',
+			'label' => esc_html__( 'Enabled by default' ),
+			'desc'  => esc_html__( 'Enable this option to set this checkbox as enabeld by default.' ),
+			'type'  => 'checkbox',
 		);
 
 		return $options;
+
+	}
+
+	/**
+	 * Adjusts the output of the "checkbox" type field. When saved, this field is saved as an integer,
+   * meaning on the profile page it will just display a number. We modify the output to display as "yes".
+   * Developers can use filters if they wish to change the output to something else.
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 * @return mixed
+	 */
+	public static function output_html( $value ) {
+
+		if( $value == '1' ) {
+			$value = esc_html_x( 'Yes', 'Used when displaying the value of a checkbox field within the profile page.' );
+		}
+
+		return $value;
 
 	}
 
