@@ -304,6 +304,12 @@ function wpum_get_displayed_user_id() {
 	$who       = wpum_is_single_profile();
 	$structure = get_option( 'wpum_permalink', 'user_id' );
 
+	// If we're on the profile but no user has been given, we return the current user id.
+	if( ! $who && ! empty( $structure ) && is_page( wpum_get_core_page_id( 'profile' ) ) ) {
+		return get_current_user_id();
+	}
+
+	// Process the retrieved user.
 	if( $who && ! empty ( $structure ) ) {
 
 		switch ( $structure ) {
