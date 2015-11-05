@@ -746,7 +746,7 @@ function wpum_get_the_field_value() {
 
 	global $wpum_field;
 
-	$wpum_field->value = wpum_unserialize_profile_field( $wpum_field->value, $wpum_field->type );
+	$wpum_field->value = wpum_format_profile_field_value( $wpum_field->value, $wpum_field->type );
 
 	/**
 	 * Filters the profile field value.
@@ -762,35 +762,22 @@ function wpum_get_the_field_value() {
 }
 
 /**
- * Unserialize the value of a field.
+ * Format the profile field value.
+ * This function simply checks whether an output method for the field class is available.
+ * If no output method is available, we return the original string.
  *
  * @param  mixed $value the value of a field.
  * @param string $type the field type string.
  * @return string        the value of a field.
  * @since 1.2.0
  */
-function wpum_unserialize_profile_field( $value, $type ) {
+function wpum_format_profile_field_value( $value, $type ) {
 
 	$type_object = wpum_get_field_type_object( $type );
 
 	if ( method_exists( $type_object->class, "output_html" ) ) {
 
 		$value = call_user_func( $type_object->class . "::output_html", $value );
-
-	} else {
-
-		if ( is_serialized( $value ) ) {
-
-			$field_value = maybe_unserialize( $value );
-			$field_value = implode( ', ', $field_value );
-			$value = $field_value;
-
-		} elseif( is_array( $value ) ) {
-
-			$field_value = implode( ', ', $value );
-			$value = $field_value;
-
-		}
 
 	}
 
