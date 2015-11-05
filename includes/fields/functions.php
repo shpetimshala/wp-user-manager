@@ -751,7 +751,7 @@ function wpum_get_the_field_value() {
 	/**
 	 * Filters the profile field value.
 	 *
-	 * @param string $value Value for the profile field.
+	 * @param string|array $value Value for the profile field.
 	 * @param string $type  Type for the profile field.
 	 * @param string $meta  the meta of the profile field.
 	 * @param int    $id    ID for the profile field.
