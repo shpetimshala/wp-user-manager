@@ -1065,3 +1065,14 @@ function wpum_get_field_option( $field_id, $option ) {
 	return $option_value;
 
 }
+
+/**
+ * Utility function to check if an array is multidimensional.
+ *
+ * @since 1.2.0
+ * @param  array  $array the array to check.
+ * @return boolean
+ */
+function wpum_is_multi_array( $array ) {
+	return ( count( $array ) !== count( $array, COUNT_RECURSIVE ) );
+}

@@ -257,7 +257,7 @@ class WP_User_Manager {
 		// Forms
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
 
-		// Files loaded only on the admin side
+		// Files loaded only on the admin side.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/welcome.php';

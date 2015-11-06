@@ -18,7 +18,7 @@
 		<span class="wpum-uploaded-file-name"><code><?php echo esc_html( basename( $value ) ); ?></code></span>
 	<?php endif; ?>
 
-	<?php if( !wpum_get_option('disable_ajax') ) : ?>
+	<?php if( ! wpum_get_option('disable_ajax') ) : ?>
 	<a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
 	<?php endif; ?>
 
