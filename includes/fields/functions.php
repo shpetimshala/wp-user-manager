@@ -221,7 +221,7 @@ function wpum_get_account_fields() {
 			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
 			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
-		), $field['id'] );
+		), $field['options'] );
 
 	}
 
@@ -828,8 +828,7 @@ function wpum_get_field_options( $field_id ) {
 function wpum_update_field_option( $field_id, $option, $value ) {
 
 	$all_options = wpum_get_field_options( $field_id );
-
-	$option = trim( $option );
+	$option      = trim( $option );
 
 	if ( empty( $option ) ) {
 		return false; }
@@ -857,8 +856,7 @@ function wpum_update_field_option( $field_id, $option, $value ) {
 function wpum_delete_field_option( $field_id, $option ) {
 
 	$all_options = wpum_get_field_options( $field_id );
-
-	$option = trim( $option );
+	$option      = trim( $option );
 
 	if ( empty( $option ) ) {
 		return false; }
@@ -891,15 +889,41 @@ function wpum_delete_field_option( $field_id, $option ) {
 function wpum_get_field_option( $field_id, $option ) {
 
 	$option_value = false;
-	$option = trim( $option );
+	$option       = trim( $option );
 
-	if ( empty( $option ) || empty( $field_id ) ) {
-				return false; }
+	if ( empty( $option ) || empty( $field_id ) ) { return false; }
 
 	$all_options = wpum_get_field_options( $field_id );
 
 	if ( array_key_exists( $option, $all_options ) ) {
 		$option_value = maybe_unserialize( $all_options[ $option ] );
+	}
+
+	return $option_value;
+
+}
+
+/**
+ * Retrieve a single field option from a field.
+ *
+ * This function assumes the field options have already been retrieved from the database,
+ * therefore we do not need to make a query again.
+ *
+ * @param  array $field_options  serialized options from the database.
+ * @param  string $option the option we need to extract.
+ * @return string         value of the extracted option.
+ */
+function wpum_get_serialized_field_option( $field_options, $option ) {
+
+	$option_value = false;
+	$option       = trim( $option );
+
+	if ( empty( $option ) ) { return false; }
+
+	$retrieved_options = maybe_unserialize( $field_options );
+
+	if( array_key_exists( $option, $retrieved_options ) ) {
+		$option_value = maybe_unserialize( $retrieved_options[ $option ] );
 	}
 
 	return $option_value;
