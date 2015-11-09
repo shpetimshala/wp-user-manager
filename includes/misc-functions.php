@@ -347,7 +347,11 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 	if ( isset( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ] ) && ! empty( $_FILES[ $field_key ]['name'] ) ) {
 
-		add_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
+		if( $field_key == 'user_avatar' ) {
+			add_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
+		} else {
+			do_action( 'wpum_before_upload_trigger', $field_key, $field );
+		}
 
 		$allowed_mime_types = get_allowed_mime_types();
 
@@ -355,6 +359,8 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 		$files_to_upload = wpum_prepare_uploaded_files( $_FILES[ $field_key ] );
 
 		foreach ( $files_to_upload as $file_key => $file_to_upload ) {
+
+			print_r( $allowed_mime_types );
 
 			if ( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
 				return new WP_Error( 'validation-error', sprintf( __( 'Allowed files types are: %s', 'wpum' ), implode( ', ', array_keys( $allowed_mime_types ) ) ) );
@@ -365,14 +371,17 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
 			if ( is_wp_error( $uploaded_file ) ) {
+
 				return new WP_Error( 'validation-error', $uploaded_file->get_error_message() );
+
 			} else {
 
 				$file_urls[] = array(
-					'url' => $uploaded_file->url,
+					'url'  => $uploaded_file->url,
 					'path' => $uploaded_file->path,
 					'size' => $uploaded_file->size
 				);
+
 			}
 
 		}
@@ -383,7 +392,11 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			return current( $file_urls );
 		}
 
-		remove_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
+		if( $field_key == 'user_avatar' ) {
+			remove_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
+		} else {
+			do_action( 'wpum_after_upload_trigger', $field_key, $field );
+		}
 
 		return $files_to_upload;
 	}
