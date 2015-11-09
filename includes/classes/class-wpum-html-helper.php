@@ -55,7 +55,7 @@ class WPUM_HTML_Elements {
 			$placeholder = '';
 		}
 
-		$output = '';
+		$output = '<span id="wpum-' . sanitize_key( $args['name'] ) . '-wrap">';
 
 		if( !empty( $args['label'] ) )
 			$output .= '<label class="wpum-label" for="' . sanitize_key( $args['name'] ) . '">' . esc_html( $args['label'] ) . '</label>';
@@ -97,9 +97,11 @@ class WPUM_HTML_Elements {
 		$output .= '</select>';
 
 		if ( ! empty( $args['desc'] ) ) {
-			$output .= '<span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
+			$output .= '<br/><span class="wpum-description">' . esc_html( $args['desc'] ) . '</span>';
 		}
-		
+
+		$output .= '</span>';
+
 		return $output;
 	}
 
