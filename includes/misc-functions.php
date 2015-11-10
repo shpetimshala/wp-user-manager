@@ -493,7 +493,7 @@ function wpum_upload_file( $file, $args = array() ) {
  * @param string  $size  in bytes
  * @return string
  */
-function wpum_max_upload_size( $field_name ) {
+function wpum_max_upload_size( $field_name = '' ) {
 
 	// Default max upload size
 	$output = size_format( wp_max_upload_size() );

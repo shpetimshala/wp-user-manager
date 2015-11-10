@@ -60,23 +60,23 @@ class WPUM_Field_Type_File extends WPUM_Field_Type {
 			'desc'             => esc_html__( 'Select the file types that can be uploaded through this field.' ),
 			'type'             => 'select',
 			'multiple'         => true,
+			'options'          => function_exists( 'wpumcf_get_formatted_mime_types' ) ? wpumcf_get_formatted_mime_types(): array(),
 			'show_option_all'  => false,
 			'show_option_none' => false,
-			'options'          => function_exists( 'wpumcf_get_formatted_mime_types' ) ? wpumcf_get_formatted_mime_types(): array()
  		);
 
 		$options[] = array(
-			'name'     => 'multiple',
-			'label'    => esc_html__( 'Allow multiple files' ),
-			'desc'     => esc_html__( 'Enable this option to allow users to upload multiple files through this field.' ),
-			'type'     => 'checkbox',
+			'name'  => 'multiple',
+			'label' => esc_html__( 'Allow multiple files' ),
+			'desc'  => esc_html__( 'Enable this option to allow users to upload multiple files through this field.' ),
+			'type'  => 'checkbox',
 		);
 
 		$options[] = array(
-			'name'     => 'max_file_size',
-			'label'    => esc_html__( 'Maximum file size' ),
-			'desc'     => esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes.' ),
-			'type'     => 'text',
+			'name'  => 'max_file_size',
+			'label' => esc_html__( 'Maximum file size' ),
+			'desc'  => sprintf( esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes. Maximum upload size on this server %s' ), wpum_max_upload_size() ),
+			'type'  => 'text',
 		);
 
 		return $options;
