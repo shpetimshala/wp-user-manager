@@ -370,14 +370,17 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 			} else {
 
 				// Trigger verification for other file fields.
-				$allowed_field_extensions = $field['allowed_extensions'];
-				$uploaded_file_extension  = pathinfo( $file_to_upload['name'] );
-				$uploaded_file_extension  = $uploaded_file_extension['extension'];
+				if( array_key_exists( 'allowed_extensions' , $field ) && is_array( $field['allowed_extensions'] ) ) {
 
-				if( ! in_array( $uploaded_file_extension , $allowed_field_extensions ) ) {
-					return new WP_Error( 'validation-error', sprintf( esc_html__( 'Error: the "%s" field allows only %s files to be uploaded.' ), $field['label'], implode ( ", ", $allowed_field_extensions ) ) );
+					$allowed_field_extensions = $field['allowed_extensions'];
+					$uploaded_file_extension  = pathinfo( $file_to_upload['name'] );
+					$uploaded_file_extension  = $uploaded_file_extension['extension'];
+
+					if( ! in_array( $uploaded_file_extension , $allowed_field_extensions ) ) {
+						return new WP_Error( 'validation-error', sprintf( esc_html__( 'Error: the "%s" field allows only %s files to be uploaded.' ), $field['label'], implode ( ", ", $allowed_field_extensions ) ) );
+					}
+
 				}
-
 
 			}
 

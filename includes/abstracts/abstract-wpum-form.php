@@ -206,20 +206,10 @@ abstract class WPUM_Form {
 					return new WP_Error( 'email-validation-error', sprintf( __( 'Please enter a valid email address for the "%s" field.', 'wpum' ), $field['label'] ) );
 				}
 
-				if ( 'file' === $field['type'] && ! empty( $field['allowed_mime_types'] ) ) {
+				if ( 'file' === $field['type'] ) {
 
 					if( is_wp_error( $values[ $group_key ][ $key ] ) )
 						return new WP_Error( 'validation-error', $values[ $group_key ][ $key ]->get_error_message() );
-
-					$check_value = array_filter( array( $values[ $group_key ][ $key ] ) );
-
-					if ( ! empty( $check_value ) ) {
-						foreach ( $check_value as $file_url ) {
-							if ( ( $info = wp_check_filetype( $file_url['url'] ) ) && ! in_array( $info['type'], $field['allowed_mime_types'] ) ) {
-								return new WP_Error( 'validation-error', sprintf( __( '"%s" (filetype %s) needs to be one of the following file types: %s', 'wpum' ), $field['label'], $info['ext'], implode( ', ', array_keys( $field['allowed_mime_types'] ) ) ) );
-							}
-						}
-					}
 
 				}
 
