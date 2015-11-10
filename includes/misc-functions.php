@@ -349,8 +349,6 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 		if( $field_key == 'user_avatar' ) {
 			add_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
-		} else {
-			do_action( 'wpum_before_upload_trigger', $field_key, $field );
 		}
 
 		$allowed_mime_types = get_allowed_mime_types();
@@ -360,13 +358,28 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 		foreach ( $files_to_upload as $file_key => $file_to_upload ) {
 
-			print_r( $allowed_mime_types );
+			// Trigger validation rules for avatar only.
+			if( $field_key == 'user_avatar' ) {
 
-			if ( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
-				return new WP_Error( 'validation-error', sprintf( __( 'Allowed files types are: %s', 'wpum' ), implode( ', ', array_keys( $allowed_mime_types ) ) ) );
+				if ( !in_array( $file_to_upload['type'] , $allowed_mime_types ) )
+					return new WP_Error( 'validation-error', sprintf( __( 'Allowed files types are: %s', 'wpum' ), implode( ', ', array_keys( $allowed_mime_types ) ) ) );
 
-			if ( defined( 'WPUM_MAX_AVATAR_SIZE' ) && $field_key == 'user_avatar' && $file_to_upload['size'] > WPUM_MAX_AVATAR_SIZE )
-				return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.', 'wpum' ) );
+				if ( defined( 'WPUM_MAX_AVATAR_SIZE' ) && $field_key == 'user_avatar' && $file_to_upload['size'] > WPUM_MAX_AVATAR_SIZE )
+					return new WP_Error( 'avatar-too-big', __( 'The uploaded file is too big.', 'wpum' ) );
+
+			} else {
+
+				// Trigger verification for other file fields.
+				$allowed_field_extensions = $field['allowed_extensions'];
+				$uploaded_file_extension  = pathinfo( $file_to_upload['name'] );
+				$uploaded_file_extension  = $uploaded_file_extension['extension'];
+
+				if( ! in_array( $uploaded_file_extension , $allowed_field_extensions ) ) {
+					return new WP_Error( 'validation-error', sprintf( esc_html__( 'Error: the "%s" field allows only %s files to be uploaded.' ), $field['label'], implode ( ", ", $allowed_field_extensions ) ) );
+				}
+
+
+			}
 
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );
 
@@ -394,8 +407,6 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 		if( $field_key == 'user_avatar' ) {
 			remove_filter( 'upload_mimes' , 'wpum_adjust_mime_types' );
-		} else {
-			do_action( 'wpum_after_upload_trigger', $field_key, $field );
 		}
 
 		return $files_to_upload;
