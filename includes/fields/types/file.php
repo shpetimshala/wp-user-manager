@@ -75,7 +75,7 @@ class WPUM_Field_Type_File extends WPUM_Field_Type {
 		$options[] = array(
 			'name'  => 'max_file_size',
 			'label' => esc_html__( 'Maximum file size' ),
-			'desc'  => sprintf( esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes. Maximum upload size on this server is %s.' ), size_format( wp_max_upload_size() ) ),
+			'desc'  => esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes.' ),
 			'type'  => 'text',
 		);
 
