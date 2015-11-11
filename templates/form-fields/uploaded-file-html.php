@@ -7,6 +7,9 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  */
+
+$value = is_array( $value ) && array_key_exists( 'url' , $value ) ? $value['url'] : $value;
+
 ?>
 <div class="wpum-uploaded-file">
 	<?php

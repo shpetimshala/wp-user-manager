@@ -428,6 +428,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 
 			update_user_meta( $user_id, "current_user_avatar", esc_url( $avatar_field['url'] ) );
 			update_user_meta( $user_id, '_current_user_avatar_path', $avatar_field['path'] );
+
 		}
 
 	}
