@@ -69,9 +69,19 @@ $field_files = $field['value'];
 <input type="file" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" <?php if ( ! empty( $field['multiple'] ) ) echo 'multiple'; ?> name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?><?php if ( ! empty( $field['multiple'] ) ) echo '[]'; ?>" id="<?php echo esc_attr( $key ); ?>" />
 
 <small class="description">
+
 	<?php if ( ! empty( $field['description'] ) ) : ?>
-		<?php echo $field['description']; ?>
-	<?php else : ?>
-		<?php printf( __( 'Maximum file size: %s.', 'wpum' ), wpum_max_upload_size( $field_name ) ); ?>
+		<p><?php echo $field['description']; ?></p>
 	<?php endif; ?>
+
+	<?php if( array_key_exists( 'max_file_size' , $field ) ) : ?>
+
+		<?php printf( esc_html__( 'Maximum file size: %s.', 'wpum' ), size_format( $field['max_file_size'] ) ); ?>
+
+	<?php else : ?>
+
+		<?php printf( __( 'Maximum file size: %s.', 'wpum' ), wpum_max_upload_size( $field_name ) ); ?>
+
+	<?php endif; ?>
+
 </small>
