@@ -63,6 +63,14 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 
 	}
 
+	public static function output_html( $field ) {
+
+		$output =  $field->value;
+
+		return $output;
+
+	}
+
 }
 
 new WPUM_Field_Type_Url;
