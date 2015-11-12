@@ -66,7 +66,11 @@ $field_files = $field['value'];
 
 <?php endif; ?>
 
+<?php if( ! empty( $field_files ) ) : ?>
+
 <a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
+
+<?php endif; ?>
 
 <input
 	type="file"
