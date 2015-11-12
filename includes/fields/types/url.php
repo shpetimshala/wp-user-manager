@@ -69,7 +69,7 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 	 * @since 1.2.0
 	 * @param  string $value the value of the field.
 	 * @param  object $field field details.
-	 * @return string        the formatted url.
+	 * @return string        the formatted field value.
 	 */
 	public static function output_html( $value, $field ) {
 
@@ -84,7 +84,6 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 			$output = '<a href="' . esc_url( $value ) .'">' . esc_url( $value ) . '</a>';
 
 		endif;
-
 
 		return $output;
 

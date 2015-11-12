@@ -42,13 +42,14 @@ class WPUM_Field_Type_Email extends WPUM_Field_Type {
 	}
 
 	/**
-	 * Method that decides how the field should displayed into user profiles.
+	 * Modify the output of the field on the fronted profile.
 	 *
 	 * @since 1.2.0
-	 * @access public
-	 * @return mixed
+	 * @param  string $value the value of the field.
+	 * @param  object $field field details.
+	 * @return string        the formatted field value.
 	 */
-	public static function output_html( $value ) {
+	public static function output_html( $value, $field ) {
 
 		$mail_output = '<a href="mailto:' . antispambot( $value ) .'">' . antispambot( $value ) . '</a>';
 

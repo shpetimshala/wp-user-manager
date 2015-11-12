@@ -44,15 +44,14 @@ class WPUM_Field_Type_Checkboxes extends WPUM_Field_Type {
 	}
 
 	/**
-	 * Adjusts the output of the "checkboxes" type field. When saved, this field is saved as an array.
-	 * We modify the output to display it as a list.
-	 * Developers can use filters if they wish to change the output to something else.
+	 * Modify the output of the field on the fronted profile.
 	 *
 	 * @since 1.2.0
-	 * @access public
-	 * @return mixed
+	 * @param  string $value the value of the field.
+	 * @param  object $field field details.
+	 * @return string        the formatted field value.
 	 */
-	public static function output_html( $values ) {
+	public static function output_html( $value, $field ) {
 
 		if( is_array( $values ) ) {
 

@@ -64,15 +64,14 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 	}
 
 	/**
-	 * Adjusts the output of the "checkbox" type field. When saved, this field is saved as an integer,
-   * meaning on the profile page it will just display a number. We modify the output to display as "yes".
-   * Developers can use filters if they wish to change the output to something else.
+	 * Modify the output of the field on the fronted profile.
 	 *
 	 * @since 1.2.0
-	 * @access public
-	 * @return mixed
+	 * @param  string $value the value of the field.
+	 * @param  object $field field details.
+	 * @return string        the formatted field value.
 	 */
-	public static function output_html( $value ) {
+	public static function output_html( $value, $field ) {
 
 		if( $value == '1' ) {
 			$value = esc_html_x( 'Yes', 'Used when displaying the value of a checkbox field within the profile page.' );
