@@ -746,15 +746,18 @@ function wpum_get_the_field_value() {
 
 	global $wpum_field;
 
-	$wpum_field->value = wpum_format_profile_field_value( $wpum_field );
+	$wpum_field->value = wpum_format_profile_field_value( $wpum_field->value, $wpum_field );
 
 	/**
 	 * Filters the profile field value.
 	 *
-	 * @param mixed $field the current profile field object.
+	 * @param string|array $value Value for the profile field.
+	 * @param string $type  Type for the profile field.
+	 * @param string $meta  the meta of the profile field.
+	 * @param int    $id    ID for the profile field.
 	 * @since 1.2.0
 	 */
-	return apply_filters( 'wpum_get_the_field_value', $wpum_field );
+	return apply_filters( 'wpum_get_the_field_value', $wpum_field->value, $wpum_field );
 
 }
 
@@ -763,19 +766,18 @@ function wpum_get_the_field_value() {
  * This function simply checks whether an output method for the field class is available.
  * If no output method is available, we return the original string.
  *
- * @param  mixed $field the current profile field.
+ * @param  mixed $value the value of a field.
+ * @param string $type the field type string.
  * @return string        the value of a field.
  * @since 1.2.0
  */
-function wpum_format_profile_field_value( $field ) {
+function wpum_format_profile_field_value( $value, $field ) {
 
 	$type_object = wpum_get_field_type_object( $field->type );
 
-	$value = $field->value;
-
 	if ( method_exists( $type_object->class, "output_html" ) ) {
 
-		$value = call_user_func( $type_object->class . "::output_html", $field );
+		$value = call_user_func( $type_object->class . "::output_html", $value, $field );
 
 	}
 

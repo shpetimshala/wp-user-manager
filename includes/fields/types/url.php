@@ -63,9 +63,28 @@ class WPUM_Field_Type_Url extends WPUM_Field_Type {
 
 	}
 
-	public static function output_html( $field ) {
+	/**
+	 * Modify the output of the field on the fronted profile.
+	 *
+	 * @since 1.2.0
+	 * @param  string $value the value of the field.
+	 * @param  object $field field details.
+	 * @return string        the formatted url.
+	 */
+	public static function output_html( $value, $field ) {
 
-		$output =  $field->value;
+		$nofollow = wpum_get_serialized_field_option( $field->options, 'rel' );
+
+		if( ! empty( $nofollow ) ) :
+
+			$output = '<a href="' . esc_url( $value ) .'" rel="nofollow">' . esc_url( $value ) . '</a>';
+
+		else :
+
+			$output = '<a href="' . esc_url( $value ) .'">' . esc_url( $value ) . '</a>';
+
+		endif;
+
 
 		return $output;
 

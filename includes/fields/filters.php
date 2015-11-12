@@ -24,9 +24,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return mixed        html output of this field.
  * @since 1.2.0
  */
-function wpum_adjust_website_meta_output( $value, $type, $meta, $id ) {
+function wpum_adjust_website_meta_output( $value, $field ) {
 
-	if( $meta == 'user_url' ) {
+	if( $field->meta == 'user_url' ) {
 		$value = '<a href="'.esc_url( $value ).'" rel="nofollow">'. esc_url( $value ) .'</a>';
 	}
 
@@ -47,13 +47,13 @@ add_filter( 'wpum_get_the_field_value', 'wpum_adjust_website_meta_output', 10, 4
  * @return mixed        html output of this field.
  * @since 1.2.0
  */
-function wpum_adjust_name_meta_output( $value, $type, $meta, $id ) {
+function wpum_adjust_name_meta_output( $value, $field ) {
 
 	if( wpum_is_single_profile() ) {
 
-		if( $meta == 'first_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+		if( $field->meta == 'first_name' && wpum_get_field_option( $field->id, 'display_full_name' ) ) {
 			$value = $value . ' ' . wpum_get_user_lname( wpum_get_displayed_user_id() );
-		} elseif( $meta == 'last_name' && wpum_get_field_option( $id, 'display_full_name' ) ) {
+		} elseif( $field->meta == 'last_name' && wpum_get_field_option( $field->id, 'display_full_name' ) ) {
 			$value = $value . ' ' . wpum_get_user_fname( wpum_get_displayed_user_id() );
 		}
 
