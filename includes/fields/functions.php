@@ -922,7 +922,7 @@ function wpum_get_serialized_field_option( $field_options, $option ) {
 
 	$retrieved_options = maybe_unserialize( $field_options );
 
-	if( array_key_exists( $option, $retrieved_options ) ) {
+	if( is_array( $retrieved_options ) && array_key_exists( $option, $retrieved_options ) ) {
 		$option_value = maybe_unserialize( $retrieved_options[ $option ] );
 	}
 
