@@ -11,7 +11,6 @@
 $classes            = array( 'input-upload' );
 $allowed_mime_types = array_keys( ! empty( $field['allowed_mime_types'] ) ? $field['allowed_mime_types'] : get_allowed_mime_types() );
 $field_name         = isset( $field['name'] ) ? $field['name'] : $key;
-$field_name         .= ! empty( $field['multiple'] ) ? '[]' : '';
 
 // Store current field files.
 $field_files = $field['value'];
@@ -69,7 +68,13 @@ $field_files = $field['value'];
 
 <a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
 
-<input type="file" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" <?php if ( ! empty( $field['multiple'] ) ) echo 'multiple'; ?> name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?><?php if ( ! empty( $field['multiple'] ) ) echo '[]'; ?>" id="<?php echo esc_attr( $key ); ?>" />
+<input
+	type="file"
+	class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
+	<?php if ( ! empty( $field['multiple'] ) ) echo 'multiple'; ?>
+	name="<?php echo $field_name; ?><?php if ( ! empty( $field['multiple'] ) ) echo '[]'; ?>"
+	id="<?php echo esc_attr( $key ); ?>"
+/>
 
 <small class="description">
 

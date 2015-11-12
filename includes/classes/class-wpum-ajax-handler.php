@@ -126,6 +126,25 @@ class WPUM_Ajax_Handler {
 
 			if( $field_id && is_user_logged_in() ) {
 
+				$field_files = get_user_meta( $user_id, $field_id, true );
+				$field_files = maybe_unserialize( $field_files );
+
+				if( is_array( $field_files ) ) {
+
+					foreach ( $field_files as $key => $file ) {
+						wp_delete_file( $file['path'] );
+					}
+
+				}
+
+				delete_user_meta( $user_id, $field_id );
+
+				$return = array(
+					'valid'   => true,
+					'message' => apply_filters( 'wpum_files_deleted_success_message', __( 'Files successfully removed.', 'wpum' ) )
+				);
+
+				wp_send_json_success( $return );
 
 			}
 
