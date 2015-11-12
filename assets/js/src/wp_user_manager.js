@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
 	var WPUM_Frontend = {
 
 		init : function() {
-			this.ajax_remove_avatar();
+			this.ajax_remove_file();
 			this.directory_sort();
 		},
 
@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 		},
 
 		// Process removal of the user avatar
-		ajax_remove_avatar : function() {
+		ajax_remove_file : function() {
 
 			$('a.wpum-remove-uploaded-file').on('click', function(e) {
 
@@ -74,15 +74,21 @@ jQuery(document).ready(function ($) {
 				var wpum_removal_button = this; // form element
 				var wpum_removal_nonce  = $( '#wpum-form-profile' ).find('#_wpnonce').val();
 				var wpum_field_id = $( wpum_removal_button ).data("remove");
+				var has_number = false;
+
+				if( typeof $( wpum_removal_button ).data('file-number') !== 'undefined' ) {
+					has_number = $( wpum_removal_button ).data("file-number");
+				}
 
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
 					url: wpum_frontend_js.ajax,
 					data: {
-						'action' : 'wpum_remove_avatar', // Calls the ajax action
+						'action' : 'wpum_remove_file', // Calls the ajax action
 						'wpum_removal_nonce' : wpum_removal_nonce,
 						'field_id' : wpum_field_id,
+						'has_number' : has_number
 					},
 					beforeSend: function() {
 						$( wpum_removal_button ).find('div.wpum-message').remove();

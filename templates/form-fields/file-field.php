@@ -37,7 +37,8 @@ $field_files = $field['value'];
 					      'name'       => 'current_' . $field_name,
 					      'value'      => $file['url'],
 					      'field'      => $field,
-					      'field_name' => $field_name
+					      'field_name' => $field_name,
+								'number'     => $key
 					    )
 					);
 
@@ -65,6 +66,8 @@ $field_files = $field['value'];
 	</div>
 
 <?php endif; ?>
+
+<a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
 
 <input type="file" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" <?php if ( ! empty( $field['multiple'] ) ) echo 'multiple'; ?> name="<?php echo esc_attr( isset( $field['name'] ) ? $field['name'] : $key ); ?><?php if ( ! empty( $field['multiple'] ) ) echo '[]'; ?>" id="<?php echo esc_attr( $key ); ?>" />
 

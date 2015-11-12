@@ -21,9 +21,5 @@ $value = is_array( $value ) && array_key_exists( 'url' , $value ) ? $value['url'
 		<span class="wpum-uploaded-file-name"><code><?php echo esc_html( basename( $value ) ); ?></code></span>
 	<?php endif; ?>
 
-	<?php if( ! wpum_get_option('disable_ajax') ) : ?>
-	<a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
-	<?php endif; ?>
-
 	<input type="hidden" class="input-text" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" />
 </div>
