@@ -206,6 +206,7 @@ abstract class WPUM_Form {
 					return new WP_Error( 'email-validation-error', sprintf( __( 'Please enter a valid email address for the "%s" field.', 'wpum' ), $field['label'] ) );
 				}
 
+				// Validate file fields.
 				if ( 'file' === $field['type'] ) {
 
 					if( is_wp_error( $values[ $group_key ][ $key ] ) )

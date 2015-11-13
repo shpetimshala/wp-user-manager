@@ -64,11 +64,11 @@ $field_files = $field['value'];
 
 	</div>
 
-<?php endif; ?>
+	<?php if( ! empty( $field_files ) ) : ?>
 
-<?php if( ! empty( $field_files ) ) : ?>
+	<a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
 
-<a class="wpum-remove-uploaded-file" href="#" data-remove="<?php echo esc_attr( $field_name ); ?>">[<?php _e( 'remove', 'wpum' ); ?>]</a>
+	<?php endif; ?>
 
 <?php endif; ?>
 
