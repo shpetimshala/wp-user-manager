@@ -13,7 +13,7 @@ $allowed_mime_types = array_keys( ! empty( $field['allowed_mime_types'] ) ? $fie
 $field_name         = isset( $field['name'] ) ? $field['name'] : $key;
 
 // Store current field files.
-$field_files = $field['value'];
+$field_files = isset( $field['value'] ) ? $field['value'] : '';
 
 ?>
 
