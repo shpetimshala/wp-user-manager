@@ -35,9 +35,9 @@ class WPUM_Field_Type_Email extends WPUM_Field_Type {
 		// Class of this field
 		$this->class            = __CLASS__;
 		// Set registration
-		$this->set_registration = false;
+		$this->set_registration = true;
 		// Set requirement
-		$this->set_requirement  = false;
+		$this->set_requirement  = true;
 
 	}
 

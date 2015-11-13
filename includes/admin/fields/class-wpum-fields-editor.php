@@ -316,11 +316,11 @@ class WPUM_Fields_Editor {
 	public function single_field_add_meta_box() {
 
 		// Add Field Requirement metabox
-		if( $this->field_object->set_requirement )
+		if( $this->field_object->set_requirement && $this->field->meta !== 'user_email' )
 			add_meta_box( 'wpum_field_requirement', __( 'Requirement', 'wpum' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
 		// Add option to display on registration form if it's in primary group.
-		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration )
+		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration && $this->field->meta !== 'user_email' )
 			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form', 'wpum' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
 
 		// Add name adjustment option.
