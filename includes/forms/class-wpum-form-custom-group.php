@@ -75,7 +75,7 @@ class WPUM_Form_Custom_Group extends WPUM_Form {
 		if ( ! empty( $wpum_fields_group_id ) ) {
 			$group_id = $wpum_fields_group_id;
 		} else if( isset( $_POST['wpum_group_form_id'] ) && $_POST['wpum_group_form_id'] !== '' ) {
-			$group_id = $_POST['wpum_group_form_id'];
+			$group_id = absint( $_POST['wpum_group_form_id'] );
 		}
 
 		return $group_id;
@@ -108,10 +108,10 @@ class WPUM_Form_Custom_Group extends WPUM_Form {
 	 */
 	public static function process() {
 
-		// Get fields
+		// Get fields.
 		self::get_group_fields();
 
-		// Get posted values
+		// Get posted values.
 		$values = self::get_posted_fields();
 
 		if ( empty( $_POST['wpum_submit_form'] ) ) {
@@ -122,32 +122,43 @@ class WPUM_Form_Custom_Group extends WPUM_Form {
 			return;
 		}
 
-		// Check values
+		// Check values.
 		if( empty( $values ) || ! is_array( $values ) )
 			return;
 
-		// Validate required
+		// Validate required.
 		if ( is_wp_error( ( $return = self::validate_fields( $values, self::$form_name ) ) ) ) {
 			self::add_error( $return->get_error_message() );
 			return;
 		}
 
-		// Proceed to update the password
-		$user_data = array(
-			'ID' => get_current_user_id(),
-		);
+		$custom_fields = array();
 
-		$user_id = wp_update_user( $user_data );
+		// Retrieve all custom fields.
+		// Custom fields will always have the prefix wpum_ when created through the addon.
+		foreach ( $values['custom-group'] as $key => $value ) {
+			if ( strpos( $key, 'wpum_' ) === 0 ) {
+				$custom_fields[ $key ] = $value;
+			}
+		}
 
-		if ( is_wp_error( $user_id ) ) {
+		// At this point the fields have already been sanitized so we do not need to do it again.
+		foreach ( $custom_fields as $meta_key => $custom_field_value ) {
 
-			self::add_error( $user_id->get_error_message() );
+			// Verify if custom field is a file type field.
+			if ( strpos( $meta_key, 'wpum_file_' ) === 0 ) {
 
-		} else {
+				// If the field is empty we skip saving this.
+				if( empty( $custom_field_value ) )
+					continue;
 
-			self::add_confirmation( __('Password successfully updated.', 'wpum') );
+			}
+
+			update_user_meta( self::$user_id, $meta_key, maybe_serialize( $custom_field_value ) );
 
 		}
+
+		self::add_confirmation( esc_html__('Profile successfully updated.', 'wpum') );
 
 	}
 

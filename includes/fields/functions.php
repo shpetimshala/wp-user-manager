@@ -966,6 +966,7 @@ function wpum_get_group_fields_for_form( $group_id ) {
 			'meta'        => $field['meta'],
 			'required'    => $field['is_required'],
 			'description' => $field['description'],
+			'value'       => maybe_unserialize( get_user_meta( get_current_user_id(), $field['meta'], true ) )
 		), $field['options'] );
 
 	}

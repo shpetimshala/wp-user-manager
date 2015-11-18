@@ -1,6 +1,6 @@
 <?php
 /**
- * WPUM Template: Default Registration Form Template.
+ * WPUM Template: General form template used to display fields of groups into the account page.
  *
  * @package     wp-user-manager
  * @copyright   Copyright (c) 2015, Alessandro Tesoro

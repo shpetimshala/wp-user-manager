@@ -131,8 +131,16 @@ class WPUM_Ajax_Handler {
 
 				if( is_array( $field_files ) ) {
 
-					foreach ( $field_files as $key => $file ) {
-						wp_delete_file( $file['path'] );
+					if( wpum_is_multi_array( $field_files ) ) {
+
+						foreach ( $field_files as $key => $file ) {
+							wp_delete_file( $file['path'] );
+						}
+
+					} else {
+
+						wp_delete_file( $field_files['path'] );
+
 					}
 
 				}
