@@ -91,7 +91,7 @@ class WPUM_Form_Custom_Group extends WPUM_Form {
 	 */
 	public static function get_group_fields() {
 
-		$fields = wpumcf_get_group_fields_for_form( self::$group_id );
+		$fields = wpum_get_group_fields_for_form( self::$group_id );
 
 		self::$fields = array(
 			'custom-group' => $fields

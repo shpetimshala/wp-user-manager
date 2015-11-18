@@ -932,3 +932,44 @@ function wpum_get_serialized_field_option( $field_options, $option ) {
 	return $option_value;
 
 }
+
+/**
+ * Get the list of fields formatted into an array.
+ * The format of the array is used by the forms.
+ *
+ * @since 1.2.0
+ * @param string $group_id the id number of the group.
+ * @return array - list of fields.
+ */
+function wpum_get_group_fields_for_form( $group_id ) {
+
+	$args = array(
+		'id'           => $group_id,
+		'array'        => true,
+		'number'       => -1,
+		'orderby'      => 'field_order',
+		'order'        => 'ASC'
+	);
+
+	$data = WPUM()->fields->get_by_group( $args );
+
+	// Manipulate fields list into a list formatted for the forms API.
+	$fields = array();
+
+	// Loop through the found fields
+	foreach ( $data as $key => $field ) {
+
+		$fields[ $field['meta'] ] = apply_filters( 'wpum_form_field', array(
+			'priority'    => $field['field_order'],
+			'label'       => $field['name'],
+			'type'        => $field['type'],
+			'meta'        => $field['meta'],
+			'required'    => $field['is_required'],
+			'description' => $field['description'],
+		), $field['options'] );
+
+	}
+
+	return apply_filters( 'wpum_get_group_fields_for_form', $fields, $group_id );
+
+}
