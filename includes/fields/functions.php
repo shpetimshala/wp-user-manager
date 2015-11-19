@@ -980,3 +980,20 @@ function wpum_get_group_fields_for_form( $group_id ) {
 	return apply_filters( 'wpum_get_group_fields_for_form', $fields, $group_id );
 
 }
+
+/**
+ * Retrieve the available options for field visiblity.
+ *
+ * @since 1.2.0
+ * @return array The list of options.
+ */
+function wpum_get_field_visibility_settings() {
+
+	$options = array(
+		'public' => esc_html__( 'Publicly visible' ),
+		'hidden' => esc_html__( 'Hidden' )
+	);
+
+	return apply_filters( 'wpum_get_field_visibility_settings', $options );
+
+}

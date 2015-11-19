@@ -206,7 +206,8 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 
 	#wpum_field_requirement,
 	#wpum_field_on_registration,
-	#wpum_field_adjust_name {
+	#wpum_field_adjust_name,
+	#wpum_profile_visibility {
 
 		.inside {
 			padding-top: 10px;
@@ -220,6 +221,16 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 			display: inline-block;
 		}
 
+	}
+
+	#wpum_profile_visibility {
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		select {
+			width: 100%;
+		}
 	}
 
 }

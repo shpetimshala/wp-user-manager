@@ -135,16 +135,23 @@ table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-profile-fi
   width: 280px; }
 #wpum-edit-field-form #wpum_field_requirement .inside,
 #wpum-edit-field-form #wpum_field_on_registration .inside,
-#wpum-edit-field-form #wpum_field_adjust_name .inside {
+#wpum-edit-field-form #wpum_field_adjust_name .inside,
+#wpum-edit-field-form #wpum_profile_visibility .inside {
   padding-top: 10px; }
 #wpum-edit-field-form #wpum_field_requirement .wpum-description,
 #wpum-edit-field-form #wpum_field_on_registration .wpum-description,
-#wpum-edit-field-form #wpum_field_adjust_name .wpum-description {
+#wpum-edit-field-form #wpum_field_adjust_name .wpum-description,
+#wpum-edit-field-form #wpum_profile_visibility .wpum-description {
   font-size: 12px;
   margin-top: 10px;
   font-style: italic;
   color: #969696;
   display: inline-block; }
+#wpum-edit-field-form #wpum_profile_visibility label {
+  display: block;
+  margin-bottom: 5px; }
+#wpum-edit-field-form #wpum_profile_visibility select {
+  width: 100%; }
 
 /* Hide screen options window */
 body.users_page_wpum-profile-fields #screen-options-link-wrap, body.users_page_wpum-profile-fields .postbox .handlediv,

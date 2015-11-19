@@ -317,15 +317,20 @@ class WPUM_Fields_Editor {
 
 		// Add Field Requirement metabox
 		if( $this->field_object->set_requirement && $this->field->meta !== 'user_email' )
-			add_meta_box( 'wpum_field_requirement', __( 'Requirement', 'wpum' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_field_requirement', esc_html__( 'Requirement', 'wpum' ), array( $this, 'requirement_setting' ), self::single_field_hook, 'side' );
 
 		// Add option to display on registration form if it's in primary group.
 		if( WPUM()->field_groups->is_primary( intval( $_GET['from_group'] ) ) && $this->field_object->set_registration && $this->field->meta !== 'user_email' )
-			add_meta_box( 'wpum_field_on_registration', __( 'Show on registration form', 'wpum' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_field_on_registration', esc_html__( 'Show on registration form', 'wpum' ), array( $this, 'field_on_registration' ), self::single_field_hook, 'side' );
 
 		// Add name adjustment option.
 		if( $this->field->meta == 'first_name' || $this->field->meta == 'last_name' )
-			add_meta_box( 'wpum_field_adjust_name', __( 'Display full name', 'wpum' ), array( $this, 'name_setting' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_field_adjust_name', esc_html__( 'Display full name', 'wpum' ), array( $this, 'name_setting' ), self::single_field_hook, 'side' );
+
+		// Add profile visibility metabox.
+		if( $this->field->meta !== 'password' || $this->field->meta !== 'user_avatar' ) {
+			add_meta_box( 'wpum_profile_visibility', esc_html__( 'Visibility', 'wpum' ), array( $this, 'visibility_settings' ), self::single_field_hook, 'side' );
+		}
 
 	}
 
@@ -675,6 +680,29 @@ class WPUM_Fields_Editor {
 	}
 
 	/**
+	 * Render the visibility settings metabox.
+	 *
+	 * @access public
+	 * @return void
+	 * @since 1.2.0
+	 */
+	public function visibility_settings() {
+
+		$args = array(
+			'name'             => 'field_visibility',
+			'selected'         => $this->field->default_visibility,
+			'label'            => esc_html__( 'Field Visibility', 'wpum' ),
+			'desc'             => esc_html__( 'Determine the visibility of this field.', 'wpum' ),
+			'show_option_all'  => false,
+			'show_option_none' => false,
+			'options'          => wpum_get_field_visibility_settings()
+		);
+
+		echo WPUM()->html->select( $args );
+
+	}
+
+	/**
 	 * Save the field to the database
 	 *
 	 * @access public
@@ -704,7 +732,8 @@ class WPUM_Fields_Editor {
 				'name'                 => sanitize_text_field( $_POST['name'] ),
 				'description'          => wp_kses_post( $_POST['field_description'] ),
 				'is_required'          => isset( $_POST['set_as_required'] ) ? (bool) $_POST['set_as_required'] : false,
-				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration'] : false
+				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration'] : false,
+				'default_visibility' => isset( $_POST['field_visibility'] ) ? sanitize_key( $_POST['field_visibility'] ) : 'public'
 			);
 
 			// Unset options from being saved if field type doesn't support them
