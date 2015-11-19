@@ -731,9 +731,9 @@ class WPUM_Fields_Editor {
 			$args = array(
 				'name'                 => sanitize_text_field( $_POST['name'] ),
 				'description'          => wp_kses_post( $_POST['field_description'] ),
-				'is_required'          => isset( $_POST['set_as_required'] ) ? (bool) $_POST['set_as_required'] : false,
-				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration'] : false,
-				'default_visibility' => isset( $_POST['field_visibility'] ) ? sanitize_key( $_POST['field_visibility'] ) : 'public'
+				'is_required'          => isset( $_POST['set_as_required'] ) ? (bool) $_POST['set_as_required']:            false,
+				'show_on_registration' => isset( $_POST['show_on_registration'] ) ? (bool) $_POST['show_on_registration']:  false,
+				'default_visibility'   => isset( $_POST['field_visibility'] ) ? sanitize_key( $_POST['field_visibility'] ): 'public'
 			);
 
 			// Unset options from being saved if field type doesn't support them

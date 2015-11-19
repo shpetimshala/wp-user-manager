@@ -131,9 +131,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Whether there are groups available.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return boolean
+	 * @since 1.2.0
 	 */
 	public function has_groups() {
 
@@ -148,9 +148,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Get next group within the loop.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return array
+	 * @since 1.2.0
 	 */
 	public function next_group() {
 
@@ -173,9 +173,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Rewind groups.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return void
+	 * @since 1.2.0
 	 */
 	public function rewind_groups() {
 
@@ -189,9 +189,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Check whether we've reached the end of the loop or keep looping.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return bool
+	 * @since 1.2.0
 	 */
 	public function profile_groups() {
 
@@ -210,10 +210,10 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Setup global variable for current group within the loop.
 	 *
-	 * @global $wpum_fields_group
-	 * @since 1.2.0
 	 * @access public
+	 * @global $wpum_fields_group
 	 * @return void
+	 * @since 1.2.0
 	 */
 	public function the_profile_group() {
 
@@ -231,9 +231,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Verify whether the current group within the loop has fields.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return boolean
+	 * @since 1.2.0
 	 */
 	public function has_fields() {
 
@@ -254,9 +254,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Proceed to next field within the loop.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return object field details.
+	 * @since 1.2.0
 	 */
 	public function next_field() {
 
@@ -270,9 +270,9 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Cleanup the fields loop once it ends.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @return void
+	 * @since 1.2.0
 	 */
 	public function rewind_fields() {
 
@@ -284,11 +284,31 @@ class WPUM_Fields_Data_Template {
 	}
 
 	/**
-	 * Start the fields loop.
+	 * Verify the visibility of the field.
 	 *
 	 * @since 1.2.0
+	 * @param  object  $field the current field to verify.
+	 * @return boolean        true or false.
+	 */
+	public function is_visible( $field ) {
+
+		$visible = true;
+
+		// Verify if publicly visible.
+		if( $field->default_visibility == 'hidden' ) {
+			$visible = false;
+		}
+
+		return $visible;
+
+	}
+
+	/**
+	 * Start the fields loop.
+	 *
 	 * @access public
 	 * @return mixed
+	 * @since 1.2.0
 	 */
 	public function profile_fields() {
 
@@ -305,10 +325,10 @@ class WPUM_Fields_Data_Template {
 	/**
 	 * Setup global variable for field within the loop.
 	 *
-	 * @since 1.2.0
 	 * @access public
 	 * @global $wpum_field
 	 * @return void
+	 * @since 1.2.0
 	 */
 	public function the_profile_field() {
 
@@ -323,7 +343,13 @@ class WPUM_Fields_Data_Template {
 		}
 
 		if ( ! empty( $value ) || ( '0' === $value ) ) {
+
 			$this->field_has_data = true;
+
+			// Now verify if the field is visible or not.
+			if( false === $this->is_visible( $wpum_field ) )
+				$this->field_has_data = false;
+
 		} else {
 			$this->field_has_data = false;
 		}
