@@ -72,8 +72,11 @@ jQuery(document).ready(function ($) {
 
 				e.preventDefault();
 				var wpum_removal_button = this; // form element
-				var wpum_removal_nonce  = $( '#wpum-form-profile' ).find('#_wpnonce').val();
+				var wpum_removal_nonce  = $( '.wpum-profile-form' ).find('#_wpnonce').val();
 				var wpum_field_id = $( wpum_removal_button ).data("remove");
+				var wpum_submitted_form = $( '.wpum-profile-form' ).find("[name='wpum_submit_form']").val();
+
+				console.log( wpum_submitted_form );
 
 				$.ajax({
 					type: 'GET',
@@ -82,7 +85,8 @@ jQuery(document).ready(function ($) {
 					data: {
 						'action' : 'wpum_remove_file', // Calls the ajax action
 						'wpum_removal_nonce' : wpum_removal_nonce,
-						'field_id' : wpum_field_id
+						'field_id' : wpum_field_id,
+						'submitted_form' : wpum_submitted_form
 					},
 					beforeSend: function() {
 						$( wpum_removal_button ).find('div.wpum-message').remove();

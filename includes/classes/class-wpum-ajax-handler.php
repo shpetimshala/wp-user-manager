@@ -83,8 +83,9 @@ class WPUM_Ajax_Handler {
 	 */
 	public function remove_user_file() {
 
-		// Check our nonce and make sure it's correct.
-		check_ajax_referer( 'profile', 'wpum_removal_nonce' );
+		$form = esc_attr( $_REQUEST['submitted_form'] );
+
+		check_ajax_referer( $form, 'wpum_removal_nonce' );
 
 		$field_id = $_REQUEST['field_id'];
 		$user_id = get_current_user_id();
