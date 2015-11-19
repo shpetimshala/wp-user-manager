@@ -53,15 +53,15 @@ class WPUM_Field_Type_Checkboxes extends WPUM_Field_Type {
 	 */
 	public static function output_html( $value, $field ) {
 
-		if( is_array( $values ) ) {
+		if( is_array( $value ) ) {
 
-			$field_value = maybe_unserialize( $values );
+			$field_value = maybe_unserialize( $value );
 			$field_value = implode( ', ', $field_value );
 			return $field_value;
 
 		}
 
-		return $values;
+		return $value;
 
 	}
 
