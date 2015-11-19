@@ -203,6 +203,8 @@
 .wpum-single-profile .wpum-user-details-list dl dd {
   margin: 2px 0;
   padding: 5px 0; }
+  .wpum-single-profile .wpum-user-details-list dl dd span.wpum-uploaded-file-name {
+    display: block; }
 .wpum-single-profile .wpum-user-details-list .group-title {
   margin-top: 0;
   margin-bottom: 1rem; }

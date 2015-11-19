@@ -956,8 +956,14 @@ function wpum_get_group_fields_for_form( $group_id ) {
 	// Manipulate fields list into a list formatted for the forms API.
 	$fields = array();
 
-	// Loop through the found fields
+	// Loop through the found fields.
 	foreach ( $data as $key => $field ) {
+
+		switch ( $field['type'] ) {
+			case 'url':
+				$field['type'] = 'text';
+				break;
+		}
 
 		$fields[ $field['meta'] ] = apply_filters( 'wpum_form_field', array(
 			'priority'    => $field['field_order'],

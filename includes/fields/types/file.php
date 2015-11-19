@@ -79,6 +79,60 @@ class WPUM_Field_Type_File extends WPUM_Field_Type {
 
 	}
 
+	/**
+	 * Modify the output of the field on the fronted profile.
+	 *
+	 * @since 1.2.0
+	 * @param  string $value the value of the field.
+	 * @param  object $field field details.
+	 * @return string        the formatted field value.
+	 */
+	public static function output_html( $value, $field ) {
+
+		$files = $value;
+
+		$output = '';
+
+		// Display files if they're images.
+		if( wpum_is_multi_array( $files ) ) {
+
+			foreach ( $files as $key => $file ) {
+
+				$extension = ! empty( $extension ) ? $extension : substr( strrchr( $file['url'], '.' ), 1 );
+
+				if ( 3 !== strlen( $extension ) || in_array( $extension, array( 'jpg', 'gif', 'png', 'jpeg', 'jpe' ) ) ) :
+
+					$output .= '<span class="wpum-uploaded-file-preview"><img src="' . esc_url( $file['url'] ) . '" /></span>';
+
+				else :
+
+					$output .= '	<span class="wpum-uploaded-file-name"><code>' . esc_html( basename( $file['url'] ) ) . '</code></span>';
+
+				endif;
+
+			}
+
+		// We have a single file.
+		} else {
+
+			$extension = ! empty( $extension ) ? $extension : substr( strrchr( $files['url'], '.' ), 1 );
+
+			if ( 3 !== strlen( $extension ) || in_array( $extension, array( 'jpg', 'gif', 'png', 'jpeg', 'jpe' ) ) ) :
+
+				$output .= '<span class="wpum-uploaded-file-preview"><img src="' . esc_url( $files['url'] ) . '" /></span>';
+
+			else :
+
+				$output .= '	<span class="wpum-uploaded-file-name"><code>' . esc_html( basename( $files['url'] ) ) . '</code></span>';
+
+			endif;
+
+		}
+
+		return $output;
+
+	}
+
 }
 
 new WPUM_Field_Type_File;
