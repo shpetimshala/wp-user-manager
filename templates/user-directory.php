@@ -8,7 +8,6 @@
  * @since       1.0.0
  */
 
-echo $directory_args['search_form'];
 ?>
 
 <!-- start directory -->

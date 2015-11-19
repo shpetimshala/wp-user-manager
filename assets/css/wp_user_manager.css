@@ -154,9 +154,12 @@ table.wpum_fields_table_list .wpum-window-hide, table.users_page_wpum-profile-fi
   width: 100%; }
 
 /* Hide screen options window */
-body.users_page_wpum-profile-fields #screen-options-link-wrap, body.users_page_wpum-profile-fields .postbox .handlediv,
+body.users_page_wpum-profile-fields #screen-options-link-wrap,
+body.users_page_wpum-profile-fields .postbox .handlediv,
+body.users_page_wpum-profile-fields #wpfooter,
 body.users_page_wpum-edit-field #screen-options-link-wrap,
-body.users_page_wpum-edit-field .postbox .handlediv {
+body.users_page_wpum-edit-field .postbox .handlediv,
+body.users_page_wpum-edit-field #wpfooter {
   display: none; }
 body.users_page_wpum-profile-fields #poststuff h3 span, body.users_page_wpum-profile-fields #poststuff h3,
 body.users_page_wpum-edit-field #poststuff h3 span,

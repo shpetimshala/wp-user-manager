@@ -373,13 +373,45 @@ ul.wpum-user-listings {
 }
 
 /* Directory Elements */
-.wpum-directory-top-bar {
+.wpum-directory-top-bar,
+.wpum-directory-search-form {
+
 	padding: .5em 1em;
 	background: #f9f9f9;
 	border-top: 1px solid #e5e5e5;
+
 	div p {
 		margin:0px;
 	}
+
+}
+
+.wpum-directory-search-form {
+
+	padding: 1em;
+
+	input {
+		width: 100%;
+		display: block;
+	}
+
+	.form-fields,
+	.form-submit {
+		position: relative;
+		margin-right: 4%;
+		float: left;
+	}
+
+	.form-fields {
+		width: 74%;
+	}
+
+	.form-submit {
+		width: 22%;
+		margin-right: 0;
+	  clear: right;
+	}
+
 }
 
 .wpum-directory-pagination {

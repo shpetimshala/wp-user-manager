@@ -238,7 +238,9 @@ table.wpum_fields_table_list, table.users_page_wpum-profile-fields {
 /* Hide screen options window */
 body.users_page_wpum-profile-fields,
 body.users_page_wpum-edit-field {
-	#screen-options-link-wrap, .postbox .handlediv {
+	#screen-options-link-wrap,
+	.postbox .handlediv,
+	#wpfooter {
 		display: none;
 	}
 
