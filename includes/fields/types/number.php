@@ -54,14 +54,14 @@ class WPUM_Field_Type_Number extends WPUM_Field_Type {
 
 		$options[] = array(
 			'name'     => 'min',
-			'label'    => esc_html__( 'Minimum value' ),
-			'desc'     => esc_html__( 'Specifies the minimum value allowed, leave blank if not needed.' ),
+			'label'    => esc_html__( 'Minimum value', 'wpum' ),
+			'desc'     => esc_html__( 'Specifies the minimum value allowed, leave blank if not needed.', 'wpum' ),
 			'type'     => 'text',
 		);
 		$options[] = array(
 			'name'     => 'max',
-			'label'    => esc_html__( 'Maximum value' ),
-			'desc'     => esc_html__( 'Specifies the maximum value allowed, leave blank if not needed.' ),
+			'label'    => esc_html__( 'Maximum value', 'wpum' ),
+			'desc'     => esc_html__( 'Specifies the maximum value allowed, leave blank if not needed.', 'wpum' ),
 			'type'     => 'text',
 		);
 

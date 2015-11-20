@@ -990,8 +990,8 @@ function wpum_get_group_fields_for_form( $group_id ) {
 function wpum_get_field_visibility_settings() {
 
 	$options = array(
-		'public' => esc_html__( 'Publicly visible' ),
-		'hidden' => esc_html__( 'Hidden' )
+		'public' => esc_html__( 'Publicly visible', 'wpum' ),
+		'hidden' => esc_html__( 'Hidden', 'wpum' )
 	);
 
 	return apply_filters( 'wpum_get_field_visibility_settings', $options );

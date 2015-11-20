@@ -129,8 +129,8 @@ class WPUM_Directory {
 				),
 				array(
 					'id'   => 'display_search_form',
-					'name' => __( 'Display search form' ),
-					'desc' => __( 'Enable this option to display the user search form' ),
+					'name' => __( 'Display search form', 'wpum' ),
+					'desc' => __( 'Enable this option to display the user search form', 'wpum' ),
 					'type' => 'checkbox',
 					'std'  => 1
 				),
@@ -212,7 +212,7 @@ class WPUM_Directory {
 		unset( $columns['date'], $columns['author'] );
 
 		$columns["roles"]             = esc_html__( 'User Roles', 'wpum' );
-		$columns["search_form"]       = esc_html__( 'Search form' );
+		$columns["search_form"]       = esc_html__( 'Search form', 'wpum' );
 		$columns["profiles_per_page"] = esc_html__( 'Profiles per page', 'wpum' );
 		$columns["shortcode"]         = esc_html__( 'Shortcode', 'wpum' );
 

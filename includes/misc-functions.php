@@ -377,7 +377,7 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 					$uploaded_file_extension  = $uploaded_file_extension['extension'];
 
 					if( ! in_array( $uploaded_file_extension , $allowed_field_extensions ) ) {
-						return new WP_Error( 'validation-error', sprintf( esc_html__( 'Error: the "%s" field allows only %s files to be uploaded.' ), $field['label'], implode ( ", ", $allowed_field_extensions ) ) );
+						return new WP_Error( 'validation-error', sprintf( esc_html__( 'Error: the "%s" field allows only %s files to be uploaded.', 'wpum' ), $field['label'], implode ( ", ", $allowed_field_extensions ) ) );
 					}
 
 				}

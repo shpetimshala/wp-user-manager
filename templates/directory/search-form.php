@@ -20,7 +20,7 @@
         $search_input = array(
           'name'        => 'search_user',
           'value'       => isset( $_POST['search_user'] ) ? sanitize_text_field( $_POST['search_user'] ) : '',
-          'placeholder' => esc_html__( 'Search for users' ),
+          'placeholder' => esc_html__( 'Search for users', 'wpum' ),
         );
         echo WPUM()->html->text( $search_input );
       ?>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-submit">
-      <input type="submit" name="wpum_submit_user_search" id="wpum-submit-user-search" class="button wpum-button" value="<?php esc_html_e( 'Search' ); ?>">
+      <input type="submit" name="wpum_submit_user_search" id="wpum-submit-user-search" class="button wpum-button" value="<?php esc_html_e( 'Search', 'wpum' ); ?>">
     </div>
 
     <div class="wpum-clearfix"></div>

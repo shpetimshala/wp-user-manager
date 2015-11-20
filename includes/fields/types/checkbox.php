@@ -54,8 +54,8 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 
 		$options[] = array(
 			'name'  => 'checked',
-			'label' => esc_html__( 'Enabled by default' ),
-			'desc'  => esc_html__( 'Enable this option to set this checkbox as enabeld by default.' ),
+			'label' => esc_html__( 'Enabled by default', 'wpum' ),
+			'desc'  => esc_html__( 'Enable this option to set this checkbox as enabeld by default.', 'wpum' ),
 			'type'  => 'checkbox',
 		);
 
@@ -74,7 +74,7 @@ class WPUM_Field_Type_Checkbox extends WPUM_Field_Type {
 	public static function output_html( $value, $field ) {
 
 		if( $value == '1' ) {
-			$value = esc_html_x( 'Yes', 'Used when displaying the value of a checkbox field within the profile page.' );
+			$value = esc_html_x( 'Yes', 'Used when displaying the value of a checkbox field within the profile page.', 'wpum' );
 		}
 
 		return $value;

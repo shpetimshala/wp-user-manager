@@ -56,22 +56,22 @@ class WPUM_Field_Type_File extends WPUM_Field_Type {
 
 		$options[] = array(
 			'name'  => 'extensions',
-			'label' => esc_html__( 'Allowed file types' ),
-			'desc'  => esc_html__( 'Enter the extension of the files that can be uploaded through this field, separated with a comma. Example: jpg, png, gif' ),
+			'label' => esc_html__( 'Allowed file types', 'wpum' ),
+			'desc'  => esc_html__( 'Enter the extension of the files that can be uploaded through this field, separated with a comma. Example: jpg, png, gif', 'wpum' ),
 			'type'  => 'text',
  		);
 
 		$options[] = array(
 			'name'  => 'multiple',
-			'label' => esc_html__( 'Allow multiple files' ),
-			'desc'  => esc_html__( 'Enable this option to allow users to upload multiple files through this field.' ),
+			'label' => esc_html__( 'Allow multiple files', 'wpum' ),
+			'desc'  => esc_html__( 'Enable this option to allow users to upload multiple files through this field.', 'wpum' ),
 			'type'  => 'checkbox',
 		);
 
 		$options[] = array(
 			'name'  => 'max_file_size',
-			'label' => esc_html__( 'Maximum file size' ),
-			'desc'  => esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes.' ),
+			'label' => esc_html__( 'Maximum file size', 'wpum' ),
+			'desc'  => esc_html__( 'Enter the maximum file size users can upload through this field. The amount must be in bytes.', 'wpum' ),
 			'type'  => 'text',
 		);
 

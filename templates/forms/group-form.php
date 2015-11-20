@@ -28,7 +28,7 @@
 		<p>
 			<input type="hidden" name="wpum_submit_form" value="<?php echo $form; ?>" />
 			<input type="hidden" name="wpum_group_form_id" value="<?php echo $group_id; ?>" />
-			<input type="submit" id="submit_wpum_group_form" name="submit_wpum_group_form" class="button" value="<?php esc_html_e( 'Update Profile' ); ?>" />
+			<input type="submit" id="submit_wpum_group_form" name="submit_wpum_group_form" class="button" value="<?php esc_html_e( 'Update Profile', 'wpum' ); ?>" />
 		</p>
 
 	</form>

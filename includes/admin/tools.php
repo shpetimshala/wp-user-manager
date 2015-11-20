@@ -61,7 +61,7 @@ function wpum_tools_page() {
 function wpum_get_tools_tabs() {
 
 	$tabs = array();
-	$tabs['export_import'] = esc_html__( 'Export/Import Settings' );
+	$tabs['export_import'] = esc_html__( 'Export/Import Settings', 'wpum' );
 
 	return apply_filters( 'wpum_tools_tabs', $tabs );
 
@@ -79,15 +79,15 @@ function wpum_tools_tab_export_import() {
 
 	<div class="postbox">
 
-		<h3 class="hndle"><span><?php esc_html_e( 'Export Settings' ); ?></span></h3>
+		<h3 class="hndle"><span><?php esc_html_e( 'Export Settings', 'wpum' ); ?></span></h3>
 
 		<div class="inside">
-			<p><?php _e( 'Export the WP User Manager settings for this site as a .json file. This allows you to easily import the configuration into another site.' ); ?></p>
+			<p><?php _e( 'Export the WP User Manager settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wpum' ); ?></p>
 			<form method="post" action="<?php echo admin_url( 'users.php?page=wpum-tools' ); ?>">
 					<p><input type="hidden" name="wpum_action" value="export_settings" /></p>
 					<p>
 						<?php wp_nonce_field( 'wpum_export_nonce', 'wpum_export_nonce' ); ?>
-						<?php submit_button( esc_html__( 'Export Settings' ), 'secondary', 'submit', false ); ?>
+						<?php submit_button( esc_html__( 'Export Settings', 'wpum' ), 'secondary', 'submit', false ); ?>
 					</p>
 			</form>
 		</div>
@@ -96,10 +96,10 @@ function wpum_tools_tab_export_import() {
 
 	<div class="postbox">
 
-		<h3 class="hndle"><span><?php esc_html_e( 'Import Settings' ); ?></span></h3>
+		<h3 class="hndle"><span><?php esc_html_e( 'Import Settings', 'wpum' ); ?></span></h3>
 
 		<div class="inside">
-			<p><?php _e( 'Import the WP User Manager settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.' ); ?></p>
+			<p><?php _e( 'Import the WP User Manager settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wpum' ); ?></p>
 			<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'users.php?page=wpum-tools' ); ?>">
 				<p>
 					<input type="file" name="import_file"/>
@@ -107,7 +107,7 @@ function wpum_tools_tab_export_import() {
 				<p>
 					<input type="hidden" name="wpum_action" value="import_settings" />
 					<?php wp_nonce_field( 'wpum_import_nonce', 'wpum_import_nonce' ); ?>
-					<?php submit_button( esc_html__( 'Import Settings' ), 'secondary', 'submit', false ); ?>
+					<?php submit_button( esc_html__( 'Import Settings', 'wpum' ), 'secondary', 'submit', false ); ?>
 				</p>
 			</form>
 		</div>
@@ -175,13 +175,13 @@ function wpum_process_settings_import() {
 		return;
 
 	if( wpum_get_file_extension( $_FILES['import_file']['name'] ) != 'json' ) {
-		wp_die( __( 'Please upload a valid .json file' ), __( 'Error' ), array( 'response' => 400 ) );
+		wp_die( __( 'Please upload a valid .json file', 'wpum' ), __( 'Error', 'wpum' ), array( 'response' => 400 ) );
 	}
 
 	$import_file = $_FILES['import_file']['tmp_name'];
 
 	if( empty( $import_file ) ) {
-		wp_die( __( 'Please upload a file to import' ), __( 'Error' ), array( 'response' => 400 ) );
+		wp_die( __( 'Please upload a file to import', 'wpum' ), __( 'Error', 'wpum' ), array( 'response' => 400 ) );
 	}
 
 	$settings = wpum_object_to_array( json_decode( file_get_contents( $import_file ) ) );

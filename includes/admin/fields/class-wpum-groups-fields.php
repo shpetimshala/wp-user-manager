@@ -180,22 +180,22 @@ class WPUM_Groups_Fields extends WP_List_Table {
 
         switch ( $type ) {
             case 'select':
-                $text = esc_html__( 'Dropdown' );
+                $text = esc_html__( 'Dropdown', 'wpum' );
                 break;
             case 'display_name':
-                $text = esc_html__( 'Dropdown' );
+                $text = esc_html__( 'Dropdown', 'wpum' );
                 break;
             case 'file':
-                $text = esc_html__( 'Upload' );
+                $text = esc_html__( 'Upload', 'wpum' );
                 break;
             case 'avatar':
-                $text = esc_html__( 'Upload' );
+                $text = esc_html__( 'Upload', 'wpum' );
                 break;
             case 'username':
-                $text = esc_html__( 'Text' );
+                $text = esc_html__( 'Text', 'wpum' );
                 break;
             case 'nickname':
-                $text = esc_html__( 'Text' );
+                $text = esc_html__( 'Text', 'wpum' );
                 break;
             default:
                 $object = wpum_get_field_type_object( $type );
