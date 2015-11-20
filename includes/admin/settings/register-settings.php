@@ -431,7 +431,7 @@ function wpum_get_registered_settings() {
 				'login_redirect' => array(
 					'id'      => 'login_redirect',
 					'name'    => __( 'Login', 'wpum' ),
-					'desc'    => __('Select the page where you want to redirect users after they login. If empty will return to the current page.', 'wpum'),
+					'desc'    => __('Select the page where you want to redirect users after they login.', 'wpum'),
 					'type'    => 'select',
 					'class'   => 'select2',
 					'options' => wpum_get_pages()
