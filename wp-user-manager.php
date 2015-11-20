@@ -294,6 +294,7 @@ class WP_User_Manager {
 		// Directory for WPUM
 		require_once WPUM_PLUGIN_DIR . 'includes/directories/class-wpum-directory.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/directories/actions.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/directories/filters.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/directories/functions.php';
 		// Ajax Handler
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-ajax-handler.php';
