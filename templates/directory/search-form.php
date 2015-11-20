@@ -13,14 +13,20 @@
   <form action="#" method="post" id="wpum-directory-search-form-<?php echo $directory_args['directory_id']; ?>" class="wpum-directory-search-form" name="wpum-directory-search-form">
 
     <div class="form-fields">
+
+      <?php do_action( 'wpum_directory_search_form_top_fields', $directory_args ); ?>
+
       <?php
         $search_input = array(
           'name'        => 'search_user',
-          'value'       => '',
+          'value'       => isset( $_POST['search_user'] ) ? sanitize_text_field( $_POST['search_user'] ) : '',
           'placeholder' => esc_html__( 'Search for users' ),
         );
         echo WPUM()->html->text( $search_input );
       ?>
+
+      <?php do_action( 'wpum_directory_search_form_bottom_fields', $directory_args ); ?>
+
     </div>
 
     <div class="form-submit">

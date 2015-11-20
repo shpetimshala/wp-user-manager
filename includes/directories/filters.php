@@ -135,3 +135,23 @@ function wpum_directory_pre_set_amount( $args, $directory_id ) {
 
 }
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_amount', 11, 2 );
+
+/**
+ * Modify the user query to search for users through the search form.
+ *
+ * @param array $args         query arguments.
+ * @param string $directory_id directory id number.
+ * @since 1.2.0
+ */
+function wpum_directory_pre_set_search( $args, $directory_id ) {
+
+	if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
+
+		$args['search'] = sanitize_text_field( $_POST['search_user'] );
+
+	}
+
+	return $args;
+
+}
+add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_search', 15, 2 );

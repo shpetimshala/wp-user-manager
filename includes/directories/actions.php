@@ -21,7 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function wpum_directory_add_search_form( $directory_args ) {
 
 	if( $directory_args['search_form'] ) {
-		get_wpum_template( "directory/search-form.php", $directory_args );
+		get_wpum_template( "directory/search-form.php", array(
+			'directory_args'  =>  $directory_args
+		) );
 	}
 
 }
