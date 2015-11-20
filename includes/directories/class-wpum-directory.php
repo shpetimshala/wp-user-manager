@@ -211,10 +211,10 @@ class WPUM_Directory {
 
 		unset( $columns['date'], $columns['author'] );
 
-		$columns["roles"]             = __( 'User Roles', 'wpum' );
-		//$columns["search_form"]       = __( 'Display search form' ); Under construction
-		$columns["profiles_per_page"] = __( 'Profiles per page', 'wpum' );
-		$columns["shortcode"]         = __( 'Shortcode', 'wpum' );
+		$columns["roles"]             = esc_html__( 'User Roles', 'wpum' );
+		$columns["search_form"]       = esc_html__( 'Search form' );
+		$columns["profiles_per_page"] = esc_html__( 'Profiles per page', 'wpum' );
+		$columns["shortcode"]         = esc_html__( 'Shortcode', 'wpum' );
 
 		return $columns;
 	}
