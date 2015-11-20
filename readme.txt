@@ -89,7 +89,7 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
 = 1.2.0 =
 
-Checkout an overview of all the new features here [http://wpusermanager.com/?p=16082](http://wpusermanager.com/?p=16082)
+Checkout an overview of all the new features here [http://wpusermanager.com/?p=16236](http://wpusermanager.com/?p=16236)
 
 - **Added**: you can now import and export the plugin's settings from a site to another.
 - **Added**: basic search form functionality into user directories.
