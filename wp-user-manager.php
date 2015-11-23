@@ -265,6 +265,7 @@ class WP_User_Manager {
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-notices.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/admin-actions.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/admin/upgrade/upgrades.php';
 
 			// Load Emails
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/emails/class-wpum-emails-editor.php';
