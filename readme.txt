@@ -87,6 +87,12 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
 == Changelog ==
 
+= 1.2.1 =
+
+- **Fixed**: issue with default required fields setting themselves as non required when saving the field settings.
+
+To fix the issue please press the upgrade button into the WP dashboard upon updating the plugin.
+
 = 1.2.0 =
 
 Checkout an overview of all the new features here [http://wpusermanager.com/?p=16236](http://wpusermanager.com/?p=16236)
