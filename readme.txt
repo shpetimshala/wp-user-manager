@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -87,11 +87,11 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
 == Changelog ==
 
-= 1.2.1 =
+= 1.2.2 =
 
 - **Fixed**: issue with default required fields setting themselves as non required when saving the field settings.
 
-To fix the issue please press the upgrade button into the WP dashboard upon updating the plugin.
+To fix the issue please press the upgrade button into the WP dashboard upon updating the plugin.c
 
 = 1.2.0 =
 
