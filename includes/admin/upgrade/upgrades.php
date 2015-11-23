@@ -23,8 +23,8 @@ function wpum_upgrades_notices() {
 
     $update_action = add_query_arg( array( 'wpum_upgrade' => 121 ), admin_url( 'index.php' ) );
 
-    $message = sprintf( esc_html__( 'WP User Manager needs to upgrade the fields database, click the button below to start the upgrade.' ) );
-    $button = '<a href="'. esc_url( $update_action ) .'" class="button-primary">'.esc_html__( 'Start upgrade' ).'</a>';
+    $message = sprintf( esc_html__( 'WP User Manager needs to upgrade the fields database, click the button below to start the upgrade.', 'wpum' ) );
+    $button = '<a href="'. esc_url( $update_action ) .'" class="button-primary">'.esc_html__( 'Start upgrade', 'wpum' ).'</a>';
 
     ?>
     <div class="updated">
@@ -50,10 +50,10 @@ function wpum_upgrades_window() {
     $get_upgrade = absint( $_GET['wpum_upgrade'] );
     $upgrade_function = 'wpum_upgrade_function_v'.$get_upgrade;
 
-    $page_title = esc_html__( 'WP User Manager Upgrade' );
-    $upgrade_not_available = esc_html__( 'No upgrade has been found.' );
-    $upgrade_completed = esc_html__( 'Upgrade successfully completed.' );
-    $return_button = '<a href="' . admin_url( 'index.php' ) . '">'. esc_html__( 'Return to dashboard' ) .'</a>';
+    $page_title = esc_html__( 'WP User Manager Upgrade', 'wpum' );
+    $upgrade_not_available = esc_html__( 'No upgrade has been found.', 'wpum' );
+    $upgrade_completed = esc_html__( 'Upgrade successfully completed.', 'wpum' );
+    $return_button = '<a href="' . admin_url( 'index.php' ) . '">'. esc_html__( 'Return to dashboard', 'wpum' ) .'</a>';
 
     if( function_exists( $upgrade_function ) ) {
 
