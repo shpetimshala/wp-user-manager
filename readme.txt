@@ -87,7 +87,7 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
 == Changelog ==
 
-= 1.2.2 =
+= 1.2.3 =
 
 - **Fixed**: issue with default required fields setting themselves as non required when saving the field settings.
 
