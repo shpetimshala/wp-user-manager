@@ -488,6 +488,9 @@ function wpum_get_registered_settings() {
 		'extensions' => apply_filters('wpum_settings_extensions',
 			array()
 		),
+		'licenses' => apply_filters('wpum_settings_licenses',
+			array()
+		),
 		'tools' => apply_filters( 'wpum_settings_tools',
 			array(
 				'restore_emails' => array(
@@ -609,6 +612,10 @@ function wpum_get_settings_tabs() {
 
 	if( ! empty( $settings['extensions'] ) ) {
 		$tabs['extensions'] = __( 'Extensions', 'wpum' );
+	}
+
+	if( ! empty( $settings['licenses'] ) ) {
+		$tabs['licenses'] = __( 'Licenses', 'wpum' );
 	}
 
 	$tabs['tools']          = __( 'Tools', 'wpum' );
@@ -968,6 +975,36 @@ function wpum_upload_callback( $args ) {
 	echo $html;
 
 }
+
+/**
+ * Renders license field.
+ *
+ * @param array $args Arguments passed by the setting
+ * @global $wpum_options Array of all the Options
+ */
+function wpum_license_key_callback( $args ) {
+
+	global $wpum_options;
+
+	if ( isset( $wpum_options[ $args['id'] ] ) ) {
+		$value = $wpum_options[ $args['id'] ];
+	} else {
+		$value = isset( $args['std'] ) ? $args['std'] : '';
+	}
+
+	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+	$html = '<input type="text" class="' . $size . '-text" id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
+
+	if ( 'valid' == get_option( $args['options']['is_valid_license_option'] ) ) {
+		$html .= '<input type="submit" class="button-secondary" name="' . $args['id'] . '_deactivate" value="' . __( 'Deactivate License' ) . '"/>';
+	}
+
+	$html .= '<label for="wpum_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	wp_nonce_field( $args['id'] . '-nonce', $args['id'] . '-nonce' );
+	echo $html;
+
+}
+
 
 /**
  * Descriptive text callback.
