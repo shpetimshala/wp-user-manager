@@ -290,6 +290,9 @@ class WP_User_Manager {
 			// Load Addons Page
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/addons.php';
 
+			// License Handler.
+			require_once WPUM_PLUGIN_DIR . 'includes/updater/class-wpum-license.php';
+
 		}
 
 		// Directory for WPUM
@@ -316,9 +319,6 @@ class WP_User_Manager {
 
 		// Installation Hook
 		require_once WPUM_PLUGIN_DIR . 'includes/install.php';
-
-		// License Handler.
-		require_once WPUM_PLUGIN_DIR . 'includes/updater/class-wpum-license.php';
 
 	}
 
