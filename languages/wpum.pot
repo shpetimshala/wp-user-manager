@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP User Manager 1.2.0\n"
+"Project-Id-Version: WP User Manager 1.2.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-user-manager\n"
-"POT-Creation-Date: 2015-11-23 16:48:49+00:00\n"
+"POT-Creation-Date: 2015-11-29 16:00:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -883,62 +883,70 @@ msgid ""
 "profile on the backend."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:495
+#: includes/admin/settings/register-settings.php:498
 msgid "Restore default emails:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:500
+#: includes/admin/settings/register-settings.php:503
 msgid "Restore Pages:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:505
+#: includes/admin/settings/register-settings.php:508
 msgid "Excluded usernames:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:506
+#: includes/admin/settings/register-settings.php:509
 msgid ""
 "Enter the usernames that you wish to disable. Separate each username on a "
 "new line."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:576
+#: includes/admin/settings/register-settings.php:579
 msgid "Settings successfully updated."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:604
+#: includes/admin/settings/register-settings.php:607
 msgid "General"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:605
+#: includes/admin/settings/register-settings.php:608
 msgid "Registration"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:606
+#: includes/admin/settings/register-settings.php:609
 msgid "Emails"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:607
+#: includes/admin/settings/register-settings.php:610
 msgid "Profiles"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:608
+#: includes/admin/settings/register-settings.php:611
 msgid "Redirects"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:611 includes/filters.php:42
+#: includes/admin/settings/register-settings.php:614 includes/filters.php:42
 msgid "Extensions"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:614
+#: includes/admin/settings/register-settings.php:618
+msgid "Licenses"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:621
 msgid "Tools"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:784
+#: includes/admin/settings/register-settings.php:791
 msgid "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:966
+#: includes/admin/settings/register-settings.php:973
 msgid "Upload File"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:999
+msgid "Deactivate License"
 msgstr ""
 
 #: includes/admin/tools.php:64
@@ -970,6 +978,9 @@ msgid "Please upload a valid .json file"
 msgstr ""
 
 #: includes/admin/tools.php:178 includes/admin/tools.php:184
+#: includes/updater/EDD_SL_Plugin_Updater.php:326
+#: includes/updater/class-wpum-license.php:184
+#: includes/updater/class-wpum-license.php:259
 msgid "Error"
 msgstr ""
 
@@ -2055,6 +2066,50 @@ msgstr ""
 
 #: includes/template-actions.php:122
 msgid "Login failed: You have entered incorrect login details, please try again."
+msgstr ""
+
+#: includes/updater/EDD_SL_Plugin_Updater.php:181
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" "
+"class=\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+
+#: includes/updater/EDD_SL_Plugin_Updater.php:188
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" "
+"class=\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a "
+"href=\"%4$s\">update now</a>."
+msgstr ""
+
+#: includes/updater/EDD_SL_Plugin_Updater.php:326
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:147
+msgid "%1$s License Key"
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:184
+#: includes/updater/class-wpum-license.php:259
+msgid "Nonce verification failed"
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:358
+msgid "This license does not belong to the product you have entered it for."
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:361
+msgid "This license does not have any activations left"
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:364
+msgid "This license key is expired. Please renew it."
+msgstr ""
+
+#: includes/updater/class-wpum-license.php:367
+msgid ""
+"There was a problem activating your license key, please try again or "
+"contact support. Error code: %s"
 msgstr ""
 
 #: includes/widgets/wpum-login-form.php:31

@@ -996,7 +996,7 @@ function wpum_license_key_callback( $args ) {
 	$html = '<input type="text" class="' . $size . '-text" id="wpum_settings[' . $args['id'] . ']" name="wpum_settings[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
 
 	if ( 'valid' == get_option( $args['options']['is_valid_license_option'] ) ) {
-		$html .= '<input type="submit" class="button-secondary" name="' . $args['id'] . '_deactivate" value="' . __( 'Deactivate License' ) . '"/>';
+		$html .= '<input type="submit" class="button-secondary" name="' . $args['id'] . '_deactivate" value="' . __( 'Deactivate License', 'wpum' ) . '"/>';
 	}
 
 	$html .= '<label for="wpum_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';

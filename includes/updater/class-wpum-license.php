@@ -144,7 +144,7 @@ class WPUM_License {
     $wpum_license_settings = array(
 			array(
 				'id'      => $this->item_shortname . '_license_key',
-				'name'    => sprintf( __( '%1$s License Key' ), $this->item_name ),
+				'name'    => sprintf( __( '%1$s License Key', 'wpum' ), $this->item_name ),
 				'desc'    => '',
 				'type'    => 'license_key',
 				'options' => array( 'is_valid_license_option' => $this->item_shortname . '_license_active' ),
@@ -181,7 +181,7 @@ class WPUM_License {
 		}
 
     if( ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
-			wp_die( __( 'Nonce verification failed' ), __( 'Error' ), array( 'response' => 403 ) );
+			wp_die( __( 'Nonce verification failed', 'wpum' ), __( 'Error', 'wpum' ), array( 'response' => 403 ) );
 		}
 
     if( ! current_user_can( 'manage_options' ) ) {
@@ -256,7 +256,7 @@ class WPUM_License {
 			return;
 
     if( ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
-  		wp_die( __( 'Nonce verification failed' ), __( 'Error' ), array( 'response' => 403 ) );
+  		wp_die( __( 'Nonce verification failed', 'wpum' ), __( 'Error', 'wpum' ), array( 'response' => 403 ) );
   	}
 
     if( ! current_user_can( 'manage_options' ) ) {
@@ -355,16 +355,16 @@ class WPUM_License {
 
     	switch( $license_error->error ) {
 				case 'item_name_mismatch' :
-					$message = esc_html__( 'This license does not belong to the product you have entered it for.' );
+					$message = esc_html__( 'This license does not belong to the product you have entered it for.', 'wpum' );
 					break;
 				case 'no_activations_left' :
-					$message = esc_html__( 'This license does not have any activations left' );
+					$message = esc_html__( 'This license does not have any activations left', 'wpum' );
 					break;
 				case 'expired' :
-					$message = esc_html__( 'This license key is expired. Please renew it.' );
+					$message = esc_html__( 'This license key is expired. Please renew it.', 'wpum' );
 					break;
 				default :
-					$message = sprintf( esc_html__( 'There was a problem activating your license key, please try again or contact support. Error code: %s' ), $license_error->error );
+					$message = sprintf( esc_html__( 'There was a problem activating your license key, please try again or contact support. Error code: %s', 'wpum' ), $license_error->error );
 					break;
 			}
 
