@@ -87,6 +87,10 @@ View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpu
 
 == Changelog ==
 
+= 1.2.4 =
+- **Added**: License updater handler for addons.
+- **Added**: Dutch language support thanks to Patrick
+
 = 1.2.3 =
 
 - **Fixed**: issue with default required fields setting themselves as non required when saving the field settings.
