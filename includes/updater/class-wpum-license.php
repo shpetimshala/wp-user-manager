@@ -40,13 +40,6 @@ class WPUM_License {
   private $item_name;
 
   /**
-   * Item id from the site.
-   *
-   * @var string
-   */
-  private $item_id;
-
-  /**
    * Item shortname.
    *
    * @var string
