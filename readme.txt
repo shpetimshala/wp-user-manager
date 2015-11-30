@@ -17,39 +17,39 @@ WP User Manager is the best solution to manage your users and create front-end p
 
 Managing your members, creating front-end profiles and custom login and registration pages should be easy. With this plugin, it finally is.
 
-[WP User Manager](http://wpusermanager.com) lets you create highly customizable user profiles. You easily add custom user registration, login and password recovery forms to your WordPress website. [WP User Manager](http://wpusermanager.com) is the best solution to manage your users.
+[WP User Manager](https://wpusermanager.com) lets you create highly customizable user profiles. You easily add custom user registration, login and password recovery forms to your WordPress website. [WP User Manager](https://wpusermanager.com) is the best solution to manage your users.
 
-[website](http://wpusermanager.com) | [addons](http://wpusermanager.com/addons) | [documentation](http://docs.wpusermanager.com/) | [support](http://wpusermanager.com/support/)
+[website](https://wpusermanager.com) | [addons](https://wpusermanager.com/addons) | [documentation](http://docs.wpusermanager.com/) | [support](https://wpusermanager.com/support/)
 
 = Smart & Effective =
-[WP User Manager](http://wpusermanager.com) is a simple-to-use solution to manage your WordPress community and create beautiful user profiles. Powerful and flexible, yet easy to setup and use, WPUM takes care of all your users needs and saves you time.
+[WP User Manager](https://wpusermanager.com) is a simple-to-use solution to manage your WordPress community and create beautiful user profiles. Powerful and flexible, yet easy to setup and use, WPUM takes care of all your users needs and saves you time.
 
 = Features included =
 
-- [Frontend Forms](http://wpusermanager.com/features/front-end-forms/).
-- [Custom Email Notifications](http://wpusermanager.com/features/custom-email-notifications/).
-- [Custom avatars](http://wpusermanager.com/features/custom-avatars/).
-- [Elegant user profiles](http://wpusermanager.com/features/elegant-user-profiles/).
-- [Shortcodes editor](http://wpusermanager.com/features/shortcodes/).
-- [Beautiful user directories](http://wpusermanager.com/features/user-directories/).
-- [Seo URLs](http://wpusermanager.com/features/seo/).
-- [Content restriction](http://wpusermanager.com/features/content-restriction/).
-- [Passwords management](http://wpusermanager.com/features/passwords-management/).
-- [Custom fields editor](http://wpusermanager.com/features/custom-fields/).
-- [Custom widgets](http://wpusermanager.com/features/custom-widgets/).
-- [Custom redirects](http://wpusermanager.com/features/custom-redirects/).
-- [Powerful tools](http://wpusermanager.com/features/tools/).
-- [Developers friendly](http://wpusermanager.com/features/developers-friendly/).
+- [Frontend Forms](https://wpusermanager.com/features/front-end-forms/).
+- [Custom Email Notifications](https://wpusermanager.com/features/custom-email-notifications/).
+- [Custom avatars](https://wpusermanager.com/features/custom-avatars/).
+- [Elegant user profiles](https://wpusermanager.com/features/elegant-user-profiles/).
+- [Shortcodes editor](https://wpusermanager.com/features/shortcodes/).
+- [Beautiful user directories](https://wpusermanager.com/features/user-directories/).
+- [Seo URLs](https://wpusermanager.com/features/seo/).
+- [Content restriction](https://wpusermanager.com/features/content-restriction/).
+- [Passwords management](https://wpusermanager.com/features/passwords-management/).
+- [Custom fields editor](https://wpusermanager.com/features/custom-fields/).
+- [Custom widgets](https://wpusermanager.com/features/custom-widgets/).
+- [Custom redirects](https://wpusermanager.com/features/custom-redirects/).
+- [Powerful tools](https://wpusermanager.com/features/tools/).
+- [Developers friendly](https://wpusermanager.com/features/developers-friendly/).
 - [Extensive documentation](http://docs.wpusermanager.com).
 - Translation Ready
 
-Read more about our features on [wpusermanager.com](http://wpusermanager.com/features/)
+Read more about our features on [wpusermanager.com](https://wpusermanager.com/features/)
 
 = Free Extensions =
 
-- [Google reCAPTCHA](http://wpusermanager.com/addons/recaptcha): Stop spam registrations on your website for free.
+- [Google reCAPTCHA](https://wpusermanager.com/addons/recaptcha): Stop spam registrations on your website for free.
 
-[View all extensions](http://wpusermanager.com/addons)
+[View all extensions](https://wpusermanager.com/addons)
 
 = Languages =
 
@@ -61,9 +61,9 @@ Read more about our features on [wpusermanager.com](http://wpusermanager.com/fea
 
 = Support =
 
-Support is provided only through our [support forum](http://wpusermanager.com/support/). Join our [support forum](http://wpusermanager.com/register/) to ask questions and get help regarding WP User Manager. Free support is provided exclusively for bugs and help using the plugin. Please read the support policy [http://wpusermanager.com/support-policy/](http://wpusermanager.com/support-policy/).
+Support is provided only through our [support forum](https://wpusermanager.com/support/). Join our [support forum](https://wpusermanager.com/register/) to ask questions and get help regarding WP User Manager. Free support is provided exclusively for bugs and help using the plugin. Please read the support policy [https://wpusermanager.com/support-policy/](https://wpusermanager.com/support-policy/).
 
-Before opening a [support topic](http://wpusermanager.com/support/) please read the [faqs](http://docs.wpusermanager.com/category/66-faq-tutorials) and [documentation](http://docs.wpusermanager.com/).
+Before opening a [support topic](https://wpusermanager.com/support/) please read the [faqs](http://docs.wpusermanager.com/category/66-faq-tutorials) and [documentation](http://docs.wpusermanager.com/).
 
 == Installation ==
 
@@ -79,11 +79,11 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 [http://docs.wpusermanager.com/category/66-faq-tutorials](http://docs.wpusermanager.com/category/66-faq-tutorials)
 
 = General questions =
-[http://wpusermanager.com/faq/](http://wpusermanager.com/faq/)
+[https://wpusermanager.com/faq/](https://wpusermanager.com/faq/)
 
 == Screenshots ==
 
-View all the screenshots here [http://wpusermanager.com/screenshots/](http://wpusermanager.com/screenshots/)
+View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
 
@@ -99,7 +99,7 @@ To fix the issue please press the upgrade button into the WP dashboard upon upda
 
 = 1.2.0 =
 
-Checkout an overview of all the new features here [http://wpusermanager.com/?p=16236](http://wpusermanager.com/?p=16236)
+Checkout an overview of all the new features here [https://wpusermanager.com/?p=16236](https://wpusermanager.com/?p=16236)
 
 - **Added**: you can now import and export the plugin's settings from a site to another.
 - **Added**: basic search form functionality into user directories.
@@ -133,7 +133,7 @@ Checkout an overview of all the new features here [http://wpusermanager.com/?p=1
 
 = 1.1.0 =
 
-Checkout an overview of all the new features here [http://wpusermanager.com/?p=16082](http://wpusermanager.com/?p=16082)
+Checkout an overview of all the new features here [https://wpusermanager.com/?p=16082](https://wpusermanager.com/?p=16082)
 
 - **Added**: Users Overview admin dashboard widget
 - **Added**: Improved WordPress menu manager with logged-in and logged-out user specific links
