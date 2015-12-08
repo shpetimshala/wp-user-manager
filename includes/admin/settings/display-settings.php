@@ -27,7 +27,7 @@ function wpum_options_page() {
 
 	ob_start();
 	?>
-	<div class="wrap">
+	<div class="wrap" id="wpum-settings-panel">
 
 		<h2 class="wpum-page-title"><?php printf( __( 'WP User Manager v%s Settings', 'wpum' ), WPUM_VERSION ); ?> <?php do_action('wpum_next_to_settings_title');?></h2>
 
