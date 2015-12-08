@@ -166,4 +166,8 @@ body.users_page_wpum-edit-field #poststuff h3 span,
 body.users_page_wpum-edit-field #poststuff h3 {
   cursor: auto; }
 
+/* Settings panel adjustment */
+#wpum-settings-panel .radio-spacer {
+  margin-bottom: 10px; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */

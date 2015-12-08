@@ -697,7 +697,7 @@ function wpum_radio_callback( $args ) {
 			$checked = true;
 
 		echo '<input name="wpum_settings[' . $args['id'] . ']"" id="wpum_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked(true, $checked, false) . '/>&nbsp;';
-		echo '<label for="wpum_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
+		echo '<label for="wpum_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/><div class="radio-spacer"></div>';
 	endforeach;
 
 	echo '<p class="description">' . $args['desc'] . '</p>';
