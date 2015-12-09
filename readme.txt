@@ -4,10 +4,10 @@ Plugin URI: https://wpusermanager.com
 Contributors: alessandro.tesoro, wpusermanager
 Tags: avatar, avatar upload, author, author profile, community, front-end login, front-end registration, gravatar, custom avatar, login, login page, registration, registration page, admin bar, hide admin bar, custom field registration, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, member profile, members profiles, member, member directory, members, profile, profile builder, profiles, registration, restrict content, content restriction, content protection, restrict, sign in, sign up, social login, user, user profile, user profiles, user roles, user-fields, users, captcha, login captcha, registration captcha, frontend registration captcha, frontend login catpcha
 Requires at least: 4.1
-Tested up to: 4.3.1
+Tested up to: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -58,6 +58,7 @@ Read more about our features on [wpusermanager.com](https://wpusermanager.com/fe
 - French (thanks to Doxtra)
 - German (thanks to Tobias)
 - Simplified Chinese ( thanks to Changmeng )
+- Dutch ( thanks to Patrick )
 
 = Support =
 
@@ -86,6 +87,10 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.2.5 =
+
+- **Updated**: German translation (thanks to Tobias)
 
 = 1.2.4 =
 - **Added**: License updater handler for addons.

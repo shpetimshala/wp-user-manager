@@ -3,7 +3,7 @@
 Plugin Name: WP User Manager
 Plugin URI:  http://wpusermanager.com
 Description: Create customized user profiles and easily add custom user registration, login and password recovery forms to your WordPress website. WP User Manager is the best solution to manage your users.
-Version: 1.2.4
+Version: 1.2.5
 Author:      Alessandro Tesoro
 Author URI:  http://wpusermanager.com
 License:     GPLv2+
@@ -170,7 +170,7 @@ class WP_User_Manager {
 
 		// Plugin version
 		if ( ! defined( 'WPUM_VERSION' ) ) {
-			define( 'WPUM_VERSION', '1.2.4' );
+			define( 'WPUM_VERSION', '1.2.5' );
 		}
 
 		// Plugin Folder Path
@@ -311,11 +311,15 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/actions.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/profiles/tabs.php';
 		// Load all widgets
-		require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-recent-users.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-password-recovery.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-registration.php';
-		require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-login-form.php';
+		if( class_exists( 'WP_Widget' ) ) {
+
+			require_once WPUM_PLUGIN_DIR . 'includes/lib/wph-widget-class.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-recent-users.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-password-recovery.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-registration.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/widgets/wpum-login-form.php';
+
+		}
 
 		// Installation Hook
 		require_once WPUM_PLUGIN_DIR . 'includes/install.php';
