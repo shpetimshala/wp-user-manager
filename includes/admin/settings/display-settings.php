@@ -40,6 +40,7 @@ function wpum_options_page() {
 					'emails-updated' => false,
 					'wpum_action' => false,
 					'setup_done' => false,
+					'message' => false,
 					'tab' => $tab_id
 				) );
 

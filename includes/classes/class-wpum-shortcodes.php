@@ -215,10 +215,6 @@ class WPUM_Shortcodes {
 			'register_link' => ''
 		), $atts ) );
 
-		// Set default values
-		if( !array_key_exists('form_id', $atts) || empty($atts['form_id']) )
-			$atts['form_id'] = 'default_password_form';
-
 		return WPUM()->forms->get_form( 'password', $atts );
 
 	}
