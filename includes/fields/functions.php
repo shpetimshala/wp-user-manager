@@ -31,7 +31,7 @@ function wpum_get_field_types( $exclude_primary = true, $type = 'basic' ) {
 		}
 	}
 
-	return $field_types;
+	return apply_filters( 'wpum_get_field_types', $field_types );
 
 }
 
