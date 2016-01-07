@@ -46,6 +46,14 @@ add_action( 'wpum_do_helper_links', 'wpum_add_links_to_forms', 10, 3 );
  */
 function wpum_add_helper_links( $atts ) {
 
+	$defaults = array(
+		'login_link'    => true,
+		'psw_link'      => true,
+		'register_link' => true,
+	);
+
+	$atts = wp_parse_args( $atts, $defaults );
+
 	$login_link    = $atts['login_link'];
 	$psw_link      = $atts['psw_link'];
 	$register_link = $atts['register_link'];
