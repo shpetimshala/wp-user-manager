@@ -742,6 +742,19 @@ class WPUM_Fields_Editor {
 			if( ! $this->field_object->set_requirement || $this->field->meta == 'user_email' )
 				unset( $args['is_required'] );
 
+			// Dirty fix for always required/show on registration fields.
+			if( $this->field->meta == 'user_email' ||
+					$this->field->meta == 'username' ||
+					$this->field->meta == 'password'
+			) {
+				unset( $args['is_required'] );
+				unset( $args['show_on_registration'] );
+			}
+
+			if( $this->field->meta == 'nickname' || $this->field->meta == 'display_name' ) {
+				unset( $args['is_required'] );
+			}
+
 			// Save the field
 			if( WPUM()->fields->update( $field_id, $args ) ) {
 
