@@ -379,7 +379,7 @@ class WPUM_Fields_Editor {
 		// Name Field Args
 		$name_args = array(
 			'name'         => 'name',
-			'value'        => esc_html( $this->group->name ),
+			'value'        => esc_html( stripslashes( $this->group->name ) ),
 			'label'        => __('Group name', 'wpum'),
 			'class'        => 'text',
 		);
@@ -387,7 +387,7 @@ class WPUM_Fields_Editor {
 		// Description field args
 		$description_args = array(
 			'name'         => 'description',
-			'value'        => esc_html( $this->group->description ),
+			'value'        => esc_html( stripslashes( $this->group->description ) ),
 			'label'        => __('Group description', 'wpum'),
 			'class'        => 'textarea',
 		);
@@ -578,7 +578,7 @@ class WPUM_Fields_Editor {
 		// Prepare configuration for fields
 		$field_name_args = array(
 			'name'         => 'name',
-			'value'        => esc_html( $this->field->name ),
+			'value'        => esc_html( stripslashes( $this->field->name ) ),
 			'label'        => false,
 			'placeholder' => __('Enter a name for this field', 'wpum'),
 			'class'        => 'text',
@@ -615,7 +615,7 @@ class WPUM_Fields_Editor {
 
 		<div class="description-editor">
 			<h3><?php esc_html_e('Field Description (optional)', 'wpum'); ?></h3>
-			<?php wp_editor( $this->field->description, 'field_description', $description_settings ); ?>
+			<?php wp_editor( stripslashes( $this->field->description ), 'field_description', $description_settings ); ?>
 		</div>
 
 		<?php

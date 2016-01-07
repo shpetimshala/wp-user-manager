@@ -150,11 +150,11 @@ function wpum_get_registration_fields() {
 
 		$fields[ $field['meta'] ] = apply_filters( 'wpum_form_field', array(
 			'priority'    => $field['field_order'],
-			'label'       => $field['name'],
+			'label'       => stripslashes( $field['name'] ),
 			'type'        => $field['type'],
 			'meta'        => $field['meta'],
 			'required'    => $field['is_required'],
-			'description' => $field['description'],
+			'description' => stripslashes( $field['description'] ),
 		), $field['options'] );
 
 	}
@@ -216,11 +216,11 @@ function wpum_get_account_fields() {
 
 		$fields[ $field['meta'] ] = apply_filters( 'wpum_form_field', array(
 			'priority'    => $field['field_order'],
-			'label'       => $field['name'],
+			'label'       => stripslashes( $field['name'] ),
 			'type'        => $field['type'],
 			'meta'        => $field['meta'],
 			'required'    => $field['is_required'],
-			'description' => $field['description'],
+			'description' => stripslashes( $field['description'] ),
 			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
 			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
