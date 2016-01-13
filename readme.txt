@@ -88,6 +88,14 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.2.6 =
+
+- **Added**: tool to manually fix broken fields from previous bug.
+- **Added**: pt_BR translation.
+- fixed: slashes - escaping in fields names and descriptions.
+- fixed: slashes - escaping in field groups names and descriptions.
+- fixed: password reset shortcode expects parameters.
+
 = 1.2.5 =
 
 - **Updated**: German translation (thanks to Tobias)
