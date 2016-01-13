@@ -503,6 +503,11 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Restore Pages:', 'wpum' ),
 					'type' => 'hook'
 				),
+				'restore_fields' => array(
+					'id'   => 'restore_fields',
+					'name' => __( 'Restore broken fields:', 'wpum' ),
+					'type' => 'hook'
+				),
 				'exclude_usernames' => array(
 					'id'   => 'exclude_usernames',
 					'name' => __( 'Excluded usernames:', 'wpum' ),

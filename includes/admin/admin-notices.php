@@ -52,6 +52,10 @@ function wpum_admin_messages() {
 			add_settings_error( 'wpum-notices', 'pages-updated', __( 'Pages setup completed.', 'wpum' ), 'updated' );
 		}
 
+		if( isset( $_GET['message'] ) && $_GET['message'] == 'fields_fixed' ) :
+			add_settings_error( 'wpum-notices', 'fields_fixed', __( 'Fields successfully fixed.', 'wpum' ), 'updated' );
+		endif;
+
 	}
 
 	// Verify if upload folder is writable
