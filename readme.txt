@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
