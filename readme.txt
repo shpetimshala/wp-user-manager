@@ -88,6 +88,10 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.2.7 =
+
+- fixed: tool to fix missing fields from previous bug, did not actually fix fields.
+
 = 1.2.6 =
 
 - **Added**: tool to manually fix broken fields from previous bug.
