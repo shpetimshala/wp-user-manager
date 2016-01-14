@@ -309,7 +309,7 @@ function wpum_run_fields_fix() {
 					'is_required' => true
 				);
 
-				WPUM()->fields->update( $field['id'], $args );
+				WPUM()->fields->update( $field['id'], $field_args );
 
 			}
 
