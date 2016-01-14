@@ -59,6 +59,7 @@ Read more about our features on [wpusermanager.com](https://wpusermanager.com/fe
 - German (thanks to Tobias)
 - Simplified Chinese ( thanks to Changmeng )
 - Dutch ( thanks to Patrick )
+- Portuguese ( thanks to Fernando )
 
 = Support =
 
