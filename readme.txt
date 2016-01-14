@@ -49,6 +49,10 @@ Read more about our features on [wpusermanager.com](https://wpusermanager.com/fe
 
 - [Google reCAPTCHA](https://wpusermanager.com/addons/recaptcha): Stop spam registrations on your website for free.
 
+= Paid Extensions =
+
+- [Custom Fields](https://wpusermanager.com/addons/custom-fields/): Add custom fields to user profiles and registration form.
+
 [View all extensions](https://wpusermanager.com/addons)
 
 = Languages =
