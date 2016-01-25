@@ -13,7 +13,7 @@
 	<form action="#" method="post" id="wpum-group-form" class="wpum-profile-form" name="wpum-group-form" enctype="multipart/form-data">
 
 		<?php foreach ( $group_fields as $key => $field ) : ?>
-			<fieldset class="fieldset-<?php echo esc_attr( $key ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php echo esc_attr( $key ); ?>">
+			<fieldset class="fieldset-<?php echo esc_attr( $key ); ?> field-<?php echo esc_attr( $field['type'] ); ?>" data-type="<?php echo esc_attr( $field['type'] );?>" data-label="<?php echo esc_attr( $field['label'] );?>" data-required="<?php echo esc_attr( $field['required'] );?>" data-name="<?php echo esc_attr( $key ); ?>">
 				<label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $field['label'] ); ?><?php if ( ! empty( $field['required'] ) ) echo '<span class="wpum-required-star">*</span>'; ?></label>
 				<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 					<?php do_action( "wpum/form/{$form}/before/field={$key}", $field ); ?>

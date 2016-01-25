@@ -50,7 +50,7 @@ if ( isset( $_GET['password-reset'] ) ) {
 
 			<!-- Start Password Replace Fields -->
 			<?php foreach ( $password_fields as $key => $field ) : ?>
-				<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?>">
+				<fieldset class="fieldset-<?php esc_attr_e( $key, 'wpum' ); ?> field-<?php echo esc_attr( $field['type'] ); ?>">
 					<label for="<?php esc_attr_e( $key, 'wpum' ); ?>"><?php echo esc_html( $field['label'] ); ?> <?php if ( ! empty( $field['required'] ) ) echo '<span class="wpum-required-star">*</span>'; ?></label>
 					<div class="field <?php echo $field['required'] ? 'required-field' : ''; ?>">
 						<?php echo wpum_get_field_input_html( $key, $field ); ?>
