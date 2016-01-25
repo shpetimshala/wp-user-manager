@@ -17,7 +17,7 @@
 	<?php checked( ( ! empty( $field['value'] ) && $opt_key == $field['value'] ), true ); ?>
 	value="<?php echo esc_attr( $opt_key ); ?>"
 />
-<?php echo esc_html( $value ); ?></label><br/>
+<?php echo esc_html( $value ); ?></label>
 
 <?php endforeach; ?>
 

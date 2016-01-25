@@ -18,7 +18,7 @@
 		<?php if ( ! empty( $field['value'] ) && is_array( $field['value'] ) ) checked( in_array( $opt_key, $field['value'] ), true ); ?>
 		value="<?php echo esc_attr( $opt_key ); ?>"
 	/>
-	<?php echo esc_html( $value ); ?></label><br/>
+	<?php echo esc_html( $value ); ?></label>
 
 <?php endforeach; ?>
 
