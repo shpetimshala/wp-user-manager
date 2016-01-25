@@ -455,6 +455,10 @@ ul.wpum-user-listings {
 			width: 70%;
 			float: right;
 			vertical-align: middle;
+			label {
+				float:none;
+				width: auto;
+			}
 		}
 		input.input-text, input.input-email, textarea, select {
 			margin: 0;

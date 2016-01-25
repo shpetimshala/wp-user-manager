@@ -430,6 +430,12 @@ ul.wpum-user-listings {
     width: 70%;
     float: right;
     vertical-align: middle; }
+    .wpum-profile-form fieldset div.field label,
+    .wpum-registration-form fieldset div.field label,
+    .wpum-password-form fieldset div.field label,
+    .wpum-update-password-form fieldset div.field label {
+      float: none;
+      width: auto; }
   .wpum-profile-form fieldset input.input-text, .wpum-profile-form fieldset input.input-email, .wpum-profile-form fieldset textarea, .wpum-profile-form fieldset select,
   .wpum-registration-form fieldset input.input-text,
   .wpum-registration-form fieldset input.input-email,
