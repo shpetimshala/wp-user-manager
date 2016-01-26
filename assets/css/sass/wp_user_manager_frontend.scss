@@ -459,6 +459,12 @@ ul.wpum-user-listings {
 				float:none;
 				width: auto;
 			}
+			&.field-mailchimp {
+				label ~ small {
+					margin-top: 0;
+					margin-bottom: 1.2em;
+				}
+			}
 		}
 		input.input-text, input.input-email, textarea, select {
 			margin: 0;
