@@ -36,14 +36,10 @@ function wpum_install() {
 	// Install default pages
 	wpum_generate_pages();
 
-	// Setup default emails content
-	$default_emails = array();
-
-	// Delete the option
-	delete_option( 'wpum_emails' );
-
-	// Get all registered emails
-	wpum_register_emails();
+	// Register emails if the option doesn't exist already.
+	if( ! get_option( 'wpum_emails' ) ) {
+		wpum_register_emails();
+	}
 
 	// Let's set some default options
 	wpum_update_option( 'enable_honeypot', true ); // enable antispam honeypot by default.
