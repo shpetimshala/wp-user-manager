@@ -129,4 +129,7 @@ body.wpum_addons_page .wpum-extension {
 #wpum-tools-page .inside {
   padding-bottom: 0px; }
 
+.wpum-field-editor-side-metaboxes h2.hndle {
+  cursor: auto !important; }
+
 /*# sourceMappingURL=wp_user_manager_admin_general.css.map */

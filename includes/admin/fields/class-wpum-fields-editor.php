@@ -529,7 +529,7 @@ class WPUM_Fields_Editor {
 
 						</div><!-- #post body content -->
 
-						<div id="postbox-container-1" class="postbox-container">
+						<div id="postbox-container-1" class="postbox-container wpum-field-editor-side-metaboxes">
 							<div id="save-field-container" >
 
 								<!-- save field box -->
