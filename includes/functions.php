@@ -317,7 +317,7 @@ function wpum_get_displayed_user_id() {
 				$user_id = esc_attr( $who );
 				break;
 			case 'username':
-				$retrieve = get_user_by( 'login', esc_attr( $who ) );
+				$retrieve = get_user_by( 'login', esc_attr( urldecode( $who ) ) );
 				$user_id  = $retrieve->data->ID;
 				break;
 			case 'nickname':

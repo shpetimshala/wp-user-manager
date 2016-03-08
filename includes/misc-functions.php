@@ -322,7 +322,7 @@ function wpum_user_exists( $user_data, $method_type ) {
 	}
 
 	// Check if user exists by username
-	if ( !empty( $user_data ) && $method_type == 'username' && get_user_by( 'login', esc_attr( $user_data ) ) ) {
+	if ( !empty( $user_data ) && $method_type == 'username' && get_user_by( 'login', esc_attr( urldecode( $user_data ) ) ) ) {
 		$exists = true;
 	}
 

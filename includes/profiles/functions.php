@@ -36,7 +36,7 @@ function wpum_get_user_by_data() {
 				$user_data = get_user_by( 'id', intval( get_query_var( 'user' ) ) );
 				break;
 			case 'username':
-				$user_data = get_user_by( 'login', esc_attr( get_query_var( 'user' ) ) );
+				$user_data = get_user_by( 'login', esc_attr( urldecode( get_query_var( 'user' ) ) ) );
 				break;
 			case 'nickname':
 
