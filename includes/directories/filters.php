@@ -116,27 +116,6 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_order', 12, 2 );
 
 /**
- * Modify the WP_User_Query on the directory page.
- * Check whether the directory should be setting a specific amount of users.
- *
- * @since 1.0.0
- * @param array $args WP_User_Query args.
- * @param string $directory_id id number of the directory.
- * @return array
- */
-function wpum_directory_pre_set_amount( $args, $directory_id ) {
-
-	$can_sort = wpum_directory_display_amount_sorter( $directory_id );
-
-	if( $can_sort && isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) )
-		$args['number'] = sanitize_key( $_GET['amount'] );
-
-	return $args;
-
-}
-add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_amount', 11, 2 );
-
-/**
  * Modify the user query to search for users through the search form.
  *
  * @param array $args         query arguments.

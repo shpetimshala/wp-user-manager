@@ -481,6 +481,14 @@ class WPUM_Shortcodes {
 
 		// Prepare Pagination
 		$number = wpum_directory_profiles_per_page( $directory_id );
+
+		// Prepare amount sorter.
+		$can_sort = wpum_directory_display_amount_sorter( $directory_id );
+
+		if( $can_sort && isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) ) {
+			$number = sanitize_key( $_GET['amount'] );
+		}
+
 		$paged  = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
 		if( $paged == 1 ) {
@@ -493,7 +501,6 @@ class WPUM_Shortcodes {
 		$args = array(
 			'number' => $number,
 			'offset' => $offset,
-			'fields' => wpum_get_user_query_fields()
 		);
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 

@@ -330,19 +330,3 @@ function wpum_directory_display_amount_sorter( $directory_id = 0 ) {
 	return false;
 
 }
-
-/**
- * List of fields to retrieve during the WP_User_Query for user directories.
- * Limiting the query to certain fields, speeds it up.
- *
- * @since 1.0.0
- * @see https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
- * @return array $fields - https://codex.wordpress.org/Class_Reference/WP_User_Query#Return_Fields_Parameter
- */
-function wpum_get_user_query_fields() {
-
-	$fields = array( 'ID', 'display_name', 'user_login', 'user_nicename', 'user_email', 'user_url', 'user_registered' );
-
-	return apply_filters( 'wpum_get_user_query_fields', $fields );
-
-}
