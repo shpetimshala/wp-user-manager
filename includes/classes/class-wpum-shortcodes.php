@@ -497,11 +497,19 @@ class WPUM_Shortcodes {
 			$offset = ( $paged -1 ) * $number;
     }
 
-		// Make the query
-		$args = array(
-			'number' => $number,
-			'offset' => $offset,
-		);
+		// Prepare the query.
+		$args = array();
+
+		$args['number'] = $number;
+		$args['offset'] = $offset;
+
+		// Trigger search and remove offset.
+		if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
+			$args['search'] = sanitize_text_field( $_POST['search_user'] );
+			$args['offset'] = null;
+		}
+
+		// Make the query.
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Detect which template we should be using.
@@ -515,8 +523,9 @@ class WPUM_Shortcodes {
 		// Build Pagination Count
 		// Modify $number var if a custom amount is set from the frontend
 		// This updates the pagination too.
-		if( isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) )
+		if( isset( $_GET['amount'] ) && is_numeric( $_GET['amount'] ) ) {
 			$number = $_GET['amount'];
+		}
 
 		$total_users = $user_query->total_users;
 		$total_pages = ceil( $total_users / $number );
