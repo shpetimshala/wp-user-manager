@@ -503,7 +503,9 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$do_user = wp_create_user( $username, $pwd, $email );
 
-		wpum_new_user_notification( $do_user, $pwd );
+		if( ! is_wp_error( $do_user ) ) {
+			wpum_new_user_notification( $do_user, $pwd );
+		}
 
 		return $do_user;
 

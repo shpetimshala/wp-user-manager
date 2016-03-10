@@ -509,7 +509,6 @@ class WPUM_Shortcodes {
 			$args['offset'] = null;
 		}
 
-		// Make the query.
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Detect which template we should be using.
