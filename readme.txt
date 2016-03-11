@@ -100,7 +100,7 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 - fixed: minor css enhancements to the fields editor.
 - fixed: profile won't load if username has spaces.
 - fixed: directory pagination not correctly offsetting when adjusting results per page.
-- fixed: directory searches only for currently paginated results if results per page where manually adjusted.
+- fixed: directory searches only for currently paginated results if results per page were manually adjusted.
 - fixed: registration form would try to send an email when someone tries to register with an existing username.
 
 = 1.2.7 =
