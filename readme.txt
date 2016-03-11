@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -92,6 +92,16 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.2.8 =
+
+- fixed: Nickname field displays improperly formatted nickname.
+- fixed: emails are erased and re-created if plugin is disabled and activated again.
+- fixed: minor css enhancements to the fields editor.
+- fixed: profile won't load if username has spaces.
+- fixed: directory pagination not correctly offsetting when adjusting results per page.
+- fixed: directory searches only for currently paginated results if results per page where manually adjusted.
+- fixed: registration form would try to send an email when someone tries to register with an existing username.
 
 = 1.2.7 =
 
