@@ -470,11 +470,6 @@ class WPUM_Form_Register extends WPUM_Form {
 			if( array_key_exists( 'description' , $values['register'] ) )
 				update_user_meta( $user_id, 'description', $values['register']['description'] );
 
-			// Send notification if password is manually added by the user.
-			if( ! self::$random_password ):
-				wpum_new_user_notification( $do_user, $pwd );
-			endif;
-
 			if( self::$random_password ) :
 				self::add_confirmation( apply_filters( 'wpum/form/register/success/message', __( 'Registration complete. We have sent you a confirmation email with your password.', 'wpum' ) ) );
 			else :
@@ -483,6 +478,11 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			// Add ability to extend registration process.
 			do_action( "wpum/form/register/success" , $user_id, $values );
+
+			// Send notification if password is manually added by the user.
+			if( ! self::$random_password ):
+				wpum_new_user_notification( $do_user, $pwd );
+			endif;
 
 		}
 

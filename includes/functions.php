@@ -330,8 +330,8 @@ function wpum_get_displayed_user_id() {
 					// The User Query.
 					$user_query = new WP_User_Query( $args );
 					$user_query = $user_query->get_results();
+					$user_id    = $user_query[0]->data->ID;
 
-					$user_id = $user_query[0]->data->ID;
 				break;
 
 		}
