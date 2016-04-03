@@ -12,8 +12,9 @@
 
 // Define the form status
 $form_status = 'recover';
-$key = null;
-$login = null;
+$key         = null;
+$login       = null;
+$reset_key   = '';
 
 if ( isset( $_GET['password-reset'] ) )
 	$form_status = 'reset';
@@ -21,7 +22,7 @@ if ( isset( $_GET['password-reset'] ) )
 // Retrieve reset key and login
 if ( isset( $_GET['password-reset'] ) ) {
 	$reset_key = $_GET['key'];
-	$login = $_GET['login'];
+	$login     = $_GET['login'];
 }
 
 ?>
