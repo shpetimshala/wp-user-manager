@@ -126,11 +126,33 @@ class WPUM_Form_Password extends WPUM_Form {
 		$password_2 = $values['password'][ 'password_2' ];
 
 		if ( empty( $password_1 ) || empty( $password_2 ) ) {
-			return new WP_Error( 'password-validation-error', __( 'Please enter your password.', 'wpum' ) );
+			return new WP_Error( 'password-validation-error', esc_html__( 'Please enter your password.', 'wpum' ) );
 		}
 
 		if ( $password_1 !== $password_2 ) {
-			return new WP_Error( 'password-validation-error-2', __( 'Passwords do not match.', 'wpum' ) );
+			return new WP_Error( 'password-validation-error-2', esc_html__( 'Passwords do not match.', 'wpum' ) );
+		}
+
+		$pwd_strenght = wpum_get_option('password_strength');
+
+		// Check strenght
+		$containsLetter  = preg_match('/[A-Z]/', $password_1 );
+		$containsDigit   = preg_match('/\d/', $password_1 );
+		$containsSpecial = preg_match('/[^a-zA-Z\d]/', $password_1 );
+
+		if( $pwd_strenght == 'weak' ) {
+			if( strlen( $password_1 ) < 8 )
+				return new WP_Error( 'password-validation-error', esc_html__( 'Password must be at least 8 characters long.', 'wpum' ) );
+		}
+
+		if( $pwd_strenght == 'medium' ) {
+			if( !$containsLetter || !$containsDigit || strlen( $password_1 ) < 8 )
+				return new WP_Error( 'password-validation-error', esc_html__( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.', 'wpum' ) );
+		}
+
+		if( $pwd_strenght == 'strong' ) {
+			if( !$containsLetter || !$containsDigit || !$containsSpecial || strlen( $password_1 ) < 8 )
+				return new WP_Error( 'password-validation-error', esc_html__( 'Password must be at least 8 characters long and contain at least 1 number and 1 uppercase letter and 1 special character.', 'wpum' ) );
 		}
 
 		return $passed;
