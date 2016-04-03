@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -92,6 +92,14 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.2.9 =
+
+- tweak: registration email is sent after successful registration hook ( for developers ).
+- fixed: password strength validation missing on password reset form.
+- fixed: undefined variable within psw reset form.
+- fixed: unable to register when using the nickname permalink structure.
+- addded: pt_pt language.
 
 = 1.2.8 =
 
