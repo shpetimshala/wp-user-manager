@@ -345,9 +345,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		// Check for nicknames if permalink structure requires unique nicknames.
 		if( get_option('wpum_permalink') == 'nickname'  ) :
 
-			$current_user = wp_get_current_user();
-
-			if( $username !== $current_user->user_nicename && wpum_nickname_exists( $username ) )
+			if( wpum_nickname_exists( $nickname ) )
 				return new WP_Error( 'username-validation-error', __( 'This nickname cannot be used.', 'wpum' ) );
 
 		endif;
