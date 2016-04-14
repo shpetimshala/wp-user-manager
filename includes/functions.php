@@ -352,10 +352,9 @@ function wpum_get_displayed_user_id() {
  */
 function wpum_create_redirect_url( $url, $redirect_to ) {
 
-	$redirect_to = $url;
-	$redirect_to = add_query_arg( $url, array( 'redirect_to' => urlencode( $redirect_to ) ) );
-	$redirect_to = esc_url( $redirect_to );
+	$redirect_url = add_query_arg( array( 'redirect_to' => urlencode( $redirect_to ) ), $url );
+	$redirect_url = esc_url( $redirect_url );
 
-	return $redirect_to;
+	return $redirect_url;
 
 }
