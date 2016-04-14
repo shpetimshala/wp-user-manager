@@ -341,3 +341,21 @@ function wpum_get_displayed_user_id() {
 	return $user_id;
 
 }
+
+/**
+ * Given an url, it creates a new url with the redirect_to parameter.
+ *
+ * @param  string $url         the base url.
+ * @param  string $redirect_to the url to redirect to.
+ * @since 1.3.0
+ * @return void
+ */
+function wpum_create_redirect_url( $url, $redirect_to ) {
+
+	$redirect_to = $url;
+	$redirect_to = add_query_arg( $url, array( 'redirect_to' => urlencode( $redirect_to ) ) );
+	$redirect_to = esc_url( $redirect_to );
+
+	return $redirect_to;
+
+}
