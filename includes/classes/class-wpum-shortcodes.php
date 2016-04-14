@@ -395,7 +395,7 @@ class WPUM_Shortcodes {
 			$args = array(
 				'id'   => 'wpum-guests-disabled',
 				'type' => 'notice',
-				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_create_redirect_url( wpum_get_core_page_url('login'), get_permalink() ), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( apply_filters( 'wpum_restrict_to_users_message', $args ), true );
 
@@ -436,7 +436,7 @@ class WPUM_Shortcodes {
 			$args = array(
 				'id'   => 'wpum-guests-disabled',
 				'type' => 'notice',
-				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_get_core_page_url('login'), wpum_get_core_page_url('register')  )
+				'text' => sprintf( __('This content is available to members only. Please <a href="%s">login</a> or <a href="%s">register</a> to view this area.', 'wpum'), wpum_create_redirect_url( wpum_get_core_page_url('login'), get_permalink() ), wpum_get_core_page_url('register')  )
 			);
 			$warning = wpum_message( apply_filters( 'wpum_restrict_to_user_roles_args', $args ), true );
 
