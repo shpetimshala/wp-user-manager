@@ -25,7 +25,7 @@ $user_profile_user = wpum_get_user_profile_url( $current_user );
 		<ul class="wpum-overview-links">
 			<li><a href="<?php echo esc_url( wpum_get_core_page_url('account') ); ?>"><?php _e('Edit Account', 'wpum'); ?></a></li>
 			<li>|</li>
-			<li><a href="<?php echo esc_url( wpum_logout_url( get_permalink() ) ); ?>"><?php _e('Logout', 'wpum'); ?></a></li>
+			<li><a href="<?php echo esc_url( wpum_logout_url() ); ?>"><?php _e('Logout', 'wpum'); ?></a></li>
 		</ul>
 
 	</div>

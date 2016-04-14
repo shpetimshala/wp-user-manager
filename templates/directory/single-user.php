@@ -12,7 +12,6 @@
 // Prepare trimmed description
 $description = get_user_meta( $user->ID, 'description', true );
 $trimmed_description = wp_trim_words( $description, 12, '<a href="'. wpum_get_user_profile_url( $user ) .'"> ...'.__( 'View Profile', 'wpum' ).'</a>' );
-
 ?>
 
 <li id="wpum-single-user-<?php echo esc_attr( $user->ID ) ?>" class="wpum-single-user">
