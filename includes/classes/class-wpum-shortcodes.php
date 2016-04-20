@@ -163,13 +163,21 @@ class WPUM_Shortcodes {
 			'label'    => esc_html__( 'Login', 'wpum' )
 		), $atts ) );
 
-		$url = wpum_get_core_page_url( 'login' );
+		if( is_user_logged_in() ) {
 
-		if( ! empty( $redirect ) ) {
-			$url = add_query_arg( array( 'redirect_to' => urlencode( $redirect ) ), $url );
+			$output = '';
+
+		} else {
+
+			$url = wpum_get_core_page_url( 'login' );
+
+			if( ! empty( $redirect ) ) {
+				$url = add_query_arg( array( 'redirect_to' => urlencode( $redirect ) ), $url );
+			}
+
+			$output = '<a href="'. esc_url( $url ) .'" class="wpum-login-link">'.esc_html( $label ).'</a>';
+
 		}
-
-		$output = '<a href="'. esc_url( $url ) .'" class="wpum-login-link">'.esc_html( $label ).'</a>';
 
 		return $output;
 
