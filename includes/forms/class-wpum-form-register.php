@@ -289,6 +289,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			'options'     => wpum_get_allowed_user_roles(),
 			'description' => __('Select your user role', 'wpum'),
 			'priority'    => 9999,
+			'value'       => get_option( 'default_role' )
 		);
 
 		return $fields;
