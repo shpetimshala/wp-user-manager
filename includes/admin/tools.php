@@ -60,8 +60,8 @@ function wpum_tools_page() {
  */
 function wpum_get_tools_tabs() {
 
-	$tabs = array();
-	$tabs['export_import']        = esc_html__( 'Export/Import Settings', 'wpum' );
+	$tabs                  = array();
+	$tabs['export_import'] = esc_html__( 'Export/Import Settings', 'wpum' );
 
 	return apply_filters( 'wpum_tools_tabs', $tabs );
 
