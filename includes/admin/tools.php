@@ -62,7 +62,6 @@ function wpum_get_tools_tabs() {
 
 	$tabs = array();
 	$tabs['export_import']        = esc_html__( 'Export/Import Settings', 'wpum' );
-	$tabs['export_import_emails'] = esc_html__( 'Export/Import Emails', 'wpum' );
 
 	return apply_filters( 'wpum_tools_tabs', $tabs );
 
