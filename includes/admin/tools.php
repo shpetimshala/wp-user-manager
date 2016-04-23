@@ -61,7 +61,8 @@ function wpum_tools_page() {
 function wpum_get_tools_tabs() {
 
 	$tabs = array();
-	$tabs['export_import'] = esc_html__( 'Export/Import Settings', 'wpum' );
+	$tabs['export_import']        = esc_html__( 'Export/Import Settings', 'wpum' );
+	$tabs['export_import_emails'] = esc_html__( 'Export/Import Emails', 'wpum' );
 
 	return apply_filters( 'wpum_tools_tabs', $tabs );
 
@@ -136,8 +137,9 @@ function wpum_process_settings_export() {
 	if( ! current_user_can( 'manage_options' ) )
 		return;
 
-	$settings = array();
-	$settings = get_option( 'wpum_settings' );
+	$settings             = array();
+	$settings['settings'] = get_option( 'wpum_settings' );
+	$settings['emails']   = get_option( 'wpum_emails' );
 
 	ignore_user_abort( true );
 
@@ -186,7 +188,8 @@ function wpum_process_settings_import() {
 
 	$settings = wpum_object_to_array( json_decode( file_get_contents( $import_file ) ) );
 
-	update_option( 'wpum_settings', $settings );
+	update_option( 'wpum_settings', $settings['settings'] );
+	update_option( 'wpum_emails', $settings['emails'] );
 
 	$url = add_query_arg( array( 'message' => 'settings_imported' ), admin_url( 'users.php?page=wpum-tools' ) );
 	wp_safe_redirect( $url ); exit;
