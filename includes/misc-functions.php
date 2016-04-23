@@ -382,6 +382,10 @@ function wpum_trigger_upload_file( $field_key, $field ) {
 
 				}
 
+				if( array_key_exists( 'max_file_size' , $field ) && $file_to_upload['size'] > $field['max_file_size'] ) {
+					return new WP_Error( 'file-too-big', esc_html__( 'The uploaded file is too big.', 'wpum' ) );
+				}
+
 			}
 
 			$uploaded_file = wpum_upload_file( $file_to_upload, array( 'file_key' => $file_key ) );

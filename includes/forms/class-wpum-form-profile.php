@@ -212,7 +212,7 @@ class WPUM_Form_Profile extends WPUM_Form {
 		self::$fields = array(
 			'profile' => wpum_get_account_fields()
 		);
-
+		
 	}
 
 	/**
