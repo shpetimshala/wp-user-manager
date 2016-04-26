@@ -375,9 +375,14 @@ function wpum_add_name_to_wptitle( $title, $sep ) {
 		$name = wpum_get_user_displayname( wpum_get_displayed_user_id() );
 		$title = "$name $sep ";
 
+		if ( in_array( 'wordpress-seo/wp-seo.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+			$sitename = get_bloginfo( 'name' );
+		  $title = "$name $sep $sitename";
+		}
+
 	}
 
 	return $title;
 
 }
-add_filter( 'wp_title', 'wpum_add_name_to_wptitle', 10, 2 );
+add_filter( 'wp_title', 'wpum_add_name_to_wptitle', 16, 2 );
