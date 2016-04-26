@@ -360,3 +360,24 @@ function wpum_filter_login_url( $login_url, $redirect ) {
 
 }
 add_filter( 'login_url', 'wpum_filter_login_url', 10, 2 );
+
+/**
+ * Adjusts page title when visiting users profiles.
+ *
+ * @since 1.3.0
+ * @param string $title Default title for current view.
+ * @param string $sep   Optional separator.
+ */
+function wpum_add_name_to_wptitle( $title, $sep ) {
+
+	if( is_page( wpum_get_core_page_id( 'profile' ) ) && wpum_is_single_profile() ) {
+
+		$name = wpum_get_user_displayname( wpum_get_displayed_user_id() );
+		$title = "$name $sep ";
+
+	}
+
+	return $title;
+
+}
+add_filter( 'wp_title', 'wpum_add_name_to_wptitle', 10, 2 );
