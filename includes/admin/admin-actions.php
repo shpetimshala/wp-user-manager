@@ -263,22 +263,6 @@ function wpum_display_rating_notice() {
 }
 
 /**
- * Function to display content of the "restore_fields" option.
- *
- * @since 1.2.6
- * @return array
-*/
-function wpum_option_restore_fields() {
-
-	$output = '<a id="wpum-restore-fields" href="'.esc_url( add_query_arg( array('tool' => 'restore-fields') , admin_url( 'users.php?page=wpum-settings&tab=tools' ) ) ).'" class="button">'.__('Restore fields', 'wpum').'</a>';
-	$output .= '<br/><p class="description">' . __('Click the button to restore the broken fields that disappeared from the registration form.', 'wpum') . '</p>';
-
-	echo $output;
-
-}
-add_action( 'wpum_restore_fields', 'wpum_option_restore_fields' );
-
-/**
  * Fix the broken fields into the previous update.
  *
  * @since 1.2.6
