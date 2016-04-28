@@ -51,7 +51,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			}
 
 			if( wpum_get_option('login_after_registration') ) {
-				add_action( 'wpum/form/register/success', array( __CLASS__, 'do_login' ), 11, 3 );
+				add_action( 'wpum/form/register/done', array( __CLASS__, 'do_login' ), 11, 3 );
 			}
 
 		}
@@ -99,7 +99,7 @@ class WPUM_Form_Register extends WPUM_Form {
 		} elseif( ! wpum_get_option('login_after_registration') || ! wpum_get_option( 'custom_passwords' ) ) {
 
 			if( wpum_get_option( 'registration_redirect' ) )
-				add_action( 'wpum/form/register/success', array( __CLASS__, 'redirect_on_success' ), 9999, 3 );
+				add_action( 'wpum/form/register/done', array( __CLASS__, 'redirect_on_success' ), 9999, 3 );
 
 		}
 
@@ -482,6 +482,9 @@ class WPUM_Form_Register extends WPUM_Form {
 			if( ! self::$random_password ):
 				wpum_new_user_notification( $do_user, $pwd );
 			endif;
+
+			// Needed to close the registration process properly.
+			do_action( "wpum/form/register/done" , $user_id, $values );
 
 		}
 
