@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.9
+Stable tag: 1.2.10
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -93,6 +93,10 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.2.10 =
+
+- fixed: registration email not sending when auto login + redirect was enabled.
 
 = 1.2.9 =
 
