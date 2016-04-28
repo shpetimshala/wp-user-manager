@@ -690,13 +690,24 @@ class WPUM_Fields_Editor {
 			'name'             => 'field_visibility',
 			'selected'         => $this->field->default_visibility,
 			'label'            => esc_html__( 'Field Visibility', 'wpum' ),
-			'desc'             => esc_html__( 'Determine the visibility of this field on users profiles.', 'wpum' ),
+			'desc'             => esc_html__( 'Set the visibility of this field on users profiles.', 'wpum' ),
 			'show_option_all'  => false,
 			'show_option_none' => false,
 			'options'          => wpum_get_field_visibility_settings()
 		);
 
+		$args_read_only = array(
+			'name'    => 'read_only',
+			'current' => false,
+			'label'   => esc_html__( 'Set as read only', 'wpum' ),
+			'desc'    => esc_html__( 'Enable to disallow editing of this field but still display it.', 'wpum' ),
+		);
+
 		echo WPUM()->html->select( $args );
+
+		echo "<br/><br/>";
+
+		echo WPUM()->html->checkbox( $args_read_only );
 
 	}
 

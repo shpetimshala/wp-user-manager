@@ -170,4 +170,8 @@ body.users_page_wpum-edit-field #poststuff h3 {
 #wpum-settings-panel .radio-spacer {
   margin-bottom: 10px; }
 
+/* Fields editor adjustments */
+#wpum_profile_visibility label + br {
+  display: none; }
+
 /*# sourceMappingURL=wp_user_manager.css.map */
