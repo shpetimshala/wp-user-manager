@@ -658,12 +658,16 @@ function wpum_get_account_page_tabs() {
 
 	$tabs['details'] = array(
 		'id'    => 'details',
-		'title' => __('Edit Account', 'wpum'),
+		'title' => esc_html__('Edit Account', 'wpum'),
+		'priority' => 0,
 	);
 	$tabs['change-password'] = array(
 		'id'    => 'change-password',
-		'title' => __('Change Password', 'wpum'),
+		'title' => esc_html__('Change Password', 'wpum'),
+		'priority' => 1,
 	);
+
+	uasort( $tabs, 'wpum_sort_by_priority' );
 
 	return apply_filters( 'wpum_get_account_page_tabs', $tabs );
 
@@ -995,4 +999,17 @@ function wpum_array_to_object( $array ) {
  */
 function wpum_is_multi_array( $array ) {
 	return ( count( $array ) !== count( $array, COUNT_RECURSIVE ) );
+}
+
+/**
+ * Function to sort arrays by priority key.
+ *
+ * @param  array $a array
+ * @param  array $b array
+ * @return array
+ */
+function wpum_sort_by_priority( $a, $b ) {
+	if ( $a['priority'] == $b['priority'] )
+			return 0;
+	return ( $a['priority'] < $b['priority'] ) ? -1 : 1;
 }
