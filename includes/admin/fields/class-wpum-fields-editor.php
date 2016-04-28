@@ -329,7 +329,7 @@ class WPUM_Fields_Editor {
 
 		// Add profile visibility metabox.
 		if( $this->field->meta !== 'password' || $this->field->meta !== 'user_avatar' ) {
-			add_meta_box( 'wpum_profile_visibility', esc_html__( 'Visibility', 'wpum' ), array( $this, 'visibility_settings' ), self::single_field_hook, 'side' );
+			add_meta_box( 'wpum_profile_visibility', esc_html__( 'Visibility & Editing', 'wpum' ), array( $this, 'visibility_settings' ), self::single_field_hook, 'side' );
 		}
 
 	}
@@ -634,7 +634,6 @@ class WPUM_Fields_Editor {
 			'name'    => 'set_as_required',
 			'current' => $this->field->is_required,
 			'label'   => esc_html__('Set this field as required', 'wpum'),
-			'desc'    => esc_html__('Enable to force the user to fill this field.', 'wpum'),
 		);
 
 		echo WPUM()->html->checkbox( $args );
@@ -653,7 +652,6 @@ class WPUM_Fields_Editor {
 			'name'    => 'show_on_registration',
 			'current' => $this->field->show_on_registration,
 			'label'   => esc_html__('Display this field on registration', 'wpum'),
-			'desc'    => esc_html__('Enable to display this field on the registration form.', 'wpum'),
 		);
 
 		echo WPUM()->html->checkbox( $args );
@@ -692,7 +690,7 @@ class WPUM_Fields_Editor {
 			'name'             => 'field_visibility',
 			'selected'         => $this->field->default_visibility,
 			'label'            => esc_html__( 'Field Visibility', 'wpum' ),
-			'desc'             => esc_html__( 'Determine the visibility of this field.', 'wpum' ),
+			'desc'             => esc_html__( 'Determine the visibility of this field on users profiles.', 'wpum' ),
 			'show_option_all'  => false,
 			'show_option_none' => false,
 			'options'          => wpum_get_field_visibility_settings()
