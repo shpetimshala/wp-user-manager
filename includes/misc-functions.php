@@ -1004,6 +1004,7 @@ function wpum_is_multi_array( $array ) {
 /**
  * Function to sort arrays by priority key.
  *
+ * @since 1.3.0
  * @param  array $a array
  * @param  array $b array
  * @return array
