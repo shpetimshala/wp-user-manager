@@ -84,6 +84,14 @@ abstract class WPUM_Field_Type {
 	public $has_repeater = false;
 
 	/**
+	 * If this is enabled, the editor will allow to create a read only field.
+	 *
+	 * @since 1.2.0
+	 * @var bool.
+	 */
+	public $set_read_only = false;
+
+	/**
 	 * Class name.
 	 *
 	 * @since 1.0.0

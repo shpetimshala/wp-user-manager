@@ -700,7 +700,7 @@ class WPUM_Fields_Editor {
 			'name'    => 'read_only',
 			'current' => false,
 			'label'   => esc_html__( 'Set as read only', 'wpum' ),
-			'desc'    => esc_html__( 'Enable to disallow editing of this field but still display it.', 'wpum' ),
+			'desc'    => esc_html__( 'Enable to prevent users from editing this field.', 'wpum' ),
 		);
 
 		echo WPUM()->html->select( $args );

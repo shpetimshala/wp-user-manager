@@ -173,5 +173,7 @@ body.users_page_wpum-edit-field #poststuff h3 {
 /* Fields editor adjustments */
 #wpum_profile_visibility label + br {
   display: none; }
+#wpum_profile_visibility label + br + span {
+  margin-top: 0 !important; }
 
 /*# sourceMappingURL=wp_user_manager.css.map */
