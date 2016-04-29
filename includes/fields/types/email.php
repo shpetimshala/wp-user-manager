@@ -38,6 +38,8 @@ class WPUM_Field_Type_Email extends WPUM_Field_Type {
 		$this->set_registration = true;
 		// Set requirement
 		$this->set_requirement  = true;
+		// Set read only state.
+		$this->set_read_only  = true;
 
 	}
 
