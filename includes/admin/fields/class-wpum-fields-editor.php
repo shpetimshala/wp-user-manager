@@ -696,18 +696,23 @@ class WPUM_Fields_Editor {
 			'options'          => wpum_get_field_visibility_settings()
 		);
 
-		$args_read_only = array(
-			'name'    => 'read_only',
-			'current' => false,
-			'label'   => esc_html__( 'Set as read only', 'wpum' ),
-			'desc'    => esc_html__( 'Enable to prevent users from editing this field.', 'wpum' ),
-		);
-
 		echo WPUM()->html->select( $args );
 
-		echo "<br/><br/>";
+		if( $this->field_object->set_read_only === true ) {
 
-		echo WPUM()->html->checkbox( $args_read_only );
+			echo "<br/><br/>";
+
+			$args_read_only = array(
+				'name'    => 'read_only',
+				'current' => false,
+				'label'   => esc_html__( 'Set as read only', 'wpum' ),
+				'desc'    => esc_html__( 'Enable to prevent users from editing this field.', 'wpum' ),
+			);
+
+			echo WPUM()->html->checkbox( $args_read_only );
+
+		}
+
 
 	}
 

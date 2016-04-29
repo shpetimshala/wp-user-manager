@@ -40,8 +40,6 @@ class WPUM_Field_Type_Username extends WPUM_Field_Type {
 		$this->set_requirement   = false;
 		// Cannot be used multiple times.
 		$this->supports_multiple = false;
-		// Set read only state.
-		$this->set_read_only  = true;
 
 	}
 
