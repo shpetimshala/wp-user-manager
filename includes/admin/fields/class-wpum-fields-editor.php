@@ -704,7 +704,7 @@ class WPUM_Fields_Editor {
 
 			$args_read_only = array(
 				'name'    => 'read_only',
-				'current' => false,
+				'current' => wpum_get_field_option( $this->field->id, 'read_only' ) ? true : false,
 				'label'   => esc_html__( 'Set as read only', 'wpum' ),
 				'desc'    => esc_html__( 'Enable to prevent users from editing this field.', 'wpum' ),
 			);
@@ -782,6 +782,19 @@ class WPUM_Fields_Editor {
 						wpum_update_field_option( $field_id, 'display_full_name', true );
 					} elseif ( $display_full_name === false ) {
 						wpum_delete_field_option( $field_id, 'display_full_name' );
+					}
+
+				}
+
+				// Verify whether the read only option has been enabled.
+				if( $this->field_object->set_read_only === true ) {
+
+					$read_only = isset( $_POST['read_only'] ) ? (bool) $_POST['read_only'] : false;
+
+					if( $read_only ) {
+						wpum_update_field_option( $field_id, 'read_only', true );
+					} else {
+						wpum_delete_field_option( $field_id, 'read_only' );
 					}
 
 				}
