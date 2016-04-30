@@ -685,3 +685,11 @@ div.wpum-message {
 #wpum-no-user-found {
 	margin-top: 1rem;
 }
+
+/* Read only fields styling */
+form.wpum-profile-form {
+	input[readonly], textarea[readonly] {
+		opacity: 0.7;
+		cursor: not-allowed;
+	}
+}
