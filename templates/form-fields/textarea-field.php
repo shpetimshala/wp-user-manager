@@ -1,7 +1,7 @@
 <?php
 /**
  * WPUM Template: Textarea Field Template.
- * 
+ *
  * @package     wp-user-manager
  * @copyright   Copyright (c) 2015, Alessandro Tesoro
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -17,5 +17,6 @@
 	placeholder="<?php echo ! empty( $field['placeholder'] ) ? esc_attr( $field['placeholder'] ) : ''; ?>"
 	maxlength="<?php echo ! empty( $field['maxlength'] ) ? $field['maxlength'] : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
+	<?php if ( $field['read_only'] ) echo 'readonly'; ?>
 	><?php echo isset( $field['value'] ) ? esc_textarea( $field['value'] ) : ''; ?></textarea>
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>

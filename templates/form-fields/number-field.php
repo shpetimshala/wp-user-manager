@@ -20,5 +20,6 @@
 	min="<?php echo ! empty( $field['min'] ) ? $field['min'] : ''; ?>"
 	step="<?php echo ! empty( $field['step'] ) ? $field['step'] : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
+	<?php if ( $field['read_only'] ) echo 'readonly'; ?>
 	/>
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
