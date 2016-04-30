@@ -221,6 +221,7 @@ function wpum_get_account_fields() {
 			'meta'        => $field['meta'],
 			'required'    => $field['is_required'],
 			'description' => stripslashes( $field['description'] ),
+			'read_only'   => wpum_is_field_read_only( $field ),
 			'placeholder' => apply_filters( 'wpum_profile_field_placeholder', null, $field ),
 			'options'     => apply_filters( 'wpum_profile_field_options', null, $field ),
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
@@ -228,13 +229,13 @@ function wpum_get_account_fields() {
 
 	}
 
-	// Remove password field from here
+	// Remove password field from here.
 	unset( $fields['password'] );
 
-	// The username cannot be changed, let's remove that field since it's useless
+	// The username cannot be changed, let's remove that field since it's useless.
 	unset( $fields['username'] );
 
-	// Remove the user avatar field if not enabled
+	// Remove the user avatar field if not enabled.
 	if( ! wpum_get_option( 'custom_avatars' ) )
 		unset( $fields['user_avatar'] );
 
@@ -995,5 +996,35 @@ function wpum_get_field_visibility_settings() {
 	);
 
 	return apply_filters( 'wpum_get_field_visibility_settings', $options );
+
+}
+
+/**
+ * Verify if the field has been set as read only.
+ *
+ * @since 1.3.0
+ * @param  array  $field field details.
+ * @return boolean
+ */
+function wpum_is_field_read_only( $field ) {
+
+	$read_only = false;
+
+	if( is_array( $field ) && array_key_exists( 'options' , $field ) && array_key_exists( 'type' , $field ) ) {
+
+		switch ( $field['type'] ) {
+			case 'text':
+			case 'textarea':
+			case 'email':
+			case 'nickname':
+			case 'number':
+			case 'url':
+				$read_only = wpum_get_serialized_field_option( $field['options'], 'read_only' );
+				break;
+		}
+
+	}
+
+	return $read_only;
 
 }
