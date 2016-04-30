@@ -689,7 +689,7 @@ class WPUM_Fields_Editor {
 		$args = array(
 			'name'             => 'field_visibility',
 			'selected'         => $this->field->default_visibility,
-			'label'            => esc_html__( 'Field Visibility', 'wpum' ),
+			'label'            => esc_html__( 'Profile visibility', 'wpum' ),
 			'desc'             => esc_html__( 'Set the visibility of this field on users profiles.', 'wpum' ),
 			'show_option_all'  => false,
 			'show_option_none' => false,
@@ -697,6 +697,20 @@ class WPUM_Fields_Editor {
 		);
 
 		echo WPUM()->html->select( $args );
+
+		echo "<br/><br/>";
+
+		$args_editing = array(
+			'name'             => 'field_editing',
+			'selected'         => '',
+			'label'            => esc_html__( 'Profile editing', 'wpum' ),
+			'desc'             => esc_html__( 'Set who can edit this field.', 'wpum' ),
+			'show_option_all'  => false,
+			'show_option_none' => false,
+			'options'          => wpum_get_field_editing_settings()
+		);
+
+		echo WPUM()->html->select( $args_editing );
 
 		if( $this->field_object->set_read_only === true ) {
 

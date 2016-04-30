@@ -1028,3 +1028,20 @@ function wpum_is_field_read_only( $field ) {
 	return $read_only;
 
 }
+
+/**
+ * Retrieve the available options for field editing.
+ *
+ * @since 1.3.0
+ * @return array The list of options.
+ */
+function wpum_get_field_editing_settings() {
+
+	$options = array(
+		'public' => esc_html__( 'Publicly editable', 'wpum' ),
+		'hidden' => esc_html__( 'Hidden (admins only)', 'wpum' )
+	);
+
+	return apply_filters( 'wpum_get_field_editing_settings', $options );
+
+}
