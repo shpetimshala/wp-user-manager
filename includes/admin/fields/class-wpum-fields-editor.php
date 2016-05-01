@@ -704,7 +704,7 @@ class WPUM_Fields_Editor {
 
 			$args_editing = array(
 				'name'             => 'field_editing',
-				'selected'         => '',
+				'selected'         => wpum_get_field_option( $this->field->id, 'can_edit' ),
 				'label'            => esc_html__( 'Profile editing', 'wpum' ),
 				'desc'             => esc_html__( 'Set who can edit this field.', 'wpum' ),
 				'show_option_all'  => false,
@@ -813,6 +813,21 @@ class WPUM_Fields_Editor {
 						wpum_update_field_option( $field_id, 'read_only', true );
 					} else {
 						wpum_delete_field_option( $field_id, 'read_only' );
+					}
+
+				}
+
+				// Verify the editing option has been set for the appropriate fields.
+				if( $this->field_object->set_editing === true ) {
+
+					$can_edit = isset( $_POST['field_editing'] ) ? $_POST['field_editing'] : false;
+
+					if( $can_edit && $can_edit !== 'public' ) {
+						wpum_update_field_option( $field_id, 'can_edit', $can_edit );
+					}
+
+					if( $can_edit == 'public' ) {
+						wpum_delete_field_option( $field_id, 'can_edit' );
 					}
 
 				}
