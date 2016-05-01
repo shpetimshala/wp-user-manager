@@ -41,7 +41,9 @@ class WPUM_Field_Type_Nickname extends WPUM_Field_Type {
 		// Cannot be used multiple times.
 		$this->supports_multiple = false;
 		// Set read only state.
-		$this->set_read_only  = true;
+		$this->set_read_only     = true;
+		// Set editing ability.
+		$this->set_editing       = true;
 
 	}
 

@@ -40,6 +40,8 @@ class WPUM_Field_Type_Radio extends WPUM_Field_Type {
 		$this->set_requirement  = true;
     // Add repeater to this field type.
 		$this->has_repeater     = true;
+		// Set editing ability.
+		$this->set_editing      = true;
 
 	}
 

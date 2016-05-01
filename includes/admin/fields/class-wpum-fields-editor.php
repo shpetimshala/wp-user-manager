@@ -577,11 +577,11 @@ class WPUM_Fields_Editor {
 
 		// Prepare configuration for fields
 		$field_name_args = array(
-			'name'         => 'name',
-			'value'        => esc_html( stripslashes( $this->field->name ) ),
-			'label'        => false,
+			'name'        => 'name',
+			'value'       => esc_html( stripslashes( $this->field->name ) ),
+			'label'       => false,
 			'placeholder' => __('Enter a name for this field', 'wpum'),
-			'class'        => 'text',
+			'class'       => 'text',
 		);
 
 		?>
@@ -698,19 +698,23 @@ class WPUM_Fields_Editor {
 
 		echo WPUM()->html->select( $args );
 
-		echo "<br/><br/>";
+		if( $this->field_object->set_editing === true ) {
 
-		$args_editing = array(
-			'name'             => 'field_editing',
-			'selected'         => '',
-			'label'            => esc_html__( 'Profile editing', 'wpum' ),
-			'desc'             => esc_html__( 'Set who can edit this field.', 'wpum' ),
-			'show_option_all'  => false,
-			'show_option_none' => false,
-			'options'          => wpum_get_field_editing_settings()
-		);
+			echo "<br/><br/>";
 
-		echo WPUM()->html->select( $args_editing );
+			$args_editing = array(
+				'name'             => 'field_editing',
+				'selected'         => '',
+				'label'            => esc_html__( 'Profile editing', 'wpum' ),
+				'desc'             => esc_html__( 'Set who can edit this field.', 'wpum' ),
+				'show_option_all'  => false,
+				'show_option_none' => false,
+				'options'          => wpum_get_field_editing_settings()
+			);
+
+			echo WPUM()->html->select( $args_editing );
+
+		}
 
 		if( $this->field_object->set_read_only === true ) {
 

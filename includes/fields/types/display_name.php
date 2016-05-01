@@ -40,6 +40,8 @@ class WPUM_Field_Type_Name_Display extends WPUM_Field_Type {
 		$this->set_requirement   = false;
 		// Cannot be used multiple times.
 		$this->supports_multiple = false;
+		// Set editing ability.
+		$this->set_editing      = true;
 
 	}
 

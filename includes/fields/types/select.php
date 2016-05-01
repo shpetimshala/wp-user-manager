@@ -30,21 +30,18 @@ class WPUM_Field_Type_Dropdown extends WPUM_Field_Type {
 
 		// Label of this field type
 		$this->name             = _x( 'Dropdown', 'field type name', 'wpum' );
-
 		// Field type name
 		$this->type             = 'select';
-
 		// Class of this field
 		$this->class            = __CLASS__;
-
 		// Set registration
 		$this->set_registration = true;
-
 		// Set requirement
 		$this->set_requirement  = true;
-
 		// Add repeater to this field type.
 		$this->has_repeater     = true;
+		// Set editing ability.
+		$this->set_editing      = true;
 
 	}
 

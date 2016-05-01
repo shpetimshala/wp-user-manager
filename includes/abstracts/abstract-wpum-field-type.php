@@ -92,6 +92,14 @@ abstract class WPUM_Field_Type {
 	public $set_read_only = false;
 
 	/**
+	 * If this is enabled, the editor will allow to hide/show the field within the account page.
+	 *
+	 * @since 1.2.0
+	 * @var bool.
+	 */
+	public $set_editing = false;
+
+	/**
 	 * Class name.
 	 *
 	 * @since 1.0.0

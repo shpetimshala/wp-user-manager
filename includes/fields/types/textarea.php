@@ -39,7 +39,9 @@ class WPUM_Field_Type_Textarea extends WPUM_Field_Type {
 		// Set requirement
 		$this->set_requirement  = true;
 		// Set read only state.
-		$this->set_read_only  = true;
+		$this->set_read_only    = true;
+		// Set editing ability.
+		$this->set_editing      = true;
 
 	}
 
