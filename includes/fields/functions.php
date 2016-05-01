@@ -227,6 +227,12 @@ function wpum_get_account_fields() {
 			'value'       => apply_filters( 'wpum_profile_field_value', null, $field )
 		), $field['options'] );
 
+		// Remove all fields that cannot be edited.
+		// This isn't the best way to do it and will be changed at a later point.
+		if( wpum_get_serialized_field_option( $field['options'] , 'can_edit' ) == 'hidden' ) {
+			unset( $fields[ $field['meta'] ] );
+		}
+
 	}
 
 	// Remove password field from here.

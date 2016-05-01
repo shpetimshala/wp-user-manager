@@ -820,7 +820,7 @@ class WPUM_Fields_Editor {
 				// Verify the editing option has been set for the appropriate fields.
 				if( $this->field_object->set_editing === true ) {
 
-					$can_edit = isset( $_POST['field_editing'] ) ? $_POST['field_editing'] : false;
+					$can_edit = isset( $_POST['field_editing'] ) ? esc_attr( $_POST['field_editing'] ) : false;
 
 					if( $can_edit && $can_edit !== 'public' ) {
 						wpum_update_field_option( $field_id, 'can_edit', $can_edit );
