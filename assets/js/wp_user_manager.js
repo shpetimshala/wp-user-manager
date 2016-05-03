@@ -1,6 +1,6 @@
-/*! WP User Manager - v1.1.0
+/*! WP User Manager - v1.3.0
  * http://wpusermanager.com
- * Copyright (c) 2015; * Licensed GPLv2+ */
+ * Copyright (c) 2016; * Licensed GPLv2+ */
 jQuery(document).ready(function ($) {
 
 	/**
@@ -16,6 +16,7 @@ jQuery(document).ready(function ($) {
 		init : function() {
 			this.ajax_remove_file();
 			this.directory_sort();
+			this.show_password();
 		},
 
 		// Check password strenght function
@@ -115,6 +116,15 @@ jQuery(document).ready(function ($) {
 			jQuery("#wpum-dropdown, #wpum-amount-dropdown").change(function () {
 		        location.href = jQuery(this).val();
 		    });
+
+		},
+
+		// Show password functionality.
+		show_password : function() {
+
+			jQuery('#wpum-show-password').change(function(){
+			  jQuery('#password').hideShowPassword( jQuery(this).prop('checked') );
+			});
 
 		}
 

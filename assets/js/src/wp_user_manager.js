@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
 		init : function() {
 			this.ajax_remove_file();
 			this.directory_sort();
+			this.show_password();
 		},
 
 		// Check password strenght function
@@ -120,6 +121,15 @@ jQuery(document).ready(function ($) {
 			jQuery("#wpum-dropdown, #wpum-amount-dropdown").change(function () {
 		        location.href = jQuery(this).val();
 		    });
+
+		},
+
+		// Show password functionality.
+		show_password : function() {
+
+			jQuery('#wpum-show-password').change(function(){
+			  jQuery('#password').hideShowPassword( jQuery(this).prop('checked') );
+			});
 
 		}
 

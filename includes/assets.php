@@ -126,6 +126,12 @@ function wpum_frontend_cssjs() {
 	if ( !defined( 'WPUM_DISABLE_CSS' ) )
 		wp_enqueue_style( 'wpum-frontend-css' );
 
+	// Load psw cloacking script.
+	if( wpum_is_psw_cloacking_enabled() ) {
+		wp_register_script( 'wpum-hideShowPassword', $js_dir . '/vendor/' . 'hideShowPassword' . $suffix . '.js', array( 'jquery' ), WPUM_VERSION, true );
+		wp_enqueue_script( 'wpum-hideShowPassword' );
+	}
+
 	// Display password meter only if enabled
 	if ( wpum_get_option( 'display_password_meter_registration' ) ) :
 

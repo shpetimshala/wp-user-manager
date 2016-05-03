@@ -1014,3 +1014,18 @@ function wpum_sort_by_priority( $a, $b ) {
 			return 0;
 	return ( $a['priority'] < $b['priority'] ) ? -1 : 1;
 }
+
+/**
+ * Verify whether the psw cloacking script is enabled.
+ * Can be disabled through filter.
+ *
+ * @since 1.3.0
+ * @return boolean
+ */
+function wpum_is_psw_cloacking_enabled() {
+
+	$enabled = true;
+
+	return apply_filters( 'wpum_is_psw_cloacking_enabled', $enabled );
+
+}
