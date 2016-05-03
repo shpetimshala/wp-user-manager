@@ -17,6 +17,6 @@
 	value="<?php echo isset( $field['value'] ) ? esc_attr( $field['value'] ) : ''; ?>"
 	maxlength="<?php echo ! empty( $field['maxlength'] ) ? $field['maxlength'] : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
-	<?php if ( $field['read_only'] ) echo 'readonly'; ?>
+	<?php if ( isset( $field['read_only'] ) && $field['read_only'] ) echo 'readonly'; ?>
 	/>
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>
