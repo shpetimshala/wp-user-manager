@@ -436,12 +436,6 @@ function wpum_get_registered_settings() {
 					'class'   => 'select2',
 					'options' => wpum_get_pages()
 				),
-				'always_redirect' => array(
-					'id'   => 'always_redirect',
-					'name' => __( 'Always redirect', 'wpum' ),
-					'desc' => sprintf( __( 'Enable this option to always redirect to the page selected above after login. Please <a href="%s" target="_blank">read documentation</a> for more information.', 'wpum' ), 'http://docs.wpusermanager.com/article/323-understanding-how-login-redirect-works' ),
-					'type' => 'checkbox'
-				),
 				'logout_redirect' => array(
 					'id'      => 'logout_redirect',
 					'name'    => __( 'Logout', 'wpum' ),
