@@ -639,4 +639,9 @@ form.wpum-profile-form input[readonly], form.wpum-profile-form textarea[readonly
   opacity: 0.7;
   cursor: not-allowed; }
 
+/* Show password field styling */
+#wpum-psw-footer label {
+  display: inline;
+  margin-left: 5px; }
+
 /*# sourceMappingURL=wp_user_manager_frontend.css.map */

@@ -17,7 +17,11 @@
 	value="<?php echo isset( $field['value'] ) ? esc_attr( $field['value'] ) : ''; ?>"
 	maxlength="<?php echo ! empty( $field['maxlength'] ) ? $field['maxlength'] : ''; ?>"
 	/>
-<div class="wpum-psw-footer">
+
+<?php if( wpum_is_psw_cloacking_enabled() && $key == 'password' ) : ?>
+<div id="wpum-psw-footer">
 	<input type="checkbox" id="wpum-show-password"><label for="wpum-show-password"><?php esc_html_e( 'Show Password' ); ?></label>
 </div>
+<?php endif; ?>
+
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>

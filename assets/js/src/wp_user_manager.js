@@ -127,9 +127,11 @@ jQuery(document).ready(function ($) {
 		// Show password functionality.
 		show_password : function() {
 
-			jQuery('#wpum-show-password').change(function(){
-			  jQuery('#password').hideShowPassword( jQuery(this).prop('checked') );
-			});
+			if ( jQuery.isFunction(jQuery.fn.hideShowPassword) ) {
+				jQuery('#wpum-show-password').change(function(){
+				  jQuery('#password').hideShowPassword( jQuery(this).prop('checked') );
+				});
+			}
 
 		}
 
