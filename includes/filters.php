@@ -345,21 +345,6 @@ function wpum_login_redirect_detection( $url ) {
 add_filter( 'wpum_login_redirect_url', 'wpum_login_redirect_detection', 99, 1 );
 
 /**
- * Filters the wp_login_url() function with the WPUM login page url.
- *
- * @since 1.3.0
- * @param  string $login_url self explanatory
- * @param  string $redirect  self explanatory
- * @return string
- */
-function wpum_filter_login_url( $login_url, $redirect ) {
-
-	return add_query_arg( array( 'redirect_to' => wpum_get_login_redirect_url() ), wpum_get_core_page_url( 'login' ) );
-
-}
-add_filter( 'login_url', 'wpum_filter_login_url', 10, 2 );
-
-/**
  * Adjusts page title when visiting users profiles.
  *
  * @since 1.3.0
