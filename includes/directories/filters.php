@@ -126,8 +126,14 @@ function wpum_directory_search_query( $query ) {
 
 	global $wpdb;
 
-	$display_name = 'Alessandro';
+	$display_name = 'Benjamin';
 
-	$query->query_where .= $wpdb->prepare( " AND $wpdb->users.display_name LIKE %s", '%' . $wpdb->esc_like( $display_name ) . '%' );
+	// Search by users first name.
+	$query->query_from .= " JOIN {$wpdb->usermeta} fname ON fname.user_id = {$wpdb->users}.ID AND fname.meta_key = 'first_name'";
+
+	// The fields to include in the search.
+ 	$search_by = array( 'user_login', 'user_email', 'fname.meta_value' );
+
+	$query->query_where = 'WHERE 1=1' . $query->get_search_sql( $display_name, $search_by, 'both' );
 
 }
