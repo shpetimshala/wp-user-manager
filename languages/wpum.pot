@@ -1,14 +1,14 @@
-# Copyright (C) 2015 Alessandro Tesoro
+# Copyright (C) 2016 Alessandro Tesoro
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP User Manager 1.2.4\n"
+"Project-Id-Version: WP User Manager 1.2.9\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-user-manager\n"
-"POT-Creation-Date: 2015-11-29 16:00:45+00:00\n"
+"POT-Creation-Date: 2016-05-05 13:46:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
@@ -169,30 +169,34 @@ msgstr ""
 msgid "Pages setup completed."
 msgstr ""
 
-#: includes/admin/admin-notices.php:62
+#: includes/admin/admin-notices.php:56
+msgid "Fields successfully fixed."
+msgstr ""
+
+#: includes/admin/admin-notices.php:66
 msgid ""
 "Your uploads folder in \"%s\" is not writable. <br/>Avatar uploads will not "
 "work, please adjust folder permission.<br/><br/> <a href=\"%s\" "
 "class=\"button\" target=\"_blank\">Read More</a>"
 msgstr ""
 
-#: includes/admin/admin-notices.php:64
+#: includes/admin/admin-notices.php:68
 msgid "No issues detected."
 msgstr ""
 
-#: includes/admin/admin-notices.php:72
+#: includes/admin/admin-notices.php:76
 msgid "Field group successfully updated."
 msgstr ""
 
-#: includes/admin/admin-notices.php:76
+#: includes/admin/admin-notices.php:80
 msgid "Field group successfully deleted."
 msgstr ""
 
-#: includes/admin/admin-notices.php:80
+#: includes/admin/admin-notices.php:84
 msgid "Field successfully updated."
 msgstr ""
 
-#: includes/admin/admin-notices.php:89
+#: includes/admin/admin-notices.php:93
 msgid "Settings successfully imported."
 msgstr ""
 
@@ -360,12 +364,12 @@ msgid "Show on registration form"
 msgstr ""
 
 #: includes/admin/fields/class-wpum-fields-editor.php:328
-#: includes/admin/fields/class-wpum-fields-editor.php:674
+#: includes/admin/fields/class-wpum-fields-editor.php:672
 msgid "Display full name"
 msgstr ""
 
 #: includes/admin/fields/class-wpum-fields-editor.php:332
-msgid "Visibility"
+msgid "Visibility & Editing"
 msgstr ""
 
 #: includes/admin/fields/class-wpum-fields-editor.php:346
@@ -417,28 +421,36 @@ msgstr ""
 msgid "Set this field as required"
 msgstr ""
 
-#: includes/admin/fields/class-wpum-fields-editor.php:637
-msgid "Enable to force the user to fill this field."
-msgstr ""
-
-#: includes/admin/fields/class-wpum-fields-editor.php:655
+#: includes/admin/fields/class-wpum-fields-editor.php:654
 msgid "Display this field on registration"
 msgstr ""
 
-#: includes/admin/fields/class-wpum-fields-editor.php:656
-msgid "Enable to display this field on the registration form."
-msgstr ""
-
-#: includes/admin/fields/class-wpum-fields-editor.php:675
+#: includes/admin/fields/class-wpum-fields-editor.php:673
 msgid "Enable to display the user full name instead."
 msgstr ""
 
-#: includes/admin/fields/class-wpum-fields-editor.php:694
-msgid "Field Visibility"
+#: includes/admin/fields/class-wpum-fields-editor.php:692
+msgid "Profile visibility"
 msgstr ""
 
-#: includes/admin/fields/class-wpum-fields-editor.php:695
-msgid "Determine the visibility of this field."
+#: includes/admin/fields/class-wpum-fields-editor.php:693
+msgid "Set the visibility of this field on users profiles."
+msgstr ""
+
+#: includes/admin/fields/class-wpum-fields-editor.php:708
+msgid "Profile editing"
+msgstr ""
+
+#: includes/admin/fields/class-wpum-fields-editor.php:709
+msgid "Set who can edit this field."
+msgstr ""
+
+#: includes/admin/fields/class-wpum-fields-editor.php:726
+msgid "Set as read only"
+msgstr ""
+
+#: includes/admin/fields/class-wpum-fields-editor.php:727
+msgid "Enable to prevent users from editing this field."
 msgstr ""
 
 #: includes/admin/fields/class-wpum-groups-fields.php:48
@@ -510,7 +522,7 @@ msgstr ""
 msgid "Add to Menu"
 msgstr ""
 
-#: includes/admin/menu-functions.php:95 includes/misc-functions.php:657
+#: includes/admin/menu-functions.php:95 includes/misc-functions.php:661
 #: templates/user-overview.php:26
 msgid "Edit Account"
 msgstr ""
@@ -519,7 +531,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: includes/admin/menu-functions.php:145 includes/misc-functions.php:587
+#: includes/admin/menu-functions.php:145 includes/misc-functions.php:591
 #: includes/widgets/wpum-registration.php:41
 #: templates/forms/registration-form.php:38
 msgid "Register"
@@ -811,7 +823,7 @@ msgstr ""
 #: includes/admin/settings/register-settings.php:433
 #: includes/classes/class-wpum-shortcodes.php:77
 #: includes/classes/class-wpum-shortcodes.php:163 includes/functions.php:117
-#: includes/misc-functions.php:551 includes/widgets/wpum-login-form.php:41
+#: includes/misc-functions.php:555 includes/widgets/wpum-login-form.php:41
 msgid "Login"
 msgstr ""
 
@@ -820,132 +832,121 @@ msgid "Select the page where you want to redirect users after they login."
 msgstr ""
 
 #: includes/admin/settings/register-settings.php:441
-msgid "Always redirect"
-msgstr ""
-
-#: includes/admin/settings/register-settings.php:442
-msgid ""
-"Enable this option to always redirect to the page selected above after "
-"login. Please <a href=\"%s\" target=\"_blank\">read documentation</a> for "
-"more information."
-msgstr ""
-
-#: includes/admin/settings/register-settings.php:447
 #: includes/classes/class-wpum-shortcodes.php:140
 #: templates/user-overview.php:28
 msgid "Logout"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:448
+#: includes/admin/settings/register-settings.php:442
 msgid ""
 "Select the page where you want to redirect users after they logout. If "
 "empty will return to wp-login.php"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:455
+#: includes/admin/settings/register-settings.php:449
 msgid "Registration Redirect"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:456
+#: includes/admin/settings/register-settings.php:450
 msgid ""
 "Select the page where you want to redirect users after they successfully "
 "register. If empty a message will be displayed instead."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:463
+#: includes/admin/settings/register-settings.php:457
 msgid "Backend register"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:464
+#: includes/admin/settings/register-settings.php:458
 msgid ""
 "Select a page if you wish to redirect users who try to signup through <a "
 "href=\"%s\">the default registration page on wp-login.php</a>"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:471
+#: includes/admin/settings/register-settings.php:465
 msgid "Backend lost password"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:472
+#: includes/admin/settings/register-settings.php:466
 msgid ""
 "Select a page if you wish to redirect users who try to recover a lost "
 "password through <a href=\"%s\">the default password recovery page on "
 "wp-login.php</a>"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:479
+#: includes/admin/settings/register-settings.php:473
 msgid "Backend profile"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:480
+#: includes/admin/settings/register-settings.php:474
 msgid ""
 "Select the page where you want to redirect users who try to access their "
 "profile on the backend."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:498
+#: includes/admin/settings/register-settings.php:492
 msgid "Restore default emails:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:503
+#: includes/admin/settings/register-settings.php:497
 msgid "Restore Pages:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:508
+#: includes/admin/settings/register-settings.php:502
 msgid "Excluded usernames:"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:509
+#: includes/admin/settings/register-settings.php:503
 msgid ""
 "Enter the usernames that you wish to disable. Separate each username on a "
 "new line."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:579
+#: includes/admin/settings/register-settings.php:573
 msgid "Settings successfully updated."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:607
+#: includes/admin/settings/register-settings.php:601
 msgid "General"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:608
+#: includes/admin/settings/register-settings.php:602
 msgid "Registration"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:609
+#: includes/admin/settings/register-settings.php:603
 msgid "Emails"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:610
+#: includes/admin/settings/register-settings.php:604
 msgid "Profiles"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:611
+#: includes/admin/settings/register-settings.php:605
 msgid "Redirects"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:614 includes/filters.php:42
+#: includes/admin/settings/register-settings.php:608 includes/filters.php:42
 msgid "Extensions"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:618
+#: includes/admin/settings/register-settings.php:612
 msgid "Licenses"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:621
+#: includes/admin/settings/register-settings.php:615
 msgid "Tools"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:791
+#: includes/admin/settings/register-settings.php:785
 msgid "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:973
+#: includes/admin/settings/register-settings.php:967
 msgid "Upload File"
 msgstr ""
 
-#: includes/admin/settings/register-settings.php:999
+#: includes/admin/settings/register-settings.php:993
 msgid "Deactivate License"
 msgstr ""
 
@@ -973,18 +974,18 @@ msgid ""
 "obtained by exporting the settings on another site using the form above."
 msgstr ""
 
-#: includes/admin/tools.php:178
+#: includes/admin/tools.php:179
 msgid "Please upload a valid .json file"
 msgstr ""
 
-#: includes/admin/tools.php:178 includes/admin/tools.php:184
+#: includes/admin/tools.php:179 includes/admin/tools.php:185
 #: includes/updater/EDD_SL_Plugin_Updater.php:326
 #: includes/updater/class-wpum-license.php:184
 #: includes/updater/class-wpum-license.php:259
 msgid "Error"
 msgstr ""
 
-#: includes/admin/tools.php:184
+#: includes/admin/tools.php:185
 msgid "Please upload a file to import"
 msgstr ""
 
@@ -1127,23 +1128,23 @@ msgstr ""
 msgid "Upload or select a file"
 msgstr ""
 
-#: includes/assets.php:135
+#: includes/assets.php:141
 msgid "Strength indicator"
 msgstr ""
 
-#: includes/assets.php:136
+#: includes/assets.php:142
 msgid "Very weak"
 msgstr ""
 
-#: includes/assets.php:137 includes/functions.php:42
+#: includes/assets.php:143 includes/functions.php:42
 msgid "Weak"
 msgstr ""
 
-#: includes/assets.php:139 includes/functions.php:44
+#: includes/assets.php:145 includes/functions.php:44
 msgid "Strong"
 msgstr ""
 
-#: includes/assets.php:147
+#: includes/assets.php:153
 msgid "Checking credentials..."
 msgstr ""
 
@@ -1162,7 +1163,7 @@ msgid "Your profile picture has been deleted."
 msgstr ""
 
 #: includes/classes/class-wpum-ajax-handler.php:118
-#: includes/template-actions.php:151
+#: includes/template-actions.php:159
 msgid "Something went wrong."
 msgstr ""
 
@@ -1199,26 +1200,26 @@ msgstr ""
 msgid "<a href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/classes/class-wpum-shortcodes.php:363
-#: includes/classes/class-wpum-shortcodes.php:402
-#: includes/classes/class-wpum-shortcodes.php:443
+#: includes/classes/class-wpum-shortcodes.php:367
+#: includes/classes/class-wpum-shortcodes.php:406
+#: includes/classes/class-wpum-shortcodes.php:447
 #: includes/profiles/functions.php:382 includes/profiles/functions.php:394
 msgid ""
 "This content is available to members only. Please <a href=\"%s\">login</a> "
 "or <a href=\"%s\">register</a> to view this area."
 msgstr ""
 
-#: includes/classes/class-wpum-shortcodes.php:480
+#: includes/classes/class-wpum-shortcodes.php:484
 msgid ""
 "Something went wrong, you have not set a directory ID or the directory is "
 "not published."
 msgstr ""
 
-#: includes/directories/actions.php:67
+#: includes/directories/actions.php:71
 msgid "Previous page"
 msgstr ""
 
-#: includes/directories/actions.php:68
+#: includes/directories/actions.php:72
 msgid "Next page"
 msgstr ""
 
@@ -1431,28 +1432,28 @@ msgid_plural "%s directories restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/directories/functions.php:138
+#: includes/directories/functions.php:144
 #: includes/emails/class-wpum-emails.php:200
 msgid "Default template"
 msgstr ""
 
-#: includes/directories/functions.php:269
+#: includes/directories/functions.php:275
 msgid "By nickname"
 msgstr ""
 
-#: includes/directories/functions.php:270
+#: includes/directories/functions.php:276
 msgid "Newest users first"
 msgstr ""
 
-#: includes/directories/functions.php:271
+#: includes/directories/functions.php:277
 msgid "Oldest users first"
 msgstr ""
 
-#: includes/directories/functions.php:272
+#: includes/directories/functions.php:278
 msgid "First name"
 msgstr ""
 
-#: includes/directories/functions.php:273
+#: includes/directories/functions.php:279
 msgid "Last Name"
 msgstr ""
 
@@ -1584,23 +1585,31 @@ msgstr ""
 msgid "Password: {password}"
 msgstr ""
 
-#: includes/fields/functions.php:264
+#: includes/fields/functions.php:271
 msgid "This field type has no output"
 msgstr ""
 
-#: includes/fields/functions.php:993
+#: includes/fields/functions.php:1000
 msgid "Publicly visible"
 msgstr ""
 
-#: includes/fields/functions.php:994
+#: includes/fields/functions.php:1001
 msgid "Hidden"
 msgstr ""
 
-#: includes/fields/types/checkbox.php:57
+#: includes/fields/functions.php:1047
+msgid "Publicly editable"
+msgstr ""
+
+#: includes/fields/functions.php:1048
+msgid "Hidden (admins only)"
+msgstr ""
+
+#: includes/fields/types/checkbox.php:59
 msgid "Enabled by default"
 msgstr ""
 
-#: includes/fields/types/checkbox.php:58
+#: includes/fields/types/checkbox.php:60
 msgid "Enable this option to set this checkbox as enabeld by default."
 msgstr ""
 
@@ -1634,27 +1643,27 @@ msgid ""
 "must be in bytes."
 msgstr ""
 
-#: includes/fields/types/number.php:57
+#: includes/fields/types/number.php:61
 msgid "Minimum value"
 msgstr ""
 
-#: includes/fields/types/number.php:58
+#: includes/fields/types/number.php:62
 msgid "Specifies the minimum value allowed, leave blank if not needed."
 msgstr ""
 
-#: includes/fields/types/number.php:63
+#: includes/fields/types/number.php:67
 msgid "Maximum value"
 msgstr ""
 
-#: includes/fields/types/number.php:64
+#: includes/fields/types/number.php:68
 msgid "Specifies the maximum value allowed, leave blank if not needed."
 msgstr ""
 
-#: includes/fields/types/url.php:57
+#: includes/fields/types/url.php:61
 msgid "Nofollow"
 msgstr ""
 
-#: includes/fields/types/url.php:58
+#: includes/fields/types/url.php:62
 msgid ""
 "Enable this option to specify that the search spiders should not follow "
 "this link."
@@ -1680,7 +1689,7 @@ msgid "WPUM Page"
 msgstr ""
 
 #: includes/forms/class-wpum-form-custom-group.php:161
-#: includes/template-actions.php:143
+#: includes/template-actions.php:151
 msgid "Profile successfully updated."
 msgstr ""
 
@@ -1709,27 +1718,49 @@ msgstr ""
 msgid "Passwords do not match."
 msgstr ""
 
-#: includes/forms/class-wpum-form-password.php:203
-#: includes/forms/class-wpum-form-password.php:208
+#: includes/forms/class-wpum-form-password.php:145
+#: includes/forms/class-wpum-form-register.php:145
+#: includes/forms/class-wpum-form-update-password.php:95
+msgid "Password must be at least 8 characters long."
+msgstr ""
+
+#: includes/forms/class-wpum-form-password.php:150
+#: includes/forms/class-wpum-form-register.php:149
+#: includes/forms/class-wpum-form-update-password.php:99
+msgid ""
+"Password must be at least 8 characters long and contain at least 1 number "
+"and 1 uppercase letter."
+msgstr ""
+
+#: includes/forms/class-wpum-form-password.php:155
+#: includes/forms/class-wpum-form-register.php:153
+#: includes/forms/class-wpum-form-update-password.php:103
+msgid ""
+"Password must be at least 8 characters long and contain at least 1 number "
+"and 1 uppercase letter and 1 special character."
+msgstr ""
+
+#: includes/forms/class-wpum-form-password.php:225
+#: includes/forms/class-wpum-form-password.php:230
 msgid "Invalid username or e-mail."
 msgstr ""
 
-#: includes/forms/class-wpum-form-password.php:222
-#: includes/forms/class-wpum-form-password.php:227
+#: includes/forms/class-wpum-form-password.php:244
+#: includes/forms/class-wpum-form-password.php:249
 msgid "Password reset is not allowed for this user"
 msgstr ""
 
-#: includes/forms/class-wpum-form-password.php:255
+#: includes/forms/class-wpum-form-password.php:277
 msgid "Password Recovery"
 msgstr ""
 
-#: includes/forms/class-wpum-form-password.php:258
+#: includes/forms/class-wpum-form-password.php:280
 msgid "Check your e-mail for the confirmation link."
 msgstr ""
 
-#: includes/forms/class-wpum-form-password.php:314
-#: includes/forms/class-wpum-form-password.php:319
-#: includes/forms/class-wpum-form-password.php:335
+#: includes/forms/class-wpum-form-password.php:336
+#: includes/forms/class-wpum-form-password.php:341
+#: includes/forms/class-wpum-form-password.php:357
 msgid "Invalid key."
 msgstr ""
 
@@ -1740,32 +1771,13 @@ msgstr ""
 
 #: includes/forms/class-wpum-form-profile.php:252
 #: includes/forms/class-wpum-form-profile.php:260
-#: includes/forms/class-wpum-form-register.php:343
-#: includes/forms/class-wpum-form-register.php:351
+#: includes/forms/class-wpum-form-register.php:344
+#: includes/forms/class-wpum-form-register.php:350
 msgid "This nickname cannot be used."
 msgstr ""
 
 #: includes/forms/class-wpum-form-profile.php:325
 msgid "Please enter a valid email address."
-msgstr ""
-
-#: includes/forms/class-wpum-form-register.php:145
-#: includes/forms/class-wpum-form-update-password.php:95
-msgid "Password must be at least 8 characters long."
-msgstr ""
-
-#: includes/forms/class-wpum-form-register.php:149
-#: includes/forms/class-wpum-form-update-password.php:99
-msgid ""
-"Password must be at least 8 characters long and contain at least 1 number "
-"and 1 uppercase letter."
-msgstr ""
-
-#: includes/forms/class-wpum-form-register.php:153
-#: includes/forms/class-wpum-form-update-password.php:103
-msgid ""
-"Password must be at least 8 characters long and contain at least 1 number "
-"and 1 uppercase letter and 1 special character."
 msgstr ""
 
 #: includes/forms/class-wpum-form-register.php:249
@@ -1786,21 +1798,21 @@ msgstr ""
 msgid "Select your user role"
 msgstr ""
 
-#: includes/forms/class-wpum-form-register.php:311
+#: includes/forms/class-wpum-form-register.php:312
 msgid "Select a valid role from the list."
 msgstr ""
 
-#: includes/forms/class-wpum-form-register.php:479
+#: includes/forms/class-wpum-form-register.php:473
 msgid ""
 "Registration complete. We have sent you a confirmation email with your "
 "password."
 msgstr ""
 
-#: includes/forms/class-wpum-form-register.php:481
+#: includes/forms/class-wpum-form-register.php:475
 msgid "Registration complete."
 msgstr ""
 
-#: includes/forms/class-wpum-form-register.php:538
+#: includes/forms/class-wpum-form-register.php:542
 msgid "Registrations are currently disabled."
 msgstr ""
 
@@ -2008,39 +2020,43 @@ msgstr ""
 msgid "Error: the \"%s\" field allows only %s files to be uploaded."
 msgstr ""
 
-#: includes/misc-functions.php:478
+#: includes/misc-functions.php:386
+msgid "The uploaded file for \"%s\" is too big."
+msgstr ""
+
+#: includes/misc-functions.php:482
 msgid "\"%s\" (filetype %s) needs to be one of the following file types: %s"
 msgstr ""
 
-#: includes/misc-functions.php:480
+#: includes/misc-functions.php:484
 msgid "Uploaded files need to be one of the following file types: %s"
 msgstr ""
 
-#: includes/misc-functions.php:531
+#: includes/misc-functions.php:535
 msgid "Verify upload permissions"
 msgstr ""
 
-#: includes/misc-functions.php:532
+#: includes/misc-functions.php:536
 msgid "Press the button above if avatar uploads does not work."
 msgstr ""
 
-#: includes/misc-functions.php:569
+#: includes/misc-functions.php:573
 msgid "Password Reset"
 msgstr ""
 
-#: includes/misc-functions.php:605
+#: includes/misc-functions.php:609
 msgid "Account"
 msgstr ""
 
-#: includes/misc-functions.php:623
+#: includes/misc-functions.php:627
 msgid "Profile"
 msgstr ""
 
-#: includes/misc-functions.php:661
+#: includes/misc-functions.php:666
 msgid "Change Password"
 msgstr ""
 
-#: includes/misc-functions.php:743
+#: includes/misc-functions.php:751
 msgid "Strength Indicator"
 msgstr ""
 
@@ -2064,7 +2080,7 @@ msgstr ""
 msgid "You are not authorized to access this area."
 msgstr ""
 
-#: includes/template-actions.php:122
+#: includes/template-actions.php:130
 msgid "Login failed: You have entered incorrect login details, please try again."
 msgstr ""
 
@@ -2224,7 +2240,7 @@ msgstr ""
 msgid "Content not found."
 msgstr ""
 
-#: templates/already-logged-in.php:22
+#: templates/already-logged-in.php:21
 msgid "You are currently logged in as %s. <a href=\"%s\">Logout &raquo;</a>"
 msgstr ""
 
@@ -2236,20 +2252,20 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: templates/directory/single-user.php:28
+#: templates/directory/single-user.php:27
 msgid "This user has not provided a description yet."
 msgstr ""
 
-#: templates/directory/single-user.php:37
+#: templates/directory/single-user.php:36
 #: templates/profile/profile-links.php:17 templates/profile-card.php:31
 msgid "Send Email"
 msgstr ""
 
-#: templates/directory/single-user.php:43
+#: templates/directory/single-user.php:42
 msgid "Visit Website"
 msgstr ""
 
-#: templates/directory/single-user.php:45
+#: templates/directory/single-user.php:44
 msgid "Registered:"
 msgstr ""
 
@@ -2274,25 +2290,29 @@ msgstr ""
 msgid "Maximum file size: %s."
 msgstr ""
 
+#: templates/form-fields/password-field.php:23
+msgid "Show Password"
+msgstr ""
+
 #: templates/forms/account-form.php:42 templates/forms/group-form.php:31
 msgid "Update Profile"
 msgstr ""
 
-#: templates/forms/password-form.php:35
+#: templates/forms/password-form.php:36
 msgid "Your password has been reset."
 msgstr ""
 
-#: templates/forms/password-form.php:48
+#: templates/forms/password-form.php:49
 msgid "Enter a new password below."
 msgstr ""
 
-#: templates/forms/password-form.php:65
+#: templates/forms/password-form.php:66
 msgid ""
 "Lost your password? Please enter your username or email address. You will "
 "receive a link to create a new password via email."
 msgstr ""
 
-#: templates/forms/password-form.php:90
+#: templates/forms/password-form.php:91
 msgid "Reset Password"
 msgstr ""
 
@@ -2397,7 +2417,7 @@ msgctxt "_doing_it_wrong error message"
 msgid "No email ID was provided"
 msgstr ""
 
-#: includes/assets.php:138
+#: includes/assets.php:144
 msgctxt "password strength"
 msgid "Medium"
 msgstr ""
@@ -2502,7 +2522,7 @@ msgctxt "field type name"
 msgid "Username"
 msgstr ""
 
-#: includes/fields/types/checkbox.php:77
+#: includes/fields/types/checkbox.php:79
 msgctxt "Used when displaying the value of a checkbox field within the profile page."
 msgid "Yes"
 msgstr ""
