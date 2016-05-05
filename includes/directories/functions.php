@@ -62,7 +62,10 @@ if ( ! function_exists( 'wpum_directory_sort_dropdown' ) ) :
 
 		foreach ( $sorting_methods as $value => $label ) {
 
-			$method_url = add_query_arg( array( 'sort' => $value ), get_permalink() );
+			$method_url = add_query_arg( array(
+				'sort'        => $value,
+				'search_user' => isset( $_GET['search_user'] ) ? sanitize_text_field( $_GET['search_user'] ): false,
+			), get_permalink() );
 
 			if ( $selected == $value ) {
 				$output .= "\t<option value='" . esc_url( $method_url ) . "' selected='selected' >$label</option>\n";
@@ -108,7 +111,10 @@ if ( ! function_exists( 'wpum_directory_results_amount_dropdown' ) ) :
 
 		foreach ( $results_options as $value => $label ) {
 
-			$result_url = add_query_arg( array( 'amount' => $value ), get_permalink() );
+			$result_url = add_query_arg( array(
+				'amount'      => $value,
+				'search_user' => isset( $_GET['search_user'] ) ? sanitize_text_field( $_GET['search_user'] ): false,
+			), get_permalink() );
 
 			if ( $selected == $value ) {
 				$output .= "\t<option value='" . esc_url( $result_url ) . "' selected='selected' >$label</option>\n";
