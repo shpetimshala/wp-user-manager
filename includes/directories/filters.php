@@ -114,3 +114,20 @@ function wpum_directory_pre_set_order( $args, $directory_id ) {
 
 }
 add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_order', 12, 2 );
+
+/**
+ * Modify the search query to include some custom fields.
+ *
+ * @since 1.3.0
+ * @param  object $query the original query.
+ * @return void
+ */
+function wpum_directory_search_query( $query ) {
+
+	global $wpdb;
+
+	$display_name = 'Alessandro';
+
+	$query->query_where .= $wpdb->prepare( " AND $wpdb->users.display_name LIKE %s", '%' . $wpdb->esc_like( $display_name ) . '%' );
+
+}

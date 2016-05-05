@@ -507,17 +507,21 @@ class WPUM_Shortcodes {
 
 		// Prepare the query.
 		$args = array();
-
 		$args['number'] = $number;
 		$args['offset'] = $offset;
 
 		// Trigger search and remove offset.
 		if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
-			$args['search'] = sanitize_text_field( $_POST['search_user'] );
 			$args['offset'] = null;
+			add_action( 'pre_user_query', 'wpum_directory_search_query' );
 		}
 
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
+
+		// Remove search action to prevent issues with other queries.
+		if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
+			remove_action( 'pre_user_query', 'wpum_directory_search_query' );
+		}
 
 		// Detect which template we should be using.
 		$template     = "user-directory.php";
