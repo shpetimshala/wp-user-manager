@@ -7,7 +7,7 @@ Requires at least: 4.1
 Tested up to: 4.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.10
+Stable tag: 1.3.0
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -93,6 +93,23 @@ Here [http://docs.wpusermanager.com/](http://docs.wpusermanager.com/)
 View all the screenshots here [https://wpusermanager.com/screenshots/](https://wpusermanager.com/screenshots/)
 
 == Changelog ==
+
+= 1.3.0 =
+
+- added: single profile page document title will now include the user's display name.
+- added: password field will now show a "show password" checkbox.
+- added: login link shortcode is now hidden when user's logged in.
+- added: settings import and export will now include email settings.
+- added: role field will now automatically set WP's default role as default option into registration form.
+- added: login link in restriction shortcode message will now redirect to previously visited page.
+- added: some fields can now be set as read-only.
+- added: some fields can now be removed from the account editing page and set as available to admins only.
+- added: user directory can now search for first name and last name.
+- fixed: deprecated notice into a template file.
+- fixed: file upload functionality ignored max file size setting from custom fields addon.
+- fixed: checkbox field into backend user's editing page not showing saved options when updated from frontend.
+- removed: fields restore option no longer needed.
+- removed: referral login redirect option - caused too much confusion.
 
 = 1.2.10 =
 
