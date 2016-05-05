@@ -59,9 +59,13 @@ function wpum_user_directory_pagination( $directory_args ) {
 
 	echo '<div class="wpum-directory-pagination">';
 
+	$big          = 9999999;
+	$search_for   = array( $big, '#038;' );
+	$replace_with = array( '%#%', '&' );
+
 	echo paginate_links( array(
-			'base'      => get_pagenum_link( 1 ) . '%_%',
-			'format'    => isset( $_GET['sort'] ) || isset( $_GET['amount'] ) ? '&paged=%#%' : '?paged=%#%',
+			'base'      => str_replace( $search_for, $replace_with, esc_url( get_pagenum_link( $big ) ) ),
+			'format'    => isset( $_GET['sort'] ) || isset( $_GET['amount'] ) || isset( $_GET['search_user'] ) ? '&paged=%#%' : '?paged=%#%',
 			'current'   => $directory_args['paged'],
 			'total'     => $directory_args['total_pages'],
 			'prev_text' => __( 'Previous page', 'wpum' ),

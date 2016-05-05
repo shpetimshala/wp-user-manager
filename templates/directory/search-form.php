@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-submit">
-      <input type="submit" name="wpum_submit_user_search" id="wpum-submit-user-search" class="button wpum-button" value="<?php esc_html_e( 'Search', 'wpum' ); ?>">
+      <input type="submit" id="wpum-submit-user-search" class="button wpum-button" value="<?php esc_html_e( 'Search', 'wpum' ); ?>">
     </div>
 
     <div class="wpum-clearfix"></div>
