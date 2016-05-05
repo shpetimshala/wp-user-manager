@@ -126,13 +126,15 @@ function wpum_directory_search_query( $query ) {
 
 	global $wpdb;
 
-	$display_name = 'Benjamin';
+	$display_name = sanitize_text_field( $_POST['search_user'] );
 
 	// Search by users first name.
 	$query->query_from .= " JOIN {$wpdb->usermeta} fname ON fname.user_id = {$wpdb->users}.ID AND fname.meta_key = 'first_name'";
+	// Search by users last name.
+	$query->query_from .= " JOIN {$wpdb->usermeta} lname ON lname.user_id = {$wpdb->users}.ID AND lname.meta_key = 'last_name'";
 
 	// The fields to include in the search.
- 	$search_by = array( 'user_login', 'user_email', 'fname.meta_value' );
+ 	$search_by = array( 'user_login', 'user_email', 'fname.meta_value', 'lname.meta_value' );
 
 	$query->query_where = 'WHERE 1=1' . $query->get_search_sql( $display_name, $search_by, 'both' );
 
