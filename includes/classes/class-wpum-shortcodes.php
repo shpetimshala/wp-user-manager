@@ -511,7 +511,7 @@ class WPUM_Shortcodes {
 		$args['offset'] = $offset;
 
 		// Trigger search and remove offset.
-		if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
+		if( wpum_directory_has_search_form( $directory_id ) && isset( $_GET['search_user'] ) ) {
 			$args['offset'] = null;
 			add_action( 'pre_user_query', 'wpum_directory_search_query' );
 		}
@@ -519,7 +519,7 @@ class WPUM_Shortcodes {
 		$user_query = new WP_User_Query( apply_filters( "wpum_user_directory_query", $args, $directory_id ) );
 
 		// Remove search action to prevent issues with other queries.
-		if( wpum_directory_has_search_form( $directory_id ) && isset( $_POST['search_user'] ) ) {
+		if( wpum_directory_has_search_form( $directory_id ) && isset( $_GET['search_user'] ) ) {
 			remove_action( 'pre_user_query', 'wpum_directory_search_query' );
 		}
 

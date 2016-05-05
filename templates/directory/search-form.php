@@ -10,7 +10,7 @@
 ?>
 <div class="wpum-directory-search-form-wrapper">
 
-  <form action="#" method="post" id="wpum-directory-search-form-<?php echo $directory_args['directory_id']; ?>" class="wpum-directory-search-form" name="wpum-directory-search-form">
+  <form action="<?php the_permalink(); ?>" method="GET" id="wpum-directory-search-form-<?php echo $directory_args['directory_id']; ?>" class="wpum-directory-search-form" name="wpum-directory-search-form">
 
     <div class="form-fields">
 
@@ -19,7 +19,7 @@
       <?php
         $search_input = array(
           'name'        => 'search_user',
-          'value'       => isset( $_POST['search_user'] ) ? sanitize_text_field( $_POST['search_user'] ) : '',
+          'value'       => isset( $_GET['search_user'] ) ? sanitize_text_field( $_GET['search_user'] ) : '',
           'placeholder' => esc_html__( 'Search for users', 'wpum' ),
         );
         echo WPUM()->html->text( $search_input );

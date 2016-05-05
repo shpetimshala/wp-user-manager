@@ -126,7 +126,7 @@ function wpum_directory_search_query( $query ) {
 
 	global $wpdb;
 
-	$display_name = sanitize_text_field( $_POST['search_user'] );
+	$display_name = sanitize_text_field( $_GET['search_user'] );
 
 	// Search by users first name.
 	$query->query_from .= " JOIN {$wpdb->usermeta} fname ON fname.user_id = {$wpdb->users}.ID AND fname.meta_key = 'first_name'";
