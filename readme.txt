@@ -105,6 +105,7 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 - added: some fields can now be set as read-only.
 - added: some fields can now be removed from the account editing page and set as available to admins only.
 - added: user directory can now search for first name and last name.
+- added: developers can now change the order of the tabs within the account page.
 - fixed: deprecated notice into a template file.
 - fixed: file upload functionality ignored max file size setting from custom fields addon.
 - fixed: checkbox field into backend user's editing page not showing saved options when updated from frontend.
