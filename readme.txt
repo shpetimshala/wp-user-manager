@@ -96,6 +96,8 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 = 1.3.0 =
 
+Checkout an overview of the new features here [https://wpusermanager.com/?p=17930](https://wpusermanager.com/?p=17930)
+
 - added: single profile page document title will now include the user's display name.
 - added: password field will now show a "show password" checkbox.
 - added: login link shortcode is now hidden when user's logged in.
