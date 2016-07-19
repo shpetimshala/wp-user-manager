@@ -170,7 +170,7 @@ class WP_User_Manager {
 
 		// Plugin version
 		if ( ! defined( 'WPUM_VERSION' ) ) {
-			define( 'WPUM_VERSION', '1.3.1' );
+			define( 'WPUM_VERSION', 'blah' );
 		}
 
 		// Plugin Folder Path
