@@ -96,6 +96,11 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.3.1 =
+
+- fixed: template loader failed to retrieve email templates when customized.
+- fixed: multiple duplicate results when searching for users within a directory.
+
 = 1.3.0 =
 
 Checkout an overview of the new features here [https://wpusermanager.com/?p=17930](https://wpusermanager.com/?p=17930)
