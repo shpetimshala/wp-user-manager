@@ -12,40 +12,60 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Modify the WP_User_Query on the directory page.
- * Check whether the directory should be displaying
- * specific user roles only.
+ * Modify user query to set roles and trigger search form results.
  *
- * @since 1.0.0
+ * @since 1.3.1
  * @param array $args WP_User_Query args.
  * @param string $directory_id id number of the directory.
  * @return array
  */
-function wpum_directory_pre_set_roles( $args, $directory_id ) {
+function wpum_directory_pre_set_roles_search( $args, $directory_id ) {
 
-	// Get roles
-	$roles = wpum_directory_get_roles( $directory_id );
+	if( isset( $_GET['search_user'] ) ) {
 
-	// Execute only if there are roles.
-	if( $roles ) {
+		$search_term    = sanitize_text_field( $_GET['search_user'] );
+		$args['offset'] = null;
 
-		global $wpdb;
-		$blog_id = get_current_blog_id();
+		$args['meta_query'] = array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'first_name',
+				'value'   => $search_term,
+				'compare' => 'LIKE'
+			),
+			array(
+				'key'     => 'last_name',
+				'value'   => $search_term,
+				'compare' => 'LIKE'
+			)
+		);
 
-		$meta_query = array(
+	} else {
+
+		$roles = wpum_directory_get_roles( $directory_id );
+
+		// Execute only if there are roles.
+		if( $roles ) {
+
+		  global $wpdb;
+		  $blog_id = get_current_blog_id();
+
+		  $meta_query = array(
 		    'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
 		    'value' => '"(' . implode( '|', array_map( 'preg_quote', $roles ) ) . ')"',
 		    'compare' => 'REGEXP'
-		);
+		  );
 
-		$args['meta_query'] = array( $meta_query );
+		  $args['meta_query'] = array( $meta_query );
+
+		}
 
 	}
 
 	return $args;
 
 }
-add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_roles', 10, 2 );
+add_filter( 'wpum_user_directory_query', 'wpum_directory_pre_set_roles_search', 10, 2 );
 
 /**
  * Modify the WP_User_Query on the directory page.
@@ -134,7 +154,7 @@ function wpum_directory_search_query( $query ) {
 	$query->query_from .= " JOIN {$wpdb->usermeta} lname ON lname.user_id = {$wpdb->users}.ID AND lname.meta_key = 'last_name'";
 
 	// The fields to include in the search.
- 	$search_by = array( 'user_login', 'user_email', 'fname.meta_value', 'lname.meta_value' );
+	$search_by = array( 'user_login', 'user_email', 'fname.meta_value', 'lname.meta_value' );
 
 	$query->query_where = 'WHERE 1=1' . $query->get_search_sql( $display_name, $search_by, 'both' );
 
