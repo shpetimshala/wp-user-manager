@@ -250,19 +250,19 @@ class WPUM_Emails {
 
 		ob_start();
 
-		get_wpum_template_part( 'emails/header', $this->get_template(), true );
+		get_wpum_template_part( 'emails/header', $this->get_template() );
 
 		do_action( 'wpum_email_header', $this );
 
 		if ( has_action( 'wpum_email_template_' . $this->get_template() ) ) {
 			do_action( 'wpum_email_template_' . $this->get_template() );
 		} else {
-			get_wpum_template_part( 'emails/body', $this->get_template(), true );
+			get_wpum_template_part( 'emails/body', $this->get_template() );
 		}
 
 		do_action( 'wpum_email_body', $this );
 
-		get_wpum_template_part( 'emails/footer', $this->get_template(), true );
+		get_wpum_template_part( 'emails/footer', $this->get_template() );
 
 		do_action( 'wpum_email_footer', $this );
 

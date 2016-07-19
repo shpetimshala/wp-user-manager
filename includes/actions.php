@@ -233,7 +233,7 @@ function wpum_authenticate_login_form( $user ) {
 			$error = true;
 		}
 
-		// check that were not on the default login page
+		// check that were not on the default login page.
 		if ( ! empty( $referrer ) && ! strstr( $referrer, 'wp-login' ) && ! strstr( $referrer, 'wp-admin' ) && $error ) {
 
 			$referrer =  add_query_arg( array(

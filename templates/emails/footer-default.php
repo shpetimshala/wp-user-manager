@@ -2,7 +2,7 @@
 /**
  * Email Footer
  *
- * 
+ *
  * @version     1.0.0
  */
 
