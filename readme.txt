@@ -4,10 +4,10 @@ Plugin URI: https://wpusermanager.com
 Contributors: alessandro.tesoro
 Tags: avatar, avatar upload, author, author profile, community, front-end login, front-end registration, gravatar, custom avatar, login, login page, registration, registration page, admin bar, hide admin bar, custom field registration, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, member profile, members profiles, member, member directory, members, profile, profile builder, profiles, registration, restrict content, content restriction, content protection, restrict, sign in, sign up, social login, user, user profile, user profiles, user roles, user-fields, users, captcha, login captcha, registration captcha, frontend registration captcha, frontend login catpcha
 Requires at least: 4.1
-Tested up to: 4.5.1
+Tested up to: 4.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 WP User Manager is the best solution to manage your users and create front-end profiles for your members.
 
@@ -48,10 +48,12 @@ Read more about our features on [wpusermanager.com](https://wpusermanager.com/fe
 = Free Extensions =
 
 - [Google reCAPTCHA](https://wpusermanager.com/addons/recaptcha): Stop spam registrations on your website for free.
+- [Username Length](https://wordpress.org/plugins/wpum-username-length/): Set minimum and maximum characters length for usernames.
 
 = Paid Extensions =
 
 - [Custom Fields](https://wpusermanager.com/addons/custom-fields/): Add custom fields to user profiles and registration form.
+- [User Verification](https://wpusermanager.com/addons/user-verification): Send a verification link via email upon registration or manually approve users before they can login.
 - [MailChimp](https://wpusermanager.com/addons/mailchimp/): Sync users with MailChimp upon registration & more.
 
 [View all extensions](https://wpusermanager.com/addons)
