@@ -356,7 +356,7 @@ function wpum_add_name_to_wptitle( $title, $sep ) {
 	if( is_page( wpum_get_core_page_id( 'profile' ) ) && wpum_is_single_profile() ) {
 
 		$name = wpum_get_user_displayname( wpum_get_displayed_user_id() );
-		$title = "$name $sep ";
+		$title = "$name $sep $title";
 
 		if ( in_array( 'wordpress-seo/wp-seo.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 			$sitename = get_bloginfo( 'name' );
