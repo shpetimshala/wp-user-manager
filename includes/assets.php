@@ -132,26 +132,11 @@ function wpum_frontend_cssjs() {
 		wp_enqueue_script( 'wpum-hideShowPassword' );
 	}
 
-	// Display password meter only if enabled
-	if ( wpum_get_option( 'display_password_meter_registration' ) ) :
-
-		wp_enqueue_script( 'password-strength-meter' );
-
-		wp_localize_script( 'password-strength-meter', 'pwsL10n', array(
-			'empty'  => __( 'Strength indicator', 'wpum' ),
-			'short'  => __( 'Very weak', 'wpum' ),
-			'bad'    => __( 'Weak', 'wpum' ),
-			'good'   => _x( 'Medium', 'password strength', 'wpum' ),
-			'strong' => __( 'Strong', 'wpum' )
-		) );
-
-	endif;
-
 	// Frontend jS Settings
 	wp_localize_script( 'wpum-frontend-js', 'wpum_frontend_js', array(
 		'ajax'                 => admin_url( 'admin-ajax.php' ),
 		'checking_credentials' => __( 'Checking credentials...', 'wpum' ),
-		'pwd_meter'            => wpum_get_option( 'display_password_meter_registration' ),
+		'pwd_meter'            => false,
 		'disable_ajax'         => wpum_get_option( 'disable_ajax' )
 	) );
 
