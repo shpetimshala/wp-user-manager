@@ -307,3 +307,23 @@ function wpum_run_fields_fix() {
 
 }
 add_action( 'admin_init', 'wpum_run_fields_fix' );
+
+/**
+ * Display button to trigger the test email.
+ *
+ * @since 1.4.0
+ * @return void
+ */
+function wpum_send_test_mail_button() {
+
+	$trigger_test_mail_url = wp_nonce_url( add_query_arg( array( 'tool' => 'send_test_mail' ), admin_url( 'users.php?page=wpum-settings&tab=emails' ) ) );
+
+	?>
+
+	<a href="<?php echo esc_url( $trigger_test_mail_url ); ?>" class="button"><?php esc_html_e( 'Send test email' ); ?></a>
+	<p><?php echo sprintf( esc_html__( 'Test email will be sent to %s' ), get_option( 'admin_email' ) ); ?></p>
+
+	<?php
+
+}
+add_action( 'wpum_trigger_test_email', 'wpum_send_test_mail_button' );

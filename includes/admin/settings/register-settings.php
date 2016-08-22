@@ -367,6 +367,11 @@ function wpum_get_registered_settings() {
 					'name' => __( 'Notifications Settings', 'wpum' ),
 					'type' => 'header'
 				),
+				'trigger_test_email' => array(
+					'id'   => 'trigger_test_email',
+					'name' => __( 'Send test email:', 'wpum' ),
+					'type' => 'hook'
+				),
 				'disable_admin_register_email' => array(
 					'id'   => 'disable_admin_register_email',
 					'name' => __( 'Disable admin registration email:', 'wpum' ),
