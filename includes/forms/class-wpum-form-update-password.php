@@ -34,10 +34,6 @@ class WPUM_Form_Update_Password extends WPUM_Form {
 
 		add_filter( 'wpum/form/validate=update-password', array( __CLASS__, 'validate_password_field' ), 10, 3 );
 
-		// Add password meter field
-		if( wpum_get_option('display_password_meter_registration') )
-			add_action( 'wpum_after_inside_password_update_form', 'wpum_psw_indicator' );
-
 	}
 
 	/**
