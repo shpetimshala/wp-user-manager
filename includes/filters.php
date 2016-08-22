@@ -369,3 +369,22 @@ function wpum_add_name_to_wptitle( $title, $sep ) {
 
 }
 add_filter( 'wp_title', 'wpum_add_name_to_wptitle', 16, 2 );
+
+/**
+ * Changes the post's author url to a WPUM Profile url.
+ *
+ * @since 1.4.0
+ *
+ * @param  string $link            author's link.
+ * @param  string $author_id       author's ID number.
+ * @param  string $author_nicename author's nice name.
+ * @return string                  new url.
+ */
+function wpum_change_author_url_to_profile( $link, $author_id, $author_nicename ) {
+
+	$user = new WP_User( $author_id );
+
+	return wpum_get_user_profile_url( $user );
+
+}
+add_filter( 'author_link', 'wpum_change_author_url_to_profile', 10, 3);
