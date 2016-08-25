@@ -316,7 +316,7 @@ add_action( 'admin_init', 'wpum_run_fields_fix' );
  */
 function wpum_send_test_mail_button() {
 
-	$trigger_test_mail_url = wp_nonce_url( add_query_arg( array( 'tool' => 'send_test_mail' ), admin_url( 'users.php?page=wpum-settings&tab=emails' ) ) );
+	$trigger_test_mail_url = wp_nonce_url( add_query_arg( array( 'tool' => 'send_test_mail' ), admin_url( 'users.php?page=wpum-settings&tab=emails' ) ), 'tool', 'send_test_mail_nonce' );
 
 	?>
 
@@ -327,3 +327,37 @@ function wpum_send_test_mail_button() {
 
 }
 add_action( 'wpum_trigger_test_email', 'wpum_send_test_mail_button' );
+
+/**
+ * Send a test email to the site's admin email.
+ *
+ * @return void
+ */
+function wpum_send_test_mail() {
+
+	if( isset( $_GET['tool'] ) && $_GET['tool'] == 'send_test_mail' && current_user_can( 'manage_options' ) ) {
+
+		if ( ! wp_verify_nonce( $_GET['send_test_mail_nonce'], 'tool' ) ) {
+			return;
+		}
+
+		// Details of the site.
+		$sitename    = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$admin_email = get_option( 'admin_email' );
+
+		// Details of the message.
+		$subject = sprintf( esc_html( 'Test email from: %s' ), $sitename );
+		$message = esc_html( 'The following is a simple test email to verify that emails are correctly being delivered from your website.' );
+
+		WPUM()->emails->__set( 'heading', esc_html__( 'Test Email', 'wpum' ) );
+		WPUM()->emails->send( $admin_email, $subject, $message );
+
+		$redirect_url = add_query_arg( array( 'message' => 'test_mail' ), admin_url( 'users.php?page=wpum-settings&tab=emails' ) );
+
+		wp_redirect( $redirect_url );
+		exit;
+
+	}
+
+}
+add_action( 'admin_init', 'wpum_send_test_mail' );
