@@ -331,6 +331,7 @@ add_action( 'wpum_trigger_test_email', 'wpum_send_test_mail_button' );
 /**
  * Send a test email to the site's admin email.
  *
+ * @since 1.4.0
  * @return void
  */
 function wpum_send_test_mail() {
