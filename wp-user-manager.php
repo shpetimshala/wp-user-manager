@@ -278,6 +278,9 @@ class WP_User_Manager {
 			// Load admin menu manager functionalities
 			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-walker-nav-menu-checklist.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/menu-functions.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-menu-controller.php';
+			require_once WPUM_PLUGIN_DIR . 'includes/walkers/class-walker-wpum-nav-menu-roles-controller.php';
+
 			// Load dashboard widget
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
 
