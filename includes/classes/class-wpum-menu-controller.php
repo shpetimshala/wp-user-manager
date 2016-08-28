@@ -99,11 +99,15 @@ class WPUM_Menu_Controller {
 
 		$fields = $this->get_custom_fields( $item_id );
 
+		echo '<p class="wpum-menu-controller">';
+
 		foreach ( $fields as $field ) {
 
 			echo WPUM()->html->select( $field );
 
 		}
+
+		echo '</p>';
 
 	}
 

@@ -1,0 +1,25 @@
+.wpum-menu-controller {
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 0.8em;
+  }
+
+  span {
+    padding-right: 13px;
+    display: block;
+    &:first-child {
+      padding-top: 40px;
+    }
+  }
+
+  select {
+    width: 100%;
+  }
+
+  .wpum-description {
+    font-style: italic;
+  }
+
+}
