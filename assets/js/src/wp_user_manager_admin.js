@@ -252,6 +252,10 @@ jQuery(document).ready(function ($) {
 				var id             = field.parent().prev().val();
 				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles_' + id + '-wrap' );
 
+				jQuery( '#wpum-wpum_nav_menu_status_roles_' + id + '-wrap select' ).select2({
+					width: 'resolve'
+				});
+
 				if( jQuery( this ).val() === 'in' ){
 
 					jQuery( roles_selector ).show().css( 'display', 'block' );

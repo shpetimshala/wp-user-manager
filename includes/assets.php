@@ -58,6 +58,12 @@ function wpum_admin_cssjs() {
 
 	endif;
 
+	// Load select 2 within menu editor too.
+	if( $screen->base == 'nav-menus' ) {
+		wp_enqueue_script( 'wpum-select2' );
+		wp_enqueue_style( 'wpum-select2' );
+	}
+
 	// Backend JS Settings
 	wp_localize_script( 'wpum-admin-js', 'wpum_admin_js', array(
 		'ajax'          => admin_url( 'admin-ajax.php' ),
