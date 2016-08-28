@@ -62,10 +62,11 @@ class WPUM_Menu_Controller {
 				'desc'             => esc_html__( 'Set the visibility of this menu item.', 'wpum' ),
 				'show_option_all'  => false,
 				'show_option_none' => false,
+				'class'            => 'wpum-menu-visibility-setter',
 				'options'          => array(
+					''    => esc_html( 'Everyone' ),
 					'in'  => esc_html( 'Logged In Users' ),
 					'out' => esc_html( 'Logged Out Users' ),
-					''    => esc_html( 'Everyone' )
 				)
 			),
 
@@ -101,6 +102,8 @@ class WPUM_Menu_Controller {
 
 		echo '<p class="wpum-menu-controller">';
 
+		echo '<input type="hidden" class="nav-menu-id" value="'. esc_attr( $item_id ) .'">';
+
 		foreach ( $fields as $field ) {
 
 			echo WPUM()->html->select( $field );
@@ -110,7 +113,6 @@ class WPUM_Menu_Controller {
 		echo '</p>';
 
 	}
-
 
 }
 
