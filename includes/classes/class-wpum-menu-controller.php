@@ -74,7 +74,7 @@ class WPUM_Menu_Controller {
 				'type'             => 'select',
 				'label'            => esc_html( 'Select roles:' ),
 				'name'             => 'wpum_nav_menu_status_roles_' . $item_id,
-				'desc'             => esc_html__( 'Select the roles that should see this menu item.', 'wpum' ),
+				'desc'             => esc_html__( 'Select the roles that should see this menu item. Leave blank for all roles.', 'wpum' ),
 				'show_option_all'  => false,
 				'show_option_none' => false,
 				'multiple'         => true,
