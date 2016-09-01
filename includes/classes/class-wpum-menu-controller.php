@@ -105,7 +105,7 @@ class WPUM_Menu_Controller {
 
 		echo '<p class="wpum-menu-controller">';
 
-		echo '<input type="hidden" class="nav-menu-id" value="'. esc_attr( $item_id ) .'">';
+		echo '<input type="hidden" class="nav-menu-id" name="wpum-menu-item-'. $item_id .'" value="'. esc_attr( $item_id ) .'">';
 
 		foreach ( $fields as $field ) {
 
@@ -136,11 +136,35 @@ class WPUM_Menu_Controller {
 		if ( ! isset( $_POST['wpum_nonce_menu_controller'] ) || ! wp_verify_nonce( $_POST['wpum_nonce_menu_controller'], 'wpum_nonce_menu_controller' ) ){
 			return;
 		}
-		echo "<pre>";
-		print_r( $_POST );
-		echo "</pre>";
-		exit;
 
+		$data_to_save  = false;
+		$submitted_menu_statuses = ( array ) $_POST['wpum_nav_menu_status'];
+		$submitted_menu_roles = isset( $_POST['wpum_nav_menu_status_roles'] ) ? $_POST['wpum_nav_menu_status_roles'] : false;
+
+		// Check if menu item has a status.
+		if( array_key_exists( $menu_item_db_id , $submitted_menu_statuses ) && $submitted_menu_statuses[ $menu_item_db_id ] == 'in' || $submitted_menu_statuses[ $menu_item_db_id ] == 'out' ) {
+
+			$menu_item_status = $submitted_menu_statuses[ $menu_item_db_id ];
+			$menu_item_roles  = false;
+
+			// Check if any role has been set.
+			if( isset( $_POST['wpum_nav_menu_status_roles'] ) && array_key_exists( $menu_item_db_id , $_POST['wpum_nav_menu_status_roles'] ) ) {
+				$menu_item_roles = array_slice( $_POST['wpum_nav_menu_status_roles'][ $menu_item_db_id ], 0, -1 );
+			}
+
+			$data_to_save = array( 'status' => $menu_item_status, 'roles' => $menu_item_roles );
+
+		}
+
+		if( $data_to_save ) {
+
+			update_post_meta( $menu_item_db_id, '_wpum_nav_menu_role', $data_to_save );
+
+		} else {
+
+			delete_post_meta( $menu_item_db_id, '_wpum_nav_menu_role' );
+
+		}
 
 	}
 
