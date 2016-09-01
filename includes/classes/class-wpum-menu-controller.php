@@ -56,6 +56,8 @@ class WPUM_Menu_Controller {
 	 */
 	private function get_custom_fields( $item_id ) {
 
+		$item_status = get_post_meta( $item_id, '_wpum_nav_menu_role', true );
+
 		$fields = array(
 
 			array(
@@ -65,6 +67,7 @@ class WPUM_Menu_Controller {
 				'desc'             => esc_html__( 'Set the visibility of this menu item.', 'wpum' ),
 				'show_option_all'  => false,
 				'show_option_none' => false,
+				'selected'         => isset( $item_status[ 'status' ] ) ? $item_status[ 'status' ]: '',
 				'class'            => 'wpum-menu-visibility-setter',
 				'options'          => array(
 					''    => esc_html( 'Everyone' ),
@@ -81,6 +84,7 @@ class WPUM_Menu_Controller {
 				'show_option_all'  => false,
 				'show_option_none' => false,
 				'multiple'         => true,
+				'selected' => isset( $item_status[ 'roles' ] ) ? $item_status[ 'roles' ]: '',
 				'options'          => wpum_get_roles( true )
 			),
 
