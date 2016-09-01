@@ -250,9 +250,9 @@ jQuery(document).ready(function ($) {
 
 				var field          = jQuery(this);
 				var id             = field.parent().prev().val();
-				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles_' + id + '-wrap' );
+				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap' );
 
-				jQuery( '#wpum-wpum_nav_menu_status_roles_' + id + '-wrap select' ).select2({
+				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2({
 					width: 'resolve'
 				});
 

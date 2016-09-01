@@ -31,6 +31,9 @@ class WPUM_Menu_Controller {
 		// Add fields via hook.
 		add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'add_custom_fields' ), 10, 4 );
 
+		// Save the new fields.
+		add_action( 'wp_update_nav_menu_item', array( $this, 'save_custom_fields'), 10, 2 );
+
 	}
 
 	/**
@@ -58,7 +61,7 @@ class WPUM_Menu_Controller {
 			array(
 				'type'             => 'select',
 				'label'            => esc_html( 'Display to:' ),
-				'name'             => 'wpum_nav_menu_status_' . $item_id,
+				'name'             => 'wpum_nav_menu_status[' . $item_id . ']',
 				'desc'             => esc_html__( 'Set the visibility of this menu item.', 'wpum' ),
 				'show_option_all'  => false,
 				'show_option_none' => false,
@@ -73,7 +76,7 @@ class WPUM_Menu_Controller {
 			array(
 				'type'             => 'select',
 				'label'            => esc_html( 'Select roles:' ),
-				'name'             => 'wpum_nav_menu_status_roles_' . $item_id,
+				'name'             => 'wpum_nav_menu_status_roles[' . $item_id . ']',
 				'desc'             => esc_html__( 'Select the roles that should see this menu item. Leave blank for all roles.', 'wpum' ),
 				'show_option_all'  => false,
 				'show_option_none' => false,
@@ -111,6 +114,33 @@ class WPUM_Menu_Controller {
 		}
 
 		echo '</p>';
+
+		echo wp_nonce_field( "wpum_nonce_menu_controller", "wpum_nonce_menu_controller" );
+
+	}
+
+	/**
+	 * Save status of the menu.
+	 *
+	 * @param  [type] $menu_id         [description]
+	 * @param  [type] $menu_item_db_id [description]
+	 * @return [type]                  [description]
+	 */
+	public function save_custom_fields( $menu_id, $menu_item_db_id ) {
+
+		global $wp_roles;
+
+		$allowed_roles = apply_filters( 'wpum_nav_menu_roles', $wp_roles->role_names );
+
+		// Nonce verification.
+		if ( ! isset( $_POST['wpum_nonce_menu_controller'] ) || ! wp_verify_nonce( $_POST['wpum_nonce_menu_controller'], 'wpum_nonce_menu_controller' ) ){
+			return;
+		}
+		echo "<pre>";
+		print_r( $_POST );
+		echo "</pre>";
+		exit;
+
 
 	}
 
