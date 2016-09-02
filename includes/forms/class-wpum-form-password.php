@@ -38,10 +38,6 @@ class WPUM_Form_Password extends WPUM_Form {
 		if( isset( $_GET['password-reset'] ) )
 			add_filter( 'wpum/form/validate=password', array( __CLASS__, 'validate_passwords' ), 10, 3 );
 
-		// Add password meter field
-		if( wpum_get_option('display_password_meter_registration') && isset( $_GET['password-reset'] ) )
-			add_action( 'wpum_after_inside_password_form_template', 'wpum_psw_indicator' );
-
 	}
 
 	/**

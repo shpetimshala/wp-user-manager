@@ -95,6 +95,11 @@ function wpum_admin_messages() {
 
 	}
 
+	// Message for successful test mail.
+	if (  isset( $_GET['message'] ) && $_GET['message'] == 'test_mail' ) {
+		add_settings_error( 'wpum-notices', 'test-mail-success', esc_html__( 'Test email successfully delivered.', 'wpum' ), 'updated' );
+	}
+
 	settings_errors( 'wpum-notices' );
 
 }

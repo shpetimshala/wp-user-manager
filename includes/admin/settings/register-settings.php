@@ -235,12 +235,6 @@ function wpum_get_registered_settings() {
 					'type'    => 'select',
 					'options' => wpum_get_psw_lengths()
 				),
-				'display_password_meter_registration' => array(
-					'id'   => 'display_password_meter_registration',
-					'name' => __( 'Display password meter:', 'wpum' ),
-					'desc' => __('Enable to display a password meter into the forms.', 'wpum'),
-					'type' => 'checkbox'
-				),
 				'header_n' => array(
 					'id'   => 'header_n',
 					'name' => __( 'Extra', 'wpum' ),
@@ -372,6 +366,11 @@ function wpum_get_registered_settings() {
 					'id'   => 'header6',
 					'name' => __( 'Notifications Settings', 'wpum' ),
 					'type' => 'header'
+				),
+				'trigger_test_email' => array(
+					'id'   => 'trigger_test_email',
+					'name' => __( 'Send test email:', 'wpum' ),
+					'type' => 'hook'
 				),
 				'disable_admin_register_email' => array(
 					'id'   => 'disable_admin_register_email',

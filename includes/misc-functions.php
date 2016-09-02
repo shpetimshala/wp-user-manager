@@ -742,16 +742,6 @@ function wpum_get_login_redirect_url() {
 }
 
 /**
- * Displays psw indicator.
- *
- * @since 1.1.0
- * @return mixed
- */
-function wpum_psw_indicator() {
-	echo '<span id="password-strength">' . __( 'Strength Indicator', 'wpum' ) . '</span>';
-}
-
-/**
  * Returns the url where users are redirected after a successfull registration.
  *
  * @since 1.1.0

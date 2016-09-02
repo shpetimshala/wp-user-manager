@@ -46,10 +46,6 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			add_filter( 'wpum/form/validate=register', array( __CLASS__, 'validate_password' ), 10, 3 );
 
-			if( wpum_get_option('display_password_meter_registration') ) {
-				add_action( 'wpum/form/register/after/field=password', 'wpum_psw_indicator', 10 );
-			}
-
 			if( wpum_get_option('login_after_registration') ) {
 				add_action( 'wpum/form/register/done', array( __CLASS__, 'do_login' ), 11, 3 );
 			}

@@ -19,6 +19,7 @@ jQuery(document).ready(function ($) {
 			this.drag_and_drop_fields_table();
 			this.confirm_dialog();
 			this.admin_upload();
+			this.menu_controller();
 		},
 
 		// General Functions
@@ -65,16 +66,16 @@ jQuery(document).ready(function ($) {
 							$( '.wpum-spinner' ).remove();
 						},
 						error: function(xhr, status, error) {
-						    alert(xhr.responseText);
+								alert(xhr.responseText);
 						}
 
 					});
 
-			    } else {
+					} else {
 
-			        return false;
+							return false;
 
-			    }
+					}
 
 			});
 
@@ -95,20 +96,20 @@ jQuery(document).ready(function ($) {
 					handle: ".column-order, .move-field",
 					update: function(event, ui) {
 
-		        // Update TR data
+						// Update TR data
 						$(this).children('tr').each(function() {
 							$(this).data('priority',$(this).index());
-				    });
+						});
 
 						// Prepare field data
 						dataArray = $.map($(this).children('tr'), function(el){
 							return { 'priority':$(el).data('priority'), 'field_id':$(el).data('field-id') };
 						});
 
-					  // Get nonce
-					  var wpum_editor_nonce = $('#wpum_fields_editor_nonce').val();
+						// Get nonce
+						var wpum_editor_nonce = $('#wpum_fields_editor_nonce').val();
 
-		        $.ajax({
+						$.ajax({
 							type: 'POST',
 							dataType: 'json',
 							url: wpum_admin_js.ajax,
@@ -131,11 +132,11 @@ jQuery(document).ready(function ($) {
 								WPUM_Admin.display_success_message( '.wpum-page-title', results.data.message );
 							},
 							error: function(xhr, status, error) {
-							    alert(xhr.responseText);
+									alert(xhr.responseText);
 							}
 						});
 
-		      }
+					}
 
 				}).disableSelection();
 			}
@@ -145,11 +146,11 @@ jQuery(document).ready(function ($) {
 		// Adjust table width when dragging
 		sortable_table_fix : function( e, tr ) {
 			var $originals = tr.children();
-		    var $helper = tr.clone();
-		    $helper.children().each(function(index){
-		      $(this).width($originals.eq(index).width())
-		    });
-		    return $helper;
+				var $helper = tr.clone();
+				$helper.children().each(function(index){
+					$(this).width($originals.eq(index).width())
+				});
+				return $helper;
 		},
 
 		// Display spinner
@@ -178,7 +179,7 @@ jQuery(document).ready(function ($) {
 			if( scroll ) {
 				// scroll back
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-  				return false;
+					return false;
 			}
 
 		},
@@ -191,7 +192,7 @@ jQuery(document).ready(function ($) {
 		confirm_dialog : function() {
 
 			$('#wpum-group-settings-edit a.submitdelete, .wpum-confirm-dialog').click(function(e){
-			    return confirm( wpum_admin_js.confirm );
+					return confirm( wpum_admin_js.confirm );
 			})
 
 		},
@@ -218,25 +219,64 @@ jQuery(document).ready(function ($) {
 					}
 
 					// Create the media frame.
-			    file_frame = wp.media.frames.file_frame = wp.media({
-			      title: wpum_admin_js.upload_title,
-			      button: {
-			        text: wpum_admin_js.use_this_file,
-			      },
-			      multiple: false  // Set to true to allow multiple files to be selected
-			    });
+					file_frame = wp.media.frames.file_frame = wp.media({
+						title: wpum_admin_js.upload_title,
+						button: {
+							text: wpum_admin_js.use_this_file,
+						},
+						multiple: false  // Set to true to allow multiple files to be selected
+					});
 
 					// When an image is selected, run a callback.
-			    file_frame.on( 'select', function() {
-			      // We set multiple to false so only get one image from the uploader
-			      attachment = file_frame.state().get('selection').first().toJSON();
+					file_frame.on( 'select', function() {
+						// We set multiple to false so only get one image from the uploader
+						attachment = file_frame.state().get('selection').first().toJSON();
 
 						// Send file url to text field
 						window.formfield.val( attachment.url );
-			    });
+					});
 
-			    // Finally, open the modal
-			    file_frame.open();
+					// Finally, open the modal
+					file_frame.open();
+
+			});
+
+		},
+
+		// Handles menu controller functionalities.
+		menu_controller : function() {
+
+			jQuery('select.wpum-menu-visibility-setter option:selected').each(function() {
+
+				var selected_status = jQuery(this).val();
+				var locate_role = jQuery(this).parent().parent().next();
+
+				if( selected_status == 'in' || selected_status == 'out' ) {
+					jQuery( locate_role ).show();
+					jQuery( locate_role ).find('select').select2();
+				}
+
+			});
+
+			jQuery('#menu-to-edit').on('change', 'select.wpum-menu-visibility-setter', function() {
+
+				var field          = jQuery(this);
+				var id             = field.parent().prev().val();
+				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap' );
+
+				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2({
+					width: 'resolve'
+				});
+
+				if( jQuery( this ).val() === 'in' ){
+
+					jQuery( roles_selector ).show().css( 'display', 'block' );
+
+				} else {
+
+					jQuery( roles_selector ).hide();
+
+				}
 
 			});
 
