@@ -219,6 +219,15 @@ class WPUM_Menu_Controller {
 				switch ( $status ) {
 					case 'in':
 						$visible = is_user_logged_in() ? true : false;
+
+						if( is_array( $roles ) && ! empty( $roles ) ) {
+							foreach ( $roles as $role ) {
+								if( ! current_user_can( $role ) ) {
+									$visible = false;
+								}
+							}
+						}
+
 						break;
 					case 'out':
 						$visible = ! is_user_logged_in() ? true : false;
