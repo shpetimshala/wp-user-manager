@@ -248,9 +248,7 @@ jQuery(document).ready(function ($) {
 
 				if( selected_status == 'in' || selected_status == 'out' ) {
 					jQuery( locate_role ).show();
-					jQuery( locate_role ).find('select').select2({
-						width: 'resolve'
-					});
+					jQuery( locate_role ).find('select').select2();
 				}
 
 			});
@@ -261,7 +259,9 @@ jQuery(document).ready(function ($) {
 				var id             = field.parent().prev().val();
 				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap' );
 
-				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2();
+				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2({
+					width: 'resolve'
+				});
 
 				if( jQuery( this ).val() === 'in' ){
 
