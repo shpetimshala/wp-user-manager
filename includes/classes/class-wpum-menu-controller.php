@@ -201,10 +201,10 @@ class WPUM_Menu_Controller {
 	/**
 	 * Exclude menu items from navigation.
 	 *
-	 * @param  [type] $items [description]
-	 * @param  [type] $menu  [description]
-	 * @param  [type] $args  [description]
-	 * @return [type]        [description]
+	 * @param  array $items all menu items.
+	 * @param  string $menu  menu ID.
+	 * @param  array $args  args passed to the function.
+	 * @return array
 	 */
 	public function exclude_menu_items( $items, $menu, $args ) {
 
