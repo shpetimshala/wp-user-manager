@@ -256,6 +256,8 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/filters.php';
 		// Forms
 		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-forms.php';
+		// Menu controller
+		require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-menu-controller.php';
 
 		// Files loaded only on the admin side.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -278,7 +280,6 @@ class WP_User_Manager {
 			// Load admin menu manager functionalities
 			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-walker-nav-menu-checklist.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/admin/menu-functions.php';
-			require_once WPUM_PLUGIN_DIR . 'includes/classes/class-wpum-menu-controller.php';
 			require_once WPUM_PLUGIN_DIR . 'includes/walkers/class-walker-wpum-nav-menu-roles-controller.php';
 
 			// Load dashboard widget

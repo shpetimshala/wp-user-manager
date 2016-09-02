@@ -34,6 +34,14 @@ class WPUM_Menu_Controller {
 		// Save the new fields.
 		add_action( 'wp_update_nav_menu_item', array( $this, 'save_custom_fields'), 10, 2 );
 
+		// Add menu status to menu items object.
+		add_filter( 'wp_setup_nav_menu_item', array( $this, 'setup_menu_item' ) );
+
+		// Now exclude menu items if needed.
+		if( ! is_admin() ) {
+			add_filter( 'wp_get_nav_menu_items', array( $this, 'exclude_menu_items' ), 10, 3 );
+		}
+
 	}
 
 	/**
@@ -126,9 +134,9 @@ class WPUM_Menu_Controller {
 	/**
 	 * Save status of the menu.
 	 *
-	 * @param  [type] $menu_id         [description]
-	 * @param  [type] $menu_item_db_id [description]
-	 * @return [type]                  [description]
+	 * @param  string $menu_id         Menu ID.
+	 * @param  string $menu_item_db_id ID saved into the database.
+	 * @return void
 	 */
 	public function save_custom_fields( $menu_id, $menu_item_db_id ) {
 
@@ -169,6 +177,64 @@ class WPUM_Menu_Controller {
 			delete_post_meta( $menu_item_db_id, '_wpum_nav_menu_role' );
 
 		}
+
+	}
+
+	/**
+	 * Add menu status to menu object.
+	 *
+	 * @param  object $menu_item Menu object.
+	 * @return object            Menu object.
+	 */
+	public function setup_menu_item( $menu_item ) {
+
+		$item_status = get_post_meta( $menu_item->ID, '_wpum_nav_menu_role', true );
+
+		if( ! empty( $item_status ) ) {
+			$menu_item->wpum_status = $item_status;
+		}
+
+		return $menu_item;
+
+	}
+
+	/**
+	 * Exclude menu items from navigation.
+	 *
+	 * @param  [type] $items [description]
+	 * @param  [type] $menu  [description]
+	 * @param  [type] $args  [description]
+	 * @return [type]        [description]
+	 */
+	public function exclude_menu_items( $items, $menu, $args ) {
+
+		foreach ( $items as $key => $item ) {
+
+			if( isset( $item->wpum_status ) ) {
+
+				$status  = $item->wpum_status['status'];
+				$roles   = $item->wpum_status['roles'];
+				$visible = true;
+
+				switch ( $status ) {
+					case 'in':
+						$visible = is_user_logged_in() ? true : false;
+						break;
+					case 'out':
+						$visible = ! is_user_logged_in() ? true : false;
+						break;
+				}
+
+				// Now exclude item if not visible.
+				if( ! $visible ) {
+					unset( $items[ $key ] );
+				}
+
+			}
+
+    }
+
+		return $items;
 
 	}
 
