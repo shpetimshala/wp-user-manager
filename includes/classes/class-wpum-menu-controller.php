@@ -84,7 +84,7 @@ class WPUM_Menu_Controller {
 				'show_option_all'  => false,
 				'show_option_none' => false,
 				'multiple'         => true,
-				'selected' => isset( $item_status[ 'roles' ] ) ? $item_status[ 'roles' ]: '',
+				'selected'         => isset( $item_status[ 'roles' ] ) ? $item_status[ 'roles' ]: '',
 				'options'          => wpum_get_roles( true )
 			),
 

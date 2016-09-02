@@ -246,15 +246,27 @@ jQuery(document).ready(function ($) {
 		// Handles menu controller functionalities.
 		menu_controller : function() {
 
+			jQuery('select.wpum-menu-visibility-setter option:selected').each(function() {
+
+				var selected_status = jQuery(this).val();
+				var locate_role = jQuery(this).parent().parent().next();
+
+				if( selected_status == 'in' || selected_status == 'out' ) {
+					jQuery( locate_role ).show();
+					jQuery( locate_role ).find('select').select2({
+						width: 'resolve'
+					});
+				}
+
+			});
+
 			jQuery('#menu-to-edit').on('change', 'select.wpum-menu-visibility-setter', function() {
 
 				var field          = jQuery(this);
 				var id             = field.parent().prev().val();
 				var roles_selector = jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap' );
 
-				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2({
-					width: 'resolve'
-				});
+				jQuery( '#wpum-wpum_nav_menu_status_roles' + id + '-wrap select' ).select2();
 
 				if( jQuery( this ).val() === 'in' ){
 
