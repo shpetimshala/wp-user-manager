@@ -320,8 +320,8 @@ function wpum_send_test_mail_button() {
 
 	?>
 
-	<a href="<?php echo esc_url( $trigger_test_mail_url ); ?>" class="button"><?php esc_html_e( 'Send test email' ); ?></a>
-	<p><?php echo sprintf( esc_html__( 'Test email will be sent to %s' ), get_option( 'admin_email' ) ); ?></p>
+	<a href="<?php echo esc_url( $trigger_test_mail_url ); ?>" class="button"><?php esc_html_e( 'Send test email', 'wpum' ); ?></a>
+	<p><?php echo sprintf( esc_html__( 'Test email will be sent to %s', 'wpum' ), get_option( 'admin_email' ) ); ?></p>
 
 	<?php
 

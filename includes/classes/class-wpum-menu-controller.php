@@ -78,9 +78,9 @@ class WPUM_Menu_Controller {
 				'selected'         => isset( $item_status[ 'status' ] ) ? $item_status[ 'status' ]: '',
 				'class'            => 'wpum-menu-visibility-setter',
 				'options'          => array(
-					''    => esc_html( 'Everyone' ),
-					'in'  => esc_html( 'Logged In Users' ),
-					'out' => esc_html( 'Logged Out Users' ),
+					''    => esc_html__( 'Everyone', 'wpum' ),
+					'in'  => esc_html__( 'Logged In Users', 'wpum' ),
+					'out' => esc_html__( 'Logged Out Users', 'wpum' ),
 				)
 			),
 
