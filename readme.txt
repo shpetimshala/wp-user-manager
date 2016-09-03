@@ -96,6 +96,14 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.4.0 =
+
+- Added: Control visibility of menu items by user status and/or role.
+- Added: Ability to send test email.
+- Added: Post author url will now redirect to wpum user profile.
+- Fixed: User profile page document title, did not display site name.
+- Tweak: "View Profile" link in backend will now open in a new window.
+
 = 1.3.1 =
 
 - fixed: template loader failed to retrieve email templates when customized.
