@@ -240,6 +240,7 @@ class WP_User_Manager {
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/checkbox.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/checkboxes.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/display_name.php';
+		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/datepicker.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/email.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/file.php';
 		require_once WPUM_PLUGIN_DIR . 'includes/fields/types/multiselect.php';

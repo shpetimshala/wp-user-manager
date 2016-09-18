@@ -83,6 +83,7 @@ function wpum_get_field_type_object( $type = '' ) {
 	}
 
 	return $object;
+
 }
 
 /**
