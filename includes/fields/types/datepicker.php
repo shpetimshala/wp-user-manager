@@ -2,10 +2,10 @@
 /**
  * Registers the datepicker type field.
  *
- * @package     wpum-custom-fields
+ * @package     wp-user-manager
  * @copyright   Copyright (c) 2016, Alessandro Tesoro
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.2.0
+ * @since       1.4.1
  */
 
 // Exit if accessed directly
@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * WPUM_Field_Type_Datepicker Class
  *
- * @since 1.0.0
+ * @since 1.4.1
  */
 class WPUM_Field_Type_Datepicker extends WPUM_Field_Type {
 
 	/**
 	 * Constructor for the field type
 	 *
-	 * @since 1.0.0
+	 * @since 1.4.1
  	 */
 	public function __construct() {
 
@@ -46,13 +46,35 @@ class WPUM_Field_Type_Datepicker extends WPUM_Field_Type {
 	/**
 	 * Method to register options for fields.
 	 *
-	 * @since 1.2.0
+	 * @since 1.4.1
 	 * @access public
 	 * @return array list of options.
 	 */
 	public static function options() {
 
 		$options = array();
+
+		$options[] = array(
+			'name'             => 'picker_type',
+			'label'            => esc_html__( 'Date Input Type', 'wpum' ),
+			'type'             => 'select',
+			'show_option_all'  => false,
+			'show_option_none' => false,
+			'options'          => array(
+				'field'    => esc_html__( 'Date field' ),
+				'picker'   => esc_html__( 'Date picker' ),
+				'dropdown' => esc_html__( 'Date Dropdown' )
+			)
+		);
+
+		$options[] = array(
+			'name'             => 'date_format',
+			'label'            => esc_html__( 'Date format', 'wpum' ),
+			'type'             => 'select',
+			'show_option_all'  => false,
+			'show_option_none' => false,
+			'options'          => wpum_get_datepicker_date_formats()
+		);
 
 		return $options;
 
@@ -61,7 +83,7 @@ class WPUM_Field_Type_Datepicker extends WPUM_Field_Type {
 	/**
 	 * Modify the output of the field on the fronted profile.
 	 *
-	 * @since 1.2.0
+	 * @since 1.4.1
 	 * @param  string $value the value of the field.
 	 * @param  object $field field details.
 	 * @return string        the formatted field value.

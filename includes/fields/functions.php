@@ -1052,3 +1052,25 @@ function wpum_get_field_editing_settings() {
 	return apply_filters( 'wpum_get_field_editing_settings', $options );
 
 }
+
+/**
+ * Retrieve a list of available date formats for the datepicker field.
+ *
+ * @since 1.4.1
+ * @return array
+ */
+function wpum_get_datepicker_date_formats() {
+
+	$formats = array(
+		'mdy'       => 'mm/dd/yyyy',
+		'dmy'       => 'dd/mm/yyyy',
+		'dmy_dash'  => 'dd-mm-yyyy',
+		'dmy_dot'   => 'dd.mm.yyyy',
+		'ymd_slash' => 'yyyy/mm/dd',
+		'ymd_dash'  => 'yyyy-mm-dd',
+		'ymd_dot'   => 'yyyy.mm.dd'
+	);
+
+	return apply_filters( 'wpum_get_datepicker_date_formats', $formats );
+
+}
