@@ -55,19 +55,6 @@ class WPUM_Field_Type_Datepicker extends WPUM_Field_Type {
 		$options = array();
 
 		$options[] = array(
-			'name'             => 'picker_type',
-			'label'            => esc_html__( 'Date Input Type', 'wpum' ),
-			'type'             => 'select',
-			'show_option_all'  => false,
-			'show_option_none' => false,
-			'options'          => array(
-				'field'    => esc_html__( 'Date field' ),
-				'picker'   => esc_html__( 'Date picker' ),
-				'dropdown' => esc_html__( 'Date Dropdown' )
-			)
-		);
-
-		$options[] = array(
 			'name'             => 'date_format',
 			'label'            => esc_html__( 'Date format', 'wpum' ),
 			'type'             => 'select',
