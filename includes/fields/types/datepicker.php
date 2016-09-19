@@ -77,7 +77,7 @@ class WPUM_Field_Type_Datepicker extends WPUM_Field_Type {
 	 */
 	public static function output_html( $value, $field ) {
 
-		$output = '';
+		$output = 'test';
 
 		return $output;
 
