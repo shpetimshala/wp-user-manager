@@ -18,6 +18,6 @@
 	value="<?php echo isset( $field['value'] ) ? esc_attr( $field['value'] ) : ''; ?>"
 	<?php if ( ! empty( $field['required'] ) ) echo 'required'; ?>
 	<?php if ( isset( $field['read_only'] ) && $field['read_only'] ) echo 'readonly'; ?>
-	date-format="<?php echo ! empty( $field['date_format'] ) ? esc_attr( $field['date_format'] ) : ''; ?>"
+	data-dateformat="<?php echo ! empty( $field['date_format'] ) ? esc_attr( $field['date_format'] ) : ''; ?>"
 	/>
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>

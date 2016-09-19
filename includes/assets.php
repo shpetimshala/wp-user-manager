@@ -127,6 +127,7 @@ function wpum_frontend_cssjs() {
 	// Enqueue everything
 	wp_enqueue_script( 'jQuery' );
 	wp_enqueue_script( 'wpum-frontend-js' );
+	wp_enqueue_script( 'jquery-ui-datepicker' );
 
 	// Allows developers to disable the frontend css in case own file is needed.
 	if ( !defined( 'WPUM_DISABLE_CSS' ) )

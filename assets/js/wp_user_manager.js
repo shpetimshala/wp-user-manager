@@ -17,6 +17,7 @@ jQuery(document).ready(function ($) {
 			this.ajax_remove_file();
 			this.directory_sort();
 			this.show_password();
+			this.datepicker();
 		},
 
 		// Check password strenght function
@@ -127,6 +128,17 @@ jQuery(document).ready(function ($) {
 				  jQuery('#password').hideShowPassword( jQuery(this).prop('checked') );
 				});
 			}
+
+		},
+
+		// Run jQuery datepicker on form fields.
+		datepicker : function() {
+
+			jQuery("input[data-dateformat]").each(function(){
+			    var testdata = $(this).data('dateformat');
+
+					console.log(testdata);
+			});
 
 		}
 
