@@ -1062,13 +1062,13 @@ function wpum_get_field_editing_settings() {
 function wpum_get_datepicker_date_formats() {
 
 	$formats = array(
-		'mdy'       => 'mm/dd/yyyy',
-		'dmy'       => 'dd/mm/yyyy',
-		'dmy_dash'  => 'dd-mm-yyyy',
-		'dmy_dot'   => 'dd.mm.yyyy',
-		'ymd_slash' => 'yyyy/mm/dd',
-		'ymd_dash'  => 'yyyy-mm-dd',
-		'ymd_dot'   => 'yyyy.mm.dd'
+		'mm/dd/yy' => 'mm/dd/yy',
+		'dd/mm/yy' => 'dd/mm/yy',
+		'dd-mm-yy' => 'dd-mm-yy',
+		'dd.mm.yy' => 'dd.mm.yy',
+		'yy/mm/dd' => 'yy/mm/dd',
+		'yy-mm-dd' => 'yy-mm-dd',
+		'yy.mm.dd' => 'yy.mm.dd'
 	);
 
 	return apply_filters( 'wpum_get_datepicker_date_formats', $formats );
