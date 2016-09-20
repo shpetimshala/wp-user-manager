@@ -128,14 +128,6 @@ function wpum_frontend_cssjs() {
 	wp_enqueue_script( 'jQuery' );
 	wp_enqueue_script( 'wpum-frontend-js' );
 
-	// Datepicker styles.
-	// Only load these files if the CF add-on is enabled.
-	// Don't need to load these on every site.
-	if( defined( 'WPUMCF_VERSION' ) ) {
-		wp_enqueue_script( 'jquery-ui-datepicker' );
-		wp_enqueue_style( 'jquery-ui-datepicker-css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' );
-	}
-
 	// Allows developers to disable the frontend css in case own file is needed.
 	if ( ! defined( 'WPUM_DISABLE_CSS' ) )
 		wp_enqueue_style( 'wpum-frontend-css' );
