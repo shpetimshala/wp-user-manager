@@ -41,7 +41,7 @@ $trimmed_description = wp_trim_words( $description, 12, '<a href="'. wpum_get_us
 		<?php if ( $user->user_url ) : ?>
 		<li class="website"><a href="<?php echo esc_attr( $user->user_url ); ?>" target="_blank" rel="nofollow"><?php _e( 'Visit Website', 'wpum' );?></a></li>
 		<?php endif; ?>
-		<li class="registration-date"><strong><?php _e( 'Registered:', 'wpum' ); ?></strong> <date><?php echo date( get_option( 'date_format' ), strtotime( $user->user_registered ) ); ?></date></li>
+		<li class="registration-date"><strong><?php _e( 'Registered:', 'wpum' ); ?></strong> <date><?php echo date_i18n( get_option('date_format'), strtotime( $user->user_registered ) ); ?></date></li>
 		<?php do_action( 'wpum_directory_single_user_meta', $user ); ?>
 	</ul>
 
