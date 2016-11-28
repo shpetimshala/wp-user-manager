@@ -197,8 +197,18 @@ abstract class WPUM_Form {
 			foreach ( $group_fields as $key => $field ) {
 
 				// Validate required fields.
-				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
+				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) && 'file' !== $field['type'] ) {
 					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field', 'wpum' ), $field['label'] ) );
+				}
+
+				if ( $field['required'] && $field['type'] == 'file' && $field['meta'] == 'user_avatar' ) {
+
+					$avatar = get_user_meta( get_current_user_id() , 'current_user_avatar', true );
+
+					if( empty( $avatar ) && empty( $values[ $group_key ][ $key ] ) ) {
+						return new WP_Error( 'validation-error', sprintf( __( '%s is a required field', 'wpum' ), $field['label'] ) );
+					}
+
 				}
 
 				// Validate email fields.
