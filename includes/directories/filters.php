@@ -26,6 +26,10 @@ function wpum_directory_pre_set_roles_search( $args, $directory_id ) {
 		$search_term    = sanitize_text_field( $_GET['search_user'] );
 		$args['offset'] = null;
 
+		$roles = wpum_directory_get_roles( $directory_id );
+		if( $roles )
+			$args['role'] = implode( ",", $roles );
+
 		$args['meta_query'] = array(
 			'relation' => 'OR',
 			array(
