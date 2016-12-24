@@ -96,6 +96,13 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.4.1 =
+
+- Fix: registration date in directory not translatable
+- Fix: can't update profile when avatar field is required and image already uploaded
+- Fix: {recovery_url} Generates Non-clickable Email Hyperlink on Yahoo and Hotmail
+- Fix: directory doesn't respect the role filter if you search by first/last name
+
 = 1.4.0 =
 
 - Added: Control visibility of menu items by user status and/or role.
