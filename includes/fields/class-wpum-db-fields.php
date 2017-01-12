@@ -255,6 +255,52 @@ class WPUM_DB_Fields extends WPUM_DB {
 	}
 
 	/**
+	 * Get all fields.
+	 *
+	 * @param  array  $args settings for the query.
+	 * @return mixed
+	 */
+	public function get_fields( $args = array() ) {
+
+		global $wpdb;
+
+		$defaults = array(
+			'number'         => 20,
+			'offset'         => 0,
+			'orderby'        => 'id',
+			'order'          => 'DESC',
+			'array'          => false,
+		);
+
+		$args  = wp_parse_args( $args, $defaults );
+
+		if( $args['number'] < 1 ) {
+			$args['number'] = 999999999999;
+		}
+
+		$where = '';
+
+		// Return as array?
+		$return_type = 'OBJECT';
+		if( $args['array'] === true )
+			$return_type = 'ARRAY_A';
+
+		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? 'id' : $args['orderby'];
+
+		$cache_key = md5( 'wpum_fields_' . serialize( $args ) );
+
+		$field_groups = wp_cache_get( $cache_key, 'fields' );
+
+		if( $field_groups === false ) {
+			$field_groups = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM  $this->table_name $where ORDER BY {$args['orderby']} {$args['order']} LIMIT %d,%d;", absint( $args['offset'] ), absint( $args['number'] ) ), $return_type );
+			wp_cache_set( $cache_key, $field_groups, 'fields', 3600 );
+		}
+
+		return $field_groups;
+
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public

@@ -435,15 +435,18 @@ class WPUM_Form_Register extends WPUM_Form {
 		if( self::$random_password ) {
 
 			$do_user = self::random_psw_registration( $username, $email );
+			$pwd     = $do_user['pwd'];
 
 		} else {
 
-			$pwd = $values['register']['password'];
+			$pwd     = $values['register']['password'];
 			$do_user = wp_create_user( $username, $pwd, $email );
 
 		}
 
-		// Check for errors
+		// Check for errors.
+		$do_user = isset( $do_user['do_user'] ) ? $do_user['do_user'] : $do_user;
+
 		if ( is_wp_error( $do_user ) ) {
 
 			foreach ($do_user->errors as $error) {
@@ -475,9 +478,7 @@ class WPUM_Form_Register extends WPUM_Form {
 			do_action( "wpum/form/register/success" , $user_id, $values );
 
 			// Send notification if password is manually added by the user.
-			if( ! self::$random_password ):
-				wpum_new_user_notification( $do_user, $pwd );
-			endif;
+			wpum_new_user_notification( $do_user, $pwd );
 
 			// Needed to close the registration process properly.
 			do_action( "wpum/form/register/done" , $user_id, $values );
@@ -501,11 +502,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		$do_user = wp_create_user( $username, $pwd, $email );
 
-		if( ! is_wp_error( $do_user ) ) {
-			wpum_new_user_notification( $do_user, $pwd );
-		}
-
-		return $do_user;
+		return array( 'do_user' => $do_user, 'pwd' => $pwd );
 
 	}
 
