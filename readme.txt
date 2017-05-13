@@ -96,6 +96,9 @@ View all the screenshots here [https://wpusermanager.com/screenshots/](https://w
 
 == Changelog ==
 
+= 1.4.3 =
+- Feature: uploaded pdf files are now downloadable through the user's profile.
+
 = 1.4.2 =
 
 - Fix: registration email not sending at the correct time when random password generated.
