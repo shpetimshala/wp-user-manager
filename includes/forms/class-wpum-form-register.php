@@ -436,6 +436,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 			$do_user = self::random_psw_registration( $username, $email );
 			$pwd     = $do_user['pwd'];
+			$do_user = $do_user['do_user'];
 
 		} else {
 
@@ -444,9 +445,7 @@ class WPUM_Form_Register extends WPUM_Form {
 
 		}
 
-		// Check for errors.
-		$do_user = isset( $do_user['do_user'] ) ? $do_user['do_user'] : $do_user;
-
+		// check for errors
 		if ( is_wp_error( $do_user ) ) {
 
 			foreach ($do_user->errors as $error) {
